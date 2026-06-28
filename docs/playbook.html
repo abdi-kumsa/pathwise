@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team Execution Playbook – Market Demand & Enrollment Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #F5F4F0;
+    --white:     #FFFFFF;
+    --navy:      #0F1923;
+    --navy2:     #1C2B3A;
+    --ink:       #2D3748;
+    --slate:     #4A5568;
+    --muted:     #718096;
+    --rule:      #E2DDD6;
+    --abdi:      #1A56DB;
+    --abdi-lt:   #EBF2FF;
+    --yonas:     #0E9F6E;
+    --yonas-lt:  #EDFAF4;
+    --both:      #7E3AF2;
+    --both-lt:   #F5F3FF;
+    --sync:      #C27803;
+    --sync-lt:   #FDF3DC;
+    --warn:      #E53E3E;
+    --mono:      'JetBrains Mono', monospace;
+  }
+
+  html { font-size: 14px; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #DEDAD2;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .page {
+    max-width: 920px;
+    margin: 32px auto;
+    background: var(--bg);
+    box-shadow: 0 12px 60px rgba(0,0,0,0.2);
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: var(--navy);
+    padding: 56px 64px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--abdi), var(--yonas));
+  }
+  .cover-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: end;
+  }
+  .cover-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 16px;
+  }
+  .cover h1 {
+    font-size: 30px;
+    font-weight: 800;
+    color: #FFFFFF;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .cover-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 300;
+    max-width: 480px;
+    line-height: 1.6;
+  }
+  .cover-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+  }
+  .badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .badge-abdi { background: rgba(26,86,219,0.2); color: #93C5FD; border: 1px solid rgba(26,86,219,0.3); }
+  .badge-yonas { background: rgba(14,159,110,0.2); color: #6EE7B7; border: 1px solid rgba(14,159,110,0.3); }
+  .badge-dot { width: 7px; height: 7px; border-radius: 50%; }
+  .badge-abdi .badge-dot { background: #93C5FD; }
+  .badge-yonas .badge-dot { background: #6EE7B7; }
+
+  .cover-meta {
+    display: flex;
+    gap: 0;
+    margin-top: 36px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 28px;
+  }
+  .cover-meta-item {
+    padding-right: 36px;
+    margin-right: 36px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .cover-meta-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+  .cml { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 4px; font-family: var(--mono); }
+  .cmv { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85); }
+
+  /* ── STACK OVERVIEW ── */
+  .stack-bar {
+    background: var(--navy2);
+    padding: 18px 64px;
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .stack-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-right: 20px;
+    margin-right: 20px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+  }
+  .stack-item:last-child { border-right: none; }
+  .stack-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--abdi); }
+  .stack-dot.g { background: var(--yonas); }
+  .stack-dot.p { background: var(--both); }
+
+  /* ── BODY ── */
+  .body { padding: 0 64px 64px; }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: var(--slate);
+  }
+  .legend-pill {
+    padding: 2px 10px;
+    border-radius: 2px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-family: var(--mono);
+  }
+  .lp-abdi { background: var(--abdi-lt); color: var(--abdi); }
+  .lp-yonas { background: var(--yonas-lt); color: var(--yonas); }
+  .lp-both { background: var(--both-lt); color: var(--both); }
+  .lp-sync { background: var(--sync-lt); color: var(--sync); }
+  .cb-demo {
+    width: 14px; height: 14px;
+    border: 2px solid #CBD5E0;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* ── PHASE ── */
+  .phase { margin-bottom: 56px; }
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 2px solid var(--navy);
+    position: relative;
+  }
+  .phase-header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, var(--abdi), var(--yonas));
+  }
+  .phase-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    background: var(--navy);
+    padding: 4px 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    letter-spacing: 1px;
+  }
+  .phase-title-block {}
+  .phase-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .phase-goal {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    font-style: italic;
+  }
+  .phase-weeks {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--white);
+    border: 1px solid var(--rule);
+    padding: 4px 12px;
+    border-radius: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  /* WORKER SECTION */
+  .worker-block {
+    margin-bottom: 16px;
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .worker-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 18px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .worker-header.abdi { background: var(--abdi-lt); border-bottom-color: #BFDBFE; }
+  .worker-header.yonas { background: var(--yonas-lt); border-bottom-color: #A7F3D0; }
+  .worker-header.both { background: var(--both-lt); border-bottom-color: #DDD6FE; }
+  .worker-name {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: var(--mono);
+  }
+  .worker-name.abdi { color: var(--abdi); }
+  .worker-name.yonas { color: var(--yonas); }
+  .worker-name.both { color: var(--both); }
+  .worker-role {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .task-list { padding: 6px 0; }
+  .task {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 9px 18px;
+    border-bottom: 1px solid #F7F5F0;
+    transition: background 0.1s;
+  }
+  .task:last-child { border-bottom: none; }
+  .task:hover { background: #FAFAF8; }
+
+  .checkbox {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #CBD5E0;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    cursor: pointer;
+    position: relative;
+    transition: border-color 0.15s;
+  }
+  .checkbox:hover { border-color: #93C5FD; }
+
+  .task-body { flex: 1; }
+  .task-title {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 3px;
+    line-height: 1.4;
+  }
+  .task-detail {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.55;
+  }
+  .task-detail code {
+    font-family: var(--mono);
+    font-size: 11px;
+    background: #F0EDE8;
+    padding: 1px 5px;
+    border-radius: 2px;
+    color: var(--navy2);
+  }
+
+  .task-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .tt-ml { background: #FEF3C7; color: #92400E; }
+  .tt-api { background: #DBEAFE; color: #1E40AF; }
+  .tt-fe { background: #D1FAE5; color: #065F46; }
+  .tt-data { background: #E0E7FF; color: #3730A3; }
+  .tt-devops { background: #FEE2E2; color: #991B1B; }
+  .tt-test { background: #F3F4F6; color: #374151; border: 1px solid #E5E7EB; }
+
+  /* SYNC BLOCK */
+  .sync-block {
+    background: var(--sync-lt);
+    border: 1px solid #FCD34D;
+    border-radius: 3px;
+    padding: 16px 20px;
+    margin-top: 18px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .sync-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .sync-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sync);
+    margin-bottom: 5px;
+  }
+  .sync-text {
+    font-size: 13px;
+    color: #78350F;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+  .sync-checks {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .sync-check {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12.5px;
+    color: #92400E;
+  }
+  .sync-check .checkbox { border-color: #FCD34D; }
+
+  /* SECTION DIVIDER */
+  .phase-divider {
+    height: 1px;
+    background: var(--rule);
+    margin: 8px 0 48px;
+    position: relative;
+  }
+
+  /* FOOTER */
+  .doc-footer {
+    background: var(--navy);
+    padding: 20px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .ft-l { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.25); letter-spacing: 1px; }
+  .ft-r { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.25); letter-spacing: 1px; }
+
+  @media print {
+    body { background: white; }
+    .page { box-shadow: none; margin: 0; }
+    .task:hover { background: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-grid">
+      <div>
+        <div class="cover-eyebrow">// internal · team execution playbook</div>
+        <h1>Market Demand &amp; Enrollment<br>Platform — Build Plan</h1>
+        <div class="cover-sub">Phase-by-phase task assignments for Abdi and Yonas. Every action is written to be handed directly to Claude Code. Mark each checkbox manually as tasks are completed.</div>
+      </div>
+      <div class="cover-badges">
+        <div class="badge badge-abdi"><div class="badge-dot"></div> Abdi — Lead</div>
+        <div class="badge badge-yonas"><div class="badge-dot"></div> Yonas — Support</div>
+      </div>
+    </div>
+    <div class="cover-meta">
+      <div class="cover-meta-item"><div class="cml">Timeline</div><div class="cmv">8 – 10 Weeks</div></div>
+      <div class="cover-meta-item"><div class="cml">Phases</div><div class="cmv">7 Phases</div></div>
+      <div class="cover-meta-item"><div class="cml">Data</div><div class="cmv">Mock / Simulated</div></div>
+      <div class="cover-meta-item"><div class="cml">Method</div><div class="cmv">Claude Code — Parallel</div></div>
+    </div>
+  </div>
+
+  <!-- STACK BAR -->
+  <div class="stack-bar">
+    <div class="stack-item"><div class="stack-dot"></div>FastAPI</div>
+    <div class="stack-item"><div class="stack-dot"></div>PostgreSQL</div>
+    <div class="stack-item"><div class="stack-dot"></div>XGBoost</div>
+    <div class="stack-item"><div class="stack-dot"></div>Prophet</div>
+    <div class="stack-item"><div class="stack-dot"></div>Keras LSTM</div>
+    <div class="stack-item"><div class="stack-dot"></div>SHAP</div>
+    <div class="stack-item"><div class="stack-dot g"></div>React + Vite</div>
+    <div class="stack-item"><div class="stack-dot g"></div>Tailwind CSS</div>
+    <div class="stack-item"><div class="stack-dot g"></div>Recharts</div>
+    <div class="stack-item"><div class="stack-dot p"></div>Docker Compose</div>
+    <div class="stack-item"><div class="stack-dot p"></div>Faker (mock data)</div>
+  </div>
+
+  <div class="body">
+
+    <!-- LEGEND -->
+    <div class="legend">
+      <div class="legend-item"><div class="legend-pill lp-abdi">ABDI</div> Lead — architecture, ML, backend</div>
+      <div class="legend-item"><div class="legend-pill lp-yonas">YONAS</div> Support — frontend, mock data, testing</div>
+      <div class="legend-item"><div class="legend-pill lp-both">BOTH</div> Do together or review each other's work</div>
+      <div class="legend-item"><div class="legend-pill lp-sync">SYNC</div> Must align before next phase starts</div>
+      <div class="legend-item"><div class="cb-demo"></div> Tick manually when done</div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         PHASE 1
+    ════════════════════════════════════════════ -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">PHASE 01</div>
+        <div class="phase-title-block">
+          <div class="phase-title">Project Setup &amp; Repository Structure</div>
+          <div class="phase-goal">Get both machines running the same environment before a single line of feature code is written.</div>
+        </div>
+        <div class="phase-weeks">Weeks 1 – 2</div>
+      </div>
+
+      <!-- ABDI -->
+      <div class="worker-block">
+        <div class="worker-header abdi">
+          <div class="worker-name abdi">Abdi</div>
+          <div class="worker-role">Initialise monorepo, Docker setup, database schema</div>
+        </div>
+        <div class="task-list">
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Create the monorepo root folder structure</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Create a monorepo with folders: /backend, /frontend, /ml, /data, /docker, /docs. Add a root README.md describing each folder's purpose."</code></div>
+            </div>
+            <div class="task-tag tt-devops">DEVOPS</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Initialise Git repository and push to GitHub</div>
+              <div class="task-detail">Create repo on GitHub. Run <code>git init</code>, add <code>.gitignore</code> for Python, Node, and <code>.env</code> files. Make first commit. Share repo URL with Yonas.</div>
+            </div>
+            <div class="task-tag tt-devops">DEVOPS</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Write Docker Compose file for all services</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write a docker-compose.yml that spins up: postgres (port 5432), fastapi backend (port 8000), and react frontend (port 3000). Include environment variable support via .env file."</code></div>
+            </div>
+            <div class="task-tag tt-devops">DEVOPS</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Initialise FastAPI backend project</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Set up a FastAPI project in /backend with: main.py, /routers folder, /models folder, /services folder, /db folder. Include requirements.txt with fastapi, uvicorn, sqlalchemy, psycopg2-binary, python-dotenv, pandas, numpy."</code></div>
+            </div>
+            <div class="task-tag tt-api">API</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Design and create the PostgreSQL database schema</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write a SQL schema for tables: students (id, name, gpa, internships, projects, communication_score, program, enrollment_year), enrollments (id, program, year, count), job_postings (id, company, title, location, skills_required, salary_min, salary_max, source, posted_date), placements (student_id, company, role, salary, time_to_hire)."</code> Run schema against local Postgres.</div>
+            </div>
+            <div class="task-tag tt-data">DATA</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Set up SQLAlchemy ORM models matching the schema</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Generate SQLAlchemy ORM models in /backend/models/ for each table in the schema. Include a database.py with connection setup using environment variables for DB host, port, name, user, password."</code></div>
+            </div>
+            <div class="task-tag tt-api">API</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Create a <code>.env.example</code> file and document all required variables</div>
+              <div class="task-detail">List: <code>DATABASE_URL</code>, <code>API_HOST</code>, <code>API_PORT</code>, <code>FRONTEND_URL</code>. Commit this file. Never commit the actual <code>.env</code>.</div>
+            </div>
+            <div class="task-tag tt-devops">DEVOPS</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- YONAS -->
+      <div class="worker-block">
+        <div class="worker-header yonas">
+          <div class="worker-name yonas">Yonas</div>
+          <div class="worker-role">Frontend scaffold, Tailwind config, component shell</div>
+        </div>
+        <div class="task-list">
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Clone the repo and set up local environment</div>
+              <div class="task-detail">Clone from Abdi's GitHub link. Copy <code>.env.example</code> to <code>.env</code> and fill in local values. Confirm Docker Compose runs without error: <code>docker compose up</code>.</div>
+            </div>
+            <div class="task-tag tt-devops">DEVOPS</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Initialise React + Vite project in /frontend</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Create a React + Vite project in /frontend. Install and configure Tailwind CSS v3, React Router v6, Axios for API calls, and Recharts. Set up a basic folder structure: /pages, /components, /hooks, /utils, /api."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the app shell — layout, sidebar, routing</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Build a dashboard shell with a fixed left sidebar showing two navigation sections: Module 1 (Market Demand) and Module 2 (Enrollment). Each section has sub-links. Main content area renders based on React Router. Use Tailwind for styling — dark navy sidebar, white content area."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Create reusable base components</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Create reusable React components: StatCard (title, value, subtitle, trend arrow), SectionHeader (title, description), LoadingSpinner, EmptyState, and ErrorBanner. Use Tailwind classes only."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Set up Axios API client with base URL from environment</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Create /frontend/src/api/client.js — an Axios instance with baseURL from VITE_API_URL env variable, default headers, and a response interceptor that logs errors."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SYNC -->
+      <div class="sync-block">
+        <div class="sync-icon">⚑</div>
+        <div>
+          <div class="sync-label">Phase 1 Sync Point</div>
+          <div class="sync-text">Before moving to Phase 2, both Abdi and Yonas must confirm the following together:</div>
+          <div class="sync-checks">
+            <div class="sync-check"><div class="checkbox"></div> <code>docker compose up</code> starts Postgres, FastAPI, and React with zero errors</div>
+            <div class="sync-check"><div class="checkbox"></div> Yonas can access the React app at <code>localhost:3000</code> and the sidebar renders correctly</div>
+            <div class="sync-check"><div class="checkbox"></div> Abdi can hit <code>localhost:8000/docs</code> and see the FastAPI Swagger UI</div>
+            <div class="sync-check"><div class="checkbox"></div> Both have confirmed the DB schema is live in Postgres (run <code>\dt</code> in psql to verify tables)</div>
+            <div class="sync-check"><div class="checkbox"></div> All code pushed to GitHub main branch and both have pulled latest</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         PHASE 2
+    ════════════════════════════════════════════ -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">PHASE 02</div>
+        <div class="phase-title-block">
+          <div class="phase-title">Mock Data Generation &amp; ETL Pipeline</div>
+          <div class="phase-goal">Fill the database with realistic simulated data so every downstream component has something to work with from day one.</div>
+        </div>
+        <div class="phase-weeks">Weeks 2 – 3</div>
+      </div>
+
+      <div class="worker-block">
+        <div class="worker-header abdi">
+          <div class="worker-name abdi">Abdi</div>
+          <div class="worker-role">ETL pipeline, feature engineering, data loader scripts</div>
+        </div>
+        <div class="task-list">
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Write the mock data generator script</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write a Python script /data/generate_mock_data.py using the Faker library. Generate: 500 student records with realistic GPA (2.0–4.0), internship count (0–4), project count, communication score (1–10), and program (CS, Electronics, Business, Civil, Data Science). Generate 5 years of enrollment counts per program. Generate 1000 job postings with company names, job titles, locations (10 Ethiopian + global cities), skills required (list of 3–6 from: Python, SQL, Excel, AI, Big Data, SAP, Communication, Leadership), and salary range."</code></div>
+            </div>
+            <div class="task-tag tt-data">DATA</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Generate placement outcome data with realistic correlations</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Extend the mock data generator to create placement records. Students with GPA above 3.2, at least 1 internship, and communication score above 7 should have 80%+ placement rate. Students below these thresholds should have 35–55% placement rate. Add noise. Include salary outcomes and time-to-hire (days). Save as CSV files in /data/mock/."</code></div>
+            </div>
+            <div class="task-tag tt-data">DATA</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build ETL loader to ingest CSVs into PostgreSQL</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write /data/load_to_db.py — reads all CSV files from /data/mock/, validates columns, cleans nulls, and inserts records into the PostgreSQL tables using SQLAlchemy. Print row counts per table after loading. Make it idempotent — running twice should not duplicate data."</code></div>
+            </div>
+            <div class="task-tag tt-data">DATA</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the feature engineering pipeline</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write /ml/feature_engineering.py. It should: (1) pull raw student and enrollment data from Postgres, (2) compute lag features for enrollment (1-year lag, 2-year lag), (3) compute 3-year rolling average enrollment per program, (4) one-hot encode program names, (5) normalise GPA and score columns using MinMaxScaler, (6) save the processed feature DataFrame as /data/processed/features.parquet."</code></div>
+            </div>
+            <div class="task-tag tt-ml">ML</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Verify data quality — run a quick summary report</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write /data/data_quality_check.py that reads all tables from Postgres and prints: row count, null counts per column, min/max/mean for numeric columns, and value distributions for categorical columns (program, placement status)."</code> Review output and confirm data looks realistic.</div>
+            </div>
+            <div class="task-tag tt-data">DATA</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="worker-block">
+        <div class="worker-header yonas">
+          <div class="worker-name yonas">Yonas</div>
+          <div class="worker-role">Frontend data layer, API hook setup, placeholder pages</div>
+        </div>
+        <div class="task-list">
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Create all API service functions for Module 1</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Create /frontend/src/api/marketDemand.js with async functions: getTopHiringCompanies(), getRegionalHiringData(), getSkillGapData(), getJobInternshipRatio(), getHiringSourceBreakdown(). Each function calls the Axios client and returns the response data. Use placeholder URLs like /api/market/top-companies — we'll connect real endpoints later."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Create all API service functions for Module 2</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Create /frontend/src/api/enrollment.js with: getEnrollmentForecast(), getAdmissionRisk(riskLevel), getPlacementByStream(), submitStudentProfile(profileData), getSkillRecommendations(studentId). Same pattern as Module 1."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build skeleton page components for all dashboard views</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Create skeleton page components (placeholder layout, no real data yet) for: MarketOverviewPage, HiringAnalyticsPage, SkillGapPage, EnrollmentForecastPage, StudentEvaluatorPage, PlacementByStreamPage. Each should render the SectionHeader component and a grid of StatCards with hardcoded dummy values."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Wire all pages into React Router</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Update App.jsx to include routes for all pages. Update the sidebar navigation so each link routes to its page correctly. Add active link highlighting using React Router's NavLink."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sync-block">
+        <div class="sync-icon">⚑</div>
+        <div>
+          <div class="sync-label">Phase 2 Sync Point</div>
+          <div class="sync-text">Confirm these before Phase 3:</div>
+          <div class="sync-checks">
+            <div class="sync-check"><div class="checkbox"></div> All 4 database tables have data (students: ~500 rows, job_postings: ~1000 rows, enrollments, placements)</div>
+            <div class="sync-check"><div class="checkbox"></div> Data quality check script shows no major nulls or broken values</div>
+            <div class="sync-check"><div class="checkbox"></div> Feature engineering outputs <code>/data/processed/features.parquet</code> successfully</div>
+            <div class="sync-check"><div class="checkbox"></div> All frontend pages render without crashing (even with dummy data)</div>
+            <div class="sync-check"><div class="checkbox"></div> All API service files created and reviewed by Abdi (confirm endpoint naming matches what backend will expose)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         PHASE 3
+    ════════════════════════════════════════════ -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">PHASE 03</div>
+        <div class="phase-title-block">
+          <div class="phase-title">Machine Learning Model Development</div>
+          <div class="phase-goal">Train three separate models, evaluate them, and save them as files the API will load for inference.</div>
+        </div>
+        <div class="phase-weeks">Weeks 3 – 5</div>
+      </div>
+
+      <div class="worker-block">
+        <div class="worker-header abdi">
+          <div class="worker-name abdi">Abdi</div>
+          <div class="worker-role">All three ML models + SHAP explainability</div>
+        </div>
+        <div class="task-list">
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Train the XGBoost placement prediction model</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write /ml/train_placement_model.py. Load features.parquet. Target variable: placed (1/0). Features: gpa, internship_count, project_count, communication_score, program (encoded). Split 80/20 train/test. Train XGBoostClassifier. Print classification report and ROC-AUC score. Save model to /ml/models/placement_model.pkl using joblib."</code></div>
+            </div>
+            <div class="task-tag tt-ml">ML</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Add SHAP explainability to the placement model</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Extend train_placement_model.py to: after training, compute SHAP values using shap.TreeExplainer on the test set. Save mean absolute SHAP values per feature as /ml/models/shap_values.json. This will be used by the frontend to show a feature importance chart."</code></div>
+            </div>
+            <div class="task-tag tt-ml">ML</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Train the Prophet enrollment forecasting model</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write /ml/train_enrollment_forecast.py. Load enrollment data from Postgres grouped by program and year. For each program, train a separate Prophet model with yearly seasonality. Forecast 3 years forward. Save all models to /ml/models/prophet_models/ as one .pkl per program. Save forecast outputs as /ml/models/enrollment_forecasts.json."</code></div>
+            </div>
+            <div class="task-tag tt-ml">ML</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Train the LSTM model for temporal demand patterns</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write /ml/train_lstm_demand.py. Use Keras. Load enrollment features.parquet with lag and rolling average columns. Build a 3-layer LSTM: LSTM(64) → Dropout(0.2) → LSTM(32) → Dense(1). Train for 50 epochs, batch size 16. Use MAE as loss. Print train vs validation MAE. Save model to /ml/models/lstm_demand.h5 and the scaler to /ml/models/lstm_scaler.pkl."</code></div>
+            </div>
+            <div class="task-tag tt-ml">ML</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build a model evaluation report</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write /ml/evaluate_models.py that loads all saved models, runs them on test data, and outputs a report: XGBoost ROC-AUC and F1, Prophet MAPE per program, LSTM MAE and RMSE. Save as /ml/models/evaluation_report.json."</code> Review and confirm results are reasonable before proceeding.</div>
+            </div>
+            <div class="task-tag tt-ml">ML</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the salary prediction model</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write /ml/train_salary_model.py. Use XGBoostRegressor. Features: program (encoded), gpa, internship_count, top skills from job_postings. Target: salary. Train, evaluate with RMSE. Save to /ml/models/salary_model.pkl."</code></div>
+            </div>
+            <div class="task-tag tt-ml">ML</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="worker-block">
+        <div class="worker-header yonas">
+          <div class="worker-name yonas">Yonas</div>
+          <div class="worker-role">Chart components, Module 1 static visualisations</div>
+        </div>
+        <div class="task-list">
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the Top Hiring Companies bar chart component</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Build a React component TopHiringChart using Recharts BarChart. Props: data (array of {company, count}). Horizontal bar chart, sorted descending, top 10 companies. Use navy + gold colour scheme. Add tooltips. Make it responsive using ResponsiveContainer."</code> Use hardcoded mock data for now.</div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the Job vs Internship Ratio pie chart</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Build a React PieChart component using Recharts. Props: jobCount, internshipCount. Show two segments: 'Full-time Jobs' and 'Internships'. Include a legend and percentage labels inside each slice."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the Skill Gap comparison chart</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Build a React SkillGapChart using Recharts. Show a grouped bar chart comparing 'Market Demand %' vs 'Curriculum Coverage %' for 8 skills (Python, SQL, AI, Big Data, SAP, Excel, Communication, Leadership). Colour market demand bars in blue, curriculum bars in green."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the Feature Importance chart (for SHAP values)</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Build a React FeatureImportanceChart. Props: data (array of {feature, importance}). Horizontal bar chart sorted by importance descending. Bars coloured from dark navy (high) to light blue (low). This will later receive SHAP values from the API."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sync-block">
+        <div class="sync-icon">⚑</div>
+        <div>
+          <div class="sync-label">Phase 3 Sync Point</div>
+          <div class="sync-text">Confirm all of the following before moving to API development:</div>
+          <div class="sync-checks">
+            <div class="sync-check"><div class="checkbox"></div> All model files exist in <code>/ml/models/</code> — placement_model.pkl, prophet_models/, lstm_demand.h5, salary_model.pkl, shap_values.json</div>
+            <div class="sync-check"><div class="checkbox"></div> Evaluation report shows XGBoost ROC-AUC above 0.70 (if not, Abdi tunes hyperparameters before proceeding)</div>
+            <div class="sync-check"><div class="checkbox"></div> Yonas has demoed all chart components to Abdi — both agree they look correct with mock data</div>
+            <div class="sync-check"><div class="checkbox"></div> Abdi shares the shape of each model's input and output with Yonas so API contracts can be written</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         PHASE 4
+    ════════════════════════════════════════════ -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">PHASE 04</div>
+        <div class="phase-title-block">
+          <div class="phase-title">Backend API Development</div>
+          <div class="phase-goal">Expose every model and data query as a clean REST endpoint the frontend can call.</div>
+        </div>
+        <div class="phase-weeks">Weeks 5 – 6</div>
+      </div>
+
+      <div class="worker-block">
+        <div class="worker-header abdi">
+          <div class="worker-name abdi">Abdi</div>
+          <div class="worker-role">All API routers, ML inference service, CORS, error handling</div>
+        </div>
+        <div class="task-list">
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Create the ML inference service layer</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write /backend/services/ml_service.py. On startup, load all model files from /ml/models/ into memory (use joblib and keras.models.load_model). Expose functions: predict_placement(student_dict) → float, forecast_enrollment(program, years) → list, predict_salary(program, gpa, internships) → float, get_shap_values() → dict."</code></div>
+            </div>
+            <div class="task-tag tt-api">API</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the Market Demand API router</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write /backend/routers/market.py with FastAPI router. Endpoints: GET /api/market/top-companies (top 10 hiring companies from DB), GET /api/market/regional-hiring (job counts by location), GET /api/market/skill-gap (aggregate skill demand from job postings vs hardcoded curriculum list), GET /api/market/job-internship-ratio, GET /api/market/hiring-sources. Each endpoint queries Postgres and returns JSON."</code></div>
+            </div>
+            <div class="task-tag tt-api">API</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the Enrollment &amp; Prediction API router</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write /backend/routers/enrollment.py. Endpoints: GET /api/enrollment/forecast?program=CS (calls Prophet model), GET /api/enrollment/placement-by-stream (placement rate per program from DB), POST /api/enrollment/predict-placement (body: {gpa, internships, projects, communication, program} → calls XGBoost model → returns probability), GET /api/enrollment/admission-risk?limit=N (returns over/under enroll probability), GET /api/enrollment/shap-values."</code></div>
+            </div>
+            <div class="task-tag tt-api">API</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the Recommendations API router</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write /backend/routers/recommendations.py. Endpoints: POST /api/recommendations/skills (body: {program, current_skills[]} → returns list of recommended certifications based on skill gap data), GET /api/recommendations/salary-forecast?program=X (calls salary model), GET /api/recommendations/escape-routes?program=X (returns list of alternative programs/regions where skills are higher demand)."</code></div>
+            </div>
+            <div class="task-tag tt-api">API</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Register all routers in main.py and configure CORS</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Update /backend/main.py: import and include all three routers with prefix /api. Add CORS middleware allowing all origins for development (we'll restrict in production). Add a GET /health endpoint that returns {status: ok, models_loaded: true/false}."</code></div>
+            </div>
+            <div class="task-tag tt-api">API</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Test all endpoints using FastAPI Swagger UI</div>
+              <div class="task-detail">Open <code>localhost:8000/docs</code>. Manually test every endpoint. Confirm each returns correctly shaped JSON. Fix any errors. Share Swagger URL with Yonas so he can see the exact response shapes.</div>
+            </div>
+            <div class="task-tag tt-test">TEST</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="worker-block">
+        <div class="worker-header yonas">
+          <div class="worker-name yonas">Yonas</div>
+          <div class="worker-role">More chart components, Module 2 UI, enrollment forecast chart</div>
+        </div>
+        <div class="task-list">
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the Enrollment Forecast line chart</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Build a React EnrollmentForecastChart using Recharts LineChart. Props: data (array of {year, actual, forecast}). Show two lines: 'Actual' (solid blue) and 'Forecast' (dashed gold). Add a shaded area between forecast confidence bounds. Program selector dropdown above the chart."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the Placement Rate by Stream bar chart</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Build a React PlacementByStreamChart using Recharts. Vertical bar chart showing placement % per department. Colour bars green if above 65%, amber if 40–65%, red if below 40%. Include a reference line at 65% labelled 'Target'."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the Student Profile Evaluator form UI</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Build a React StudentEvaluator component. Form fields: GPA (number input, 0–4.0), Internship Count (0–4 slider), Projects Completed (0–10 input), Communication Score (1–10 slider), Program (dropdown). Submit button labelled 'Calculate My Score'. Below the form, a circular gauge showing placement probability % (use a Recharts RadialBarChart). Initially empty until submitted."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the Admission Risk slider component</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Build a React AdmissionRiskPanel. A slider input for 'Admission Limit' (50–500 students). Below it, three cards showing over-enrollment risk at 5%, 10%, 20% thresholds. These will call the API when the slider changes (debounced 500ms)."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sync-block">
+        <div class="sync-icon">⚑</div>
+        <div>
+          <div class="sync-label">Phase 4 Sync Point</div>
+          <div class="sync-text">Before connecting frontend to backend:</div>
+          <div class="sync-checks">
+            <div class="sync-check"><div class="checkbox"></div> Every API endpoint manually tested in Swagger and returning correct JSON shape</div>
+            <div class="sync-check"><div class="checkbox"></div> Yonas has reviewed the Swagger docs and confirmed all API service functions in frontend match the real endpoint URLs and request bodies</div>
+            <div class="sync-check"><div class="checkbox"></div> <code>/health</code> endpoint confirms models are loaded correctly</div>
+            <div class="sync-check"><div class="checkbox"></div> All new chart components render without errors using hardcoded data</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         PHASE 5
+    ════════════════════════════════════════════ -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">PHASE 05</div>
+        <div class="phase-title-block">
+          <div class="phase-title">Frontend–Backend Integration</div>
+          <div class="phase-goal">Replace all hardcoded mock data in the frontend with live API calls, and confirm end-to-end data flow.</div>
+        </div>
+        <div class="phase-weeks">Weeks 6 – 7</div>
+      </div>
+
+      <div class="worker-block">
+        <div class="worker-header abdi">
+          <div class="worker-name abdi">Abdi</div>
+          <div class="worker-role">Fix API bugs surfaced during integration, query optimisation</div>
+        </div>
+        <div class="task-list">
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Monitor API logs during Yonas's integration and fix errors</div>
+              <div class="task-detail">Run <code>docker compose logs -f backend</code> while Yonas is connecting pages. Fix any 422 (validation), 500 (server error), or CORS errors as they appear. This is Abdi's primary job this phase.</div>
+            </div>
+            <div class="task-tag tt-api">API</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Add database indexes for commonly queried columns</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Add PostgreSQL indexes on: job_postings.location, job_postings.posted_date, students.program, placements.student_id. Write and run the SQL migration."</code></div>
+            </div>
+            <div class="task-tag tt-data">DATA</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Add response caching to slow endpoints</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Add in-memory caching using functools.lru_cache or a simple dict cache to the following endpoints: skill-gap, top-companies, shap-values. Cache for 5 minutes. These don't change between requests and ML computations are slow."</code></div>
+            </div>
+            <div class="task-tag tt-api">API</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="worker-block">
+        <div class="worker-header yonas">
+          <div class="worker-name yonas">Yonas</div>
+          <div class="worker-role">Wire every page to live API, loading states, error handling</div>
+        </div>
+        <div class="task-list">
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Create a useFetch custom hook for all API calls</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write a React custom hook /frontend/src/hooks/useFetch.js. Takes a URL and optional params. Returns {data, loading, error}. Handles fetch, sets loading true while waiting, catches errors. Include a refetch function."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Connect HiringAnalyticsPage to live API</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Update HiringAnalyticsPage to use useFetch to call: /api/market/top-companies, /api/market/job-internship-ratio, /api/market/hiring-sources. Show LoadingSpinner while loading. Show ErrorBanner if any call fails. Pass real data to chart components."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Connect SkillGapPage to live API</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Update SkillGapPage to fetch from /api/market/skill-gap and /api/enrollment/shap-values. Render the SkillGapChart and FeatureImportanceChart with live data."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Connect EnrollmentForecastPage to live API</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Update EnrollmentForecastPage. On program dropdown change, call /api/enrollment/forecast?program=X and update the EnrollmentForecastChart. Show loading state on program switch."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Connect StudentEvaluatorPage to live placement prediction API</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Update StudentEvaluator so that on form submit, it POSTs to /api/enrollment/predict-placement with the form data. Display the returned probability in the gauge. Also call /api/recommendations/skills with the student's program and current skills. Render a skill recommendation list below the gauge."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Connect AdmissionRiskPanel to live API</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Update AdmissionRiskPanel: on slider change (debounced 500ms), call /api/enrollment/admission-risk?limit=N and update the three risk cards with live values."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Connect PlacementByStreamPage to live API</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Update PlacementByStreamPage to fetch from /api/enrollment/placement-by-stream and render the PlacementByStreamChart with real data."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sync-block">
+        <div class="sync-icon">⚑</div>
+        <div>
+          <div class="sync-label">Phase 5 Sync Point</div>
+          <div class="sync-text">Walk through every page together on a shared screen:</div>
+          <div class="sync-checks">
+            <div class="sync-check"><div class="checkbox"></div> Every chart on every page is showing real data from the API (not hardcoded values)</div>
+            <div class="sync-check"><div class="checkbox"></div> Student evaluator form submits, receives a placement score, and shows skill recommendations</div>
+            <div class="sync-check"><div class="checkbox"></div> Loading states and error states work correctly (test by temporarily stopping the backend)</div>
+            <div class="sync-check"><div class="checkbox"></div> No console errors in the browser on any page</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         PHASE 6
+    ════════════════════════════════════════════ -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">PHASE 06</div>
+        <div class="phase-title-block">
+          <div class="phase-title">Recommendation Engine &amp; Polish</div>
+          <div class="phase-goal">Complete the intelligence layer, make the UI presentation-ready, and ensure the whole system feels finished.</div>
+        </div>
+        <div class="phase-weeks">Weeks 7 – 8</div>
+      </div>
+
+      <div class="worker-block">
+        <div class="worker-header abdi">
+          <div class="worker-name abdi">Abdi</div>
+          <div class="worker-role">Recommendation logic, salary forecasting endpoint, escape route engine</div>
+        </div>
+        <div class="task-list">
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the enrollment recommendation logic engine</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write /backend/services/recommendation_service.py. Function: get_enrollment_recommendation(program, forecast_data, market_demand_data) → returns a dict with: recommended_intake (number), reasoning (string), risk_level (low/medium/high), and market_alignment_score (0–100). Logic: if forecast shows demand increasing and placement rate is above 60%, recommend growing intake. If placement below 50%, flag risk."</code></div>
+            </div>
+            <div class="task-tag tt-api">API</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the escape route mapping logic</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write a function get_escape_routes(program, skills[]) in recommendation_service.py. Query job_postings for all postings where required_skills overlap with the student's skills. Group by program and location. Return top 3 alternative career paths or regions where the student's profile is a stronger fit."</code></div>
+            </div>
+            <div class="task-tag tt-api">API</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Implement the skill recommendation engine</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write get_skill_recommendations(program, current_skills[]) in recommendation_service.py. From job_postings, extract the top 10 most demanded skills for the given program. Return the skills the student is missing ranked by frequency in postings. Map each missing skill to a certification name (e.g. 'Python' → 'Python for Data Science – Coursera')."</code></div>
+            </div>
+            <div class="task-tag tt-api">API</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="worker-block">
+        <div class="worker-header yonas">
+          <div class="worker-name yonas">Yonas</div>
+          <div class="worker-role">UI polish, KPI cards, regional map, responsive fixes</div>
+        </div>
+        <div class="task-list">
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the KPI summary bar at the top of each module</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Add a KPI bar to the top of MarketOverviewPage: four StatCards showing — Total Companies Hiring, Total Job Postings, Average Salary (from DB), Top Hiring Region. Fetch values from /api/market/top-companies and compute client-side. Animate the numbers counting up on load using a simple counter hook."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the skill recommendation card list UI</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Build a SkillRecommendationList React component. Props: skills (array of {skill, certification, priority}). Renders a ranked list — each item shows the skill name, suggested certification, and a priority badge (High/Medium/Low). High priority items have a red left border."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the escape route cards UI</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Build an EscapeRoutePanel React component. Shows 3 cards — each has: alternative career path or region name, match score (%), and a short explanation. Cards have a subtle green border. Renders below the student evaluator form when results are shown."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Make all pages fully responsive for tablet and desktop</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Review all dashboard pages and fix layout issues on screen widths 768px and above. Sidebar should collapse to icons on tablet. Chart containers should use ResponsiveContainer. Form layouts should stack on narrow screens. Test using browser devtools device simulation."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Add a dark/light mode toggle</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Add a dark/light mode toggle to the sidebar. Use Tailwind's dark: class variant. Store user preference in React state. Update the navy sidebar, white content area, and all chart backgrounds to respond to mode change."</code></div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sync-block">
+        <div class="sync-icon">⚑</div>
+        <div>
+          <div class="sync-label">Phase 6 Sync Point</div>
+          <div class="sync-text">Do a full demo run-through as if presenting to the client:</div>
+          <div class="sync-checks">
+            <div class="sync-check"><div class="checkbox"></div> Recommendation engine returns skill gaps, certifications, and escape routes for a test student profile</div>
+            <div class="sync-check"><div class="checkbox"></div> All KPI cards at top of both modules show correct values from live DB</div>
+            <div class="sync-check"><div class="checkbox"></div> Dark mode toggle works without breaking any charts or layouts</div>
+            <div class="sync-check"><div class="checkbox"></div> Both modules are fully navigable with no dead-end pages or broken links</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         PHASE 7
+    ════════════════════════════════════════════ -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">PHASE 07</div>
+        <div class="phase-title-block">
+          <div class="phase-title">Testing, Monitoring &amp; Final Delivery</div>
+          <div class="phase-goal">Lock down quality, add model monitoring, write the docs, and prepare everything for handoff.</div>
+        </div>
+        <div class="phase-weeks">Weeks 8 – 10</div>
+      </div>
+
+      <div class="worker-block">
+        <div class="worker-header abdi">
+          <div class="worker-name abdi">Abdi</div>
+          <div class="worker-role">Model monitoring, retraining pipeline, API tests, documentation</div>
+        </div>
+        <div class="task-list">
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the model performance monitoring script</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write /ml/monitor_models.py. It should: load the XGBoost model, run it against the latest 50 student records in DB, compute current ROC-AUC, compare to baseline in evaluation_report.json. If performance drops more than 10%, print a warning: 'Model drift detected — retrain recommended'. Schedule this to run weekly using a simple cron comment in the script."</code></div>
+            </div>
+            <div class="task-tag tt-ml">ML</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Build the retraining pipeline script</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write /ml/retrain_all.py. Runs the full pipeline in order: (1) feature_engineering.py, (2) train_placement_model.py, (3) train_enrollment_forecast.py, (4) train_lstm_demand.py, (5) evaluate_models.py. Each step prints start/finish. If any step fails, stop and print which step failed. This is the single script to run when new data arrives."</code></div>
+            </div>
+            <div class="task-tag tt-ml">ML</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Write API integration tests</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write /backend/tests/test_api.py using pytest and httpx. Write tests for: GET /health returns 200 and models_loaded=true, GET /api/market/top-companies returns list of at least 5 items, POST /api/enrollment/predict-placement with valid body returns probability between 0 and 1, GET /api/enrollment/forecast?program=CS returns a list of year/count objects."</code></div>
+            </div>
+            <div class="task-tag tt-test">TEST</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Write technical documentation</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write /docs/TECHNICAL.md covering: project folder structure, how to run with Docker Compose, environment variables reference, API endpoint list with example request/response for each, how to regenerate mock data, how to retrain models, and how to run tests."</code></div>
+            </div>
+            <div class="task-tag tt-devops">DEVOPS</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="worker-block">
+        <div class="worker-header yonas">
+          <div class="worker-name yonas">Yonas</div>
+          <div class="worker-role">Frontend testing, UI bug fixes, demo prep</div>
+        </div>
+        <div class="task-list">
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Full manual QA pass on all pages</div>
+              <div class="task-detail">Go through every page in the app and fill in this checklist for each: charts load correctly, loading state shows while fetching, error state shows when API is offline, all filters and dropdowns update charts, no console errors in browser devtools. Log every bug found in a GitHub Issue.</div>
+            </div>
+            <div class="task-tag tt-test">TEST</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Fix all bugs found during QA</div>
+              <div class="task-detail">Work through the GitHub Issues list one by one. For each bug, prompt Claude Code with the specific problem and the component file it's in. Close each issue when fixed and verified.</div>
+            </div>
+            <div class="task-tag tt-fe">FRONTEND</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Prepare a demo script and walkthrough order</div>
+              <div class="task-detail">Write a short script (a Google Doc or markdown file) covering: what to show first, which student profile to enter in the evaluator for a dramatic result, which program to select for the best-looking enrollment forecast. Practice the walkthrough twice before submission.</div>
+            </div>
+            <div class="task-tag tt-test">TEST</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Write a user-facing README for the frontend</div>
+              <div class="task-detail">Prompt Claude Code: <code>"Write /docs/USER_GUIDE.md explaining: how to navigate the dashboard, what each page shows, how to use the student evaluator form, what the SHAP feature importance chart means in plain language, and how to interpret the enrollment risk slider."</code></div>
+            </div>
+            <div class="task-tag tt-devops">DEVOPS</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="worker-block">
+        <div class="worker-header both">
+          <div class="worker-name both">Both — Together</div>
+          <div class="worker-role">Final review and delivery preparation</div>
+        </div>
+        <div class="task-list">
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Run <code>docker compose up</code> on a clean machine and confirm everything works</div>
+              <div class="task-detail">One of you clones the repo fresh into a new folder (not the dev folder). Run <code>docker compose up</code>. Confirm all services start and the full app is functional from scratch. This simulates what the client will do.</div>
+            </div>
+            <div class="task-tag tt-test">TEST</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Run all API tests and confirm they pass</div>
+              <div class="task-detail">Run <code>pytest backend/tests/</code> inside the Docker container. All tests must pass. If any fail, fix before delivery.</div>
+            </div>
+            <div class="task-tag tt-test">TEST</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Tag the final release on GitHub</div>
+              <div class="task-detail">Merge all branches into main. Tag the commit: <code>git tag v1.0.0 && git push origin v1.0.0</code>. This is the version submitted to the client.</div>
+            </div>
+            <div class="task-tag tt-devops">DEVOPS</div>
+          </div>
+
+          <div class="task">
+            <div class="checkbox"></div>
+            <div class="task-body">
+              <div class="task-title">Deliver the final package to the client</div>
+              <div class="task-detail">Share: GitHub repo link (or zip), the <code>docker-compose.yml</code> and <code>.env.example</code>, TECHNICAL.md and USER_GUIDE.md, and the evaluation_report.json showing model performance. Offer a live walkthrough call if required.</div>
+            </div>
+            <div class="task-tag tt-devops">DEVOPS</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sync-block">
+        <div class="sync-icon">✓</div>
+        <div>
+          <div class="sync-label">Final Delivery Checklist</div>
+          <div class="sync-text">The project is complete when every item below is checked:</div>
+          <div class="sync-checks">
+            <div class="sync-check"><div class="checkbox"></div> All 7 phases completed and all task checkboxes above are ticked</div>
+            <div class="sync-check"><div class="checkbox"></div> All API tests pass with <code>pytest</code></div>
+            <div class="sync-check"><div class="checkbox"></div> Clean <code>docker compose up</code> works from a fresh clone</div>
+            <div class="sync-check"><div class="checkbox"></div> Both modules are fully functional with live data from the API</div>
+            <div class="sync-check"><div class="checkbox"></div> Student evaluator returns placement score + skill recommendations + escape routes</div>
+            <div class="sync-check"><div class="checkbox"></div> Model evaluation report confirms acceptable performance metrics</div>
+            <div class="sync-check"><div class="checkbox"></div> TECHNICAL.md and USER_GUIDE.md are complete and reviewed</div>
+            <div class="sync-check"><div class="checkbox"></div> GitHub repo tagged v1.0.0 and shared with client</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end body -->
+
+  <div class="doc-footer">
+    <div class="ft-l">INTERNAL · TEAM EXECUTION PLAYBOOK · NOT FOR CLIENT DISTRIBUTION</div>
+    <div class="ft-r">ABDI + YONAS · 2025</div>
+  </div>
+
+</div>
+</body>
+</html>
