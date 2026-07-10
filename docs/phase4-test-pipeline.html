@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PathWise Analytics — Phase 4 Test Pipeline Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F172A;
+    --navy-800:#16213A;
+    --navy-700:#1E293B;
+    --blue:#3B82F6;
+    --blue-dark:#2563EB;
+    --blue-light:#EAF1FE;
+    --white:#FFFFFF;
+    --page:#F5F7FB;
+    --border:#E6E9F0;
+    --text-secondary:#64748B;
+    --text-muted:#94A3B8;
+    --green:#0EA872;
+    --green-bg:#E7F7F0;
+    --red:#E4483F;
+    --red-bg:#FCEAE9;
+    --amber:#F59E0B;
+    --amber-bg:#FFFBEB;
+    --purple:#8B5CF6;
+    --purple-bg:#F5F3FF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--page);
+    color:var(--navy);
+    display:flex;
+    min-height:100vh;
+  }
+
+  /* ── SIDEBAR ─────────────────────────────────────────────── */
+  .sidebar{
+    width:264px; flex-shrink:0;
+    background:var(--navy);
+    padding:28px 16px 24px;
+    display:flex; flex-direction:column; gap:28px;
+    position:sticky; top:0; height:100vh; overflow-y:auto;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    padding:0 8px 20px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .brand-mark{
+    width:34px; height:34px; border-radius:9px;
+    background:linear-gradient(155deg,var(--blue),#1D4ED8);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Sora',sans-serif; font-weight:700; font-size:15px; color:#fff;
+  }
+  .brand-text{display:flex; flex-direction:column; gap:1px;}
+  .brand-name{font-family:'Sora',sans-serif; font-weight:600; font-size:16px; color:#fff; letter-spacing:-0.01em;}
+  .brand-tag{font-size:11px; color:var(--blue); font-weight:600; letter-spacing:0.04em; text-transform:uppercase;}
+
+  .nav-group{display:flex; flex-direction:column; gap:2px;}
+  .nav-label{
+    font-size:11px; font-weight:600; letter-spacing:0.07em; color:#64748B;
+    text-transform:uppercase; padding:10px 12px 8px;
+  }
+  .nav-item{
+    display:flex; align-items:center; gap:11px;
+    padding:9px 12px; border-radius:8px;
+    color:#B6C0D4; font-size:13.5px; font-weight:500;
+    text-decoration:none; cursor:pointer; transition:background .15s;
+  }
+  .nav-item:hover{background:rgba(255,255,255,0.05); color:#fff;}
+  .nav-item svg{width:16px; height:16px; flex-shrink:0; opacity:0.85;}
+  .nav-item.active{background:var(--navy-700); color:#fff;}
+  .nav-item.active::before{
+    content:""; position:absolute; left:-16px; top:6px; bottom:6px; width:3px;
+    background:var(--blue); border-radius:0 3px 3px 0;
+  }
+
+  .sidebar-footer{
+    margin-top:auto; padding:12px; border-radius:10px;
+    background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06);
+  }
+  .sf-row{display:flex; align-items:center; gap:10px;}
+  .sf-avatar{
+    width:32px; height:32px; border-radius:8px;
+    background:var(--blue); color:#fff; font-family:'Sora',sans-serif;
+    font-weight:600; font-size:13px; display:flex; align-items:center; justify-content:center;
+  }
+  .sf-name{font-size:13px; color:#fff; font-weight:500;}
+  .sf-role{font-size:11.5px; color:#7C8AA5;}
+
+  /* ── MAIN ────────────────────────────────────────────────── */
+  .main{flex:1; min-width:0; padding:36px 44px 64px;}
+
+  .topbar{
+    display:flex; align-items:flex-start; justify-content:space-between;
+    margin-bottom:32px; gap:24px;
+  }
+  .title-block h1{
+    font-family:'Sora',sans-serif; font-weight:600; font-size:24px;
+    letter-spacing:-0.015em; color:var(--navy);
+  }
+  .title-meta{display:flex; align-items:center; gap:8px; margin-top:8px; flex-wrap:wrap;}
+  .live-dot{width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 0 3px var(--green-bg);}
+  .title-meta span{font-size:13px; color:var(--text-secondary);}
+  .badge{
+    display:inline-flex; align-items:center; gap:5px;
+    font-size:11.5px; font-weight:600; padding:3px 9px; border-radius:6px;
+    letter-spacing:0.02em;
+  }
+  .badge-green{background:var(--green-bg); color:var(--green);}
+  .badge-blue{background:var(--blue-light); color:var(--blue-dark);}
+  .badge-amber{background:var(--amber-bg); color:var(--amber);}
+  .badge-purple{background:var(--purple-bg); color:var(--purple);}
+  .badge-navy{background:rgba(15,23,42,0.08); color:var(--navy);}
+
+  /* ── KPI STRIP ───────────────────────────────────────────── */
+  .kpi-strip{
+    display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-bottom:28px;
+  }
+  .kpi-card{
+    background:var(--white); border:1px solid var(--border); border-radius:14px;
+    padding:18px 20px;
+  }
+  .kpi-label{font-size:11.5px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px;}
+  .kpi-value{font-family:'Sora',sans-serif; font-size:28px; font-weight:700; color:var(--navy); letter-spacing:-0.02em; line-height:1;}
+  .kpi-sub{font-size:12px; color:var(--text-secondary); margin-top:6px; font-weight:500;}
+
+  /* ── SECTION BLOCKS ──────────────────────────────────────── */
+  .section{margin-bottom:28px;}
+  .section-header{
+    display:flex; align-items:center; gap:12px; margin-bottom:14px;
+  }
+  .section-icon{
+    width:36px; height:36px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .section-icon svg{width:18px; height:18px;}
+  .section-title{font-family:'Sora',sans-serif; font-size:15px; font-weight:600; color:var(--navy);}
+  .section-subtitle{font-size:12.5px; color:var(--text-secondary); margin-top:2px;}
+
+  .card{
+    background:var(--white); border:1px solid var(--border); border-radius:14px;
+    overflow:hidden;
+  }
+  .card-inner{padding:0;}
+
+  /* ── TEST TABLE ──────────────────────────────────────────── */
+  .test-table{width:100%; border-collapse:collapse; font-size:13px;}
+  .test-table thead tr{border-bottom:1px solid var(--border);}
+  .test-table th{
+    padding:11px 16px; text-align:left; font-size:11.5px; font-weight:600;
+    color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em; background:var(--page);
+  }
+  .test-table td{padding:10px 16px; vertical-align:middle; border-bottom:1px solid #F8FAFC;}
+  .test-table tr:last-child td{border-bottom:none;}
+  .test-table tr:hover td{background:#FAFBFD;}
+
+  .test-id{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; font-weight:600;
+    color:var(--text-muted); white-space:nowrap;
+  }
+  .test-name{color:var(--navy); font-weight:500; line-height:1.4;}
+  .test-result{font-size:12px; color:var(--text-secondary); font-family:'IBM Plex Mono',monospace;}
+
+  .pass-chip{
+    display:inline-flex; align-items:center; gap:4px;
+    background:var(--green-bg); color:var(--green);
+    font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px; white-space:nowrap;
+  }
+  .fail-chip{
+    display:inline-flex; align-items:center; gap:4px;
+    background:var(--red-bg); color:var(--red);
+    font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px; white-space:nowrap;
+  }
+
+  /* ── PROGRESS BAR ────────────────────────────────────────── */
+  .progress-bar-wrap{
+    background:var(--white); border:1px solid var(--border); border-radius:14px;
+    padding:20px 24px; margin-bottom:28px;
+    display:flex; align-items:center; gap:24px;
+  }
+  .progress-bar-outer{
+    flex:1; height:10px; background:#E6E9F0; border-radius:10px; overflow:hidden;
+  }
+  .progress-bar-fill{
+    height:100%; background:linear-gradient(90deg,#0EA872,#34D399);
+    border-radius:10px; transition:width .5s ease;
+  }
+  .progress-label{font-size:13px; font-weight:600; color:var(--navy); white-space:nowrap;}
+
+  /* ── CATEGORY PILLS ROW ──────────────────────────────────── */
+  .category-row{
+    display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap;
+  }
+  .cat-pill{
+    display:flex; align-items:center; gap:7px;
+    padding:6px 13px; border-radius:20px; font-size:12.5px; font-weight:600;
+    border:1px solid var(--border); background:var(--white); color:var(--text-secondary);
+    cursor:pointer; transition:all .15s;
+  }
+  .cat-pill:hover{border-color:var(--blue); color:var(--blue-dark);}
+  .cat-pill .dot{width:8px; height:8px; border-radius:50%;}
+  .cat-count{
+    font-size:11px; background:var(--page); border-radius:10px;
+    padding:1px 6px; font-weight:700; color:var(--navy);
+  }
+
+  /* ── VERDICT SUMMARY ─────────────────────────────────────── */
+  .verdict-box{
+    background:linear-gradient(135deg,#0EA87210,#34D39905);
+    border:1px solid #0EA87225; border-radius:14px;
+    padding:22px 28px; display:flex; align-items:center; gap:20px;
+    margin-bottom:28px;
+  }
+  .verdict-icon{
+    width:48px; height:48px; border-radius:12px; flex-shrink:0;
+    background:var(--green-bg); display:flex; align-items:center; justify-content:center;
+  }
+  .verdict-icon svg{width:26px; height:26px; color:var(--green);}
+  .verdict-title{font-family:'Sora',sans-serif; font-size:17px; font-weight:700; color:var(--navy); margin-bottom:4px;}
+  .verdict-sub{font-size:13px; color:var(--text-secondary); line-height:1.5;}
+
+  /* ── ARCH DIAGRAM ────────────────────────────────────────── */
+  .arch-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:28px;}
+  .arch-card{
+    background:var(--white); border:1px solid var(--border); border-radius:14px;
+    padding:16px 18px;
+  }
+  .arch-card-head{
+    display:flex; align-items:center; gap:9px; margin-bottom:10px;
+  }
+  .arch-dot{width:10px; height:10px; border-radius:50%; flex-shrink:0;}
+  .arch-card-title{font-family:'Sora',sans-serif; font-size:13px; font-weight:600; color:var(--navy);}
+  .arch-card-list{list-style:none; display:flex; flex-direction:column; gap:5px;}
+  .arch-card-list li{
+    font-size:12px; color:var(--text-secondary); padding-left:14px; position:relative;
+  }
+  .arch-card-list li::before{
+    content:""; position:absolute; left:0; top:7px; width:5px; height:5px;
+    border-radius:50%; background:var(--border);
+  }
+
+  /* ── COVERAGE TABLE ──────────────────────────────────────── */
+  .cov-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-bottom:28px;}
+
+  .divider{height:1px; background:var(--border); margin:28px 0;}
+
+  /* scrollbar */
+  ::-webkit-scrollbar{width:5px; height:5px;}
+  ::-webkit-scrollbar-track{background:transparent;}
+  ::-webkit-scrollbar-thumb{background:#CBD5E1; border-radius:10px;}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ SIDEBAR ═══════════════════════════════ -->
+<nav class="sidebar">
+  <div class="brand">
+    <div class="brand-mark">P</div>
+    <div class="brand-text">
+      <span class="brand-name">PathWise</span>
+      <span class="brand-tag">Test Report</span>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label">Report Sections</div>
+    <a class="nav-item active" href="#summary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Overview
+    </a>
+    <a class="nav-item" href="#arch">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+      System Architecture
+    </a>
+    <a class="nav-item" href="#health">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      A — Health Checks
+    </a>
+    <a class="nav-item" href="#market">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+      M — Market Endpoints
+    </a>
+    <a class="nav-item" href="#enrollment">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      E — Enrollment Endpoints
+    </a>
+    <a class="nav-item" href="#placement">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h4"/><path d="M9 21V9a2 2 0 0 1 2-2h6l4 4v8a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2Z"/></svg>
+      P — Placement & SHAP
+    </a>
+    <a class="nav-item" href="#edge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
+      X — Edge Cases
+    </a>
+    <a class="nav-item" href="#integrity">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      I — Data Integrity
+    </a>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="sf-row">
+      <div class="sf-avatar">P</div>
+      <div>
+        <div class="sf-name">PathWise Analytics</div>
+        <div class="sf-role">Phase 4 — API Layer</div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════ MAIN ══════════════════════════════════ -->
+<main class="main">
+
+  <!-- ── Topbar ─────────────────────────────────────────────── -->
+  <div class="topbar">
+    <div class="title-block">
+      <h1>Phase 4 — Test Pipeline Report</h1>
+      <div class="title-meta">
+        <div class="live-dot"></div>
+        <span>104 / 104 tests passed &nbsp;·&nbsp; Run: 10 July 2026 &nbsp;·&nbsp; Backend port 8080</span>
+        <span class="badge badge-green">All Clear</span>
+        <span class="badge badge-blue">Phase 4</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Verdict ────────────────────────────────────────────── -->
+  <div class="verdict-box">
+    <div class="verdict-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+    </div>
+    <div>
+      <div class="verdict-title">Phase 4 fully verified — ready to proceed to Phase 5</div>
+      <div class="verdict-sub">
+        Every API endpoint, ML prediction, SHAP explanation, data integrity constraint, and error-handling path passed.
+        The XGBoost model achieved <strong>99.8% probability for a strong student</strong> and <strong>21.0% for a weak student</strong>,
+        confirming strong discrimination. All 13 routes return correct schemas with live data.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── KPI Strip ──────────────────────────────────────────── -->
+  <div class="kpi-strip" id="summary">
+    <div class="kpi-card">
+      <div class="kpi-label">Total Tests</div>
+      <div class="kpi-value">104</div>
+      <div class="kpi-sub">Across 6 test sections</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Passed</div>
+      <div class="kpi-value" style="color:var(--green)">104</div>
+      <div class="kpi-sub">100% pass rate</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Failed</div>
+      <div class="kpi-value" style="color:var(--text-muted)">0</div>
+      <div class="kpi-sub">No regressions</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">API Endpoints</div>
+      <div class="kpi-value">13</div>
+      <div class="kpi-sub">Market (7) + Enrollment (6)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">ML Coverage</div>
+      <div class="kpi-value">3</div>
+      <div class="kpi-sub">XGBoost · LSTM · Prophet</div>
+    </div>
+  </div>
+
+  <!-- ── Progress Bar ───────────────────────────────────────── -->
+  <div class="progress-bar-wrap">
+    <div style="min-width:100px">
+      <div class="kpi-label" style="margin-bottom:4px">Test Coverage</div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; color:var(--navy)">104 / 104</div>
+    </div>
+    <div class="progress-bar-outer">
+      <div class="progress-bar-fill" style="width:100%"></div>
+    </div>
+    <div class="progress-label" style="color:var(--green)">100%</div>
+  </div>
+
+  <!-- ── Category Pills ─────────────────────────────────────── -->
+  <div class="category-row">
+    <div class="cat-pill"><div class="dot" style="background:#3B82F6"></div> Health Checks <span class="cat-count">5</span></div>
+    <div class="cat-pill"><div class="dot" style="background:#8B5CF6"></div> Market Endpoints <span class="cat-count">34</span></div>
+    <div class="cat-pill"><div class="dot" style="background:#0EA872"></div> Enrollment Endpoints <span class="cat-count">33</span></div>
+    <div class="cat-pill"><div class="dot" style="background:#F59E0B"></div> Placement &amp; SHAP <span class="cat-count">18</span></div>
+    <div class="cat-pill"><div class="dot" style="background:#E4483F"></div> Edge Cases <span class="cat-count">8</span></div>
+    <div class="cat-pill"><div class="dot" style="background:#0F172A"></div> Data Integrity <span class="cat-count">6</span></div>
+  </div>
+
+  <!-- ── System Architecture ────────────────────────────────── -->
+  <div class="section" id="arch">
+    <div class="section-header">
+      <div class="section-icon" style="background:#EEF2FF">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#6366F1" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+      </div>
+      <div>
+        <div class="section-title">System Architecture Under Test</div>
+        <div class="section-subtitle">Phase 4 introduces the API layer bridging the ML pipeline to the React frontend</div>
+      </div>
+    </div>
+    <div class="arch-grid">
+      <div class="arch-card">
+        <div class="arch-card-head">
+          <div class="arch-dot" style="background:#3B82F6"></div>
+          <div class="arch-card-title">FastAPI Backend</div>
+        </div>
+        <ul class="arch-card-list">
+          <li>2 routers: <code style="font-family:'IBM Plex Mono',monospace; font-size:11px">/api/market</code> &amp; <code style="font-family:'IBM Plex Mono',monospace; font-size:11px">/api/enrollment</code></li>
+          <li>13 endpoints total (7 market + 6 enrollment)</li>
+          <li>Pydantic v2 request/response schemas</li>
+          <li>CORS middleware for React frontend</li>
+          <li>Running on port 8080</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card-head">
+          <div class="arch-dot" style="background:#0EA872"></div>
+          <div class="arch-card-title">ML Service Layer</div>
+        </div>
+        <ul class="arch-card-list">
+          <li>Lazy singleton pattern (load once per process)</li>
+          <li>XGBoost placement prediction + SHAP</li>
+          <li>LSTM enrollment forecasting</li>
+          <li>Prophet demand forecasting</li>
+          <li>sys.path injection for ml/ imports</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card-head">
+          <div class="arch-dot" style="background:#F59E0B"></div>
+          <div class="arch-card-title">Data Services</div>
+        </div>
+        <ul class="arch-card-list">
+          <li>market_service.py — 7 functions from CSV + SHAP</li>
+          <li>enrollment_service.py — 6 functions from parquet</li>
+          <li>Skill gap: SHAP normalised to 0–100 demand score</li>
+          <li>Admission risk: YoY enrollment decline %</li>
+          <li>Placement coverage from 3,000-student dataset</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card-head">
+          <div class="arch-dot" style="background:#8B5CF6"></div>
+          <div class="arch-card-title">React Frontend</div>
+        </div>
+        <ul class="arch-card-list">
+          <li>8 new pages wired to live API</li>
+          <li>Recharts v3: BarChart, AreaChart, LineChart</li>
+          <li>SHAP waterfall with per-bar Cell coloring</li>
+          <li>LSTM line chart with historical/forecast overlap</li>
+          <li>Vite build: 523 modules, 0 errors</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card-head">
+          <div class="arch-dot" style="background:#E4483F"></div>
+          <div class="arch-card-title">Error Handling</div>
+        </div>
+        <ul class="arch-card-list">
+          <li>422 Unprocessable Entity — missing/invalid fields</li>
+          <li>404 Not Found — unknown programme in forecast</li>
+          <li>500 prevention — all edge inputs return non-500</li>
+          <li>Extra fields silently ignored (Pydantic default)</li>
+          <li>GPA boundary inputs (2.0, 4.0) handled correctly</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card-head">
+          <div class="arch-dot" style="background:#0F172A"></div>
+          <div class="arch-card-title">Test Infrastructure</div>
+        </div>
+        <ul class="arch-card-list">
+          <li>Pure stdlib: <code style="font-family:'IBM Plex Mono',monospace; font-size:11px">urllib.request</code>, <code style="font-family:'IBM Plex Mono',monospace; font-size:11px">json</code></li>
+          <li>No pytest dependency — runs anywhere Python is available</li>
+          <li>File: <code style="font-family:'IBM Plex Mono',monospace; font-size:11px">tests/test_phase4.py</code></li>
+          <li>Self-contained — one file, no fixtures</li>
+          <li>60 s timeout per request (SHAP/LSTM calls)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════ A — HEALTH CHECKS ═══════════════════ -->
+  <div class="section" id="health">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--blue-light)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue-dark)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <div>
+        <div class="section-title">A — Health &amp; Router Registration</div>
+        <div class="section-subtitle">Confirms the API server is live, models are loaded, and both routers respond before any other tests run</div>
+      </div>
+      <span class="badge badge-blue" style="margin-left:auto">5 / 5</span>
+    </div>
+    <div class="card">
+      <table class="test-table">
+        <thead><tr><th>ID</th><th>Test</th><th>What it checks</th><th>Actual result</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="test-id">A1</td>
+            <td class="test-name">Health endpoint returns 200</td>
+            <td class="test-result">GET /health → HTTP 200</td>
+            <td class="test-result">{"status":"ok","models_loaded":true}</td>
+            <td><span class="pass-chip">✓ PASS</span></td>
+          </tr>
+          <tr>
+            <td class="test-id">A2</td>
+            <td class="test-name">ML models loaded on startup</td>
+            <td class="test-result">models_loaded === true</td>
+            <td class="test-result">true</td>
+            <td><span class="pass-chip">✓ PASS</span></td>
+          </tr>
+          <tr>
+            <td class="test-id">A3</td>
+            <td class="test-name">Root endpoint returns welcome message</td>
+            <td class="test-result">GET / → 200 with message key</td>
+            <td class="test-result">{"message":"PathWise Analytics API"}</td>
+            <td><span class="pass-chip">✓ PASS</span></td>
+          </tr>
+          <tr>
+            <td class="test-id">A4</td>
+            <td class="test-name">Market router registered</td>
+            <td class="test-result">GET /api/market/overview → 200</td>
+            <td class="test-result">200 OK</td>
+            <td><span class="pass-chip">✓ PASS</span></td>
+          </tr>
+          <tr>
+            <td class="test-id">A5</td>
+            <td class="test-name">Enrollment router registered</td>
+            <td class="test-result">GET /api/enrollment/summary → 200</td>
+            <td class="test-result">200 OK</td>
+            <td><span class="pass-chip">✓ PASS</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ M — MARKET ══════════════════════════ -->
+  <div class="section" id="market">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--purple-bg)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+      </div>
+      <div>
+        <div class="section-title">M — Market Demand Endpoints</div>
+        <div class="section-subtitle">Covers all 7 market routes: overview, companies, regions, job ratio, skill gap, hiring sources, and demand forecast</div>
+      </div>
+      <span class="badge badge-purple" style="margin-left:auto">34 / 34</span>
+    </div>
+    <div class="card">
+      <table class="test-table">
+        <thead><tr><th>ID</th><th>Test</th><th>What it checks</th><th>Actual result</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td class="test-id">M1</td><td class="test-name">/market/overview returns 200</td><td class="test-result">HTTP status code</td><td class="test-result">200 OK</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M2</td><td class="test-name">Overview has all 5 required fields</td><td class="test-result">total_companies, total_placements, avg_salary, avg_time_to_hire, top_role</td><td class="test-result">All 5 present</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M3</td><td class="test-name">total_companies is a positive integer</td><td class="test-result">int > 0</td><td class="test-result">30</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M4</td><td class="test-name">total_placements in plausible range</td><td class="test-result">500 ≤ value ≤ 3000</td><td class="test-result">2,649</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M5</td><td class="test-name">avg_salary in plausible range</td><td class="test-result">$70K ≤ value ≤ $200K</td><td class="test-result">$118,526</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M6</td><td class="test-name">avg_time_to_hire in range</td><td class="test-result">10 ≤ value ≤ 120 days</td><td class="test-result">54.0 days</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M7</td><td class="test-name">top_role is a non-empty string</td><td class="test-result">len > 0</td><td class="test-result">Full Stack Developer</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M8</td><td class="test-name">/market/top-companies returns 200</td><td class="test-result">HTTP status code</td><td class="test-result">200 OK</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M9</td><td class="test-name">Returns up to 10 companies</td><td class="test-result">1 ≤ len ≤ 10</td><td class="test-result">10 companies</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M10</td><td class="test-name">Each company has name and count</td><td class="test-result">company + count keys</td><td class="test-result">All present</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M11</td><td class="test-name">Companies sorted by count descending</td><td class="test-result">count[i] ≥ count[i+1]</td><td class="test-result">Correctly ordered</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M12</td><td class="test-name">All counts are positive integers</td><td class="test-result">int > 0 for each</td><td class="test-result">All positive</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M13</td><td class="test-name">/market/regional-hiring returns 200</td><td class="test-result">HTTP status code</td><td class="test-result">200 OK</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M14</td><td class="test-name">Returns at least 1 region</td><td class="test-result">len ≥ 1</td><td class="test-result">6 regions</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M15</td><td class="test-name">Each region has location and count</td><td class="test-result">location + count keys</td><td class="test-result">All present</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M16</td><td class="test-name">/market/job-internship-ratio returns 200</td><td class="test-result">HTTP status code</td><td class="test-result">200 OK</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M17</td><td class="test-name">Has job_count, internship_count, ratio</td><td class="test-result">3 required keys</td><td class="test-result">All present</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M18</td><td class="test-name">Ratio equals job_count ÷ internship_count</td><td class="test-result">Arithmetic check ±0.01</td><td class="test-result">2649 ÷ 6007 = 0.44 ✓</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M19</td><td class="test-name">/market/skill-gap returns 200</td><td class="test-result">HTTP status code</td><td class="test-result">200 OK</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M20</td><td class="test-name">Has skills, top_gap_skill, avg_gap_score</td><td class="test-result">3 top-level keys</td><td class="test-result">All present</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M21</td><td class="test-name">Returns exactly 4 skill items</td><td class="test-result">len(skills) == 4</td><td class="test-result">4 skills</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M22</td><td class="test-name">Each skill has demand, coverage, gap scores</td><td class="test-result">3 score keys per skill</td><td class="test-result">All present</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M23</td><td class="test-name">Max demand_score == 100 (normalised)</td><td class="test-result">SHAP normalisation to 0–100</td><td class="test-result">max = 100.0</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M24</td><td class="test-name">All coverage scores in [0, 100]</td><td class="test-result">Range check</td><td class="test-result">All within range</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M25</td><td class="test-name">gap_score = max(demand − coverage, 0)</td><td class="test-result">Cross-field arithmetic ±0.2</td><td class="test-result">All consistent</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M26</td><td class="test-name">top_gap_skill matches highest gap</td><td class="test-result">argmax(gap_score) == top_gap_skill</td><td class="test-result">Consistent</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M27</td><td class="test-name">/market/hiring-sources returns 200</td><td class="test-result">HTTP status code</td><td class="test-result">200 OK</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M28</td><td class="test-name">Each source has source name and count</td><td class="test-result">source + count keys</td><td class="test-result">All present</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M29</td><td class="test-name">/market/demand-forecast returns 200</td><td class="test-result">HTTP status code</td><td class="test-result">200 OK</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M30</td><td class="test-name">12-month request returns exactly 12 points</td><td class="test-result">len(fc) == 12</td><td class="test-result">12 points</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M31</td><td class="test-name">Each point has month, predicted, lower, upper</td><td class="test-result">4 keys per point</td><td class="test-result">All present</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M32</td><td class="test-name">All predicted_postings are positive</td><td class="test-result">value > 0 for all 12</td><td class="test-result">Annual total: 1,559</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M33</td><td class="test-name">CI ordered: lower ≤ predicted ≤ upper</td><td class="test-result">Confidence interval validity</td><td class="test-result">All 12 points valid</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">M34</td><td class="test-name">6-month request returns 6 points</td><td class="test-result">Parameterisable forecast length</td><td class="test-result">6 points</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ E — ENROLLMENT ══════════════════════ -->
+  <div class="section" id="enrollment">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--green-bg)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div>
+        <div class="section-title">E — Enrollment Intelligence Endpoints</div>
+        <div class="section-subtitle">Covers 6 enrollment routes: summary, LSTM forecast, admission risk, placement by stream, and skill recommendations</div>
+      </div>
+      <span class="badge badge-green" style="margin-left:auto">33 / 33</span>
+    </div>
+    <div class="card">
+      <table class="test-table">
+        <thead><tr><th>ID</th><th>Test</th><th>What it checks</th><th>Actual result</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td class="test-id">E1</td><td class="test-name">/enrollment/summary returns 200</td><td class="test-result">HTTP status code</td><td class="test-result">200 OK</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E2</td><td class="test-name">Summary has all 5 required fields</td><td class="test-result">total_students, total_programs, avg_placement_rate, top_program, enrollment_by_year</td><td class="test-result">All 5 present</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E3</td><td class="test-name">total_students == 3,000</td><td class="test-result">Exact count match</td><td class="test-result">3,000</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E4</td><td class="test-name">total_programs == 12</td><td class="test-result">Exact count match</td><td class="test-result">12</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E5</td><td class="test-name">avg_placement_rate in [80%, 99%]</td><td class="test-result">Range check</td><td class="test-result">88.3%</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E6</td><td class="test-name">enrollment_by_year has 6 years (2019–2024)</td><td class="test-result">len == 6</td><td class="test-result">6 years</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E7</td><td class="test-name">Year totals sum to 3,000</td><td class="test-result">sum(enrollment_by_year.values()) == 3000</td><td class="test-result">469+529+518+503+473+508 = 3,000 ✓</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E8</td><td class="test-name">/enrollment/forecast returns 200</td><td class="test-result">HTTP status code</td><td class="test-result">200 OK</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E9</td><td class="test-name">Forecast has program, historical, forecast keys</td><td class="test-result">3 top-level keys</td><td class="test-result">All present</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E10</td><td class="test-name">Historical has 6 data points (2019–2024)</td><td class="test-result">len(historical) == 6</td><td class="test-result">6 points</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E11</td><td class="test-name">Forecast has 3 data points (2025–2027)</td><td class="test-result">len(forecast) == 3</td><td class="test-result">3 points</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E12</td><td class="test-name">Forecast years are 2025, 2026, 2027</td><td class="test-result">Exact year sequence</td><td class="test-result">[2025, 2026, 2027]</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E13</td><td class="test-name">All forecast counts are positive</td><td class="test-result">value > 0 for all 3 years</td><td class="test-result">All positive</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E14</td><td class="test-name">Forecast works for all 12 programmes</td><td class="test-result">200 for each programme name</td><td class="test-result">12/12 return 200</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E15</td><td class="test-name">/enrollment/admission-risk returns 200</td><td class="test-result">HTTP status code</td><td class="test-result">200 OK</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E16</td><td class="test-name">Returns up to 12 results</td><td class="test-result">1 ≤ len ≤ 12</td><td class="test-result">12 results</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E17</td><td class="test-name">Each risk has 4 required fields</td><td class="test-result">program, risk_score, recommended_intake, trend</td><td class="test-result">All present</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E18</td><td class="test-name">All risk_scores are non-negative</td><td class="test-result">value ≥ 0 for all</td><td class="test-result">All ≥ 0</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E19</td><td class="test-name">Trend values are 'up', 'down', or 'stable'</td><td class="test-result">Enum validation</td><td class="test-result">All valid</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E20</td><td class="test-name">recommended_intake values are positive</td><td class="test-result">int > 0 for all</td><td class="test-result">All positive</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E21</td><td class="test-name">Sorted by risk_score descending</td><td class="test-result">risk[i] ≥ risk[i+1]</td><td class="test-result">Correctly ordered</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E22</td><td class="test-name">/enrollment/placement-by-stream returns 200</td><td class="test-result">HTTP status code</td><td class="test-result">200 OK</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E23</td><td class="test-name">Returns all 12 programmes</td><td class="test-result">len == 12</td><td class="test-result">12 streams</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E24</td><td class="test-name">Each stream has 4 required fields</td><td class="test-result">program, placement_rate, avg_salary, student_count</td><td class="test-result">All present</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E25</td><td class="test-name">placement_rate in [0%, 100%] for all streams</td><td class="test-result">Range check</td><td class="test-result">All within range</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E26</td><td class="test-name">avg_salary in [$50K, $250K] for all streams</td><td class="test-result">Range check</td><td class="test-result">All within range</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E27</td><td class="test-name">student_count totals 3,000</td><td class="test-result">sum(student_count) == 3000</td><td class="test-result">3,000 ✓</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E28</td><td class="test-name">Sorted by placement_rate descending</td><td class="test-result">rate[i] ≥ rate[i+1]</td><td class="test-result">Correctly ordered</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E29</td><td class="test-name">/enrollment/skill-recommendations returns 200</td><td class="test-result">HTTP status code</td><td class="test-result">200 OK</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E30</td><td class="test-name">Has recommendations and alternative_pathways</td><td class="test-result">2 top-level keys</td><td class="test-result">Both present</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E31</td><td class="test-name">Recommendations list is non-empty</td><td class="test-result">len > 0</td><td class="test-result">Non-empty</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E32</td><td class="test-name">Each recommendation has skill, priority, reason</td><td class="test-result">3 keys per item</td><td class="test-result">All present</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">E33</td><td class="test-name">Priority values are High / Medium / Low</td><td class="test-result">Enum validation</td><td class="test-result">All valid</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ P — PLACEMENT & SHAP ════════════════ -->
+  <div class="section" id="placement">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--amber-bg)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><path d="M9 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h4"/><path d="M9 21V9a2 2 0 0 1 2-2h6l4 4v8a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2Z"/></svg>
+      </div>
+      <div>
+        <div class="section-title">P — Placement Prediction &amp; SHAP Explainability</div>
+        <div class="section-subtitle">Tests the XGBoost model via POST with strong, average, and weak student profiles; verifies SHAP sign direction, determinism, and all 12 programmes</div>
+      </div>
+      <span class="badge badge-amber" style="margin-left:auto">18 / 18</span>
+    </div>
+
+    <!-- Student profile summary -->
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:14px;">
+      <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:12px; padding:14px 16px;">
+        <div style="font-size:11px; font-weight:700; color:#2563EB; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">Strong Student Profile</div>
+        <div style="font-size:12px; color:var(--navy); line-height:1.7;">GPA: 3.9 &nbsp;·&nbsp; Internships: 4 &nbsp;·&nbsp; Projects: 8 &nbsp;·&nbsp; Communication: 10/10<br>Programme: MS Data Science</div>
+        <div style="margin-top:8px; font-family:'Sora',sans-serif; font-size:20px; font-weight:700; color:#0EA872;">99.8% <span style="font-size:12px; font-weight:600;">Placed</span></div>
+      </div>
+      <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:12px; padding:14px 16px;">
+        <div style="font-size:11px; font-weight:700; color:#D97706; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">Average Student Profile</div>
+        <div style="font-size:12px; color:var(--navy); line-height:1.7;">GPA: 3.1 &nbsp;·&nbsp; Internships: 1 &nbsp;·&nbsp; Projects: 4 &nbsp;·&nbsp; Communication: 6/10<br>Programme: MS Computer Science</div>
+        <div style="margin-top:8px; font-family:'Sora',sans-serif; font-size:20px; font-weight:700; color:#F59E0B;">86.6% <span style="font-size:12px; font-weight:600;">Placed</span></div>
+      </div>
+      <div style="background:#FFF1F2; border:1px solid #FECDD3; border-radius:12px; padding:14px 16px;">
+        <div style="font-size:11px; font-weight:700; color:#DC2626; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">Weak Student Profile</div>
+        <div style="font-size:12px; color:var(--navy); line-height:1.7;">GPA: 2.1 &nbsp;·&nbsp; Internships: 0 &nbsp;·&nbsp; Projects: 0 &nbsp;·&nbsp; Communication: 2/10<br>Programme: Certificate Data Analytics</div>
+        <div style="margin-top:8px; font-family:'Sora',sans-serif; font-size:20px; font-weight:700; color:#E4483F;">21.0% <span style="font-size:12px; font-weight:600;">Not Placed</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <table class="test-table">
+        <thead><tr><th>ID</th><th>Test</th><th>What it checks</th><th>Actual result</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td class="test-id">P1</td><td class="test-name">Strong profile POST returns 200</td><td class="test-result">HTTP status code</td><td class="test-result">200 OK</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">P2</td><td class="test-name">Average profile POST returns 200</td><td class="test-result">HTTP status code</td><td class="test-result">200 OK</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">P3</td><td class="test-name">Weak profile POST returns 200</td><td class="test-result">HTTP status code</td><td class="test-result">200 OK</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">P4</td><td class="test-name">Response has all 4 required fields</td><td class="test-result">placement_probability, prediction, base_value, shap_values</td><td class="test-result">All 4 present</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">P5</td><td class="test-name">Strong profile probability > 85%</td><td class="test-result">Model confidence for top-tier student</td><td class="test-result">99.8%</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">P6</td><td class="test-name">Weak profile probability &lt; 70%</td><td class="test-result">Model confidence for low-tier student</td><td class="test-result">21.0%</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">P7</td><td class="test-name">strong > average > weak ordering</td><td class="test-result">Monotonic discrimination</td><td class="test-result">0.998 > 0.866 > 0.210 ✓</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">P8</td><td class="test-name">All probabilities in [0, 1]</td><td class="test-result">Valid probability range</td><td class="test-result">All in [0,1]</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">P9</td><td class="test-name">Strong prediction label is 'Placed'</td><td class="test-result">Classification output</td><td class="test-result">Placed</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">P10</td><td class="test-name">Weak prediction label is 'Not Placed'</td><td class="test-result">Classification output</td><td class="test-result">Not Placed</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">P11</td><td class="test-name">SHAP values list is non-empty</td><td class="test-result">At least 1 contribution returned</td><td class="test-result">16 contributions</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">P12</td><td class="test-name">Each SHAP item has feature, value, shap</td><td class="test-result">3 keys per contribution</td><td class="test-result">All present</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">P13</td><td class="test-name">gpa_scaled is present in SHAP output</td><td class="test-result">Key feature in output</td><td class="test-result">Present</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">P14</td><td class="test-name">internships is present in SHAP output</td><td class="test-result">Key feature in output</td><td class="test-result">Present</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">P15</td><td class="test-name">gpa_scaled SHAP is positive for strong student</td><td class="test-result">High GPA helps placement</td><td class="test-result">+ve SHAP value</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">P16</td><td class="test-name">gpa_scaled SHAP is negative for weak student</td><td class="test-result">Low GPA hurts placement</td><td class="test-result">−1.1255</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">P17</td><td class="test-name">Same input returns same probability</td><td class="test-result">Determinism / reproducibility</td><td class="test-result">Identical on repeat call</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          <tr><td class="test-id">P18</td><td class="test-name">All 12 programmes return 200</td><td class="test-result">No programme causes a crash</td><td class="test-result">12/12 return 200</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ X — EDGE CASES ══════════════════════ -->
+  <div class="section" id="edge">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--red-bg)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
+      </div>
+      <div>
+        <div class="section-title">X — Edge Cases &amp; Error Handling</div>
+        <div class="section-subtitle">Validates that the API fails gracefully: correct HTTP status codes for bad inputs, boundary values, and unknown resources</div>
+      </div>
+      <span class="badge" style="background:var(--red-bg); color:var(--red); margin-left:auto;">8 / 8</span>
+    </div>
+    <div class="card">
+      <table class="test-table">
+        <thead><tr><th>ID</th><th>Test</th><th>Input</th><th>Expected</th><th>Actual</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="test-id">X1</td>
+            <td class="test-name">Invalid programme name</td>
+            <td class="test-result">program: "Fake Programme"</td>
+            <td class="test-result">Non-500 (graceful)</td>
+            <td class="test-result">200 (model runs, prob returned)</td>
+            <td><span class="pass-chip">✓ PASS</span></td>
+          </tr>
+          <tr>
+            <td class="test-id">X2</td>
+            <td class="test-name">Missing required field</td>
+            <td class="test-result">Body without 'gpa' key</td>
+            <td class="test-result">422 Unprocessable Entity</td>
+            <td class="test-result">422</td>
+            <td><span class="pass-chip">✓ PASS</span></td>
+          </tr>
+          <tr>
+            <td class="test-id">X3</td>
+            <td class="test-name">Extra unknown fields in body</td>
+            <td class="test-result">Body + extra_field key</td>
+            <td class="test-result">200 (ignored silently)</td>
+            <td class="test-result">200</td>
+            <td><span class="pass-chip">✓ PASS</span></td>
+          </tr>
+          <tr>
+            <td class="test-id">X4</td>
+            <td class="test-name">Unknown programme in forecast</td>
+            <td class="test-result">program=Unknown+Programme</td>
+            <td class="test-result">404 Not Found</td>
+            <td class="test-result">404</td>
+            <td><span class="pass-chip">✓ PASS</span></td>
+          </tr>
+          <tr>
+            <td class="test-id">X5</td>
+            <td class="test-name">Admission risk with limit=0</td>
+            <td class="test-result">?limit=0</td>
+            <td class="test-result">200 with empty list []</td>
+            <td class="test-result">200 · []</td>
+            <td><span class="pass-chip">✓ PASS</span></td>
+          </tr>
+          <tr>
+            <td class="test-id">X6</td>
+            <td class="test-name">GPA at floor value (2.0)</td>
+            <td class="test-result">gpa:2.0, all other inputs minimal</td>
+            <td class="test-result">Valid probability in [0,1]</td>
+            <td class="test-result">58.5%</td>
+            <td><span class="pass-chip">✓ PASS</span></td>
+          </tr>
+          <tr>
+            <td class="test-id">X7</td>
+            <td class="test-name">GPA at ceiling value (4.0)</td>
+            <td class="test-result">gpa:4.0, all other inputs maximal</td>
+            <td class="test-result">Valid probability in [0,1]</td>
+            <td class="test-result">99.9%</td>
+            <td><span class="pass-chip">✓ PASS</span></td>
+          </tr>
+          <tr>
+            <td class="test-id">X8</td>
+            <td class="test-name">Ceiling probability > floor probability</td>
+            <td class="test-result">Compare X6 vs X7</td>
+            <td class="test-result">0.999 > 0.585</td>
+            <td class="test-result">0.999 > 0.585 ✓</td>
+            <td><span class="pass-chip">✓ PASS</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ I — DATA INTEGRITY ══════════════════ -->
+  <div class="section" id="integrity">
+    <div class="section-header">
+      <div class="section-icon" style="background:#F1F5F9">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div>
+        <div class="section-title">I — Cross-Endpoint Data Integrity</div>
+        <div class="section-subtitle">Validates that values are internally consistent across endpoints — totals add up, averages match, SHAP base values are stable</div>
+      </div>
+      <span class="badge badge-navy" style="margin-left:auto">6 / 6</span>
+    </div>
+    <div class="card">
+      <table class="test-table">
+        <thead><tr><th>ID</th><th>Test</th><th>Cross-check</th><th>Actual result</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="test-id">I1</td>
+            <td class="test-name">Placements vs enrolled are different metrics</td>
+            <td class="test-result">total_placements ≠ total_students (they measure different things)</td>
+            <td class="test-result">placements=2,649 · enrolled=3,000</td>
+            <td><span class="pass-chip">✓ PASS</span></td>
+          </tr>
+          <tr>
+            <td class="test-id">I2</td>
+            <td class="test-name">Top company count ≤ total placements</td>
+            <td class="test-result">top_company.count ≤ overview.total_placements</td>
+            <td class="test-result">104 ≤ 2,649 ✓</td>
+            <td><span class="pass-chip">✓ PASS</span></td>
+          </tr>
+          <tr>
+            <td class="test-id">I3</td>
+            <td class="test-name">12-month forecast annual total is realistic</td>
+            <td class="test-result">800 ≤ sum(predicted_postings) ≤ 2,500</td>
+            <td class="test-result">1,559 total postings</td>
+            <td><span class="pass-chip">✓ PASS</span></td>
+          </tr>
+          <tr>
+            <td class="test-id">I4</td>
+            <td class="test-name">avg_gap_score matches computed average</td>
+            <td class="test-result">reported value == mean(gap_score) ±0.2</td>
+            <td class="test-result">reported=15.7 · computed=15.7</td>
+            <td><span class="pass-chip">✓ PASS</span></td>
+          </tr>
+          <tr>
+            <td class="test-id">I5</td>
+            <td class="test-name">All yearly enrollment counts are positive</td>
+            <td class="test-result">enrollment_by_year[y] > 0 for all 6 years</td>
+            <td class="test-result">469 · 529 · 518 · 503 · 473 · 508 (all > 0)</td>
+            <td><span class="pass-chip">✓ PASS</span></td>
+          </tr>
+          <tr>
+            <td class="test-id">I6</td>
+            <td class="test-name">SHAP base_value is identical across all profiles</td>
+            <td class="test-result">Same model → same global base value ±0.01</td>
+            <td class="test-result">2.0377 for strong, average, and weak</td>
+            <td><span class="pass-chip">✓ PASS</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── Final Summary ──────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--green-bg)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <div>
+        <div class="section-title">Final Verdict</div>
+        <div class="section-subtitle">Summary of Phase 4 test outcomes</div>
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px;">
+      <div style="background:var(--white); border:1px solid var(--border); border-radius:14px; padding:18px 20px;">
+        <div class="kpi-label">API Coverage</div>
+        <div class="kpi-value" style="color:var(--green); font-size:22px; margin-top:6px;">13 / 13 routes</div>
+        <div class="kpi-sub" style="margin-top:6px;">Every endpoint returns correct schema and live data</div>
+      </div>
+      <div style="background:var(--white); border:1px solid var(--border); border-radius:14px; padding:18px 20px;">
+        <div class="kpi-label">ML Discrimination</div>
+        <div class="kpi-value" style="color:var(--green); font-size:22px; margin-top:6px;">78.8 pp gap</div>
+        <div class="kpi-sub" style="margin-top:6px;">Strong student 99.8% vs weak student 21.0% — clear separation</div>
+      </div>
+      <div style="background:var(--white); border:1px solid var(--border); border-radius:14px; padding:18px 20px;">
+        <div class="kpi-label">Error Resilience</div>
+        <div class="kpi-value" style="color:var(--green); font-size:22px; margin-top:6px;">0 crashes</div>
+        <div class="kpi-sub" style="margin-top:6px;">All bad inputs return correct HTTP error codes, no 500s</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:40px; padding:18px 22px; background:var(--white); border:1px solid var(--border); border-radius:14px; display:flex; align-items:center; justify-content:space-between;">
+    <div>
+      <div style="font-family:'Sora',sans-serif; font-size:13px; font-weight:600; color:var(--navy); margin-bottom:3px;">Test file location</div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--text-secondary);">tests/test_phase4.py &nbsp;·&nbsp; Run with: python tests/test_phase4.py</div>
+    </div>
+    <span class="badge badge-green" style="font-size:13px; padding:6px 14px;">Phase 5 cleared to proceed</span>
+  </div>
+
+</main>
+</body>
+</html>

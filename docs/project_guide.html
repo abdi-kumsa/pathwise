@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PathWise — Project Guide</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:  #1a2f4e;
+    --blue:  #2563eb;
+    --teal:  #0d9488;
+    --slate: #475569;
+    --muted: #94a3b8;
+    --line:  #e2e8f0;
+    --bg:    #f8fafc;
+    --white: #ffffff;
+    --text:  #0f172a;
+  }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ── Page wrapper ── */
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* ── Top header ── */
+  .doc-header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+    border-radius: 14px;
+    padding: 40px 44px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .doc-header::after {
+    content: 'PW';
+    position: absolute;
+    right: 30px; top: 20px;
+    font-size: 80px;
+    font-weight: 900;
+    color: rgba(255,255,255,.05);
+    letter-spacing: -3px;
+  }
+  .doc-header .tag {
+    display: inline-block;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.7);
+    margin-bottom: 14px;
+  }
+  .doc-header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .doc-header p {
+    color: rgba(255,255,255,.55);
+    font-size: 14px;
+    max-width: 560px;
+  }
+
+  /* ── Table of contents ── */
+  .toc {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 40px;
+  }
+  .toc h3 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .toc ol {
+    padding-left: 18px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 24px;
+  }
+  .toc ol li {
+    font-size: 13.5px;
+    color: var(--blue);
+    padding: 3px 0;
+  }
+  .toc ol li a {
+    color: var(--blue);
+    text-decoration: none;
+  }
+  .toc ol li a:hover { text-decoration: underline; }
+
+  /* ── Section ── */
+  .section {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin-bottom: 24px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 6px;
+  }
+  .section-label.teal { color: var(--teal); }
+
+  h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 24px 0 8px;
+  }
+  h3:first-of-type { margin-top: 8px; }
+
+  h4 {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 16px 0 4px;
+  }
+
+  p {
+    color: var(--slate);
+    margin-bottom: 12px;
+    font-size: 14.5px;
+  }
+  p:last-child { margin-bottom: 0; }
+
+  ul, ol {
+    color: var(--slate);
+    font-size: 14.5px;
+    padding-left: 20px;
+    margin-bottom: 12px;
+  }
+  li { padding: 3px 0; line-height: 1.6; }
+
+  /* ── Highlight boxes ── */
+  .box-blue {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-left: 4px solid var(--blue);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 16px 0;
+  }
+  .box-blue p { color: #1e40af; margin: 0; font-size: 14px; }
+
+  .box-teal {
+    background: #f0fdfa;
+    border: 1px solid #99f6e4;
+    border-left: 4px solid var(--teal);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 16px 0;
+  }
+  .box-teal p { color: #134e4a; margin: 0; font-size: 14px; }
+
+  .box-yellow {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-left: 4px solid #f59e0b;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 16px 0;
+  }
+  .box-yellow p { color: #78350f; margin: 0; font-size: 14px; }
+
+  .box-dark {
+    background: #0f172a;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .box-dark p {
+    color: #94a3b8;
+    margin: 0;
+    font-size: 13.5px;
+    font-style: italic;
+  }
+  .box-dark .label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #3b82f6;
+    margin-bottom: 6px;
+  }
+
+  /* ── Term cards ── */
+  .term-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .term-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .term-head {
+    background: var(--navy);
+    padding: 12px 18px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .term-name {
+    font-size: 14px;
+    font-weight: 800;
+    color: #fff;
+  }
+  .term-full {
+    font-size: 12px;
+    color: rgba(255,255,255,.45);
+  }
+  .term-body {
+    padding: 14px 18px;
+    background: #fafbfc;
+  }
+  .term-body p { font-size: 13.5px; margin-bottom: 8px; }
+  .term-body .say {
+    background: #eff6ff;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 12.5px;
+    color: #1e40af;
+    font-style: italic;
+    margin-top: 8px;
+  }
+  .term-body .say::before { content: 'Say it like this: '; font-weight: 700; font-style: normal; }
+
+  /* ── Flow diagram ── */
+  .flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin: 20px 0;
+    overflow-x: auto;
+  }
+  .flow-node {
+    flex: 1;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 14px;
+    background: #fafbfc;
+    min-width: 120px;
+    text-align: center;
+  }
+  .flow-node .fn-num {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--blue);
+    margin-bottom: 6px;
+  }
+  .flow-node .fn-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .flow-node .fn-items {
+    font-size: 11.5px;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    color: var(--muted);
+    font-size: 20px;
+    padding: 0 4px;
+    flex-shrink: 0;
+  }
+
+  /* ── Module cards ── */
+  .module-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .module-head {
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .module-head.blue { background: var(--blue); }
+  .module-head.teal { background: var(--teal); }
+  .module-num { font-size: 28px; font-weight: 900; color: rgba(255,255,255,.2); line-height: 1; }
+  .module-info .mt { font-size: 14px; font-weight: 700; color: #fff; }
+  .module-info .ms { font-size: 12px; color: rgba(255,255,255,.65); margin-top: 2px; }
+  .module-body { padding: 18px 20px; }
+  .module-body ul { list-style: none; padding: 0; }
+  .module-body ul li {
+    font-size: 13.5px;
+    color: var(--slate);
+    padding: 7px 0;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+  .module-body ul li:last-child { border-bottom: none; }
+  .module-body ul li .li-title { font-weight: 700; color: var(--navy); min-width: 200px; flex-shrink: 0; }
+  .module-body ul li .li-desc { color: var(--slate); }
+
+  /* ── DB table cards ── */
+  .db-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .db-card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+    background: #fafbfc;
+  }
+  .db-card .dbn { font-family: 'Courier New', monospace; font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .db-card .dbd { font-size: 12.5px; color: var(--slate); line-height: 1.6; }
+  .db-card .dbf { margin-top: 8px; }
+  .db-card .dbf span {
+    display: inline-block;
+    background: #f1f5f9;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-family: 'Courier New', monospace;
+    color: var(--slate);
+    margin: 2px 2px 0 0;
+  }
+
+  /* ── Timeline ── */
+  .timeline { margin-top: 12px; }
+  .tl-item {
+    display: grid;
+    grid-template-columns: 100px 14px 1fr;
+    gap: 0 14px;
+    margin-bottom: 0;
+  }
+  .tl-week {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    padding-top: 3px;
+    text-align: right;
+  }
+  .tl-spine {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .tl-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .tl-dot.blue  { background: var(--blue); }
+  .tl-dot.teal  { background: var(--teal); }
+  .tl-dot.gray  { background: #cbd5e1; }
+  .tl-line {
+    width: 2px;
+    background: var(--line);
+    flex: 1;
+    min-height: 16px;
+  }
+  .tl-content {
+    padding-bottom: 24px;
+  }
+  .tl-phase {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tl-tasks { font-size: 13px; color: var(--slate); line-height: 1.55; }
+  .badge {
+    display: inline-flex;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 20px;
+  }
+  .badge.done { background: #dcfce7; color: #15803d; }
+  .badge.next { background: #dbeafe; color: #1d4ed8; }
+
+  /* ── Divider ── */
+  hr {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 20px 0;
+  }
+
+  /* ── Print styles ── */
+  @media print {
+    body { background: white; }
+    .page { padding: 24px; }
+    .section { break-inside: avoid; }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    .toc ol { grid-template-columns: 1fr; }
+    .db-grid { grid-template-columns: 1fr; }
+    .flow { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); align-self: center; }
+    .doc-header { padding: 28px 22px; }
+    .section { padding: 24px 20px; }
+    .module-body ul li { flex-direction: column; }
+    .module-body ul li .li-title { min-width: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="doc-header">
+    <div class="tag">Study Guide</div>
+    <h1>PathWise — Everything You Need to Know</h1>
+    <p>A plain-English breakdown of the project: what it is, how it works, what each technical term means, and how to explain it confidently to your client.</p>
+  </div>
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h3>Contents</h3>
+    <ol>
+      <li><a href="#s1">What is PathWise?</a></li>
+      <li><a href="#s2">The Two Problems it Solves</a></li>
+      <li><a href="#s3">The Two Dashboards (Modules)</a></li>
+      <li><a href="#s4">Technical Terms Explained</a></li>
+      <li><a href="#s5">How the System Works (Architecture)</a></li>
+      <li><a href="#s6">The Database</a></li>
+      <li><a href="#s7">The Frontend (What the User Sees)</a></li>
+      <li><a href="#s8">What Has Been Built So Far</a></li>
+      <li><a href="#s9">The Full Project Timeline</a></li>
+      <li><a href="#s10">What Is Coming Next</a></li>
+      <li><a href="#s11">Final Deliverables</a></li>
+      <li><a href="#s12">Key Sentences to Use in the Meeting</a></li>
+    </ol>
+  </div>
+
+
+  <!-- ══ SECTION 1 ══════════════════════════════ -->
+  <div class="section" id="s1">
+    <div class="section-label">Section 1</div>
+    <h2>What is PathWise?</h2>
+
+    <p>PathWise is a <strong>web application</strong> — meaning it runs in a browser, like a website — built specifically for a university or educational institution. It has two parts, called dashboards, that answer two important questions the institution currently cannot answer well.</p>
+
+    <p>It is not a chatbot. It is not a search engine. It is closer to a <strong>custom analytics platform</strong> — think of it like Power BI or Google Analytics, but built from scratch, specifically for this institution, and powered by AI models trained on their own data.</p>
+
+    <div class="box-blue">
+      <p><strong>One sentence summary:</strong> PathWise is a custom-built AI-powered analytics platform that helps university administrators make smarter decisions about student enrollment and graduate employment.</p>
+    </div>
+
+    <h3>Who uses it?</h3>
+    <ul>
+      <li><strong>University administrators</strong> — to decide how many students to admit and into which programs</li>
+      <li><strong>Department heads</strong> — to understand whether their curriculum matches what employers actually need</li>
+      <li><strong>Students</strong> — to check their own placement readiness and get skill recommendations</li>
+    </ul>
+  </div>
+
+
+  <!-- ══ SECTION 2 ══════════════════════════════ -->
+  <div class="section" id="s2">
+    <div class="section-label">Section 2</div>
+    <h2>The Two Problems It Solves</h2>
+
+    <h3>Problem 1 — The Employment Gap</h3>
+    <p>Universities produce graduates, but they often do not know clearly: which companies are hiring, for which roles, requiring which skills, at what salary. They make curriculum decisions based on outdated information or guesswork. Meanwhile students graduate without the skills the market actually wants.</p>
+    <div class="box-yellow">
+      <p><strong>PathWise fixes this</strong> by pulling in real job posting data, analysing it with AI, and showing administrators exactly where demand is, what skills are trending, and which graduates are most employable — and why.</p>
+    </div>
+
+    <h3>Problem 2 — The Enrollment Guessing Game</h3>
+    <p>Every year, a university has to decide: how many students to admit, into which programs, at what capacity. Too many students and not enough jobs waiting for them is bad. Too few students means missed tuition revenue and underused resources. Most institutions use spreadsheets and gut feeling to make this call.</p>
+    <div class="box-yellow">
+      <p><strong>PathWise fixes this</strong> by using AI to analyse historical enrollment patterns, labor market trends, and economic signals — then forecasting the right intake numbers with confidence intervals, not guesses.</p>
+    </div>
+  </div>
+
+
+  <!-- ══ SECTION 3 ══════════════════════════════ -->
+  <div class="section" id="s3">
+    <div class="section-label">Section 3</div>
+    <h2>The Two Dashboards (Modules)</h2>
+
+    <div class="module-card">
+      <div class="module-head blue">
+        <div class="module-num">01</div>
+        <div class="module-info">
+          <div class="mt">Market Demand Forecast Dashboard</div>
+          <div class="ms">For administrators and department heads</div>
+        </div>
+      </div>
+      <div class="module-body">
+        <ul>
+          <li>
+            <span class="li-title">Top Hiring Companies & Roles</span>
+            <span class="li-desc">Bar charts and tree maps showing which employers are hiring the most and which job titles are in highest demand right now.</span>
+          </li>
+          <li>
+            <span class="li-title">Regional Hiring Trends</span>
+            <span class="li-desc">Geographic maps showing where jobs and internships are concentrated — which cities or regions are most active.</span>
+          </li>
+          <li>
+            <span class="li-title">Skill Demand vs Curriculum</span>
+            <span class="li-desc">A comparison of what skills employers require (e.g. AI, Big Data, SAP) vs. what the university currently teaches. Highlights the gap.</span>
+          </li>
+          <li>
+            <span class="li-title">Placement Probability Evaluator</span>
+            <span class="li-desc">A student enters their GPA, number of internships, and projects. The AI returns a real-time percentage: their probability of getting placed.</span>
+          </li>
+          <li>
+            <span class="li-title">Salary Forecasting</span>
+            <span class="li-desc">Predicts early-career earnings by program and market demand. Helps students choose programs with better financial outcomes.</span>
+          </li>
+          <li>
+            <span class="li-title">Feature Importance Charts</span>
+            <span class="li-desc">Shows which factors most influence placement — e.g. "GPA matters 35%, internship count matters 40%, communication score matters 25%".</span>
+          </li>
+          <li>
+            <span class="li-title">Escape Route Mapping</span>
+            <span class="li-desc">For graduates who are underemployed or in the wrong field — shows alternative career paths they can realistically move into.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-head teal">
+        <div class="module-num">02</div>
+        <div class="module-info">
+          <div class="mt">Student Enrollment Intelligence Dashboard</div>
+          <div class="ms">For enrollment strategy and student self-assessment</div>
+        </div>
+      </div>
+      <div class="module-body">
+        <ul>
+          <li>
+            <span class="li-title">Enrollment Trend Forecasts</span>
+            <span class="li-desc">AI predicts how many students will enroll in each program over the next 1–3 years, based on historical data and external signals.</span>
+          </li>
+          <li>
+            <span class="li-title">Admission Risk Modeler</span>
+            <span class="li-desc">Sliders that let administrators model different risk scenarios — "what happens if we over-enroll by 10%?" — and see projected outcomes.</span>
+          </li>
+          <li>
+            <span class="li-title">Placement Rate by Stream</span>
+            <span class="li-desc">Compares departments side by side (e.g. Computer Science vs Civil Engineering) on how well their graduates are getting placed.</span>
+          </li>
+          <li>
+            <span class="li-title">Student Portal</span>
+            <span class="li-desc">Students enter their CGPA, internship count, IQ score, and soft skills. They receive a placement likelihood score and a personalised skill-building roadmap.</span>
+          </li>
+          <li>
+            <span class="li-title">Course & Certification Recommendations</span>
+            <span class="li-desc">AI recommends specific certifications (SAP, SPSS, AI courses) that would most improve a student's employability based on their current profile.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══ SECTION 4 ══════════════════════════════ -->
+  <div class="section" id="s4">
+    <div class="section-label">Section 4</div>
+    <h2>Technical Terms Explained</h2>
+    <p>Every term below is something that may come up in the meeting. Read through each one so you can respond confidently if the client asks.</p>
+
+    <div class="term-grid">
+
+      <div class="term-card">
+        <div class="term-head">
+          <div class="term-name">XGBoost</div>
+          <div class="term-full">Extreme Gradient Boosting</div>
+        </div>
+        <div class="term-body">
+          <p>An AI model that is very good at looking at a table of data and learning patterns from it. You give it thousands of rows of past student data (GPA, internships, projects, outcome) and it learns which combinations of factors lead to placement and which don't.</p>
+          <p>Once trained, it can look at a new student's profile and predict: <em>"This student has a 72% chance of getting placed."</em> It is the engine behind the Placement Probability Evaluator.</p>
+          <p>Think of it like a very smart pattern-recognition system that has studied thousands of past cases and can now make predictions on new ones.</p>
+          <div class="say">"We use XGBoost for the placement prediction model — it's an industry-standard machine learning algorithm that learns from historical student data to score new students in real time."</div>
+        </div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-head">
+          <div class="term-name">LSTM</div>
+          <div class="term-full">Long Short-Term Memory</div>
+        </div>
+        <div class="term-body">
+          <p>An AI model specifically designed to understand sequences of data over time — like enrollment numbers year by year. It has a kind of "memory" so it doesn't just look at last year's number, it considers the full trend over many years.</p>
+          <p>You give it 10 years of enrollment data and it figures out the growth pattern, the seasonal patterns, the cycles. Then it predicts the next 1–3 years. It powers the Enrollment Forecast chart.</p>
+          <p>Think of it like a model that has read a university's full history and can now say: <em>"Based on everything I've seen, next year's intake in Computer Science will be around 340 students."</em></p>
+          <div class="say">"LSTM is a deep learning model we use for time-series forecasting — it captures long-term patterns in enrollment data to produce accurate intake predictions."</div>
+        </div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-head">
+          <div class="term-name">Prophet</div>
+          <div class="term-full">Open-source forecasting tool by Meta (Facebook)</div>
+        </div>
+        <div class="term-body">
+          <p>Another forecasting model, like LSTM, but simpler and faster to set up. Also used for predicting numbers over time. We use both Prophet and LSTM for the enrollment forecasts — Prophet as a quick, reliable baseline and LSTM for more complex pattern detection.</p>
+          <p>Think of it as a second AI giving a second opinion on the enrollment forecast. If both agree, the prediction is more trustworthy.</p>
+          <div class="say">"We run Prophet alongside LSTM for our enrollment forecasts — having two independent models cross-check each other increases the reliability of the predictions."</div>
+        </div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-head">
+          <div class="term-name">SHAP</div>
+          <div class="term-full">Shapley Additive Explanations</div>
+        </div>
+        <div class="term-body">
+          <p>This is not a forecasting model — it's an explainability tool. AI models can sometimes feel like a black box: they give you an answer but don't tell you why. SHAP fixes that.</p>
+          <p>When the model says "this student has a 65% placement chance", SHAP also shows: <em>"GPA is helping (+15%), internship count is helping (+22%), but low project count is hurting (-12%)."</em> It makes the AI transparent and trustworthy.</p>
+          <div class="say">"SHAP gives us explainability on top of our models — so administrators and students don't just get a score, they see exactly which factors drove that score."</div>
+        </div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-head">
+          <div class="term-name">API / FastAPI</div>
+          <div class="term-full">Application Programming Interface</div>
+        </div>
+        <div class="term-body">
+          <p>An API is a messenger between two software systems. In PathWise: the AI models live on a server, and the dashboard lives in the browser. They need a way to talk to each other. The API is that communication layer.</p>
+          <p>FastAPI is the specific tool we use to build that messenger. When a user opens the Placement Evaluator and types in their GPA, FastAPI receives that request, passes it to the XGBoost model, gets the score back, and sends it to the dashboard to display.</p>
+          <div class="say">"FastAPI is our backend API layer — it handles all communication between the AI models and the user interface, and it auto-generates documentation for every endpoint."</div>
+        </div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-head">
+          <div class="term-name">PostgreSQL</div>
+          <div class="term-full">A relational database system</div>
+        </div>
+        <div class="term-body">
+          <p>This is where all the data is stored — student records, job postings, enrollment history, placement outcomes. PostgreSQL is a database, similar in concept to Excel but far more powerful, structured, and secure.</p>
+          <p>It runs on a server. The API talks to it to read and write data. The ML models were trained on data that came from it.</p>
+          <div class="say">"We use PostgreSQL as our database — it stores all student, enrollment, job posting, and placement data, and it's designed for the kind of analytical queries our dashboards run."</div>
+        </div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-head">
+          <div class="term-name">React</div>
+          <div class="term-full">A JavaScript framework for building web UIs</div>
+        </div>
+        <div class="term-body">
+          <p>React is the tool used to build what the user sees — the dashboards, the charts, the navigation, the forms. It is the industry standard for building modern, interactive web applications. Developed by Meta (Facebook).</p>
+          <p>It handles things like: when a user clicks a filter, the charts update instantly without reloading the page. When the API returns new data, the dashboard refreshes automatically.</p>
+          <div class="say">"The frontend is built in React — it's a modern single-page application with live API integration and interactive charts via Recharts."</div>
+        </div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-head">
+          <div class="term-name">Docker / Docker Compose</div>
+          <div class="term-full">Containerisation and orchestration tools</div>
+        </div>
+        <div class="term-body">
+          <p>Docker packages the entire application — the database, the API server, the frontend — into containers that run the same way on any computer. This means the app works identically on a developer's laptop, a test server, and a production server.</p>
+          <p>Docker Compose is the tool that starts all three containers together with one command. Instead of manually starting the database, then the API, then the frontend separately, you run one command and everything starts.</p>
+          <div class="say">"The entire stack is containerised with Docker Compose — one command spins up the database, API, and frontend together, making deployment straightforward."</div>
+        </div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-head">
+          <div class="term-name">ETL Pipeline</div>
+          <div class="term-full">Extract, Transform, Load</div>
+        </div>
+        <div class="term-body">
+          <p>This is the process of taking raw data from wherever it lives (CSV files, external systems, scraped sources), cleaning it and reshaping it, then loading it into the database.</p>
+          <p>Extract = pull the raw data. Transform = clean it, fix errors, calculate new columns. Load = put it into the database. This has to happen before any AI model can train.</p>
+          <div class="say">"We have a full ETL pipeline that ingests raw data sources, cleans and feature-engineers them, and loads them into PostgreSQL ready for model training and live queries."</div>
+        </div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-head">
+          <div class="term-name">Feature Engineering</div>
+          <div class="term-full">Preparing data to make AI models smarter</div>
+        </div>
+        <div class="term-body">
+          <p>Raw data is not ready for AI models as-is. Feature engineering is the process of creating new, smarter columns from the raw data that help the model see patterns more clearly.</p>
+          <p>For example: instead of just giving the model "enrollment was 300 in 2023", you also add columns like "enrollment 1 year ago", "enrollment 3 years ago", "average over last 3 years", "percentage change from last year". These extra columns — called features — give the model context and memory.</p>
+          <div class="say">"Feature engineering is a critical step in our pipeline — we enrich the raw data with lag values, rolling averages, and seasonality signals before it reaches the models."</div>
+        </div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-head">
+          <div class="term-name">ORM Models</div>
+          <div class="term-full">Object-Relational Mapping</div>
+        </div>
+        <div class="term-body">
+          <p>The database stores data in tables. The Python backend code works with objects. ORM is the layer that maps one to the other — so instead of writing raw SQL database queries, the code can work with Python objects and the ORM translates that to database operations automatically.</p>
+          <p>SQLAlchemy is the specific ORM tool used in PathWise. It makes the code cleaner, safer, and easier to maintain.</p>
+          <div class="say">"We use SQLAlchemy ORM models — they give us a clean, type-safe interface to the database from Python, without writing raw SQL."</div>
+        </div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-head">
+          <div class="term-name">MAE / RMSE / MAPE</div>
+          <div class="term-full">Model performance metrics</div>
+        </div>
+        <div class="term-body">
+          <p>These are numbers that measure how accurate the AI models are. After training, you test the model on data it has never seen and measure how far off its predictions are.</p>
+          <ul>
+            <li><strong>MAE</strong> (Mean Absolute Error) — average size of the prediction error</li>
+            <li><strong>RMSE</strong> (Root Mean Square Error) — similar but penalises large errors more heavily</li>
+            <li><strong>MAPE</strong> (Mean Absolute Percentage Error) — the error expressed as a percentage</li>
+          </ul>
+          <p>Lower numbers = better model. We track these continuously to know when a model needs retraining.</p>
+          <div class="say">"We evaluate model performance using MAE, RMSE, and MAPE — and we have a monitoring pipeline that tracks these metrics over time to flag when retraining is needed."</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══ SECTION 5 ══════════════════════════════ -->
+  <div class="section" id="s5">
+    <div class="section-label">Section 5</div>
+    <h2>How the System Works — Architecture</h2>
+
+    <p>The system has five stages. Data enters at stage 1 and the user sees results at stage 5. Here is what each stage does:</p>
+
+    <div class="flow">
+      <div class="flow-node">
+        <div class="fn-num">Stage 1</div>
+        <div class="fn-title">Data Sources</div>
+        <div class="fn-items">Enrollment records<br>Job postings<br>Student profiles<br>Economic data</div>
+      </div>
+      <div class="flow-arrow">›</div>
+      <div class="flow-node">
+        <div class="fn-num">Stage 2</div>
+        <div class="fn-title">Feature Engineering</div>
+        <div class="fn-items">Lag features<br>Rolling averages<br>Seasonality<br>Interaction terms</div>
+      </div>
+      <div class="flow-arrow">›</div>
+      <div class="flow-node" style="border-color:#bfdbfe; background:#eff6ff;">
+        <div class="fn-num" style="color:var(--blue);">Stage 3</div>
+        <div class="fn-title">AI Models</div>
+        <div class="fn-items">LSTM (time series)<br>XGBoost (placement)<br>Prophet (forecast)<br>SHAP (explain)</div>
+      </div>
+      <div class="flow-arrow">›</div>
+      <div class="flow-node">
+        <div class="fn-num">Stage 4</div>
+        <div class="fn-title">API Layer</div>
+        <div class="fn-items">FastAPI server<br>Forecast endpoints<br>Placement score<br>Recommendations</div>
+      </div>
+      <div class="flow-arrow">›</div>
+      <div class="flow-node" style="border-color:#99f6e4; background:#f0fdfa;">
+        <div class="fn-num" style="color:var(--teal);">Stage 5</div>
+        <div class="fn-title">Dashboards</div>
+        <div class="fn-items">Module 1 charts<br>Module 2 forecasts<br>Student portal<br>Admin tools</div>
+      </div>
+    </div>
+
+    <div class="box-blue">
+      <p><strong>The one sentence that covers the whole architecture:</strong> "Raw data goes in one end, gets cleaned and prepared, gets fed to AI models, the models' predictions are served through an API, and the dashboards display those predictions as interactive charts for decision-makers."</p>
+    </div>
+
+    <h3>Why is the API in the middle?</h3>
+    <p>The AI models live on a server — they are heavy files that run Python code. The dashboard lives in a browser. A browser cannot directly run a Python AI model. The API is the bridge: the dashboard asks the API for an answer, the API runs the model and returns the result, the dashboard shows it to the user. This is standard architecture for any web-based AI product.</p>
+
+    <h3>Why Docker?</h3>
+    <p>The system has three separate programs running: the database, the API server, and the frontend web server. They all need to run together. Docker packages each one independently so they work on any machine, and Docker Compose starts all three with a single command. This makes deployment and future handoff simple.</p>
+  </div>
+
+
+  <!-- ══ SECTION 6 ══════════════════════════════ -->
+  <div class="section" id="s6">
+    <div class="section-label">Section 6</div>
+    <h2>The Database</h2>
+
+    <p>The database is called <strong>PostgreSQL</strong>. It has four tables — think of a table as a spreadsheet with specific columns. All data in the system lives in one of these four tables.</p>
+
+    <div class="db-grid">
+      <div class="db-card">
+        <div class="dbn">students</div>
+        <div class="dbd">One row per student. Stores their academic profile — the data used to train the placement prediction model.</div>
+        <div class="dbf">
+          <span>gpa</span><span>internships</span><span>projects</span><span>program</span><span>communication_score</span><span>enrollment_year</span>
+        </div>
+      </div>
+      <div class="db-card">
+        <div class="dbn">enrollments</div>
+        <div class="dbd">One row per program per year. Stores how many students enrolled. This is the time-series the LSTM and Prophet models train on.</div>
+        <div class="dbf">
+          <span>program</span><span>year</span><span>count</span>
+        </div>
+      </div>
+      <div class="db-card">
+        <div class="dbn">job_postings</div>
+        <div class="dbd">One row per job listing. Stores employer data pulled from job boards — the data powering the Market Demand dashboard.</div>
+        <div class="dbf">
+          <span>company</span><span>title</span><span>location</span><span>skills_required</span><span>salary_min</span><span>salary_max</span><span>is_internship</span>
+        </div>
+      </div>
+      <div class="db-card">
+        <div class="dbn">placements</div>
+        <div class="dbd">One row per placement outcome. Stores where each student ended up — the ground truth the XGBoost model learns from.</div>
+        <div class="dbf">
+          <span>student_id</span><span>company</span><span>role</span><span>salary</span><span>time_to_hire</span><span>placement_status</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="box-teal">
+      <p>All four tables are already created and deployed to the live PostgreSQL server. The schema (structure) is complete. What comes next (Phase 2) is filling them with data.</p>
+    </div>
+  </div>
+
+
+  <!-- ══ SECTION 7 ══════════════════════════════ -->
+  <div class="section" id="s7">
+    <div class="section-label">Section 7</div>
+    <h2>The Frontend — What the User Sees</h2>
+
+    <p>The frontend is the visual web application the user interacts with in their browser. It is built in <strong>React</strong> and has two modules, each with four pages — eight pages total.</p>
+
+    <h3>Module 1 Pages</h3>
+    <ul>
+      <li><strong>Hiring Trends</strong> — charts showing which companies, roles, and regions are most active</li>
+      <li><strong>Skill Gap Analysis</strong> — comparison of employer-required skills vs. current curriculum</li>
+      <li><strong>Salary Forecast</strong> — salary predictions by program and demand level</li>
+      <li><strong>Placement Evaluator</strong> — the student-facing score tool (enter your profile, get a score)</li>
+    </ul>
+
+    <h3>Module 2 Pages</h3>
+    <ul>
+      <li><strong>Enrollment Forecast</strong> — AI-predicted intake numbers per program for upcoming years</li>
+      <li><strong>Admission Risk Modeler</strong> — sliders that let admins model over/under-enrollment scenarios</li>
+      <li><strong>Placement by Stream</strong> — department-level comparison of graduate employment rates</li>
+      <li><strong>Student Portal</strong> — student inputs their full profile and gets a roadmap + recommendations</li>
+    </ul>
+
+    <div class="box-blue">
+      <p><strong>Current state:</strong> All 8 routes are registered and the navigation sidebar is working. The pages currently show placeholder content. They will be filled with real charts and live data in Phase 5 (Weeks 7–8), once the API and ML models are ready.</p>
+    </div>
+
+    <h3>The 6 shared UI components already built</h3>
+    <p>These are reusable building blocks that every page uses, so every page looks consistent:</p>
+    <ul>
+      <li><strong>StatCard</strong> — the KPI tile (shows a number with a trend arrow)</li>
+      <li><strong>SectionHeader</strong> — the title at the top of each page</li>
+      <li><strong>LoadingSpinner</strong> — the animation shown while data is loading from the API</li>
+      <li><strong>EmptyState</strong> — shown when there is no data to display yet</li>
+      <li><strong>ErrorBanner</strong> — shown if something goes wrong, with a retry button</li>
+      <li><strong>API Client</strong> — the wiring that connects every page to the FastAPI backend</li>
+    </ul>
+  </div>
+
+
+  <!-- ══ SECTION 8 ══════════════════════════════ -->
+  <div class="section" id="s8">
+    <div class="section-label">Section 8</div>
+    <h2>What Has Been Built So Far</h2>
+
+    <p>Phase 1 is complete. Everything below has been built and is working:</p>
+
+    <ul>
+      <li>Full project structure and code repository set up</li>
+      <li>Docker Compose stack — one command starts PostgreSQL, the API server, and the frontend together</li>
+      <li>PostgreSQL database with all four tables created, indexed, and deployed</li>
+      <li>SQLAlchemy ORM models — Python code maps to every database table</li>
+      <li>FastAPI application shell — server is running with CORS configured and a health check endpoint live</li>
+      <li>React frontend shell — sidebar navigation works, all 8 routes are registered</li>
+      <li>Six reusable UI components built and ready for every page</li>
+      <li>Axios API client wired — the frontend knows where to send requests and how to handle errors</li>
+    </ul>
+
+    <div class="box-blue">
+      <p><strong>Think of Phase 1 as laying the foundation of a building.</strong> The structure is up, the rooms are framed, the plumbing and wiring are roughed in. Now the interior work begins.</p>
+    </div>
+  </div>
+
+
+  <!-- ══ SECTION 9 ══════════════════════════════ -->
+  <div class="section" id="s9">
+    <div class="section-label">Section 9</div>
+    <h2>The Full Project Timeline</h2>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-week">Weeks 1–2</div>
+        <div class="tl-spine"><div class="tl-dot blue"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-phase">Phase 1 — Foundation <span class="badge done">Complete</span></div>
+          <div class="tl-tasks">Database schema, ORM models, Docker stack, FastAPI shell, React frontend shell, API client, all 8 routes</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-week">Weeks 3–4</div>
+        <div class="tl-spine"><div class="tl-dot blue"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-phase">Phase 2 — Data Pipeline <span class="badge next">Up Next</span></div>
+          <div class="tl-tasks">Generate synthetic data, ETL scripts, feature engineering, load data into PostgreSQL, data quality checks</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-week">Weeks 5–6</div>
+        <div class="tl-spine"><div class="tl-dot gray"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-phase">Phase 3 — ML Models</div>
+          <div class="tl-tasks">Train XGBoost placement predictor, build Prophet enrollment forecast, train LSTM for demand, add SHAP explainability, evaluate with MAE/RMSE/MAPE</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-week">Weeks 6–7</div>
+        <div class="tl-spine"><div class="tl-dot gray"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-phase">Phase 4 — Backend API</div>
+          <div class="tl-tasks">Build all REST endpoints: placement score, enrollment forecast, skill recommendations — wrap models as live API routes</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-week">Weeks 7–8</div>
+        <div class="tl-spine"><div class="tl-dot gray"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-phase">Phase 5 — Frontend Build</div>
+          <div class="tl-tasks">Build all 8 dashboard pages with real charts, connect every page to the live API, add filters and interactive controls</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-week">Weeks 8–9</div>
+        <div class="tl-spine"><div class="tl-dot gray"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-phase">Phase 6 — Recommender & Integration</div>
+          <div class="tl-tasks">Build enrollment recommendation logic, skill-gap engine, escape route mapping, student skill roadmap, end-to-end integration testing</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-week">Weeks 9–10</div>
+        <div class="tl-spine"><div class="tl-dot teal"></div></div>
+        <div class="tl-content">
+          <div class="tl-phase">Phase 7 — Testing & Delivery</div>
+          <div class="tl-tasks">Full QA testing, model monitoring setup, retraining pipeline, technical documentation, user guide, demo video, final handoff</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══ SECTION 10 ═════════════════════════════ -->
+  <div class="section" id="s10">
+    <div class="section-label">Section 10</div>
+    <h2>What Is Coming Next — Phase 2</h2>
+
+    <p>Phase 2 is the Data Pipeline. Three scripts will be written:</p>
+
+    <h3>1. generate_mock_data.py</h3>
+    <p>This script creates realistic fake data using a tool called <strong>Faker</strong>. It will generate thousands of fake student profiles, job postings, enrollment records, and placement outcomes. The data will look and behave like real institutional data but is entirely synthetic — no real students or companies involved.</p>
+
+    <h3>2. load_to_db.py</h3>
+    <p>This script takes the generated CSV files and loads them into the PostgreSQL database. It handles the Extract → Transform → Load process: reads the files, validates and cleans the data, then inserts it into the correct tables.</p>
+
+    <h3>3. feature_engineering.py</h3>
+    <p>This script takes the raw loaded data and builds the enriched feature columns the AI models need — lag values, rolling averages, seasonality flags. It saves the output as parquet files (a fast, compressed format for large data) that the ML models in Phase 3 will train on.</p>
+
+    <div class="box-yellow">
+      <p><strong>Important question for the client meeting:</strong> Will the client provide real institutional data (enrollment records, placement history, job feeds), or should synthetic data be used for the full build? Either works — but the answer needs to be confirmed now so Phase 2 is built correctly. If real data, it must arrive by Week 5.</p>
+    </div>
+  </div>
+
+
+  <!-- ══ SECTION 11 ═════════════════════════════ -->
+  <div class="section" id="s11">
+    <div class="section-label">Section 11</div>
+    <h2>Final Deliverables</h2>
+
+    <p>At the end of the project (Week 10), the client receives six things:</p>
+
+    <ol>
+      <li style="padding: 10px 0; border-bottom: 1px solid var(--line);">
+        <strong>Module 1 Dashboard</strong> — the full Market Demand web interface: hiring analytics, skill gap analysis, salary forecasting, placement evaluator, feature importance charts, escape route mapping
+      </li>
+      <li style="padding: 10px 0; border-bottom: 1px solid var(--line);">
+        <strong>Module 2 Dashboard</strong> — the full Enrollment Intelligence web interface: enrollment forecasting, admin risk tools, student placement evaluator, personalised skill roadmap engine
+      </li>
+      <li style="padding: 10px 0; border-bottom: 1px solid var(--line);">
+        <strong>Trained ML Models</strong> — XGBoost, Prophet, and LSTM models trained and saved, with SHAP explainability outputs and documented performance metrics (MAE/RMSE/MAPE)
+      </li>
+      <li style="padding: 10px 0; border-bottom: 1px solid var(--line);">
+        <strong>REST API</strong> — FastAPI server with all prediction, forecast, and recommendation endpoints, auto-generated documentation included
+      </li>
+      <li style="padding: 10px 0; border-bottom: 1px solid var(--line);">
+        <strong>Data Pipeline</strong> — ETL scripts for ingesting, cleaning, and feature-engineering data — reusable when the client wants to update the system with new data
+      </li>
+      <li style="padding: 10px 0;">
+        <strong>Documentation</strong> — technical setup guide, API reference, plain-English user guide for non-technical staff, and a demo walkthrough video
+      </li>
+    </ol>
+  </div>
+
+
+  <!-- ══ SECTION 12 ═════════════════════════════ -->
+  <div class="section" id="s12">
+    <div class="section-label">Section 12</div>
+    <h2>Key Sentences to Use in the Meeting</h2>
+
+    <p>Use these whenever you need to sound confident on a topic. They are accurate, professional, and at the right level for a client conversation.</p>
+
+    <hr>
+
+    <h3>On what PathWise is</h3>
+    <div class="box-dark">
+      <div class="label">Say this</div>
+      <p>"PathWise is a custom-built AI-powered analytics platform. It has two dashboard modules — one focused on labour market demand and graduate employment, the other on enrollment forecasting and student placement readiness. Everything is built from scratch, tailored to your institution."</p>
+    </div>
+
+    <h3>On the AI models</h3>
+    <div class="box-dark">
+      <div class="label">Say this</div>
+      <p>"We use three AI models. XGBoost handles the placement prediction — it learns from historical student data to score new students in real time. LSTM and Prophet handle the time-series forecasting for enrollment — they analyse years of historical intake data and project forward. On top of that, SHAP gives us explainability, so every prediction comes with a reason, not just a score."</p>
+    </div>
+
+    <h3>On the architecture</h3>
+    <div class="box-dark">
+      <div class="label">Say this</div>
+      <p>"The system flows in five stages: raw data in, feature engineering, AI models, a REST API, and the dashboards. The API layer is what keeps the models and the UI cleanly separated — the dashboard asks for a result, the API runs the model and returns it, the dashboard displays it. The whole stack runs on Docker, so deployment is straightforward."</p>
+    </div>
+
+    <h3>On the current status</h3>
+    <div class="box-dark">
+      <div class="label">Say this</div>
+      <p>"Phase 1 is complete. The full project foundation is in place — the database schema is deployed, the ORM models are written, the FastAPI server is running, and the React frontend shell is live with all eight routes registered. We are on schedule and moving into Phase 2 now, which is the data pipeline and feature engineering."</p>
+    </div>
+
+    <h3>On mock data</h3>
+    <div class="box-dark">
+      <div class="label">Say this</div>
+      <p>"We are starting with synthetic data — realistic, Faker-generated records that mirror real institutional data. This lets us build and validate the full system end-to-end without waiting on real data. When real data is available, it's a clean swap into the existing pipeline, not a rebuild."</p>
+    </div>
+
+    <h3>On the timeline</h3>
+    <div class="box-dark">
+      <div class="label">Say this</div>
+      <p>"The project runs over 8 to 10 weeks across seven phases. Phase 1 is done. Phase 2 is the data pipeline. Phases 3 and 4 cover ML model training and the backend API. Phases 5 and 6 build out the full frontend and recommendation engine. Phase 7 is testing, monitoring, and handoff."</p>
+    </div>
+
+    <h3>If asked about the data question</h3>
+    <div class="box-dark">
+      <div class="label">Say this</div>
+      <p>"This is actually something I wanted to confirm with you today. Will you be providing real institutional data — enrollment records, placement history, job posting sources — or should we proceed with high-quality synthetic data for the full build? Either works cleanly. We just need to confirm now so Phase 2 is built accordingly. If real data, we would need it in CSV or database export format by Week 5."</p>
+    </div>
+
+  </div>
+
+</div>
+</body>
+</html>

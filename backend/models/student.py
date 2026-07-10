@@ -11,6 +11,6 @@ class Student(Base):
     internships         = Column(SmallInteger, nullable=False, server_default="0")
     projects            = Column(SmallInteger, nullable=False, server_default="0")
     communication_score = Column(SmallInteger, nullable=False)
-    program             = Column(String(80), nullable=False)
+    program             = Column(String(80), nullable=False, index=True)
     enrollment_year     = Column(SmallInteger, nullable=False)
     created_at          = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text("NOW()"))

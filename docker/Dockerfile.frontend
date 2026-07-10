@@ -2,14 +2,19 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Install dependencies
+# ── Dependencies ───────────────────────────────────────────────────────────────
+# Copy package files first so Docker caches node_modules separately from source.
+# node_modules only rebuilds when package.json / package-lock.json change.
 COPY package*.json ./
 RUN npm install
 
-# Copy application source
+# ── Application source ─────────────────────────────────────────────────────────
 COPY . .
 
 EXPOSE 3000
 
-# --host exposes dev server to Docker network
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "3000"]
+# --host 0.0.0.0  : expose dev server to Docker network (not just loopback)
+# --port 3000     : explicit port
+# --strictPort    : fail loudly if port 3000 is already taken instead of
+#                   silently picking another port and confusing docker-compose
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "3000", "--strictPort"]

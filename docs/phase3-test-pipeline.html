@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Phase 3 — Training Pipeline &amp; Tests</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FBFAF7;
+    --bg-alt: #F3F1EA;
+    --panel: #FFFFFF;
+    --border: #E4E1D6;
+    --text: #2B2A26;
+    --text-dim: #8A8676;
+    --accent: #3E6B5C;
+    --accent-soft: #E7EFEA;
+    --key: #A2482E;
+    --string: #4C7A3F;
+    --num: #2E5FA3;
+    --tab-active: #FBFAF7;
+    --sidebar-w: 250px;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    display:flex;
+    flex-direction:column;
+    height:100vh;
+    overflow:hidden;
+  }
+
+  /* Title bar */
+  .titlebar{
+    height:36px;
+    background:var(--bg-alt);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    padding:0 12px;
+    gap:8px;
+    flex-shrink:0;
+  }
+  .dots{display:flex;gap:6px;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .dot.red{background:#E5A29A;}
+  .dot.yellow{background:#E8CC9A;}
+  .dot.green{background:#A6CBAE;}
+  .titlebar-label{
+    margin-left:10px;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--text-dim);
+  }
+
+  .body-wrap{
+    display:flex;
+    flex:1;
+    min-height:0;
+  }
+
+  /* Sidebar */
+  .sidebar{
+    width:var(--sidebar-w);
+    flex-shrink:0;
+    background:var(--bg-alt);
+    border-right:1px solid var(--border);
+    overflow-y:auto;
+    padding:14px 0;
+  }
+  .sidebar-title{
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    padding:0 16px 8px;
+    font-weight:600;
+  }
+  .tree-root{
+    font-family:var(--mono);
+    font-size:13px;
+    padding:0 8px;
+  }
+  .tree-item{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding:6px 8px;
+    border-radius:5px;
+    cursor:pointer;
+    color:var(--text);
+    white-space:nowrap;
+  }
+  .tree-item:hover{background:rgba(0,0,0,0.04);}
+  .tree-item.active{
+    background:var(--accent-soft);
+    color:var(--accent);
+    font-weight:600;
+  }
+  .tree-icon{
+    width:8px;height:8px;border-radius:2px;flex-shrink:0;
+    background:var(--num);
+  }
+  .tree-item.active .tree-icon{background:var(--accent);}
+  .tree-sub{padding-left:14px;color:var(--text-dim);font-size:11.5px;}
+
+  /* Tabs */
+  .tabs{
+    display:flex;
+    background:var(--bg-alt);
+    border-bottom:1px solid var(--border);
+    overflow-x:auto;
+    flex-shrink:0;
+  }
+  .tab{
+    font-family:var(--mono);
+    font-size:12.5px;
+    padding:9px 16px;
+    border-right:1px solid var(--border);
+    color:var(--text-dim);
+    cursor:pointer;
+    white-space:nowrap;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .tab.active{
+    background:var(--tab-active);
+    color:var(--text);
+    border-top:2px solid var(--accent);
+    border-bottom:2px solid var(--tab-active);
+    margin-bottom:-1px;
+  }
+  .section-divider{
+    height:1px;
+    background:var(--border);
+    margin:38px 0;
+  }
+
+  /* Editor area */
+  .editor-area{
+    flex:1;
+    display:flex;
+    min-height:0;
+  }
+  .gutter{
+    background:var(--bg);
+    color:#C9C5B5;
+    font-family:var(--mono);
+    font-size:12px;
+    text-align:right;
+    padding:24px 10px 24px 0;
+    user-select:none;
+    flex-shrink:0;
+    line-height:1.75;
+  }
+  .content-scroll{
+    flex:1;
+    overflow-y:auto;
+    background:var(--panel);
+  }
+  .pane{
+    display:block;
+    padding:0 40px;
+    max-width:860px;
+    scroll-margin-top:20px;
+  }
+  .pane:first-of-type{padding-top:26px;}
+  .pane:last-of-type{padding-bottom:60px;}
+
+  h1.doc-title{
+    font-family:var(--sans);
+    font-size:22px;
+    font-weight:700;
+    margin:0 0 4px;
+    color:var(--text);
+  }
+  .doc-sub{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--text-dim);
+    margin-bottom:22px;
+  }
+  h2{
+    font-family:var(--sans);
+    font-size:16.5px;
+    font-weight:700;
+    color:var(--accent);
+    margin:30px 0 10px;
+    padding-bottom:6px;
+    border-bottom:1px solid var(--border);
+  }
+  h2:first-of-type{margin-top:0;}
+  p{
+    font-size:14px;
+    line-height:1.7;
+    margin:8px 0;
+    color:var(--text);
+  }
+  strong{color:var(--key);font-weight:600;}
+  code{
+    font-family:var(--mono);
+    background:var(--bg-alt);
+    padding:1px 6px;
+    border-radius:4px;
+    font-size:12.5px;
+    color:var(--key);
+  }
+  pre.block{
+    font-family:var(--mono);
+    background:var(--bg-alt);
+    border:1px solid var(--border);
+    border-left:3px solid var(--accent);
+    border-radius:6px;
+    padding:16px 18px;
+    font-size:12.5px;
+    line-height:1.65;
+    overflow-x:auto;
+    color:var(--text);
+    margin:12px 0 18px;
+  }
+  ul{
+    margin:8px 0 16px;
+    padding-left:20px;
+  }
+  li{
+    font-size:14px;
+    line-height:1.7;
+    margin-bottom:4px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:10px 0 22px;
+    font-size:13px;
+    font-family:var(--mono);
+  }
+  th{
+    text-align:left;
+    background:var(--bg-alt);
+    color:var(--text-dim);
+    font-weight:600;
+    padding:8px 12px;
+    border:1px solid var(--border);
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+  }
+  td{
+    padding:8px 12px;
+    border:1px solid var(--border);
+    color:var(--text);
+  }
+  td:first-child{color:var(--num);font-weight:600;white-space:nowrap;}
+  .summary-line{
+    margin-top:26px;
+    padding:14px 18px;
+    background:var(--accent-soft);
+    border-radius:6px;
+    font-family:var(--mono);
+    font-size:13.5px;
+    color:var(--accent);
+    font-weight:600;
+  }
+  .closing{
+    margin-top:18px;
+    font-size:14px;
+    color:var(--text-dim);
+    font-style:italic;
+  }
+
+  /* Status bar */
+  .statusbar{
+    height:24px;
+    background:var(--accent);
+    color:#fff;
+    font-family:var(--mono);
+    font-size:11.5px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 14px;
+    flex-shrink:0;
+  }
+  .statusbar span{opacity:0.9;}
+
+  ::-webkit-scrollbar{width:10px;height:10px;}
+  ::-webkit-scrollbar-thumb{background:#DEDACB;border-radius:6px;}
+  ::-webkit-scrollbar-track{background:transparent;}
+</style>
+</head>
+<body>
+
+  <div class="titlebar">
+    <div class="dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+    <div class="titlebar-label">phase3-training-pipeline — client-handoff</div>
+  </div>
+
+  <div class="body-wrap">
+    <div class="sidebar">
+      <div class="sidebar-title">Explorer</div>
+      <div class="tree-root">
+        <div class="tree-item active" data-target="pane-overview"><span class="tree-icon"></span>overview.md</div>
+        <div class="tree-item" data-target="pane-data"><span class="tree-icon"></span>data_foundation.md</div>
+        <div class="tree-item" data-target="pane-m1"><span class="tree-icon"></span>model1_feature_pipeline.md</div>
+        <div class="tree-item" data-target="pane-m2"><span class="tree-icon"></span>model2_xgboost.md</div>
+        <div class="tree-item" data-target="pane-m3"><span class="tree-icon"></span>model3_lstm.md</div>
+        <div class="tree-item" data-target="pane-m4"><span class="tree-icon"></span>model4_prophet.md</div>
+        <div class="tree-item" data-target="pane-m5"><span class="tree-icon"></span>model5_shap.md</div>
+        <div class="tree-item" data-target="pane-summary"><span class="tree-icon"></span>test_summary.md</div>
+      </div>
+    </div>
+
+    <div style="flex:1; display:flex; flex-direction:column; min-height:0;">
+      <div class="tabs">
+        <div class="tab active">phase3_training_pipeline.md</div>
+      </div>
+
+      <div class="editor-area">
+        <div class="content-scroll" id="scrollHost">
+
+          <div class="pane active" id="pane-overview">
+            <h1 class="doc-title">Phase 3 — Training Pipeline &amp; Tests</h1>
+            <p>Total: <strong>44/44</strong> automated tests pass across all 5 models.</p>
+            <div class="summary-line">✓ 44 / 44 tests passing across all 5 models</div>
+          </div>
+
+          <div class="section-divider"></div>
+          <div class="pane" id="pane-data">
+            <h2>The Data Foundation</h2>
+            <p>Everything starts from <code>data/build_parquet_from_csv.py</code>. It reads two CSVs, merges them, scales features, and writes <code>data/processed/features.parquet</code> — the single input all ML scripts share. No database needed.</p>
+            <pre class="block">data/mock/students.csv + placements.csv
+        ↓
+data/build_parquet_from_csv.py
+        ↓
+data/processed/features.parquet   (3,000 rows × 24 cols)
+        ↓
+┌──────────────┬─────────────────┬──────────────┐
+│ XGBoost      │ LSTM            │ Prophet      │
+│ (placement)  │ (enrollment)    │ (job demand) │
+└──────────────┴─────────────────┴──────────────┘</pre>
+          </div>
+
+          <div class="section-divider"></div>
+          <div class="pane" id="pane-m1">
+            <h2>Model 1 — Feature Pipeline (ml/load_features.py + data/build_parquet_from_csv.py)</h2>
+            <p>Transforms applied to raw CSVs:</p>
+            <ul>
+              <li>MinMaxScaler → gpa_scaled, communication_score_scaled (both clamped to [0,1])</li>
+              <li>pd.get_dummies(prefix='prog_') → 12 one-hot programme columns</li>
+              <li>placed column: bool → int (critical fix — pandas reads "True"/"False" as booleans, not strings)</li>
+            </ul>
+            <p>Tests (tests/test_feature_pipeline.py) — 8/8 pass:</p>
+            <table>
+              <tr><th>Test</th><th>What it checks</th></tr>
+              <tr><td>F1</td><td>Parquet loads without error</td></tr>
+              <tr><td>F2</td><td>Shape exactly 3,000 × 24</td></tr>
+              <tr><td>F3</td><td>No nulls in core feature columns</td></tr>
+              <tr><td>F4</td><td>gpa_scaled bounded [0, 1]</td></tr>
+              <tr><td>F5</td><td>communication_score_scaled bounded [0, 1]</td></tr>
+              <tr><td>F6</td><td>Programme one-hots are mutually exclusive (row sum = 1)</td></tr>
+              <tr><td>F7</td><td>enrollment_year only contains 2019–2024</td></tr>
+              <tr><td>F9</td><td>Stratified split: placement rate delta &lt; 1% between train/test</td></tr>
+            </table>
+          </div>
+
+          <div class="section-divider"></div>
+          <div class="pane" id="pane-m2">
+            <h2>Model 2 — XGBoost (ml/train_xgboost.py)</h2>
+            <p>Key design decisions:</p>
+            <ul>
+              <li>Monotone constraints — gpa_scaled, internships, projects, communication_score_scaled all set to +1 (must increase). Programme dummies set to 0. This enforces that better students always get higher predicted probability.</li>
+              <li>n_estimators=100, max_depth=5, learning_rate=0.1, binary:logistic</li>
+              <li>Final metrics: Accuracy 87.83%, Precision 89.19%, Recall 98.11%, F1 93.44%</li>
+            </ul>
+            <p>Tests (tests/test_xgboost.py) — 11/11 pass:</p>
+            <table>
+              <tr><th>Test</th><th>What it checks</th></tr>
+              <tr><td>X1</td><td>Model is an XGBClassifier instance</td></tr>
+              <tr><td>X2</td><td>Accuracy ≥ 85%</td></tr>
+              <tr><td>X3</td><td>Precision ≥ 85%</td></tr>
+              <tr><td>X4</td><td>Recall ≥ 90%</td></tr>
+              <tr><td>X5</td><td>All probabilities in [0, 1]</td></tr>
+              <tr><td>X6</td><td>Strong candidate probability &gt; weak candidate</td></tr>
+              <tr><td>X7</td><td>GPA monotonicity: prob rises as GPA increases (max 1 dip allowed)</td></tr>
+              <tr><td>X8</td><td>Internship monotonicity: prob rises with more internships</td></tr>
+              <tr><td>X9</td><td>All 12 programmes return valid predictions</td></tr>
+              <tr><td>X10</td><td>Deterministic: 3 identical runs return same probability</td></tr>
+              <tr><td>X11</td><td>Feature importances sum to ~1.0</td></tr>
+            </table>
+          </div>
+
+          <div class="section-divider"></div>
+          <div class="pane" id="pane-m3">
+            <h2>Model 3 — LSTM (ml/train_lstm.py)</h2>
+            <p>Architecture:</p>
+            <pre class="block">Input(3, 1)  ← 3-year sliding window, 1 feature (enrollment count)
+    ↓
+LSTM(32, return_sequences=True)
+    ↓
+LSTM(16)
+    ↓
+Dense(1)     ← next year's enrollment count (normalized)</pre>
+            <ul>
+              <li>Per-programme MinMaxScaler fitted on 2019–2023 only; 2024 held out for test</li>
+              <li>EarlyStopping(patience=20), batch_size=8, up to 200 epochs</li>
+              <li>Rolling-forward inference: each predicted year feeds back as input for the next</li>
+              <li>RMSE on 2024 holdout: 7.88 students</li>
+            </ul>
+            <p>Tests (tests/test_lstm.py) — 8/8 pass:</p>
+            <table>
+              <tr><th>Test</th><th>What it checks</th></tr>
+              <tr><td>L1</td><td>Keras model file loads</td></tr>
+              <tr><td>L2</td><td>All 12 programmes have a scaler</td></tr>
+              <tr><td>L3</td><td>seq_len in meta matches model input shape</td></tr>
+              <tr><td>L4</td><td>Overall RMSE on 2024 holdout &lt; 15</td></tr>
+              <tr><td>L5</td><td>All 2025/2026 predicted counts are positive</td></tr>
+              <tr><td>L6</td><td>All 2025/2026 counts in plausible range [10, 200]</td></tr>
+              <tr><td>L7</td><td>Rolling forecast returns 2025 and 2026 for all 12 programmes</td></tr>
+              <tr><td>L8</td><td>5-year rolling forecast stays below 500 (no explosion)</td></tr>
+            </table>
+          </div>
+
+          <div class="section-divider"></div>
+          <div class="pane" id="pane-m4">
+            <h2>Model 4 — Prophet (ml/train_prophet.py)</h2>
+            <p>Design:</p>
+            <ul>
+              <li>Monthly job-demand series derived from enrollment × 3 posting multiplier</li>
+              <li>Seasonal weights: Jan–Mar and Aug–Sep peaks (1.2–1.4×), Jun–Jul trough (0.6–0.7×)</li>
+              <li>Prophet(seasonality_mode='multiplicative', changepoint_prior_scale=0.15)</li>
+              <li>6-month holdout for evaluation</li>
+              <li>MAPE 3.41%, RMSE 4.68 on holdout</li>
+            </ul>
+            <p>Tests (tests/test_prophet.py) — 7/7 pass:</p>
+            <table>
+              <tr><th>Test</th><th>What it checks</th></tr>
+              <tr><td>P1</td><td>Model loads without error</td></tr>
+              <tr><td>P2</td><td>MAPE &lt; 10% on 6-month holdout</td></tr>
+              <tr><td>P3</td><td>RMSE &lt; 20 on 6-month holdout</td></tr>
+              <tr><td>P4</td><td>All 12-month forecast predictions are positive</td></tr>
+              <tr><td>P5</td><td>Confidence intervals ordered: lower ≤ yhat ≤ upper</td></tr>
+              <tr><td>P6</td><td>Seasonality captured: August forecast &gt; June forecast</td></tr>
+              <tr><td>P7</td><td>12-month forecast total between 800 and 2,000 postings</td></tr>
+            </table>
+          </div>
+
+          <div class="section-divider"></div>
+          <div class="pane" id="pane-m5">
+            <h2>Model 5 — SHAP (ml/explain_predictions.py)</h2>
+            <p>Two APIs:</p>
+            <ul>
+              <li>compute_shap_values(n_samples=200) — global feature importance across 200 test samples</li>
+              <li>explain_student(student_dict) — per-student breakdown of what drives their placement probability</li>
+            </ul>
+            <p>Top features by mean |SHAP|: gpa_scaled (0.68), internships (0.46), communication_score_scaled (0.42), projects (0.28), then programme dummies.</p>
+            <p>Tests (tests/test_shap.py) — 10/10 pass:</p>
+            <table>
+              <tr><th>Test</th><th>What it checks</th></tr>
+              <tr><td>S1</td><td>SHAP values compute without error</td></tr>
+              <tr><td>S2</td><td>SHAP matrix shape is (200, 16)</td></tr>
+              <tr><td>S3</td><td>Additivity: base_value + sum(shap) = model raw score (tol 1e-2)</td></tr>
+              <tr><td>S4</td><td>gpa_scaled is in top-3 features by mean |SHAP|</td></tr>
+              <tr><td>S5</td><td>Mean SHAP of gpa_scaled is positive</td></tr>
+              <tr><td>S6</td><td>Strong candidate probability &gt; 85% via explain_student()</td></tr>
+              <tr><td>S7a</td><td>Weak student: gpa_scaled SHAP is negative</td></tr>
+              <tr><td>S7b</td><td>Weak student: internships SHAP is non-positive</td></tr>
+              <tr><td>S7c</td><td>Weak student: communication_score SHAP is negative</td></tr>
+              <tr><td>S8</td><td>All 16 features have SHAP values</td></tr>
+            </table>
+          </div>
+
+          <div class="section-divider"></div>
+          <div class="pane" id="pane-summary">
+            <h2>Test Summary</h2>
+            <table>
+              <tr><th>Suite</th><th>File</th><th>Result</th></tr>
+              <tr><td>Feature Pipeline</td><td>tests/test_feature_pipeline.py</td><td>8/8 pass</td></tr>
+              <tr><td>XGBoost</td><td>tests/test_xgboost.py</td><td>11/11 pass</td></tr>
+              <tr><td>LSTM</td><td>tests/test_lstm.py</td><td>8/8 pass</td></tr>
+              <tr><td>Prophet</td><td>tests/test_prophet.py</td><td>7/7 pass</td></tr>
+              <tr><td>SHAP</td><td>tests/test_shap.py</td><td>10/10 pass</td></tr>
+            </table>
+            <div class="summary-line">Total: 44/44 automated tests pass across all 5 models.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="statusbar">
+    <span>⎇ main</span>
+    <span id="statusFile">overview.md</span>
+    <span>44/44 tests passing</span>
+  </div>
+
+<script>
+  const treeItems = document.querySelectorAll('.tree-item');
+  const statusFile = document.getElementById('statusFile');
+  const scrollHost = document.getElementById('scrollHost');
+  const panes = document.querySelectorAll('.pane');
+
+  treeItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const target = document.getElementById(item.dataset.target);
+      if(target){
+        target.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const id = entry.target.id;
+        treeItems.forEach(t => t.classList.toggle('active', t.dataset.target === id));
+        const label = document.querySelector('.tree-item[data-target="'+id+'"]');
+        if(label){ statusFile.textContent = label.textContent.trim(); }
+      }
+    });
+  }, { root: scrollHost, threshold: 0.35 });
+
+  panes.forEach(p => observer.observe(p));
+</script>
+</body>
+</html>

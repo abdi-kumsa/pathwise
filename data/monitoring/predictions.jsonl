@@ -1,0 +1,2 @@
+{"ts": 1783696354.376847, "inputs": {"gpa": 3.5, "internships": 2, "projects": 3, "communication_score": 7, "program": "MS Data Science"}, "probability": 0.7111, "prediction": "Placed", "latency_ms": 62.4}
+{"ts": 1783696845.5605485, "inputs": {"gpa": 3.5, "internships": 2, "projects": 3, "communication_score": 7, "program": "MS Data Science"}, "probability": 0.7111, "prediction": "Placed", "latency_ms": 89.5}

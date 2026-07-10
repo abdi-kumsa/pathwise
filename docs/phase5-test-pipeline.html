@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PathWise Analytics — Phase 5 Test Pipeline Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F172A; --navy-800:#16213A; --navy-700:#1E293B;
+    --blue:#3B82F6; --blue-dark:#2563EB; --blue-light:#EAF1FE;
+    --white:#FFFFFF; --page:#F5F7FB; --border:#E6E9F0;
+    --text-secondary:#64748B; --text-muted:#94A3B8;
+    --green:#0EA872; --green-bg:#E7F7F0;
+    --red:#E4483F; --red-bg:#FCEAE9;
+    --amber:#F59E0B; --amber-bg:#FFFBEB;
+    --purple:#8B5CF6; --purple-bg:#F5F3FF;
+    --teal:#0891B2; --teal-bg:#ECFEFF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',sans-serif;background:var(--page);color:var(--navy);display:flex;min-height:100vh;}
+
+  /* ── SIDEBAR ── */
+  .sidebar{width:264px;flex-shrink:0;background:var(--navy);padding:28px 16px 24px;display:flex;flex-direction:column;gap:28px;position:sticky;top:0;height:100vh;overflow-y:auto;}
+  .brand{display:flex;align-items:center;gap:10px;padding:0 8px 20px;border-bottom:1px solid rgba(255,255,255,0.08);}
+  .brand-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(155deg,var(--blue),#1D4ED8);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;color:#fff;}
+  .brand-text{display:flex;flex-direction:column;gap:1px;}
+  .brand-name{font-family:'Sora',sans-serif;font-weight:600;font-size:16px;color:#fff;letter-spacing:-0.01em;}
+  .brand-tag{font-size:11px;color:var(--blue);font-weight:600;letter-spacing:0.04em;text-transform:uppercase;}
+  .nav-group{display:flex;flex-direction:column;gap:2px;}
+  .nav-label{font-size:11px;font-weight:600;letter-spacing:0.07em;color:#64748B;text-transform:uppercase;padding:10px 12px 8px;}
+  .nav-item{display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:8px;color:#B6C0D4;font-size:13.5px;font-weight:500;text-decoration:none;cursor:pointer;}
+  .nav-item svg{width:16px;height:16px;flex-shrink:0;opacity:0.85;}
+  .nav-item.active,.nav-item:hover{background:var(--navy-700);color:#fff;}
+  .sidebar-footer{margin-top:auto;padding:12px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);}
+  .sf-row{display:flex;align-items:center;gap:10px;}
+  .sf-avatar{width:32px;height:32px;border-radius:8px;background:var(--blue);color:#fff;font-family:'Sora',sans-serif;font-weight:600;font-size:13px;display:flex;align-items:center;justify-content:center;}
+  .sf-name{font-size:13px;color:#fff;font-weight:500;}
+  .sf-role{font-size:11.5px;color:#7C8AA5;}
+
+  /* ── MAIN ── */
+  .main{flex:1;min-width:0;padding:36px 44px 64px;}
+  .topbar{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:32px;gap:24px;}
+  .title-block h1{font-family:'Sora',sans-serif;font-weight:600;font-size:24px;letter-spacing:-0.015em;color:var(--navy);}
+  .title-meta{display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap;}
+  .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px var(--green-bg);}
+  .title-meta span{font-size:13px;color:var(--text-secondary);}
+  .badge{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:6px;letter-spacing:0.02em;}
+  .badge-green{background:var(--green-bg);color:var(--green);}
+  .badge-blue{background:var(--blue-light);color:var(--blue-dark);}
+  .badge-amber{background:var(--amber-bg);color:var(--amber);}
+  .badge-purple{background:var(--purple-bg);color:var(--purple);}
+  .badge-teal{background:var(--teal-bg);color:var(--teal);}
+  .badge-navy{background:rgba(15,23,42,0.08);color:var(--navy);}
+
+  /* ── KPI STRIP ── */
+  .kpi-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:28px;}
+  .kpi-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:18px 20px;}
+  .kpi-label{font-size:11.5px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;}
+  .kpi-value{font-family:'Sora',sans-serif;font-size:28px;font-weight:700;color:var(--navy);letter-spacing:-0.02em;line-height:1;}
+  .kpi-sub{font-size:12px;color:var(--text-secondary);margin-top:6px;font-weight:500;}
+
+  /* ── CARDS ── */
+  .card{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:20px;}
+  .section{margin-bottom:32px;}
+  .section-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .section-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .section-icon svg{width:18px;height:18px;}
+  .section-title{font-family:'Sora',sans-serif;font-size:15px;font-weight:600;color:var(--navy);}
+  .section-subtitle{font-size:12.5px;color:var(--text-secondary);margin-top:2px;}
+
+  /* ── TEST TABLE ── */
+  .test-table{width:100%;border-collapse:collapse;font-size:13px;}
+  .test-table thead tr{border-bottom:1px solid var(--border);}
+  .test-table th{padding:11px 16px;text-align:left;font-size:11.5px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;background:var(--page);}
+  .test-table td{padding:10px 16px;vertical-align:middle;border-bottom:1px solid #F8FAFC;}
+  .test-table tr:last-child td{border-bottom:none;}
+  .test-table tr:hover td{background:#FAFBFD;}
+  .test-id{font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;color:var(--text-muted);white-space:nowrap;}
+  .test-name{color:var(--navy);font-weight:500;line-height:1.4;}
+  .test-result{font-size:12px;color:var(--text-secondary);font-family:'IBM Plex Mono',monospace;}
+  .pass-chip{display:inline-flex;align-items:center;gap:4px;background:var(--green-bg);color:var(--green);font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;white-space:nowrap;}
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar-wrap{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:20px 24px;margin-bottom:28px;display:flex;align-items:center;gap:24px;}
+  .progress-bar-outer{flex:1;height:10px;background:#E6E9F0;border-radius:10px;overflow:hidden;}
+  .progress-bar-fill{height:100%;background:linear-gradient(90deg,#0EA872,#34D399);border-radius:10px;}
+  .progress-label{font-size:13px;font-weight:600;color:var(--navy);white-space:nowrap;}
+
+  /* ── VERDICT ── */
+  .verdict-box{background:linear-gradient(135deg,#0EA87210,#34D39905);border:1px solid #0EA87225;border-radius:14px;padding:22px 28px;display:flex;align-items:center;gap:20px;margin-bottom:28px;}
+  .verdict-icon{width:48px;height:48px;border-radius:12px;flex-shrink:0;background:var(--green-bg);display:flex;align-items:center;justify-content:center;}
+  .verdict-icon svg{width:26px;height:26px;color:var(--green);}
+  .verdict-title{font-family:'Sora',sans-serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+  .verdict-sub{font-size:13px;color:var(--text-secondary);line-height:1.5;}
+
+  /* ── ARCH CARDS ── */
+  .arch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px;}
+  .arch-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:16px 18px;}
+  .arch-card-head{display:flex;align-items:center;gap:9px;margin-bottom:10px;}
+  .arch-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+  .arch-card-title{font-family:'Sora',sans-serif;font-size:13px;font-weight:600;color:var(--navy);}
+  .arch-card-list{list-style:none;display:flex;flex-direction:column;gap:5px;}
+  .arch-card-list li{font-size:12px;color:var(--text-secondary);padding-left:14px;position:relative;}
+  .arch-card-list li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--border);}
+
+  /* ── LAYER FLOW ── */
+  .layer-flow{display:flex;align-items:stretch;gap:0;margin-bottom:28px;border-radius:14px;overflow:hidden;border:1px solid var(--border);}
+  .layer-cell{flex:1;padding:18px 20px;background:var(--white);position:relative;}
+  .layer-cell:not(:last-child)::after{content:"›";position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--text-muted);z-index:1;}
+  .layer-cell:not(:last-child){border-right:1px solid var(--border);}
+  .layer-tag{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px;}
+  .layer-title{font-family:'Sora',sans-serif;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;}
+  .layer-desc{font-size:11.5px;color:var(--text-secondary);line-height:1.4;}
+  .layer-count{display:inline-block;margin-top:8px;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;}
+
+  /* ── STAT ROW ── */
+  .stat-row{display:flex;gap:14px;margin-bottom:14px;flex-wrap:wrap;}
+  .stat-pill{display:flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);border-radius:10px;padding:10px 16px;}
+  .stat-pill-val{font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--navy);}
+  .stat-pill-label{font-size:12px;color:var(--text-secondary);}
+
+  /* ── DIVIDER ── */
+  .divider{height:1px;background:var(--border);margin:32px 0;}
+
+  /* ── GROUP HEADER ── */
+  .group-header{padding:12px 16px;background:var(--page);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+  .group-header-title{font-size:12px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:0.05em;}
+  .group-header-count{font-size:12px;color:var(--text-secondary);}
+
+  ::-webkit-scrollbar{width:5px;height:5px;}
+  ::-webkit-scrollbar-track{background:transparent;}
+  ::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:10px;}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ SIDEBAR ═══════════ -->
+<nav class="sidebar">
+  <div class="brand">
+    <div class="brand-mark">P</div>
+    <div class="brand-text">
+      <span class="brand-name">PathWise</span>
+      <span class="brand-tag">Test Report</span>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label">Report Sections</div>
+    <a class="nav-item active" href="#summary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Overview
+    </a>
+    <a class="nav-item" href="#arch">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+      Architecture
+    </a>
+    <a class="nav-item" href="#frontend">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 8-5 4 5 4"/><path d="m15 8 5 4-5 4"/></svg>
+      Frontend Tests
+    </a>
+    <a class="nav-item" href="#hook">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      H — useFetch Hook
+    </a>
+    <a class="nav-item" href="#components">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+      C — Components
+    </a>
+    <a class="nav-item" href="#api">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      A — API Layer
+    </a>
+    <a class="nav-item" href="#pages">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      P — Page Tests
+    </a>
+    <a class="nav-item" href="#backend">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+      Backend Tests
+    </a>
+    <a class="nav-item" href="#cache">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Ca — Cache
+    </a>
+    <a class="nav-item" href="#contract">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h4"/><path d="M9 21V9a2 2 0 0 1 2-2h6l4 4v8a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2Z"/></svg>
+      F — Contract
+    </a>
+    <a class="nav-item" href="#flow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      Fl — Flow Tests
+    </a>
+    <a class="nav-item" href="#params">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="m21 8-4-4-4 4"/><path d="M17 4v16"/></svg>
+      N — Parameters
+    </a>
+    <a class="nav-item" href="#integrity">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      D — Data Integrity
+    </a>
+    <a class="nav-item" href="#stability">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+      S — Stability
+    </a>
+    <a class="nav-item" href="#perf">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      R — Response Time
+    </a>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="sf-row">
+      <div class="sf-avatar">AK</div>
+      <div>
+        <div class="sf-name">Abdi Kumsa</div>
+        <div class="sf-role">Lead Engineer</div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════ MAIN ═══════════ -->
+<main class="main">
+
+  <!-- ── TOPBAR ── -->
+  <div class="topbar" id="summary">
+    <div class="title-block">
+      <h1>Phase 5 — Test Pipeline Report</h1>
+      <div class="title-meta">
+        <div class="live-dot"></div>
+        <span>Frontend–Backend Integration</span>
+        <span class="badge badge-green">201 / 201 PASSED</span>
+        <span class="badge badge-blue">Vitest + Python</span>
+        <span class="badge badge-navy">July 2026</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── VERDICT ── -->
+  <div class="verdict-box">
+    <div class="verdict-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+    </div>
+    <div>
+      <div class="verdict-title">Phase 5 Integration Verified — All 201 Tests Pass</div>
+      <div class="verdict-sub">
+        116 frontend unit &amp; integration tests (Vitest + React Testing Library) and 85 backend integration tests
+        (Python requests) all pass with zero failures. TTL cache delivers warm responses in under 5 ms.
+        Every page correctly shows loading states, handles errors with retry, and renders live data.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── KPI STRIP ── -->
+  <div class="kpi-strip">
+    <div class="kpi-card">
+      <div class="kpi-label">Total Tests</div>
+      <div class="kpi-value">201</div>
+      <div class="kpi-sub">116 frontend · 85 backend</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">All Passed</div>
+      <div class="kpi-value" style="color:var(--green);">201</div>
+      <div class="kpi-sub">0 failures · 0 skipped</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Test Suites</div>
+      <div class="kpi-value">9</div>
+      <div class="kpi-sub">7 frontend · 2 backend</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Cache Speed</div>
+      <div class="kpi-value">2–4ms</div>
+      <div class="kpi-sub">Warm hit vs 15 ms cold</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Pages Covered</div>
+      <div class="kpi-value">8</div>
+      <div class="kpi-sub">All dashboard views</div>
+    </div>
+  </div>
+
+  <!-- ── PROGRESS BAR ── -->
+  <div class="progress-bar-wrap">
+    <span class="progress-label">Overall Pass Rate</span>
+    <div class="progress-bar-outer">
+      <div class="progress-bar-fill" style="width:100%;"></div>
+    </div>
+    <span class="progress-label" style="color:var(--green);">201 / 201 — 100%</span>
+  </div>
+
+  <!-- ── ARCHITECTURE ── -->
+  <div id="arch" class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--blue-light);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue-dark)" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+      </div>
+      <div>
+        <div class="section-title">Test Architecture — 5-Layer Coverage</div>
+        <div class="section-subtitle">Every layer of the Phase 5 stack has dedicated tests from unit to end-to-end</div>
+      </div>
+    </div>
+
+    <div class="layer-flow">
+      <div class="layer-cell">
+        <div class="layer-tag" style="color:var(--purple);">Layer 1</div>
+        <div class="layer-title">Hook</div>
+        <div class="layer-desc">useFetch state machine, refetch, dep-change, stale-closure guard</div>
+        <span class="layer-count" style="background:var(--purple-bg);color:var(--purple);">13 tests</span>
+      </div>
+      <div class="layer-cell">
+        <div class="layer-tag" style="color:var(--teal);">Layer 2</div>
+        <div class="layer-title">Components</div>
+        <div class="layer-desc">ErrorBanner · LoadingSpinner rendering &amp; interaction</div>
+        <span class="layer-count" style="background:var(--teal-bg);color:var(--teal);">12 tests</span>
+      </div>
+      <div class="layer-cell">
+        <div class="layer-tag" style="color:var(--blue-dark);">Layer 3</div>
+        <div class="layer-title">API Layer</div>
+        <div class="layer-desc">All 13 API functions verified for correct URL &amp; param forwarding</div>
+        <span class="layer-count" style="background:var(--blue-light);color:var(--blue-dark);">19 tests</span>
+      </div>
+      <div class="layer-cell">
+        <div class="layer-tag" style="color:var(--amber);">Layer 4</div>
+        <div class="layer-title">Pages</div>
+        <div class="layer-desc">All 8 dashboard pages: loading / error / data / retry flows</div>
+        <span class="layer-count" style="background:var(--amber-bg);color:var(--amber);">72 tests</span>
+      </div>
+      <div class="layer-cell">
+        <div class="layer-tag" style="color:var(--green);">Layer 5</div>
+        <div class="layer-title">Backend</div>
+        <div class="layer-desc">Cache, contract, flow, params, integrity, stability, perf</div>
+        <span class="layer-count" style="background:var(--green-bg);color:var(--green);">85 tests</span>
+      </div>
+    </div>
+
+    <div class="arch-grid">
+      <div class="arch-card">
+        <div class="arch-card-head"><div class="arch-dot" style="background:var(--purple);"></div><div class="arch-card-title">Frontend Test Stack</div></div>
+        <ul class="arch-card-list">
+          <li>Vitest v4 — Vite-native runner, zero config</li>
+          <li>@testing-library/react v16 — Component rendering</li>
+          <li>@testing-library/user-event — Real user interactions</li>
+          <li>@testing-library/jest-dom — DOM matchers</li>
+          <li>jsdom — Browser environment simulation</li>
+          <li>ResizeObserver polyfill for recharts</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card-head"><div class="arch-dot" style="background:var(--green);"></div><div class="arch-card-title">Backend Test Stack</div></div>
+        <ul class="arch-card-list">
+          <li>Python 3.13 — stdlib requests module</li>
+          <li>Custom check() reporter with PASS/FAIL colouring</li>
+          <li>Live HTTP calls against FastAPI on 127.0.0.1:8080</li>
+          <li>Warm-up pass before response-time measurement</li>
+          <li>Cross-endpoint data consistency assertions</li>
+          <li>BASE_URL env variable for CI override</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card-head"><div class="arch-dot" style="background:var(--blue-dark);"></div><div class="arch-card-title">Mocking Strategy</div></div>
+        <ul class="arch-card-list">
+          <li>Axios client mocked at module boundary (vi.mock)</li>
+          <li>Recharts replaced with transparent pass-through wrappers</li>
+          <li>API modules stubbed per test with mockResolvedValue</li>
+          <li>vi.useFakeTimers() isolates debounce in AdmissionRisk</li>
+          <li>Pending Promises simulate in-flight loading state</li>
+          <li>Sequential mocks (Once) test error → recovery flows</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════ FRONTEND TESTS ═══════ -->
+  <div id="frontend">
+    <div class="section-header" style="margin-bottom:22px;">
+      <div class="section-icon" style="background:var(--purple-bg);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 8-5 4 5 4"/><path d="m15 8 5 4-5 4"/></svg>
+      </div>
+      <div>
+        <div class="section-title">Frontend Tests — 116 / 116 Passed</div>
+        <div class="section-subtitle">Vitest + React Testing Library · 7 test files · 6.5 s total runtime</div>
+      </div>
+      <span class="badge badge-green" style="margin-left:auto;">All passed</span>
+    </div>
+
+    <!-- H — useFetch Hook -->
+    <div id="hook" class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--purple-bg);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </div>
+        <div>
+          <div class="section-title">H — useFetch Hook</div>
+          <div class="section-subtitle">src/test/useFetch.test.js · 13 tests · Covers all state machine transitions</div>
+        </div>
+        <span class="badge badge-purple" style="margin-left:auto;">13 / 13</span>
+      </div>
+      <div class="card">
+        <table class="test-table">
+          <thead><tr><th>ID</th><th>Test</th><th>Validates</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="test-id">H01</td><td class="test-name">Starts with loading=true, data=null, error=null</td><td class="test-result">Initial state correct before first resolve</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">H02</td><td class="test-name">Sets data and clears loading on successful fetch</td><td class="test-result">data populated, loading false, error null</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">H03</td><td class="test-name">Works for array responses</td><td class="test-result">Array payloads stored without mutation</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">H04</td><td class="test-name">Sets error from plain Error message</td><td class="test-result">e.message surfaced to error state</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">H05</td><td class="test-name">Extracts detail from Axios error response</td><td class="test-result">e.response.data.detail preferred over e.message</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">H06</td><td class="test-name">Falls back to "Something went wrong" for empty error</td><td class="test-result">No uncaught undefined when error has no fields</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">H07</td><td class="test-name">refetch() re-runs fetch and updates data</td><td class="test-result">Second call returns count=2</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">H08</td><td class="test-name">refetch() resets error to null before re-fetching</td><td class="test-result">Error cleared before second attempt completes</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">H09</td><td class="test-name">refetch() sets loading=true while in-flight</td><td class="test-result">Spinner visible between refetch and resolve</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">H10</td><td class="test-name">Re-fetches when deps array changes</td><td class="test-result">New program dep triggers second API call</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">H11</td><td class="test-name">Does NOT re-fetch when deps are the same value</td><td class="test-result">Same n=5 on rerender → fetchFn called once only</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">H12</td><td class="test-name">Does NOT re-fetch when fetchFn reference changes (same deps)</td><td class="test-result">useRef guard prevents stale-closure re-runs</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">H13</td><td class="test-name">fetchFn called exactly twice after one refetch</td><td class="test-result">No extra renders or redundant calls</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- C — Components -->
+    <div id="components" class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--teal-bg);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </div>
+        <div>
+          <div class="section-title">C — UI Component Tests</div>
+          <div class="section-subtitle">ErrorBanner (6 tests) · LoadingSpinner (6 tests) · Both use inline styles only</div>
+        </div>
+        <span class="badge badge-teal" style="margin-left:auto;">12 / 12</span>
+      </div>
+      <div class="card">
+        <div class="group-header"><span class="group-header-title">ErrorBanner</span><span class="group-header-count">6 tests</span></div>
+        <table class="test-table">
+          <thead><tr><th>ID</th><th>Test</th><th>Validates</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="test-id">C01</td><td class="test-name">Renders the error message</td><td class="test-result">Passed message text visible in DOM</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">C02</td><td class="test-name">Renders default fallback label</td><td class="test-result">"Something went wrong" appears in title + body</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">C03</td><td class="test-name">Shows Retry button when onRetry prop provided</td><td class="test-result">Button present in DOM when callback passed</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">C04</td><td class="test-name">Does NOT render Retry button when onRetry absent</td><td class="test-result">queryByRole returns null without prop</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">C05</td><td class="test-name">Calls onRetry when Retry button is clicked</td><td class="test-result">Mock called exactly once on fireEvent.click</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">C06</td><td class="test-name">Has accessible error region in DOM</td><td class="test-result">role=alert or visible text present</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          </tbody>
+        </table>
+        <div class="group-header" style="border-top:1px solid var(--border);"><span class="group-header-title">LoadingSpinner</span><span class="group-header-count">6 tests</span></div>
+        <table class="test-table">
+          <tbody>
+            <tr><td class="test-id">C07</td><td class="test-name">Renders a spinner element</td><td class="test-result">Circular DOM element present after mount</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">C08</td><td class="test-name">Renders with default height wrapper</td><td class="test-result">Outer div rendered without explicit height prop</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">C09</td><td class="test-name">Applies custom height when provided</td><td class="test-result">height=400 reflected in wrapper inline style</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">C10</td><td class="test-name">Default height is 280</td><td class="test-result">style contains "280" when no height prop</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">C11</td><td class="test-name">Renders optional message when provided</td><td class="test-result">"Loading forecast…" text visible in DOM</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">C12</td><td class="test-name">Does not crash without any props</td><td class="test-result">No thrown errors on bare render</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- A — API Layer -->
+    <div id="api" class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--blue-light);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue-dark)" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </div>
+        <div>
+          <div class="section-title">A — API Layer Tests</div>
+          <div class="section-subtitle">src/test/api.test.js · 19 tests · Axios client mocked at module level — no HTTP calls</div>
+        </div>
+        <span class="badge badge-blue" style="margin-left:auto;">19 / 19</span>
+      </div>
+      <div class="card">
+        <div class="group-header"><span class="group-header-title">Market Demand API (marketDemand.js)</span><span class="group-header-count">9 tests</span></div>
+        <table class="test-table">
+          <thead><tr><th>ID</th><th>Function</th><th>Validates</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="test-id">A01</td><td class="test-name">getMarketOverview</td><td class="test-result">GET /api/market/overview · returns data</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">A02</td><td class="test-name">getTopHiringCompanies — default n=10</td><td class="test-result">GET /api/market/top-companies?n=10</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">A03</td><td class="test-name">getTopHiringCompanies — custom n=5</td><td class="test-result">param { n:5 } forwarded correctly</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">A04</td><td class="test-name">getRegionalHiringData</td><td class="test-result">GET /api/market/regional-hiring</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">A05</td><td class="test-name">getSkillGapData</td><td class="test-result">GET /api/market/skill-gap</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">A06</td><td class="test-name">getJobInternshipRatio</td><td class="test-result">GET /api/market/job-internship-ratio</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">A07</td><td class="test-name">getHiringSourceBreakdown</td><td class="test-result">GET /api/market/hiring-sources</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">A08</td><td class="test-name">getDemandForecast — default months=12</td><td class="test-result">GET /api/market/demand-forecast?months=12</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">A09</td><td class="test-name">getDemandForecast — custom months=6</td><td class="test-result">param { months:6 } forwarded correctly</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          </tbody>
+        </table>
+        <div class="group-header" style="border-top:1px solid var(--border);"><span class="group-header-title">Enrollment API (enrollment.js)</span><span class="group-header-count">10 tests</span></div>
+        <table class="test-table">
+          <tbody>
+            <tr><td class="test-id">A10</td><td class="test-name">getEnrollmentSummary</td><td class="test-result">GET /api/enrollment/summary · data returned</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">A11</td><td class="test-name">getEnrollmentForecast — default years=3</td><td class="test-result">GET /api/enrollment/forecast?program=...&years=3</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">A12</td><td class="test-name">getEnrollmentForecast — custom years=5</td><td class="test-result">param { years:5 } forwarded correctly</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">A13</td><td class="test-name">getAdmissionRisk — default limit=10</td><td class="test-result">GET /api/enrollment/admission-risk?limit=10</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">A14</td><td class="test-name">getAdmissionRisk — custom limit=5</td><td class="test-result">param { limit:5 } forwarded correctly</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">A15</td><td class="test-name">getPlacementByStream</td><td class="test-result">GET /api/enrollment/placement-by-stream</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">A16</td><td class="test-name">submitStudentProfile — POSTs full profile body</td><td class="test-result">POST /api/enrollment/predict-placement with JSON</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">A17</td><td class="test-name">getSkillRecommendations — no student_id</td><td class="test-result">GET /api/enrollment/skill-recommendations?student_id=undefined</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">A18</td><td class="test-name">getSkillRecommendations — with student_id=42</td><td class="test-result">param { student_id:42 } forwarded correctly</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">A19</td><td class="test-name">submitStudentProfile returns prediction payload</td><td class="test-result">prediction field accessible on response</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- P — Page Tests -->
+    <div id="pages" class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--amber-bg);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div>
+          <div class="section-title">P — Page Integration Tests</div>
+          <div class="section-subtitle">72 tests across 8 dashboard pages — loading · error · data · retry · interactions</div>
+        </div>
+        <span class="badge badge-amber" style="margin-left:auto;">72 / 72</span>
+      </div>
+
+      <!-- Market pages -->
+      <div class="card" style="margin-bottom:16px;">
+        <div class="group-header"><span class="group-header-title">Market Demand Dashboard (pages.market.test.jsx)</span><span class="group-header-count">21 tests</span></div>
+        <table class="test-table">
+          <thead><tr><th>ID</th><th>Page · Test</th><th>Validates</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="test-id">PM01</td><td class="test-name">MarketOverview — shows page title</td><td class="test-result">"Market demand overview" heading rendered</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PM02</td><td class="test-name">MarketOverview — shows loading dashes while fetching</td><td class="test-result">Em-dashes displayed before resolve</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PM03</td><td class="test-name">MarketOverview — renders KPI values after data loads</td><td class="test-result">total_companies=30, total_placements=2,649 visible</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PM04</td><td class="test-name">MarketOverview — shows ErrorBanner on failure</td><td class="test-result">Error message text visible in DOM</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PM05</td><td class="test-name">MarketOverview — shows Retry button inside ErrorBanner</td><td class="test-result">role=button[retry] present on failure</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PM06</td><td class="test-name">MarketOverview — Retry triggers successful re-fetch</td><td class="test-result">Data appears after click · fetchFn called twice</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PM07</td><td class="test-name">HiringAnalytics — shows loading dashes initially</td><td class="test-result">KPI cards show em-dashes before 4 parallel fetches resolve</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PM08</td><td class="test-name">HiringAnalytics — renders avg_time_to_hire KPI</td><td class="test-result">"54 days" visible after data loads</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PM09</td><td class="test-name">HiringAnalytics — renders top company name</td><td class="test-result">"Google" visible after data loads</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PM10</td><td class="test-name">HiringAnalytics — shows ErrorBanner on failure</td><td class="test-result">Single error shown for 4-parallel-fetch failure</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PM11</td><td class="test-name">SkillGap — shows page title</td><td class="test-result">"Skill gap analysis" heading rendered</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PM12</td><td class="test-name">SkillGap — shows loading dashes while fetching</td><td class="test-result">KPI em-dashes before resolve</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PM13</td><td class="test-name">SkillGap — renders top_gap_skill after data loads</td><td class="test-result">"Python" visible in KPI card and chart area</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PM14</td><td class="test-name">SkillGap — renders avg_gap_score KPI</td><td class="test-result">"19.0" visible in avg gap card</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PM15</td><td class="test-name">SkillGap — shows ErrorBanner on failure</td><td class="test-result">"skill data unavailable" text in DOM</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PM16</td><td class="test-name">SkillGap — Retry button triggers successful re-fetch</td><td class="test-result">Data renders after error → click → success sequence</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PM17</td><td class="test-name">Forecast — shows page title</td><td class="test-result">"Demand forecast" heading rendered</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PM18</td><td class="test-name">Forecast — shows loading dashes while fetching</td><td class="test-result">KPI em-dashes before 12-month data resolves</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PM19</td><td class="test-name">Forecast — renders 12-month total KPI</td><td class="test-result">Computed sum of predicted_postings shown</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PM20</td><td class="test-name">Forecast — shows ErrorBanner on failure</td><td class="test-result">"forecast unavailable" in DOM</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PM21</td><td class="test-name">Forecast — shows Retry button on error</td><td class="test-result">role=button[retry] present on failure</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Enrollment pages -->
+      <div class="card" style="margin-bottom:16px;">
+        <div class="group-header"><span class="group-header-title">Enrollment Dashboard (pages.enrollment.test.jsx)</span><span class="group-header-count">25 tests</span></div>
+        <table class="test-table">
+          <thead><tr><th>ID</th><th>Page · Test</th><th>Validates</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="test-id">PE01</td><td class="test-name">EnrollmentForecast — shows page title</td><td class="test-result">"Enrollment forecast" heading rendered</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE02</td><td class="test-name">EnrollmentForecast — shows loading dashes during summary fetch</td><td class="test-result">Em-dashes before both useFetch calls resolve</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE03</td><td class="test-name">EnrollmentForecast — renders total_students KPI</td><td class="test-result">"3,000" visible after summary loads</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE04</td><td class="test-name">EnrollmentForecast — renders top_program KPI</td><td class="test-result">"MS Data Science" visible in KPI card</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE05</td><td class="test-name">EnrollmentForecast — renders avg_placement_rate KPI</td><td class="test-result">"88.3%" visible after data loads</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE06</td><td class="test-name">EnrollmentForecast — ErrorBanner if summary fetch fails</td><td class="test-result">Separate banner for summary failure</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE07</td><td class="test-name">EnrollmentForecast — ErrorBanner if forecast fetch fails</td><td class="test-result">Separate banner for forecast failure</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE08</td><td class="test-name">EnrollmentForecast — re-fetches forecast on program dropdown change</td><td class="test-result">getEnrollmentForecast called twice · correct program passed</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE09</td><td class="test-name">EnrollmentForecast — summary fetch fires only once on program change</td><td class="test-result">getEnrollmentSummary called exactly once (no dep on program)</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE10</td><td class="test-name">AdmissionRisk — shows page title</td><td class="test-result">"Admission risk" heading rendered</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE11</td><td class="test-name">AdmissionRisk — shows loading dashes initially</td><td class="test-result">Em-dashes before risk data resolves</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE12</td><td class="test-name">AdmissionRisk — renders risk table rows after data loads</td><td class="test-result">"MS Cybersecurity" and "MS HCI" in DOM</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE13</td><td class="test-name">AdmissionRisk — renders risk_score values</td><td class="test-result">"24.5" and "12.1" visible in table cells</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE14</td><td class="test-name">AdmissionRisk — renders trend badges</td><td class="test-result">"Declining" × 2 and "Stable" × 1 visible</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE15</td><td class="test-name">AdmissionRisk — shows declining count in KPI</td><td class="test-result">KPI card shows "2" declining programmes</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE16</td><td class="test-name">AdmissionRisk — shows ErrorBanner on failure</td><td class="test-result">"risk data error" message in DOM</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE17</td><td class="test-name">AdmissionRisk — initial API call uses default limit=12</td><td class="test-result">getAdmissionRisk called with 12 on mount</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE18</td><td class="test-name">AdmissionRisk — debounce: no new call within 400ms of slider change</td><td class="test-result">vi.useFakeTimers · call count unchanged at 400ms</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE19</td><td class="test-name">AdmissionRisk — debounce: fires exactly once at 500ms with new limit</td><td class="test-result">getAdmissionRisk(5) called after 500ms total</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE20</td><td class="test-name">PlacementByStream — shows page title</td><td class="test-result">"Placement by stream" heading rendered</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE21</td><td class="test-name">PlacementByStream — shows loading dashes initially</td><td class="test-result">Em-dashes before stream data resolves</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE22</td><td class="test-name">PlacementByStream — renders top programme name</td><td class="test-result">"MS Data Science" visible in KPI and chart</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE23</td><td class="test-name">PlacementByStream — renders overall placement rate KPI</td><td class="test-result">Computed average "90.5%" visible</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE24</td><td class="test-name">PlacementByStream — renders avg salary KPI</td><td class="test-result">Computed "$118K" visible in DOM</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">PE25</td><td class="test-name">PlacementByStream — Retry button triggers re-fetch</td><td class="test-result">Data appears after error → retry → success</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- StudentEvaluatorPage -->
+      <div class="card">
+        <div class="group-header"><span class="group-header-title">StudentEvaluatorPage (pages.evaluator.test.jsx)</span><span class="group-header-count">26 tests</span></div>
+        <table class="test-table">
+          <thead><tr><th>ID</th><th>Scenario · Test</th><th>Validates</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="test-id">EV01</td><td class="test-name">Initial — shows page title</td><td class="test-result">"Student evaluator" heading rendered</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV02</td><td class="test-name">Initial — shows placeholder prompt</td><td class="test-result">"Set profile and predict" visible before submission</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV03</td><td class="test-name">Initial — shows Predict Placement button</td><td class="test-result">Button rendered and enabled</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV04</td><td class="test-name">Initial — shows GPA slider</td><td class="test-result">"GPA" label visible in form</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV05</td><td class="test-name">Initial — dropdown default is MS Data Science</td><td class="test-result">select.value === 'MS Data Science'</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV06</td><td class="test-name">Initial — dropdown has all 12 programme options</td><td class="test-result">getAllByRole('option').length === 12</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV07</td><td class="test-name">Prediction — shows probability % after submit</td><td class="test-result">"97.0%" visible after resolve</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV08</td><td class="test-name">Prediction — "Placed" badge for high-probability profile</td><td class="test-result">Green "Placed" badge visible</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV09</td><td class="test-name">Prediction — shows base_value in log-odds display</td><td class="test-result">"2.038" visible below probability circle</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV10</td><td class="test-name">Prediction — shows SHAP Feature Contributions heading</td><td class="test-result">Section heading rendered after result</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV11</td><td class="test-name">Prediction — calls getSkillRecommendations after success</td><td class="test-result">API function called once after predict resolves</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV12</td><td class="test-name">Prediction — Skill Recommendations section heading visible</td><td class="test-result">"Skill Recommendations" heading in DOM</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV13</td><td class="test-name">Prediction — renders all 4 recommendation skill names</td><td class="test-result">GPA, Industry Experience, Projects, Communication all visible</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV14</td><td class="test-name">Prediction — renders priority badges (High/Medium/Low)</td><td class="test-result">High × 2, Medium × 1, Low × 1 visible</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV15</td><td class="test-name">Prediction — renders recommendation reasons</td><td class="test-result">"Strongest placement predictor" text visible</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV16</td><td class="test-name">Prediction — renders Alternative Pathways section</td><td class="test-result">"Alternative Pathways" heading visible</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV17</td><td class="test-name">Prediction — renders both pathway items</td><td class="test-result">Data Science cert and AWS/Azure cert text visible</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV18</td><td class="test-name">Prediction — button shows "Predicting…" while in-flight</td><td class="test-result">Button text changes during pending Promise</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV19</td><td class="test-name">Not Placed — "Not Placed" badge for weak profile</td><td class="test-result">Red "Not Placed" badge visible for p=21%</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV20</td><td class="test-name">Not Placed — shows 21.0% probability</td><td class="test-result">"21.0%" visible after weak predict resolves</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV21</td><td class="test-name">Reset — clears results and shows placeholder again</td><td class="test-result">97.0% hidden · "Set profile and predict" shown again</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV22</td><td class="test-name">Error — shows error message when predict API fails</td><td class="test-result">"Model not loaded" detail visible from Axios error</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV23</td><td class="test-name">Error — button returns to "Predict Placement" after failure</td><td class="test-result">Button re-enabled after error state</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV24</td><td class="test-name">Error — can re-submit after an error</td><td class="test-result">Second attempt succeeds → 97.0% visible</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV25</td><td class="test-name">Error — shows prediction even if recs fetch fails</td><td class="test-result">97.0% shown · Skill Recommendations absent</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">EV26</td><td class="test-name">Form — submitStudentProfile called with updated GPA</td><td class="test-result">Profile contains gpa:3.9 after slider change</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════ BACKEND TESTS ═══════ -->
+  <div id="backend">
+    <div class="section-header" style="margin-bottom:22px;">
+      <div class="section-icon" style="background:var(--green-bg);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+      </div>
+      <div>
+        <div class="section-title">Backend Tests — 85 / 85 Passed</div>
+        <div class="section-subtitle">tests/test_phase5.py · Python requests · Live FastAPI on 127.0.0.1:8080 · 7 sections</div>
+      </div>
+      <span class="badge badge-green" style="margin-left:auto;">All passed</span>
+    </div>
+
+    <!-- Ca — Cache -->
+    <div id="cache" class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--amber-bg);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <div class="section-title">Ca — TTL Cache Verification</div>
+          <div class="section-subtitle">Warm vs cold latency · cache key isolation · response stability</div>
+        </div>
+        <span class="badge badge-amber" style="margin-left:auto;">7 / 7</span>
+      </div>
+      <div class="card">
+        <table class="test-table">
+          <thead><tr><th>ID</th><th>Test</th><th>Result</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="test-id">C1</td><td class="test-name">/market/overview first call returns 200</td><td class="test-result">HTTP 200 · cold call</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">C2</td><td class="test-name">Second call returns 200</td><td class="test-result">HTTP 200 · cached</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">C3</td><td class="test-name">Second call faster than first (cache hit)</td><td class="test-result">Cold 15ms · Warm 2ms (7.5× speedup)</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">C4</td><td class="test-name">Both calls return identical JSON</td><td class="test-result">r1.json() == r2.json()</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">C5</td><td class="test-name">/market/top-companies cached response matches</td><td class="test-result">n=10 consistent across two calls</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">C6</td><td class="test-name">Different n param uses separate cache slot</td><td class="test-result">n=10 → 10 items · n=5 → 5 items (different keys)</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">C7</td><td class="test-name">/market/skill-gap response stable across calls</td><td class="test-result">Identical JSON on both calls</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- F — Contract -->
+    <div id="contract" class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--blue-light);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue-dark)" stroke-width="2"><path d="M9 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h4"/><path d="M9 21V9a2 2 0 0 1 2-2h6l4 4v8a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2Z"/></svg>
+        </div>
+        <div>
+          <div class="section-title">F — Frontend–Backend Contract</div>
+          <div class="section-subtitle">30 field-name and type checks — every field consumed by the UI is verified at the API level</div>
+        </div>
+        <span class="badge badge-blue" style="margin-left:auto;">30 / 30</span>
+      </div>
+      <div class="card">
+        <div class="group-header"><span class="group-header-title">Market Endpoints (F1–F19)</span><span class="group-header-count">19 checks</span></div>
+        <table class="test-table">
+          <thead><tr><th>ID</th><th>Field</th><th>Expected Type</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="test-id">F1</td><td class="test-name">overview.total_companies</td><td class="test-result">int</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F2</td><td class="test-name">overview.total_placements</td><td class="test-result">int</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F3</td><td class="test-name">overview.avg_salary</td><td class="test-result">int | float</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F4</td><td class="test-name">overview.avg_time_to_hire</td><td class="test-result">int | float</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F5</td><td class="test-name">overview.top_role</td><td class="test-result">str</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F6</td><td class="test-name">companies list non-empty</td><td class="test-result">len &gt; 0</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F7</td><td class="test-name">company[].company</td><td class="test-result">str</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F8</td><td class="test-name">company[].count</td><td class="test-result">int</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F9</td><td class="test-name">skill_gap.skills</td><td class="test-result">list</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F10</td><td class="test-name">skill[].demand_score</td><td class="test-result">int | float</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F11</td><td class="test-name">skill[].curriculum_coverage</td><td class="test-result">int | float</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F12</td><td class="test-name">skill[].gap_score</td><td class="test-result">int | float</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F13</td><td class="test-name">skill_gap.top_gap_skill</td><td class="test-result">str</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F14</td><td class="test-name">skill_gap.avg_gap_score</td><td class="test-result">int | float</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F15</td><td class="test-name">demand-forecast is list of 12</td><td class="test-result">len == 12</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F16</td><td class="test-name">forecast[].month</td><td class="test-result">str (ISO date)</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F17</td><td class="test-name">forecast[].predicted_postings</td><td class="test-result">int | float</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F18</td><td class="test-name">forecast[].lower_bound</td><td class="test-result">int | float</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F19</td><td class="test-name">forecast[].upper_bound</td><td class="test-result">int | float</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          </tbody>
+        </table>
+        <div class="group-header" style="border-top:1px solid var(--border);"><span class="group-header-title">Enrollment Endpoints (F20–F30)</span><span class="group-header-count">11 checks</span></div>
+        <table class="test-table">
+          <tbody>
+            <tr><td class="test-id">F20</td><td class="test-name">summary.total_students</td><td class="test-result">int</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F21</td><td class="test-name">summary.top_program</td><td class="test-result">str</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F22</td><td class="test-name">summary.avg_placement_rate</td><td class="test-result">int | float</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F23</td><td class="test-name">summary.enrollment_by_year</td><td class="test-result">dict</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F24</td><td class="test-name">risks is a list</td><td class="test-result">list (admission-risk endpoint)</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F25</td><td class="test-name">risk[].program</td><td class="test-result">str</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F26</td><td class="test-name">risk[].risk_score</td><td class="test-result">int | float</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F27</td><td class="test-name">risk[].trend</td><td class="test-result">str ("up" | "down" | "stable")</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F28</td><td class="test-name">risk[].recommended_intake</td><td class="test-result">int</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F29</td><td class="test-name">streams is list of 12</td><td class="test-result">len == 12</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            <tr><td class="test-id">F30</td><td class="test-name">stream[] has all 4 required fields</td><td class="test-result">program · placement_rate · avg_salary · student_count</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Fl — Flow, N, D, S, R in a 2-column grid -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
+
+      <!-- Fl — Predict→Recommend Flow -->
+      <div id="flow">
+        <div class="section-header">
+          <div class="section-icon" style="background:var(--purple-bg);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div>
+            <div class="section-title">Fl — Predict → Recommend Flow</div>
+            <div class="section-subtitle">Full end-to-end for 3 profiles × 6 checks + 2 coherence checks</div>
+          </div>
+          <span class="badge badge-purple" style="margin-left:auto;">20 / 20</span>
+        </div>
+        <div class="card">
+          <table class="test-table">
+            <thead><tr><th>ID</th><th>Profile · Check</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td class="test-id">P1</td><td class="test-name">Strong profile predict returns 200</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">P2</td><td class="test-name">Strong profile recs returns 200</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">P3</td><td class="test-name">Strong recommendations list non-empty</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">P4</td><td class="test-name">Strong alternative_pathways non-empty</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">P5</td><td class="test-name">Strong all rec items have skill/priority/reason</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">P6</td><td class="test-name">Strong priority values are High/Medium/Low</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">P1–6</td><td class="test-name">Average profile — same 6 checks</td><td><span class="pass-chip">✓ PASS ×6</span></td></tr>
+              <tr><td class="test-id">P1–6</td><td class="test-name">Weak profile — same 6 checks</td><td><span class="pass-chip">✓ PASS ×6</span></td></tr>
+              <tr><td class="test-id">P7</td><td class="test-name">GPA SHAP positive for strong student (1.29)</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">P8</td><td class="test-name">Top recommendation has High priority</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- N — Parameters -->
+      <div id="params">
+        <div class="section-header">
+          <div class="section-icon" style="background:var(--teal-bg);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="m21 8-4-4-4 4"/><path d="M17 4v16"/></svg>
+          </div>
+          <div>
+            <div class="section-title">N — Parameter Forwarding</div>
+            <div class="section-subtitle">Backend honours months · n · years · limit params from frontend</div>
+          </div>
+          <span class="badge badge-teal" style="margin-left:auto;">11 / 11</span>
+        </div>
+        <div class="card">
+          <table class="test-table">
+            <thead><tr><th>ID</th><th>Param · Check</th><th>Result</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td class="test-id">N1</td><td class="test-name">months=6 returns 6 points</td><td class="test-result">got 6</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">N2</td><td class="test-name">months=9 returns 9 points</td><td class="test-result">got 9</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">N3</td><td class="test-name">months=12 returns 12 points</td><td class="test-result">got 12</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">N4</td><td class="test-name">n=3 returns at most 3 companies</td><td class="test-result">got 3</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">N5</td><td class="test-name">n=10 returns at most 10 companies</td><td class="test-result">got 10</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">N6</td><td class="test-name">n=10 returns more than n=3</td><td class="test-result">10 &gt; 3</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">N7</td><td class="test-name">years=3 returns 3 forecast points</td><td class="test-result">got 3</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">N8</td><td class="test-name">years=5 returns 5 forecast points</td><td class="test-result">got 5</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">N9</td><td class="test-name">limit=5 returns at most 5 items</td><td class="test-result">got 5</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">N10</td><td class="test-name">limit=12 returns at most 12 items</td><td class="test-result">got 12</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">N11</td><td class="test-name">limit=12 returns more than limit=5</td><td class="test-result">12 &gt; 5</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;">
+
+      <!-- D — Data Integrity -->
+      <div id="integrity">
+        <div class="section-header">
+          <div class="section-icon" style="background:var(--navy-700);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#B6C0D4" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div class="section-title">D — Data Integrity</div>
+            <div class="section-subtitle">Cross-endpoint consistency</div>
+          </div>
+          <span class="badge badge-navy" style="margin-left:auto;">7 / 7</span>
+        </div>
+        <div class="card">
+          <table class="test-table">
+            <thead><tr><th>ID</th><th>Check</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td class="test-id">D1</td><td class="test-name">enrolled_total == sum(stream counts) · 3000 = 3000</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">D2</td><td class="test-name">All risk programmes in known 12-programme list</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">D3</td><td class="test-name">avg placement_rate in [80, 99] · got 88.2%</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">D4</td><td class="test-name">summary.top_program is a real stream</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">D5</td><td class="test-name">All 12 programmes return a valid forecast</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">D6</td><td class="test-name">Recommendations return exactly 4 skills</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">D7</td><td class="test-name">All priority values in {High, Medium, Low}</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- S — Stability -->
+      <div id="stability">
+        <div class="section-header">
+          <div class="section-icon" style="background:var(--green-bg);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+          </div>
+          <div>
+            <div class="section-title">S — Stability</div>
+            <div class="section-subtitle">Determinism &amp; idempotency</div>
+          </div>
+          <span class="badge badge-green" style="margin-left:auto;">5 / 5</span>
+        </div>
+        <div class="card">
+          <table class="test-table">
+            <thead><tr><th>ID</th><th>Check</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td class="test-id">S1</td><td class="test-name">3 identical predictions → same probability · 0.9535 each</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">S2</td><td class="test-name">SHAP base_value identical across 3 calls · 2.0377</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">S3a</td><td class="test-name">/market/overview identical on repeat call</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">S3b</td><td class="test-name">/market/skill-gap identical on repeat call</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">S3c</td><td class="test-name">/enrollment/summary identical on repeat call</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- R — Response Time -->
+      <div id="perf">
+        <div class="section-header">
+          <div class="section-icon" style="background:var(--amber-bg);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div>
+            <div class="section-title">R — Response Time</div>
+            <div class="section-subtitle">Warm cache · budget 200 ms</div>
+          </div>
+          <span class="badge badge-amber" style="margin-left:auto;">5 / 5</span>
+        </div>
+        <div class="card">
+          <table class="test-table">
+            <thead><tr><th>ID</th><th>Endpoint</th><th>Warm</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td class="test-id">R1</td><td class="test-name">/market/overview</td><td class="test-result">3 ms</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">R2</td><td class="test-name">/market/top-companies</td><td class="test-result">3 ms</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">R3</td><td class="test-name">/market/skill-gap</td><td class="test-result">4 ms</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">R4</td><td class="test-name">/market/regional-hiring</td><td class="test-result">2 ms</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+              <tr><td class="test-id">R5</td><td class="test-name">/market/hiring-sources</td><td class="test-result">2 ms</td><td><span class="pass-chip">✓ PASS</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── FINAL VERDICT ── -->
+  <div class="verdict-box" style="background:linear-gradient(135deg,#2563EB08,#3B82F605);border-color:#2563EB20;">
+    <div class="verdict-icon" style="background:var(--blue-light);">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue-dark)" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+    </div>
+    <div>
+      <div class="verdict-title">Phase 5 Complete — Frontend Integration Fully Verified</div>
+      <div class="verdict-sub">
+        201 / 201 tests pass across 9 test files and 2 test runners. Every dashboard page correctly wires
+        to the backend: data renders live, errors are caught and surfaced with retry buttons, loading states
+        display spinners, and the XGBoost evaluator shows probabilities, SHAP waterfall, skill recommendations,
+        and alternative career pathways. The TTL cache delivers sub-5ms warm responses on all market endpoints.
+        PathWise is ready to proceed to Phase 6.
+      </div>
+    </div>
+  </div>
+
+  <p style="font-size:12px;color:var(--text-muted);text-align:center;margin-top:24px;">
+    PathWise Analytics Platform · Phase 5 Test Pipeline · Generated July 2026 · Abdi Kumsa
+  </p>
+
+</main>
+</body>
+</html>

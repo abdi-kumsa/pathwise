@@ -10,9 +10,26 @@ alembic==1.13.1
 # Environment
 python-dotenv==1.0.1
 
-# Data
-pandas==2.2.2
+# Data / ML — core
+pandas==3.0.1
 numpy==1.26.4
+scikit-learn==1.4.2
+pyarrow==16.1.0
+joblib==1.4.2
+
+# ML inference — placement (XGBoost + SHAP)
+# Pin matches the training environment; update if you retrain with a different version
+xgboost==2.1.4
+shap==0.45.1
+
+# ML inference — enrollment forecasting (LSTM)
+# tensorflow-cpu: no GPU required on the server; ~400MB vs ~2GB for full tensorflow
+# Requires .keras model saved with Keras 3.x (TF >= 2.16)
+tensorflow-cpu==2.16.2
+
+# ML inference — demand forecasting (Prophet)
+# prophet only needs to load a pre-trained pickle for inference; CmdStan not required
+prophet==1.1.6
 
 # Validation
 pydantic==2.7.1

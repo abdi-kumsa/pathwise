@@ -2,17 +2,33 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install system dependencies
+# ── System dependencies ────────────────────────────────────────────────────────
+# gcc / g++    : compile Python extensions (psycopg2-binary, some numpy deps)
+# libpq-dev    : PostgreSQL client headers for psycopg2
+# libgomp1     : GNU OpenMP — required by XGBoost for parallel tree building
+# libhdf5-dev  : HDF5 — required by TensorFlow when loading .keras model files
 RUN apt-get update && apt-get install -y \
     gcc \
+    g++ \
     libpq-dev \
+    libgomp1 \
+    libhdf5-dev \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Python dependencies
+# ── Python dependencies ────────────────────────────────────────────────────────
+# Copy requirements first so Docker caches this layer.
+# The heavy ML packages (tensorflow-cpu, prophet) only re-install when
+# requirements.txt changes, not on every source code change.
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application source
+# ── TensorFlow / environment tunables ─────────────────────────────────────────
+# Suppress TF startup banner and oneDNN info messages in container logs
+ENV TF_CPP_MIN_LOG_LEVEL=3
+ENV TF_ENABLE_ONEDNN_OPTS=0
+
+# ── Application source ────────────────────────────────────────────────────────
 COPY . .
 
 EXPOSE 8000
