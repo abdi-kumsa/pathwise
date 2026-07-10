@@ -7,7 +7,7 @@ class Placement(Base):
     __tablename__ = "placements"
 
     id               = Column(Integer, primary_key=True, index=True)
-    student_id       = Column(Integer, ForeignKey("students.id", ondelete="CASCADE"), nullable=False)
+    student_id       = Column(Integer, ForeignKey("students.id", ondelete="CASCADE"), nullable=False, index=True)
     company          = Column(String(120), nullable=True)
     role             = Column(String(150), nullable=True)
     salary           = Column(Numeric(10, 2), nullable=True)

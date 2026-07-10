@@ -16,6 +16,9 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      # Mount schema so Postgres runs it automatically on first-ever container
+      # start (when the data volume is empty). Skipped on every subsequent start.
+      - ./backend/db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
       interval: 10s
@@ -41,9 +44,20 @@ services:
       - ./backend:/app
       - ./ml:/ml
       - ./data:/data
+      - ./Assets:/Assets
     depends_on:
       db:
         condition: service_healthy
+    healthcheck:
+      # curl is installed in Dockerfile.backend.
+      # start_period gives TF/Prophet time to load before retries begin.
+      # The frontend depends_on this healthcheck so it won't start until
+      # all models report loaded.
+      test: ["CMD-SHELL", "curl -sf http://localhost:8000/health | grep -q '\"status\":' || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 8
+      start_period: 90s
 
   # ── React Frontend ─────────────────────────────────────────
   frontend:
@@ -61,7 +75,8 @@ services:
       - ./frontend:/app
       - /app/node_modules
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
 
 volumes:
   postgres_data:

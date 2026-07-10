@@ -1,36 +1,55 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Sidebar from './components/Sidebar'
 
-function Placeholder({ title }) {
-  return (
-    <div className="flex items-center justify-center h-full text-slate-400 text-lg">
-      {title} — coming soon
-    </div>
-  )
-}
+import MarketOverviewPage from './pages/MarketOverviewPage'
+import HiringAnalyticsPage from './pages/HiringAnalyticsPage'
+import SkillGapPage from './pages/SkillGapPage'
+import ForecastPage from './pages/ForecastPage'
+
+import EnrollmentForecastPage from './pages/EnrollmentForecastPage'
+import AdmissionRiskPage from './pages/AdmissionRiskPage'
+import PlacementByStreamPage from './pages/PlacementByStreamPage'
+import StudentEvaluatorPage from './pages/StudentEvaluatorPage'
+
+import SalaryForecastPage from './pages/SalaryForecastPage'
+import EscapeRoutePage from './pages/EscapeRoutePage'
+import SkillRoadmapPage from './pages/SkillRoadmapPage'
 
 export default function App() {
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--page)' }}>
       <Sidebar />
 
-      <main className="ml-60 flex-1 overflow-y-auto p-8">
+      <main style={{ marginLeft: '264px', flex: '1', minWidth: '0', padding: '32px 40px 56px' }}>
         <Routes>
           <Route path="/" element={<Navigate to="/market/overview" replace />} />
 
-          {/* Module 1 — Market Demand */}
-          <Route path="/market/overview"  element={<Placeholder title="Market Overview" />} />
-          <Route path="/market/hiring"    element={<Placeholder title="Hiring Analytics" />} />
-          <Route path="/market/skill-gap" element={<Placeholder title="Skill Gap" />} />
-          <Route path="/market/forecast"  element={<Placeholder title="Forecast" />} />
+          <Route path="/market/overview"  element={<MarketOverviewPage />} />
+          <Route path="/market/hiring"    element={<HiringAnalyticsPage />} />
+          <Route path="/market/skill-gap" element={<SkillGapPage />} />
+          <Route path="/market/forecast"  element={<ForecastPage />} />
 
-          {/* Module 2 — Enrollment Intel */}
-          <Route path="/enrollment/trends"     element={<Placeholder title="Enrollment Trends" />} />
-          <Route path="/enrollment/risk"       element={<Placeholder title="Admission Risk" />} />
-          <Route path="/enrollment/placements" element={<Placeholder title="Placements" />} />
-          <Route path="/enrollment/student"    element={<Placeholder title="Student Evaluator" />} />
+          <Route path="/enrollment/trends"     element={<EnrollmentForecastPage />} />
+          <Route path="/enrollment/risk"       element={<AdmissionRiskPage />} />
+          <Route path="/enrollment/placements" element={<PlacementByStreamPage />} />
+          <Route path="/enrollment/student"    element={<StudentEvaluatorPage />} />
 
-          <Route path="*" element={<Placeholder title="Page not found" />} />
+          <Route path="/recommendations/salary"  element={<SalaryForecastPage />} />
+          <Route path="/recommendations/escape"  element={<EscapeRoutePage />} />
+          <Route path="/enrollment/skill-roadmap" element={<SkillRoadmapPage />} />
+
+          <Route path="*" element={
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '100%',
+              color: 'var(--text-muted)',
+              fontSize: '16px'
+            }}>
+              Page not found
+            </div>
+          } />
         </Routes>
       </main>
     </div>
