@@ -1,0 +1,110 @@
+[
+  {
+    "month": "2024-07-01",
+    "predicted_postings": 75,
+    "lower_bound": 71,
+    "upper_bound": 79
+  },
+  {
+    "month": "2024-08-01",
+    "predicted_postings": 161,
+    "lower_bound": 157,
+    "upper_bound": 165
+  },
+  {
+    "month": "2024-09-01",
+    "predicted_postings": 149,
+    "lower_bound": 145,
+    "upper_bound": 153
+  },
+  {
+    "month": "2024-10-01",
+    "predicted_postings": 116,
+    "lower_bound": 112,
+    "upper_bound": 120
+  },
+  {
+    "month": "2024-11-01",
+    "predicted_postings": 104,
+    "lower_bound": 99,
+    "upper_bound": 108
+  },
+  {
+    "month": "2024-12-01",
+    "predicted_postings": 121,
+    "lower_bound": 116,
+    "upper_bound": 125
+  },
+  {
+    "month": "2025-01-01",
+    "predicted_postings": 170,
+    "lower_bound": 165,
+    "upper_bound": 174
+  },
+  {
+    "month": "2025-02-01",
+    "predicted_postings": 159,
+    "lower_bound": 154,
+    "upper_bound": 163
+  },
+  {
+    "month": "2025-03-01",
+    "predicted_postings": 185,
+    "lower_bound": 180,
+    "upper_bound": 190
+  },
+  {
+    "month": "2025-04-01",
+    "predicted_postings": 122,
+    "lower_bound": 117,
+    "upper_bound": 127
+  },
+  {
+    "month": "2025-05-01",
+    "predicted_postings": 105,
+    "lower_bound": 100,
+    "upper_bound": 110
+  },
+  {
+    "month": "2025-06-01",
+    "predicted_postings": 92,
+    "lower_bound": 87,
+    "upper_bound": 96
+  },
+  {
+    "month": "2025-07-01",
+    "predicted_postings": 79,
+    "lower_bound": 74,
+    "upper_bound": 84
+  },
+  {
+    "month": "2025-08-01",
+    "predicted_postings": 170,
+    "lower_bound": 163,
+    "upper_bound": 177
+  },
+  {
+    "month": "2025-09-01",
+    "predicted_postings": 157,
+    "lower_bound": 150,
+    "upper_bound": 165
+  },
+  {
+    "month": "2025-10-01",
+    "predicted_postings": 121,
+    "lower_bound": 114,
+    "upper_bound": 127
+  },
+  {
+    "month": "2025-11-01",
+    "predicted_postings": 109,
+    "lower_bound": 102,
+    "upper_bound": 115
+  },
+  {
+    "month": "2025-12-01",
+    "predicted_postings": 125,
+    "lower_bound": 118,
+    "upper_bound": 133
+  }
+]

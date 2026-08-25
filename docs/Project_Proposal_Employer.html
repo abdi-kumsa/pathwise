@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Proposal – Market Demand & Enrollment Intelligence Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #0D1B2A;
+    --navy2:  #1B2E42;
+    --gold:   #C9A84C;
+    --gold-lt:#F0E2B6;
+    --bg:     #F8F6F1;
+    --white:  #FFFFFF;
+    --slate:  #4A5568;
+    --light:  #9AA5B4;
+    --rule:   #D8D2C4;
+    --ink:    #2D3748;
+  }
+
+  html { font-size: 15px; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: #E8E4DC;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+
+  /* PAGE WRAPPER */
+  .page {
+    max-width: 860px;
+    margin: 36px auto;
+    background: var(--bg);
+    box-shadow: 0 8px 48px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  /* ── HEADER ── */
+  .doc-header {
+    background: var(--navy);
+    padding: 52px 60px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .doc-header::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+  }
+  .doc-header::after {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    border: 40px solid rgba(201,168,76,0.06);
+  }
+  .doc-eyebrow {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+  .doc-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.25;
+    max-width: 560px;
+    margin-bottom: 24px;
+  }
+  .doc-header h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .meta-row {
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 22px;
+    margin-top: 6px;
+  }
+  .meta-item {
+    padding-right: 32px;
+    margin-right: 32px;
+    border-right: 1px solid rgba(255,255,255,0.12);
+  }
+  .meta-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+  .meta-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 3px;
+  }
+  .meta-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+  }
+
+  /* ── BODY ── */
+  .doc-body { padding: 54px 60px; }
+
+  /* SECTION */
+  .section { margin-bottom: 52px; }
+  .section:last-child { margin-bottom: 0; }
+
+  .sec-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .sec-rule {
+    width: 100%;
+    height: 1px;
+    background: var(--rule);
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .sec-rule::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--gold);
+    top: -0.5px;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--navy2);
+    margin-bottom: 10px;
+    margin-top: 24px;
+  }
+  p {
+    color: var(--slate);
+    font-size: 15px;
+    margin-bottom: 12px;
+    font-weight: 300;
+  }
+  p strong { font-weight: 600; color: var(--ink); }
+
+  /* OVERVIEW CALLOUT */
+  .callout {
+    border-left: 3px solid var(--gold);
+    background: var(--white);
+    padding: 20px 24px;
+    margin: 22px 0;
+    font-size: 15px;
+    color: var(--slate);
+    font-style: italic;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+  .callout strong { font-style: normal; font-weight: 600; color: var(--navy); }
+
+  /* TWO-COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 10px; }
+  .two-col-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 10px; }
+
+  /* MODULE BLOCK */
+  .module-block {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    margin-bottom: 22px;
+  }
+  .module-block:last-child { margin-bottom: 0; }
+  .module-top {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .module-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--gold-lt);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .module-top-text {}
+  .module-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 2px;
+  }
+  .module-sub {
+    font-size: 12px;
+    color: var(--light);
+    font-weight: 400;
+    letter-spacing: 0.3px;
+  }
+  .module-body { padding: 20px 24px; }
+
+  .feature-group { margin-bottom: 16px; }
+  .feature-group:last-child { margin-bottom: 0; }
+  .feature-group-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 8px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .feat-list { list-style: none; }
+  .feat-list li {
+    font-size: 13.5px;
+    color: var(--slate);
+    font-weight: 300;
+    padding: 5px 0;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    border-bottom: 1px dotted #E8E4DC;
+  }
+  .feat-list li:last-child { border-bottom: none; }
+  .feat-list li::before {
+    content: '—';
+    color: var(--gold);
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .feat-list li strong { font-weight: 600; color: var(--ink); }
+
+  /* ARCH */
+  .arch-stack { margin-top: 6px; }
+  .arch-row {
+    display: flex;
+    align-items: stretch;
+    margin-bottom: 3px;
+  }
+  .arch-tag {
+    width: 160px;
+    flex-shrink: 0;
+    background: var(--navy);
+    color: rgba(255,255,255,0.9);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+  }
+  .arch-items-row {
+    flex: 1;
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-left: 2px solid var(--gold);
+    padding: 9px 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+  .arch-chip {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--ink);
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    padding: 2px 10px;
+    border-radius: 2px;
+  }
+  .arch-connector {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3px;
+    padding-left: 79px;
+  }
+  .arch-connector-line {
+    width: 1px;
+    height: 10px;
+    background: var(--gold);
+    margin-left: 0px;
+  }
+
+  /* TECH */
+  .tech-item {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    padding: 16px 18px;
+  }
+  .tech-cat {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .tech-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .tech-desc {
+    font-size: 12.5px;
+    color: var(--light);
+    font-weight: 300;
+  }
+
+  /* TIMELINE */
+  .tl { margin-top: 6px; }
+  .tl-row {
+    display: flex;
+    gap: 0;
+    margin-bottom: 2px;
+  }
+  .tl-week-col {
+    width: 100px;
+    flex-shrink: 0;
+    padding: 14px 0 14px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 20px;
+    border-right: 2px solid var(--rule);
+    position: relative;
+  }
+  .tl-week-col::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--bg);
+    position: absolute;
+    right: -5px;
+    top: 18px;
+  }
+  .tl-week-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: right;
+  }
+  .tl-content-col {
+    flex: 1;
+    padding: 12px 0 20px 20px;
+  }
+  .tl-phase-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 5px;
+  }
+  .tl-phase-desc {
+    font-size: 13px;
+    color: var(--slate);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* DELIVERABLES */
+  .del-item {
+    display: flex;
+    gap: 18px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: flex-start;
+  }
+  .del-item:last-child { border-bottom: none; }
+  .del-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold-lt);
+    flex-shrink: 0;
+    width: 32px;
+    line-height: 1;
+    margin-top: 2px;
+  }
+  .del-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 3px;
+  }
+  .del-desc {
+    font-size: 13px;
+    color: var(--slate);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  .doc-footer {
+    background: var(--navy);
+    padding: 22px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .doc-footer .ft-left {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.3px;
+  }
+  .doc-footer .ft-right {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.7;
+  }
+
+  @media print {
+    body { background: white; }
+    .page { box-shadow: none; margin: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="doc-eyebrow">Project Proposal &nbsp;·&nbsp; Technical Plan</div>
+    <h1>Market Demand &amp; Enrollment<br><em>Intelligence Platform</em></h1>
+    <div class="meta-row">
+      <div class="meta-item">
+        <div class="meta-label">Modules</div>
+        <div class="meta-value">2 Dashboards</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Estimated Timeline</div>
+        <div class="meta-value">8 – 10 Weeks</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Discipline</div>
+        <div class="meta-value">AI · Data Engineering · Frontend</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Delivery Format</div>
+        <div class="meta-value">Web Application</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-body">
+
+    <!-- PROJECT OVERVIEW -->
+    <div class="section">
+      <div class="sec-label">01 &nbsp;—&nbsp; Project Overview</div>
+      <div class="sec-rule"></div>
+      <h2>What I Am Building</h2>
+      <p>
+        This project involves designing and delivering a <strong>full-stack predictive analytics platform</strong> built around two interconnected intelligence dashboards. The platform draws from multiple data sources — institutional enrollment records, labor market feeds, regional economic indicators, and demographic data — and processes them through a multi-model machine learning pipeline to generate actionable forecasts and recommendations.
+      </p>
+      <div class="callout">
+        <strong>In plain terms:</strong> the platform answers two questions simultaneously — <em>what does the job market actually need right now?</em> and <em>how should an institution adjust who it enrolls and what it teaches to match that?</em> — backed by real data and predictive models, not assumptions.
+      </div>
+      <p>
+        The architecture is built for scale and maintainability: a cloud-ready data pipeline, a REST API backend serving ML inference in real time, and a responsive React frontend that makes complex data legible to both administrators and students. The two modules are designed to complement each other within a single unified application.
+      </p>
+    </div>
+
+    <!-- MODULE 1 -->
+    <div class="section">
+      <div class="sec-label">02 &nbsp;—&nbsp; Module Breakdown</div>
+      <div class="sec-rule"></div>
+      <h2>Two Modules, One Integrated Platform</h2>
+      <p>
+        Each module has a distinct audience and purpose, but they share the same data pipeline and ML backend — which keeps the system cohesive and reduces overhead significantly.
+      </p>
+
+      <div class="module-block">
+        <div class="module-top">
+          <div class="module-num">01</div>
+          <div class="module-top-text">
+            <div class="module-title">Market Demand Forecast Dashboard</div>
+            <div class="module-sub">For institutional leaders, department heads, and curriculum planners</div>
+          </div>
+        </div>
+        <div class="module-body">
+          <div class="feature-group">
+            <div class="feature-group-title">Hiring &amp; Market Intelligence</div>
+            <ul class="feat-list">
+              <li><strong>Top Hiring Companies &amp; Roles</strong> — Bar charts and tree maps surfacing the organisations recruiting most actively, and which job titles are in highest demand</li>
+              <li><strong>Regional Opportunity Maps</strong> — Geographic visualisations showing job and internship density by location, identifying high-demand regions</li>
+              <li><strong>Recruitment Channel Analysis</strong> — Breakdown of which sourcing platforms are most active by industry or department</li>
+              <li><strong>Job-to-Internship Ratio</strong> — Comparative charts showing the balance between full-time offers and experiential opportunities in the current market</li>
+            </ul>
+          </div>
+          <div class="feature-group">
+            <div class="feature-group-title">Skill Gap &amp; Curriculum Alignment</div>
+            <ul class="feat-list">
+              <li><strong>Skill Demand vs. Training Supply</strong> — Interactive mapping of what the market requires (AI, Big Data, Digital Marketing) against what the institution currently teaches</li>
+              <li><strong>Graduate-to-Role Fit Classification</strong> — Categorises placement outcomes as Matched, Overeducated, or Undereducated to identify structural misalignments</li>
+              <li><strong>Feature Importance Analysis</strong> — SHAP-powered charts showing which graduate attributes (GPA, internships, communication) statistically drive placement success</li>
+            </ul>
+          </div>
+          <div class="feature-group">
+            <div class="feature-group-title">Forecasting &amp; Prediction</div>
+            <ul class="feat-list">
+              <li><strong>Enrollment Yield Forecasts</strong> — Time-series models projecting future intake based on historical demographic patterns</li>
+              <li><strong>Salary Trajectory Modelling</strong> — Predictive estimates of early-career earnings by major, region, and demand trend</li>
+              <li><strong>Mobility Pathway Mapping</strong> — Probability analysis showing how underemployed graduates transition into better-matched roles over time</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-block">
+        <div class="module-top">
+          <div class="module-num">02</div>
+          <div class="module-top-text">
+            <div class="module-title">Student Enrollment Intelligence Dashboard</div>
+            <div class="module-sub">For admissions administrators and individual students</div>
+          </div>
+        </div>
+        <div class="module-body">
+          <div class="feature-group">
+            <div class="feature-group-title">Institutional Analytics &amp; Risk Tools</div>
+            <ul class="feat-list">
+              <li><strong>Enrollment Trend Forecasting</strong> — LSTM-driven projections of future enrollment volumes segmented by program and demographic group</li>
+              <li><strong>Admission Risk Modelling</strong> — Interactive controls for administrators to simulate over- and under-enrollment scenarios at configurable risk thresholds (5%, 10%, 20%)</li>
+              <li><strong>Placement Rate by Department</strong> — Comparative performance metrics across all university streams, enabling data-driven curriculum investment decisions</li>
+            </ul>
+          </div>
+          <div class="feature-group">
+            <div class="feature-group-title">Student-Facing Recommender</div>
+            <ul class="feat-list">
+              <li><strong>Placement Probability Evaluator</strong> — Students input their profile (GPA, internship count, soft skills, projects) and receive a real-time employment likelihood score powered by XGBoost</li>
+              <li><strong>Personalised Skill-Building Engine</strong> — AI-driven recommendation of specific certifications and technical skills (e.g. SAP, data analysis, cloud) to close the gap between a student's current profile and their target career</li>
+              <li><strong>Alternative Pathway Suggestions</strong> — For students in lower-demand fields, the system recommends adjacent disciplines or regions where their profile performs better</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARCHITECTURE -->
+    <div class="section">
+      <div class="sec-label">03 &nbsp;—&nbsp; System Architecture</div>
+      <div class="sec-rule"></div>
+      <h2>How the System Is Structured</h2>
+      <p>
+        The platform follows a layered pipeline architecture — data enters at the top, is engineered into features, passes through multiple ML models, and exits as forecasts and recommendations that feed the dashboards. A feedback loop captures actuals to continuously retrain the models on new enrollment data.
+      </p>
+      <div class="arch-stack">
+        <div class="arch-row">
+          <div class="arch-tag">Data Sources</div>
+          <div class="arch-items-row">
+            <span class="arch-chip">Historical enrollment records</span>
+            <span class="arch-chip">Labor market &amp; salary data</span>
+            <span class="arch-chip">Population &amp; demographic trends</span>
+            <span class="arch-chip">GDP · tuition · grants</span>
+          </div>
+        </div>
+        <div class="arch-connector"><div class="arch-connector-line"></div></div>
+        <div class="arch-row">
+          <div class="arch-tag">Feature Pipeline</div>
+          <div class="arch-items-row">
+            <span class="arch-chip">Lag features</span>
+            <span class="arch-chip">Rolling averages</span>
+            <span class="arch-chip">Seasonality encoding</span>
+            <span class="arch-chip">Interaction terms</span>
+            <span class="arch-chip">Normalisation</span>
+          </div>
+        </div>
+        <div class="arch-connector"><div class="arch-connector-line"></div></div>
+        <div class="arch-row">
+          <div class="arch-tag">ML Model Layer</div>
+          <div class="arch-items-row">
+            <span class="arch-chip">LSTM / GRU — temporal patterns</span>
+            <span class="arch-chip">XGBoost — tabular data</span>
+            <span class="arch-chip">Prophet — trend &amp; seasonality</span>
+            <span class="arch-chip">Ensemble stacking</span>
+          </div>
+        </div>
+        <div class="arch-connector"><div class="arch-connector-line"></div></div>
+        <div class="arch-row">
+          <div class="arch-tag">Forecast Outputs</div>
+          <div class="arch-items-row">
+            <span class="arch-chip">Demand forecast by program &amp; year</span>
+            <span class="arch-chip">Market gap (supply vs. demand)</span>
+            <span class="arch-chip">Capacity &amp; intake forecast</span>
+            <span class="arch-chip">Confidence bands</span>
+          </div>
+        </div>
+        <div class="arch-connector"><div class="arch-connector-line"></div></div>
+        <div class="arch-row">
+          <div class="arch-tag">Recommendation</div>
+          <div class="arch-items-row">
+            <span class="arch-chip">Enrollment recommendation logic</span>
+            <span class="arch-chip">ROI optimisation</span>
+            <span class="arch-chip">Fill rate maximisation</span>
+            <span class="arch-chip">Labor market alignment scoring</span>
+          </div>
+        </div>
+        <div class="arch-connector"><div class="arch-connector-line"></div></div>
+        <div class="arch-row">
+          <div class="arch-tag">Monitoring</div>
+          <div class="arch-items-row">
+            <span class="arch-chip">MAE · RMSE · MAPE tracking on actuals</span>
+            <span class="arch-chip">Scheduled retraining pipeline</span>
+            <span class="arch-chip">Feedback loop</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TECH STACK -->
+    <div class="section">
+      <div class="sec-label">04 &nbsp;—&nbsp; Technology Stack</div>
+      <div class="sec-rule"></div>
+      <h2>Tools &amp; Technologies</h2>
+      <p>
+        The stack I have chosen prioritises production readiness, speed of development, and long-term maintainability. Each tool is selected for a specific job, with no unnecessary dependencies.
+      </p>
+      <div class="two-col" style="margin-top:20px;">
+        <div class="tech-item">
+          <div class="tech-cat">Data &amp; Storage</div>
+          <div class="tech-name">PostgreSQL + Cloud Storage</div>
+          <div class="tech-desc">Structured data in PostgreSQL; raw ingestion via AWS S3 or Azure Data Lake for scalability</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-cat">Data Processing</div>
+          <div class="tech-name">Python · Pandas · PySpark</div>
+          <div class="tech-desc">ETL pipeline built in Python; PySpark for large-scale dataset cleaning where needed</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-cat">Machine Learning</div>
+          <div class="tech-name">TensorFlow · XGBoost · Prophet</div>
+          <div class="tech-desc">LSTM via TensorFlow for temporal forecasting; XGBoost for placement prediction; Prophet for trend modelling</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-cat">Explainability</div>
+          <div class="tech-name">SHAP / LIME</div>
+          <div class="tech-desc">Model-agnostic explainability layer showing which input features drive each prediction</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-cat">Backend API</div>
+          <div class="tech-name">FastAPI (Python)</div>
+          <div class="tech-desc">High-performance async REST API serving ML predictions and recommendation logic in real time</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-cat">Frontend</div>
+          <div class="tech-name">React.js · Recharts · Plotly</div>
+          <div class="tech-desc">Fully responsive dashboard UI; interactive charts built with Recharts and Plotly for rich data visualisation</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="section">
+      <div class="sec-label">05 &nbsp;—&nbsp; Delivery Timeline</div>
+      <div class="sec-rule"></div>
+      <h2>Phase-by-Phase Plan — 8 to 10 Weeks</h2>
+      <p>
+        Work is structured in seven sequential phases, with each phase building directly on the last. The sequence is designed so there is a working, demonstrable version of the system by Week 6 — the final weeks focus on integration, refinement, and delivery.
+      </p>
+      <div class="tl" style="margin-top:28px;">
+
+        <div class="tl-row">
+          <div class="tl-week-col"><div class="tl-week-label">Weeks 1–2</div></div>
+          <div class="tl-content-col">
+            <div class="tl-phase-title">Phase 1 &nbsp;·&nbsp; Scoping, Data &amp; Architecture</div>
+            <div class="tl-phase-desc">Define data schema and source datasets (enrollment, job market, demographics). Set up project repository and database. Design API structure. Wireframe dashboard layouts for both modules. Confirm data availability and simulation strategy.</div>
+          </div>
+        </div>
+
+        <div class="tl-row">
+          <div class="tl-week-col"><div class="tl-week-label">Weeks 3–4</div></div>
+          <div class="tl-content-col">
+            <div class="tl-phase-title">Phase 2 &nbsp;·&nbsp; Data Pipeline &amp; Feature Engineering</div>
+            <div class="tl-phase-desc">Build the ETL pipeline for ingesting and cleaning all data sources. Engineer lag features, rolling averages, seasonality encoding, and interaction terms. Store processed feature sets in the database. Unit test the pipeline end-to-end.</div>
+          </div>
+        </div>
+
+        <div class="tl-row">
+          <div class="tl-week-col"><div class="tl-week-label">Weeks 5–6</div></div>
+          <div class="tl-content-col">
+            <div class="tl-phase-title">Phase 3 &nbsp;·&nbsp; Machine Learning Model Development</div>
+            <div class="tl-phase-desc">Train and evaluate the XGBoost placement predictor, Prophet enrollment forecast, and LSTM temporal demand model. Build SHAP explainability layer. Assess performance using MAE, RMSE, and MAPE. Develop ensemble stacking to combine model outputs.</div>
+          </div>
+        </div>
+
+        <div class="tl-row">
+          <div class="tl-week-col"><div class="tl-week-label">Week 6–7</div></div>
+          <div class="tl-content-col">
+            <div class="tl-phase-title">Phase 4 &nbsp;·&nbsp; Backend API Development</div>
+            <div class="tl-phase-desc">Build FastAPI server exposing endpoints for all forecast, prediction, and recommendation functions. Wrap trained models into API services. Add input validation, error handling, and CORS configuration for frontend consumption.</div>
+          </div>
+        </div>
+
+        <div class="tl-row">
+          <div class="tl-week-col"><div class="tl-week-label">Weeks 7–8</div></div>
+          <div class="tl-content-col">
+            <div class="tl-phase-title">Phase 5 &nbsp;·&nbsp; Frontend Dashboard Development</div>
+            <div class="tl-phase-desc">Build React application covering both modules. Module 1: market demand charts, geographic maps, skill gap visuals, feature importance displays. Module 2: enrollment forecasts, admin risk controls, student placement evaluator, skill recommendations. Connect all views to the live API.</div>
+          </div>
+        </div>
+
+        <div class="tl-row">
+          <div class="tl-week-col"><div class="tl-week-label">Weeks 8–9</div></div>
+          <div class="tl-content-col">
+            <div class="tl-phase-title">Phase 6 &nbsp;·&nbsp; Recommendation Engine &amp; Full Integration</div>
+            <div class="tl-phase-desc">Implement the enrollment recommendation logic (ROI optimisation, fill rate maximisation, labor market alignment). Build the personalised skill-building engine and pathway mapper. Complete end-to-end integration testing across all modules.</div>
+          </div>
+        </div>
+
+        <div class="tl-row">
+          <div class="tl-week-col"><div class="tl-week-label">Weeks 9–10</div></div>
+          <div class="tl-content-col">
+            <div class="tl-phase-title">Phase 7 &nbsp;·&nbsp; QA, Monitoring &amp; Final Delivery</div>
+            <div class="tl-phase-desc">Full quality assurance pass across all features. Configure model performance monitoring and scheduled retraining pipeline. Prepare technical documentation, setup guide, and API reference. Deliver final working application with walkthrough.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DELIVERABLES -->
+    <div class="section">
+      <div class="sec-label">06 &nbsp;—&nbsp; Final Deliverables</div>
+      <div class="sec-rule"></div>
+      <h2>What Will Be Submitted</h2>
+      <p>
+        At the conclusion of the project, the following will be delivered as a complete, working system — not a prototype.
+      </p>
+      <div style="margin-top:20px;">
+        <div class="del-item">
+          <div class="del-num">1</div>
+          <div>
+            <div class="del-title">Module 1 — Market Demand Forecast Dashboard</div>
+            <div class="del-desc">Fully functional web dashboard covering hiring analytics, regional opportunity maps, skill gap analysis, salary forecasting, and feature importance visualisations — connected to live API endpoints.</div>
+          </div>
+        </div>
+        <div class="del-item">
+          <div class="del-num">2</div>
+          <div>
+            <div class="del-title">Module 2 — Student Enrollment Intelligence Dashboard</div>
+            <div class="del-desc">Admin-facing enrollment forecast and risk modelling tools, plus a student-facing placement probability evaluator and personalised skill-building recommender.</div>
+          </div>
+        </div>
+        <div class="del-item">
+          <div class="del-num">3</div>
+          <div>
+            <div class="del-title">Trained ML Models &amp; Inference Pipeline</div>
+            <div class="del-desc">Production-ready LSTM, XGBoost, and Prophet models with SHAP explainability, ensemble stacking, and performance evaluation reports (MAE, RMSE, MAPE).</div>
+          </div>
+        </div>
+        <div class="del-item">
+          <div class="del-num">4</div>
+          <div>
+            <div class="del-title">FastAPI Backend &amp; Data Pipeline</div>
+            <div class="del-desc">Complete REST API serving all model predictions and recommendation logic, plus the full ETL data pipeline with feature engineering modules.</div>
+          </div>
+        </div>
+        <div class="del-item">
+          <div class="del-num">5</div>
+          <div>
+            <div class="del-title">Model Monitoring &amp; Retraining Pipeline</div>
+            <div class="del-desc">Automated performance tracking on actuals with a scheduled retraining trigger — ensuring the models stay accurate as new enrollment data becomes available.</div>
+          </div>
+        </div>
+        <div class="del-item">
+          <div class="del-num">6</div>
+          <div>
+            <div class="del-title">Full Technical Documentation</div>
+            <div class="del-desc">Setup and deployment guide, API reference documentation, model training notes, and a recorded walkthrough of all system features.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end doc-body -->
+
+  <div class="doc-footer">
+    <div class="ft-left">Market Demand &amp; Enrollment Intelligence Platform &nbsp;·&nbsp; Technical Proposal</div>
+    <div class="ft-right">Confidential</div>
+  </div>
+
+</div>
+</body>
+</html>

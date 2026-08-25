@@ -1,0 +1,57 @@
+{
+  "xgboost_placement": {
+    "model": "XGBoost",
+    "task": "placement_classification",
+    "accuracy": 0.8817,
+    "precision": 0.8817,
+    "recall": 1.0,
+    "f1_score": 0.9371,
+    "top_features": {
+      "prog_Certificate Data Analytics": 0.1022,
+      "prog_MS Information Technology": 0.0848,
+      "prog_MS Data Science": 0.0799,
+      "prog_MBA Product Management": 0.0788,
+      "prog_MS Business Analytics": 0.0735,
+      "projects": 0.0654,
+      "prog_MS Cloud Computing": 0.0633,
+      "internships": 0.0621,
+      "prog_MS Cybersecurity": 0.0619,
+      "prog_BS Data Science": 0.0608
+    }
+  },
+  "xgboost_salary": {
+    "model": "XGBoostRegressor",
+    "task": "salary_prediction",
+    "rmse": 14288.34,
+    "mae": 12128.34,
+    "r2": 0.3615,
+    "top_features": {
+      "prog_Certificate Data Analytics": 0.3045,
+      "prog_MS Human-Computer Interaction": 0.138,
+      "prog_MS Artificial Intelligence": 0.1115,
+      "prog_MBA Product Management": 0.1019,
+      "prog_MS Cloud Computing": 0.0805,
+      "prog_MS Business Analytics": 0.0593,
+      "prog_MS Data Science": 0.0559,
+      "prog_BS Data Science": 0.0385,
+      "prog_BS Computer Science": 0.0266,
+      "prog_MS Computer Science": 0.0175
+    }
+  },
+  "lstm_enrollment": {
+    "model": "LSTM",
+    "task": "enrollment_forecasting",
+    "seq_len": 3,
+    "test_year": 2024,
+    "rmse": 7.88,
+    "mae": 7.88
+  },
+  "prophet_demand": {
+    "model": "Prophet",
+    "task": "demand_forecasting",
+    "test_period_months": 6,
+    "rmse": 4.68,
+    "mae": 3.75,
+    "mape": 3.41
+  }
+}

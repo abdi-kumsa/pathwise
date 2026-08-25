@@ -2,7 +2,7 @@
 
 ## Overview
 
-Three models power the PathWise intelligence dashboards.  All are trained on
+Four models power the PathWise intelligence dashboards.  All are trained on
 synthetic institutional data (3,000 students, 12 programmes, 2019–2024).
 
 ---
@@ -38,7 +38,42 @@ synthetic institutional data (3,000 students, 12 programmes, 2019–2024).
 
 ---
 
-## 2. LSTM — Enrollment Forecasting
+## 2. XGBoost — Salary Prediction
+
+| Attribute | Value |
+|-----------|-------|
+| Task | Regression (expected starting salary, USD) |
+| Algorithm | XGBoost (`XGBRegressor`) |
+| Input features | Same 16-feature vector as the placement model |
+| RMSE | $14,288 |
+| MAE | $12,128 |
+| R² | **0.36** |
+
+**Top features (by importance)**
+
+| Rank | Feature | Importance |
+|------|---------|------------|
+| 1 | Certificate Data Analytics | 30.5 % |
+| 2 | MS Human-Computer Interaction | 13.8 % |
+| 3 | MS Artificial Intelligence | 11.2 % |
+| 4 | MBA Product Management | 10.2 % |
+
+> **Interpretation caveat.** An R² of 0.36 means the model explains roughly a
+> third of the variance in starting salary; the remaining two-thirds is driven
+> by factors absent from the synthetic feature set (employer, negotiation,
+> geography, prior experience). Feature importances are dominated by programme
+> one-hots, so predictions are best read as *programme-level salary bands* with
+> a wide error margin (MAE ≈ $12k) rather than individual salary estimates.
+> Do not present a single-point prediction to a student without that band.
+
+**Artefacts**
+- `ml/models/salary_xgboost.pkl` — trained model
+- `ml/models/salary_xgboost_meta.pkl` — feature list + metadata
+- `ml/predict_salary.py` — inference entry point
+
+---
+
+## 3. LSTM — Enrollment Forecasting
 
 | Attribute | Value |
 |-----------|-------|
@@ -64,7 +99,7 @@ Rolling-forward inference allows multi-year forecasting (2025, 2026, …).
 
 ---
 
-## 3. Prophet — Job-Market Demand Forecasting
+## 4. Prophet — Job-Market Demand Forecasting
 
 | Attribute | Value |
 |-----------|-------|
@@ -94,6 +129,7 @@ SHAP `TreeExplainer` is used for the XGBoost model.  Call
 ## Limitations
 
 - All data is synthetic — performance metrics reflect simulated distributions.
+- The salary regressor has low explanatory power (R² = 0.36) and should be surfaced as a band, not a point estimate — see §2.
 - The LSTM has a small training set; predictions for programmes with low/volatile enrolment may be unstable.
 - Prophet demand series is a proxy derived from student counts; replace with real job-posting data in production.
 - No demographic fairness audit has been performed.
@@ -102,11 +138,18 @@ SHAP `TreeExplainer` is used for the XGBoost model.  Call
 
 ## Retraining
 
-Re-run the three training scripts in order:
+Re-run the four training scripts in order:
 
 ```bash
 python ml/train_xgboost.py
+python ml/train_salary_xgboost.py
 python ml/train_lstm.py
 python ml/train_prophet.py
 python ml/generate_model_metrics.py   # refresh metrics JSON
+```
+
+Or run all of them in one step:
+
+```bash
+python ml/retrain_all.py
 ```

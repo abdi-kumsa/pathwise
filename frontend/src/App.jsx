@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar'
 import MarketOverviewPage from './pages/MarketOverviewPage'
 import HiringAnalyticsPage from './pages/HiringAnalyticsPage'
 import SkillGapPage from './pages/SkillGapPage'
+import RegionalOpportunityPage from './pages/RegionalOpportunityPage'
 import ForecastPage from './pages/ForecastPage'
 
 import EnrollmentForecastPage from './pages/EnrollmentForecastPage'
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/market/overview"  element={<MarketOverviewPage />} />
           <Route path="/market/hiring"    element={<HiringAnalyticsPage />} />
           <Route path="/market/skill-gap" element={<SkillGapPage />} />
+          <Route path="/market/regional" element={<RegionalOpportunityPage />} />
           <Route path="/market/forecast"  element={<ForecastPage />} />
 
           <Route path="/enrollment/trends"     element={<EnrollmentForecastPage />} />

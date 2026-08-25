@@ -49,14 +49,27 @@ pnpm-debug.log*
 secrets/
 
 # ── ML / Data ────────────────────────────────────────
+# The seed CSVs, the parquet feature store and the trained model artefacts
+# ARE committed (~2.4 MB total) so that a fresh clone runs
+# `docker compose up` with no bootstrap step and reproduces the exact
+# metrics recorded in ml/MODEL_CARD.md.
+#
+# NOTE: these are file-pattern excludes, not directory excludes — git cannot
+# re-include a path underneath an excluded directory, so `data/mock/` etc.
+# must NOT be listed here.
 *.h5
-*.pkl
 *.joblib
-*.parquet
+
 *.csv
-data/mock/
-data/processed/
-ml/models/
+!Assets/*.csv
+!data/mock/*.csv
+
+*.pkl
+!ml/models/*.pkl
+!data/processed/*.pkl
+
+*.parquet
+!data/processed/*.parquet
 
 # ── OS ───────────────────────────────────────────────
 .DS_Store
