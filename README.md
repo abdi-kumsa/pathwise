@@ -72,9 +72,13 @@ cp .env.example .env
 docker compose up
 
 # 3. Open the app
-#    Frontend:  http://localhost:3000
+#    Frontend:  http://localhost:3001
 #    API docs:  http://localhost:8000/docs
 ```
+
+Host ports are set by `FRONTEND_HOST_PORT`, `API_HOST_PORT` and `DB_HOST_PORT` in
+`.env`. The defaults deliberately avoid `3000` and `5432` so the stack does not
+collide with other projects. See [docs/TECHNICAL.md](docs/TECHNICAL.md) §3.
 
 ---
 
