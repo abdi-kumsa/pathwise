@@ -77,7 +77,7 @@ export default function HiringAnalyticsPage() {
                 <XAxis dataKey="company" tick={{ fontSize: 10, fill: '#64748b' }} angle={-35} textAnchor="end" interval={0} />
                 <YAxis tick={{ fontSize: 11, fill: '#64748b' }} />
                 <Tooltip formatter={v => [v, 'Placements']} />
-                <Bar dataKey="count" fill="#2563eb" radius={[4, 4, 0, 0]} />
+                <Bar isAnimationActive={false} dataKey="count" fill="#2563eb" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           )}
@@ -96,7 +96,7 @@ export default function HiringAnalyticsPage() {
                 <XAxis type="number" tick={{ fontSize: 11, fill: '#64748b' }} />
                 <YAxis type="category" dataKey="source" tick={{ fontSize: 11, fill: '#64748b' }} width={80} />
                 <Tooltip formatter={v => [v, 'Placements']} />
-                <Bar dataKey="count" fill="#6366f1" radius={[0, 4, 4, 0]} />
+                <Bar isAnimationActive={false} dataKey="count" fill="#6366f1" radius={[0, 4, 4, 0]} />
               </BarChart>
             </ResponsiveContainer>
           )}

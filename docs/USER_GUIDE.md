@@ -28,23 +28,54 @@ The platform has two dashboard modules. **Module 1 — Market Demand** is for de
 
 ## 1. Getting Around the Dashboard
 
-When you open PathWise at `http://localhost:3001` you land on the Market Overview page. The left-hand sidebar is always visible and is divided into two sections:
+### Signing in
 
-**Market Demand** (Module 1)
-- Overview
-- Hiring analytics
-- Skill gap
-- Forecast
+Open PathWise at `http://localhost:3001`. You will be asked to sign in.
 
-**Enrollment Intelligence** (Module 2)
-- Enrollment trends
-- Admission risk
-- Placements
-- Student evaluator
+**PathWise is role based** — the dashboard is assembled around who you are, so
+two people signing in with different accounts see different pages. Pick the
+account matching your role (the login page lists them; click one to fill the
+form). All demo accounts use the password `pathwise123`.
 
-Click any item to navigate to that view. All data loads automatically when the page opens — you do not need to press a refresh button. If data is still loading, placeholder dashes (—) appear in the KPI cards until the values arrive.
+| Sign in as | You get | You land on |
+|---|---|---|
+| `student` | Career explorer, placement odds, skill roadmap, alternative paths, salary outlook | Career explorer |
+| `mol` | Labour overview, emerging occupations, supply & demand gap, skills mismatch, regional demand | Labour market overview |
+| `moe` | Education overview, field explorer, investment matrix, investment priority, labour demand | Education supply overview |
+| `university` | Institution overview, programme portfolio, expansion, resource efficiency, peer benchmark | Your institution |
+| `admin` | All of the above, plus model monitoring and the permission matrix | Platform overview |
 
-If a page shows a red error banner, the API is temporarily unavailable. Click the **Retry** button that appears inside the banner to try again.
+You will only ever see pages your role can open. If you try to reach another
+role's page directly you are returned to your own home page — this is enforced
+by the server, not just hidden in the menu.
+
+Sign out with the arrow button at the bottom of the sidebar.
+
+### The layout
+
+- **Sidebar (left)** — your role's pages, grouped into sections. On a narrow
+  screen or phone it collapses; tap the ☰ button at the top left to open it.
+- **Search (top)** — press `Ctrl K` (or `Cmd K` on a Mac) anywhere to search
+  occupations, fields and programmes. Results are limited to things your role
+  can open. Arrow keys to move, Enter to go.
+- **Dataset chip (top right)** — a reminder of which dataset you are looking at.
+
+All data loads automatically when a page opens — there is no refresh button. While
+loading, placeholder dashes (—) appear in the KPI cards until values arrive.
+
+If a page shows a red error banner, the API is temporarily unavailable. Click
+**Retry** inside the banner.
+
+### A note on the numbers
+
+Some pages carry a small grey or amber note beneath a chart. These are not
+decoration — they say what a figure can and cannot be used for. The one on the
+**Skills mismatch** page matters most: the credential-fit percentages describe
+the system as a whole and are *not* a ranking between fields, because the
+distribution barely varies between them in this dataset. For a mismatch signal
+that does vary meaningfully, use **Supply & demand gap**.
+
+Full detail in [DATA_PROVENANCE.md](DATA_PROVENANCE.md).
 
 ---
 

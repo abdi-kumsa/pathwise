@@ -68,7 +68,7 @@ export default function MarketOverviewPage() {
               <XAxis dataKey="company" tick={{ fontSize: 11, fill: '#64748b' }} angle={-35} textAnchor="end" interval={0} />
               <YAxis tick={{ fontSize: 11, fill: '#64748b' }} />
               <Tooltip formatter={v => [v + ' placements', 'Count']} />
-              <Bar dataKey="count" fill="#2563eb" radius={[4, 4, 0, 0]} />
+              <Bar isAnimationActive={false} dataKey="count" fill="#2563eb" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         )}

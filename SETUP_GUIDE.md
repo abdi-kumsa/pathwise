@@ -147,6 +147,27 @@ Open Google Chrome or Microsoft Edge and open these links:
 * 📊 **Main Interactive Dashboard (Primary View):**  
   👉 [http://localhost:3001](http://localhost:3001)
 
+### Signing in
+
+PathWise is role based — what you see depends on which account you use. Five
+demo accounts are created automatically the first time the stack starts.
+**The password is the same for all five:** `pathwise123`
+
+| Username | Role | What it shows |
+|---|---|---|
+| `student` | Student | Career explorer — name a job, get told which department to join |
+| `mol` | Ministry of Labour | Emerging occupations, workforce shortfalls, skills mismatch |
+| `moe` | Ministry of Education | Investment matrix — where to add education capacity |
+| `university` | University | Programme portfolio, expansion, recruitment efficiency |
+| `admin` | Administrator | Everything, plus model monitoring |
+
+The login page lists these too — click one to fill the form.
+
+> ⚠️ **Demo credentials only.** Change `DEMO_PASSWORD` in `.env` and re-seed
+> (`docker compose down -v && docker compose up`) before putting this anywhere
+> other people can reach. Also set `JWT_SECRET` — if it is blank the API uses a
+> built-in development signing key and warns about it in the startup log.
+
 * ⚙️ **Interactive API Documentation (Swagger UI):**  
   👉 [http://localhost:8000/docs](http://localhost:8000/docs)
 

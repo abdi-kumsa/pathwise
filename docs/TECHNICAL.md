@@ -10,11 +10,16 @@ This document covers environment setup, architecture, all API endpoints, how to 
 2. [Quick Start](#2-quick-start)
 3. [Environment Variables](#3-environment-variables)
 4. [Architecture](#4-architecture)
-5. [API Reference](#5-api-reference)
-6. [Running Tests](#6-running-tests)
-7. [Model Retraining](#7-model-retraining)
-8. [Monitoring & Drift Detection](#8-monitoring--drift-detection)
-9. [Troubleshooting](#9-troubleshooting)
+5. [Roles & Permissions](#5-roles--permissions)
+6. [API Reference](#6-api-reference)
+7. [Running Tests](#7-running-tests)
+8. [Model Retraining](#8-model-retraining)
+9. [Monitoring & Drift Detection](#9-monitoring--drift-detection)
+10. [Troubleshooting](#10-troubleshooting)
+
+See also [DATA_PROVENANCE.md](DATA_PROVENANCE.md) — what the numbers are, the
+join key between the two datasets, and the limitations that constrain how some
+figures may be presented.
 
 ---
 
@@ -202,13 +207,181 @@ healthy.
 
 ---
 
-## 5. API Reference
+## 5. Roles & Permissions
+
+PathWise is role based. Every `/api/*` endpoint except `/health`, `/` and
+`/api/auth/*` requires a bearer token, and most require a specific role.
+
+### 5.1 The five roles
+
+| Role | Lands on | Answers |
+|---|---|---|
+| `STUDENT` | `/student/careers` | "I want this job — which department do I join?" |
+| `MOL` | `/mol/overview` | "Which occupations are emerging and where is the workforce short?" |
+| `MOE` | `/moe/overview` | "Which fields should we invest new education capacity in?" |
+| `UNIVERSITY` | `/university/overview` | "Which of our programmes should we expand or consolidate?" |
+| `ADMIN` | `/admin/overview` | Everything, plus model monitoring |
+
+`ADMIN` satisfies every `require_roles` check by construction
+(`services/auth_service.py`), so a new router cannot accidentally lock the
+administrator out of its own system.
+
+The landing route is served by the API (`ROLE_HOME`) and returned on login, so
+the role→page mapping lives in one place rather than being duplicated in the
+React router.
+
+### 5.2 Permission matrix
+
+Enforced server-side. A disallowed role gets `403`; no token gets `401`.
+
+| Endpoint prefix | ADMIN | STUDENT | MOE | MOL | UNIVERSITY |
+|---|:--:|:--:|:--:|:--:|:--:|
+| `/api/careers` | ✓ | ✓ | | | |
+| `/api/labour` | ✓ | | ✓ | ✓ | |
+| `/api/education` | ✓ | | ✓ | | |
+| `/api/institution` | ✓ | | | | ✓ |
+| `/api/market` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `/api/enrollment` | ✓ | ✓ | ✓ | | ✓ |
+| `/api/recommendations` | ✓ | ✓ | ✓ | | ✓ |
+| `/api/monitoring` | ✓ | | | | |
+| `/api/search` | ✓ | ✓ | ✓ | ✓ | ✓ |
+
+MoE reads `/api/labour` because labour demand is the input to their investment
+decisions. MoL has no enrolment-planning remit, so it is excluded from
+`/api/enrollment`.
+
+`/api/search` is open to every role but **filters its results server-side** — a
+student never receives institution records in the response.
+
+### 5.3 Row-level scoping for universities
+
+A `UNIVERSITY` token carries an `institution` claim. Every
+`/api/institution/*` handler reads the institution from that signed claim and
+**never from a request parameter**, so one university cannot read another's data
+by crafting a URL. Peer benchmarks are anonymised to "Peer A/B/C…".
+
+A `UNIVERSITY` token with no institution claim is rejected rather than falling
+back to all-institution access.
+
+### 5.4 Authentication
+
+- bcrypt password hashing (passlib), HS256 JWTs (python-jose)
+- token carries `sub`, `role`, `institution`, `exp`; no server-side session store
+- `JWT_SECRET` and `JWT_EXPIRE_MINUTES` come from `.env`. If `JWT_SECRET` is
+  unset the API falls back to a built-in development key **and logs a warning at
+  startup** — set it before deploying anywhere real
+- login returns one generic `401` for both an unknown username and a wrong
+  password, so the endpoint cannot be used to enumerate accounts
+
+**This puts Postgres on the request path for the first time.** Before the
+role-based work the database was an unused ETL sink and the dashboards worked
+with it down. Now the `users` table is queried on every login, so **a database
+outage blocks sign-in** — though an already-issued token keeps working, because
+authorisation reads the token claims rather than the database. Login failure due
+to an unreachable database returns `503`, not `401`, so the cause is not
+mistaken for bad credentials.
+
+### 5.5 Demo accounts
+
+Five accounts are seeded on first start when the `users` table is empty, using
+the password in `DEMO_PASSWORD` (default `pathwise123`):
+
+`admin` · `student` · `moe` · `mol` · `university` (scoped to Tech Institute)
+
+Seeding is idempotent — it exits silently once any user exists, so a changed
+password is never overwritten on restart. **These are demo credentials.** Rotate
+`DEMO_PASSWORD` and re-seed before exposing the deployment to anyone. There is
+no user CRUD in this build; accounts are provisioned at startup.
+
+---
+
+## 6. API Reference
 
 Base URL: `http://localhost:8000`
 
 All endpoints return JSON. Errors return `{"detail": "<message>"}` with an appropriate HTTP status.
 
-### 5.1 Health
+Except where noted, every endpoint below requires
+`Authorization: Bearer <token>` — see §5.
+
+### 6.0 Authentication
+
+| Method | Path | Auth | Description |
+|---|---|---|---|
+| POST | `/api/auth/login` | public | OAuth2 password form → `{access_token, token_type, expires_in, user}` |
+| GET | `/api/auth/me` | any role | Current caller; used to rehydrate a session on page load |
+| GET | `/api/auth/roles` | any role | Role vocabulary and landing routes |
+
+```bash
+TOKEN=$(curl -s -X POST http://localhost:8000/api/auth/login \
+  -d 'username=student&password=pathwise123' \
+  | python -c 'import sys,json;print(json.load(sys.stdin)["access_token"])')
+
+curl -s -H "Authorization: Bearer $TOKEN" http://localhost:8000/api/auth/me
+```
+
+### 6.1 Careers — `STUDENT`
+
+| Method | Path | Description |
+|---|---|---|
+| GET | `/api/careers/jobs` | All 33 occupations with their field |
+| GET | `/api/careers/search?q=` | Typeahead; prefix matches rank first |
+| GET | `/api/careers/job/{title}` | Labour-market profile for one occupation |
+| POST | `/api/careers/recommend` | **Job → ranked departments**, with per-factor breakdown |
+
+`recommend` takes `job_title` plus an optional `gpa`/`internships`/`projects`/
+`communication_score`. A **partial** profile is treated as absent — the API will
+not default an unanswered field and then present the result as personalised.
+With a full profile, placement odds come from the XGBoost model; without one,
+from each programme's historical rate. The response reports which via
+`personalised`.
+
+### 6.2 Labour market — `MOL`, `MOE`
+
+| Method | Path | Description |
+|---|---|---|
+| GET | `/api/labour/overview` | Headline demand figures |
+| GET | `/api/labour/emerging?level=family\|title` | Ranked by growth, with yearly series |
+| GET | `/api/labour/supply-demand` | Workforce shortfall per field |
+| GET | `/api/labour/mismatch?by=overview\|field\|program` | Graduate-to-role fit |
+| GET | `/api/labour/regional?field=` | Demand by metro and state |
+| GET | `/api/labour/occupation/{title}` | Full occupation profile |
+
+`mismatch` always returns `comparable: false` and a `caveat` — the distribution
+is near-uniform across fields in this dataset and must not be charted as a
+league table. See [DATA_PROVENANCE.md §4.1](DATA_PROVENANCE.md).
+
+### 6.3 Education supply — `MOE`
+
+| Method | Path | Description |
+|---|---|---|
+| GET | `/api/education/overview` | National enrolment and outcomes |
+| GET | `/api/education/field-trends` | Enrolment and applications per field per year |
+| GET | `/api/education/investment-quadrant` | Demand growth vs supply growth, split at each axis median |
+| GET | `/api/education/investment-priority` | Ranked fields with weighted factor breakdown |
+| GET | `/api/education/field/{field}` | Full field profile |
+
+### 6.4 Institution — `UNIVERSITY`
+
+Scoped to the caller's own institution; no institution parameter is accepted.
+
+| Method | Path | Description |
+|---|---|---|
+| GET | `/api/institution/me` | Institution profile |
+| GET | `/api/institution/portfolio` | All 12 programmes with funnel and cost |
+| GET | `/api/institution/expansion` | Expand / Hold / Consolidate, with rationale |
+| GET | `/api/institution/resources` | Recruitment funnel and cost per enrolment |
+| GET | `/api/institution/benchmark` | Standing vs anonymised peers |
+
+### 6.5 Search — any role
+
+| Method | Path | Description |
+|---|---|---|
+| GET | `/api/search?q=&limit=` | Occupations, fields, programmes, institutions — filtered by role |
+
+Each result carries the route the frontend should navigate to.
+
+### 6.6 Health
 
 | Method | Path | Description |
 |---|---|---|
@@ -257,7 +430,7 @@ on an already-warm singleton. Loading all five from cold takes ~15 s.
 
 ---
 
-### 5.2 Market Demand
+### 6.7 Market Demand
 
 | Method | Path | Query params | Description |
 |---|---|---|---|
@@ -294,7 +467,7 @@ on an already-warm singleton. Loading all five from cold takes ~15 s.
 
 ---
 
-### 5.3 Enrollment Intelligence
+### 6.8 Enrollment Intelligence
 
 | Method | Path | Query params | Description |
 |---|---|---|---|
@@ -346,7 +519,7 @@ on an already-warm singleton. Loading all five from cold takes ~15 s.
 
 ---
 
-### 5.4 Monitoring
+### 6.9 Monitoring
 
 | Method | Path | Query params | Description |
 |---|---|---|---|
@@ -370,9 +543,9 @@ When `alert` is `true`, run the retraining pipeline (see §7).
 
 ---
 
-## 6. Running Tests
+## 7. Running Tests
 
-### 6.1 Frontend unit tests (Vitest)
+### 7.1 Frontend unit tests (Vitest)
 
 ```bash
 cd frontend
@@ -381,7 +554,7 @@ npm run test:watch    # watch mode for development
 npm run test:coverage # generates coverage report in frontend/coverage/
 ```
 
-### 6.2 Backend integration tests (Python)
+### 7.2 Backend integration tests (Python)
 
 **Phase 5 tests** — validate API contracts, cache behaviour, ML flows.
 Backend must be running locally on port 8000, or set `BASE_URL`:
@@ -404,7 +577,7 @@ BACKEND_URL=http://127.0.0.1:8000 FRONTEND_URL=http://127.0.0.1:3000 \
 
 Exit code: `0` = all pass, `1` = at least one failure.
 
-### 6.3 Backend API test suite (pytest)
+### 7.3 Backend API test suite (pytest)
 
 `backend/tests/test_api.py` is the primary backend suite — 55 tests covering
 every endpoint: status codes, response schemas, parameter forwarding, error
@@ -429,7 +602,7 @@ backend image without any extra install step.
 
 ---
 
-## 7. Model Retraining
+## 8. Model Retraining
 
 Re-run the training pipeline whenever:
 - New student/placement data has been loaded into the database
@@ -474,7 +647,7 @@ Runs each training script inside the `pathwise_backend` container via `docker ex
 
 ---
 
-## 8. Monitoring & Drift Detection
+## 9. Monitoring & Drift Detection
 
 Every call to `POST /api/enrollment/predict-placement` is automatically logged to `data/monitoring/predictions.jsonl`. Each log line is a JSON object:
 
@@ -510,7 +683,7 @@ The drift endpoint compares the mean `probability` of the last 100 predictions a
 
 ---
 
-## 9. Troubleshooting
+## 10. Troubleshooting
 
 **`docker compose up` hangs on "Building backend"**
 The first build installs TensorFlow (~400 MB). This can take 5–10 minutes on a slow connection. Subsequent builds are cached — rebuilds take under 30 seconds unless `requirements.txt` changes.

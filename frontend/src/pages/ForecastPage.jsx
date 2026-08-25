@@ -92,9 +92,9 @@ export default function ForecastPage() {
               <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#64748b' }} />
               <YAxis tick={{ fontSize: 11, fill: '#64748b' }} />
               <Tooltip formatter={(v, name) => [v.toLocaleString(), name]} />
-              <Area type="monotone" dataKey="Upper"    stroke="#cbd5e1" strokeWidth={1} strokeDasharray="4 2" fill="none" name="Upper bound" />
-              <Area type="monotone" dataKey="Forecast" stroke="#2563eb" strokeWidth={2} fill="url(#forecastGrad)" name="Forecast" />
-              <Area type="monotone" dataKey="Lower"    stroke="#cbd5e1" strokeWidth={1} strokeDasharray="4 2" fill="none" name="Lower bound" />
+              <Area isAnimationActive={false} type="monotone" dataKey="Upper"    stroke="#cbd5e1" strokeWidth={1} strokeDasharray="4 2" fill="none" name="Upper bound" />
+              <Area isAnimationActive={false} type="monotone" dataKey="Forecast" stroke="#2563eb" strokeWidth={2} fill="url(#forecastGrad)" name="Forecast" />
+              <Area isAnimationActive={false} type="monotone" dataKey="Lower"    stroke="#cbd5e1" strokeWidth={1} strokeDasharray="4 2" fill="none" name="Lower bound" />
             </AreaChart>
           </ResponsiveContainer>
         )}

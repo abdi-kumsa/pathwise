@@ -440,6 +440,22 @@ class TestEducation:
     def test_field_detail_unknown_404(self, role_clients):
         assert role_clients["moe"].get("/api/education/field/Nonsense").status_code == 404
 
+    def test_field_detail_handles_slash_in_name(self, role_clients):
+        """"AI/ML Engineering" contains a forward slash. The client encodes it
+        as %2F but the server decodes it back before routing, so a plain path
+        segment never matches — the route needs the :path converter."""
+        r = role_clients["moe"].get("/api/education/field/AI/ML Engineering")
+        assert r.status_code == 200, f"slash-containing field 404s: {r.status_code}"
+        assert r.json()["field"] == "AI/ML Engineering"
+
+    def test_every_field_detail_resolves(self, role_clients):
+        """Whatever the quadrant lists must be openable in the field explorer."""
+        fields = [p["field"] for p in
+                  role_clients["moe"].get("/api/education/investment-quadrant").json()["points"]]
+        for field in fields:
+            r = role_clients["moe"].get(f"/api/education/field/{field}")
+            assert r.status_code == 200, f"{field} → {r.status_code}"
+
 
 # =============================================================================
 # Institution (University) — including row scoping

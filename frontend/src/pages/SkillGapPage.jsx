@@ -83,9 +83,9 @@ export default function SkillGapPage() {
               <YAxis tick={{ fontSize: 11, fill: '#64748b' }} domain={[0, 110]} />
               <Tooltip formatter={(v, name) => [v.toFixed(1), name]} />
               <Legend />
-              <Bar dataKey="Demand"   fill="#2563eb" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="Coverage" fill="#10b981" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="Gap"      fill="#f59e0b" radius={[4, 4, 0, 0]} />
+              <Bar isAnimationActive={false} dataKey="Demand"   fill="#2563eb" radius={[4, 4, 0, 0]} />
+              <Bar isAnimationActive={false} dataKey="Coverage" fill="#10b981" radius={[4, 4, 0, 0]} />
+              <Bar isAnimationActive={false} dataKey="Gap"      fill="#f59e0b" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         )}

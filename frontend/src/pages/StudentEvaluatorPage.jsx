@@ -198,7 +198,7 @@ export default function StudentEvaluatorPage() {
                     <YAxis type="category" dataKey="feature" tick={{ fontSize: 11, fill: '#64748b' }} width={90} />
                     <ReferenceLine x={0} stroke="#94a3b8" strokeWidth={1} />
                     <Tooltip formatter={v => [v.toFixed(4), 'SHAP value']} />
-                    <Bar dataKey="value" radius={[0, 4, 4, 0]}>
+                    <Bar isAnimationActive={false} dataKey="value" radius={[0, 4, 4, 0]}>
                       {shapData.map((entry, i) => (
                         <Cell key={i} fill={entry.value >= 0 ? '#2563eb' : '#ef4444'} />
                       ))}

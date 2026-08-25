@@ -70,7 +70,7 @@ export default function RegionalOpportunityPage() {
                 <XAxis type="number" tick={{ fontSize: 11, fill: '#64748b' }} />
                 <YAxis type="category" dataKey="location" tick={{ fontSize: 11, fill: '#64748b' }} width={80} />
                 <Tooltip formatter={v => [v, 'Placements']} />
-                <Bar dataKey="count" fill="#2563eb" radius={[0, 4, 4, 0]} />
+                <Bar isAnimationActive={false} dataKey="count" fill="#2563eb" radius={[0, 4, 4, 0]} />
               </BarChart>
             </ResponsiveContainer>
           )}
