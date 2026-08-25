@@ -28,7 +28,7 @@ The platform has two dashboard modules. **Module 1 — Market Demand** is for de
 
 ## 1. Getting Around the Dashboard
 
-When you open PathWise at `http://localhost:3000` you land on the Market Overview page. The left-hand sidebar is always visible and is divided into two sections:
+When you open PathWise at `http://localhost:3001` you land on the Market Overview page. The left-hand sidebar is always visible and is divided into two sections:
 
 **Market Demand** (Module 1)
 - Overview

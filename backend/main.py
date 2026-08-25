@@ -46,17 +46,6 @@ app.include_router(enrollment.router,       prefix="/api")
 app.include_router(monitoring.router,       prefix="/api")
 app.include_router(recommendations.router,  prefix="/api")
 
-# ── Model status — updated in _prewarm_models() ───────────────────────────────
-# Kept at module level so /health can read it without re-importing ml_service.
-_model_status: dict = {
-    "xgboost": False,
-    "salary":  False,
-    "lstm":    False,
-    "prophet": False,
-    "shap":    False,
-}
-
-
 def _prewarm_models() -> None:
     """Load all four ML artefacts eagerly at startup.
 
@@ -66,47 +55,30 @@ def _prewarm_models() -> None:
 
     Each model is loaded independently — a failure in one (e.g. missing .keras
     file) does not prevent the others from loading.
+
+    Loaders are idempotent (they no-op when the singleton is already set), so
+    this is safe to re-run to retry whatever failed last time.
     """
     from services import ml_service
 
     log.info("Pre-warming ML models ...")
 
-    try:
-        ml_service.get_xgboost()
-        _model_status["xgboost"] = True
-        log.info("  [ok] XGBoost placement model")
-    except Exception as exc:
-        log.error("  [fail] XGBoost: %s", exc)
+    loaders = [
+        ("XGBoost placement model", ml_service.get_xgboost),
+        ("XGBoost salary model",    ml_service.get_salary_model),
+        ("LSTM enrollment model",   ml_service.get_lstm),
+        ("Prophet demand model",    ml_service.get_prophet),
+        ("SHAP value cache",        ml_service.get_shap_cache),
+    ]
 
-    try:
-        ml_service.get_salary_model()
-        _model_status["salary"] = True
-        log.info("  [ok] XGBoost salary model")
-    except Exception as exc:
-        log.error("  [fail] Salary model: %s", exc)
+    for label, loader in loaders:
+        try:
+            loader()
+            log.info("  [ok] %s", label)
+        except Exception as exc:
+            log.error("  [fail] %s: %s", label, exc)
 
-    try:
-        ml_service.get_lstm()
-        _model_status["lstm"] = True
-        log.info("  [ok] LSTM enrollment model")
-    except Exception as exc:
-        log.error("  [fail] LSTM: %s", exc)
-
-    try:
-        ml_service.get_prophet()
-        _model_status["prophet"] = True
-        log.info("  [ok] Prophet demand model")
-    except Exception as exc:
-        log.error("  [fail] Prophet: %s", exc)
-
-    try:
-        ml_service.get_shap_cache()
-        _model_status["shap"] = True
-        log.info("  [ok] SHAP value cache")
-    except Exception as exc:
-        log.error("  [fail] SHAP cache: %s", exc)
-
-    loaded = sum(_model_status.values())
+    loaded = sum(ml_service.loaded_status().values())
     log.info("Model pre-warm complete — %d/5 loaded.", loaded)
 
 
@@ -132,17 +104,44 @@ def on_startup() -> None:
 # ── Health check ──────────────────────────────────────────────────────────────
 @app.get("/health", tags=["Health"])
 def health_check():
-    """Returns per-model load status.
+    """Returns per-model load status, read live from the ml_service singletons.
 
     docker-compose uses this endpoint to decide when the backend service is
     healthy.  The frontend container will not start until this returns 200.
     A model that failed to load shows False — the API still starts, but
     endpoints that depend on that model will return 500.
+
+    This reflects current state, not a snapshot taken at startup: a model that
+    loads later (lazily, or via POST /health/reload) is reported immediately.
     """
-    all_loaded = all(_model_status.values())
+    from services import ml_service
+
+    models = ml_service.loaded_status()
     return {
-        "status": "ok" if all_loaded else "degraded",
-        "models": _model_status,
+        "status": "ok" if all(models.values()) else "degraded",
+        "models": models,
+    }
+
+
+@app.post("/health/reload", tags=["Health"])
+def reload_models():
+    """Retry loading any artefact that is not currently resident.
+
+    Recovery path for the case where the process started before its volume
+    mounts were ready — the API is up but reports degraded, and previously the
+    only fix was restarting the container. Already-loaded models are untouched
+    because the loaders no-op on a warm singleton.
+    """
+    from services import ml_service
+
+    before = ml_service.loaded_status()
+    _prewarm_models()
+    after = ml_service.loaded_status()
+
+    return {
+        "status":   "ok" if all(after.values()) else "degraded",
+        "models":   after,
+        "recovered": [k for k, v in after.items() if v and not before[k]],
     }
 
 

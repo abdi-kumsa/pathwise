@@ -76,6 +76,15 @@ class TestHealth:
         assert r.status_code == 200
         assert "PathWise" in r.json().get("message", "")
 
+    def test_health_reload_is_idempotent(self, client):
+        """Reloading a fully-warm API must be a no-op, not a regression."""
+        r = client.post("/health/reload")
+        assert r.status_code == 200
+        body = r.json()
+        assert body["status"] == "ok"
+        assert all(body["models"].values())
+        assert body["recovered"] == []   # nothing was broken, so nothing recovered
+
 
 # =============================================================================
 # Market Demand
@@ -332,6 +341,38 @@ class TestPredictPlacement:
         body = {**STRONG_STUDENT, "gpa": 9.9}
         r = client.post("/api/enrollment/predict-placement", json=body)
         assert r.status_code == 422
+
+
+class TestSkillRoadmapValidation:
+    """skill-roadmap takes the same profile as predict-placement and feeds it to
+    the same model, so it must reject the same out-of-range values."""
+
+    def test_roadmap_valid_profile_200(self, client):
+        r = client.post("/api/enrollment/skill-roadmap", json=STRONG_STUDENT)
+        assert r.status_code == 200
+
+    @pytest.mark.parametrize("field,bad_value", [
+        ("gpa",                  9.9),   # above the 4.0 scale
+        ("gpa",                 -1.0),   # negative
+        ("internships",          -3),
+        ("projects",             -1),
+        ("communication_score",  99),    # scale is 1-10
+        ("communication_score",   0),
+    ])
+    def test_roadmap_rejects_out_of_range(self, client, field, bad_value):
+        body = {**STRONG_STUDENT, field: bad_value}
+        r = client.post("/api/enrollment/skill-roadmap", json=body)
+        assert r.status_code == 422, f"{field}={bad_value} was accepted"
+
+    @pytest.mark.parametrize("field,bad_value", [
+        ("gpa",                 -1.0),
+        ("internships",          -3),
+        ("communication_score",   0),
+    ])
+    def test_predict_placement_rejects_out_of_range(self, client, field, bad_value):
+        body = {**STRONG_STUDENT, field: bad_value}
+        r = client.post("/api/enrollment/predict-placement", json=body)
+        assert r.status_code == 422, f"{field}={bad_value} was accepted"
 
 
 class TestSkillRecommendations:

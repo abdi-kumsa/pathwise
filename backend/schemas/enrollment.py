@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import List, Optional
 
 
@@ -36,10 +36,16 @@ class PlacementByStream(BaseModel):
 
 
 class StudentProfile(BaseModel):
-    gpa: float
-    internships: int
-    projects: int
-    communication_score: int
+    """Input to /api/enrollment/predict-placement.
+
+    Bounds match SalaryRequest in schemas/salary.py. Without them XGBoost
+    happily scores nonsense (gpa=9.9) and returns a confident-looking
+    probability, so out-of-range values must be rejected at the edge.
+    """
+    gpa: float = Field(..., ge=0.0, le=4.0)
+    internships: int = Field(..., ge=0, le=20)
+    projects: int = Field(..., ge=0, le=50)
+    communication_score: int = Field(..., ge=1, le=10)
     program: str
 
 
@@ -69,10 +75,11 @@ class SkillRecommendationsResponse(BaseModel):
 
 
 class SkillRoadmapRequest(BaseModel):
-    gpa: float
-    internships: int
-    projects: int
-    communication_score: int
+    """Input to /api/enrollment/skill-roadmap — same bounds as StudentProfile."""
+    gpa: float = Field(..., ge=0.0, le=4.0)
+    internships: int = Field(..., ge=0, le=20)
+    projects: int = Field(..., ge=0, le=50)
+    communication_score: int = Field(..., ge=1, le=10)
     program: str
 
 

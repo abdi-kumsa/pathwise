@@ -85,6 +85,25 @@ def get_shap_cache():
     return _shap_cache
 
 
+# ── Load status ───────────────────────────────────────────────────────────────
+
+def loaded_status() -> dict:
+    """Which artefacts are currently resident in memory.
+
+    Read straight off the singletons so /health reports live state rather than
+    a snapshot taken at startup — a model that loads later (or is reloaded via
+    POST /health/reload) shows up immediately. Pure attribute reads, no I/O,
+    so this stays fast enough for the docker-compose healthcheck.
+    """
+    return {
+        "xgboost": _xgboost_model is not None,
+        "salary":  _salary_model  is not None,
+        "lstm":    _lstm_model    is not None,
+        "prophet": _prophet_model is not None,
+        "shap":    _shap_cache    is not None,
+    }
+
+
 # ── Inference wrappers ────────────────────────────────────────────────────────
 
 def predict_placement(student_dict: dict) -> dict:

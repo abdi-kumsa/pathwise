@@ -33,4 +33,8 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# No --reload: uvicorn's file watcher crash-loops on Windows bind mounts
+# ("WatchfilesRustInternalError: IO error for operation on /app"), which leaves
+# the API reachable but with zero models loaded. docker-compose overrides this
+# command and appends --reload when BACKEND_RELOAD is set in .env.
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

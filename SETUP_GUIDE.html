@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PathWise — Exhaustive Windows Setup & Deployment Guide</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #e2e8f0;
+      --card-bg: #f8fafc;
+      --primary: #2563eb;
+      --primary-light: #eff6ff;
+      --primary-border: #bfdbfe;
+      --success: #16a34a;
+      --success-bg: #f0fdf4;
+      --warning: #d97706;
+      --warning-bg: #fffbeb;
+      --code-bg: #0f172a;
+      --code-text: #38bdf8;
+      --radius: 0.75rem;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 4rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 1.5rem;
+    }
+
+    .header-content {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .badge {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 9999px;
+      border: 1px solid var(--primary-border);
+      white-space: nowrap;
+    }
+
+    .win-badge {
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem;
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-title {
+      font-size: 2.25rem;
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .toc-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .toc-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .toc-list a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .toc-list a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 5rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 1.25rem 0 0.5rem 0;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .callout {
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius);
+      margin: 1.25rem 0;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .callout-info {
+      background-color: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      color: #1e3a8a;
+    }
+
+    .callout-warning {
+      background-color: var(--warning-bg);
+      border-left: 4px solid var(--warning);
+      color: #78350f;
+    }
+
+    .callout-success {
+      background-color: var(--success-bg);
+      border-left: 4px solid var(--success);
+      color: #14532d;
+    }
+
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      margin: 1rem 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 500px;
+      background: #ffffff;
+    }
+
+    th {
+      background: var(--card-bg);
+      text-align: left;
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    code.inline {
+      background: #f1f5f9;
+      color: var(--primary);
+      padding: 0.15rem 0.4rem;
+      border-radius: 0.375rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    pre.code-block {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius);
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin: 1rem 0;
+    }
+
+    .step-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    .step-card-header {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    a.link-btn {
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    a.link-btn:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 0.75rem 1rem;
+      }
+
+      .container {
+        padding: 1.25rem 1rem;
+      }
+
+      .hero-title {
+        font-size: 1.65rem;
+      }
+
+      .hero-subtitle {
+        font-size: 0.95rem;
+      }
+
+      h2 {
+        font-size: 1.25rem;
+      }
+
+      .callout {
+        padding: 0.85rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <div class="brand">
+        PathWise <span class="badge win-badge">🪟 Exhaustive Windows Guide</span>
+      </div>
+      <div>
+        <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Dr. Endriss</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <div class="hero">
+      <h1 class="hero-title">PathWise Windows Deployment Guide</h1>
+      <p class="hero-subtitle">100% foolproof step-by-step setup guide for a brand-new Windows 10 / 11 laptop with no developer tools pre-installed.</p>
+    </div>
+
+    <!-- Quick Windows Summary -->
+    <div class="callout callout-success">
+      <strong>🚀 Quick Windows Setup Summary:</strong><br>
+      1. Download & Install <a href="https://www.docker.com/products/docker-desktop/" target="_blank" class="link-btn">Docker Desktop for Windows</a>.<br>
+      2. Unzip <code class="inline">PathWise.zip</code> to your Desktop.<br>
+      3. Open <strong>PowerShell</strong> inside the unzipped folder and run <code class="inline">docker compose up</code>.<br>
+      4. Open <strong><a href="http://localhost:3000" target="_blank" class="link-btn">http://localhost:3000</a></strong> in Chrome or Edge!
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc-box">
+      <div class="toc-title">Quick Navigation</div>
+      <ul class="toc-list">
+        <li><a href="#preflight">1. Pre-Flight Checklist (Brand-New Laptop Setup)</a></li>
+        <li><a href="#step-1">2. Step 1: Install Docker Desktop & Enable WSL 2</a></li>
+        <li><a href="#step-2">3. Step 2: Extract Zip & Prepare `.env` File</a></li>
+        <li><a href="#step-3">4. Step 3: Opening PowerShell in the Folder</a></li>
+        <li><a href="#step-4">5. Step 4: Launching PathWise & Watching Startup Logs</a></li>
+        <li><a href="#step-5">6. Step 5: Opening the Dashboard</a></li>
+        <li><a href="#step-6">7. Step 6: Stopping, Restarting & Diagnostics</a></li>
+        <li><a href="#faq">8. Comprehensive Windows Troubleshooting</a></li>
+      </ul>
+    </div>
+
+    <!-- Pre-Flight Checklist -->
+    <section id="preflight">
+      <h2><span>📋</span> 1. Pre-Flight Checklist (Brand-New Laptop Setup)</h2>
+      <p>Before installing anything, verify your Windows system settings:</p>
+
+      <div class="step-card">
+        <div class="step-card-header">A. OS Version Check</div>
+        <p>Press <code class="inline">Windows Key + R</code>, type <code class="inline">winver</code>, and press Enter. Ensures Windows 10 (64-bit Home/Pro) or Windows 11 is installed.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card-header">B. Hardware Virtualization Check</div>
+        <p>Press <code class="inline">Ctrl + Shift + Esc</code> to open Task Manager. Click <strong>Performance</strong> &gt; <strong>CPU</strong>. Verify bottom-right shows <strong>Virtualization: Enabled</strong>.</p>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Requirement</th>
+              <th>Minimum Specification</th>
+              <th>Recommended</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Operating System</strong></td>
+              <td>Windows 10 (64-bit Pro/Home) or Windows 11</td>
+              <td>Windows 11 Home / Pro (Build 22000+)</td>
+            </tr>
+            <tr>
+              <td><strong>Available RAM</strong></td>
+              <td>6 GB free RAM</td>
+              <td>8 GB+ free RAM</td>
+            </tr>
+            <tr>
+              <td><strong>Disk Space</strong></td>
+              <td>10 GB free disk space</td>
+              <td>15 GB free SSD space</td>
+            </tr>
+            <tr>
+              <td><strong>Web Browser</strong></td>
+              <td>Microsoft Edge, Google Chrome, or Firefox</td>
+              <td>Google Chrome or Microsoft Edge</td>
+            </tr>
+            <tr>
+              <td><strong>Software Needed</strong></td>
+              <td><strong>Docker Desktop for Windows</strong></td>
+              <td>Docker Desktop v4.25+</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Step 1: Docker Installation -->
+    <section id="step-1">
+      <h2><span>🐳</span> Step 1: Install Docker Desktop & Enable WSL 2</h2>
+      <p>PathWise is containerized. You do <strong>NOT</strong> need to install Python, Node.js, PostgreSQL, or Machine Learning libraries. Docker handles everything automatically.</p>
+
+      <div class="step-card">
+        <div class="step-card-header">🪟 Windows Installation Walkthrough</div>
+        <ol style="margin-left: 1.25rem; color: var(--text-muted); font-size: 0.95rem;">
+          <li style="margin-bottom: 0.4rem;">Download installer: <a href="https://www.docker.com/products/docker-desktop/" target="_blank" class="link-btn">https://www.docker.com/products/docker-desktop/</a></li>
+          <li style="margin-bottom: 0.4rem;">Double-click <code class="inline">Docker Desktop Installer.exe</code>. Ensure <strong>"Use WSL 2 instead of Hyper-V"</strong> is <strong>CHECKED</strong>.</li>
+          <li style="margin-bottom: 0.4rem;">Click <strong>Close and restart</strong> when Windows prompts to finish setup.</li>
+          <li>Launch <strong>Docker Desktop</strong> from the Start Menu, accept terms, click <em>"Continue without signing in"</em>, and wait until status turns <strong style="color: var(--success);">green ("Engine running")</strong>.</li>
+        </ol>
+      </div>
+
+      <div class="callout callout-info">
+        💡 <strong>WSL 2 Prompt Fix:</strong> If Docker states "WSL 2 installation is incomplete", open PowerShell as Administrator and run: <code class="inline">wsl --update</code>, then restart Docker Desktop.
+      </div>
+    </section>
+
+    <!-- Step 2: Unzipping & .env -->
+    <section id="step-2">
+      <h2><span>📦</span> Step 2: Extract Zip & Prepare Environment Configuration</h2>
+      <div class="step-card">
+        <ol style="margin-left: 1.25rem; color: var(--text-muted); font-size: 0.95rem;">
+          <li style="margin-bottom: 0.4rem;">Locate your downloaded <code class="inline">PathWise.zip</code> file in Downloads.</li>
+          <li style="margin-bottom: 0.4rem;">Right-click <code class="inline">PathWise.zip</code> and click <strong>Extract All...</strong> to your Desktop.</li>
+          <li>Check that a file named <code class="inline">.env</code> exists inside the folder. If missing, copy <code class="inline">.env.example</code> and rename it to <code class="inline">.env</code>.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Step 3: Running -->
+    <section id="step-3">
+      <h2><span>⚡</span> Step 3: Opening PowerShell in the Folder</h2>
+      <p>Open File Explorer inside the unzipped <code class="inline">PathWise</code> folder. Click directly on the <strong>Address Bar</strong> at the top, type <code class="inline">powershell</code>, and press Enter. Terminal will open directly in the folder!</p>
+
+      <p>Then run:</p>
+      <pre class="code-block">docker compose up</pre>
+    </section>
+
+    <!-- Step 4: Logs -->
+    <section id="step-4">
+      <h2><span>📋</span> Step 4: Watching Startup Logs</h2>
+      
+      <div class="step-card">
+        <div class="step-card-header">Expected Terminal Logs to Look For:</div>
+        <pre class="code-block" style="margin: 0.5rem 0 0 0;">pathwise_db      | PostgreSQL database system is ready to accept connections
+pathwise_backend | [ok] XGBoost placement classifier loaded.
+pathwise_backend | PathWise API ready.
+pathwise_frontend| Local: http://localhost:3000/</pre>
+      </div>
+    </section>
+
+    <!-- Step 5: Accessing -->
+    <section id="step-5">
+      <h2><span>🌐</span> Step 5: Opening the Dashboard</h2>
+      <p>Once startup logs show services are ready, open Chrome or Microsoft Edge to:</p>
+
+      <div class="step-card">
+        <div class="step-card-header">📊 Main Client Dashboard</div>
+        <p style="margin: 0;"><a href="http://localhost:3000" target="_blank" class="link-btn" style="font-size: 1.1rem;">http://localhost:3000</a></p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card-header">⚙️ Interactive API Documentation (Swagger)</div>
+        <p style="margin: 0;"><a href="http://localhost:8000/docs" target="_blank" class="link-btn" style="font-size: 1.1rem;">http://localhost:8000/docs</a></p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card-header">🩺 System Health Status</div>
+        <p style="margin: 0;"><a href="http://localhost:8000/health" target="_blank" class="link-btn" style="font-size: 1.1rem;">http://localhost:8000/health</a></p>
+      </div>
+    </section>
+
+    <!-- Step 6: Diagnostics -->
+    <section id="step-6">
+      <h2><span>🛑</span> Step 6: Stopping, Restarting & Diagnostics</h2>
+      
+      <p><strong>To Stop:</strong> Press <code class="inline">Ctrl + C</code> in PowerShell, or run <code class="inline">docker compose down</code>.</p>
+      <p><strong>To Restart:</strong> Ensure Docker Desktop is running, then run <code class="inline">docker compose up</code>.</p>
+      
+      <div class="step-card">
+        <div class="step-card-header">Useful Diagnostic Commands</div>
+        <p><code class="inline">docker compose ps</code> — Check running status of containers.</p>
+        <p><code class="inline">docker compose logs backend</code> — Inspect backend server logs.</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <h2><span>❓</span> Comprehensive Windows Troubleshooting</h2>
+
+      <div class="step-card">
+        <div class="step-card-header">Q: PowerShell shows "docker: command not found"</div>
+        <p><strong>Solution:</strong> Docker Desktop is not open. Search for <strong>Docker Desktop</strong> in your Windows Start Menu and wait until the status in the bottom-left corner shows green ("Engine running").</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card-header">Q: Error "port 3000 or 8000 is already in use"</div>
+        <p><strong>Solution:</strong> Another program on Windows is using port 3000 or 8000. Close active web servers or restart Windows to free up system ports.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card-header">Q: How do I reset to pristine demo sample data on Windows?</div>
+        <p>Run <code class="inline">docker compose down -v</code> followed by <code class="inline">docker compose up</code> in PowerShell to reset cached database volumes.</p>
+      </div>
+    </section>
+
+  </div>
+
+</body>
+</html>
