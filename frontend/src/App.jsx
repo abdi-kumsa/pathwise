@@ -1,59 +1,168 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { useState } from 'react'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
+
+import { AuthProvider, useAuth } from './context/AuthContext'
+import RoleRoute from './components/RoleRoute'
 import Sidebar from './components/Sidebar'
+import CommandBar from './components/CommandBar'
+import LoadingSpinner from './components/LoadingSpinner'
 
-import MarketOverviewPage from './pages/MarketOverviewPage'
-import HiringAnalyticsPage from './pages/HiringAnalyticsPage'
-import SkillGapPage from './pages/SkillGapPage'
-import RegionalOpportunityPage from './pages/RegionalOpportunityPage'
-import ForecastPage from './pages/ForecastPage'
+import LoginPage from './pages/LoginPage'
 
-import EnrollmentForecastPage from './pages/EnrollmentForecastPage'
-import AdmissionRiskPage from './pages/AdmissionRiskPage'
-import PlacementByStreamPage from './pages/PlacementByStreamPage'
+// Student
+import CareerExplorerPage from './pages/student/CareerExplorerPage'
 import StudentEvaluatorPage from './pages/StudentEvaluatorPage'
-
-import SalaryForecastPage from './pages/SalaryForecastPage'
-import EscapeRoutePage from './pages/EscapeRoutePage'
 import SkillRoadmapPage from './pages/SkillRoadmapPage'
+import EscapeRoutePage from './pages/EscapeRoutePage'
+import SalaryForecastPage from './pages/SalaryForecastPage'
+import MarketOverviewPage from './pages/MarketOverviewPage'
+
+// Ministry of Labour
+import LabourOverviewPage from './pages/mol/LabourOverviewPage'
+import EmergingOccupationsPage from './pages/mol/EmergingOccupationsPage'
+import SupplyDemandPage from './pages/mol/SupplyDemandPage'
+import SkillsMismatchPage from './pages/mol/SkillsMismatchPage'
+import RegionalDemandPage from './pages/mol/RegionalDemandPage'
+
+// Ministry of Education
+import EducationOverviewPage from './pages/moe/EducationOverviewPage'
+import InvestmentQuadrantPage from './pages/moe/InvestmentQuadrantPage'
+import InvestmentPriorityPage from './pages/moe/InvestmentPriorityPage'
+import FieldExplorerPage from './pages/moe/FieldExplorerPage'
+
+// University
+import InstitutionOverviewPage from './pages/university/InstitutionOverviewPage'
+import ProgramPortfolioPage from './pages/university/ProgramPortfolioPage'
+import ExpansionPage from './pages/university/ExpansionPage'
+import ResourceEfficiencyPage from './pages/university/ResourceEfficiencyPage'
+import PeerBenchmarkPage from './pages/university/PeerBenchmarkPage'
+import EnrollmentForecastPage from './pages/EnrollmentForecastPage'
+
+// Admin
+import AdminOverviewPage from './pages/admin/AdminOverviewPage'
+import AdminMonitoringPage from './pages/admin/AdminMonitoringPage'
+import AdminUsersPage from './pages/admin/AdminUsersPage'
+
+const STUDENT    = ['STUDENT']
+const MOL        = ['MOL']
+const MOE        = ['MOE']
+const MOL_OR_MOE = ['MOL', 'MOE']
+const UNIVERSITY = ['UNIVERSITY']
+const ADMIN      = ['ADMIN']
+
+/** Signed-in chrome: sidebar, top bar, command bar, routed page. */
+function Shell({ children }) {
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const location = useLocation()
+
+  return (
+    <div className="app-shell">
+      <Sidebar open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+
+      <main className="app-main">
+        <div className="topbar">
+          <button
+            className="topbar-burger"
+            onClick={() => setDrawerOpen(true)}
+            aria-label="Open navigation"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                 strokeLinecap="round">
+              <path d="M3 6h18M3 12h18M3 18h18" />
+            </svg>
+          </button>
+
+          <CommandBar />
+
+          <span className="provenance-chip">US benchmark dataset · 2020–2025</span>
+        </div>
+
+        {/* key on pathname so a page never shows the previous page's state */}
+        <div key={location.pathname}>{children}</div>
+      </main>
+    </div>
+  )
+}
+
+/** `/` sends each role to its own landing page, decided by the API. */
+function HomeRedirect() {
+  const { user, booting } = useAuth()
+  if (booting) return <LoadingSpinner message="Loading…" height={320} />
+  if (!user) return <Navigate to="/login" replace />
+  return <Navigate to={user.home ?? '/student/careers'} replace />
+}
+
+function Protected({ allow, children }) {
+  return (
+    <RoleRoute allow={allow}>
+      <Shell>{children}</Shell>
+    </RoleRoute>
+  )
+}
+
+function AppRoutes() {
+  return (
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/" element={<HomeRedirect />} />
+
+      {/* ── Student ──────────────────────────────────────────────────────── */}
+      <Route path="/student/careers"        element={<Protected allow={STUDENT}><CareerExplorerPage /></Protected>} />
+      <Route path="/student/evaluator"      element={<Protected allow={STUDENT}><StudentEvaluatorPage /></Protected>} />
+      <Route path="/student/skill-roadmap"  element={<Protected allow={STUDENT}><SkillRoadmapPage /></Protected>} />
+      <Route path="/student/alternatives"   element={<Protected allow={STUDENT}><EscapeRoutePage /></Protected>} />
+      <Route path="/student/salary"         element={<Protected allow={STUDENT}><SalaryForecastPage /></Protected>} />
+      <Route path="/student/market"         element={<Protected allow={STUDENT}><MarketOverviewPage /></Protected>} />
+
+      {/* ── Ministry of Labour ───────────────────────────────────────────── */}
+      <Route path="/mol/overview"      element={<Protected allow={MOL}><LabourOverviewPage /></Protected>} />
+      <Route path="/mol/emerging"      element={<Protected allow={MOL}><EmergingOccupationsPage /></Protected>} />
+      <Route path="/mol/supply-demand" element={<Protected allow={MOL_OR_MOE}><SupplyDemandPage /></Protected>} />
+      <Route path="/mol/mismatch"      element={<Protected allow={MOL_OR_MOE}><SkillsMismatchPage /></Protected>} />
+      <Route path="/mol/regional"      element={<Protected allow={MOL}><RegionalDemandPage /></Protected>} />
+      <Route path="/mol/occupations"   element={<Protected allow={MOL}><EmergingOccupationsPage /></Protected>} />
+
+      {/* ── Ministry of Education ────────────────────────────────────────── */}
+      <Route path="/moe/overview"   element={<Protected allow={MOE}><EducationOverviewPage /></Protected>} />
+      <Route path="/moe/quadrant"   element={<Protected allow={MOE}><InvestmentQuadrantPage /></Protected>} />
+      <Route path="/moe/priorities" element={<Protected allow={MOE}><InvestmentPriorityPage /></Protected>} />
+      <Route path="/moe/fields"     element={<Protected allow={MOE}><FieldExplorerPage /></Protected>} />
+      {/* MoE reads labour demand too — it is the input to their decisions */}
+      <Route path="/moe/labour"     element={<Protected allow={MOE}><SupplyDemandPage /></Protected>} />
+
+      {/* ── University ───────────────────────────────────────────────────── */}
+      <Route path="/university/overview"    element={<Protected allow={UNIVERSITY}><InstitutionOverviewPage /></Protected>} />
+      <Route path="/university/portfolio"   element={<Protected allow={UNIVERSITY}><ProgramPortfolioPage /></Protected>} />
+      <Route path="/university/expansion"   element={<Protected allow={UNIVERSITY}><ExpansionPage /></Protected>} />
+      <Route path="/university/resources"   element={<Protected allow={UNIVERSITY}><ResourceEfficiencyPage /></Protected>} />
+      <Route path="/university/benchmark"   element={<Protected allow={UNIVERSITY}><PeerBenchmarkPage /></Protected>} />
+      <Route path="/university/enrollment"  element={<Protected allow={UNIVERSITY}><EnrollmentForecastPage /></Protected>} />
+
+      {/* ── Admin ────────────────────────────────────────────────────────── */}
+      <Route path="/admin/overview"   element={<Protected allow={ADMIN}><AdminOverviewPage /></Protected>} />
+      <Route path="/admin/monitoring" element={<Protected allow={ADMIN}><AdminMonitoringPage /></Protected>} />
+      <Route path="/admin/users"      element={<Protected allow={ADMIN}><AdminUsersPage /></Protected>} />
+
+      <Route path="*" element={
+        <Protected>
+          <div style={{ padding: '64px 0', textAlign: 'center', color: 'var(--text-muted)' }}>
+            <p style={{ fontSize: '15px', fontWeight: 600, color: 'var(--navy)', marginBottom: 6 }}>
+              Page not found
+            </p>
+            <p style={{ fontSize: '13px' }}>
+              This page may belong to a different role. Use the sidebar to get back.
+            </p>
+          </div>
+        </Protected>
+      } />
+    </Routes>
+  )
+}
 
 export default function App() {
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--page)' }}>
-      <Sidebar />
-
-      <main style={{ marginLeft: '264px', flex: '1', minWidth: '0', padding: '32px 40px 56px' }}>
-        <Routes>
-          <Route path="/" element={<Navigate to="/market/overview" replace />} />
-
-          <Route path="/market/overview"  element={<MarketOverviewPage />} />
-          <Route path="/market/hiring"    element={<HiringAnalyticsPage />} />
-          <Route path="/market/skill-gap" element={<SkillGapPage />} />
-          <Route path="/market/regional" element={<RegionalOpportunityPage />} />
-          <Route path="/market/forecast"  element={<ForecastPage />} />
-
-          <Route path="/enrollment/trends"     element={<EnrollmentForecastPage />} />
-          <Route path="/enrollment/risk"       element={<AdmissionRiskPage />} />
-          <Route path="/enrollment/placements" element={<PlacementByStreamPage />} />
-          <Route path="/enrollment/student"    element={<StudentEvaluatorPage />} />
-
-          <Route path="/recommendations/salary"  element={<SalaryForecastPage />} />
-          <Route path="/recommendations/escape"  element={<EscapeRoutePage />} />
-          <Route path="/enrollment/skill-roadmap" element={<SkillRoadmapPage />} />
-
-          <Route path="*" element={
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: '100%',
-              color: 'var(--text-muted)',
-              fontSize: '16px'
-            }}>
-              Page not found
-            </div>
-          } />
-        </Routes>
-      </main>
-    </div>
+    <AuthProvider>
+      <AppRoutes />
+    </AuthProvider>
   )
 }

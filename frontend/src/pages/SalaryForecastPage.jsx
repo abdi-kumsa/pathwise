@@ -138,7 +138,7 @@ export default function SalaryForecastPage() {
                 <XAxis type="number" tick={{ fontSize: 11, fill: '#64748b' }} unit="K" />
                 <YAxis type="category" dataKey="name" tick={{ fontSize: 10, fill: '#64748b' }} width={108} />
                 <Tooltip formatter={v => ['$' + v + 'K', 'Avg Salary']} />
-                <Bar dataKey="Avg" fill="#2563eb" radius={[0, 4, 4, 0]} />
+                <Bar isAnimationActive={false} dataKey="Avg" fill="#2563eb" radius={[0, 4, 4, 0]} />
               </BarChart>
             </ResponsiveContainer>
           )}
@@ -155,7 +155,7 @@ export default function SalaryForecastPage() {
                 <XAxis type="number" tick={{ fontSize: 11, fill: '#64748b' }} unit="K" />
                 <YAxis type="category" dataKey="name" tick={{ fontSize: 10, fill: '#64748b' }} width={108} />
                 <Tooltip formatter={v => ['$' + v + 'K', 'Median Salary']} />
-                <Bar dataKey="Median" fill="#0ea5e9" radius={[0, 4, 4, 0]} />
+                <Bar isAnimationActive={false} dataKey="Median" fill="#0ea5e9" radius={[0, 4, 4, 0]} />
               </BarChart>
             </ResponsiveContainer>
           )}

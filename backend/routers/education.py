@@ -52,8 +52,16 @@ def get_investment_priority():
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/field/{field}")
+@router.get("/field/{field:path}")
 def get_field_detail(field: str):
+    """Detail for one field of study.
+
+    Uses the `:path` converter because one field name contains a forward slash
+    — "AI/ML Engineering". A client percent-encodes it as %2F, but the ASGI
+    server decodes that back to a literal "/" before routing, so a plain
+    `{field}` segment never matches and the request 404s. `:path` accepts the
+    remainder of the URL, slash included.
+    """
     try:
         return education_service.get_field_detail(field)
     except ValueError as e:

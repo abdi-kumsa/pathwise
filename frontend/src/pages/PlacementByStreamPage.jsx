@@ -77,7 +77,7 @@ export default function PlacementByStreamPage() {
                 <XAxis type="number" domain={[0, 100]} tick={{ fontSize: 11, fill: '#64748b' }} unit="%" />
                 <YAxis type="category" dataKey="name" tick={{ fontSize: 10, fill: '#64748b' }} width={100} />
                 <Tooltip formatter={v => [v + '%', 'Placement Rate']} />
-                <Bar dataKey="Rate" fill="#10b981" radius={[0, 4, 4, 0]} />
+                <Bar isAnimationActive={false} dataKey="Rate" fill="#10b981" radius={[0, 4, 4, 0]} />
               </BarChart>
             </ResponsiveContainer>
           )}
@@ -96,7 +96,7 @@ export default function PlacementByStreamPage() {
                 <XAxis type="number" tick={{ fontSize: 11, fill: '#64748b' }} unit="K" />
                 <YAxis type="category" dataKey="name" tick={{ fontSize: 10, fill: '#64748b' }} width={100} />
                 <Tooltip formatter={v => ['$' + v + 'K', 'Avg Salary']} />
-                <Bar dataKey="Salary" fill="#6366f1" radius={[0, 4, 4, 0]} />
+                <Bar isAnimationActive={false} dataKey="Salary" fill="#6366f1" radius={[0, 4, 4, 0]} />
               </BarChart>
             </ResponsiveContainer>
           )}

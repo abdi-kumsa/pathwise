@@ -116,8 +116,8 @@ export default function EnrollmentForecastPage() {
               <YAxis tick={{ fontSize: 11, fill: '#64748b' }} />
               <Tooltip formatter={(v, name) => [v ?? '—', name]} />
               <Legend />
-              <Line type="monotone" dataKey="historical" stroke="#2563eb" strokeWidth={2} dot={{ r: 4 }} connectNulls={false} name="Historical" />
-              <Line type="monotone" dataKey="forecast"   stroke="#f59e0b" strokeWidth={2} strokeDasharray="6 3" dot={{ r: 4 }} connectNulls={false} name="Forecast" />
+              <Line isAnimationActive={false} type="monotone" dataKey="historical" stroke="#2563eb" strokeWidth={2} dot={{ r: 4 }} connectNulls={false} name="Historical" />
+              <Line isAnimationActive={false} type="monotone" dataKey="forecast"   stroke="#f59e0b" strokeWidth={2} strokeDasharray="6 3" dot={{ r: 4 }} connectNulls={false} name="Forecast" />
             </LineChart>
           </ResponsiveContainer>
         )}
