@@ -1,0 +1,3001 @@
+student_id,placed,placement_status,company,role,salary,time_to_hire
+1,true,Undereducated,KPMG,Solutions Architect,102736.37,50
+2,false,,,,,
+3,true,Undereducated,Raytheon Technologies,AI Researcher,111222.03,61
+4,true,Matched,IBM,Mobile Developer,151211.27,15
+5,true,Undereducated,KPMG,Data Scientist,127492.13,42
+6,true,Undereducated,Stripe,UX Researcher,117935.65,50
+7,true,Undereducated,McKinsey & Company,Data Scientist,144479.32,70
+8,true,Undereducated,Amazon Web Services,Security Analyst,142026.1,90
+9,true,Matched,Raytheon Technologies,Security Analyst,111706.86,20
+10,true,Undereducated,McKinsey & Company,BI Developer,108967.4,75
+11,true,Undereducated,JPMorgan Chase,Design Researcher,101524.3,55
+12,false,,,,,
+13,true,Undereducated,UnitedHealth Group,Applied Scientist,86058.62,44
+14,true,Matched,Infosys,Frontend Developer,139296.44,15
+15,true,Undereducated,SAP,Scrum Master,106108.3,45
+16,true,Matched,Bloomberg,Full Stack Developer,116640.52,83
+17,true,Undereducated,Intel,Analytics Manager,96768.75,79
+18,true,Matched,Raytheon Technologies,ML Engineer,147568.51,91
+19,true,Undereducated,McKinsey & Company,Data Warehouse Architect,94872.15,83
+20,true,Undereducated,Booz Allen Hamilton,DevOps Engineer,86927.17,64
+21,true,Undereducated,Lockheed Martin,Data Scientist,121086.54,16
+22,true,Undereducated,Morgan Stanley,DevOps Engineer,95665.14,76
+23,true,Undereducated,PwC,Frontend Developer,97974.36,36
+24,true,Undereducated,Intel,Data Analyst,133590.54,69
+25,true,Undereducated,Booz Allen Hamilton,Growth PM,90884.11,54
+26,false,,,,,
+27,true,Undereducated,Bloomberg,Cloud Consultant,121395.04,30
+28,false,,,,,
+29,true,Matched,Raytheon Technologies,Full Stack Developer,85102.95,37
+30,true,Undereducated,Booz Allen Hamilton,UX Researcher,132369.75,83
+31,true,Matched,Oracle,Full Stack Developer,101860.68,25
+32,true,Undereducated,Cisco Systems,Product Designer,100417.44,39
+33,true,Undereducated,Accenture,Backend Developer,99012.14,23
+34,true,Undereducated,KPMG,Data Scientist,107736.65,76
+35,false,,,,,
+36,true,Undereducated,Google,Product Designer,126974.66,70
+37,true,Matched,Salesforce,Product Manager,125620.99,42
+38,true,Overeducated,Johnson & Johnson,BI Developer,120569.45,44
+39,false,,,,,
+40,true,Undereducated,Lockheed Martin,Security Analyst,127915.21,64
+41,true,Undereducated,UnitedHealth Group,Applied Scientist,118443.54,19
+42,true,Undereducated,IBM,Analytics Manager,108200.97,62
+43,true,Undereducated,SAP,AI Researcher,111114.55,55
+44,true,Undereducated,SAP,Build Engineer,112602.16,91
+45,true,Undereducated,McKinsey & Company,Cloud Architect,149370.76,75
+46,true,Matched,PwC,Mobile Developer,125837.7,30
+47,true,Undereducated,SAP,MLOps Engineer,101624.0,46
+48,true,Undereducated,Goldman Sachs,Applied Scientist,141108.23,28
+49,true,Undereducated,Capital One,Frontend Developer,105809.44,63
+50,false,,,,,
+51,true,Undereducated,Bloomberg,Platform Engineer,142486.85,24
+52,true,Undereducated,Intel,Analytics Manager,120499.65,18
+53,false,,,,,
+54,true,Undereducated,Stripe,Cloud Architect,119319.21,82
+55,true,Undereducated,IBM,CISO,131172.22,27
+56,false,,,,,
+57,true,Undereducated,Booz Allen Hamilton,Data Engineer,115915.59,88
+58,true,Undereducated,Deloitte,BI Analyst,151220.07,50
+59,true,Undereducated,Raytheon Technologies,Backend Developer,132510.45,85
+60,false,,,,,
+61,true,Undereducated,Visa,ML Engineer,127303.23,27
+62,false,,,,,
+63,true,Undereducated,Visa,QA Engineer,77548.02,26
+64,true,Undereducated,Amazon Web Services,Cloud Architect,104376.22,23
+65,true,Undereducated,Accenture,Build Engineer,147234.8,76
+66,true,Undereducated,Infosys,Build Engineer,123618.03,48
+67,true,Undereducated,UnitedHealth Group,DevOps Engineer,129344.92,25
+68,true,Undereducated,Visa,Build Engineer,83034.91,17
+69,true,Undereducated,Capital One,Data Analyst,141894.93,80
+70,true,Overeducated,Oracle,Full Stack Developer,125211.35,88
+71,true,Undereducated,Cognizant,Solutions Architect,122155.54,85
+72,true,Undereducated,Microsoft,Product Designer,126345.6,39
+73,true,Undereducated,Capital One,Product Manager,100879.08,90
+74,true,Overeducated,Epic Systems,DevOps Engineer,113446.59,93
+75,false,,,,,
+76,true,Undereducated,Morgan Stanley,Solutions Architect,125851.66,15
+77,false,,,,,
+78,true,Undereducated,Epic Systems,Cloud Architect,109558.25,88
+79,true,Undereducated,Booz Allen Hamilton,DevOps Engineer,132041.03,31
+80,true,Undereducated,Deloitte,Applied Scientist,111542.78,24
+81,true,Undereducated,Cognizant,Full Stack Developer,106648.1,29
+82,true,Matched,Palantir Technologies,CISO,111377.83,16
+83,true,Undereducated,JPMorgan Chase,Cloud Consultant,107702.42,33
+84,true,Undereducated,Stripe,Platform Engineer,139279.87,56
+85,false,,,,,
+86,true,Undereducated,Epic Systems,Scrum Master,105792.37,40
+87,true,Undereducated,Infosys,Penetration Tester,90128.45,39
+88,false,,,,,
+89,true,Undereducated,Johnson & Johnson,Solutions Architect,143764.39,50
+90,true,Undereducated,Intel,Security Analyst,103597.12,35
+91,true,Overeducated,Amazon Web Services,Security Analyst,138668.96,82
+92,true,Undereducated,UnitedHealth Group,Growth PM,115843.41,33
+93,true,Undereducated,Raytheon Technologies,AI Researcher,108853.0,75
+94,true,Matched,McKinsey & Company,Security Analyst,131538.8,59
+95,true,Matched,Cognizant,Full Stack Developer,106767.16,76
+96,false,,,,,
+97,true,Undereducated,JPMorgan Chase,Cloud Architect,133938.92,17
+98,true,Undereducated,Infosys,Design Researcher,100518.37,85
+99,true,Undereducated,Booz Allen Hamilton,Full Stack Developer,134962.91,62
+100,true,Undereducated,Epic Systems,ML Engineer,123735.76,66
+101,true,Overeducated,UnitedHealth Group,Build Engineer,123223.48,45
+102,true,Undereducated,Deloitte,Data Engineer,121613.33,78
+103,false,,,,,
+104,true,Undereducated,Google,QA Engineer,136096.59,87
+105,true,Matched,Cisco Systems,Build Engineer,119088.92,54
+106,true,Matched,Palantir Technologies,Full Stack Developer,111543.04,90
+107,true,Undereducated,SAP,Penetration Tester,100882.05,27
+108,true,Undereducated,UnitedHealth Group,DevOps Engineer,136480.2,56
+109,true,Undereducated,Johnson & Johnson,DevOps Engineer,126151.99,83
+110,true,Undereducated,Lockheed Martin,Analytics Manager,102468.57,24
+111,true,Undereducated,Deloitte,QA Engineer,133212.56,20
+112,true,Undereducated,PwC,BI Developer,91669.68,28
+113,true,Undereducated,JPMorgan Chase,Cloud Architect,142844.51,43
+114,true,Undereducated,Booz Allen Hamilton,Applied Scientist,84301.88,47
+115,true,Undereducated,Booz Allen Hamilton,Full Stack Developer,129374.98,90
+116,false,,,,,
+117,true,Matched,Visa,DevOps Engineer,96300.22,93
+118,true,Undereducated,Salesforce,DevOps Engineer,129049.13,20
+119,true,Undereducated,Cisco Systems,AI Researcher,109299.91,77
+120,true,Matched,Intel,Mobile Developer,106385.21,27
+121,true,Undereducated,Visa,Full Stack Developer,129143.96,15
+122,true,Undereducated,IBM,Scrum Master,126843.78,86
+123,true,Undereducated,Booz Allen Hamilton,Analytics Manager,109452.57,50
+124,true,Undereducated,Deloitte,Applied Scientist,129826.45,37
+125,true,Undereducated,Capital One,Growth PM,119289.83,73
+126,true,Undereducated,Microsoft,Cloud Architect,122473.35,19
+127,true,Undereducated,Cognizant,Platform Engineer,139787.58,53
+128,false,,,,,
+129,true,Undereducated,SAP,Data Analyst,145147.52,75
+130,true,Undereducated,Amazon Web Services,Data Engineer,112911.51,68
+131,true,Undereducated,Cognizant,BI Developer,149278.55,34
+132,true,Undereducated,Palantir Technologies,Data Analyst,111992.45,49
+133,true,Undereducated,UnitedHealth Group,Mobile Developer,146541.0,72
+134,true,Undereducated,Lockheed Martin,Data Warehouse Architect,161849.75,72
+135,true,Undereducated,Salesforce,Scrum Master,125325.54,50
+136,true,Undereducated,Visa,Analytics Manager,130314.07,40
+137,true,Overeducated,Lockheed Martin,Security Analyst,109274.2,26
+138,false,,,,,
+139,true,Overeducated,UnitedHealth Group,BI Analyst,123947.81,44
+140,false,,,,,
+141,true,Undereducated,Lockheed Martin,Site Reliability Engineer,131430.09,65
+142,true,Undereducated,PwC,Cloud Architect,139355.77,21
+143,true,Undereducated,Deloitte,Cloud Architect,126951.27,45
+144,false,,,,,
+145,true,Undereducated,UnitedHealth Group,BI Developer,99062.25,45
+146,true,Undereducated,KPMG,Backend Developer,108345.53,48
+147,true,Undereducated,SAP,Data Engineer,137641.0,20
+148,true,Undereducated,Cognizant,Cloud Architect,119710.29,43
+149,true,Undereducated,Capital One,Scrum Master,112826.69,24
+150,true,Undereducated,Bloomberg,MLOps Engineer,142228.14,73
+151,true,Undereducated,Stripe,Mobile Developer,109262.94,18
+152,true,Undereducated,Accenture,Analytics Manager,96553.42,18
+153,true,Undereducated,PwC,Backend Developer,108246.2,25
+154,true,Undereducated,Salesforce,Build Engineer,124038.99,71
+155,true,Undereducated,IBM,BI Analyst,121873.5,92
+156,true,Undereducated,IBM,MLOps Engineer,107488.76,63
+157,true,Matched,KPMG,Growth PM,122966.34,52
+158,true,Undereducated,SAP,Cloud Consultant,91741.78,91
+159,true,Undereducated,Goldman Sachs,Solutions Architect,127000.67,81
+160,true,Undereducated,Cisco Systems,Growth PM,95523.78,79
+161,true,Matched,Infosys,Site Reliability Engineer,98038.07,20
+162,true,Undereducated,Amazon Web Services,BI Analyst,118431.01,15
+163,true,Undereducated,Infosys,Penetration Tester,155832.81,58
+164,true,Undereducated,Epic Systems,Cloud Consultant,147090.56,66
+165,true,Undereducated,Intel,Cloud Consultant,97655.35,49
+166,true,Undereducated,IBM,BI Analyst,143552.04,61
+167,true,Undereducated,McKinsey & Company,Product Designer,104171.31,20
+168,true,Undereducated,Johnson & Johnson,BI Analyst,101968.8,67
+169,true,Undereducated,Stripe,Security Analyst,106048.07,94
+170,true,Undereducated,Raytheon Technologies,Data Engineer,149937.05,31
+171,true,Matched,Amazon Web Services,CISO,113390.53,65
+172,true,Undereducated,UnitedHealth Group,AI Researcher,131485.94,48
+173,true,Undereducated,Stripe,Data Engineer,112933.08,85
+174,false,,,,,
+175,true,Overeducated,KPMG,Data Scientist,140683.19,63
+176,true,Undereducated,Morgan Stanley,BI Developer,100633.46,66
+177,true,Undereducated,Bloomberg,Cloud Consultant,103433.32,66
+178,true,Undereducated,Cisco Systems,ML Engineer,110167.25,67
+179,true,Undereducated,UnitedHealth Group,QA Engineer,88911.21,31
+180,true,Undereducated,KPMG,Release Manager,136261.43,42
+181,true,Undereducated,Epic Systems,Backend Developer,159881.78,74
+182,false,,,,,
+183,false,,,,,
+184,true,Undereducated,Infosys,Data Analyst,155074.84,60
+185,false,,,,,
+186,true,Undereducated,Stripe,Applied Scientist,87043.25,38
+187,true,Undereducated,Oracle,Platform Engineer,93621.32,58
+188,true,Undereducated,Cognizant,Analytics Manager,100599.94,25
+189,true,Undereducated,Salesforce,Full Stack Developer,110771.01,52
+190,true,Undereducated,KPMG,UX Researcher,142078.64,17
+191,true,Undereducated,IBM,DevOps Engineer,147462.12,86
+192,true,Undereducated,SAP,Full Stack Developer,125937.35,57
+193,true,Undereducated,Microsoft,BI Analyst,115249.71,58
+194,true,Matched,Amazon Web Services,Growth PM,145088.68,45
+195,true,Undereducated,Raytheon Technologies,Penetration Tester,119671.21,39
+196,true,Undereducated,Google,CISO,103854.99,65
+197,true,Undereducated,Salesforce,Build Engineer,106654.79,26
+198,true,Undereducated,KPMG,Security Analyst,98794.5,30
+199,true,Undereducated,Cognizant,DevOps Engineer,119897.0,90
+200,true,Undereducated,Johnson & Johnson,Data Warehouse Architect,112508.88,32
+201,true,Undereducated,Deloitte,Applied Scientist,106858.93,67
+202,true,Undereducated,Bloomberg,UX Researcher,136168.04,78
+203,false,,,,,
+204,true,Undereducated,JPMorgan Chase,UX Researcher,129024.4,67
+205,true,Undereducated,KPMG,AI Researcher,114252.01,16
+206,false,,,,,
+207,true,Undereducated,Salesforce,Analytics Manager,77009.63,90
+208,true,Matched,Booz Allen Hamilton,Cloud Architect,144488.92,91
+209,true,Matched,Palantir Technologies,Product Designer,100656.01,57
+210,true,Undereducated,Epic Systems,Growth PM,129736.25,91
+211,true,Undereducated,Intel,AI Researcher,136238.88,94
+212,true,Undereducated,Microsoft,Penetration Tester,114804.55,32
+213,true,Undereducated,Microsoft,BI Developer,95507.59,30
+214,true,Overeducated,McKinsey & Company,Growth PM,142521.58,28
+215,true,Undereducated,Infosys,Site Reliability Engineer,97937.14,58
+216,true,Undereducated,Raytheon Technologies,QA Engineer,98289.17,39
+217,true,Undereducated,Cognizant,UX Researcher,103472.25,33
+218,true,Undereducated,Google,Mobile Developer,93149.09,68
+219,true,Undereducated,Amazon Web Services,Growth PM,103736.78,31
+220,true,Overeducated,PwC,Applied Scientist,120362.4,61
+221,true,Undereducated,Google,DevOps Engineer,127788.85,78
+222,false,,,,,
+223,true,Matched,PwC,Applied Scientist,142381.82,81
+224,true,Undereducated,Capital One,Release Manager,97359.58,17
+225,true,Matched,Stripe,BI Analyst,141304.7,81
+226,true,Undereducated,Infosys,Backend Developer,118066.11,18
+227,true,Undereducated,Bloomberg,MLOps Engineer,112766.14,42
+228,true,Undereducated,Cognizant,Frontend Developer,113126.42,58
+229,true,Undereducated,KPMG,Data Engineer,123965.5,70
+230,true,Undereducated,Stripe,Solutions Architect,104386.22,69
+231,true,Overeducated,Capital One,Data Warehouse Architect,137495.85,82
+232,true,Undereducated,Amazon Web Services,CISO,114520.04,45
+233,true,Undereducated,Salesforce,Scrum Master,107290.29,39
+234,true,Undereducated,Stripe,Cloud Architect,102921.58,67
+235,true,Undereducated,IBM,CISO,120622.36,21
+236,true,Undereducated,Palantir Technologies,Analytics Manager,118528.14,92
+237,true,Matched,McKinsey & Company,BI Developer,125369.97,52
+238,true,Undereducated,Accenture,Scrum Master,100361.79,47
+239,true,Overeducated,Raytheon Technologies,QA Engineer,95286.45,94
+240,true,Undereducated,Raytheon Technologies,Growth PM,109289.93,85
+241,true,Undereducated,PwC,Security Analyst,149012.71,26
+242,true,Undereducated,Lockheed Martin,Platform Engineer,123959.57,89
+243,true,Undereducated,Deloitte,Cloud Consultant,112173.54,57
+244,true,Undereducated,Raytheon Technologies,UX Researcher,110131.56,54
+245,true,Undereducated,Stripe,Data Scientist,150784.12,37
+246,true,Undereducated,SAP,Design Researcher,88550.9,52
+247,true,Undereducated,Intel,Product Manager,149918.51,87
+248,true,Undereducated,Intel,Analytics Manager,158626.57,86
+249,true,Undereducated,Booz Allen Hamilton,Security Analyst,115103.7,68
+250,false,,,,,
+251,true,Undereducated,PwC,Data Warehouse Architect,126983.45,54
+252,true,Matched,Deloitte,Design Researcher,155723.98,56
+253,true,Undereducated,IBM,DevOps Engineer,119710.4,81
+254,true,Undereducated,Raytheon Technologies,Analytics Manager,139059.16,51
+255,true,Undereducated,Intel,CISO,150657.04,33
+256,false,,,,,
+257,true,Overeducated,Accenture,Cloud Consultant,121707.41,66
+258,true,Undereducated,Oracle,Cloud Consultant,103783.78,70
+259,true,Undereducated,Lockheed Martin,Product Designer,79552.9,88
+260,true,Undereducated,Bloomberg,Data Warehouse Architect,115532.4,16
+261,true,Matched,Booz Allen Hamilton,Cloud Consultant,117967.17,39
+262,true,Undereducated,Google,CISO,106429.96,47
+263,false,,,,,
+264,false,,,,,
+265,true,Overeducated,McKinsey & Company,ML Engineer,90255.99,80
+266,true,Undereducated,Stripe,Analytics Manager,144949.7,36
+267,true,Matched,Accenture,UX Researcher,93396.86,70
+268,true,Undereducated,Infosys,BI Developer,133737.59,22
+269,true,Undereducated,Infosys,UX Researcher,148982.53,40
+270,true,Matched,SAP,Mobile Developer,133415.75,18
+271,true,Undereducated,KPMG,BI Analyst,107443.57,93
+272,true,Undereducated,Morgan Stanley,BI Developer,95684.8,56
+273,true,Undereducated,Cisco Systems,Data Scientist,130020.72,89
+274,false,,,,,
+275,true,Undereducated,Amazon Web Services,Platform Engineer,131348.88,43
+276,true,Undereducated,UnitedHealth Group,Solutions Architect,86264.62,71
+277,true,Undereducated,Cisco Systems,BI Analyst,100386.04,72
+278,false,,,,,
+279,true,Undereducated,Intel,Cloud Architect,127096.45,91
+280,true,Matched,Salesforce,Backend Developer,92895.27,77
+281,true,Undereducated,Visa,Product Designer,107388.23,21
+282,false,,,,,
+283,true,Undereducated,Bloomberg,Frontend Developer,146624.26,17
+284,true,Undereducated,Lockheed Martin,Frontend Developer,121151.11,23
+285,false,,,,,
+286,true,Undereducated,Bloomberg,Cloud Architect,132508.79,55
+287,true,Undereducated,Cognizant,Penetration Tester,128946.89,66
+288,true,Overeducated,Bloomberg,Security Analyst,137413.01,16
+289,true,Undereducated,Visa,Data Analyst,113852.21,28
+290,true,Undereducated,Infosys,CISO,99515.61,43
+291,true,Undereducated,KPMG,MLOps Engineer,116374.6,31
+292,true,Undereducated,IBM,Product Designer,122213.41,30
+293,true,Undereducated,UnitedHealth Group,Growth PM,117479.49,54
+294,true,Undereducated,Cisco Systems,MLOps Engineer,94262.47,21
+295,true,Undereducated,KPMG,Applied Scientist,119779.43,27
+296,true,Undereducated,Amazon Web Services,DevOps Engineer,105098.99,72
+297,true,Overeducated,Booz Allen Hamilton,Product Manager,103505.79,75
+298,true,Undereducated,UnitedHealth Group,Security Analyst,146384.2,78
+299,true,Undereducated,Cisco Systems,BI Developer,95494.0,16
+300,false,,,,,
+301,true,Undereducated,UnitedHealth Group,Data Engineer,143909.07,28
+302,true,Undereducated,Visa,QA Engineer,99488.33,36
+303,true,Overeducated,SAP,Solutions Architect,126367.43,92
+304,true,Undereducated,Stripe,Design Researcher,126862.41,84
+305,true,Undereducated,KPMG,Data Engineer,88829.39,84
+306,true,Undereducated,Accenture,Mobile Developer,106648.32,44
+307,true,Undereducated,PwC,Analytics Manager,112683.59,78
+308,true,Undereducated,PwC,Release Manager,124253.36,66
+309,true,Undereducated,JPMorgan Chase,Site Reliability Engineer,137745.51,22
+310,true,Matched,Deloitte,Product Manager,152786.11,81
+311,true,Matched,Salesforce,AI Researcher,103034.12,61
+312,true,Undereducated,Capital One,Backend Developer,114053.61,36
+313,true,Undereducated,Google,Data Analyst,131458.75,26
+314,false,,,,,
+315,true,Undereducated,Accenture,Mobile Developer,117020.43,84
+316,false,,,,,
+317,true,Undereducated,Infosys,Cloud Consultant,123590.38,24
+318,true,Undereducated,Cisco Systems,BI Developer,127424.15,88
+319,true,Overeducated,JPMorgan Chase,Applied Scientist,97578.95,86
+320,true,Undereducated,Epic Systems,DevOps Engineer,138628.54,70
+321,true,Undereducated,Salesforce,Analytics Manager,111841.74,35
+322,true,Undereducated,Stripe,Mobile Developer,151766.47,19
+323,false,,,,,
+324,true,Undereducated,SAP,Release Manager,102570.76,91
+325,true,Undereducated,Goldman Sachs,Cloud Architect,121541.65,53
+326,false,,,,,
+327,true,Undereducated,KPMG,BI Developer,114887.84,25
+328,true,Undereducated,Lockheed Martin,UX Researcher,93170.82,73
+329,false,,,,,
+330,true,Undereducated,Morgan Stanley,Scrum Master,89575.18,26
+331,true,Undereducated,UnitedHealth Group,Product Manager,100235.95,72
+332,true,Matched,Raytheon Technologies,Data Engineer,114191.41,18
+333,false,,,,,
+334,true,Undereducated,Bloomberg,BI Developer,90457.04,74
+335,true,Undereducated,Infosys,Cloud Consultant,131674.26,94
+336,true,Undereducated,Johnson & Johnson,Cloud Consultant,92585.65,31
+337,true,Undereducated,Johnson & Johnson,Applied Scientist,139147.43,83
+338,true,Matched,Infosys,Data Engineer,136316.89,45
+339,true,Undereducated,UnitedHealth Group,Analytics Manager,134775.08,61
+340,true,Undereducated,PwC,Mobile Developer,114727.41,73
+341,true,Undereducated,Booz Allen Hamilton,Data Analyst,93409.17,50
+342,false,,,,,
+343,true,Undereducated,Stripe,Platform Engineer,148309.53,49
+344,true,Matched,Infosys,Security Analyst,158448.47,90
+345,true,Undereducated,SAP,Growth PM,111298.42,38
+346,true,Undereducated,Capital One,Full Stack Developer,115893.76,65
+347,true,Undereducated,Cognizant,Build Engineer,111109.86,58
+348,true,Undereducated,Oracle,MLOps Engineer,122079.33,38
+349,true,Undereducated,Visa,Site Reliability Engineer,121570.17,37
+350,true,Undereducated,Cisco Systems,Data Analyst,103107.43,66
+351,true,Matched,Palantir Technologies,Design Researcher,111082.61,58
+352,true,Undereducated,IBM,Build Engineer,144647.49,43
+353,false,,,,,
+354,true,Matched,Palantir Technologies,Product Manager,113735.37,62
+355,true,Undereducated,Johnson & Johnson,Frontend Developer,141678.16,64
+356,false,,,,,
+357,true,Undereducated,Google,Solutions Architect,104812.89,51
+358,true,Undereducated,Cognizant,ML Engineer,93416.68,94
+359,true,Matched,KPMG,BI Developer,117718.78,29
+360,true,Undereducated,Cisco Systems,BI Analyst,129950.05,40
+361,true,Undereducated,McKinsey & Company,DevOps Engineer,102778.07,49
+362,true,Undereducated,IBM,Data Warehouse Architect,104300.51,65
+363,true,Undereducated,JPMorgan Chase,Build Engineer,116262.3,56
+364,true,Undereducated,Cognizant,Data Engineer,110114.86,61
+365,true,Undereducated,Intel,Site Reliability Engineer,97436.57,82
+366,true,Overeducated,JPMorgan Chase,MLOps Engineer,151135.4,20
+367,true,Undereducated,Stripe,Cloud Consultant,131038.54,28
+368,true,Undereducated,Bloomberg,Applied Scientist,116329.89,60
+369,true,Undereducated,KPMG,CISO,109614.89,90
+370,true,Undereducated,Microsoft,Cloud Architect,133197.25,76
+371,true,Undereducated,Deloitte,UX Researcher,118049.33,82
+372,true,Undereducated,Infosys,Data Analyst,138349.3,32
+373,false,,,,,
+374,true,Undereducated,Raytheon Technologies,Release Manager,145644.64,68
+375,true,Undereducated,Raytheon Technologies,UX Researcher,125520.58,68
+376,true,Undereducated,JPMorgan Chase,Full Stack Developer,107790.31,53
+377,true,Overeducated,Palantir Technologies,Mobile Developer,115463.83,80
+378,true,Undereducated,Oracle,Full Stack Developer,120595.28,84
+379,true,Undereducated,Intel,Platform Engineer,120247.06,55
+380,true,Undereducated,Goldman Sachs,Data Engineer,153445.12,79
+381,true,Undereducated,Visa,CISO,136068.24,25
+382,false,,,,,
+383,true,Undereducated,Capital One,AI Researcher,107285.56,20
+384,true,Undereducated,IBM,Design Researcher,145684.32,90
+385,true,Undereducated,Deloitte,Cloud Architect,98211.94,29
+386,true,Undereducated,Bloomberg,Data Warehouse Architect,120476.37,15
+387,true,Undereducated,KPMG,Data Warehouse Architect,94260.11,69
+388,true,Matched,Booz Allen Hamilton,Growth PM,104743.15,53
+389,true,Undereducated,Microsoft,Product Designer,125990.45,64
+390,true,Undereducated,Johnson & Johnson,Cloud Consultant,149755.02,78
+391,false,,,,,
+392,true,Undereducated,Intel,Scrum Master,140959.35,71
+393,true,Undereducated,Intel,Cloud Consultant,114633.41,15
+394,true,Matched,PwC,Data Analyst,147990.09,62
+395,true,Undereducated,Bloomberg,Data Warehouse Architect,112088.72,37
+396,true,Undereducated,Booz Allen Hamilton,Cloud Architect,151617.37,39
+397,true,Undereducated,Microsoft,Cloud Consultant,114819.95,15
+398,true,Undereducated,Amazon Web Services,Product Designer,125955.26,16
+399,false,,,,,
+400,true,Overeducated,Johnson & Johnson,Data Analyst,115937.66,41
+401,true,Undereducated,Accenture,Data Analyst,133012.05,75
+402,true,Undereducated,Oracle,Security Analyst,119071.33,37
+403,true,Undereducated,Johnson & Johnson,Security Analyst,156591.99,56
+404,true,Undereducated,Lockheed Martin,Full Stack Developer,136771.62,76
+405,true,Matched,McKinsey & Company,Applied Scientist,116356.77,56
+406,true,Undereducated,SAP,Security Analyst,100331.23,63
+407,true,Matched,PwC,Build Engineer,117474.79,65
+408,true,Undereducated,Palantir Technologies,Scrum Master,149189.58,30
+409,true,Undereducated,JPMorgan Chase,Data Warehouse Architect,104426.35,40
+410,true,Overeducated,Cognizant,Data Engineer,135859.72,18
+411,true,Undereducated,McKinsey & Company,Data Warehouse Architect,108627.19,67
+412,false,,,,,
+413,true,Matched,Salesforce,MLOps Engineer,120243.43,89
+414,true,Undereducated,Lockheed Martin,Cloud Consultant,87521.54,45
+415,true,Matched,IBM,DevOps Engineer,116255.13,88
+416,true,Undereducated,Google,ML Engineer,121927.85,49
+417,true,Undereducated,Morgan Stanley,Security Analyst,134411.57,78
+418,true,Undereducated,Goldman Sachs,DevOps Engineer,129179.12,17
+419,true,Undereducated,Epic Systems,Solutions Architect,104007.74,93
+420,true,Undereducated,UnitedHealth Group,Scrum Master,114289.86,92
+421,false,,,,,
+422,true,Undereducated,Cisco Systems,Data Engineer,107307.02,71
+423,true,Undereducated,Deloitte,Security Analyst,110993.63,82
+424,false,,,,,
+425,true,Undereducated,Palantir Technologies,MLOps Engineer,92997.96,32
+426,true,Undereducated,Visa,DevOps Engineer,107449.11,31
+427,true,Matched,Raytheon Technologies,Build Engineer,106868.19,32
+428,true,Matched,Salesforce,BI Analyst,129445.11,85
+429,true,Undereducated,Amazon Web Services,Frontend Developer,93732.23,85
+430,true,Undereducated,Oracle,Security Analyst,146163.31,81
+431,true,Undereducated,JPMorgan Chase,Penetration Tester,137453.91,41
+432,true,Undereducated,UnitedHealth Group,Platform Engineer,125214.05,80
+433,true,Undereducated,Lockheed Martin,Product Manager,102892.61,22
+434,true,Undereducated,Salesforce,Applied Scientist,140282.28,40
+435,true,Undereducated,Deloitte,Product Designer,160811.45,25
+436,true,Matched,McKinsey & Company,MLOps Engineer,154180.02,29
+437,true,Matched,Stripe,Data Analyst,103263.05,41
+438,true,Undereducated,Visa,Backend Developer,138807.87,17
+439,true,Matched,Cisco Systems,Penetration Tester,121573.94,18
+440,true,Undereducated,Epic Systems,UX Researcher,101146.62,39
+441,true,Undereducated,Visa,AI Researcher,141162.46,88
+442,true,Undereducated,Cognizant,Solutions Architect,133385.22,26
+443,true,Undereducated,Infosys,BI Analyst,101528.17,34
+444,true,Undereducated,Cisco Systems,CISO,101546.86,73
+445,true,Undereducated,Capital One,BI Analyst,104601.07,29
+446,true,Undereducated,Bloomberg,CISO,115332.89,29
+447,true,Overeducated,Visa,Data Engineer,88389.23,20
+448,true,Undereducated,JPMorgan Chase,Cloud Architect,125196.85,58
+449,true,Undereducated,Raytheon Technologies,Scrum Master,134574.41,46
+450,true,Matched,PwC,Data Warehouse Architect,110164.91,19
+451,true,Undereducated,Infosys,Mobile Developer,100852.45,41
+452,true,Undereducated,JPMorgan Chase,ML Engineer,122375.51,81
+453,true,Overeducated,Goldman Sachs,Data Engineer,127160.56,27
+454,true,Undereducated,Lockheed Martin,Product Manager,101135.47,82
+455,true,Undereducated,Accenture,MLOps Engineer,102834.85,32
+456,true,Undereducated,Capital One,Analytics Manager,123482.5,90
+457,true,Undereducated,IBM,Product Designer,148037.4,23
+458,false,,,,,
+459,true,Overeducated,Visa,Data Warehouse Architect,100061.8,87
+460,true,Undereducated,Palantir Technologies,Solutions Architect,102153.76,17
+461,true,Undereducated,JPMorgan Chase,CISO,111443.16,33
+462,true,Undereducated,IBM,MLOps Engineer,111497.66,84
+463,true,Matched,Visa,Cloud Architect,106119.48,42
+464,true,Undereducated,Bloomberg,Cloud Consultant,94893.01,18
+465,true,Overeducated,Amazon Web Services,Release Manager,119128.92,30
+466,true,Undereducated,Deloitte,Solutions Architect,99449.88,50
+467,true,Undereducated,Amazon Web Services,Scrum Master,129953.34,25
+468,true,Matched,Accenture,QA Engineer,137374.29,44
+469,true,Matched,KPMG,Build Engineer,108680.41,58
+470,true,Undereducated,Cisco Systems,AI Researcher,159457.38,43
+471,true,Undereducated,Amazon Web Services,DevOps Engineer,137589.81,22
+472,true,Undereducated,Visa,Product Manager,120342.31,78
+473,true,Overeducated,JPMorgan Chase,Platform Engineer,105199.67,69
+474,true,Undereducated,Bloomberg,Platform Engineer,115412.97,71
+475,true,Undereducated,IBM,Platform Engineer,127805.5,51
+476,true,Undereducated,Deloitte,Frontend Developer,117314.06,76
+477,true,Matched,Salesforce,Frontend Developer,115390.39,74
+478,true,Undereducated,Lockheed Martin,BI Analyst,80201.29,30
+479,true,Undereducated,Amazon Web Services,Data Warehouse Architect,95538.95,18
+480,false,,,,,
+481,true,Matched,Deloitte,Build Engineer,120628.64,72
+482,true,Undereducated,Bloomberg,Solutions Architect,143699.1,35
+483,true,Undereducated,Accenture,Build Engineer,98045.93,61
+484,true,Undereducated,Accenture,Build Engineer,115999.14,58
+485,true,Undereducated,Cognizant,UX Researcher,93611.3,20
+486,true,Matched,Amazon Web Services,Security Analyst,105083.32,44
+487,true,Undereducated,SAP,Growth PM,130626.11,61
+488,false,,,,,
+489,false,,,,,
+490,true,Undereducated,Infosys,Data Engineer,92378.77,29
+491,true,Undereducated,McKinsey & Company,Release Manager,105289.09,38
+492,true,Undereducated,Oracle,Penetration Tester,142970.23,72
+493,true,Undereducated,Epic Systems,Solutions Architect,116615.28,18
+494,true,Undereducated,Google,Data Scientist,138307.92,40
+495,true,Matched,Salesforce,Scrum Master,90576.55,47
+496,false,,,,,
+497,true,Undereducated,Capital One,Backend Developer,116966.82,60
+498,true,Undereducated,SAP,Cloud Architect,106033.87,75
+499,true,Undereducated,Epic Systems,Product Manager,98763.88,68
+500,true,Undereducated,Google,Analytics Manager,106287.66,23
+501,true,Undereducated,McKinsey & Company,Solutions Architect,102528.88,74
+502,true,Undereducated,Accenture,Frontend Developer,99101.93,89
+503,true,Undereducated,Lockheed Martin,BI Developer,127340.54,87
+504,true,Undereducated,Morgan Stanley,Full Stack Developer,137180.18,88
+505,true,Undereducated,Palantir Technologies,BI Developer,112464.53,55
+506,true,Undereducated,Microsoft,UX Researcher,77607.28,19
+507,true,Undereducated,SAP,Solutions Architect,110286.19,65
+508,false,,,,,
+509,true,Undereducated,Deloitte,BI Developer,94727.33,40
+510,true,Undereducated,Booz Allen Hamilton,QA Engineer,102438.73,63
+511,true,Undereducated,Booz Allen Hamilton,QA Engineer,137495.34,63
+512,false,,,,,
+513,true,Overeducated,Amazon Web Services,Solutions Architect,124247.77,76
+514,true,Undereducated,SAP,Data Engineer,121405.06,56
+515,true,Matched,Palantir Technologies,UX Researcher,114968.64,90
+516,true,Undereducated,Visa,CISO,98148.83,93
+517,true,Undereducated,Palantir Technologies,Frontend Developer,100733.02,36
+518,false,,,,,
+519,true,Matched,Capital One,Analytics Manager,112318.67,42
+520,true,Undereducated,SAP,Data Analyst,130809.7,28
+521,true,Overeducated,Cisco Systems,Analytics Manager,78087.05,48
+522,true,Overeducated,Visa,Backend Developer,158268.0,45
+523,true,Undereducated,Microsoft,UX Researcher,129687.22,91
+524,true,Undereducated,McKinsey & Company,Scrum Master,137680.36,33
+525,true,Undereducated,JPMorgan Chase,Analytics Manager,100008.04,83
+526,true,Undereducated,Goldman Sachs,UX Researcher,124207.08,18
+527,true,Undereducated,Lockheed Martin,Product Manager,131164.43,48
+528,true,Undereducated,Raytheon Technologies,CISO,102635.55,72
+529,false,,,,,
+530,true,Undereducated,PwC,Design Researcher,136185.1,88
+531,false,,,,,
+532,false,,,,,
+533,true,Undereducated,Lockheed Martin,Data Engineer,140760.33,22
+534,true,Undereducated,Amazon Web Services,QA Engineer,94899.03,75
+535,true,Undereducated,SAP,Data Engineer,111996.53,39
+536,true,Undereducated,Microsoft,Product Manager,108426.66,26
+537,true,Undereducated,Visa,Data Analyst,128063.22,80
+538,false,,,,,
+539,true,Undereducated,Salesforce,Data Analyst,129521.5,91
+540,true,Matched,KPMG,Cloud Consultant,138223.2,74
+541,true,Undereducated,Oracle,Site Reliability Engineer,119605.23,21
+542,true,Undereducated,Deloitte,CISO,119086.72,48
+543,true,Undereducated,McKinsey & Company,Release Manager,100244.98,29
+544,true,Undereducated,UnitedHealth Group,DevOps Engineer,85848.89,37
+545,true,Undereducated,Salesforce,Design Researcher,144406.39,57
+546,true,Undereducated,Raytheon Technologies,Security Analyst,108285.96,89
+547,true,Undereducated,Oracle,Product Manager,145850.2,38
+548,true,Undereducated,Microsoft,QA Engineer,77716.37,51
+549,true,Undereducated,Lockheed Martin,DevOps Engineer,109310.47,48
+550,true,Matched,Epic Systems,Scrum Master,111748.18,80
+551,true,Undereducated,Accenture,Cloud Consultant,94978.96,86
+552,true,Undereducated,Cisco Systems,Penetration Tester,100209.28,89
+553,true,Undereducated,Intel,Full Stack Developer,118671.83,84
+554,true,Undereducated,McKinsey & Company,Design Researcher,104017.85,49
+555,true,Undereducated,KPMG,Design Researcher,116504.36,93
+556,true,Undereducated,Epic Systems,Product Manager,126667.23,76
+557,true,Undereducated,KPMG,Scrum Master,161326.25,92
+558,true,Undereducated,Microsoft,BI Developer,116395.89,26
+559,true,Undereducated,SAP,CISO,110722.59,90
+560,true,Undereducated,Deloitte,Penetration Tester,143722.61,91
+561,true,Undereducated,SAP,Data Warehouse Architect,99509.27,67
+562,true,Undereducated,PwC,QA Engineer,115093.88,15
+563,true,Undereducated,Amazon Web Services,Frontend Developer,143088.61,56
+564,true,Undereducated,Google,Analytics Manager,113097.36,36
+565,true,Undereducated,Raytheon Technologies,ML Engineer,153719.71,78
+566,true,Matched,Booz Allen Hamilton,Release Manager,106228.47,55
+567,true,Undereducated,Palantir Technologies,Growth PM,155144.26,50
+568,true,Undereducated,Infosys,BI Developer,138629.84,75
+569,true,Undereducated,Visa,BI Developer,114275.02,81
+570,true,Undereducated,Lockheed Martin,Applied Scientist,103899.83,84
+571,true,Undereducated,Accenture,Product Manager,127932.34,74
+572,false,,,,,
+573,true,Undereducated,JPMorgan Chase,Full Stack Developer,122660.92,67
+574,true,Undereducated,Salesforce,Design Researcher,125801.61,56
+575,true,Undereducated,Morgan Stanley,Product Designer,140117.6,48
+576,true,Undereducated,Lockheed Martin,DevOps Engineer,130823.41,89
+577,true,Undereducated,JPMorgan Chase,ML Engineer,120453.07,79
+578,true,Undereducated,UnitedHealth Group,Backend Developer,87869.31,56
+579,true,Matched,Google,BI Analyst,122105.82,29
+580,true,Overeducated,Microsoft,Data Engineer,115277.46,22
+581,false,,,,,
+582,true,Undereducated,Deloitte,Product Designer,143744.83,20
+583,true,Undereducated,Bloomberg,Release Manager,95237.65,22
+584,true,Undereducated,Raytheon Technologies,Product Manager,124608.31,41
+585,true,Undereducated,Palantir Technologies,Cloud Architect,121421.85,27
+586,true,Undereducated,IBM,BI Analyst,103955.65,63
+587,true,Undereducated,Microsoft,ML Engineer,90162.68,32
+588,true,Undereducated,Epic Systems,Data Engineer,136678.64,21
+589,true,Undereducated,Infosys,Full Stack Developer,90300.75,86
+590,true,Matched,Intel,BI Analyst,126429.68,56
+591,false,,,,,
+592,true,Undereducated,Salesforce,ML Engineer,92660.33,55
+593,true,Undereducated,Raytheon Technologies,Scrum Master,104024.25,58
+594,true,Undereducated,JPMorgan Chase,ML Engineer,93342.47,55
+595,false,,,,,
+596,true,Undereducated,Microsoft,Analytics Manager,110282.56,69
+597,true,Undereducated,IBM,Frontend Developer,131423.72,66
+598,true,Matched,Stripe,Data Engineer,128030.84,68
+599,true,Undereducated,Booz Allen Hamilton,Product Manager,100724.38,57
+600,true,Undereducated,Visa,BI Analyst,89186.89,16
+601,true,Undereducated,Cisco Systems,Data Engineer,144464.45,30
+602,true,Overeducated,Raytheon Technologies,Scrum Master,105529.17,69
+603,false,,,,,
+604,true,Undereducated,Goldman Sachs,Product Manager,122205.63,32
+605,true,Undereducated,Infosys,Analytics Manager,120210.56,28
+606,true,Undereducated,Booz Allen Hamilton,Backend Developer,86675.36,62
+607,false,,,,,
+608,false,,,,,
+609,true,Undereducated,Salesforce,Product Designer,112560.05,22
+610,true,Undereducated,Lockheed Martin,AI Researcher,139412.99,28
+611,true,Undereducated,Infosys,Site Reliability Engineer,135878.6,78
+612,false,,,,,
+613,true,Undereducated,Cisco Systems,Penetration Tester,126483.23,71
+614,false,,,,,
+615,false,,,,,
+616,false,,,,,
+617,true,Undereducated,Palantir Technologies,QA Engineer,102475.68,48
+618,true,Matched,Intel,BI Developer,116098.14,33
+619,true,Undereducated,Amazon Web Services,Data Warehouse Architect,145976.09,82
+620,true,Undereducated,UnitedHealth Group,Site Reliability Engineer,147712.45,58
+621,true,Undereducated,McKinsey & Company,Product Designer,107903.08,83
+622,true,Undereducated,SAP,Data Analyst,122597.17,62
+623,false,,,,,
+624,false,,,,,
+625,true,Undereducated,Oracle,Design Researcher,93628.33,79
+626,true,Undereducated,Salesforce,Full Stack Developer,85622.28,21
+627,true,Undereducated,Epic Systems,ML Engineer,111893.76,62
+628,true,Undereducated,PwC,Cloud Consultant,93754.51,40
+629,false,,,,,
+630,true,Matched,Cognizant,Cloud Consultant,98437.41,72
+631,true,Matched,Raytheon Technologies,Solutions Architect,137012.41,94
+632,true,Undereducated,JPMorgan Chase,Scrum Master,161097.63,65
+633,true,Undereducated,Goldman Sachs,Data Analyst,107659.02,77
+634,true,Undereducated,SAP,Product Designer,105198.15,36
+635,true,Undereducated,IBM,AI Researcher,133296.01,84
+636,true,Undereducated,Microsoft,Product Designer,148033.33,46
+637,true,Undereducated,Palantir Technologies,Data Scientist,108236.64,19
+638,true,Undereducated,Deloitte,MLOps Engineer,137739.18,84
+639,true,Undereducated,Microsoft,Design Researcher,98662.01,57
+640,false,,,,,
+641,true,Overeducated,Stripe,Build Engineer,96567.13,80
+642,true,Undereducated,JPMorgan Chase,Site Reliability Engineer,109158.3,79
+643,true,Undereducated,SAP,Release Manager,151060.16,59
+644,false,,,,,
+645,true,Undereducated,Oracle,Platform Engineer,85666.95,48
+646,true,Undereducated,Lockheed Martin,Data Warehouse Architect,86246.46,83
+647,false,,,,,
+648,true,Undereducated,Microsoft,Data Warehouse Architect,128705.79,72
+649,true,Undereducated,Accenture,MLOps Engineer,132728.5,45
+650,true,Undereducated,Lockheed Martin,Security Analyst,97673.31,79
+651,true,Undereducated,Lockheed Martin,Product Designer,112772.84,94
+652,true,Undereducated,McKinsey & Company,UX Researcher,101874.57,34
+653,true,Matched,Microsoft,BI Analyst,149274.05,54
+654,false,,,,,
+655,true,Undereducated,Capital One,Site Reliability Engineer,134096.31,28
+656,true,Matched,Capital One,Frontend Developer,102875.39,63
+657,true,Matched,Stripe,Product Designer,106788.51,47
+658,true,Undereducated,Cognizant,Design Researcher,98081.25,90
+659,true,Undereducated,Deloitte,Build Engineer,136159.03,34
+660,false,,,,,
+661,false,,,,,
+662,true,Undereducated,Infosys,Data Analyst,129998.4,87
+663,true,Undereducated,Stripe,UX Researcher,99930.51,21
+664,true,Undereducated,Cognizant,Data Analyst,132966.38,33
+665,true,Undereducated,Accenture,Data Engineer,135178.29,44
+666,true,Undereducated,Bloomberg,Product Designer,100105.63,74
+667,true,Undereducated,Visa,Analytics Manager,101501.49,80
+668,false,,,,,
+669,true,Undereducated,Visa,Site Reliability Engineer,137656.11,64
+670,true,Undereducated,SAP,Growth PM,112100.61,39
+671,true,Undereducated,Goldman Sachs,BI Analyst,134249.26,45
+672,false,,,,,
+673,true,Undereducated,Deloitte,Backend Developer,120604.88,90
+674,true,Undereducated,Johnson & Johnson,Full Stack Developer,110557.69,68
+675,true,Undereducated,Lockheed Martin,Cloud Architect,132788.85,39
+676,true,Overeducated,McKinsey & Company,MLOps Engineer,125250.74,27
+677,true,Undereducated,Raytheon Technologies,Analytics Manager,109927.79,73
+678,true,Undereducated,Cisco Systems,AI Researcher,105788.22,62
+679,true,Overeducated,Google,Product Designer,123063.18,71
+680,false,,,,,
+681,true,Undereducated,Amazon Web Services,Release Manager,121923.45,70
+682,false,,,,,
+683,true,Undereducated,Bloomberg,BI Developer,130792.42,16
+684,true,Undereducated,IBM,ML Engineer,124435.34,26
+685,true,Undereducated,UnitedHealth Group,Design Researcher,146020.3,51
+686,true,Undereducated,Google,Build Engineer,122351.05,66
+687,true,Undereducated,McKinsey & Company,Full Stack Developer,157809.32,94
+688,true,Undereducated,Accenture,Platform Engineer,105957.3,86
+689,true,Undereducated,Lockheed Martin,Data Scientist,131214.41,52
+690,true,Matched,PwC,Product Manager,123651.87,35
+691,true,Matched,Accenture,Design Researcher,132792.12,84
+692,true,Undereducated,UnitedHealth Group,CISO,127771.04,75
+693,true,Undereducated,Morgan Stanley,Solutions Architect,112649.38,93
+694,true,Undereducated,Salesforce,Release Manager,101531.74,38
+695,true,Overeducated,McKinsey & Company,Security Analyst,153570.22,63
+696,true,Matched,Capital One,Analytics Manager,98598.66,26
+697,true,Undereducated,Raytheon Technologies,Penetration Tester,138296.62,73
+698,true,Undereducated,McKinsey & Company,Data Engineer,142077.23,63
+699,true,Undereducated,Lockheed Martin,AI Researcher,148888.89,88
+700,true,Matched,Bloomberg,Security Analyst,98403.21,61
+701,true,Undereducated,Booz Allen Hamilton,Security Analyst,87945.47,77
+702,true,Matched,Oracle,Cloud Architect,102830.52,77
+703,true,Undereducated,Salesforce,BI Developer,114493.42,27
+704,true,Undereducated,Morgan Stanley,Cloud Consultant,139861.73,50
+705,true,Undereducated,Infosys,Cloud Architect,113936.34,70
+706,true,Overeducated,Microsoft,Site Reliability Engineer,99485.06,57
+707,true,Undereducated,Amazon Web Services,Frontend Developer,91275.72,61
+708,true,Undereducated,SAP,Penetration Tester,115122.08,52
+709,true,Undereducated,Amazon Web Services,MLOps Engineer,141671.95,70
+710,true,Undereducated,Stripe,Cloud Consultant,114826.63,31
+711,true,Undereducated,SAP,AI Researcher,99421.09,88
+712,true,Undereducated,Bloomberg,Product Manager,103904.06,43
+713,false,,,,,
+714,false,,,,,
+715,true,Undereducated,JPMorgan Chase,Data Analyst,147531.96,42
+716,false,,,,,
+717,true,Undereducated,Cisco Systems,UX Researcher,154683.9,35
+718,true,Undereducated,UnitedHealth Group,Full Stack Developer,140995.43,15
+719,true,Undereducated,Morgan Stanley,Data Engineer,124273.74,35
+720,true,Undereducated,Deloitte,Backend Developer,135853.84,32
+721,false,,,,,
+722,true,Matched,Lockheed Martin,Platform Engineer,158846.27,15
+723,true,Undereducated,IBM,BI Analyst,98828.04,26
+724,true,Undereducated,Accenture,Data Engineer,99615.66,74
+725,true,Undereducated,SAP,Backend Developer,97023.54,55
+726,true,Undereducated,UnitedHealth Group,Applied Scientist,87396.57,61
+727,true,Undereducated,Salesforce,Scrum Master,129579.26,21
+728,false,,,,,
+729,true,Undereducated,JPMorgan Chase,BI Developer,85841.71,70
+730,true,Overeducated,Accenture,Site Reliability Engineer,144746.21,47
+731,true,Undereducated,Morgan Stanley,Backend Developer,147158.81,79
+732,true,Matched,Palantir Technologies,MLOps Engineer,120237.44,52
+733,true,Undereducated,Salesforce,Security Analyst,100542.67,67
+734,true,Undereducated,Stripe,QA Engineer,108069.54,59
+735,true,Undereducated,Johnson & Johnson,CISO,112854.54,67
+736,true,Undereducated,Microsoft,UX Researcher,100228.36,33
+737,false,,,,,
+738,true,Matched,Lockheed Martin,Backend Developer,110921.02,42
+739,true,Undereducated,Bloomberg,Applied Scientist,136267.64,48
+740,true,Undereducated,Raytheon Technologies,Product Manager,103379.0,43
+741,true,Undereducated,UnitedHealth Group,Growth PM,103436.04,42
+742,false,,,,,
+743,true,Undereducated,JPMorgan Chase,Frontend Developer,120048.37,82
+744,true,Undereducated,Google,Cloud Consultant,141192.82,68
+745,true,Undereducated,Epic Systems,Release Manager,120281.58,19
+746,false,,,,,
+747,true,Undereducated,Deloitte,Frontend Developer,129414.3,53
+748,true,Undereducated,Lockheed Martin,ML Engineer,125168.99,37
+749,true,Undereducated,Visa,ML Engineer,98025.47,66
+750,true,Undereducated,Google,Mobile Developer,127009.61,21
+751,true,Undereducated,Epic Systems,BI Analyst,112439.34,65
+752,true,Undereducated,IBM,Backend Developer,130993.73,61
+753,false,,,,,
+754,true,Undereducated,PwC,AI Researcher,138486.84,91
+755,true,Undereducated,UnitedHealth Group,MLOps Engineer,140972.03,28
+756,true,Undereducated,Goldman Sachs,Analytics Manager,120931.43,91
+757,true,Undereducated,Bloomberg,Build Engineer,84875.7,74
+758,true,Matched,Booz Allen Hamilton,Analytics Manager,152953.0,33
+759,true,Undereducated,JPMorgan Chase,Product Designer,110156.73,21
+760,true,Undereducated,Morgan Stanley,Analytics Manager,113211.68,66
+761,true,Undereducated,Deloitte,MLOps Engineer,123289.35,49
+762,true,Undereducated,Cisco Systems,AI Researcher,112490.52,25
+763,true,Undereducated,UnitedHealth Group,MLOps Engineer,117841.01,87
+764,true,Matched,Accenture,Data Analyst,124403.11,68
+765,true,Undereducated,Amazon Web Services,Backend Developer,113384.71,55
+766,true,Undereducated,PwC,Data Engineer,110729.94,59
+767,true,Undereducated,Oracle,Frontend Developer,132733.82,71
+768,true,Matched,Amazon Web Services,Scrum Master,109940.68,51
+769,true,Overeducated,Booz Allen Hamilton,Scrum Master,130398.66,39
+770,false,,,,,
+771,true,Undereducated,Visa,Penetration Tester,117334.25,90
+772,true,Undereducated,Visa,Design Researcher,121620.01,23
+773,true,Undereducated,Goldman Sachs,Data Warehouse Architect,143163.22,53
+774,true,Undereducated,Palantir Technologies,CISO,96585.83,15
+775,true,Undereducated,Amazon Web Services,Data Warehouse Architect,106302.83,69
+776,true,Undereducated,Raytheon Technologies,Growth PM,125355.58,23
+777,true,Undereducated,Microsoft,Build Engineer,114994.59,43
+778,false,,,,,
+779,true,Undereducated,UnitedHealth Group,Data Engineer,125537.93,84
+780,true,Undereducated,Deloitte,Platform Engineer,137998.26,87
+781,true,Undereducated,Infosys,BI Developer,94102.41,19
+782,true,Undereducated,McKinsey & Company,AI Researcher,112622.66,17
+783,true,Matched,Visa,BI Analyst,101995.87,24
+784,true,Undereducated,Johnson & Johnson,Frontend Developer,130422.18,20
+785,true,Matched,Johnson & Johnson,UX Researcher,133190.18,49
+786,true,Undereducated,UnitedHealth Group,Data Warehouse Architect,97764.09,39
+787,true,Undereducated,McKinsey & Company,Platform Engineer,100714.95,43
+788,true,Undereducated,JPMorgan Chase,Product Designer,100490.48,35
+789,true,Undereducated,Cisco Systems,Penetration Tester,84338.1,16
+790,true,Overeducated,Infosys,MLOps Engineer,115050.86,47
+791,true,Undereducated,Goldman Sachs,Build Engineer,109993.5,73
+792,true,Overeducated,Amazon Web Services,Data Engineer,104820.97,88
+793,true,Undereducated,Salesforce,Design Researcher,98874.77,54
+794,true,Undereducated,Accenture,Applied Scientist,113143.44,88
+795,true,Undereducated,Intel,Applied Scientist,144751.51,60
+796,true,Undereducated,Lockheed Martin,QA Engineer,121311.51,80
+797,true,Undereducated,UnitedHealth Group,CISO,76529.89,26
+798,true,Undereducated,Salesforce,Cloud Architect,131979.88,93
+799,false,,,,,
+800,true,Undereducated,Visa,Security Analyst,112490.21,57
+801,true,Undereducated,Lockheed Martin,Scrum Master,131824.99,56
+802,true,Overeducated,Bloomberg,Data Analyst,143035.19,90
+803,true,Undereducated,Goldman Sachs,Data Analyst,133011.17,65
+804,true,Undereducated,Deloitte,QA Engineer,147662.56,37
+805,true,Undereducated,Capital One,Security Analyst,132698.24,62
+806,true,Undereducated,Epic Systems,Security Analyst,109326.93,74
+807,false,,,,,
+808,true,Undereducated,Visa,Scrum Master,80791.13,29
+809,true,Undereducated,Cisco Systems,Design Researcher,126589.62,85
+810,true,Undereducated,Palantir Technologies,Data Analyst,109452.26,27
+811,true,Undereducated,Oracle,Data Analyst,140831.7,23
+812,true,Undereducated,Salesforce,CISO,128056.97,81
+813,true,Undereducated,Accenture,Platform Engineer,124441.65,87
+814,true,Undereducated,Booz Allen Hamilton,UX Researcher,105320.8,70
+815,true,Undereducated,Lockheed Martin,Backend Developer,104342.85,90
+816,false,,,,,
+817,true,Undereducated,Johnson & Johnson,Data Analyst,118260.0,27
+818,true,Overeducated,Palantir Technologies,BI Analyst,125838.2,58
+819,true,Undereducated,Raytheon Technologies,Data Warehouse Architect,94192.51,23
+820,true,Undereducated,Capital One,UX Researcher,114021.01,89
+821,true,Matched,KPMG,Full Stack Developer,108618.91,57
+822,true,Matched,Amazon Web Services,Build Engineer,124793.55,80
+823,true,Undereducated,Johnson & Johnson,Data Analyst,119784.83,15
+824,true,Undereducated,Microsoft,Growth PM,96945.59,83
+825,true,Undereducated,Deloitte,Cloud Architect,146331.06,34
+826,true,Matched,Epic Systems,Solutions Architect,87724.58,50
+827,true,Undereducated,Visa,CISO,136557.11,23
+828,true,Undereducated,IBM,Data Scientist,129953.4,16
+829,true,Undereducated,PwC,AI Researcher,120371.65,31
+830,true,Undereducated,Amazon Web Services,Full Stack Developer,114808.6,34
+831,true,Undereducated,Palantir Technologies,Scrum Master,98035.23,78
+832,true,Undereducated,Palantir Technologies,Build Engineer,146518.38,46
+833,true,Undereducated,UnitedHealth Group,Cloud Architect,96534.39,79
+834,true,Undereducated,Amazon Web Services,QA Engineer,126115.12,47
+835,true,Undereducated,SAP,BI Analyst,96138.52,59
+836,true,Undereducated,Visa,Scrum Master,124553.8,73
+837,true,Undereducated,McKinsey & Company,Build Engineer,129485.72,93
+838,true,Undereducated,Bloomberg,Analytics Manager,89544.81,35
+839,false,,,,,
+840,true,Undereducated,SAP,BI Developer,123401.27,75
+841,true,Undereducated,Amazon Web Services,Data Analyst,108877.19,89
+842,true,Undereducated,Booz Allen Hamilton,Analytics Manager,136667.84,48
+843,true,Undereducated,Lockheed Martin,Full Stack Developer,124545.16,23
+844,true,Undereducated,Capital One,Backend Developer,114810.34,40
+845,false,,,,,
+846,true,Matched,Amazon Web Services,Platform Engineer,108755.57,66
+847,true,Overeducated,SAP,QA Engineer,118428.72,65
+848,true,Undereducated,UnitedHealth Group,Applied Scientist,126644.57,64
+849,true,Undereducated,Capital One,Backend Developer,119700.06,88
+850,true,Matched,IBM,BI Analyst,110110.95,53
+851,true,Undereducated,Salesforce,Frontend Developer,138940.15,53
+852,true,Matched,Intel,Product Manager,126930.71,40
+853,true,Undereducated,Cognizant,Design Researcher,125023.64,87
+854,true,Matched,Morgan Stanley,Product Designer,92392.66,36
+855,true,Undereducated,Cisco Systems,Product Designer,97955.89,32
+856,true,Undereducated,Bloomberg,Growth PM,130365.07,33
+857,true,Undereducated,Oracle,Cloud Architect,144863.18,58
+858,true,Undereducated,Google,Full Stack Developer,132849.87,34
+859,true,Matched,KPMG,Applied Scientist,125734.35,83
+860,true,Matched,Microsoft,Build Engineer,159253.75,94
+861,true,Undereducated,Deloitte,ML Engineer,107375.95,25
+862,true,Matched,Infosys,Frontend Developer,113119.32,43
+863,true,Undereducated,Deloitte,Cloud Architect,112264.1,51
+864,true,Undereducated,Cisco Systems,Platform Engineer,148705.42,22
+865,true,Undereducated,Deloitte,Frontend Developer,93905.71,40
+866,false,,,,,
+867,true,Undereducated,Bloomberg,Backend Developer,134476.22,61
+868,true,Matched,Infosys,Analytics Manager,136566.11,62
+869,false,,,,,
+870,true,Undereducated,Raytheon Technologies,Product Designer,143178.36,87
+871,true,Undereducated,Salesforce,Security Analyst,104973.94,66
+872,true,Undereducated,Salesforce,Full Stack Developer,133166.07,57
+873,false,,,,,
+874,true,Undereducated,IBM,Site Reliability Engineer,103036.74,49
+875,true,Matched,Microsoft,UX Researcher,128972.51,63
+876,false,,,,,
+877,true,Undereducated,Epic Systems,Cloud Architect,110431.09,25
+878,true,Undereducated,Accenture,AI Researcher,105135.33,88
+879,true,Matched,Microsoft,ML Engineer,153293.68,80
+880,true,Undereducated,Raytheon Technologies,Product Manager,103034.38,91
+881,true,Overeducated,IBM,Product Designer,133753.31,65
+882,true,Undereducated,Booz Allen Hamilton,DevOps Engineer,102760.74,16
+883,true,Overeducated,Capital One,DevOps Engineer,149041.87,62
+884,true,Undereducated,Booz Allen Hamilton,Full Stack Developer,108717.06,38
+885,true,Matched,Goldman Sachs,BI Analyst,129057.51,48
+886,true,Undereducated,Deloitte,Data Analyst,124009.02,68
+887,false,,,,,
+888,true,Overeducated,Goldman Sachs,Data Warehouse Architect,88035.93,22
+889,true,Undereducated,Oracle,Security Analyst,120632.46,43
+890,true,Undereducated,UnitedHealth Group,Analytics Manager,145373.02,18
+891,true,Matched,Booz Allen Hamilton,Solutions Architect,102077.82,82
+892,false,,,,,
+893,true,Undereducated,Booz Allen Hamilton,Backend Developer,98536.08,62
+894,true,Overeducated,Visa,Full Stack Developer,117438.44,55
+895,true,Undereducated,Oracle,Full Stack Developer,108686.41,37
+896,true,Undereducated,Salesforce,Security Analyst,145292.18,48
+897,true,Undereducated,UnitedHealth Group,Solutions Architect,128653.26,21
+898,true,Undereducated,Cisco Systems,Analytics Manager,118475.76,82
+899,true,Undereducated,PwC,Cloud Consultant,112388.98,43
+900,true,Undereducated,Capital One,Release Manager,113288.76,66
+901,true,Undereducated,Cognizant,Security Analyst,129963.83,15
+902,true,Undereducated,Morgan Stanley,Applied Scientist,151373.39,60
+903,true,Undereducated,Visa,BI Developer,135056.23,18
+904,false,,,,,
+905,true,Undereducated,Oracle,Applied Scientist,127155.7,19
+906,true,Undereducated,Stripe,Data Engineer,94687.25,31
+907,true,Undereducated,JPMorgan Chase,Data Scientist,100570.19,30
+908,true,Undereducated,Deloitte,CISO,109377.04,42
+909,true,Undereducated,Morgan Stanley,Backend Developer,121396.16,78
+910,false,,,,,
+911,true,Undereducated,Cognizant,Product Designer,114319.89,94
+912,true,Undereducated,KPMG,Product Manager,124622.62,37
+913,false,,,,,
+914,true,Undereducated,McKinsey & Company,Solutions Architect,116374.51,46
+915,true,Undereducated,Microsoft,Penetration Tester,125080.28,42
+916,false,,,,,
+917,true,Undereducated,Palantir Technologies,Scrum Master,107538.81,44
+918,true,Undereducated,KPMG,Data Engineer,100744.79,15
+919,true,Undereducated,Palantir Technologies,Design Researcher,154054.66,60
+920,true,Undereducated,Intel,Backend Developer,84612.21,79
+921,true,Undereducated,Infosys,Backend Developer,89529.37,21
+922,true,Matched,KPMG,Data Engineer,118037.51,64
+923,true,Undereducated,Booz Allen Hamilton,UX Researcher,117092.31,35
+924,true,Matched,Amazon Web Services,Build Engineer,118794.78,16
+925,true,Undereducated,Booz Allen Hamilton,Penetration Tester,103486.6,85
+926,true,Undereducated,Oracle,Data Engineer,136286.31,26
+927,false,,,,,
+928,true,Undereducated,Morgan Stanley,Release Manager,150862.81,48
+929,true,Undereducated,Infosys,Site Reliability Engineer,117430.07,40
+930,true,Undereducated,Capital One,Cloud Consultant,143195.09,41
+931,false,,,,,
+932,false,,,,,
+933,false,,,,,
+934,false,,,,,
+935,true,Undereducated,Palantir Technologies,UX Researcher,99423.75,17
+936,true,Undereducated,Goldman Sachs,Frontend Developer,132210.3,34
+937,true,Undereducated,Stripe,Cloud Consultant,161481.03,38
+938,true,Matched,Infosys,BI Analyst,130167.59,63
+939,true,Undereducated,Google,Data Warehouse Architect,132867.68,62
+940,true,Undereducated,Deloitte,Site Reliability Engineer,156611.78,46
+941,true,Undereducated,Lockheed Martin,BI Analyst,137683.22,49
+942,true,Overeducated,Epic Systems,Build Engineer,134063.17,45
+943,true,Matched,Deloitte,ML Engineer,138788.12,30
+944,true,Undereducated,Accenture,BI Developer,111550.03,43
+945,false,,,,,
+946,true,Undereducated,KPMG,Growth PM,143699.32,66
+947,true,Undereducated,Johnson & Johnson,Platform Engineer,141408.6,64
+948,true,Undereducated,Salesforce,Site Reliability Engineer,136524.88,20
+949,true,Undereducated,Bloomberg,Data Engineer,121577.06,23
+950,true,Undereducated,PwC,Full Stack Developer,101981.0,24
+951,true,Matched,Oracle,Mobile Developer,127255.65,57
+952,true,Undereducated,Visa,Backend Developer,84710.09,88
+953,true,Undereducated,Cognizant,MLOps Engineer,114066.7,72
+954,true,Undereducated,Cisco Systems,BI Analyst,117887.64,76
+955,true,Undereducated,Accenture,Frontend Developer,106825.73,36
+956,true,Undereducated,Accenture,BI Developer,107914.79,94
+957,true,Undereducated,Capital One,Backend Developer,134791.04,34
+958,true,Undereducated,McKinsey & Company,DevOps Engineer,152921.64,70
+959,true,Matched,JPMorgan Chase,Security Analyst,141496.43,66
+960,true,Matched,Johnson & Johnson,Data Warehouse Architect,159564.12,24
+961,true,Undereducated,Johnson & Johnson,Design Researcher,124527.47,25
+962,true,Undereducated,Cisco Systems,Cloud Architect,137314.14,71
+963,false,,,,,
+964,true,Undereducated,Google,Site Reliability Engineer,93302.65,84
+965,true,Matched,Morgan Stanley,Data Warehouse Architect,111861.57,88
+966,false,,,,,
+967,true,Undereducated,Booz Allen Hamilton,Backend Developer,110820.83,63
+968,true,Undereducated,KPMG,Mobile Developer,96288.55,38
+969,true,Undereducated,Cisco Systems,CISO,115815.51,90
+970,true,Undereducated,Raytheon Technologies,Penetration Tester,142108.25,77
+971,true,Undereducated,Goldman Sachs,Security Analyst,113614.37,51
+972,true,Undereducated,Accenture,Cloud Architect,113860.59,68
+973,false,,,,,
+974,true,Undereducated,Lockheed Martin,Release Manager,96859.15,78
+975,true,Undereducated,McKinsey & Company,Scrum Master,113185.42,54
+976,true,Undereducated,SAP,Data Scientist,100273.29,64
+977,true,Undereducated,Amazon Web Services,Frontend Developer,126184.78,57
+978,true,Overeducated,IBM,MLOps Engineer,125148.71,43
+979,true,Undereducated,PwC,Product Designer,77430.13,49
+980,true,Overeducated,JPMorgan Chase,Scrum Master,115124.18,25
+981,true,Undereducated,Morgan Stanley,Penetration Tester,131749.49,32
+982,true,Undereducated,Google,Data Warehouse Architect,90445.96,21
+983,true,Undereducated,PwC,AI Researcher,140052.48,37
+984,true,Undereducated,KPMG,Data Analyst,101285.85,74
+985,true,Undereducated,Goldman Sachs,DevOps Engineer,101493.02,25
+986,false,,,,,
+987,true,Undereducated,Microsoft,Mobile Developer,151640.59,93
+988,true,Matched,Intel,Release Manager,134439.75,46
+989,true,Undereducated,Epic Systems,Growth PM,116520.38,43
+990,true,Undereducated,Bloomberg,ML Engineer,85781.12,93
+991,true,Matched,Microsoft,DevOps Engineer,128469.27,92
+992,true,Undereducated,Stripe,Frontend Developer,140695.73,50
+993,true,Undereducated,McKinsey & Company,Full Stack Developer,109684.27,67
+994,true,Undereducated,Oracle,Data Analyst,126291.23,33
+995,true,Undereducated,KPMG,QA Engineer,124479.41,31
+996,true,Undereducated,Visa,Data Warehouse Architect,118897.35,88
+997,true,Undereducated,Raytheon Technologies,Full Stack Developer,111459.86,27
+998,true,Matched,Accenture,Scrum Master,92558.9,31
+999,true,Undereducated,Stripe,Site Reliability Engineer,117360.2,20
+1000,true,Matched,Stripe,Penetration Tester,115067.93,39
+1001,true,Undereducated,Intel,Platform Engineer,146326.79,58
+1002,true,Overeducated,Stripe,Cloud Architect,124109.05,19
+1003,true,Undereducated,Epic Systems,Release Manager,93973.89,53
+1004,true,Undereducated,PwC,Design Researcher,90819.88,87
+1005,true,Undereducated,UnitedHealth Group,Penetration Tester,109478.83,28
+1006,true,Undereducated,PwC,Security Analyst,101510.34,57
+1007,true,Matched,KPMG,Product Manager,131758.68,39
+1008,true,Undereducated,Oracle,Site Reliability Engineer,126218.62,15
+1009,true,Undereducated,Salesforce,Backend Developer,126372.69,88
+1010,true,Undereducated,Epic Systems,Platform Engineer,135441.56,85
+1011,true,Undereducated,Google,Product Manager,112968.75,64
+1012,true,Matched,Visa,Platform Engineer,95334.03,21
+1013,true,Overeducated,Cisco Systems,Data Scientist,110237.92,67
+1014,true,Undereducated,Capital One,Applied Scientist,117512.93,46
+1015,true,Undereducated,Cisco Systems,Frontend Developer,103215.81,67
+1016,true,Undereducated,Goldman Sachs,Design Researcher,113820.2,72
+1017,true,Undereducated,PwC,Product Manager,120784.26,84
+1018,false,,,,,
+1019,true,Undereducated,Morgan Stanley,MLOps Engineer,117241.73,33
+1020,true,Undereducated,Raytheon Technologies,BI Analyst,123151.31,34
+1021,false,,,,,
+1022,true,Undereducated,Johnson & Johnson,Scrum Master,100572.06,51
+1023,true,Undereducated,Amazon Web Services,ML Engineer,95066.83,41
+1024,false,,,,,
+1025,true,Overeducated,Salesforce,Platform Engineer,106962.28,21
+1026,true,Undereducated,Microsoft,Full Stack Developer,135123.2,69
+1027,true,Undereducated,Raytheon Technologies,Mobile Developer,100334.01,35
+1028,true,Matched,Capital One,Design Researcher,115207.73,16
+1029,true,Undereducated,Infosys,Build Engineer,98184.33,42
+1030,true,Matched,Accenture,Design Researcher,96478.12,40
+1031,true,Undereducated,Bloomberg,CISO,93800.95,69
+1032,true,Undereducated,SAP,AI Researcher,127720.81,71
+1033,false,,,,,
+1034,true,Matched,Microsoft,Penetration Tester,118962.63,55
+1035,true,Undereducated,Cisco Systems,Full Stack Developer,137419.64,62
+1036,true,Matched,UnitedHealth Group,Data Engineer,103912.1,44
+1037,true,Overeducated,Epic Systems,Solutions Architect,127806.43,36
+1038,true,Undereducated,Palantir Technologies,Cloud Architect,119706.38,20
+1039,true,Undereducated,Bloomberg,Analytics Manager,114800.26,26
+1040,true,Undereducated,Cisco Systems,Cloud Architect,116804.39,52
+1041,true,Undereducated,JPMorgan Chase,QA Engineer,113918.39,48
+1042,true,Undereducated,PwC,Build Engineer,122230.3,75
+1043,true,Matched,Google,Frontend Developer,123785.26,67
+1044,true,Matched,Microsoft,Data Engineer,105893.07,48
+1045,true,Undereducated,Lockheed Martin,Design Researcher,113268.52,83
+1046,false,,,,,
+1047,true,Undereducated,Johnson & Johnson,Cloud Consultant,117122.03,58
+1048,true,Matched,Cisco Systems,Cloud Consultant,146556.7,55
+1049,true,Undereducated,McKinsey & Company,Mobile Developer,123317.24,64
+1050,true,Undereducated,Palantir Technologies,Frontend Developer,96283.51,79
+1051,true,Undereducated,Deloitte,Solutions Architect,115961.38,46
+1052,true,Undereducated,Raytheon Technologies,BI Developer,122568.48,38
+1053,true,Undereducated,Amazon Web Services,CISO,104226.82,82
+1054,true,Undereducated,Deloitte,Penetration Tester,105567.54,85
+1055,true,Undereducated,Microsoft,BI Analyst,145910.66,24
+1056,true,Undereducated,SAP,Solutions Architect,110672.12,52
+1057,true,Undereducated,Visa,Design Researcher,128705.14,91
+1058,true,Undereducated,Microsoft,Frontend Developer,113592.73,60
+1059,true,Undereducated,UnitedHealth Group,CISO,88096.9,78
+1060,true,Matched,UnitedHealth Group,Solutions Architect,108775.14,64
+1061,true,Overeducated,Lockheed Martin,Security Analyst,103489.57,38
+1062,true,Undereducated,Goldman Sachs,Cloud Consultant,108592.96,33
+1063,true,Undereducated,Oracle,MLOps Engineer,100102.79,48
+1064,true,Undereducated,Stripe,Data Scientist,127010.35,39
+1065,true,Undereducated,Lockheed Martin,Data Scientist,92069.36,40
+1066,false,,,,,
+1067,true,Undereducated,UnitedHealth Group,Analytics Manager,92827.11,54
+1068,true,Undereducated,KPMG,Mobile Developer,120891.12,16
+1069,true,Undereducated,Cisco Systems,AI Researcher,92957.24,62
+1070,true,Undereducated,KPMG,Penetration Tester,114121.11,24
+1071,true,Undereducated,Cognizant,Scrum Master,126498.06,78
+1072,true,Undereducated,Cisco Systems,Product Manager,129695.56,69
+1073,true,Undereducated,UnitedHealth Group,MLOps Engineer,110460.15,68
+1074,true,Undereducated,Visa,Solutions Architect,113619.3,75
+1075,true,Undereducated,Visa,Penetration Tester,95501.84,87
+1076,true,Undereducated,UnitedHealth Group,Product Manager,101571.16,59
+1077,true,Matched,Microsoft,Cloud Architect,94237.43,18
+1078,true,Undereducated,Visa,Data Analyst,138926.05,34
+1079,true,Undereducated,Google,QA Engineer,114319.38,42
+1080,true,Undereducated,Google,Product Manager,119204.97,44
+1081,true,Undereducated,PwC,Cloud Consultant,103457.44,67
+1082,true,Undereducated,Goldman Sachs,Data Engineer,131121.15,20
+1083,true,Undereducated,Oracle,Frontend Developer,112103.88,94
+1084,true,Undereducated,Lockheed Martin,Mobile Developer,127022.74,27
+1085,true,Undereducated,Deloitte,Applied Scientist,119849.46,20
+1086,true,Undereducated,Stripe,Design Researcher,121652.77,35
+1087,true,Undereducated,Cisco Systems,Cloud Consultant,126833.58,27
+1088,false,,,,,
+1089,true,Undereducated,PwC,Growth PM,99660.93,80
+1090,true,Undereducated,Palantir Technologies,Platform Engineer,121104.3,83
+1091,true,Undereducated,Intel,Solutions Architect,112030.25,66
+1092,true,Undereducated,Raytheon Technologies,CISO,108455.55,82
+1093,true,Undereducated,Amazon Web Services,Product Designer,127813.6,54
+1094,false,,,,,
+1095,true,Overeducated,Oracle,AI Researcher,141858.58,20
+1096,true,Undereducated,Visa,UX Researcher,117593.71,78
+1097,true,Undereducated,Deloitte,MLOps Engineer,136318.54,81
+1098,true,Undereducated,Infosys,Product Manager,125890.45,51
+1099,false,,,,,
+1100,true,Matched,PwC,CISO,97053.27,91
+1101,true,Undereducated,Goldman Sachs,Data Engineer,102206.46,29
+1102,true,Undereducated,Intel,Cloud Consultant,130313.23,37
+1103,true,Undereducated,Goldman Sachs,BI Developer,104785.04,20
+1104,true,Matched,Lockheed Martin,Data Warehouse Architect,141033.65,29
+1105,true,Undereducated,KPMG,CISO,109366.29,26
+1106,true,Undereducated,Capital One,QA Engineer,115059.88,90
+1107,true,Undereducated,Epic Systems,Build Engineer,148838.21,35
+1108,true,Undereducated,PwC,Analytics Manager,96763.15,22
+1109,true,Matched,Intel,Analytics Manager,116735.57,36
+1110,true,Undereducated,IBM,Data Scientist,103119.4,35
+1111,true,Undereducated,Infosys,Data Scientist,105282.81,27
+1112,true,Undereducated,Google,Data Engineer,131590.42,49
+1113,true,Undereducated,Deloitte,AI Researcher,121414.09,60
+1114,true,Undereducated,Intel,Data Analyst,99444.59,87
+1115,true,Overeducated,JPMorgan Chase,Product Manager,103122.39,83
+1116,true,Matched,JPMorgan Chase,Release Manager,95216.62,46
+1117,false,,,,,
+1118,true,Undereducated,UnitedHealth Group,Data Warehouse Architect,122678.88,79
+1119,true,Matched,Salesforce,Data Warehouse Architect,128809.68,42
+1120,true,Undereducated,PwC,Backend Developer,125190.47,79
+1121,true,Undereducated,Morgan Stanley,Product Manager,109930.33,37
+1122,true,Undereducated,Intel,ML Engineer,96818.72,28
+1123,true,Undereducated,Capital One,UX Researcher,95421.74,35
+1124,true,Undereducated,Microsoft,Cloud Consultant,106829.22,27
+1125,true,Undereducated,PwC,Design Researcher,119664.24,59
+1126,false,,,,,
+1127,true,Overeducated,Stripe,BI Developer,98803.29,82
+1128,true,Undereducated,Raytheon Technologies,Analytics Manager,113746.38,66
+1129,false,,,,,
+1130,true,Undereducated,Morgan Stanley,Applied Scientist,124053.42,69
+1131,true,Undereducated,SAP,Data Analyst,141614.29,15
+1132,true,Undereducated,KPMG,Build Engineer,140847.95,49
+1133,true,Overeducated,Capital One,Security Analyst,91302.66,92
+1134,true,Undereducated,JPMorgan Chase,UX Researcher,110848.57,29
+1135,true,Undereducated,McKinsey & Company,DevOps Engineer,140044.72,84
+1136,true,Undereducated,Johnson & Johnson,Data Engineer,108097.4,17
+1137,false,,,,,
+1138,true,Undereducated,Infosys,Product Designer,107533.76,62
+1139,true,Undereducated,Lockheed Martin,Product Designer,141098.77,36
+1140,true,Undereducated,SAP,Build Engineer,127110.7,32
+1141,true,Undereducated,Microsoft,UX Researcher,105798.72,90
+1142,true,Matched,Google,MLOps Engineer,112192.12,43
+1143,true,Matched,Morgan Stanley,AI Researcher,122873.47,71
+1144,true,Undereducated,McKinsey & Company,Analytics Manager,155876.1,71
+1145,true,Undereducated,Raytheon Technologies,QA Engineer,113858.26,69
+1146,true,Undereducated,Bloomberg,Scrum Master,125874.67,88
+1147,true,Undereducated,Lockheed Martin,AI Researcher,119252.7,85
+1148,true,Undereducated,Oracle,Solutions Architect,93376.8,47
+1149,true,Matched,Stripe,Growth PM,139650.36,66
+1150,true,Undereducated,Cognizant,UX Researcher,159494.85,53
+1151,true,Undereducated,Goldman Sachs,Security Analyst,113253.99,81
+1152,true,Undereducated,Infosys,Build Engineer,112481.41,63
+1153,true,Matched,Accenture,Frontend Developer,124045.43,52
+1154,true,Undereducated,Cisco Systems,UX Researcher,150786.1,65
+1155,false,,,,,
+1156,true,Matched,SAP,Applied Scientist,108545.07,35
+1157,true,Undereducated,Amazon Web Services,Product Manager,159903.69,66
+1158,true,Undereducated,Amazon Web Services,Analytics Manager,124887.81,84
+1159,true,Undereducated,Epic Systems,Penetration Tester,111524.22,81
+1160,true,Undereducated,Lockheed Martin,Data Scientist,102186.22,20
+1161,true,Undereducated,SAP,DevOps Engineer,101425.34,94
+1162,true,Undereducated,SAP,Build Engineer,123686.34,85
+1163,true,Undereducated,Deloitte,AI Researcher,149212.4,34
+1164,true,Undereducated,IBM,AI Researcher,127248.07,21
+1165,true,Undereducated,IBM,Product Designer,110479.91,66
+1166,true,Undereducated,Raytheon Technologies,Penetration Tester,150207.44,41
+1167,true,Undereducated,IBM,Product Designer,136539.08,52
+1168,true,Undereducated,McKinsey & Company,Data Scientist,122097.2,71
+1169,false,,,,,
+1170,true,Undereducated,Goldman Sachs,Release Manager,144860.13,72
+1171,true,Matched,Johnson & Johnson,Analytics Manager,120127.37,30
+1172,true,Undereducated,UnitedHealth Group,Applied Scientist,103775.78,18
+1173,true,Overeducated,Intel,Platform Engineer,115505.05,30
+1174,true,Undereducated,Goldman Sachs,ML Engineer,109026.4,47
+1175,true,Undereducated,Amazon Web Services,Product Manager,124574.69,76
+1176,true,Undereducated,Intel,Product Manager,117147.21,62
+1177,true,Matched,Infosys,Cloud Consultant,135239.93,31
+1178,true,Undereducated,Microsoft,Release Manager,151328.38,76
+1179,true,Undereducated,Raytheon Technologies,Data Engineer,129027.31,38
+1180,false,,,,,
+1181,true,Undereducated,Google,DevOps Engineer,120013.47,42
+1182,true,Matched,Goldman Sachs,Scrum Master,127080.78,18
+1183,true,Undereducated,UnitedHealth Group,Product Designer,124594.37,53
+1184,true,Undereducated,Google,Platform Engineer,128867.25,91
+1185,true,Undereducated,Cisco Systems,Build Engineer,107231.23,44
+1186,true,Undereducated,Johnson & Johnson,Backend Developer,111001.91,32
+1187,true,Undereducated,Cognizant,Build Engineer,125518.09,36
+1188,true,Undereducated,Microsoft,BI Analyst,131645.23,15
+1189,false,,,,,
+1190,true,Undereducated,Bloomberg,BI Developer,122286.95,75
+1191,true,Undereducated,Capital One,Security Analyst,150055.25,78
+1192,true,Undereducated,Lockheed Martin,DevOps Engineer,121985.64,94
+1193,true,Undereducated,Oracle,MLOps Engineer,125333.19,85
+1194,true,Undereducated,Oracle,ML Engineer,117771.01,36
+1195,true,Matched,Palantir Technologies,MLOps Engineer,89158.46,27
+1196,true,Undereducated,Google,Solutions Architect,125054.93,62
+1197,true,Undereducated,Amazon Web Services,Mobile Developer,112636.83,21
+1198,true,Matched,IBM,ML Engineer,142383.53,91
+1199,true,Undereducated,Goldman Sachs,Full Stack Developer,102825.95,75
+1200,true,Undereducated,Cognizant,Penetration Tester,118306.07,33
+1201,true,Matched,PwC,Growth PM,132196.87,29
+1202,false,,,,,
+1203,true,Matched,McKinsey & Company,ML Engineer,105954.12,88
+1204,true,Undereducated,Stripe,Data Warehouse Architect,103958.04,19
+1205,true,Matched,Lockheed Martin,Analytics Manager,119439.86,43
+1206,true,Undereducated,Intel,Backend Developer,106253.75,23
+1207,true,Undereducated,Morgan Stanley,Data Engineer,111982.3,69
+1208,false,,,,,
+1209,true,Undereducated,UnitedHealth Group,Data Engineer,135325.49,86
+1210,true,Undereducated,Johnson & Johnson,Site Reliability Engineer,134131.39,40
+1211,true,Undereducated,Intel,Data Engineer,152669.34,55
+1212,true,Undereducated,Booz Allen Hamilton,Scrum Master,111046.12,54
+1213,true,Undereducated,Cognizant,MLOps Engineer,152913.54,43
+1214,true,Undereducated,KPMG,BI Analyst,134677.3,27
+1215,true,Undereducated,IBM,Release Manager,125992.99,76
+1216,true,Undereducated,Infosys,Solutions Architect,86610.22,26
+1217,true,Undereducated,Infosys,Data Analyst,131905.43,90
+1218,true,Matched,Bloomberg,ML Engineer,98376.31,43
+1219,true,Undereducated,McKinsey & Company,Frontend Developer,115010.58,63
+1220,true,Undereducated,UnitedHealth Group,Mobile Developer,111780.53,21
+1221,true,Undereducated,Salesforce,Analytics Manager,139056.24,19
+1222,true,Overeducated,Lockheed Martin,Mobile Developer,116484.24,76
+1223,true,Undereducated,UnitedHealth Group,Design Researcher,104882.02,58
+1224,true,Undereducated,Lockheed Martin,QA Engineer,129805.04,81
+1225,true,Undereducated,Morgan Stanley,Growth PM,109799.51,64
+1226,true,Undereducated,Raytheon Technologies,ML Engineer,123391.09,94
+1227,true,Undereducated,Oracle,Security Analyst,139245.31,89
+1228,true,Undereducated,Visa,Platform Engineer,104193.43,77
+1229,true,Undereducated,IBM,Cloud Architect,113819.11,81
+1230,true,Undereducated,Amazon Web Services,Data Engineer,147814.53,33
+1231,true,Undereducated,JPMorgan Chase,BI Developer,131769.24,32
+1232,true,Undereducated,Morgan Stanley,Scrum Master,127022.4,25
+1233,true,Overeducated,Raytheon Technologies,ML Engineer,134606.59,48
+1234,false,,,,,
+1235,true,Undereducated,Salesforce,Data Warehouse Architect,139495.38,69
+1236,true,Undereducated,KPMG,Product Manager,120701.64,81
+1237,true,Undereducated,Cognizant,Analytics Manager,96017.91,41
+1238,true,Undereducated,Intel,CISO,107719.07,25
+1239,true,Undereducated,Johnson & Johnson,Backend Developer,130487.73,50
+1240,true,Undereducated,Accenture,Analytics Manager,126174.21,94
+1241,true,Undereducated,SAP,Data Analyst,154789.18,28
+1242,true,Undereducated,IBM,MLOps Engineer,139162.98,33
+1243,true,Undereducated,Intel,Data Warehouse Architect,116410.82,43
+1244,true,Undereducated,Morgan Stanley,MLOps Engineer,128178.12,79
+1245,true,Matched,PwC,Security Analyst,88909.37,16
+1246,false,,,,,
+1247,true,Matched,Oracle,Product Manager,92196.67,17
+1248,true,Undereducated,McKinsey & Company,DevOps Engineer,101833.82,89
+1249,true,Undereducated,Stripe,Cloud Architect,107933.75,88
+1250,false,,,,,
+1251,true,Undereducated,Google,Penetration Tester,121730.64,30
+1252,true,Undereducated,McKinsey & Company,BI Analyst,121329.6,82
+1253,true,Undereducated,Booz Allen Hamilton,UX Researcher,121680.55,30
+1254,true,Undereducated,UnitedHealth Group,Cloud Architect,116387.01,53
+1255,true,Undereducated,Infosys,BI Developer,123051.93,58
+1256,true,Undereducated,KPMG,Solutions Architect,122983.29,41
+1257,true,Undereducated,Visa,Scrum Master,110494.62,25
+1258,true,Overeducated,PwC,Product Manager,89249.8,87
+1259,true,Undereducated,Salesforce,BI Analyst,112955.03,15
+1260,true,Undereducated,Stripe,Release Manager,122138.53,26
+1261,true,Undereducated,JPMorgan Chase,DevOps Engineer,135958.81,26
+1262,true,Undereducated,SAP,Product Designer,148760.26,45
+1263,true,Undereducated,IBM,Penetration Tester,118132.59,29
+1264,true,Undereducated,Infosys,Applied Scientist,123669.58,32
+1265,false,,,,,
+1266,true,Undereducated,Cisco Systems,Security Analyst,123576.84,18
+1267,true,Undereducated,Intel,Product Designer,132324.52,67
+1268,true,Undereducated,Goldman Sachs,Data Engineer,157362.08,81
+1269,true,Matched,Epic Systems,BI Developer,129132.94,67
+1270,true,Matched,Microsoft,Security Analyst,156238.27,56
+1271,true,Undereducated,Lockheed Martin,ML Engineer,110236.89,67
+1272,true,Undereducated,IBM,CISO,102142.68,19
+1273,true,Undereducated,Accenture,Cloud Architect,117769.96,77
+1274,false,,,,,
+1275,true,Undereducated,Intel,Data Warehouse Architect,115706.34,69
+1276,true,Undereducated,Stripe,Build Engineer,142860.75,48
+1277,true,Undereducated,JPMorgan Chase,CISO,123115.88,82
+1278,true,Undereducated,Google,Data Warehouse Architect,102576.17,17
+1279,true,Undereducated,Amazon Web Services,QA Engineer,118456.1,78
+1280,true,Undereducated,Stripe,AI Researcher,134758.63,87
+1281,true,Undereducated,Raytheon Technologies,Full Stack Developer,105237.57,93
+1282,true,Undereducated,Stripe,MLOps Engineer,127202.0,59
+1283,true,Undereducated,SAP,Mobile Developer,129931.77,83
+1284,true,Undereducated,Stripe,Solutions Architect,127591.07,30
+1285,true,Undereducated,Accenture,Release Manager,144413.3,85
+1286,true,Matched,Salesforce,Build Engineer,113434.53,64
+1287,true,Undereducated,Raytheon Technologies,Applied Scientist,152321.09,40
+1288,true,Undereducated,KPMG,BI Developer,101580.17,79
+1289,true,Undereducated,JPMorgan Chase,Penetration Tester,132515.59,80
+1290,true,Undereducated,Infosys,Growth PM,120637.97,75
+1291,true,Matched,Booz Allen Hamilton,Design Researcher,141470.0,16
+1292,true,Undereducated,Booz Allen Hamilton,Penetration Tester,120643.68,39
+1293,true,Undereducated,Intel,Analytics Manager,100202.79,38
+1294,true,Undereducated,IBM,Frontend Developer,91044.12,36
+1295,false,,,,,
+1296,false,,,,,
+1297,true,Undereducated,Stripe,Design Researcher,148063.88,25
+1298,true,Undereducated,IBM,Scrum Master,136208.06,74
+1299,true,Undereducated,Epic Systems,BI Developer,104352.42,17
+1300,true,Undereducated,Palantir Technologies,Full Stack Developer,134507.06,27
+1301,true,Undereducated,IBM,DevOps Engineer,99339.81,85
+1302,true,Matched,Johnson & Johnson,ML Engineer,90617.88,27
+1303,true,Matched,Capital One,Full Stack Developer,157874.23,84
+1304,false,,,,,
+1305,true,Undereducated,Lockheed Martin,Site Reliability Engineer,103747.21,34
+1306,true,Undereducated,Stripe,QA Engineer,149148.18,41
+1307,true,Undereducated,Johnson & Johnson,ML Engineer,99674.16,33
+1308,true,Matched,SAP,Data Warehouse Architect,108755.39,37
+1309,true,Undereducated,SAP,BI Analyst,96962.59,19
+1310,true,Undereducated,Intel,Build Engineer,114363.45,63
+1311,true,Undereducated,Capital One,Product Manager,118794.77,72
+1312,true,Undereducated,Visa,Cloud Consultant,91133.08,19
+1313,true,Undereducated,Salesforce,DevOps Engineer,126101.94,65
+1314,false,,,,,
+1315,true,Undereducated,McKinsey & Company,Platform Engineer,89692.76,40
+1316,true,Undereducated,Accenture,AI Researcher,117010.26,58
+1317,true,Undereducated,Accenture,BI Analyst,140665.42,27
+1318,true,Undereducated,Salesforce,AI Researcher,102554.95,18
+1319,true,Matched,JPMorgan Chase,Backend Developer,119674.15,39
+1320,true,Matched,JPMorgan Chase,Data Analyst,97661.15,35
+1321,true,Undereducated,SAP,Product Designer,101392.92,87
+1322,true,Undereducated,UnitedHealth Group,BI Developer,115428.54,64
+1323,true,Undereducated,Accenture,Frontend Developer,83054.24,55
+1324,true,Undereducated,Epic Systems,QA Engineer,135497.26,29
+1325,false,,,,,
+1326,true,Matched,Salesforce,BI Developer,108359.19,75
+1327,true,Overeducated,Goldman Sachs,DevOps Engineer,122739.41,67
+1328,true,Undereducated,SAP,Design Researcher,154875.28,53
+1329,true,Undereducated,UnitedHealth Group,Cloud Architect,128179.85,38
+1330,true,Undereducated,Infosys,AI Researcher,100456.46,33
+1331,true,Undereducated,McKinsey & Company,Full Stack Developer,106304.34,25
+1332,true,Undereducated,Visa,Analytics Manager,114767.87,89
+1333,true,Undereducated,JPMorgan Chase,Site Reliability Engineer,137095.39,38
+1334,true,Undereducated,Oracle,Data Engineer,101130.2,68
+1335,true,Undereducated,Booz Allen Hamilton,Design Researcher,108243.62,31
+1336,true,Matched,JPMorgan Chase,ML Engineer,95629.53,86
+1337,true,Undereducated,Capital One,Full Stack Developer,154475.08,59
+1338,false,,,,,
+1339,true,Overeducated,Booz Allen Hamilton,Product Designer,137162.69,19
+1340,true,Undereducated,Oracle,CISO,96889.83,55
+1341,false,,,,,
+1342,true,Undereducated,Bloomberg,Data Analyst,151953.74,70
+1343,true,Undereducated,Raytheon Technologies,Growth PM,110611.76,92
+1344,true,Undereducated,Epic Systems,Site Reliability Engineer,109626.05,86
+1345,true,Overeducated,KPMG,QA Engineer,138182.79,31
+1346,true,Undereducated,Amazon Web Services,AI Researcher,128485.94,79
+1347,true,Undereducated,Epic Systems,Analytics Manager,110974.15,80
+1348,true,Undereducated,Oracle,Backend Developer,121916.1,87
+1349,true,Undereducated,Goldman Sachs,Cloud Architect,85366.22,25
+1350,true,Undereducated,Infosys,Data Scientist,89918.93,65
+1351,true,Undereducated,Capital One,Data Scientist,131057.39,56
+1352,false,,,,,
+1353,true,Matched,Intel,Full Stack Developer,122526.84,72
+1354,false,,,,,
+1355,true,Undereducated,Deloitte,QA Engineer,103570.58,55
+1356,true,Undereducated,Palantir Technologies,AI Researcher,91874.65,36
+1357,true,Undereducated,PwC,Solutions Architect,116990.98,33
+1358,false,,,,,
+1359,true,Undereducated,UnitedHealth Group,Data Warehouse Architect,121100.38,42
+1360,true,Undereducated,Lockheed Martin,Product Designer,76783.6,46
+1361,true,Undereducated,Infosys,Security Analyst,115238.62,45
+1362,true,Undereducated,Accenture,Backend Developer,114936.2,30
+1363,true,Overeducated,Accenture,Analytics Manager,105872.53,89
+1364,true,Undereducated,Infosys,Cloud Consultant,131118.16,45
+1365,true,Undereducated,Visa,Security Analyst,124723.61,89
+1366,true,Undereducated,McKinsey & Company,Security Analyst,129583.12,94
+1367,true,Undereducated,Salesforce,Mobile Developer,104463.13,53
+1368,true,Undereducated,Bloomberg,Release Manager,136446.97,76
+1369,false,,,,,
+1370,true,Undereducated,Accenture,UX Researcher,110194.04,50
+1371,true,Undereducated,Booz Allen Hamilton,Build Engineer,103455.89,46
+1372,false,,,,,
+1373,true,Undereducated,UnitedHealth Group,Backend Developer,88037.09,55
+1374,true,Matched,Morgan Stanley,Platform Engineer,119789.94,48
+1375,true,Undereducated,McKinsey & Company,ML Engineer,115642.17,34
+1376,false,,,,,
+1377,true,Undereducated,Stripe,AI Researcher,99430.07,23
+1378,true,Matched,Deloitte,Full Stack Developer,106901.33,67
+1379,true,Matched,Infosys,Frontend Developer,117430.93,51
+1380,true,Undereducated,Stripe,Product Manager,113570.25,70
+1381,true,Undereducated,Booz Allen Hamilton,BI Analyst,124941.25,85
+1382,true,Undereducated,PwC,Analytics Manager,132536.79,32
+1383,true,Undereducated,Bloomberg,UX Researcher,126953.74,34
+1384,false,,,,,
+1385,true,Overeducated,Microsoft,Growth PM,135720.3,15
+1386,true,Undereducated,Capital One,Applied Scientist,144534.15,82
+1387,true,Matched,Johnson & Johnson,Frontend Developer,121264.19,56
+1388,false,,,,,
+1389,true,Undereducated,IBM,Data Scientist,128324.76,67
+1390,true,Undereducated,Deloitte,Penetration Tester,153453.82,73
+1391,true,Undereducated,Cisco Systems,Build Engineer,123911.6,86
+1392,false,,,,,
+1393,true,Undereducated,Lockheed Martin,CISO,111936.75,68
+1394,false,,,,,
+1395,true,Undereducated,Google,Penetration Tester,122597.28,87
+1396,true,Undereducated,UnitedHealth Group,Product Manager,127946.81,29
+1397,true,Undereducated,Microsoft,Data Engineer,98919.95,43
+1398,true,Undereducated,Accenture,BI Analyst,111617.65,25
+1399,true,Undereducated,Capital One,Security Analyst,107630.54,26
+1400,true,Overeducated,PwC,Data Engineer,130723.5,40
+1401,false,,,,,
+1402,true,Undereducated,Visa,Release Manager,125810.37,23
+1403,true,Undereducated,Morgan Stanley,Frontend Developer,93504.11,83
+1404,true,Undereducated,PwC,Release Manager,104599.47,70
+1405,true,Undereducated,SAP,Frontend Developer,106770.64,54
+1406,true,Undereducated,UnitedHealth Group,ML Engineer,102300.17,37
+1407,false,,,,,
+1408,false,,,,,
+1409,true,Undereducated,Morgan Stanley,ML Engineer,106500.63,64
+1410,false,,,,,
+1411,true,Matched,Google,DevOps Engineer,125857.88,15
+1412,true,Undereducated,Salesforce,Data Warehouse Architect,125082.21,54
+1413,true,Undereducated,Deloitte,Penetration Tester,81658.23,86
+1414,true,Matched,Intel,Data Analyst,112486.0,35
+1415,false,,,,,
+1416,true,Undereducated,Capital One,Security Analyst,126474.85,38
+1417,true,Undereducated,KPMG,Product Manager,149343.28,68
+1418,true,Undereducated,IBM,Product Manager,114596.49,34
+1419,true,Overeducated,Bloomberg,Scrum Master,95594.6,67
+1420,true,Matched,Stripe,Full Stack Developer,107447.9,94
+1421,true,Overeducated,Bloomberg,Data Analyst,108551.59,89
+1422,true,Matched,Accenture,Applied Scientist,101553.9,67
+1423,false,,,,,
+1424,true,Undereducated,KPMG,Site Reliability Engineer,135554.03,53
+1425,false,,,,,
+1426,true,Undereducated,Epic Systems,Data Warehouse Architect,101781.11,54
+1427,true,Undereducated,UnitedHealth Group,Product Designer,130850.79,85
+1428,true,Undereducated,Bloomberg,Mobile Developer,92860.37,70
+1429,true,Undereducated,Raytheon Technologies,Penetration Tester,119811.66,35
+1430,true,Undereducated,Cisco Systems,Analytics Manager,123591.94,66
+1431,true,Undereducated,Goldman Sachs,Backend Developer,109267.79,30
+1432,true,Undereducated,Johnson & Johnson,Data Scientist,113830.81,84
+1433,true,Undereducated,JPMorgan Chase,DevOps Engineer,116435.04,15
+1434,true,Undereducated,Goldman Sachs,Design Researcher,126309.79,58
+1435,true,Matched,KPMG,UX Researcher,150603.57,37
+1436,true,Undereducated,Epic Systems,QA Engineer,116298.81,83
+1437,true,Undereducated,Epic Systems,Analytics Manager,125067.89,59
+1438,true,Undereducated,Amazon Web Services,Data Engineer,123928.58,26
+1439,true,Undereducated,Goldman Sachs,Data Scientist,126639.16,50
+1440,true,Undereducated,Deloitte,Analytics Manager,147215.2,30
+1441,false,,,,,
+1442,true,Undereducated,KPMG,Release Manager,109674.63,15
+1443,true,Matched,Capital One,Build Engineer,98547.57,79
+1444,true,Undereducated,Cognizant,Data Analyst,161322.53,22
+1445,false,,,,,
+1446,true,Matched,Lockheed Martin,BI Analyst,108976.33,25
+1447,true,Undereducated,Accenture,Data Warehouse Architect,86488.85,53
+1448,false,,,,,
+1449,true,Undereducated,Booz Allen Hamilton,Solutions Architect,105838.82,27
+1450,true,Undereducated,Morgan Stanley,QA Engineer,113465.2,20
+1451,true,Matched,Morgan Stanley,Product Designer,109458.04,34
+1452,true,Undereducated,Oracle,BI Analyst,135235.71,79
+1453,true,Undereducated,Goldman Sachs,Security Analyst,108437.05,82
+1454,true,Undereducated,Accenture,CISO,122962.25,24
+1455,true,Undereducated,Deloitte,Mobile Developer,117002.38,82
+1456,true,Undereducated,Johnson & Johnson,Data Analyst,101730.23,86
+1457,true,Undereducated,JPMorgan Chase,AI Researcher,137626.96,75
+1458,true,Undereducated,Raytheon Technologies,BI Analyst,103655.24,44
+1459,true,Undereducated,Booz Allen Hamilton,Release Manager,159056.64,18
+1460,true,Undereducated,Raytheon Technologies,Site Reliability Engineer,120575.31,34
+1461,true,Undereducated,Microsoft,Product Designer,92517.71,47
+1462,true,Undereducated,Lockheed Martin,Data Scientist,133194.91,77
+1463,true,Undereducated,JPMorgan Chase,QA Engineer,111334.25,86
+1464,true,Undereducated,Accenture,Data Engineer,121786.15,51
+1465,true,Undereducated,Palantir Technologies,Platform Engineer,117644.4,60
+1466,true,Undereducated,Amazon Web Services,AI Researcher,160395.15,36
+1467,true,Undereducated,Goldman Sachs,Data Scientist,133456.48,32
+1468,true,Overeducated,Cisco Systems,Data Analyst,100600.98,30
+1469,true,Undereducated,Infosys,Product Designer,93750.37,85
+1470,true,Overeducated,Infosys,Site Reliability Engineer,122794.65,17
+1471,true,Undereducated,Oracle,Penetration Tester,107469.3,23
+1472,true,Undereducated,Deloitte,Platform Engineer,129124.49,33
+1473,true,Undereducated,Booz Allen Hamilton,QA Engineer,94526.26,53
+1474,true,Undereducated,Accenture,Site Reliability Engineer,128973.34,16
+1475,true,Undereducated,SAP,Frontend Developer,127654.85,35
+1476,true,Undereducated,PwC,CISO,84051.49,94
+1477,true,Undereducated,Capital One,Growth PM,115550.83,84
+1478,true,Undereducated,Deloitte,Analytics Manager,115155.9,16
+1479,true,Undereducated,Intel,BI Developer,96928.3,16
+1480,true,Undereducated,Capital One,Build Engineer,115888.92,62
+1481,false,,,,,
+1482,true,Matched,Raytheon Technologies,Product Designer,146863.54,52
+1483,true,Undereducated,Deloitte,Mobile Developer,134121.02,44
+1484,true,Matched,Accenture,MLOps Engineer,104535.76,17
+1485,true,Matched,Epic Systems,Solutions Architect,144023.22,68
+1486,true,Matched,Johnson & Johnson,UX Researcher,161655.76,89
+1487,true,Undereducated,Booz Allen Hamilton,MLOps Engineer,137065.09,75
+1488,true,Undereducated,PwC,CISO,116848.0,32
+1489,true,Undereducated,JPMorgan Chase,Solutions Architect,95512.56,57
+1490,true,Undereducated,McKinsey & Company,Platform Engineer,102431.35,87
+1491,true,Undereducated,IBM,Frontend Developer,113316.97,34
+1492,true,Undereducated,Amazon Web Services,Security Analyst,141066.64,35
+1493,true,Undereducated,Capital One,Growth PM,128701.03,52
+1494,true,Matched,IBM,Full Stack Developer,136907.29,69
+1495,true,Undereducated,Amazon Web Services,Penetration Tester,103679.68,23
+1496,true,Undereducated,Cognizant,BI Analyst,89201.92,79
+1497,true,Overeducated,Salesforce,Frontend Developer,113359.38,76
+1498,true,Undereducated,Deloitte,Site Reliability Engineer,121496.0,22
+1499,true,Matched,Goldman Sachs,Design Researcher,134280.5,82
+1500,true,Matched,JPMorgan Chase,Growth PM,109285.62,24
+1501,true,Matched,Google,Security Analyst,120156.23,38
+1502,true,Matched,Cisco Systems,Mobile Developer,103775.89,48
+1503,true,Undereducated,KPMG,Product Manager,114932.51,33
+1504,true,Undereducated,KPMG,ML Engineer,100553.08,20
+1505,true,Undereducated,Capital One,AI Researcher,121430.54,72
+1506,true,Undereducated,Cognizant,Cloud Consultant,109353.36,76
+1507,false,,,,,
+1508,false,,,,,
+1509,true,Undereducated,Cognizant,Product Manager,158926.27,75
+1510,true,Undereducated,Microsoft,Cloud Architect,106918.16,42
+1511,true,Undereducated,KPMG,Site Reliability Engineer,131286.82,92
+1512,true,Matched,Palantir Technologies,Analytics Manager,139004.2,48
+1513,true,Undereducated,Infosys,Design Researcher,140934.07,37
+1514,true,Undereducated,IBM,DevOps Engineer,98053.57,48
+1515,true,Undereducated,Oracle,Cloud Consultant,122681.1,75
+1516,true,Overeducated,Bloomberg,MLOps Engineer,101561.04,91
+1517,false,,,,,
+1518,true,Undereducated,Accenture,MLOps Engineer,112868.62,39
+1519,true,Undereducated,Intel,Scrum Master,136893.33,22
+1520,true,Undereducated,UnitedHealth Group,Security Analyst,115008.81,78
+1521,true,Overeducated,Cisco Systems,Release Manager,112524.57,24
+1522,true,Undereducated,Deloitte,Frontend Developer,131682.13,33
+1523,true,Undereducated,Stripe,Product Manager,113935.42,31
+1524,true,Undereducated,Amazon Web Services,Data Engineer,101487.13,37
+1525,false,,,,,
+1526,true,Undereducated,Raytheon Technologies,BI Developer,105164.37,74
+1527,true,Undereducated,Johnson & Johnson,Release Manager,137864.94,92
+1528,true,Undereducated,Intel,Data Analyst,134558.27,22
+1529,true,Undereducated,UnitedHealth Group,Platform Engineer,107880.73,29
+1530,true,Matched,Infosys,Design Researcher,130508.89,19
+1531,true,Undereducated,SAP,Release Manager,135239.86,89
+1532,true,Undereducated,Salesforce,Data Engineer,139563.76,38
+1533,true,Undereducated,Intel,AI Researcher,91567.68,27
+1534,false,,,,,
+1535,true,Undereducated,Infosys,Full Stack Developer,117956.78,78
+1536,true,Undereducated,Lockheed Martin,Analytics Manager,98906.4,24
+1537,true,Undereducated,Raytheon Technologies,Analytics Manager,132642.75,42
+1538,true,Undereducated,Visa,Data Scientist,91536.94,72
+1539,true,Undereducated,Google,AI Researcher,97888.21,19
+1540,true,Undereducated,Cisco Systems,QA Engineer,105517.66,73
+1541,true,Undereducated,Infosys,Design Researcher,151674.66,29
+1542,true,Undereducated,McKinsey & Company,Full Stack Developer,102503.92,71
+1543,true,Matched,Lockheed Martin,AI Researcher,121049.96,84
+1544,true,Undereducated,PwC,Product Manager,128141.08,56
+1545,true,Undereducated,IBM,MLOps Engineer,107813.69,28
+1546,true,Matched,Microsoft,Design Researcher,110949.19,31
+1547,true,Undereducated,Raytheon Technologies,Solutions Architect,107900.18,38
+1548,true,Undereducated,UnitedHealth Group,CISO,108524.35,64
+1549,true,Undereducated,Goldman Sachs,Release Manager,122002.0,22
+1550,true,Undereducated,Intel,Scrum Master,116661.46,65
+1551,true,Overeducated,JPMorgan Chase,Data Analyst,152499.39,85
+1552,true,Undereducated,Cognizant,Solutions Architect,127218.48,48
+1553,true,Undereducated,IBM,Analytics Manager,141836.5,72
+1554,true,Undereducated,Lockheed Martin,Release Manager,125283.27,53
+1555,true,Undereducated,Johnson & Johnson,Platform Engineer,101585.23,67
+1556,false,,,,,
+1557,true,Undereducated,Accenture,Build Engineer,102229.74,87
+1558,false,,,,,
+1559,true,Overeducated,Cisco Systems,Data Engineer,134941.14,24
+1560,true,Overeducated,Goldman Sachs,DevOps Engineer,149937.99,94
+1561,true,Undereducated,McKinsey & Company,Applied Scientist,112952.4,89
+1562,true,Undereducated,IBM,Data Scientist,144937.61,46
+1563,true,Undereducated,Cisco Systems,DevOps Engineer,92301.78,60
+1564,true,Undereducated,IBM,Mobile Developer,99082.35,59
+1565,false,,,,,
+1566,true,Undereducated,PwC,Design Researcher,130909.59,58
+1567,true,Undereducated,Oracle,Applied Scientist,123033.44,43
+1568,true,Undereducated,SAP,Growth PM,129044.76,41
+1569,true,Undereducated,Deloitte,Data Scientist,126732.44,35
+1570,true,Undereducated,Visa,Data Analyst,85359.01,90
+1571,true,Undereducated,Lockheed Martin,Analytics Manager,92333.15,59
+1572,true,Undereducated,Morgan Stanley,Design Researcher,142501.78,30
+1573,true,Undereducated,Epic Systems,Full Stack Developer,148295.9,26
+1574,true,Undereducated,JPMorgan Chase,Mobile Developer,128989.38,91
+1575,true,Undereducated,Microsoft,Cloud Architect,139568.33,22
+1576,true,Undereducated,Johnson & Johnson,Product Manager,103165.44,40
+1577,true,Undereducated,McKinsey & Company,Platform Engineer,122989.29,50
+1578,true,Undereducated,Infosys,Data Engineer,139507.89,91
+1579,false,,,,,
+1580,true,Undereducated,Cognizant,Scrum Master,113016.96,58
+1581,true,Undereducated,McKinsey & Company,Cloud Architect,139841.49,38
+1582,true,Matched,Deloitte,Build Engineer,103800.68,76
+1583,true,Undereducated,Capital One,Release Manager,125237.17,50
+1584,true,Undereducated,Stripe,UX Researcher,98952.66,66
+1585,true,Undereducated,UnitedHealth Group,Cloud Consultant,105144.28,18
+1586,true,Matched,JPMorgan Chase,Design Researcher,130989.07,18
+1587,true,Undereducated,Oracle,Full Stack Developer,124468.39,55
+1588,true,Undereducated,Cognizant,Data Analyst,108983.14,28
+1589,true,Undereducated,Stripe,Mobile Developer,129172.0,60
+1590,true,Undereducated,Cognizant,Cloud Architect,92139.83,27
+1591,true,Undereducated,Deloitte,BI Analyst,79992.56,81
+1592,false,,,,,
+1593,true,Undereducated,Morgan Stanley,Cloud Architect,139929.1,48
+1594,true,Undereducated,IBM,Frontend Developer,136795.94,31
+1595,true,Undereducated,Lockheed Martin,DevOps Engineer,108858.06,47
+1596,true,Undereducated,Palantir Technologies,CISO,117717.86,90
+1597,true,Overeducated,Accenture,ML Engineer,152238.89,84
+1598,true,Undereducated,Johnson & Johnson,Product Designer,110238.16,88
+1599,true,Undereducated,Deloitte,Data Analyst,110448.48,90
+1600,true,Matched,IBM,Build Engineer,127909.5,60
+1601,false,,,,,
+1602,true,Matched,JPMorgan Chase,Growth PM,108296.46,70
+1603,true,Undereducated,Google,UX Researcher,121103.66,60
+1604,true,Undereducated,SAP,Data Analyst,111337.81,56
+1605,true,Undereducated,Johnson & Johnson,Cloud Architect,135530.07,66
+1606,true,Undereducated,KPMG,Full Stack Developer,84755.56,65
+1607,true,Undereducated,Raytheon Technologies,Data Analyst,127606.18,61
+1608,true,Undereducated,Raytheon Technologies,MLOps Engineer,110835.32,62
+1609,true,Undereducated,Cisco Systems,Data Analyst,118937.7,37
+1610,true,Undereducated,Raytheon Technologies,Build Engineer,108116.7,83
+1611,true,Undereducated,Oracle,Product Manager,131008.13,36
+1612,true,Undereducated,JPMorgan Chase,Data Engineer,161398.28,85
+1613,true,Undereducated,Epic Systems,Data Engineer,108737.26,16
+1614,true,Undereducated,Salesforce,Data Analyst,147288.2,46
+1615,false,,,,,
+1616,true,Undereducated,Cisco Systems,AI Researcher,113068.19,16
+1617,true,Undereducated,Infosys,Data Analyst,143376.71,71
+1618,true,Undereducated,Accenture,Frontend Developer,110855.83,58
+1619,true,Matched,McKinsey & Company,Platform Engineer,106736.0,70
+1620,true,Undereducated,SAP,Growth PM,78536.63,20
+1621,true,Undereducated,Bloomberg,BI Analyst,107116.77,25
+1622,true,Matched,Raytheon Technologies,Data Scientist,107789.3,83
+1623,true,Undereducated,Goldman Sachs,Security Analyst,110992.38,26
+1624,true,Undereducated,Infosys,AI Researcher,119226.77,20
+1625,true,Overeducated,KPMG,Cloud Consultant,97020.85,74
+1626,true,Undereducated,Infosys,Full Stack Developer,110012.68,66
+1627,true,Matched,Intel,BI Analyst,144994.72,75
+1628,false,,,,,
+1629,true,Matched,Cognizant,Penetration Tester,119546.12,16
+1630,true,Undereducated,JPMorgan Chase,Data Engineer,106975.96,40
+1631,true,Undereducated,SAP,Release Manager,104506.59,33
+1632,false,,,,,
+1633,true,Overeducated,Stripe,Data Scientist,105868.13,67
+1634,true,Undereducated,Salesforce,Frontend Developer,142717.36,51
+1635,true,Undereducated,Goldman Sachs,Cloud Architect,142319.88,40
+1636,true,Undereducated,Epic Systems,Growth PM,124232.65,29
+1637,false,,,,,
+1638,true,Undereducated,Johnson & Johnson,Product Designer,117648.56,81
+1639,true,Undereducated,UnitedHealth Group,Applied Scientist,159355.18,69
+1640,true,Matched,Epic Systems,Growth PM,119255.12,38
+1641,true,Undereducated,Epic Systems,Release Manager,102250.14,23
+1642,true,Matched,Booz Allen Hamilton,UX Researcher,137200.7,85
+1643,true,Undereducated,SAP,Solutions Architect,125916.23,94
+1644,true,Undereducated,Goldman Sachs,Data Engineer,113816.85,20
+1645,true,Undereducated,Deloitte,Scrum Master,109777.49,54
+1646,true,Undereducated,Raytheon Technologies,Solutions Architect,108831.32,36
+1647,true,Undereducated,Raytheon Technologies,Mobile Developer,126648.92,40
+1648,true,Undereducated,Epic Systems,Scrum Master,114658.62,87
+1649,true,Matched,IBM,Growth PM,92495.89,83
+1650,true,Undereducated,SAP,Cloud Architect,115720.51,68
+1651,true,Undereducated,Palantir Technologies,Security Analyst,97990.2,37
+1652,true,Matched,Palantir Technologies,Full Stack Developer,126561.42,23
+1653,true,Undereducated,Accenture,Mobile Developer,160879.65,44
+1654,true,Matched,UnitedHealth Group,MLOps Engineer,112186.38,76
+1655,true,Undereducated,Bloomberg,Product Manager,108860.01,50
+1656,true,Overeducated,Microsoft,Analytics Manager,105648.74,19
+1657,true,Undereducated,Lockheed Martin,BI Developer,111018.73,48
+1658,true,Undereducated,Johnson & Johnson,QA Engineer,86096.26,27
+1659,true,Undereducated,Visa,Frontend Developer,117869.31,50
+1660,true,Undereducated,PwC,Product Designer,86151.63,25
+1661,true,Undereducated,Morgan Stanley,Penetration Tester,127471.36,68
+1662,true,Undereducated,JPMorgan Chase,Cloud Architect,125532.88,64
+1663,true,Overeducated,Visa,BI Developer,110590.08,62
+1664,true,Overeducated,Bloomberg,Platform Engineer,155642.47,81
+1665,true,Undereducated,Amazon Web Services,Cloud Consultant,123420.16,72
+1666,true,Undereducated,McKinsey & Company,CISO,118614.23,16
+1667,true,Matched,Amazon Web Services,Security Analyst,120019.4,86
+1668,true,Undereducated,Deloitte,Platform Engineer,100762.46,67
+1669,true,Undereducated,Google,Applied Scientist,126277.04,44
+1670,true,Undereducated,Visa,Release Manager,102656.7,90
+1671,true,Undereducated,Infosys,Site Reliability Engineer,114986.25,71
+1672,true,Undereducated,Infosys,Site Reliability Engineer,97068.15,30
+1673,true,Undereducated,PwC,Data Engineer,106781.97,68
+1674,true,Undereducated,Visa,Full Stack Developer,125735.35,25
+1675,true,Undereducated,JPMorgan Chase,UX Researcher,127470.48,79
+1676,true,Matched,Raytheon Technologies,Mobile Developer,115337.56,91
+1677,false,,,,,
+1678,true,Undereducated,Cognizant,QA Engineer,133419.32,41
+1679,true,Undereducated,Palantir Technologies,UX Researcher,106901.85,94
+1680,false,,,,,
+1681,true,Matched,Infosys,Analytics Manager,119115.74,55
+1682,true,Undereducated,Stripe,Analytics Manager,131884.02,53
+1683,true,Undereducated,Booz Allen Hamilton,Security Analyst,102671.95,22
+1684,true,Undereducated,Intel,BI Developer,119970.8,84
+1685,true,Matched,JPMorgan Chase,Analytics Manager,139505.29,67
+1686,true,Undereducated,Amazon Web Services,BI Developer,100593.68,66
+1687,false,,,,,
+1688,true,Undereducated,UnitedHealth Group,AI Researcher,159956.5,75
+1689,true,Undereducated,McKinsey & Company,Data Engineer,106764.21,80
+1690,false,,,,,
+1691,true,Undereducated,SAP,Data Analyst,161740.6,77
+1692,true,Undereducated,Palantir Technologies,MLOps Engineer,103388.09,41
+1693,true,Matched,Bloomberg,Security Analyst,84868.46,15
+1694,true,Undereducated,Goldman Sachs,Frontend Developer,152407.36,36
+1695,true,Undereducated,Accenture,Data Warehouse Architect,123764.58,90
+1696,true,Undereducated,Deloitte,Backend Developer,147684.03,45
+1697,false,,,,,
+1698,true,Undereducated,Microsoft,Analytics Manager,143499.22,29
+1699,true,Matched,Microsoft,QA Engineer,133204.2,72
+1700,true,Undereducated,Cisco Systems,BI Developer,109497.54,93
+1701,true,Undereducated,Cognizant,AI Researcher,96467.11,62
+1702,true,Undereducated,Cisco Systems,Full Stack Developer,130362.91,44
+1703,true,Undereducated,Raytheon Technologies,Full Stack Developer,105530.45,46
+1704,true,Undereducated,Salesforce,BI Developer,124079.24,74
+1705,true,Undereducated,Johnson & Johnson,UX Researcher,114028.89,15
+1706,true,Undereducated,Morgan Stanley,Full Stack Developer,118845.26,43
+1707,true,Undereducated,Morgan Stanley,BI Analyst,98437.07,28
+1708,true,Undereducated,UnitedHealth Group,Cloud Consultant,142545.7,80
+1709,true,Undereducated,JPMorgan Chase,Applied Scientist,96070.69,29
+1710,true,Matched,Capital One,QA Engineer,146845.79,53
+1711,true,Undereducated,Cognizant,Analytics Manager,120953.09,80
+1712,true,Undereducated,Morgan Stanley,BI Developer,97509.38,73
+1713,true,Overeducated,Cisco Systems,QA Engineer,98910.24,85
+1714,true,Undereducated,Goldman Sachs,ML Engineer,120544.99,82
+1715,true,Undereducated,Oracle,Analytics Manager,141433.27,73
+1716,true,Undereducated,McKinsey & Company,Mobile Developer,120366.83,87
+1717,true,Undereducated,Morgan Stanley,Full Stack Developer,142929.68,26
+1718,true,Matched,Intel,CISO,116832.5,91
+1719,false,,,,,
+1720,true,Undereducated,Salesforce,Site Reliability Engineer,101288.58,66
+1721,true,Undereducated,Amazon Web Services,Cloud Architect,84653.35,17
+1722,true,Undereducated,Amazon Web Services,Data Engineer,110242.44,68
+1723,true,Matched,Epic Systems,Full Stack Developer,127659.62,49
+1724,true,Undereducated,Infosys,Data Engineer,123335.02,47
+1725,true,Undereducated,SAP,Solutions Architect,116008.35,15
+1726,true,Undereducated,PwC,Growth PM,96525.7,33
+1727,true,Undereducated,IBM,Data Warehouse Architect,143511.99,67
+1728,true,Matched,Visa,Cloud Consultant,129278.34,43
+1729,true,Undereducated,Cisco Systems,Full Stack Developer,103437.62,87
+1730,true,Undereducated,Visa,BI Analyst,152437.58,46
+1731,true,Undereducated,JPMorgan Chase,AI Researcher,116557.11,31
+1732,true,Undereducated,Infosys,MLOps Engineer,110094.91,32
+1733,true,Undereducated,Goldman Sachs,Applied Scientist,144569.86,60
+1734,true,Undereducated,Intel,Frontend Developer,145713.66,79
+1735,true,Undereducated,SAP,Scrum Master,129595.79,62
+1736,false,,,,,
+1737,true,Undereducated,Deloitte,Product Manager,104845.95,49
+1738,false,,,,,
+1739,true,Matched,Booz Allen Hamilton,Penetration Tester,117152.08,87
+1740,true,Matched,KPMG,Platform Engineer,114927.0,50
+1741,true,Matched,Capital One,Data Scientist,100802.76,31
+1742,true,Undereducated,Infosys,Security Analyst,110075.78,92
+1743,true,Undereducated,Intel,Growth PM,160388.42,89
+1744,true,Undereducated,Goldman Sachs,Solutions Architect,123387.33,37
+1745,true,Undereducated,Epic Systems,Data Engineer,110726.88,92
+1746,true,Undereducated,Intel,Cloud Architect,109225.94,16
+1747,true,Undereducated,JPMorgan Chase,QA Engineer,119907.76,37
+1748,true,Undereducated,Microsoft,Cloud Consultant,126616.64,90
+1749,false,,,,,
+1750,true,Undereducated,Lockheed Martin,DevOps Engineer,159372.86,42
+1751,true,Matched,Johnson & Johnson,Product Manager,137853.69,86
+1752,true,Undereducated,JPMorgan Chase,Data Engineer,130085.55,62
+1753,true,Matched,Goldman Sachs,CISO,131426.73,46
+1754,true,Undereducated,KPMG,Frontend Developer,91252.0,92
+1755,true,Undereducated,Cognizant,Data Scientist,100590.99,91
+1756,true,Overeducated,Infosys,AI Researcher,155534.19,18
+1757,true,Matched,Goldman Sachs,BI Analyst,95058.93,74
+1758,false,,,,,
+1759,true,Undereducated,PwC,BI Developer,125613.11,54
+1760,true,Undereducated,Stripe,Applied Scientist,111776.07,51
+1761,true,Undereducated,Cognizant,ML Engineer,117945.06,30
+1762,true,Undereducated,McKinsey & Company,Solutions Architect,115762.97,56
+1763,true,Undereducated,Lockheed Martin,Site Reliability Engineer,110693.85,31
+1764,true,Undereducated,Intel,MLOps Engineer,125419.08,64
+1765,true,Undereducated,Oracle,Cloud Architect,131629.58,52
+1766,false,,,,,
+1767,true,Undereducated,Morgan Stanley,Cloud Consultant,124724.08,22
+1768,true,Undereducated,SAP,Design Researcher,107209.55,18
+1769,true,Undereducated,Intel,Release Manager,104348.13,92
+1770,false,,,,,
+1771,true,Undereducated,Lockheed Martin,Product Manager,153050.42,31
+1772,true,Undereducated,SAP,Applied Scientist,128419.25,62
+1773,true,Overeducated,Accenture,Backend Developer,89531.76,75
+1774,true,Undereducated,Visa,AI Researcher,112300.24,72
+1775,true,Undereducated,Visa,Release Manager,130088.17,88
+1776,true,Undereducated,Raytheon Technologies,Growth PM,114093.43,15
+1777,true,Undereducated,Goldman Sachs,Solutions Architect,106225.3,47
+1778,true,Undereducated,Deloitte,BI Developer,108168.34,39
+1779,true,Undereducated,Stripe,Product Manager,125696.29,27
+1780,true,Undereducated,Johnson & Johnson,Data Scientist,134794.83,36
+1781,true,Undereducated,IBM,BI Analyst,113642.02,43
+1782,true,Undereducated,Raytheon Technologies,Data Engineer,137878.47,20
+1783,true,Matched,Microsoft,BI Developer,107342.19,90
+1784,true,Undereducated,Cognizant,Security Analyst,129182.52,20
+1785,true,Undereducated,Salesforce,Growth PM,136588.12,54
+1786,true,Undereducated,Lockheed Martin,AI Researcher,117530.59,49
+1787,true,Matched,PwC,QA Engineer,101283.63,31
+1788,true,Undereducated,Bloomberg,AI Researcher,120391.09,75
+1789,true,Undereducated,Raytheon Technologies,BI Developer,103810.82,75
+1790,true,Undereducated,Palantir Technologies,Penetration Tester,125053.2,26
+1791,true,Undereducated,Oracle,Data Analyst,120900.18,83
+1792,true,Undereducated,IBM,Product Designer,108079.76,39
+1793,false,,,,,
+1794,true,Undereducated,Lockheed Martin,Penetration Tester,151952.92,80
+1795,true,Undereducated,PwC,Backend Developer,89160.04,27
+1796,true,Undereducated,Epic Systems,Full Stack Developer,141758.39,94
+1797,true,Undereducated,Microsoft,CISO,108824.29,65
+1798,true,Undereducated,Johnson & Johnson,AI Researcher,124594.85,21
+1799,true,Undereducated,UnitedHealth Group,AI Researcher,124215.95,54
+1800,true,Undereducated,Lockheed Martin,Full Stack Developer,87846.81,17
+1801,false,,,,,
+1802,true,Undereducated,Palantir Technologies,Cloud Consultant,157848.45,37
+1803,true,Undereducated,Oracle,Data Warehouse Architect,121902.13,90
+1804,true,Undereducated,Raytheon Technologies,Applied Scientist,132909.38,45
+1805,true,Undereducated,Lockheed Martin,Product Manager,151597.6,50
+1806,true,Undereducated,Accenture,Scrum Master,129281.91,83
+1807,true,Undereducated,Google,Data Analyst,103274.48,92
+1808,true,Undereducated,UnitedHealth Group,Product Designer,87802.81,51
+1809,true,Undereducated,Cognizant,Data Warehouse Architect,113790.35,45
+1810,true,Undereducated,Cognizant,BI Analyst,120876.18,39
+1811,true,Undereducated,Epic Systems,Analytics Manager,108610.6,79
+1812,false,,,,,
+1813,true,Undereducated,SAP,Release Manager,127056.01,77
+1814,true,Matched,Microsoft,Site Reliability Engineer,125112.38,20
+1815,true,Undereducated,Oracle,CISO,102051.31,91
+1816,true,Undereducated,SAP,Growth PM,92076.88,43
+1817,true,Undereducated,Stripe,Cloud Consultant,105585.22,64
+1818,true,Undereducated,Lockheed Martin,Full Stack Developer,109004.92,85
+1819,true,Undereducated,Cisco Systems,Product Manager,110540.47,45
+1820,true,Undereducated,Microsoft,Product Manager,80533.59,19
+1821,true,Matched,Oracle,Data Analyst,93283.23,33
+1822,true,Undereducated,UnitedHealth Group,Site Reliability Engineer,106842.73,15
+1823,true,Undereducated,IBM,Full Stack Developer,153502.59,52
+1824,true,Undereducated,Salesforce,BI Analyst,129514.75,83
+1825,true,Undereducated,Capital One,Data Scientist,112514.29,25
+1826,true,Undereducated,Infosys,BI Developer,78413.89,94
+1827,true,Undereducated,McKinsey & Company,Full Stack Developer,136459.73,68
+1828,true,Undereducated,Infosys,QA Engineer,129267.71,31
+1829,false,,,,,
+1830,true,Matched,Raytheon Technologies,Product Designer,88415.24,15
+1831,true,Undereducated,Capital One,Product Designer,125001.37,24
+1832,true,Undereducated,Capital One,Platform Engineer,110457.93,77
+1833,false,,,,,
+1834,false,,,,,
+1835,true,Undereducated,KPMG,Product Manager,133715.08,21
+1836,true,Undereducated,Infosys,DevOps Engineer,151880.45,20
+1837,true,Undereducated,SAP,AI Researcher,94025.65,62
+1838,true,Undereducated,UnitedHealth Group,Backend Developer,120161.1,69
+1839,true,Overeducated,Lockheed Martin,CISO,92368.66,16
+1840,true,Undereducated,McKinsey & Company,CISO,139678.65,36
+1841,true,Undereducated,Morgan Stanley,Analytics Manager,148002.12,33
+1842,true,Undereducated,Epic Systems,Mobile Developer,84978.83,35
+1843,true,Undereducated,JPMorgan Chase,Platform Engineer,121765.27,87
+1844,true,Matched,Deloitte,CISO,129872.79,88
+1845,true,Undereducated,Infosys,Applied Scientist,113706.99,21
+1846,true,Undereducated,Amazon Web Services,Cloud Architect,116538.52,74
+1847,true,Undereducated,Johnson & Johnson,Growth PM,135106.92,56
+1848,true,Matched,Morgan Stanley,Cloud Architect,100027.59,20
+1849,true,Undereducated,Microsoft,Growth PM,126369.66,51
+1850,true,Undereducated,Bloomberg,CISO,111256.45,86
+1851,true,Undereducated,Palantir Technologies,Product Designer,133175.11,59
+1852,true,Undereducated,Goldman Sachs,Growth PM,116352.06,57
+1853,true,Undereducated,Stripe,Data Analyst,129931.8,91
+1854,true,Undereducated,Booz Allen Hamilton,Solutions Architect,113807.74,93
+1855,true,Undereducated,Intel,Product Designer,106485.28,16
+1856,true,Undereducated,Booz Allen Hamilton,QA Engineer,146204.12,32
+1857,true,Undereducated,JPMorgan Chase,AI Researcher,121152.86,52
+1858,true,Undereducated,Raytheon Technologies,QA Engineer,126736.65,66
+1859,true,Undereducated,Salesforce,BI Developer,118623.98,61
+1860,true,Undereducated,IBM,Data Scientist,101358.66,15
+1861,true,Undereducated,PwC,Backend Developer,84755.18,69
+1862,true,Overeducated,Intel,BI Analyst,104694.47,59
+1863,true,Undereducated,IBM,Cloud Architect,113171.59,37
+1864,true,Undereducated,Deloitte,MLOps Engineer,99602.56,54
+1865,true,Undereducated,Palantir Technologies,Product Designer,95144.63,48
+1866,true,Undereducated,Booz Allen Hamilton,MLOps Engineer,89883.94,74
+1867,true,Matched,JPMorgan Chase,CISO,106688.62,88
+1868,true,Matched,Morgan Stanley,Product Manager,103997.6,70
+1869,false,,,,,
+1870,false,,,,,
+1871,false,,,,,
+1872,true,Undereducated,Google,Product Designer,93021.94,30
+1873,true,Undereducated,Google,Solutions Architect,114130.03,48
+1874,true,Undereducated,Infosys,AI Researcher,138216.57,62
+1875,true,Undereducated,Cisco Systems,DevOps Engineer,77868.69,76
+1876,false,,,,,
+1877,false,,,,,
+1878,true,Undereducated,Stripe,AI Researcher,104206.52,27
+1879,true,Undereducated,Microsoft,Platform Engineer,103869.24,70
+1880,true,Undereducated,Stripe,Cloud Consultant,84246.53,92
+1881,true,Undereducated,Oracle,Cloud Architect,101784.27,41
+1882,true,Undereducated,Goldman Sachs,Frontend Developer,143030.55,20
+1883,true,Undereducated,Capital One,MLOps Engineer,138276.23,45
+1884,true,Undereducated,Visa,Security Analyst,152035.77,63
+1885,true,Undereducated,Cisco Systems,Frontend Developer,124499.49,36
+1886,true,Undereducated,Microsoft,Data Analyst,128411.63,43
+1887,true,Undereducated,Morgan Stanley,Cloud Consultant,131903.44,20
+1888,true,Undereducated,Accenture,Build Engineer,134300.53,47
+1889,true,Undereducated,Intel,Data Scientist,100006.65,44
+1890,true,Undereducated,Epic Systems,Growth PM,91357.86,32
+1891,true,Undereducated,Oracle,BI Developer,87283.05,92
+1892,true,Undereducated,Microsoft,AI Researcher,98870.14,76
+1893,true,Overeducated,Bloomberg,Mobile Developer,88201.12,49
+1894,true,Undereducated,Infosys,BI Analyst,93580.86,71
+1895,true,Undereducated,Microsoft,BI Developer,128419.7,40
+1896,true,Matched,Accenture,AI Researcher,115499.14,65
+1897,true,Undereducated,Cognizant,Cloud Consultant,149234.07,38
+1898,true,Undereducated,Morgan Stanley,Cloud Consultant,121624.8,31
+1899,true,Undereducated,Cognizant,Data Warehouse Architect,113502.21,24
+1900,true,Undereducated,Palantir Technologies,Applied Scientist,125394.92,65
+1901,true,Undereducated,Johnson & Johnson,Analytics Manager,124131.84,71
+1902,true,Matched,Amazon Web Services,DevOps Engineer,138159.63,63
+1903,true,Undereducated,Google,Data Analyst,112082.79,94
+1904,true,Undereducated,Morgan Stanley,Growth PM,101386.36,25
+1905,true,Undereducated,Johnson & Johnson,ML Engineer,101879.68,21
+1906,true,Undereducated,Accenture,Release Manager,134787.19,75
+1907,true,Matched,Cisco Systems,Release Manager,89939.31,73
+1908,true,Undereducated,Visa,AI Researcher,113820.01,70
+1909,true,Undereducated,Amazon Web Services,DevOps Engineer,84579.32,66
+1910,true,Undereducated,IBM,Product Manager,125417.83,48
+1911,false,,,,,
+1912,true,Matched,JPMorgan Chase,Full Stack Developer,114136.23,55
+1913,true,Undereducated,Cognizant,Build Engineer,121701.69,81
+1914,false,,,,,
+1915,false,,,,,
+1916,true,Undereducated,Johnson & Johnson,Full Stack Developer,133678.11,91
+1917,true,Undereducated,Visa,UX Researcher,121915.12,69
+1918,true,Undereducated,UnitedHealth Group,MLOps Engineer,126044.27,55
+1919,true,Undereducated,Palantir Technologies,Data Warehouse Architect,123233.16,33
+1920,false,,,,,
+1921,true,Undereducated,Cognizant,Cloud Architect,121825.93,31
+1922,true,Undereducated,Epic Systems,Product Designer,136866.54,27
+1923,true,Matched,Lockheed Martin,BI Developer,107847.42,28
+1924,true,Undereducated,Visa,Mobile Developer,109839.2,44
+1925,true,Matched,Bloomberg,Data Engineer,92187.85,72
+1926,true,Undereducated,Visa,Data Analyst,129552.57,32
+1927,false,,,,,
+1928,true,Undereducated,Palantir Technologies,ML Engineer,142664.11,78
+1929,true,Matched,Visa,Data Analyst,118721.86,58
+1930,true,Undereducated,KPMG,Solutions Architect,132899.14,23
+1931,false,,,,,
+1932,true,Undereducated,Visa,Cloud Architect,126317.77,41
+1933,true,Undereducated,Morgan Stanley,Site Reliability Engineer,132148.0,22
+1934,true,Undereducated,Stripe,Growth PM,137519.4,23
+1935,true,Undereducated,Palantir Technologies,BI Developer,94275.89,40
+1936,true,Undereducated,Morgan Stanley,Platform Engineer,108260.06,66
+1937,true,Undereducated,McKinsey & Company,Full Stack Developer,137379.67,65
+1938,true,Matched,KPMG,Release Manager,139331.3,71
+1939,true,Undereducated,Salesforce,Product Designer,128368.45,39
+1940,true,Matched,Accenture,Scrum Master,121995.68,34
+1941,true,Undereducated,Amazon Web Services,BI Analyst,134591.28,88
+1942,false,,,,,
+1943,true,Undereducated,Capital One,AI Researcher,128746.32,27
+1944,true,Undereducated,Google,Scrum Master,113103.77,79
+1945,true,Undereducated,Johnson & Johnson,Product Manager,118444.72,56
+1946,true,Undereducated,UnitedHealth Group,Solutions Architect,121380.56,60
+1947,true,Matched,Epic Systems,Site Reliability Engineer,136438.88,70
+1948,true,Undereducated,Infosys,Scrum Master,76260.25,58
+1949,true,Undereducated,Salesforce,Cloud Architect,146083.34,52
+1950,true,Undereducated,Intel,Product Designer,108441.01,60
+1951,true,Undereducated,Cisco Systems,Frontend Developer,88473.48,53
+1952,true,Undereducated,McKinsey & Company,Site Reliability Engineer,127412.65,52
+1953,true,Undereducated,SAP,Data Scientist,106463.67,40
+1954,true,Undereducated,Intel,Analytics Manager,110661.68,80
+1955,true,Undereducated,SAP,Site Reliability Engineer,136151.88,20
+1956,true,Overeducated,Deloitte,QA Engineer,127537.04,39
+1957,true,Undereducated,Salesforce,Full Stack Developer,131110.55,34
+1958,true,Undereducated,Intel,BI Analyst,115583.95,37
+1959,true,Undereducated,PwC,BI Analyst,123909.58,84
+1960,true,Matched,Accenture,Full Stack Developer,96317.62,23
+1961,true,Undereducated,Accenture,Release Manager,128062.72,23
+1962,true,Undereducated,Johnson & Johnson,Solutions Architect,123781.52,32
+1963,false,,,,,
+1964,true,Undereducated,Epic Systems,CISO,116254.25,41
+1965,true,Matched,KPMG,AI Researcher,135688.43,53
+1966,true,Matched,Cognizant,Penetration Tester,102111.87,63
+1967,true,Undereducated,KPMG,AI Researcher,94701.43,88
+1968,true,Undereducated,Deloitte,Frontend Developer,142571.87,17
+1969,false,,,,,
+1970,true,Undereducated,Lockheed Martin,Applied Scientist,120885.12,32
+1971,true,Undereducated,Cisco Systems,Frontend Developer,121609.82,49
+1972,true,Undereducated,Stripe,Applied Scientist,155083.3,44
+1973,false,,,,,
+1974,true,Undereducated,Raytheon Technologies,Cloud Architect,116400.52,57
+1975,true,Undereducated,Stripe,Analytics Manager,140968.31,74
+1976,true,Undereducated,Amazon Web Services,Design Researcher,106360.23,27
+1977,true,Matched,JPMorgan Chase,Site Reliability Engineer,117120.89,51
+1978,true,Undereducated,Microsoft,Platform Engineer,127934.35,29
+1979,true,Undereducated,UnitedHealth Group,Release Manager,95067.91,49
+1980,false,,,,,
+1981,true,Undereducated,Cognizant,AI Researcher,146968.26,79
+1982,true,Undereducated,SAP,MLOps Engineer,141643.26,81
+1983,false,,,,,
+1984,true,Undereducated,Epic Systems,Build Engineer,106627.27,88
+1985,true,Undereducated,Raytheon Technologies,Design Researcher,112234.63,36
+1986,false,,,,,
+1987,true,Undereducated,IBM,Product Designer,147788.75,94
+1988,true,Undereducated,Intel,Site Reliability Engineer,116950.3,52
+1989,true,Undereducated,Stripe,Scrum Master,92811.05,39
+1990,true,Undereducated,Cisco Systems,Data Warehouse Architect,109661.66,26
+1991,true,Undereducated,KPMG,Backend Developer,137159.4,74
+1992,true,Overeducated,Raytheon Technologies,Cloud Consultant,111778.23,63
+1993,false,,,,,
+1994,true,Undereducated,Intel,Analytics Manager,107651.31,68
+1995,false,,,,,
+1996,true,Undereducated,Capital One,Design Researcher,108247.4,75
+1997,true,Undereducated,McKinsey & Company,Analytics Manager,99737.6,34
+1998,false,,,,,
+1999,true,Overeducated,McKinsey & Company,BI Analyst,117889.62,19
+2000,true,Undereducated,Intel,MLOps Engineer,128642.5,49
+2001,true,Undereducated,Morgan Stanley,Scrum Master,119436.56,22
+2002,true,Undereducated,Salesforce,Security Analyst,132713.84,72
+2003,true,Undereducated,Bloomberg,Scrum Master,113537.21,68
+2004,true,Undereducated,McKinsey & Company,BI Developer,124949.22,84
+2005,true,Undereducated,SAP,Scrum Master,139645.52,41
+2006,true,Matched,McKinsey & Company,BI Developer,107448.06,56
+2007,true,Undereducated,McKinsey & Company,ML Engineer,98787.75,62
+2008,true,Undereducated,Palantir Technologies,Product Designer,140860.32,36
+2009,true,Undereducated,KPMG,Frontend Developer,117296.69,85
+2010,true,Overeducated,KPMG,Analytics Manager,130195.35,34
+2011,false,,,,,
+2012,true,Undereducated,Capital One,DevOps Engineer,129524.06,90
+2013,true,Matched,Booz Allen Hamilton,Analytics Manager,97003.61,57
+2014,true,Undereducated,Salesforce,Build Engineer,117170.37,34
+2015,true,Undereducated,Lockheed Martin,Product Designer,132352.03,27
+2016,true,Undereducated,Salesforce,Analytics Manager,115226.02,77
+2017,true,Undereducated,Palantir Technologies,Applied Scientist,124893.08,30
+2018,true,Undereducated,Deloitte,Site Reliability Engineer,129306.82,33
+2019,true,Undereducated,Lockheed Martin,Design Researcher,90047.1,43
+2020,true,Undereducated,Oracle,Release Manager,124496.24,53
+2021,true,Undereducated,Amazon Web Services,DevOps Engineer,112889.59,55
+2022,true,Undereducated,JPMorgan Chase,UX Researcher,109596.51,93
+2023,true,Undereducated,PwC,Design Researcher,120891.09,39
+2024,true,Undereducated,Accenture,Solutions Architect,129144.82,71
+2025,true,Undereducated,Cisco Systems,Data Warehouse Architect,96671.82,27
+2026,true,Matched,Amazon Web Services,MLOps Engineer,126374.23,71
+2027,true,Undereducated,Capital One,Backend Developer,101636.73,82
+2028,true,Overeducated,UnitedHealth Group,Design Researcher,119761.19,81
+2029,true,Undereducated,Epic Systems,Applied Scientist,146752.74,54
+2030,true,Undereducated,Cognizant,Build Engineer,95345.83,24
+2031,true,Matched,Johnson & Johnson,BI Analyst,96959.89,28
+2032,true,Undereducated,Morgan Stanley,MLOps Engineer,146810.45,21
+2033,true,Undereducated,JPMorgan Chase,CISO,121716.2,56
+2034,true,Undereducated,Visa,BI Developer,114890.11,19
+2035,true,Undereducated,Stripe,Scrum Master,102392.24,94
+2036,true,Overeducated,UnitedHealth Group,Cloud Consultant,110885.59,44
+2037,true,Undereducated,Raytheon Technologies,Full Stack Developer,124337.87,60
+2038,true,Undereducated,Intel,Site Reliability Engineer,114596.13,88
+2039,true,Undereducated,Raytheon Technologies,Design Researcher,101236.99,69
+2040,true,Matched,Goldman Sachs,Analytics Manager,116509.1,23
+2041,true,Undereducated,Microsoft,MLOps Engineer,135131.06,76
+2042,true,Undereducated,Oracle,Data Warehouse Architect,104941.58,30
+2043,true,Overeducated,IBM,Scrum Master,159024.78,35
+2044,true,Undereducated,Capital One,Scrum Master,113538.63,44
+2045,true,Undereducated,Lockheed Martin,Data Warehouse Architect,110101.13,19
+2046,true,Undereducated,Google,Platform Engineer,147153.05,53
+2047,true,Undereducated,Deloitte,Design Researcher,137812.77,37
+2048,true,Matched,PwC,Platform Engineer,128299.42,23
+2049,true,Undereducated,Epic Systems,DevOps Engineer,131341.44,89
+2050,true,Undereducated,JPMorgan Chase,Data Warehouse Architect,100340.57,53
+2051,true,Undereducated,Johnson & Johnson,Frontend Developer,119215.03,64
+2052,true,Undereducated,PwC,Penetration Tester,114605.91,84
+2053,true,Undereducated,Morgan Stanley,Solutions Architect,99951.89,49
+2054,true,Undereducated,Microsoft,CISO,128627.34,69
+2055,true,Undereducated,Accenture,Data Analyst,76111.62,36
+2056,true,Undereducated,Infosys,BI Developer,101247.37,51
+2057,false,,,,,
+2058,true,Undereducated,Goldman Sachs,Full Stack Developer,128235.84,76
+2059,true,Undereducated,Palantir Technologies,Frontend Developer,144467.96,86
+2060,true,Undereducated,JPMorgan Chase,Growth PM,119368.96,18
+2061,true,Undereducated,Salesforce,Cloud Architect,114936.92,83
+2062,true,Undereducated,Deloitte,Data Scientist,122564.14,18
+2063,true,Undereducated,Stripe,Penetration Tester,121237.62,18
+2064,true,Undereducated,Infosys,Data Engineer,121707.24,29
+2065,true,Undereducated,Infosys,Scrum Master,91921.52,73
+2066,true,Undereducated,Intel,QA Engineer,131820.23,70
+2067,false,,,,,
+2068,true,Undereducated,PwC,Product Manager,131884.8,45
+2069,true,Overeducated,Visa,Applied Scientist,118074.92,32
+2070,true,Matched,Capital One,Design Researcher,141914.35,49
+2071,true,Undereducated,Bloomberg,Data Warehouse Architect,132299.33,71
+2072,false,,,,,
+2073,true,Undereducated,Johnson & Johnson,Penetration Tester,144555.16,94
+2074,true,Matched,Stripe,Scrum Master,87939.07,93
+2075,true,Undereducated,Goldman Sachs,Full Stack Developer,107486.0,66
+2076,true,Undereducated,Microsoft,Data Analyst,105513.22,42
+2077,true,Undereducated,Bloomberg,Security Analyst,142917.34,53
+2078,false,,,,,
+2079,false,,,,,
+2080,true,Undereducated,Stripe,Product Designer,110744.15,21
+2081,true,Overeducated,Johnson & Johnson,Cloud Architect,128721.43,63
+2082,true,Undereducated,Salesforce,Penetration Tester,133515.81,63
+2083,true,Matched,IBM,Data Analyst,142220.11,38
+2084,true,Undereducated,Stripe,Frontend Developer,121933.58,26
+2085,true,Undereducated,Cognizant,MLOps Engineer,102249.06,15
+2086,false,,,,,
+2087,true,Undereducated,Bloomberg,Data Warehouse Architect,107388.04,49
+2088,true,Matched,Epic Systems,Product Manager,122865.1,76
+2089,true,Undereducated,Lockheed Martin,Design Researcher,131739.14,88
+2090,true,Undereducated,Deloitte,Design Researcher,113565.81,23
+2091,true,Matched,Infosys,Backend Developer,118059.86,62
+2092,true,Undereducated,SAP,Data Scientist,123790.18,34
+2093,true,Undereducated,Palantir Technologies,Security Analyst,101493.92,82
+2094,true,Undereducated,Google,Data Warehouse Architect,108765.11,23
+2095,true,Undereducated,Goldman Sachs,AI Researcher,134410.18,89
+2096,true,Undereducated,Johnson & Johnson,Release Manager,94242.13,69
+2097,true,Undereducated,Palantir Technologies,Platform Engineer,109715.96,79
+2098,true,Undereducated,Palantir Technologies,Site Reliability Engineer,113394.88,46
+2099,true,Undereducated,Bloomberg,MLOps Engineer,101482.0,26
+2100,false,,,,,
+2101,true,Undereducated,Lockheed Martin,QA Engineer,121656.71,36
+2102,true,Undereducated,Accenture,Solutions Architect,153155.01,85
+2103,true,Matched,Amazon Web Services,Product Manager,132629.81,82
+2104,true,Matched,Google,Security Analyst,105854.85,21
+2105,true,Undereducated,SAP,AI Researcher,122299.96,33
+2106,true,Matched,Oracle,Data Scientist,152386.28,46
+2107,false,,,,,
+2108,true,Undereducated,Epic Systems,Data Engineer,113869.81,40
+2109,true,Undereducated,Cisco Systems,Data Scientist,93529.06,21
+2110,true,Undereducated,Stripe,Mobile Developer,125110.13,57
+2111,true,Undereducated,Google,Cloud Architect,96905.61,36
+2112,true,Undereducated,Goldman Sachs,Cloud Consultant,113161.13,18
+2113,true,Undereducated,Booz Allen Hamilton,MLOps Engineer,133941.58,24
+2114,true,Undereducated,McKinsey & Company,Cloud Consultant,115018.48,17
+2115,true,Undereducated,Intel,DevOps Engineer,137275.98,41
+2116,true,Undereducated,Capital One,Cloud Architect,115888.11,32
+2117,true,Undereducated,Google,Design Researcher,101575.36,90
+2118,true,Undereducated,Amazon Web Services,Platform Engineer,133241.96,63
+2119,true,Undereducated,Oracle,Applied Scientist,93266.44,24
+2120,true,Undereducated,Lockheed Martin,ML Engineer,92724.85,41
+2121,true,Undereducated,Deloitte,Data Engineer,100849.38,61
+2122,true,Undereducated,Booz Allen Hamilton,Data Warehouse Architect,123699.29,35
+2123,true,Undereducated,Google,QA Engineer,124689.83,51
+2124,true,Undereducated,Cisco Systems,UX Researcher,84229.98,66
+2125,true,Undereducated,Microsoft,Scrum Master,117774.6,69
+2126,true,Undereducated,McKinsey & Company,UX Researcher,104316.61,70
+2127,true,Matched,PwC,BI Analyst,113381.13,89
+2128,false,,,,,
+2129,true,Undereducated,Morgan Stanley,Site Reliability Engineer,137517.71,46
+2130,true,Undereducated,Morgan Stanley,Platform Engineer,123496.72,37
+2131,true,Matched,IBM,Product Manager,124536.61,26
+2132,true,Undereducated,Infosys,Product Manager,104523.05,62
+2133,true,Matched,Bloomberg,Full Stack Developer,117885.15,77
+2134,false,,,,,
+2135,true,Undereducated,Salesforce,DevOps Engineer,116516.13,80
+2136,true,Undereducated,Intel,ML Engineer,157470.61,28
+2137,true,Undereducated,IBM,Design Researcher,139137.81,46
+2138,true,Undereducated,IBM,Data Analyst,123917.04,51
+2139,false,,,,,
+2140,false,,,,,
+2141,false,,,,,
+2142,false,,,,,
+2143,true,Matched,Oracle,Design Researcher,130544.6,58
+2144,true,Undereducated,Palantir Technologies,QA Engineer,139350.25,31
+2145,true,Undereducated,McKinsey & Company,Mobile Developer,120989.24,46
+2146,true,Undereducated,Visa,Product Designer,101317.21,78
+2147,false,,,,,
+2148,true,Undereducated,Johnson & Johnson,Backend Developer,100956.37,35
+2149,true,Undereducated,Palantir Technologies,QA Engineer,131716.92,40
+2150,true,Undereducated,Deloitte,MLOps Engineer,112070.3,49
+2151,true,Overeducated,Intel,Mobile Developer,143604.82,79
+2152,true,Undereducated,McKinsey & Company,Analytics Manager,112317.55,67
+2153,false,,,,,
+2154,true,Undereducated,Goldman Sachs,Site Reliability Engineer,111689.6,90
+2155,true,Undereducated,Raytheon Technologies,BI Developer,99404.62,68
+2156,true,Undereducated,Oracle,UX Researcher,131580.43,25
+2157,true,Undereducated,KPMG,Data Scientist,156434.61,74
+2158,true,Undereducated,Johnson & Johnson,Data Warehouse Architect,94283.41,75
+2159,true,Undereducated,Palantir Technologies,Data Analyst,102946.54,15
+2160,true,Matched,Microsoft,Release Manager,109145.74,76
+2161,true,Matched,Accenture,Cloud Architect,156807.14,64
+2162,true,Undereducated,Booz Allen Hamilton,Cloud Architect,118396.68,30
+2163,false,,,,,
+2164,true,Undereducated,Raytheon Technologies,ML Engineer,118608.8,71
+2165,true,Overeducated,Epic Systems,Cloud Consultant,111519.11,89
+2166,false,,,,,
+2167,true,Undereducated,Palantir Technologies,Growth PM,100321.22,59
+2168,true,Undereducated,SAP,Data Scientist,110255.74,91
+2169,true,Undereducated,Visa,ML Engineer,94102.56,16
+2170,true,Undereducated,Epic Systems,UX Researcher,129750.33,25
+2171,false,,,,,
+2172,true,Matched,Palantir Technologies,Product Designer,142669.68,52
+2173,true,Undereducated,Intel,Scrum Master,79360.38,18
+2174,true,Undereducated,Deloitte,Data Warehouse Architect,156006.37,57
+2175,true,Undereducated,Booz Allen Hamilton,Product Designer,105546.88,28
+2176,true,Undereducated,McKinsey & Company,Analytics Manager,128122.29,29
+2177,true,Undereducated,McKinsey & Company,Full Stack Developer,103299.78,89
+2178,true,Undereducated,Cognizant,Design Researcher,126700.13,44
+2179,true,Overeducated,Johnson & Johnson,QA Engineer,118138.64,76
+2180,true,Undereducated,Oracle,Full Stack Developer,110255.92,83
+2181,true,Undereducated,SAP,Frontend Developer,123198.13,26
+2182,true,Undereducated,Stripe,Release Manager,147750.67,78
+2183,true,Undereducated,Epic Systems,Backend Developer,85583.28,28
+2184,true,Undereducated,McKinsey & Company,Backend Developer,142815.34,18
+2185,true,Undereducated,UnitedHealth Group,Data Analyst,106331.32,19
+2186,true,Undereducated,UnitedHealth Group,QA Engineer,112720.13,68
+2187,false,,,,,
+2188,true,Undereducated,Amazon Web Services,BI Developer,117037.4,94
+2189,true,Undereducated,Capital One,CISO,98843.7,40
+2190,true,Undereducated,Visa,Mobile Developer,144765.93,53
+2191,true,Undereducated,Amazon Web Services,Data Warehouse Architect,144407.76,55
+2192,true,Undereducated,Palantir Technologies,Site Reliability Engineer,121273.36,87
+2193,false,,,,,
+2194,true,Undereducated,Visa,Build Engineer,119168.0,41
+2195,true,Undereducated,Bloomberg,MLOps Engineer,100050.62,76
+2196,true,Matched,Bloomberg,Solutions Architect,124286.94,29
+2197,true,Undereducated,Palantir Technologies,Build Engineer,93950.19,89
+2198,true,Undereducated,SAP,Analytics Manager,128753.8,32
+2199,true,Undereducated,Stripe,AI Researcher,118268.66,35
+2200,false,,,,,
+2201,true,Undereducated,Bloomberg,Growth PM,117726.18,26
+2202,true,Undereducated,JPMorgan Chase,ML Engineer,153380.67,55
+2203,true,Undereducated,Palantir Technologies,BI Developer,104352.31,92
+2204,true,Undereducated,Stripe,UX Researcher,107190.15,62
+2205,true,Undereducated,Intel,Data Scientist,87193.43,92
+2206,true,Undereducated,Bloomberg,Applied Scientist,97056.09,78
+2207,true,Undereducated,Oracle,Product Designer,148531.29,30
+2208,true,Matched,Cisco Systems,DevOps Engineer,137942.77,34
+2209,true,Undereducated,Amazon Web Services,BI Developer,118765.86,45
+2210,true,Undereducated,Google,BI Analyst,126117.83,67
+2211,true,Undereducated,Oracle,Data Engineer,121667.12,64
+2212,true,Undereducated,SAP,Penetration Tester,117201.91,58
+2213,true,Matched,Raytheon Technologies,Solutions Architect,125451.45,54
+2214,false,,,,,
+2215,true,Undereducated,Goldman Sachs,Solutions Architect,110585.86,23
+2216,true,Undereducated,Lockheed Martin,Full Stack Developer,118394.14,81
+2217,true,Undereducated,Intel,Product Designer,128032.16,92
+2218,true,Matched,Microsoft,Design Researcher,128510.65,22
+2219,true,Undereducated,Morgan Stanley,Mobile Developer,80026.74,70
+2220,true,Undereducated,Visa,Product Manager,146954.0,41
+2221,true,Undereducated,Goldman Sachs,Cloud Consultant,150028.03,38
+2222,true,Undereducated,JPMorgan Chase,Cloud Consultant,147118.19,64
+2223,true,Overeducated,IBM,Product Manager,104896.02,61
+2224,true,Undereducated,Accenture,Site Reliability Engineer,109607.95,17
+2225,true,Undereducated,Stripe,Full Stack Developer,95818.14,29
+2226,true,Undereducated,SAP,Product Designer,104264.87,80
+2227,true,Overeducated,Stripe,Data Engineer,136206.85,48
+2228,true,Undereducated,JPMorgan Chase,Build Engineer,102616.48,15
+2229,true,Undereducated,SAP,QA Engineer,126632.23,67
+2230,true,Undereducated,Epic Systems,Build Engineer,111185.7,77
+2231,true,Undereducated,Johnson & Johnson,QA Engineer,102754.49,36
+2232,true,Undereducated,Booz Allen Hamilton,Penetration Tester,119685.06,35
+2233,true,Overeducated,Capital One,Data Engineer,89998.66,37
+2234,true,Undereducated,Lockheed Martin,Full Stack Developer,95924.16,75
+2235,true,Undereducated,Cognizant,Penetration Tester,103466.14,92
+2236,true,Undereducated,Accenture,Full Stack Developer,114858.01,26
+2237,true,Undereducated,Epic Systems,Scrum Master,137565.47,92
+2238,true,Undereducated,UnitedHealth Group,Build Engineer,111408.65,29
+2239,true,Undereducated,Accenture,MLOps Engineer,112657.41,39
+2240,true,Undereducated,JPMorgan Chase,Cloud Consultant,150107.51,36
+2241,true,Undereducated,Capital One,AI Researcher,126530.63,70
+2242,true,Undereducated,Visa,Platform Engineer,137256.94,77
+2243,true,Undereducated,Raytheon Technologies,Security Analyst,77555.52,82
+2244,true,Undereducated,Lockheed Martin,Analytics Manager,102126.04,24
+2245,true,Undereducated,Microsoft,Growth PM,105804.69,57
+2246,true,Undereducated,Google,Cloud Architect,95551.26,80
+2247,true,Matched,Morgan Stanley,Frontend Developer,108971.56,51
+2248,true,Undereducated,JPMorgan Chase,Growth PM,130139.48,31
+2249,true,Undereducated,Morgan Stanley,UX Researcher,117465.45,86
+2250,false,,,,,
+2251,true,Matched,Raytheon Technologies,Penetration Tester,119276.29,78
+2252,false,,,,,
+2253,true,Overeducated,Accenture,Design Researcher,124676.95,74
+2254,true,Undereducated,Oracle,Cloud Consultant,105378.14,27
+2255,true,Undereducated,PwC,Scrum Master,117068.75,47
+2256,false,,,,,
+2257,false,,,,,
+2258,false,,,,,
+2259,true,Matched,Google,Mobile Developer,108179.78,85
+2260,true,Overeducated,Johnson & Johnson,Platform Engineer,107846.11,90
+2261,true,Undereducated,Accenture,Full Stack Developer,124102.15,38
+2262,true,Undereducated,SAP,QA Engineer,131355.4,92
+2263,true,Undereducated,Amazon Web Services,ML Engineer,112923.3,60
+2264,false,,,,,
+2265,true,Matched,Intel,AI Researcher,134448.13,63
+2266,true,Undereducated,Google,QA Engineer,102423.55,73
+2267,true,Matched,Epic Systems,Platform Engineer,122617.36,71
+2268,true,Matched,Google,Cloud Consultant,91651.75,71
+2269,true,Undereducated,Intel,BI Developer,152175.06,53
+2270,true,Undereducated,Capital One,Penetration Tester,107177.16,43
+2271,true,Undereducated,Cognizant,Site Reliability Engineer,115553.3,66
+2272,true,Matched,Microsoft,Product Manager,108036.45,52
+2273,true,Undereducated,SAP,Solutions Architect,122991.6,38
+2274,true,Undereducated,Accenture,Growth PM,149574.85,38
+2275,true,Undereducated,Epic Systems,Data Engineer,107041.93,42
+2276,true,Matched,Amazon Web Services,Full Stack Developer,96228.84,25
+2277,true,Undereducated,Booz Allen Hamilton,Mobile Developer,93544.84,58
+2278,true,Undereducated,Microsoft,Build Engineer,132162.86,56
+2279,true,Undereducated,Goldman Sachs,Analytics Manager,87982.36,64
+2280,true,Undereducated,Salesforce,Product Designer,114953.43,16
+2281,true,Matched,JPMorgan Chase,BI Analyst,103898.03,45
+2282,false,,,,,
+2283,true,Undereducated,Microsoft,Mobile Developer,132857.95,91
+2284,true,Undereducated,Deloitte,Backend Developer,82888.76,56
+2285,true,Undereducated,Capital One,Product Designer,140237.88,43
+2286,true,Undereducated,SAP,Cloud Architect,109093.81,92
+2287,true,Undereducated,UnitedHealth Group,Backend Developer,100455.77,71
+2288,true,Undereducated,Cisco Systems,Cloud Architect,114327.16,31
+2289,true,Matched,JPMorgan Chase,Data Engineer,100176.62,30
+2290,true,Undereducated,Cisco Systems,Product Manager,85148.04,63
+2291,true,Undereducated,SAP,AI Researcher,108892.92,65
+2292,true,Undereducated,IBM,Applied Scientist,106310.1,42
+2293,true,Undereducated,Cisco Systems,UX Researcher,111531.41,20
+2294,true,Undereducated,SAP,Penetration Tester,105648.93,15
+2295,true,Undereducated,Booz Allen Hamilton,BI Analyst,94073.83,28
+2296,true,Matched,Cognizant,Platform Engineer,116291.43,94
+2297,true,Undereducated,Bloomberg,BI Analyst,109376.2,15
+2298,true,Undereducated,Palantir Technologies,Mobile Developer,109170.66,70
+2299,true,Undereducated,SAP,Mobile Developer,98726.35,63
+2300,true,Undereducated,Palantir Technologies,Solutions Architect,139204.8,23
+2301,true,Undereducated,Microsoft,ML Engineer,127897.18,15
+2302,true,Matched,Microsoft,Cloud Consultant,113492.15,44
+2303,true,Undereducated,IBM,Data Warehouse Architect,150871.78,32
+2304,true,Matched,Infosys,Security Analyst,104142.19,74
+2305,true,Undereducated,Bloomberg,Growth PM,126723.73,57
+2306,true,Undereducated,Goldman Sachs,DevOps Engineer,117172.42,71
+2307,true,Undereducated,Microsoft,Growth PM,142484.68,60
+2308,true,Undereducated,Visa,Build Engineer,125485.38,25
+2309,true,Undereducated,Intel,QA Engineer,130857.54,69
+2310,true,Undereducated,Oracle,Site Reliability Engineer,117230.04,68
+2311,true,Undereducated,McKinsey & Company,Data Analyst,105378.14,85
+2312,true,Matched,Google,Site Reliability Engineer,124213.49,85
+2313,true,Undereducated,Salesforce,BI Analyst,127784.68,34
+2314,true,Undereducated,Booz Allen Hamilton,Product Manager,99323.88,76
+2315,true,Undereducated,JPMorgan Chase,Analytics Manager,123268.62,64
+2316,true,Undereducated,Intel,Data Warehouse Architect,123891.17,57
+2317,true,Undereducated,Oracle,Solutions Architect,94651.42,30
+2318,true,Undereducated,Bloomberg,Cloud Architect,129288.69,63
+2319,false,,,,,
+2320,true,Undereducated,KPMG,Platform Engineer,86810.39,68
+2321,true,Matched,Bloomberg,Growth PM,129894.97,34
+2322,true,Undereducated,Amazon Web Services,Analytics Manager,118398.52,46
+2323,true,Undereducated,Visa,DevOps Engineer,116832.6,87
+2324,false,,,,,
+2325,true,Undereducated,Stripe,DevOps Engineer,102481.84,24
+2326,true,Undereducated,IBM,UX Researcher,108463.35,63
+2327,true,Undereducated,Johnson & Johnson,Frontend Developer,106017.21,28
+2328,true,Undereducated,Salesforce,Solutions Architect,97042.28,67
+2329,true,Undereducated,Google,Data Warehouse Architect,111865.23,82
+2330,true,Undereducated,Raytheon Technologies,Full Stack Developer,100523.88,18
+2331,true,Undereducated,Cisco Systems,Release Manager,123368.45,65
+2332,true,Undereducated,Stripe,Design Researcher,111829.8,62
+2333,true,Undereducated,Cisco Systems,Full Stack Developer,102936.0,55
+2334,false,,,,,
+2335,true,Undereducated,Deloitte,Solutions Architect,129158.73,61
+2336,true,Undereducated,Raytheon Technologies,Product Designer,106444.71,93
+2337,true,Matched,KPMG,Scrum Master,91607.84,80
+2338,true,Undereducated,Cisco Systems,Full Stack Developer,101886.14,88
+2339,true,Undereducated,Booz Allen Hamilton,Analytics Manager,108909.97,54
+2340,true,Undereducated,Accenture,QA Engineer,81247.41,89
+2341,true,Undereducated,Google,Product Designer,118104.2,83
+2342,true,Undereducated,Capital One,BI Analyst,137219.92,68
+2343,true,Undereducated,UnitedHealth Group,QA Engineer,137534.69,78
+2344,true,Undereducated,PwC,MLOps Engineer,159011.52,17
+2345,true,Undereducated,Cognizant,Frontend Developer,129215.34,49
+2346,true,Undereducated,McKinsey & Company,CISO,111939.26,53
+2347,true,Matched,IBM,AI Researcher,105738.06,38
+2348,true,Undereducated,UnitedHealth Group,Solutions Architect,101010.65,74
+2349,true,Undereducated,Visa,AI Researcher,137137.48,51
+2350,false,,,,,
+2351,false,,,,,
+2352,true,Undereducated,UnitedHealth Group,Cloud Architect,113327.49,62
+2353,true,Undereducated,Palantir Technologies,BI Analyst,105829.6,73
+2354,true,Matched,Microsoft,Cloud Architect,107048.56,26
+2355,true,Undereducated,SAP,Cloud Consultant,132886.03,46
+2356,true,Matched,UnitedHealth Group,Cloud Consultant,132255.38,22
+2357,false,,,,,
+2358,true,Undereducated,Bloomberg,Product Manager,99867.95,77
+2359,true,Matched,Accenture,Product Manager,125572.82,40
+2360,true,Undereducated,Capital One,Release Manager,119864.32,40
+2361,true,Undereducated,Capital One,Cloud Consultant,107502.91,18
+2362,true,Undereducated,UnitedHealth Group,Growth PM,130686.53,79
+2363,false,,,,,
+2364,true,Undereducated,Raytheon Technologies,Data Warehouse Architect,118318.48,41
+2365,false,,,,,
+2366,true,Undereducated,Oracle,Product Designer,148154.0,17
+2367,false,,,,,
+2368,true,Undereducated,Palantir Technologies,Product Manager,146925.24,78
+2369,true,Overeducated,Palantir Technologies,Data Warehouse Architect,137183.15,63
+2370,true,Undereducated,Oracle,Frontend Developer,126120.68,92
+2371,true,Undereducated,UnitedHealth Group,Cloud Architect,150313.93,18
+2372,true,Undereducated,Intel,Full Stack Developer,113782.64,87
+2373,true,Undereducated,Stripe,Data Scientist,106703.93,33
+2374,true,Undereducated,Stripe,Backend Developer,118479.56,87
+2375,false,,,,,
+2376,true,Undereducated,UnitedHealth Group,AI Researcher,124294.29,24
+2377,true,Undereducated,Infosys,CISO,107262.91,75
+2378,true,Matched,Palantir Technologies,BI Analyst,150780.77,84
+2379,true,Undereducated,KPMG,UX Researcher,106403.38,88
+2380,true,Undereducated,Amazon Web Services,Growth PM,120043.14,47
+2381,true,Undereducated,Amazon Web Services,Full Stack Developer,107185.06,45
+2382,true,Undereducated,UnitedHealth Group,UX Researcher,125094.68,58
+2383,true,Overeducated,Google,Data Scientist,106251.69,81
+2384,true,Matched,KPMG,Data Warehouse Architect,113563.5,76
+2385,true,Undereducated,KPMG,BI Analyst,111346.5,40
+2386,true,Undereducated,Booz Allen Hamilton,Product Manager,142514.73,81
+2387,true,Matched,JPMorgan Chase,CISO,123834.53,77
+2388,false,,,,,
+2389,true,Undereducated,Bloomberg,Applied Scientist,108588.67,34
+2390,false,,,,,
+2391,true,Matched,Infosys,Data Warehouse Architect,127538.78,76
+2392,true,Undereducated,Booz Allen Hamilton,Platform Engineer,126668.44,81
+2393,false,,,,,
+2394,true,Matched,Intel,CISO,151136.99,25
+2395,true,Undereducated,SAP,Product Designer,113621.05,71
+2396,true,Undereducated,KPMG,Data Scientist,125848.79,40
+2397,true,Undereducated,Stripe,Applied Scientist,99152.3,56
+2398,true,Undereducated,Lockheed Martin,Data Warehouse Architect,116641.97,62
+2399,true,Undereducated,Lockheed Martin,BI Developer,127253.0,90
+2400,true,Undereducated,Palantir Technologies,Cloud Consultant,88431.66,84
+2401,true,Undereducated,Deloitte,DevOps Engineer,127696.29,89
+2402,true,Undereducated,KPMG,Data Analyst,132982.26,51
+2403,true,Undereducated,Capital One,Build Engineer,124809.35,74
+2404,false,,,,,
+2405,true,Undereducated,Amazon Web Services,BI Developer,121427.86,57
+2406,true,Matched,Intel,Release Manager,86172.02,85
+2407,true,Undereducated,Accenture,Data Scientist,137712.33,15
+2408,true,Undereducated,Cognizant,Data Analyst,130802.8,74
+2409,true,Undereducated,Intel,Design Researcher,104650.09,47
+2410,true,Matched,Salesforce,BI Analyst,131898.57,36
+2411,true,Undereducated,IBM,ML Engineer,143739.39,69
+2412,true,Undereducated,Salesforce,Security Analyst,107450.55,39
+2413,false,,,,,
+2414,true,Undereducated,Visa,Site Reliability Engineer,139972.68,31
+2415,false,,,,,
+2416,false,,,,,
+2417,true,Undereducated,Deloitte,Data Analyst,138276.29,76
+2418,false,,,,,
+2419,true,Undereducated,Raytheon Technologies,CISO,140152.99,30
+2420,true,Matched,Capital One,MLOps Engineer,115058.08,31
+2421,true,Undereducated,KPMG,Product Designer,119075.11,40
+2422,true,Undereducated,Accenture,Scrum Master,114511.72,25
+2423,true,Undereducated,Capital One,Full Stack Developer,94210.3,33
+2424,true,Matched,Johnson & Johnson,Data Warehouse Architect,123056.24,21
+2425,true,Undereducated,Stripe,Scrum Master,143566.93,75
+2426,true,Undereducated,Visa,Release Manager,125714.09,30
+2427,true,Undereducated,Johnson & Johnson,Build Engineer,113632.83,63
+2428,true,Undereducated,IBM,Product Manager,99176.73,66
+2429,true,Undereducated,Amazon Web Services,Product Designer,120335.98,82
+2430,true,Undereducated,Raytheon Technologies,Full Stack Developer,109738.57,17
+2431,true,Undereducated,Capital One,Data Analyst,103109.2,51
+2432,false,,,,,
+2433,false,,,,,
+2434,true,Matched,Cognizant,Security Analyst,141057.62,94
+2435,true,Undereducated,Capital One,Backend Developer,134727.88,89
+2436,true,Undereducated,Microsoft,AI Researcher,94851.65,73
+2437,true,Undereducated,Johnson & Johnson,DevOps Engineer,123890.85,68
+2438,true,Undereducated,Johnson & Johnson,CISO,80332.67,25
+2439,true,Undereducated,PwC,Build Engineer,102465.13,20
+2440,true,Undereducated,Visa,Cloud Consultant,130024.28,68
+2441,true,Undereducated,Capital One,Product Manager,130203.81,59
+2442,true,Undereducated,Oracle,Frontend Developer,135888.39,74
+2443,false,,,,,
+2444,true,Undereducated,Visa,Data Warehouse Architect,154629.92,43
+2445,true,Undereducated,Palantir Technologies,Data Warehouse Architect,125380.0,60
+2446,true,Undereducated,Cisco Systems,Build Engineer,79391.84,51
+2447,true,Undereducated,Bloomberg,Frontend Developer,123599.68,64
+2448,true,Undereducated,KPMG,QA Engineer,127434.85,64
+2449,false,,,,,
+2450,true,Undereducated,Capital One,Analytics Manager,107523.13,41
+2451,true,Undereducated,Johnson & Johnson,Cloud Architect,143755.9,67
+2452,true,Undereducated,KPMG,Cloud Consultant,103020.13,54
+2453,true,Matched,Stripe,Data Analyst,97989.05,78
+2454,true,Undereducated,Amazon Web Services,Applied Scientist,96184.13,33
+2455,true,Undereducated,Amazon Web Services,Backend Developer,100427.16,53
+2456,true,Undereducated,Accenture,MLOps Engineer,90325.63,26
+2457,true,Matched,Google,Full Stack Developer,122854.96,41
+2458,false,,,,,
+2459,true,Undereducated,Morgan Stanley,Data Scientist,80352.58,22
+2460,true,Undereducated,Cognizant,DevOps Engineer,145588.0,55
+2461,false,,,,,
+2462,false,,,,,
+2463,true,Undereducated,Palantir Technologies,Data Scientist,104781.13,16
+2464,true,Undereducated,PwC,Applied Scientist,98794.2,90
+2465,true,Undereducated,McKinsey & Company,DevOps Engineer,124113.24,23
+2466,true,Undereducated,PwC,AI Researcher,121009.97,54
+2467,true,Undereducated,Amazon Web Services,Data Engineer,116457.95,82
+2468,true,Undereducated,Google,Full Stack Developer,141521.06,23
+2469,true,Undereducated,Microsoft,Data Engineer,155562.18,94
+2470,true,Undereducated,Deloitte,BI Analyst,115352.05,48
+2471,true,Undereducated,Intel,Release Manager,131667.86,26
+2472,true,Undereducated,Cisco Systems,Analytics Manager,91864.4,80
+2473,true,Undereducated,Capital One,Release Manager,87458.59,81
+2474,true,Undereducated,Stripe,ML Engineer,142652.48,73
+2475,true,Undereducated,Raytheon Technologies,Security Analyst,160995.21,15
+2476,true,Undereducated,Deloitte,BI Developer,139745.31,26
+2477,true,Matched,Lockheed Martin,Data Warehouse Architect,89256.36,46
+2478,true,Undereducated,Johnson & Johnson,Data Scientist,120192.16,92
+2479,true,Undereducated,Capital One,Build Engineer,125191.91,86
+2480,true,Undereducated,Goldman Sachs,Cloud Architect,101990.02,69
+2481,true,Undereducated,Intel,Penetration Tester,94026.09,18
+2482,true,Undereducated,Salesforce,Solutions Architect,113607.67,69
+2483,true,Overeducated,KPMG,Solutions Architect,108937.41,76
+2484,true,Undereducated,Oracle,Data Warehouse Architect,133305.33,67
+2485,false,,,,,
+2486,true,Matched,Oracle,Penetration Tester,136402.09,18
+2487,true,Undereducated,UnitedHealth Group,Data Analyst,132737.02,73
+2488,true,Undereducated,Cisco Systems,Data Engineer,99907.29,69
+2489,true,Undereducated,SAP,UX Researcher,112417.25,16
+2490,true,Undereducated,JPMorgan Chase,Product Manager,112887.04,25
+2491,true,Undereducated,Google,Data Analyst,143496.5,38
+2492,true,Undereducated,Oracle,AI Researcher,121477.9,74
+2493,true,Undereducated,Salesforce,MLOps Engineer,134354.07,87
+2494,true,Undereducated,Google,Site Reliability Engineer,106778.95,76
+2495,true,Undereducated,Microsoft,Solutions Architect,107088.7,63
+2496,true,Undereducated,Cognizant,Platform Engineer,137648.41,83
+2497,true,Undereducated,Bloomberg,Growth PM,77114.4,30
+2498,false,,,,,
+2499,true,Undereducated,Infosys,Mobile Developer,159150.12,76
+2500,true,Undereducated,Bloomberg,Cloud Architect,100669.67,90
+2501,false,,,,,
+2502,true,Undereducated,IBM,Backend Developer,149104.93,83
+2503,true,Matched,Booz Allen Hamilton,ML Engineer,104013.94,82
+2504,true,Undereducated,Morgan Stanley,Platform Engineer,98691.96,20
+2505,true,Matched,Epic Systems,Full Stack Developer,140587.33,91
+2506,true,Undereducated,JPMorgan Chase,Solutions Architect,109047.35,59
+2507,true,Undereducated,Morgan Stanley,Design Researcher,155605.74,17
+2508,true,Undereducated,Accenture,CISO,134661.83,28
+2509,false,,,,,
+2510,true,Undereducated,Bloomberg,UX Researcher,121146.52,65
+2511,true,Undereducated,Epic Systems,Data Analyst,101806.45,88
+2512,true,Undereducated,Oracle,Penetration Tester,93056.06,34
+2513,false,,,,,
+2514,true,Undereducated,Intel,Data Warehouse Architect,108337.32,30
+2515,true,Undereducated,Cisco Systems,Applied Scientist,96752.51,16
+2516,true,Undereducated,Cognizant,Analytics Manager,124923.74,32
+2517,true,Undereducated,UnitedHealth Group,Product Designer,128132.83,69
+2518,true,Undereducated,McKinsey & Company,Scrum Master,129683.95,61
+2519,true,Undereducated,PwC,Growth PM,159040.3,18
+2520,true,Undereducated,UnitedHealth Group,Backend Developer,111678.31,50
+2521,true,Undereducated,Microsoft,Platform Engineer,123733.56,67
+2522,true,Undereducated,Epic Systems,BI Analyst,110516.05,63
+2523,true,Undereducated,Cognizant,Platform Engineer,104703.77,53
+2524,true,Matched,Epic Systems,Mobile Developer,128124.6,23
+2525,true,Undereducated,UnitedHealth Group,QA Engineer,143387.08,60
+2526,false,,,,,
+2527,true,Undereducated,Stripe,Full Stack Developer,117315.31,79
+2528,true,Undereducated,PwC,Design Researcher,124020.37,60
+2529,true,Undereducated,Morgan Stanley,Data Analyst,147235.0,68
+2530,false,,,,,
+2531,true,Undereducated,SAP,ML Engineer,113188.22,81
+2532,true,Undereducated,Stripe,Security Analyst,94787.33,75
+2533,true,Undereducated,Visa,UX Researcher,118607.98,92
+2534,true,Undereducated,UnitedHealth Group,QA Engineer,90680.86,93
+2535,true,Undereducated,Morgan Stanley,Frontend Developer,143471.91,53
+2536,true,Undereducated,Intel,Mobile Developer,124966.66,83
+2537,true,Undereducated,PwC,ML Engineer,105236.52,55
+2538,false,,,,,
+2539,true,Undereducated,Microsoft,Data Engineer,146919.47,83
+2540,true,Undereducated,PwC,AI Researcher,123174.05,21
+2541,true,Undereducated,Visa,Data Scientist,104896.75,87
+2542,true,Undereducated,Deloitte,Solutions Architect,123372.03,33
+2543,true,Undereducated,Epic Systems,Penetration Tester,129514.52,15
+2544,true,Undereducated,Bloomberg,QA Engineer,122865.8,32
+2545,true,Undereducated,Booz Allen Hamilton,Penetration Tester,143654.73,19
+2546,true,Undereducated,Morgan Stanley,AI Researcher,145212.89,53
+2547,false,,,,,
+2548,true,Undereducated,Lockheed Martin,Build Engineer,100509.61,54
+2549,true,Undereducated,Bloomberg,Cloud Architect,120256.7,74
+2550,true,Undereducated,Oracle,Design Researcher,105327.59,43
+2551,true,Undereducated,SAP,Mobile Developer,136262.91,39
+2552,true,Undereducated,UnitedHealth Group,Build Engineer,146963.74,29
+2553,true,Undereducated,McKinsey & Company,Analytics Manager,100959.17,50
+2554,false,,,,,
+2555,true,Undereducated,UnitedHealth Group,Security Analyst,108466.61,48
+2556,true,Undereducated,Oracle,Product Designer,116838.29,38
+2557,true,Undereducated,Palantir Technologies,BI Analyst,117197.3,82
+2558,true,Undereducated,Cognizant,Penetration Tester,120066.0,59
+2559,true,Undereducated,Epic Systems,Release Manager,153637.12,20
+2560,true,Matched,Morgan Stanley,Backend Developer,152485.05,89
+2561,true,Undereducated,Johnson & Johnson,ML Engineer,104688.35,59
+2562,true,Undereducated,Oracle,Design Researcher,120258.55,73
+2563,true,Undereducated,Intel,Cloud Architect,140342.7,75
+2564,true,Undereducated,Intel,Security Analyst,119498.44,40
+2565,true,Undereducated,Booz Allen Hamilton,Cloud Architect,121509.71,26
+2566,true,Undereducated,IBM,Release Manager,130200.95,36
+2567,true,Matched,Booz Allen Hamilton,Data Engineer,112866.41,69
+2568,true,Undereducated,Booz Allen Hamilton,UX Researcher,112876.93,71
+2569,true,Undereducated,Microsoft,BI Analyst,88621.09,69
+2570,true,Overeducated,SAP,Release Manager,108359.49,45
+2571,true,Matched,Visa,Mobile Developer,142204.12,24
+2572,true,Overeducated,Amazon Web Services,ML Engineer,104751.02,57
+2573,true,Undereducated,Microsoft,Cloud Consultant,107176.79,31
+2574,true,Undereducated,Intel,Scrum Master,118971.55,44
+2575,true,Undereducated,Cisco Systems,Data Warehouse Architect,92398.16,50
+2576,true,Undereducated,KPMG,Applied Scientist,152700.37,54
+2577,true,Undereducated,Bloomberg,Growth PM,125409.2,34
+2578,true,Undereducated,SAP,DevOps Engineer,118464.87,66
+2579,true,Undereducated,Oracle,Cloud Consultant,85940.31,85
+2580,true,Undereducated,Booz Allen Hamilton,DevOps Engineer,141562.29,47
+2581,true,Undereducated,IBM,Scrum Master,113366.97,63
+2582,true,Undereducated,Bloomberg,CISO,140744.44,57
+2583,true,Matched,Goldman Sachs,Frontend Developer,109311.27,39
+2584,false,,,,,
+2585,true,Matched,Morgan Stanley,ML Engineer,146191.39,46
+2586,true,Undereducated,Deloitte,Backend Developer,135981.93,19
+2587,true,Undereducated,Oracle,Site Reliability Engineer,125653.16,76
+2588,true,Undereducated,Google,Analytics Manager,110985.71,67
+2589,true,Undereducated,Oracle,Security Analyst,139565.51,92
+2590,true,Undereducated,Google,BI Developer,133549.5,72
+2591,true,Matched,Booz Allen Hamilton,Release Manager,103762.74,33
+2592,true,Undereducated,Amazon Web Services,UX Researcher,108335.82,77
+2593,true,Undereducated,Cisco Systems,Build Engineer,136164.76,90
+2594,true,Undereducated,UnitedHealth Group,BI Developer,129441.79,56
+2595,true,Undereducated,Intel,Site Reliability Engineer,117893.49,29
+2596,true,Undereducated,McKinsey & Company,UX Researcher,113231.27,72
+2597,true,Undereducated,Goldman Sachs,Penetration Tester,131871.83,91
+2598,true,Undereducated,Bloomberg,Platform Engineer,136343.4,40
+2599,true,Undereducated,Amazon Web Services,AI Researcher,109159.87,37
+2600,true,Undereducated,Infosys,DevOps Engineer,127701.23,86
+2601,true,Undereducated,UnitedHealth Group,Data Warehouse Architect,125420.05,54
+2602,true,Undereducated,Cisco Systems,MLOps Engineer,144024.89,79
+2603,true,Matched,Amazon Web Services,DevOps Engineer,132539.16,21
+2604,true,Undereducated,PwC,Data Warehouse Architect,130229.35,49
+2605,true,Undereducated,Oracle,Penetration Tester,139868.23,53
+2606,true,Undereducated,PwC,Cloud Consultant,126823.47,45
+2607,false,,,,,
+2608,true,Undereducated,Bloomberg,DevOps Engineer,113197.95,85
+2609,true,Undereducated,Bloomberg,BI Analyst,117427.55,55
+2610,true,Undereducated,Infosys,BI Analyst,112228.36,27
+2611,true,Undereducated,Accenture,Build Engineer,95026.06,45
+2612,true,Undereducated,IBM,DevOps Engineer,137532.87,37
+2613,true,Undereducated,Cognizant,BI Developer,137709.36,64
+2614,true,Undereducated,Morgan Stanley,QA Engineer,125288.58,43
+2615,true,Overeducated,Lockheed Martin,Backend Developer,100451.88,76
+2616,false,,,,,
+2617,true,Undereducated,JPMorgan Chase,UX Researcher,130011.63,90
+2618,true,Undereducated,Intel,Site Reliability Engineer,111216.67,38
+2619,true,Undereducated,Capital One,Backend Developer,93064.2,47
+2620,true,Undereducated,Amazon Web Services,Site Reliability Engineer,100786.71,16
+2621,true,Matched,Epic Systems,Platform Engineer,111950.27,18
+2622,true,Undereducated,SAP,MLOps Engineer,144249.76,28
+2623,true,Matched,KPMG,Platform Engineer,122938.89,25
+2624,true,Undereducated,McKinsey & Company,Backend Developer,144107.62,94
+2625,true,Undereducated,IBM,Frontend Developer,126843.94,61
+2626,true,Undereducated,Microsoft,Product Manager,108794.88,59
+2627,true,Undereducated,Microsoft,Data Engineer,129844.32,73
+2628,true,Matched,JPMorgan Chase,Scrum Master,95599.38,29
+2629,true,Matched,KPMG,QA Engineer,133786.48,33
+2630,false,,,,,
+2631,true,Undereducated,Booz Allen Hamilton,Cloud Architect,127136.27,66
+2632,true,Undereducated,Raytheon Technologies,Scrum Master,109557.41,84
+2633,true,Undereducated,IBM,Solutions Architect,105313.49,41
+2634,true,Overeducated,Stripe,Site Reliability Engineer,109779.86,51
+2635,true,Undereducated,PwC,Cloud Architect,98233.84,42
+2636,true,Undereducated,Raytheon Technologies,Growth PM,146381.47,63
+2637,false,,,,,
+2638,true,Matched,UnitedHealth Group,Product Designer,105923.44,37
+2639,true,Undereducated,Cognizant,AI Researcher,101420.5,52
+2640,false,,,,,
+2641,true,Undereducated,Intel,Build Engineer,129054.66,53
+2642,true,Overeducated,IBM,Data Engineer,144230.89,52
+2643,true,Undereducated,Infosys,QA Engineer,80282.4,41
+2644,true,Matched,Johnson & Johnson,Analytics Manager,111120.28,47
+2645,true,Undereducated,McKinsey & Company,Product Designer,123609.6,90
+2646,true,Undereducated,Accenture,Data Warehouse Architect,129117.89,63
+2647,true,Undereducated,Deloitte,AI Researcher,133411.67,18
+2648,true,Matched,Oracle,Design Researcher,102114.91,66
+2649,true,Undereducated,Bloomberg,Penetration Tester,112984.0,88
+2650,false,,,,,
+2651,true,Undereducated,Palantir Technologies,CISO,90088.61,36
+2652,true,Undereducated,Google,Design Researcher,111113.16,50
+2653,true,Undereducated,Amazon Web Services,Product Designer,133760.77,33
+2654,true,Undereducated,JPMorgan Chase,Data Analyst,99933.89,31
+2655,true,Undereducated,Booz Allen Hamilton,Data Scientist,86669.1,17
+2656,true,Undereducated,Palantir Technologies,Product Manager,101482.21,21
+2657,true,Matched,Oracle,Scrum Master,133944.76,82
+2658,true,Undereducated,PwC,Frontend Developer,122762.58,88
+2659,true,Undereducated,Microsoft,Scrum Master,118812.69,94
+2660,true,Undereducated,Visa,Cloud Architect,87997.51,28
+2661,true,Undereducated,Lockheed Martin,QA Engineer,101298.18,57
+2662,false,,,,,
+2663,true,Undereducated,Lockheed Martin,Build Engineer,142364.01,16
+2664,true,Undereducated,Morgan Stanley,MLOps Engineer,119640.77,67
+2665,false,,,,,
+2666,true,Undereducated,SAP,Build Engineer,125212.6,36
+2667,true,Undereducated,IBM,Penetration Tester,149053.49,72
+2668,true,Matched,Raytheon Technologies,QA Engineer,137242.32,28
+2669,true,Matched,Intel,Data Warehouse Architect,110644.24,77
+2670,true,Undereducated,Bloomberg,Data Warehouse Architect,105298.9,82
+2671,false,,,,,
+2672,true,Matched,UnitedHealth Group,BI Analyst,143006.59,65
+2673,true,Undereducated,Palantir Technologies,BI Analyst,112014.86,29
+2674,true,Matched,Accenture,Solutions Architect,142722.1,24
+2675,true,Undereducated,Cognizant,Data Analyst,129675.08,29
+2676,true,Undereducated,Palantir Technologies,Data Scientist,134518.83,68
+2677,true,Undereducated,Deloitte,BI Developer,134511.86,75
+2678,true,Undereducated,Epic Systems,Applied Scientist,126344.17,20
+2679,true,Undereducated,Amazon Web Services,DevOps Engineer,130102.56,75
+2680,true,Undereducated,PwC,Growth PM,98852.31,62
+2681,true,Undereducated,Deloitte,Mobile Developer,116645.41,68
+2682,false,,,,,
+2683,true,Undereducated,Microsoft,CISO,102783.32,34
+2684,true,Undereducated,PwC,Data Warehouse Architect,109365.68,92
+2685,true,Undereducated,Google,Mobile Developer,81529.0,28
+2686,true,Undereducated,SAP,Data Engineer,109071.8,56
+2687,true,Undereducated,Morgan Stanley,Frontend Developer,120883.03,78
+2688,false,,,,,
+2689,false,,,,,
+2690,true,Undereducated,Palantir Technologies,Data Engineer,105314.68,39
+2691,true,Undereducated,Palantir Technologies,Product Manager,110015.42,44
+2692,true,Undereducated,Epic Systems,Build Engineer,85922.57,41
+2693,true,Matched,Google,Design Researcher,97084.63,27
+2694,true,Undereducated,Amazon Web Services,DevOps Engineer,106446.15,16
+2695,true,Overeducated,Microsoft,Product Manager,128845.07,81
+2696,true,Undereducated,Microsoft,Applied Scientist,88831.65,90
+2697,true,Undereducated,IBM,Security Analyst,127756.89,32
+2698,true,Undereducated,Amazon Web Services,Data Engineer,139903.99,28
+2699,true,Undereducated,UnitedHealth Group,Data Scientist,121258.35,57
+2700,true,Undereducated,Bloomberg,QA Engineer,104896.52,66
+2701,true,Overeducated,Cognizant,Data Warehouse Architect,111593.3,94
+2702,true,Matched,JPMorgan Chase,Analytics Manager,134978.06,76
+2703,true,Undereducated,Oracle,Design Researcher,114535.29,52
+2704,false,,,,,
+2705,true,Undereducated,Capital One,Data Analyst,117734.02,36
+2706,false,,,,,
+2707,false,,,,,
+2708,true,Undereducated,UnitedHealth Group,Design Researcher,136069.93,22
+2709,true,Matched,Cisco Systems,DevOps Engineer,128143.96,70
+2710,true,Undereducated,Booz Allen Hamilton,Build Engineer,110267.92,54
+2711,true,Undereducated,Raytheon Technologies,Full Stack Developer,117082.58,34
+2712,true,Undereducated,Cisco Systems,Full Stack Developer,133407.66,46
+2713,false,,,,,
+2714,false,,,,,
+2715,true,Undereducated,JPMorgan Chase,QA Engineer,130046.15,59
+2716,true,Matched,Booz Allen Hamilton,UX Researcher,123395.16,69
+2717,true,Undereducated,Intel,Full Stack Developer,143033.99,16
+2718,true,Overeducated,Booz Allen Hamilton,ML Engineer,118494.07,78
+2719,true,Overeducated,Microsoft,BI Developer,141533.85,39
+2720,true,Undereducated,SAP,Cloud Architect,125275.63,53
+2721,true,Matched,Oracle,BI Analyst,143525.68,80
+2722,true,Matched,Stripe,BI Developer,100237.84,24
+2723,true,Undereducated,Infosys,MLOps Engineer,118780.24,93
+2724,true,Undereducated,McKinsey & Company,Data Engineer,131968.75,19
+2725,true,Undereducated,Johnson & Johnson,Product Designer,117422.97,63
+2726,true,Undereducated,Intel,Data Engineer,133198.25,36
+2727,true,Undereducated,Lockheed Martin,Product Designer,120621.29,26
+2728,true,Undereducated,Bloomberg,Data Scientist,113014.72,92
+2729,true,Undereducated,Salesforce,Design Researcher,136117.18,54
+2730,true,Undereducated,Stripe,Cloud Consultant,122070.43,52
+2731,true,Undereducated,Cisco Systems,UX Researcher,116382.71,39
+2732,true,Undereducated,Salesforce,ML Engineer,105183.14,81
+2733,true,Undereducated,Deloitte,Frontend Developer,98123.18,41
+2734,true,Undereducated,PwC,Product Designer,100921.33,70
+2735,true,Undereducated,Amazon Web Services,UX Researcher,117228.89,70
+2736,false,,,,,
+2737,true,Undereducated,Goldman Sachs,DevOps Engineer,118974.45,86
+2738,true,Undereducated,Capital One,Mobile Developer,111863.51,58
+2739,true,Undereducated,Google,Analytics Manager,108911.45,88
+2740,true,Undereducated,Raytheon Technologies,Platform Engineer,112480.64,92
+2741,true,Undereducated,Johnson & Johnson,AI Researcher,143304.17,46
+2742,true,Undereducated,Microsoft,Release Manager,134720.09,51
+2743,true,Undereducated,Booz Allen Hamilton,Site Reliability Engineer,111490.36,66
+2744,true,Undereducated,Booz Allen Hamilton,Data Scientist,108413.48,15
+2745,true,Undereducated,McKinsey & Company,Mobile Developer,108860.55,50
+2746,true,Undereducated,JPMorgan Chase,Data Warehouse Architect,130450.25,50
+2747,false,,,,,
+2748,true,Undereducated,Infosys,Product Designer,120083.95,81
+2749,false,,,,,
+2750,true,Matched,Microsoft,Frontend Developer,139808.31,73
+2751,true,Undereducated,JPMorgan Chase,Analytics Manager,102630.26,70
+2752,true,Undereducated,Epic Systems,Scrum Master,100080.17,25
+2753,true,Undereducated,Cognizant,Frontend Developer,142241.95,72
+2754,true,Undereducated,SAP,Penetration Tester,124393.83,68
+2755,true,Undereducated,Morgan Stanley,Mobile Developer,111638.03,24
+2756,true,Undereducated,Accenture,Build Engineer,135279.89,64
+2757,true,Undereducated,McKinsey & Company,Data Engineer,96286.31,41
+2758,true,Matched,IBM,Release Manager,110374.36,88
+2759,true,Undereducated,Visa,Full Stack Developer,100932.33,56
+2760,true,Undereducated,Google,QA Engineer,100831.94,67
+2761,true,Undereducated,Deloitte,Solutions Architect,128830.71,58
+2762,true,Overeducated,Palantir Technologies,Frontend Developer,102514.29,37
+2763,false,,,,,
+2764,true,Undereducated,Palantir Technologies,Data Analyst,108751.67,57
+2765,true,Matched,Amazon Web Services,Cloud Architect,80726.12,57
+2766,true,Undereducated,Stripe,DevOps Engineer,137385.81,83
+2767,true,Undereducated,Johnson & Johnson,Release Manager,102817.56,37
+2768,true,Undereducated,Goldman Sachs,UX Researcher,132229.04,24
+2769,true,Undereducated,Deloitte,Growth PM,132508.38,88
+2770,true,Undereducated,Stripe,BI Analyst,142930.06,64
+2771,true,Undereducated,Deloitte,Analytics Manager,105510.25,25
+2772,true,Overeducated,Raytheon Technologies,Cloud Consultant,103973.32,71
+2773,true,Undereducated,Google,Backend Developer,90340.16,93
+2774,true,Undereducated,Goldman Sachs,UX Researcher,92070.55,62
+2775,true,Undereducated,Palantir Technologies,Solutions Architect,131938.43,73
+2776,true,Undereducated,Johnson & Johnson,BI Analyst,99794.01,42
+2777,true,Undereducated,Amazon Web Services,Data Scientist,115917.79,69
+2778,true,Undereducated,Goldman Sachs,Data Warehouse Architect,96769.87,91
+2779,true,Undereducated,Microsoft,Product Designer,120416.16,46
+2780,true,Undereducated,Oracle,Cloud Consultant,96414.24,40
+2781,true,Undereducated,Intel,Backend Developer,112228.24,76
+2782,false,,,,,
+2783,true,Undereducated,UnitedHealth Group,Design Researcher,110582.13,30
+2784,false,,,,,
+2785,true,Undereducated,JPMorgan Chase,Security Analyst,143319.35,69
+2786,true,Undereducated,Capital One,Product Designer,120673.82,46
+2787,false,,,,,
+2788,true,Undereducated,Amazon Web Services,UX Researcher,120284.41,93
+2789,true,Undereducated,UnitedHealth Group,Solutions Architect,127713.4,78
+2790,true,Undereducated,Raytheon Technologies,Platform Engineer,129781.35,93
+2791,true,Undereducated,Deloitte,Growth PM,109769.01,79
+2792,true,Undereducated,IBM,Data Scientist,89810.17,72
+2793,false,,,,,
+2794,true,Undereducated,Stripe,Analytics Manager,138152.53,45
+2795,true,Matched,Lockheed Martin,Site Reliability Engineer,93697.78,51
+2796,true,Undereducated,Accenture,Site Reliability Engineer,132117.49,68
+2797,true,Overeducated,Microsoft,Scrum Master,95703.79,59
+2798,true,Undereducated,Google,Site Reliability Engineer,100236.81,41
+2799,true,Undereducated,Microsoft,BI Analyst,92734.36,19
+2800,true,Undereducated,Stripe,Full Stack Developer,110511.61,19
+2801,false,,,,,
+2802,true,Undereducated,KPMG,Cloud Consultant,108425.14,45
+2803,false,,,,,
+2804,true,Undereducated,KPMG,Mobile Developer,126543.88,69
+2805,true,Undereducated,Cisco Systems,Data Scientist,126465.65,31
+2806,false,,,,,
+2807,true,Undereducated,Oracle,AI Researcher,101594.58,19
+2808,true,Undereducated,McKinsey & Company,Backend Developer,97387.35,23
+2809,true,Undereducated,Goldman Sachs,Platform Engineer,94311.62,68
+2810,true,Undereducated,Raytheon Technologies,UX Researcher,109200.3,87
+2811,true,Undereducated,Google,Backend Developer,129551.52,26
+2812,true,Undereducated,Google,UX Researcher,128776.67,42
+2813,true,Undereducated,Visa,Full Stack Developer,117495.46,66
+2814,true,Undereducated,Goldman Sachs,Site Reliability Engineer,120221.87,72
+2815,true,Undereducated,Morgan Stanley,QA Engineer,113022.51,80
+2816,true,Matched,PwC,Security Analyst,88002.64,89
+2817,true,Undereducated,Stripe,Product Designer,117533.45,85
+2818,false,,,,,
+2819,true,Undereducated,IBM,Cloud Architect,100791.14,62
+2820,true,Undereducated,McKinsey & Company,Platform Engineer,148897.54,17
+2821,true,Undereducated,Epic Systems,Data Analyst,120465.91,44
+2822,true,Undereducated,Cisco Systems,Data Engineer,92166.01,78
+2823,true,Undereducated,Accenture,MLOps Engineer,96002.45,50
+2824,true,Undereducated,Microsoft,Release Manager,134020.46,37
+2825,true,Undereducated,Amazon Web Services,Penetration Tester,103354.27,23
+2826,true,Undereducated,Infosys,Product Designer,112764.93,19
+2827,true,Overeducated,Stripe,DevOps Engineer,110761.36,42
+2828,true,Undereducated,Epic Systems,Security Analyst,136224.41,79
+2829,true,Undereducated,Goldman Sachs,ML Engineer,113057.51,31
+2830,true,Undereducated,Epic Systems,Growth PM,107056.46,28
+2831,true,Undereducated,Stripe,Data Analyst,139065.19,43
+2832,true,Undereducated,Deloitte,Penetration Tester,119080.84,25
+2833,true,Undereducated,Palantir Technologies,QA Engineer,148376.82,67
+2834,true,Overeducated,Johnson & Johnson,Site Reliability Engineer,143353.2,53
+2835,true,Matched,Cognizant,Platform Engineer,91967.59,24
+2836,true,Undereducated,Capital One,Penetration Tester,109394.92,80
+2837,true,Undereducated,Intel,MLOps Engineer,95236.5,83
+2838,true,Undereducated,Microsoft,Platform Engineer,108066.04,36
+2839,true,Undereducated,Microsoft,MLOps Engineer,119470.05,58
+2840,true,Undereducated,Amazon Web Services,ML Engineer,140336.56,24
+2841,true,Undereducated,Lockheed Martin,Product Designer,160440.78,57
+2842,true,Undereducated,UnitedHealth Group,CISO,125941.46,63
+2843,true,Undereducated,Cisco Systems,Data Warehouse Architect,132379.12,83
+2844,true,Overeducated,McKinsey & Company,Design Researcher,119860.21,54
+2845,true,Undereducated,Bloomberg,Applied Scientist,141820.51,22
+2846,false,,,,,
+2847,false,,,,,
+2848,true,Undereducated,Infosys,Data Scientist,108393.64,48
+2849,true,Undereducated,SAP,Data Engineer,114694.81,54
+2850,false,,,,,
+2851,true,Undereducated,IBM,Security Analyst,130413.31,45
+2852,false,,,,,
+2853,false,,,,,
+2854,false,,,,,
+2855,true,Undereducated,Bloomberg,UX Researcher,100877.03,55
+2856,true,Overeducated,Goldman Sachs,Backend Developer,133611.72,26
+2857,true,Undereducated,Cognizant,DevOps Engineer,115275.72,25
+2858,true,Undereducated,IBM,Data Scientist,110926.76,21
+2859,false,,,,,
+2860,true,Undereducated,Amazon Web Services,ML Engineer,93793.61,52
+2861,true,Undereducated,Bloomberg,Build Engineer,122047.55,21
+2862,true,Undereducated,Intel,Platform Engineer,127071.97,93
+2863,true,Undereducated,Google,MLOps Engineer,127854.9,73
+2864,true,Undereducated,Intel,DevOps Engineer,119255.23,54
+2865,true,Undereducated,Booz Allen Hamilton,Data Engineer,109681.12,91
+2866,true,Undereducated,Microsoft,Full Stack Developer,107067.95,58
+2867,true,Undereducated,Oracle,Backend Developer,130516.71,94
+2868,false,,,,,
+2869,true,Undereducated,Booz Allen Hamilton,Product Designer,105191.21,63
+2870,true,Undereducated,Amazon Web Services,Cloud Architect,100477.61,35
+2871,true,Undereducated,PwC,CISO,115235.87,66
+2872,true,Undereducated,KPMG,Cloud Architect,125704.97,34
+2873,true,Undereducated,Johnson & Johnson,Penetration Tester,126375.34,66
+2874,true,Undereducated,SAP,Product Designer,150236.85,33
+2875,true,Undereducated,Epic Systems,Solutions Architect,109677.64,88
+2876,true,Undereducated,PwC,AI Researcher,130003.99,16
+2877,true,Matched,Oracle,Penetration Tester,84754.99,78
+2878,true,Undereducated,Morgan Stanley,Security Analyst,106633.46,21
+2879,true,Undereducated,Accenture,Applied Scientist,116526.63,74
+2880,false,,,,,
+2881,true,Undereducated,Johnson & Johnson,Cloud Architect,102942.41,47
+2882,true,Undereducated,Booz Allen Hamilton,Cloud Consultant,132938.06,93
+2883,true,Undereducated,Cisco Systems,Applied Scientist,123943.05,57
+2884,true,Undereducated,Visa,Analytics Manager,125585.98,33
+2885,false,,,,,
+2886,true,Undereducated,Salesforce,Product Designer,91178.48,20
+2887,true,Undereducated,Salesforce,Data Engineer,101434.0,48
+2888,true,Undereducated,Stripe,ML Engineer,128026.08,76
+2889,true,Overeducated,Infosys,Mobile Developer,135912.49,20
+2890,true,Matched,Stripe,Backend Developer,101164.69,79
+2891,false,,,,,
+2892,true,Matched,Infosys,Frontend Developer,107202.17,41
+2893,true,Undereducated,Google,Penetration Tester,110222.04,70
+2894,false,,,,,
+2895,true,Undereducated,KPMG,UX Researcher,122825.47,80
+2896,true,Overeducated,IBM,Release Manager,132483.38,93
+2897,true,Undereducated,Cognizant,Product Designer,120833.37,21
+2898,true,Undereducated,Visa,Cloud Architect,106398.85,90
+2899,true,Undereducated,Booz Allen Hamilton,Data Scientist,96056.47,86
+2900,true,Undereducated,Johnson & Johnson,Full Stack Developer,151949.46,72
+2901,false,,,,,
+2902,true,Undereducated,Accenture,Data Warehouse Architect,118561.22,80
+2903,true,Undereducated,Raytheon Technologies,Frontend Developer,88512.3,81
+2904,true,Undereducated,Google,DevOps Engineer,125593.79,86
+2905,true,Matched,Goldman Sachs,ML Engineer,130476.39,24
+2906,true,Matched,Epic Systems,Security Analyst,132167.31,87
+2907,true,Matched,Deloitte,ML Engineer,147851.66,71
+2908,true,Undereducated,IBM,Backend Developer,94053.48,67
+2909,true,Undereducated,SAP,Mobile Developer,126701.03,43
+2910,true,Matched,Johnson & Johnson,AI Researcher,147428.3,86
+2911,true,Undereducated,KPMG,Product Manager,95400.25,82
+2912,true,Undereducated,Salesforce,Mobile Developer,130349.06,63
+2913,true,Undereducated,UnitedHealth Group,Data Analyst,98865.49,62
+2914,true,Undereducated,Lockheed Martin,Data Engineer,141084.53,35
+2915,true,Undereducated,Lockheed Martin,AI Researcher,99578.48,29
+2916,true,Undereducated,IBM,Data Warehouse Architect,99096.07,20
+2917,true,Undereducated,Google,Release Manager,135537.48,83
+2918,true,Undereducated,SAP,Release Manager,112623.35,77
+2919,true,Undereducated,KPMG,Analytics Manager,137235.21,93
+2920,false,,,,,
+2921,true,Undereducated,Deloitte,Site Reliability Engineer,151292.35,49
+2922,true,Undereducated,SAP,Site Reliability Engineer,139024.73,57
+2923,true,Undereducated,Morgan Stanley,Data Scientist,102628.35,25
+2924,false,,,,,
+2925,true,Undereducated,Salesforce,Mobile Developer,107852.19,91
+2926,true,Undereducated,Palantir Technologies,Solutions Architect,157883.35,50
+2927,true,Matched,Epic Systems,Backend Developer,108123.58,23
+2928,true,Undereducated,KPMG,Product Designer,105392.1,35
+2929,true,Undereducated,Booz Allen Hamilton,CISO,116161.53,93
+2930,true,Undereducated,Google,Design Researcher,116371.24,49
+2931,true,Undereducated,Google,BI Developer,117779.64,60
+2932,false,,,,,
+2933,true,Undereducated,Microsoft,Product Manager,132789.15,71
+2934,true,Undereducated,Visa,AI Researcher,116484.86,21
+2935,true,Matched,PwC,UX Researcher,105914.16,38
+2936,true,Undereducated,Salesforce,Data Scientist,113953.89,19
+2937,true,Undereducated,McKinsey & Company,Site Reliability Engineer,103983.51,34
+2938,true,Undereducated,Capital One,Full Stack Developer,123162.22,84
+2939,false,,,,,
+2940,true,Undereducated,Microsoft,Data Analyst,149703.84,76
+2941,true,Undereducated,McKinsey & Company,Frontend Developer,122558.27,70
+2942,true,Undereducated,Bloomberg,UX Researcher,94268.48,19
+2943,true,Undereducated,Cognizant,ML Engineer,134094.43,85
+2944,true,Undereducated,Google,Design Researcher,130571.25,71
+2945,true,Overeducated,UnitedHealth Group,Product Manager,104488.03,66
+2946,false,,,,,
+2947,true,Overeducated,Google,Frontend Developer,140570.11,49
+2948,true,Undereducated,Deloitte,Cloud Consultant,108851.72,65
+2949,true,Undereducated,Johnson & Johnson,Full Stack Developer,138745.49,66
+2950,true,Undereducated,Capital One,BI Analyst,89787.02,57
+2951,true,Undereducated,Palantir Technologies,ML Engineer,119754.39,94
+2952,true,Undereducated,Palantir Technologies,Cloud Consultant,96925.93,82
+2953,true,Matched,JPMorgan Chase,Cloud Consultant,122149.26,79
+2954,true,Overeducated,Bloomberg,Penetration Tester,102128.69,56
+2955,true,Undereducated,Morgan Stanley,Data Warehouse Architect,136789.99,86
+2956,true,Undereducated,Johnson & Johnson,Security Analyst,92902.07,58
+2957,false,,,,,
+2958,true,Undereducated,Cisco Systems,Product Designer,112824.4,38
+2959,true,Undereducated,Microsoft,Platform Engineer,119747.38,65
+2960,true,Undereducated,Goldman Sachs,Product Manager,120575.93,15
+2961,true,Undereducated,SAP,Analytics Manager,109599.43,76
+2962,true,Undereducated,Salesforce,Build Engineer,104109.3,92
+2963,true,Undereducated,IBM,Platform Engineer,117892.07,23
+2964,true,Undereducated,Epic Systems,ML Engineer,112458.62,27
+2965,false,,,,,
+2966,true,Undereducated,Cognizant,Build Engineer,108260.57,69
+2967,true,Undereducated,Cisco Systems,DevOps Engineer,130995.63,81
+2968,true,Matched,McKinsey & Company,Site Reliability Engineer,126162.58,49
+2969,true,Undereducated,Infosys,MLOps Engineer,116849.91,89
+2970,true,Undereducated,IBM,MLOps Engineer,129033.26,53
+2971,true,Undereducated,Salesforce,Data Warehouse Architect,113166.2,54
+2972,true,Undereducated,Lockheed Martin,Site Reliability Engineer,143823.42,78
+2973,true,Undereducated,Salesforce,Data Engineer,125832.23,33
+2974,true,Undereducated,Epic Systems,BI Analyst,147163.56,77
+2975,true,Undereducated,Deloitte,ML Engineer,159270.92,29
+2976,true,Undereducated,JPMorgan Chase,Security Analyst,103837.45,30
+2977,false,,,,,
+2978,true,Undereducated,Google,Frontend Developer,101269.91,74
+2979,true,Undereducated,Goldman Sachs,Frontend Developer,84691.22,45
+2980,true,Undereducated,Oracle,Frontend Developer,118383.18,83
+2981,true,Undereducated,IBM,Security Analyst,95609.75,79
+2982,true,Undereducated,Deloitte,Mobile Developer,112728.12,49
+2983,true,Matched,Johnson & Johnson,ML Engineer,125636.53,27
+2984,true,Matched,Morgan Stanley,Platform Engineer,107124.75,74
+2985,true,Undereducated,Capital One,DevOps Engineer,143920.33,33
+2986,true,Undereducated,IBM,Analytics Manager,148336.91,89
+2987,true,Undereducated,Johnson & Johnson,ML Engineer,119140.37,77
+2988,true,Undereducated,Morgan Stanley,QA Engineer,135085.6,66
+2989,true,Matched,Visa,Frontend Developer,150520.4,30
+2990,false,,,,,
+2991,true,Undereducated,PwC,ML Engineer,85056.77,71
+2992,true,Undereducated,Booz Allen Hamilton,Frontend Developer,108985.12,66
+2993,true,Undereducated,JPMorgan Chase,Build Engineer,155848.75,47
+2994,true,Matched,McKinsey & Company,Solutions Architect,119649.6,46
+2995,false,,,,,
+2996,true,Undereducated,Google,Mobile Developer,108067.78,20
+2997,true,Undereducated,Goldman Sachs,Platform Engineer,106404.1,66
+2998,true,Undereducated,Cognizant,Product Designer,118151.02,27
+2999,true,Matched,Microsoft,Analytics Manager,118085.63,20
+3000,true,Matched,Amazon Web Services,Product Designer,112163.15,73

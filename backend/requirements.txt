@@ -35,5 +35,8 @@ prophet==1.1.6
 pydantic==2.7.1
 pydantic-settings==2.2.1
 
-# HTTP client (for inter-service calls)
+# HTTP client (for inter-service calls, and the pytest suite)
 httpx==0.27.0
+
+# Testing
+pytest==8.2.2

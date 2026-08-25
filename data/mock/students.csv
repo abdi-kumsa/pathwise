@@ -1,0 +1,3001 @@
+name,gpa,internships,projects,communication_score,program,enrollment_year
+Allison Hill,3.28,2,3,1,MS Information Technology,2020
+Noah Rhodes,2.28,4,1,2,MS Human-Computer Interaction,2023
+Angie Henderson,2.84,1,3,1,BS Data Science,2023
+Daniel Wagner,3.2,4,6,9,MBA Product Management,2020
+Cristian Santos,2.9,1,6,5,BS Computer Science,2021
+Connie Lawrence,2.56,0,1,4,MS Business Analytics,2022
+Abigail Shaffer,2.19,2,0,6,MS Data Science,2024
+Gina Moore,2.92,0,8,2,MS Cloud Computing,2021
+Gabrielle Davis,3.66,4,3,10,MS Business Analytics,2024
+Ryan Munoz,2.14,0,3,4,MS Artificial Intelligence,2019
+Monica Herrera,2.76,2,2,8,MS Human-Computer Interaction,2021
+Jamie Arnold,2.71,0,9,5,MS Information Technology,2024
+Lisa Hensley,2.34,3,6,4,Certificate Data Analytics,2021
+Michele Williams,3.98,2,0,9,MBA Product Management,2020
+Dylan Miller,3.64,2,1,6,MS Cloud Computing,2020
+Brian Ramirez,3.83,2,3,10,MS Information Technology,2024
+Holly Wood,3.0,2,2,8,Certificate Data Analytics,2020
+Derek Zuniga,3.49,4,6,9,MS Artificial Intelligence,2023
+Lisa Jackson,2.8,4,7,4,Certificate Data Analytics,2019
+Carla Gray,3.51,1,10,2,Certificate Data Analytics,2022
+Margaret Hawkins DDS,3.19,4,7,7,MS Cloud Computing,2023
+Patty Perez,2.5,0,10,9,BS Computer Science,2023
+Ethan Adams,3.5,2,6,6,BS Data Science,2020
+Tommy Walter,2.91,1,8,5,MS Cybersecurity,2019
+Matthew Foster,3.74,4,9,5,MS Human-Computer Interaction,2020
+Judy Baker,2.31,4,0,3,MS Cybersecurity,2023
+Justin Baker,2.65,2,4,1,BS Data Science,2020
+Stephanie Ross,2.12,0,7,10,BS Data Science,2019
+Zachary Hicks,3.96,1,10,9,Certificate Data Analytics,2022
+Anthony Rodriguez,3.89,4,9,3,MS Artificial Intelligence,2022
+Rebecca Henderson,3.93,1,4,9,MS Information Technology,2022
+James Ferrell,3.99,4,7,6,MS Computer Science,2019
+Tricia Valencia,2.5,0,9,2,MS Business Analytics,2023
+Nathan Maldonado,2.46,0,10,4,BS Computer Science,2019
+Debra Davidson,2.46,0,8,1,MS Business Analytics,2020
+Jeffrey Chavez,2.56,4,2,8,MBA Product Management,2024
+Sherri Baker,3.87,3,3,10,MS Data Science,2022
+Cassandra Gaines,3.61,0,10,4,BS Data Science,2022
+Elizabeth Fowler,2.71,0,10,7,MS Computer Science,2024
+Brittany Farmer,3.97,3,5,2,BS Computer Science,2019
+Paula Moreno,2.5,3,2,4,MS Cybersecurity,2022
+Fred Smith,2.37,0,7,8,MBA Product Management,2023
+Sherry Decker,2.2,0,3,9,BS Computer Science,2020
+Anthony Humphrey,2.81,3,0,8,MBA Product Management,2020
+Angelica Tucker,2.76,3,4,7,MS Artificial Intelligence,2022
+Philip Cannon,3.39,3,2,9,MS Human-Computer Interaction,2020
+John Pierce,2.59,4,0,1,MS Data Science,2024
+Shane Henderson,2.63,3,8,1,MS Data Science,2023
+Joshua Blair,2.31,1,1,9,BS Data Science,2023
+Eric Carney,2.14,0,9,4,MS Cloud Computing,2020
+Jessica Holmes,3.16,0,6,1,MS Data Science,2024
+Danny Morgan,3.17,2,3,9,MS Business Analytics,2024
+Crystal Robinson,3.43,3,2,4,MS Artificial Intelligence,2024
+Mark Perez,3.29,0,0,8,MS Business Analytics,2022
+Shannon Jones,3.24,0,8,10,BS Data Science,2020
+Michael Lewis,3.01,0,3,3,MS Business Analytics,2021
+Timothy Duncan,2.57,2,9,8,MS Cybersecurity,2024
+Richard Aguirre,3.06,0,2,9,MS Artificial Intelligence,2021
+Brent Jordan,2.23,4,2,2,MS Information Technology,2021
+John Daniel,2.56,2,3,4,MS Information Technology,2024
+Victoria Garcia,3.27,3,4,5,MS Cybersecurity,2019
+Gerald Hensley,2.18,0,0,7,MS Artificial Intelligence,2021
+Connor West,3.54,3,8,5,Certificate Data Analytics,2024
+Donald Wright,2.86,0,2,1,BS Data Science,2023
+Jessica Callahan,2.07,4,2,6,MS Data Science,2022
+Amber Kidd,2.25,0,5,5,MS Business Analytics,2020
+Tracy House,3.36,4,6,2,MS Business Analytics,2023
+Carol Tucker,3.5,1,6,4,Certificate Data Analytics,2019
+James Brown,2.36,1,4,6,MS Cloud Computing,2020
+William Baker,3.57,0,7,2,MS Cloud Computing,2020
+Jordan Henderson,2.4,2,3,8,MS Business Analytics,2020
+Whitney Peters,2.05,2,4,4,MS Cloud Computing,2019
+Brittney Phillips,3.93,4,6,5,MS Business Analytics,2024
+Lauren Daniels,3.96,0,1,9,MS Business Analytics,2021
+Amy Silva,2.36,0,9,5,BS Computer Science,2022
+Sarah Moore,2.69,4,8,6,MS Cloud Computing,2019
+Angela Lopez,2.77,2,0,10,MBA Product Management,2024
+Megan Young,2.87,1,5,9,MS Cybersecurity,2022
+Steve Sanchez,2.14,2,10,6,MS Data Science,2019
+Lisa Barnes,3.44,2,10,5,MS Cybersecurity,2022
+Kelly Donovan,2.65,1,3,5,MS Cybersecurity,2022
+Mike Allen,3.33,1,9,7,MS Human-Computer Interaction,2023
+Michael Evans,2.6,2,4,9,BS Computer Science,2020
+Paul Jones,2.86,2,7,10,MS Data Science,2022
+Zachary Ferrell,2.88,3,2,4,MS Cybersecurity,2024
+Daniel Baker,2.17,4,5,9,MS Human-Computer Interaction,2019
+Shirley Suarez,3.64,2,3,4,MS Human-Computer Interaction,2020
+Christopher Bass,2.29,3,9,1,MBA Product Management,2019
+Lisa Archer,2.91,3,7,10,MBA Product Management,2022
+Aimee Montoya,2.49,3,3,1,BS Data Science,2020
+Matthew Mcmillan,3.61,0,8,9,MS Computer Science,2020
+Brian Rodriguez,3.83,1,7,2,MS Computer Science,2024
+Denise Jacobs,3.06,2,7,9,MS Data Science,2023
+Christina Walters,3.63,4,7,9,MS Cloud Computing,2020
+John Whitehead,3.49,2,3,8,MS Computer Science,2024
+Anna Henderson,2.55,1,4,9,MS Computer Science,2022
+Aaron Wise,2.15,2,5,5,MBA Product Management,2021
+Deborah Figueroa,3.79,1,3,2,Certificate Data Analytics,2022
+Jessica Smith,3.39,3,6,4,BS Data Science,2021
+Stephen Mckee,3.09,1,6,7,BS Computer Science,2022
+Sandra Aguilar,3.81,0,9,10,MS Information Technology,2022
+Cameron Parker,2.95,3,6,6,MS Artificial Intelligence,2023
+Rebecca Valencia,3.5,1,7,9,MS Data Science,2020
+Christine Wright,2.55,3,5,8,BS Computer Science,2024
+Richard Henson,3.36,1,7,7,MS Information Technology,2020
+Marc Moore,3.96,3,9,9,BS Computer Science,2023
+Sharon Cherry,3.33,3,2,2,MS Human-Computer Interaction,2022
+Sierra Johnson,2.36,2,3,5,MS Cloud Computing,2022
+Evelyn Galvan,2.65,3,4,7,MS Artificial Intelligence,2019
+Sharon Cochran,2.94,2,3,9,BS Computer Science,2024
+Richard Rodriguez,2.14,1,3,1,BS Computer Science,2019
+Shannon Walker,3.24,3,10,4,Certificate Data Analytics,2019
+Julia Torres,3.13,2,5,4,MS Computer Science,2020
+Crystal Johnson,3.21,2,1,2,Certificate Data Analytics,2023
+Garrett Lin,2.05,3,6,5,MS Data Science,2024
+Diana May,2.4,1,1,10,MS Information Technology,2024
+William Herrera,3.54,4,0,10,BS Data Science,2021
+Ashley Waller,3.07,4,10,6,BS Data Science,2021
+Victor Baker,2.03,0,6,7,MS Computer Science,2021
+Jeffrey Chandler,3.27,1,6,8,MS Information Technology,2020
+Larry Dixon,3.47,4,7,5,MS Data Science,2022
+Kenneth Scott,2.87,2,3,10,MS Artificial Intelligence,2019
+April Frost,2.56,3,9,8,MBA Product Management,2023
+Michelle Harmon,3.34,3,5,6,BS Computer Science,2020
+Helen Jones,2.98,2,4,6,MS Artificial Intelligence,2023
+Erin Edwards,3.4,0,8,5,MS Cybersecurity,2020
+Michelle Evans,2.17,4,3,7,MS Computer Science,2024
+Jason Powell,2.95,0,1,8,MS Computer Science,2021
+Cameron Fisher,2.44,4,5,4,MS Artificial Intelligence,2022
+Megan Orr,3.11,4,5,6,MS Cloud Computing,2021
+Elizabeth Kelley,3.41,2,3,5,MS Artificial Intelligence,2019
+Dustin Jordan,3.44,4,2,6,BS Data Science,2020
+Mary Marshall,2.43,4,8,8,MS Artificial Intelligence,2023
+Daniel Kennedy,2.57,2,3,2,MBA Product Management,2021
+Rebecca Jackson,2.36,4,2,1,MS Information Technology,2021
+Jose Schultz,2.09,2,2,1,MS Cybersecurity,2024
+Robert Potter,3.74,0,9,8,BS Data Science,2021
+Courtney Gonzalez,2.94,1,0,8,MS Business Analytics,2021
+David Alvarez,3.88,0,6,8,BS Data Science,2022
+Angel Perry,2.15,1,9,1,Certificate Data Analytics,2021
+Cheyenne Horton,2.17,4,6,4,BS Data Science,2023
+David Douglas Jr.,3.19,4,6,10,MBA Product Management,2022
+Patricia Rodriguez,3.82,3,4,5,MS Data Science,2023
+Christopher Rubio,3.24,0,3,10,MS Information Technology,2024
+Amber Wright,2.42,1,2,2,Certificate Data Analytics,2023
+Joyce Solis,2.15,3,9,1,MS Cloud Computing,2022
+Victoria Larson,2.58,2,7,4,MS Artificial Intelligence,2019
+Stephanie Salazar,3.37,4,10,5,MS Human-Computer Interaction,2020
+Kathy Rivas,2.85,1,4,9,MBA Product Management,2020
+Stephanie Manning,2.14,4,9,3,MS Artificial Intelligence,2021
+David Wright,2.88,2,6,8,MS Information Technology,2021
+Pamela Boyd,3.0,0,9,8,MS Computer Science,2019
+Denise Jones,3.78,2,0,6,MS Data Science,2019
+Devon Flores,2.46,0,10,10,MS Data Science,2021
+Brenda Hall,3.15,4,10,3,MS Computer Science,2022
+Michelle Brown,3.83,3,10,3,MS Data Science,2022
+Joshua Perry,3.94,3,5,8,MS Business Analytics,2021
+Jason Stein,3.34,3,7,3,MS Business Analytics,2021
+Melissa Gates,3.33,0,7,7,MS Cybersecurity,2019
+Jamie Smith,2.63,3,8,6,BS Data Science,2019
+Paul Castaneda,3.32,3,0,9,MS Computer Science,2020
+Jennifer Adkins,3.04,3,0,10,MS Computer Science,2020
+Lindsey Walker,2.53,3,7,3,MS Artificial Intelligence,2019
+Jeffrey Johnson,2.06,1,4,10,MBA Product Management,2023
+Michael Powell,2.03,1,1,7,BS Data Science,2022
+John Anderson,3.89,2,8,3,MS Computer Science,2024
+Alyssa Long,2.55,1,7,8,MS Computer Science,2023
+Alyssa Day,2.29,4,2,4,MS Data Science,2019
+Joel Williams,2.55,4,4,7,MS Business Analytics,2019
+Daniel Murphy,2.57,4,10,5,MS Data Science,2022
+Jamie Walton,3.73,3,5,8,MS Cybersecurity,2021
+Darlene Miller,3.1,3,5,9,MS Cloud Computing,2020
+Joshua Cooke,3.96,3,3,4,MS Data Science,2022
+Matthew Harrington,2.09,3,6,8,MS Information Technology,2024
+Nicole Herring,3.58,0,2,3,MS Computer Science,2023
+Alex Hernandez,3.93,3,1,6,BS Data Science,2023
+Michael Elliott,3.82,1,6,1,MS Information Technology,2024
+Michael Wang,3.94,2,5,2,MS Computer Science,2023
+Lawrence Adkins,3.39,4,6,2,MS Business Analytics,2021
+Robert Oconnell,3.25,0,9,8,MS Cybersecurity,2019
+Alexander Collins,2.47,0,6,5,MBA Product Management,2019
+Tina Sanders,3.52,1,4,2,MS Computer Science,2019
+Angela Vaughn,2.09,2,5,1,MS Artificial Intelligence,2022
+Ashley Barton,2.29,4,10,9,MS Cloud Computing,2020
+Lindsay Martinez,2.34,3,9,2,MS Data Science,2024
+Dr. Hannah Patterson,2.48,1,7,10,Certificate Data Analytics,2024
+Jonathan Peterson,2.51,0,7,5,MS Human-Computer Interaction,2021
+Samantha Garcia,3.36,3,5,3,BS Data Science,2023
+Madison Poole,2.6,2,7,7,MS Information Technology,2021
+Jessica Gross,2.4,0,3,7,MS Computer Science,2022
+Debra Morton,3.14,2,0,10,MS Artificial Intelligence,2024
+Karen Graham,2.79,0,9,1,MS Data Science,2024
+Debra Christian,2.99,4,5,5,MBA Product Management,2020
+Angelica Keith,3.27,1,10,10,MS Artificial Intelligence,2019
+John Bishop,3.81,3,0,1,MS Artificial Intelligence,2023
+Allen Rosales,2.73,2,5,3,BS Data Science,2024
+Daniel Salinas,2.83,4,5,4,Certificate Data Analytics,2023
+Spencer Haynes,3.0,2,7,5,Certificate Data Analytics,2021
+Adam Vaughan,3.49,3,1,6,BS Data Science,2020
+Nathan Freeman,3.51,3,8,4,MS Human-Computer Interaction,2021
+Melissa Brewer,2.18,2,8,7,BS Computer Science,2019
+Ricky Davis II,2.91,3,10,5,MS Data Science,2021
+Elizabeth Perkins,2.22,0,9,4,MS Computer Science,2023
+Joseph Coleman,2.66,0,10,10,MBA Product Management,2022
+Erin Warner,3.82,3,1,5,MS Human-Computer Interaction,2020
+David Martinez,2.09,3,1,1,MS Artificial Intelligence,2019
+Bryan Herrera,2.47,3,7,9,Certificate Data Analytics,2021
+Cathy Robinson,3.34,4,2,9,MS Cloud Computing,2022
+Dr. William Warren,3.31,3,4,8,MS Data Science,2019
+Brian Lee,3.38,3,3,4,MS Computer Science,2021
+Christopher Smith,2.2,2,0,6,MS Cybersecurity,2022
+Denise Mccann,2.55,0,10,2,MS Computer Science,2020
+Melissa Martinez,3.28,0,5,10,BS Computer Science,2020
+Katherine Salas,3.98,0,8,10,MBA Product Management,2020
+Julie Alexander,3.17,1,9,4,MS Business Analytics,2019
+Anthony Everett,2.55,4,4,3,Certificate Data Analytics,2020
+Rodney Morales,2.22,0,5,1,Certificate Data Analytics,2020
+Mark Brown,3.18,2,0,1,Certificate Data Analytics,2020
+Justin Torres,3.48,0,7,9,BS Data Science,2022
+Bailey Duran DDS,3.56,0,7,9,MS Data Science,2023
+Courtney Mills,2.44,4,4,10,BS Computer Science,2022
+Jeremy Dalton,3.29,3,6,1,BS Computer Science,2022
+Elizabeth Oliver DDS,3.37,3,1,8,MS Information Technology,2019
+Theresa Clark,2.64,1,4,3,BS Data Science,2023
+Matthew Moore,3.27,2,6,9,MS Information Technology,2023
+Benjamin Smith,3.06,4,6,8,MS Cybersecurity,2019
+Kirk Carter,3.59,4,3,2,MS Human-Computer Interaction,2022
+Michael Warner,2.9,2,7,4,MS Cloud Computing,2022
+Michael Bradshaw,2.83,3,5,2,MS Business Analytics,2024
+Lori Guerrero,2.51,3,1,3,MS Human-Computer Interaction,2019
+Jessica Stephens,3.66,0,5,2,MS Cloud Computing,2020
+Susan Serrano,3.11,4,5,10,MS Cybersecurity,2024
+Christopher Parker,2.24,3,0,6,MS Human-Computer Interaction,2021
+Laura Roberts,3.2,4,8,6,BS Data Science,2020
+Michael Lyons,2.31,0,5,8,MBA Product Management,2023
+Kathryn Snyder,2.74,1,6,5,MS Data Science,2023
+Andrew Reynolds,3.95,4,0,10,MS Data Science,2023
+David Davis,3.86,1,4,5,BS Computer Science,2024
+Sara Johnston,3.52,0,2,6,MS Business Analytics,2020
+Yvonne Chambers,3.13,1,10,7,BS Data Science,2019
+Andrew Avila,2.18,3,6,9,MBA Product Management,2022
+Matthew Moon,2.68,2,9,6,MS Artificial Intelligence,2023
+Kevin Walters,2.17,1,9,1,Certificate Data Analytics,2019
+Brandon Bailey MD,3.35,3,7,5,MS Computer Science,2023
+Shannon Rivera,2.88,4,1,5,MBA Product Management,2021
+Donna Landry,2.86,4,7,5,MS Human-Computer Interaction,2023
+Krista Gibson,3.33,3,9,1,MBA Product Management,2019
+Frank Cordova,2.02,1,4,5,MBA Product Management,2021
+Jose Travis,2.66,3,2,1,MS Computer Science,2020
+Kimberly Gutierrez,2.76,4,10,4,MS Cybersecurity,2021
+Isaiah Avila,2.14,0,7,1,MS Cloud Computing,2019
+Olivia Harris,3.72,4,6,10,MS Cloud Computing,2024
+Tanya Kim,3.28,3,0,5,BS Data Science,2021
+Barbara Dudley,2.34,2,1,10,MS Computer Science,2022
+Cynthia Moore,3.69,4,6,4,MS Cloud Computing,2023
+Kristen Davis,2.16,2,3,5,MS Information Technology,2021
+Susan Murray MD,3.56,0,8,2,MS Cybersecurity,2023
+Kathleen Moran,2.39,1,3,6,MS Business Analytics,2019
+Denise Davenport,2.29,4,2,4,Certificate Data Analytics,2024
+Mrs. Kristen Reyes,2.15,4,9,8,MS Computer Science,2022
+Katie Suarez,3.36,4,5,10,MS Human-Computer Interaction,2024
+Desiree Tyler,2.63,3,7,8,BS Data Science,2024
+Timothy Romero,2.61,0,5,5,MS Data Science,2023
+Diane Evans,2.15,0,0,8,MS Computer Science,2021
+Yvonne Burns,3.66,0,9,2,MS Human-Computer Interaction,2023
+Joshua Reed,3.01,4,0,8,MS Data Science,2022
+Kimberly Gibson,3.82,1,5,10,MS Human-Computer Interaction,2023
+Colin Terry,2.95,3,1,3,BS Computer Science,2021
+Cynthia Rowe,3.96,1,0,2,MS Cybersecurity,2020
+Patrick Thornton,3.42,4,9,8,MS Cybersecurity,2020
+Jasmin Alvarado,2.73,3,5,5,MS Cloud Computing,2024
+Veronica Simpson,3.2,2,1,6,BS Data Science,2023
+Jonathan Lawrence,3.36,4,2,5,MS Artificial Intelligence,2021
+Shelly Alexander,2.16,2,10,3,MS Business Analytics,2024
+Joyce Bowen,3.32,0,4,3,MS Data Science,2023
+Matthew Moore,2.75,4,1,6,Certificate Data Analytics,2024
+Wayne Morgan,3.34,0,5,9,MS Business Analytics,2021
+Marie Christian,2.36,3,3,4,MS Business Analytics,2020
+Shannon James,4.0,2,1,3,BS Data Science,2023
+Nathan Malone,3.54,2,9,9,BS Computer Science,2020
+Amanda Jones,3.19,1,9,3,Certificate Data Analytics,2020
+Tammie Bright,3.44,2,10,1,MS Cloud Computing,2024
+Jessica Garcia,2.48,2,7,8,MS Data Science,2020
+Shelia Wallace,3.07,1,5,5,MS Computer Science,2024
+Stephanie Williams,3.89,2,6,8,MS Computer Science,2023
+Elaine Brooks,3.05,4,2,3,MBA Product Management,2021
+Joseph Knight,2.1,4,1,8,MS Business Analytics,2024
+Carolyn Miller,3.69,0,2,2,MS Artificial Intelligence,2021
+Lisa Allen,2.9,3,1,9,Certificate Data Analytics,2020
+Briana Murray,3.63,3,0,6,BS Computer Science,2022
+David Smith,3.0,0,5,4,MS Cloud Computing,2020
+Stephanie Byrd,2.06,2,2,2,MS Information Technology,2020
+Jeremy Reed,2.08,1,7,8,MS Information Technology,2022
+Margaret Coleman,3.23,2,3,2,BS Computer Science,2020
+Ryan Gonzalez,3.1,3,1,10,MS Cybersecurity,2021
+John Young,2.48,1,6,2,BS Computer Science,2024
+Laura Haney,3.59,0,7,8,BS Data Science,2023
+William Barrett,3.07,1,2,9,MS Data Science,2021
+Keith Jennings,2.86,1,9,10,MS Business Analytics,2022
+Amber Obrien,2.37,2,1,2,MS Cybersecurity,2023
+Tanner Mitchell DDS,3.09,0,6,9,MS Cybersecurity,2022
+Heather Fields,2.09,2,0,7,MS Business Analytics,2021
+Megan Le,3.58,0,9,6,MBA Product Management,2024
+Sara Fuller,3.51,2,8,3,BS Computer Science,2021
+Maria Parker,3.63,3,7,3,MS Human-Computer Interaction,2024
+Kevin Oconnor,2.36,3,0,3,BS Data Science,2021
+Edward Burgess,2.4,2,4,4,BS Computer Science,2023
+Carlos Ryan,2.8,2,0,9,MS Computer Science,2024
+Kiara Mcintyre,2.38,2,4,6,BS Computer Science,2019
+Dawn Summers,3.6,3,6,7,MS Cloud Computing,2021
+Dr. Paul Morgan,3.95,3,5,8,MS Information Technology,2023
+Victor Taylor,2.53,3,1,2,MS Information Technology,2022
+Shannon Ramsey,3.2,2,5,3,MS Cybersecurity,2019
+Tracy Ballard,2.16,3,9,5,MS Artificial Intelligence,2024
+Richard Smith,2.85,3,0,8,MS Business Analytics,2024
+Jordan Chambers,3.74,3,4,6,MS Data Science,2024
+Lauren Carson,3.96,3,5,1,BS Data Science,2023
+Ashley Hall,3.6,1,9,3,BS Computer Science,2024
+Stephen Hoffman,3.56,0,3,1,Certificate Data Analytics,2024
+Connie Brown,2.73,0,9,7,MS Data Science,2020
+Susan Turner,3.36,3,1,6,MS Business Analytics,2023
+Charles Shah,2.28,2,10,6,MS Cloud Computing,2021
+Johnathan Davis,2.5,1,7,2,BS Computer Science,2023
+Brandy Chavez,2.77,2,4,9,BS Data Science,2024
+Natalie Bautista,2.89,3,3,10,MS Artificial Intelligence,2019
+Patrick Moore,2.27,1,7,2,MS Computer Science,2019
+Brett Burns,3.62,2,1,6,MS Human-Computer Interaction,2023
+Trevor Johnson,3.08,1,5,5,Certificate Data Analytics,2023
+Jeremy Sampson,2.45,1,7,4,Certificate Data Analytics,2019
+Ariana Jennings,2.72,3,8,10,MS Business Analytics,2020
+Vanessa Howard,3.22,2,6,2,BS Data Science,2024
+Colton Martinez,3.44,3,9,9,MS Cloud Computing,2019
+Jordan Bates,2.25,0,7,6,MS Human-Computer Interaction,2022
+Linda Smith,3.36,4,10,6,Certificate Data Analytics,2023
+Dana Martinez,2.36,4,0,3,MS Cloud Computing,2019
+Andrea Hubbard,3.04,1,5,5,Certificate Data Analytics,2024
+Daniel Kane,2.45,0,4,9,MS Artificial Intelligence,2020
+Charles Lester,3.27,1,10,9,MS Artificial Intelligence,2021
+Scott Thomas,3.23,1,9,2,MS Cybersecurity,2023
+David Thompson,2.31,4,5,10,MS Information Technology,2023
+Allison Smith,2.08,0,10,1,BS Data Science,2023
+Cynthia Morris,2.53,3,9,4,MS Data Science,2024
+Anthony Harmon,2.06,2,7,9,MS Artificial Intelligence,2020
+Nichole Alvarez,3.61,3,1,7,MS Artificial Intelligence,2024
+Kayla Rodriguez,2.12,3,7,8,MS Cloud Computing,2020
+Theresa Williams,2.68,2,5,3,MS Business Analytics,2022
+Sharon Boyd,2.26,4,1,6,MS Cybersecurity,2021
+Victor Brown,2.48,3,3,2,MS Artificial Intelligence,2020
+James Parks,2.19,4,6,5,MS Cloud Computing,2020
+Theodore Jones Jr.,3.93,4,5,3,MS Business Analytics,2020
+Ana Hill,3.53,3,7,8,MS Cybersecurity,2021
+Kimberly Nguyen,2.99,4,7,2,MS Cloud Computing,2020
+Kerry Chavez DDS,2.43,0,4,6,BS Computer Science,2022
+Michael Farrell,3.2,4,0,8,MS Artificial Intelligence,2019
+Patricia Le,2.86,2,6,5,MS Information Technology,2021
+Jesse Perez,2.09,4,3,1,MS Data Science,2021
+Jesse Perry,3.11,4,7,2,MS Cloud Computing,2023
+Jeffery Ortega,2.56,4,1,10,MS Human-Computer Interaction,2020
+Christian Leblanc,3.95,2,8,7,MS Business Analytics,2021
+Ronald Davis,3.51,4,6,4,MS Data Science,2023
+Parker Cain,2.08,2,7,1,Certificate Data Analytics,2023
+Laurie Hoffman,2.91,1,5,10,MS Cybersecurity,2023
+Bryan Gomez,2.64,2,9,7,MS Data Science,2021
+Nicole Parrish,3.01,3,9,9,MS Cybersecurity,2021
+Tracy Burke,2.95,2,10,1,MS Business Analytics,2019
+Kenneth Lewis,3.96,0,9,10,MS Artificial Intelligence,2022
+Courtney Rodriguez,2.53,1,0,10,MS Data Science,2023
+Holly Farmer,2.96,4,6,9,MS Human-Computer Interaction,2020
+Renee Bruce,3.64,4,1,4,BS Computer Science,2020
+Sabrina Austin,2.04,1,6,6,MS Cloud Computing,2024
+Allison Hickman,2.41,3,0,9,MS Data Science,2024
+Debra White,2.28,2,10,4,MS Cybersecurity,2022
+Ellen Morgan,3.05,3,8,6,Certificate Data Analytics,2021
+Sergio Knight,3.09,3,3,5,MS Data Science,2020
+Charles Schultz,2.56,2,4,5,MBA Product Management,2024
+Paul Lewis,2.41,3,5,8,MS Business Analytics,2023
+Glen Wood,3.87,0,9,5,MS Artificial Intelligence,2024
+Paula Bradley,3.09,1,4,7,MS Business Analytics,2019
+Anthony Moore,2.58,3,10,2,MS Business Analytics,2021
+Megan Nelson,3.49,4,4,4,MBA Product Management,2023
+Karla Ramos,3.39,4,9,3,BS Data Science,2020
+Paul Wilson,2.48,1,0,9,MBA Product Management,2019
+Douglas Gregory,2.83,1,0,8,BS Data Science,2023
+Mr. Andrew Foster,3.96,3,7,3,MS Cloud Computing,2024
+Aimee Turner,2.4,2,10,5,MS Business Analytics,2019
+Chad Scott,3.82,4,3,2,MS Human-Computer Interaction,2023
+Adam Burgess,3.48,3,2,1,Certificate Data Analytics,2019
+James Padilla,3.99,1,4,7,MS Computer Science,2019
+Sandra Drake,2.02,0,5,10,MS Data Science,2021
+Scott Williams,2.91,3,2,9,MS Cybersecurity,2023
+Thomas Atkins,2.94,2,2,4,BS Data Science,2024
+Laura Mckinney,2.92,1,0,5,MS Information Technology,2024
+Brian Smith,2.67,1,2,5,MS Data Science,2023
+Robert Montgomery,3.71,4,5,7,MS Cloud Computing,2019
+Tamara Davis,2.8,1,7,2,Certificate Data Analytics,2021
+Dana Chapman,3.87,3,3,1,MS Artificial Intelligence,2022
+Jennifer Collins,3.51,4,9,6,MS Artificial Intelligence,2019
+Gary Jackson,2.52,1,0,6,MS Information Technology,2024
+Ashley Hicks,2.24,3,10,5,Certificate Data Analytics,2023
+Hannah Luna,3.85,0,10,5,MS Information Technology,2021
+Robin Young,2.74,1,7,4,MBA Product Management,2020
+Craig Morrison,2.91,3,8,10,MS Business Analytics,2022
+Mary Thompson,3.51,4,1,4,MBA Product Management,2023
+Kathleen Webster,2.89,4,1,6,BS Data Science,2019
+Joann Glass,3.66,4,8,9,MBA Product Management,2020
+Madison Weber,2.33,0,10,9,MS Computer Science,2020
+Lori Hernandez,3.43,4,7,8,BS Data Science,2019
+Jeremy Turner,2.91,3,9,9,MS Cloud Computing,2019
+Anthony Romero,3.12,0,6,5,MS Information Technology,2021
+Jesse Brown,3.63,0,0,4,MS Data Science,2022
+Angela Lin,2.69,0,1,2,MS Cybersecurity,2022
+Lisa Hunter,2.06,1,10,7,Certificate Data Analytics,2024
+Julian Conner,3.29,3,7,7,MS Business Analytics,2022
+Joanna Pacheco,2.75,2,1,9,Certificate Data Analytics,2020
+Erica Alvarez,3.99,1,3,7,MS Cybersecurity,2019
+Antonio Garcia,3.51,4,6,5,MS Computer Science,2023
+Gwendolyn Klein,2.76,3,5,4,MBA Product Management,2020
+Carrie Wright,2.55,3,9,2,BS Computer Science,2019
+Jeffrey Mills,2.48,4,0,2,BS Data Science,2022
+Jake Campbell,3.2,0,6,1,MBA Product Management,2022
+George Harper,2.47,1,8,4,BS Computer Science,2021
+Maria Jones,2.47,4,9,10,MS Business Analytics,2024
+Michael Mitchell,3.64,1,10,4,MS Artificial Intelligence,2023
+Mary Escobar,2.44,0,8,5,MS Artificial Intelligence,2023
+Felicia Aguilar,3.76,3,8,3,MS Human-Computer Interaction,2022
+Gregory Ponce,2.09,3,8,6,MS Human-Computer Interaction,2021
+Jenna Larson,3.39,2,6,7,Certificate Data Analytics,2020
+Emily Bennett,3.51,1,4,8,MBA Product Management,2024
+Robin Santiago,2.29,4,6,8,BS Computer Science,2022
+Nancy Jennings,3.11,1,4,3,MS Cloud Computing,2020
+Maria Henderson,2.66,2,1,2,MS Computer Science,2023
+Jack White,3.45,2,6,4,BS Computer Science,2024
+Travis Tucker,3.21,1,9,1,BS Data Science,2024
+Chad Jones,3.34,1,5,4,MS Computer Science,2021
+Ashley Wise,3.91,1,1,1,MBA Product Management,2024
+Sophia Johnson,4.0,4,3,8,MBA Product Management,2022
+Ralph Anderson,3.83,2,6,9,MS Business Analytics,2022
+Christopher Guerra,3.07,2,5,6,MS Artificial Intelligence,2023
+Rhonda Martin,3.77,3,5,8,BS Data Science,2020
+Jason Rhodes,2.74,4,3,7,BS Computer Science,2024
+Jeremy Mitchell,2.29,4,9,5,MS Cybersecurity,2024
+Joann Ferguson,2.84,2,3,3,MBA Product Management,2022
+Robert Harrison,3.14,4,10,4,MS Computer Science,2024
+Holly Valentine,2.68,3,7,8,MS Information Technology,2020
+Mrs. Diane Reyes,3.47,1,8,6,Certificate Data Analytics,2022
+Tracy Montoya,2.37,0,8,9,MS Human-Computer Interaction,2019
+Brenda Wright,3.68,0,0,2,MS Human-Computer Interaction,2022
+Shelly Spencer,2.27,1,0,4,BS Data Science,2020
+Ryan Rosales,3.01,4,10,6,BS Computer Science,2024
+Phillip Nelson,3.87,3,0,8,MS Human-Computer Interaction,2019
+Brittany Kim,3.06,0,8,7,BS Computer Science,2024
+Courtney Hayes,2.55,4,10,5,BS Computer Science,2022
+Alexander Brown,3.61,0,8,3,BS Data Science,2020
+Cynthia Vang,2.48,2,5,10,MS Cybersecurity,2021
+Alfred Galvan,3.59,3,7,2,MS Business Analytics,2023
+Marie Moody,2.49,0,10,4,MS Artificial Intelligence,2024
+Dustin Gallegos,3.52,3,6,2,MS Cloud Computing,2023
+Brenda Thornton,2.95,1,1,1,MS Information Technology,2022
+Aaron Miller,3.69,0,8,6,MS Data Science,2019
+Ruben Dunn,2.46,2,0,10,MS Computer Science,2019
+Kelsey Rodriguez,3.37,4,10,5,MS Cybersecurity,2019
+Eric Williams,2.36,1,9,6,BS Computer Science,2020
+Riley Bryant,3.5,2,2,7,BS Data Science,2023
+Taylor Carlson,2.48,4,5,7,MS Human-Computer Interaction,2022
+Jose Allen,3.51,0,8,3,MS Information Technology,2024
+Jeffrey Mendez,3.95,3,3,1,BS Data Science,2019
+Jason Beck,2.68,3,5,10,MS Data Science,2019
+William Jones,3.27,1,5,8,MS Computer Science,2023
+Katie Mcneil,3.88,4,10,7,Certificate Data Analytics,2022
+Jeanette Harrison,2.17,1,1,10,MS Artificial Intelligence,2019
+Veronica King,2.54,1,6,7,MS Information Technology,2021
+Richard Cooper,2.72,2,7,2,BS Computer Science,2021
+Lori Ingram,3.52,0,2,2,Certificate Data Analytics,2022
+Evelyn Williams,2.9,3,1,9,MS Cybersecurity,2019
+Robin Thompson,2.18,4,9,9,BS Data Science,2021
+Julie Dominguez,3.73,3,6,1,MS Artificial Intelligence,2019
+Robin Brown,3.45,4,8,9,MBA Product Management,2020
+Judith Carter,3.37,2,4,3,Certificate Data Analytics,2021
+Curtis Williams,2.99,3,4,2,Certificate Data Analytics,2022
+Kaylee Hays,2.6,2,3,2,MS Business Analytics,2024
+Dawn Mullins,3.25,1,7,10,MS Data Science,2019
+Howard Norman,2.27,2,9,1,MS Cloud Computing,2022
+Evelyn Martinez,3.61,2,6,6,MS Computer Science,2024
+Steve Paul,3.95,2,9,3,MS Artificial Intelligence,2024
+Jasmine Beltran,2.4,3,5,6,Certificate Data Analytics,2021
+Jonathan Glass MD,3.47,1,5,8,MS Data Science,2022
+Monica Miller,2.56,0,9,7,MS Business Analytics,2020
+Samantha Gardner,3.18,4,0,9,Certificate Data Analytics,2024
+Bobby Guerrero,2.92,2,1,4,MS Computer Science,2022
+Lance Simmons,3.35,2,3,3,MS Human-Computer Interaction,2021
+Heather Williams,3.32,0,7,7,MS Cloud Computing,2023
+Heather Bolton,2.96,4,6,7,MS Cybersecurity,2023
+William Gould,2.07,4,9,6,MS Information Technology,2024
+Mark Cox,3.83,2,2,2,MBA Product Management,2024
+Meghan Cisneros,3.23,3,5,10,MS Human-Computer Interaction,2022
+Lawrence Harrington,2.21,1,8,2,MS Artificial Intelligence,2024
+Austin Osborne,3.04,4,3,10,MS Information Technology,2022
+James Bradley,2.75,4,8,8,MS Human-Computer Interaction,2020
+Meghan Rush,2.69,0,4,1,MS Computer Science,2022
+Phillip Berry,3.84,1,5,2,BS Data Science,2021
+Jennifer Banks,2.69,3,5,4,MS Cybersecurity,2022
+Brian Fitzgerald,2.2,0,4,8,MS Business Analytics,2019
+Mr. Justin Green III,3.62,2,10,2,BS Computer Science,2019
+Zachary Mitchell,3.35,1,8,3,MS Information Technology,2020
+Katherine Martinez,3.1,3,7,6,MS Cybersecurity,2020
+Jodi Roach,3.6,3,6,3,Certificate Data Analytics,2019
+Brandon Fleming,3.47,4,6,4,MS Computer Science,2022
+Emma Reed,2.01,2,1,4,MBA Product Management,2023
+Joshua Vance,2.2,2,5,9,Certificate Data Analytics,2020
+Michelle Ho,2.92,3,8,5,MS Human-Computer Interaction,2024
+Rebecca Hicks,2.63,3,9,7,MS Data Science,2019
+Curtis Taylor,2.7,1,10,8,MS Data Science,2024
+Allison Spencer,3.6,0,10,10,MS Data Science,2020
+Robert Arnold,2.63,0,2,4,MS Artificial Intelligence,2021
+Angelica Parker,3.39,3,9,9,MS Cloud Computing,2020
+Dr. Kelly Hammond DVM,3.15,3,10,7,Certificate Data Analytics,2023
+William Day,3.39,1,7,3,MS Cybersecurity,2021
+Michael Cooper,2.28,4,0,6,MS Computer Science,2021
+Penny Bowman,3.9,1,6,8,Certificate Data Analytics,2023
+Vincent Reynolds,3.01,3,6,8,MS Cloud Computing,2024
+Amy Martinez,3.68,0,9,8,Certificate Data Analytics,2019
+Christopher Morris,3.59,0,4,4,MS Artificial Intelligence,2020
+Hannah Everett,3.08,4,7,3,MS Computer Science,2023
+Sarah King,3.02,2,8,10,BS Data Science,2021
+Krista Martinez,3.08,3,8,1,MS Information Technology,2020
+Joseph Shaw,3.98,1,4,2,MS Information Technology,2019
+Todd Moore,2.9,3,1,6,BS Data Science,2020
+Michelle Jacobs,2.42,2,9,10,MS Information Technology,2024
+Kristy Bryan,2.86,1,3,10,Certificate Data Analytics,2019
+Angel May,3.14,4,8,9,MS Artificial Intelligence,2020
+Marilyn Wang,2.65,4,4,5,MS Artificial Intelligence,2023
+Mark Jimenez,3.97,3,0,2,Certificate Data Analytics,2021
+Donna Frye,3.73,1,3,3,MS Information Technology,2020
+Dr. Michael Evans,3.42,3,7,4,MS Human-Computer Interaction,2020
+Anthony Gonzales,3.15,3,6,5,MS Human-Computer Interaction,2022
+Mr. Lawrence Edwards,2.15,4,4,2,MS Cloud Computing,2024
+Morgan Valencia,3.87,3,5,6,MS Computer Science,2023
+Bianca Wood,2.0,3,10,2,MS Information Technology,2024
+Emma Owens,3.39,3,3,2,MS Cybersecurity,2022
+David Davis,3.65,2,4,8,MS Artificial Intelligence,2021
+James Gilbert,3.09,3,5,3,MS Data Science,2024
+Sean Moore,3.52,3,0,1,BS Data Science,2019
+Kenneth Edwards,3.86,3,0,3,MS Computer Science,2022
+Kathleen Robertson,2.4,2,2,3,MS Human-Computer Interaction,2021
+Mr. Alexander Landry MD,2.19,0,5,6,MS Artificial Intelligence,2024
+Cindy Gomez,3.81,3,10,3,BS Computer Science,2021
+Johnny Khan,3.45,0,1,4,MS Cloud Computing,2019
+Julie Herrera,2.43,4,3,2,Certificate Data Analytics,2023
+Jessica Khan,3.36,2,1,1,BS Computer Science,2022
+Pamela Diaz,3.39,1,6,8,BS Data Science,2019
+Kelly Lee,3.46,2,5,2,BS Data Science,2021
+Angel Gordon,2.27,1,1,3,MS Human-Computer Interaction,2023
+Diana Hays,3.13,1,7,10,MS Human-Computer Interaction,2021
+Barbara Hester,3.44,4,10,3,MS Cloud Computing,2022
+Robert Morgan,3.72,1,1,2,BS Data Science,2023
+Nicole Gonzalez,3.46,2,2,6,MS Cloud Computing,2020
+Kathryn Williams,2.55,4,9,2,MBA Product Management,2023
+Gary Wells,3.44,0,10,5,MS Information Technology,2021
+Larry Robertson,2.41,1,6,10,MS Cybersecurity,2021
+Louis Martin,3.29,3,1,4,MS Computer Science,2020
+Nancy Evans MD,3.0,4,0,10,BS Data Science,2021
+Kim Erickson,3.87,4,6,3,MS Cloud Computing,2021
+Robert Richardson,3.09,0,0,3,MS Computer Science,2023
+Veronica Silva,2.14,0,0,5,MBA Product Management,2022
+Molly Watts,3.01,3,6,9,MS Cloud Computing,2019
+John Coffey,3.28,1,4,9,MS Data Science,2019
+Paula Lane,2.62,1,8,9,MBA Product Management,2021
+Lauren Jackson,2.78,3,3,2,MS Artificial Intelligence,2019
+Lisa Randall,2.49,3,9,7,BS Data Science,2023
+Michael Johnson,2.11,0,2,3,BS Data Science,2024
+Ashley Smith,2.02,4,8,8,MS Business Analytics,2024
+Christian Vaughn,2.52,2,1,6,Certificate Data Analytics,2019
+Reginald Knapp,2.67,4,1,7,MS Artificial Intelligence,2021
+Nancy Brown,3.42,0,7,10,MS Human-Computer Interaction,2022
+Daniel Nguyen,3.02,4,2,1,MS Computer Science,2021
+Kelly Edwards,2.31,0,3,2,MS Data Science,2024
+Thomas Peterson,3.02,1,0,1,BS Computer Science,2022
+Raymond Le,2.73,0,8,3,Certificate Data Analytics,2024
+Melissa Bishop,3.48,2,3,7,MBA Product Management,2022
+David Grant,3.83,0,9,6,MS Artificial Intelligence,2021
+William Evans,2.24,1,8,1,Certificate Data Analytics,2019
+Daniel Bush,3.91,2,4,2,MS Computer Science,2021
+Gregory Peck,2.17,2,3,8,BS Computer Science,2021
+Denise Martinez,3.13,4,3,5,MS Information Technology,2022
+Jamie Baird,2.74,4,3,8,MBA Product Management,2020
+Tina Ballard,2.01,1,8,7,BS Computer Science,2021
+Dwayne Klein,3.27,0,10,1,MS Business Analytics,2022
+Jeremy Scott,3.7,1,8,5,BS Data Science,2020
+Dale Ryan,2.84,2,1,1,Certificate Data Analytics,2019
+Melissa Taylor,3.84,2,7,9,MS Cloud Computing,2024
+Laurie Sanchez,2.17,1,10,2,MS Cybersecurity,2022
+Kiara Little,2.15,3,10,10,BS Computer Science,2020
+Jason Love,2.47,3,5,5,MS Business Analytics,2021
+Randy Smith,2.91,1,2,4,BS Data Science,2023
+Tanya Russell,2.22,3,7,2,Certificate Data Analytics,2021
+Sherry Woods,2.81,1,7,9,MS Business Analytics,2021
+Victor Morris,2.93,1,10,2,BS Data Science,2021
+Susan Davis,3.65,1,5,10,BS Computer Science,2020
+Kimberly Sharp,2.18,3,8,4,MS Business Analytics,2019
+Susan Thompson,3.35,0,6,5,Certificate Data Analytics,2022
+Casey Gillespie,3.11,0,7,9,MBA Product Management,2019
+Jennifer Simpson DVM,3.61,0,0,3,BS Data Science,2020
+Tammy Mcdowell,2.26,0,9,7,MS Business Analytics,2023
+Keith Rodriguez,2.52,0,3,2,BS Computer Science,2024
+Mrs. Virginia Daniels,2.89,2,1,3,BS Data Science,2019
+Todd Rosales MD,3.88,4,6,1,Certificate Data Analytics,2024
+Brian Martin,2.79,3,2,1,MS Cloud Computing,2021
+David Lopez,2.43,2,7,3,MS Artificial Intelligence,2020
+Rachel Bradley,2.07,1,10,10,MS Data Science,2021
+Casey Chase,3.0,0,1,9,MS Computer Science,2021
+Samantha Robertson,2.77,4,3,7,MBA Product Management,2024
+Michael Lopez,3.99,3,5,9,BS Computer Science,2022
+Franklin Wright,3.09,4,8,8,MS Business Analytics,2021
+David Molina,2.78,2,9,3,BS Computer Science,2020
+Elizabeth Sharp,2.06,3,8,5,BS Computer Science,2021
+Matthew Schwartz,3.53,0,3,4,Certificate Data Analytics,2024
+Bryan Parker,2.48,0,3,9,MS Information Technology,2023
+Jonathan Jacobson,3.69,1,2,7,MS Business Analytics,2020
+Emily Wilson,3.19,0,5,6,MS Data Science,2023
+Elizabeth Mendez,3.13,3,8,10,MBA Product Management,2021
+Casey Hernandez,2.35,0,3,1,BS Data Science,2023
+Lisa Perry,2.44,0,5,9,MS Computer Science,2023
+Kaitlin Medina,2.4,1,5,3,MS Business Analytics,2019
+Colleen Wright,2.04,1,1,10,MS Information Technology,2023
+Shelley Miller,3.72,3,9,2,MS Business Analytics,2019
+Michael Miller,2.67,1,6,6,Certificate Data Analytics,2024
+Amy Kelley,3.92,4,9,6,Certificate Data Analytics,2021
+Laura Hernandez,2.45,3,4,10,Certificate Data Analytics,2024
+Joseph Wilson,3.38,0,9,3,Certificate Data Analytics,2022
+Kevin Davis,3.7,1,9,10,BS Computer Science,2021
+Rhonda Chavez,3.84,4,1,10,MBA Product Management,2022
+Joyce Brown,2.28,2,5,2,MBA Product Management,2020
+Robert Cummings,3.27,2,7,2,MS Information Technology,2019
+Robert Reese,2.53,0,5,4,MS Information Technology,2021
+Amber Cooper,3.57,3,7,1,BS Computer Science,2024
+Zachary Michael,2.84,3,6,3,MS Cloud Computing,2021
+Timothy Johnson,3.09,4,10,2,MS Computer Science,2024
+Randy Cannon,2.45,0,4,8,BS Data Science,2019
+Maria Fisher,2.64,2,2,2,BS Data Science,2022
+Janet Kane DVM,2.32,0,5,2,MS Cybersecurity,2023
+Michael Stanley,3.97,0,6,8,MS Information Technology,2024
+Martha Bailey,2.33,0,1,7,Certificate Data Analytics,2021
+Joshua Rice,2.41,4,8,4,MS Cloud Computing,2021
+Courtney Smith,3.32,0,0,5,MBA Product Management,2022
+Edwin Nunez,3.14,0,5,8,Certificate Data Analytics,2019
+Kim Morrow,2.86,4,7,5,MS Human-Computer Interaction,2020
+Gregory Hill,2.19,2,1,4,Certificate Data Analytics,2022
+Molly Rodriguez,3.69,3,7,5,MS Cloud Computing,2024
+Jennifer Miranda,2.53,1,5,9,MS Cloud Computing,2022
+Alexis Harris,2.74,2,7,8,BS Computer Science,2022
+Andrew Harper,2.53,0,2,5,MS Data Science,2024
+Amber Yang,3.33,2,8,2,MS Human-Computer Interaction,2022
+David Robinson,3.94,4,0,10,MBA Product Management,2022
+Amy Gordon,3.64,3,9,7,MS Cybersecurity,2020
+Robert Dennis,2.95,0,8,2,MS Cloud Computing,2023
+Kyle Chambers,3.8,4,2,10,MS Human-Computer Interaction,2019
+Eric Thomas,3.9,1,3,8,Certificate Data Analytics,2020
+Connie Turner,2.25,3,3,7,BS Data Science,2024
+Travis Hobbs,2.3,2,1,10,MS Artificial Intelligence,2019
+Lori Simmons,2.78,2,4,7,MS Cybersecurity,2023
+William David DDS,2.92,4,9,1,MS Information Technology,2023
+Emma Butler,3.56,1,2,2,MS Cloud Computing,2023
+James Webster,3.18,4,1,2,BS Data Science,2021
+Samuel Turner,3.73,2,6,6,MS Cloud Computing,2024
+Renee Melendez,2.97,0,2,10,MS Computer Science,2021
+Tracy Grant,2.81,3,0,10,MS Data Science,2022
+David Harris,3.78,1,0,6,MS Information Technology,2024
+Tammy Boone,2.95,0,5,5,MS Business Analytics,2021
+Nathaniel Lee,2.62,0,3,8,MS Information Technology,2020
+Michael Morrison,2.6,2,6,8,MS Business Analytics,2023
+Chelsea Gill,3.29,1,6,4,MS Computer Science,2024
+Kristin Mendoza,2.97,0,8,9,MS Business Analytics,2020
+Felicia Krueger,2.13,1,8,9,MS Cloud Computing,2023
+Timothy Hayden,2.06,0,3,4,MBA Product Management,2019
+Zachary Mendoza,2.91,1,4,6,MS Information Technology,2021
+Larry Harris,3.65,0,10,9,MS Cloud Computing,2019
+Kristen Rowe,2.48,3,2,8,MS Data Science,2022
+Joseph Howard,3.17,1,4,6,MS Business Analytics,2024
+Jose Crawford,3.66,0,6,2,MS Artificial Intelligence,2019
+William Harrison,2.33,1,10,10,MBA Product Management,2020
+Suzanne Wood,3.36,3,8,5,MS Human-Computer Interaction,2019
+Justin Walker,3.73,1,10,1,MS Computer Science,2020
+Dean Donovan,3.2,2,9,1,MBA Product Management,2021
+Jennifer Hernandez,3.43,3,5,5,MS Cloud Computing,2022
+James Whitaker,2.5,4,9,8,MS Artificial Intelligence,2022
+Mr. Michael Scott PhD,3.17,2,8,1,MS Cybersecurity,2024
+Maria Henry,3.19,0,7,5,MS Artificial Intelligence,2019
+Robert Jackson,2.67,2,4,5,MS Human-Computer Interaction,2021
+Katherine Stark,3.31,1,8,5,MBA Product Management,2020
+Maria Brown,3.8,2,10,10,MS Cloud Computing,2020
+Ryan Landry,3.44,2,6,8,MS Artificial Intelligence,2022
+Pamela Gutierrez,2.78,4,3,1,MS Data Science,2021
+Crystal Mann,3.45,4,10,4,MS Human-Computer Interaction,2022
+Jonathan Brooks,3.81,2,2,6,MS Cybersecurity,2024
+Mary Jensen,3.75,0,7,3,MS Artificial Intelligence,2020
+Mr. Aaron Arnold,3.48,2,10,9,Certificate Data Analytics,2019
+Joseph Hill,2.44,2,6,4,MS Information Technology,2021
+Alicia Li,2.74,3,1,10,MS Artificial Intelligence,2022
+Renee Browning,2.11,4,1,10,MS Data Science,2022
+Brent Hernandez,3.78,3,8,9,BS Data Science,2021
+Joseph Ochoa,2.83,1,5,3,Certificate Data Analytics,2022
+James Watson,3.97,2,2,8,Certificate Data Analytics,2019
+Karl Branch,2.98,0,0,3,MS Business Analytics,2022
+Michael Abbott,2.55,1,7,3,MS Data Science,2019
+Shannon Malone,2.26,3,6,7,MS Human-Computer Interaction,2022
+James Tran,3.93,0,8,7,BS Computer Science,2020
+Adam Jackson,3.46,4,3,1,MS Business Analytics,2019
+Mr. Richard Knight PhD,3.35,2,4,4,MBA Product Management,2020
+Joseph Williams,2.21,2,2,9,MS Data Science,2019
+Sean Clay,3.65,3,8,5,MS Artificial Intelligence,2023
+Anthony Jones,3.05,1,5,7,MS Human-Computer Interaction,2022
+Stephanie Elliott,2.72,3,0,4,Certificate Data Analytics,2020
+Timothy Edwards,2.45,0,9,3,MBA Product Management,2023
+Laurie Goodwin,2.34,0,6,6,MS Information Technology,2024
+Jennifer Jones,2.51,0,9,9,MS Data Science,2019
+David Davenport,3.32,0,6,1,BS Computer Science,2022
+Steven Rivera,2.76,3,2,9,MS Artificial Intelligence,2020
+Brenda Hinton,3.39,3,10,1,MS Artificial Intelligence,2019
+Kathryn Mccann,3.32,4,2,5,MS Data Science,2022
+Jeffrey Roberson,3.66,4,1,2,MS Cybersecurity,2021
+Randy Friedman,2.23,1,9,2,MS Computer Science,2020
+Raymond Johnson,3.56,2,6,9,MBA Product Management,2021
+Willie Henry,2.32,1,7,9,MS Computer Science,2021
+Todd Reynolds,2.47,0,1,1,MS Human-Computer Interaction,2023
+Mary Miller,3.34,4,1,3,BS Data Science,2024
+Rebecca Marquez,3.45,1,7,5,MS Human-Computer Interaction,2021
+Christian Dawson,2.53,1,0,1,BS Data Science,2021
+Nancy Stewart,2.72,0,1,6,MS Cloud Computing,2019
+Aaron Parker,2.02,1,5,3,MS Human-Computer Interaction,2021
+Derrick Anderson,3.79,0,5,10,MS Artificial Intelligence,2021
+Jerry Peters,2.37,3,4,7,MS Cloud Computing,2022
+Alexander Gomez,3.38,1,1,8,MS Cloud Computing,2020
+Kyle Nguyen,3.39,0,6,1,Certificate Data Analytics,2023
+Edgar Hughes,2.97,3,2,10,MS Human-Computer Interaction,2023
+Steven Stein,2.76,0,10,6,MS Data Science,2024
+Laura Jackson,3.95,3,1,3,MS Computer Science,2022
+Charles Turner,2.88,2,0,2,MS Artificial Intelligence,2024
+Arthur Hamilton MD,3.74,4,9,9,MS Information Technology,2020
+Mr. David Wright,3.96,4,9,6,MS Cybersecurity,2019
+Linda Gonzalez,2.87,2,10,4,MS Computer Science,2024
+Eric Rush,3.28,4,0,3,MS Cybersecurity,2019
+Manuel Brock,3.29,3,7,3,MS Cybersecurity,2020
+George Ochoa,2.15,1,5,8,MS Business Analytics,2021
+Valerie Taylor,2.1,3,6,4,MS Cybersecurity,2020
+Travis Harris,2.16,3,1,8,MS Data Science,2022
+Vincent Novak,2.89,0,1,2,MS Computer Science,2022
+Michael Henry,2.82,0,1,9,MS Cybersecurity,2023
+Dana Bennett,3.93,4,3,5,MS Cybersecurity,2024
+Jenna Wilson,3.34,0,3,6,MS Business Analytics,2022
+Leslie Gardner,2.66,3,10,10,MS Data Science,2021
+Krista Benton,3.43,1,0,2,BS Data Science,2021
+Michael Gonzales,2.71,4,5,5,MS Cybersecurity,2024
+Michael Fuentes,2.21,1,6,3,MS Computer Science,2019
+Jennifer Porter,2.51,0,6,4,MBA Product Management,2020
+Dana Hopkins,2.91,2,1,4,MS Information Technology,2022
+Rachel Jones,2.09,3,7,10,BS Data Science,2024
+Karen Morales DDS,3.18,3,0,9,Certificate Data Analytics,2023
+Melissa Stephens,3.47,4,7,9,MS Cloud Computing,2023
+Heather Woodard,3.56,4,2,3,MS Information Technology,2024
+Margaret Miller,3.63,4,9,2,MS Cloud Computing,2021
+Mary Kelly,3.01,4,3,7,MS Cloud Computing,2021
+Amanda Terrell,2.8,3,2,6,MS Artificial Intelligence,2020
+Jennifer Goodwin,2.83,4,5,9,MS Artificial Intelligence,2024
+Jessica Smith,3.47,1,3,9,MS Human-Computer Interaction,2020
+Jorge Stone,3.25,2,10,5,MS Human-Computer Interaction,2020
+Laura Griffin,3.96,4,10,3,MS Cybersecurity,2021
+Raymond Chapman,3.42,3,9,6,MS Cybersecurity,2023
+Haley Johnson,3.89,4,4,7,MS Human-Computer Interaction,2022
+Jason Nixon,3.62,0,6,9,BS Data Science,2020
+Todd Thomas,2.11,2,2,1,MBA Product Management,2021
+Jesse Clark,3.37,2,3,3,BS Computer Science,2023
+Mr. Jeffrey Horton,2.06,4,10,8,BS Data Science,2024
+Eric Patrick,3.12,4,6,4,MS Information Technology,2020
+Samuel Wong,3.02,0,6,5,MS Information Technology,2022
+Carly Riggs,2.83,0,0,6,MS Cybersecurity,2024
+Christopher Moore,2.5,1,10,10,MS Computer Science,2024
+Tina Hall,3.42,4,9,6,MS Data Science,2020
+Cody Davidson,3.55,3,2,4,MS Artificial Intelligence,2024
+Allen Mendez,2.15,4,1,3,MS Information Technology,2022
+Kevin Price,2.08,2,2,5,MS Cybersecurity,2020
+Christine Goodwin,3.17,2,7,5,BS Computer Science,2024
+Amy Garcia,3.87,2,9,1,Certificate Data Analytics,2019
+Chelsea Nguyen,3.55,2,7,10,MS Human-Computer Interaction,2023
+Dennis Huffman,3.1,2,8,2,MS Information Technology,2020
+Margaret Harper,3.91,4,2,9,BS Data Science,2022
+Laurie Bailey,3.09,2,3,7,BS Data Science,2020
+Lisa Cervantes,3.33,2,3,6,MS Business Analytics,2023
+Elizabeth Mendez,3.06,0,1,9,MS Human-Computer Interaction,2024
+Cesar Wilson,2.69,4,9,4,MS Human-Computer Interaction,2020
+Clayton Steele,3.92,0,6,6,MS Cloud Computing,2021
+Jennifer Taylor,3.08,4,5,5,BS Computer Science,2023
+Cody Reid,3.61,0,4,8,MS Computer Science,2024
+Maria Cooke,2.39,0,2,9,BS Data Science,2023
+Katherine Taylor,3.07,1,10,2,MBA Product Management,2022
+Jerry Brown,3.67,3,10,4,MS Cybersecurity,2019
+Adam Taylor,3.49,3,5,3,BS Computer Science,2019
+Tracey Wagner,2.18,2,8,1,Certificate Data Analytics,2019
+Michael Perry PhD,3.15,3,6,4,MS Artificial Intelligence,2022
+Bradley Johnson DDS,3.26,0,6,7,MS Business Analytics,2024
+Donald Medina,2.24,4,1,1,MS Human-Computer Interaction,2024
+Jim Newton,3.17,4,1,2,MS Business Analytics,2021
+Krista Wilson,3.57,0,4,5,MS Data Science,2022
+Reginald Morrow,2.76,1,8,1,MS Computer Science,2020
+Rodney Williams,2.27,2,10,7,MS Cybersecurity,2020
+Kimberly Fritz,2.6,4,8,6,BS Computer Science,2020
+Ronald Potter,2.25,4,6,1,MS Data Science,2023
+Zachary Cole,3.1,1,5,2,MS Artificial Intelligence,2020
+Robert Gonzales,2.83,1,2,9,Certificate Data Analytics,2020
+Patricia Young PhD,3.23,0,2,5,MBA Product Management,2024
+Heather Page,3.6,3,10,1,MS Cybersecurity,2023
+Carol Taylor,2.15,0,3,2,MS Artificial Intelligence,2024
+Daniel Brown,3.16,1,10,6,MS Business Analytics,2024
+Douglas Ryan,2.47,0,3,5,MS Data Science,2021
+Michael Roberts,2.97,2,9,6,MS Data Science,2020
+Scott Duke,3.13,3,2,6,MS Business Analytics,2019
+Anna Estes,2.63,3,4,4,MS Information Technology,2021
+Tamara Riddle,2.27,3,7,6,MS Computer Science,2021
+Beth Cline,3.55,0,2,8,MS Cybersecurity,2024
+Michael Poole,3.21,4,3,5,Certificate Data Analytics,2021
+Megan Burns,3.47,0,0,2,MS Information Technology,2023
+Debra Perry,3.26,3,9,10,MS Data Science,2020
+Mark Beard,3.81,4,8,9,MS Artificial Intelligence,2022
+Jose Ramirez,3.31,3,3,3,MS Business Analytics,2023
+Jackie Clements,3.47,3,8,5,Certificate Data Analytics,2023
+Aaron Schroeder,2.18,0,10,6,MS Cybersecurity,2020
+Monica Ellis,3.7,1,8,10,MS Human-Computer Interaction,2020
+Heather Brown,2.89,4,10,3,MS Data Science,2020
+Claudia Jordan,3.47,0,3,8,MS Business Analytics,2022
+Derrick Clayton,2.46,1,0,5,MS Business Analytics,2024
+Kenneth Knight,2.41,3,7,6,MS Cloud Computing,2019
+Mr. Michael Williams,2.08,4,10,6,BS Data Science,2021
+Richard Stevens,3.67,4,9,5,MS Data Science,2020
+Scott Alexander,2.75,4,10,7,MS Business Analytics,2019
+Tyler Harris,3.03,4,6,7,MBA Product Management,2021
+Bonnie Santos,3.63,3,9,6,MS Computer Science,2019
+Timothy Hill,3.0,1,3,3,MS Computer Science,2019
+Danielle Watson,3.03,1,2,5,MBA Product Management,2020
+Carol Sanders,2.72,1,6,2,MS Human-Computer Interaction,2021
+Michael Young,3.44,3,7,8,MS Human-Computer Interaction,2020
+Michele Smith,3.18,1,0,7,BS Computer Science,2020
+Casey Perez,3.15,4,0,3,Certificate Data Analytics,2023
+Alexandra Dominguez,2.29,1,8,3,MS Artificial Intelligence,2022
+Virginia Henderson,3.2,0,10,10,MS Human-Computer Interaction,2021
+Benjamin Reyes,3.89,4,7,4,MS Computer Science,2022
+Ashley Edwards,2.34,1,9,7,MS Data Science,2020
+Breanna Ayala,3.25,1,10,9,MS Artificial Intelligence,2021
+Brandi Haney,3.84,0,3,10,MS Data Science,2022
+Joseph Smith,2.77,1,8,2,BS Computer Science,2023
+Jessica Bowen,3.37,0,2,3,MS Data Science,2022
+Brittany Jenkins,3.8,4,8,10,BS Computer Science,2019
+Shannon Miller,2.19,4,0,3,MS Data Science,2024
+Paul Lawrence,3.3,2,0,9,MS Cloud Computing,2024
+Victor Edwards,3.06,3,5,4,MS Computer Science,2023
+Donald Miller,3.61,3,2,10,BS Data Science,2021
+Lindsay Lawson,2.95,2,9,4,BS Data Science,2023
+Melissa Abbott,2.82,0,9,4,BS Computer Science,2023
+Elizabeth Holmes,2.24,1,5,1,MS Cloud Computing,2022
+Nicole Phillips,2.72,4,4,3,MS Cloud Computing,2021
+Steven Blevins,3.71,2,9,7,MS Data Science,2021
+Brian Porter MD,3.98,3,8,7,MBA Product Management,2023
+Vanessa Hatfield,2.96,4,7,6,MS Cybersecurity,2021
+Bonnie Valencia,3.98,3,2,10,MS Business Analytics,2024
+Holly Vega,2.24,1,1,4,MS Computer Science,2020
+Tiffany Townsend,3.02,4,10,6,MS Cybersecurity,2024
+Austin Baker,2.1,0,1,7,MS Human-Computer Interaction,2020
+Antonio Mccormick,2.94,0,1,10,MS Cloud Computing,2021
+Lori Mason,2.44,0,6,2,MS Data Science,2022
+Michael Miller,3.23,4,0,9,MS Artificial Intelligence,2020
+Lisa Ramirez,3.28,1,10,8,BS Computer Science,2023
+Jorge Harris,2.57,4,8,1,MS Data Science,2024
+Kimberly Myers,2.46,0,5,3,MS Human-Computer Interaction,2020
+Sandra Becker,3.31,2,6,3,BS Data Science,2021
+Michael Blair,3.34,1,8,7,MS Data Science,2019
+Amy Miller,3.47,4,4,2,BS Data Science,2024
+Jesse Lynch,3.66,2,4,10,MS Business Analytics,2020
+Patrick Yang,3.21,3,9,4,MS Computer Science,2019
+Michael Miles,2.52,0,8,7,MS Cybersecurity,2019
+Troy Mills,3.01,4,4,6,BS Data Science,2023
+Michelle Jackson,3.63,3,6,10,MS Artificial Intelligence,2023
+Richard Adams,2.97,3,10,4,MS Business Analytics,2022
+Patricia Johnson,3.79,0,4,1,MS Computer Science,2019
+Denise Brown,2.77,1,5,4,MS Human-Computer Interaction,2022
+Laura Jones,3.91,0,4,9,MS Cybersecurity,2020
+Ian Porter,2.57,2,1,7,MS Human-Computer Interaction,2023
+Holly Scott,3.86,2,3,8,MS Business Analytics,2023
+Kenneth Sharp,2.54,1,3,4,MS Computer Science,2024
+Jordan Williams,2.48,1,3,5,MBA Product Management,2020
+Dana Ruiz,3.67,0,1,6,Certificate Data Analytics,2019
+Chris Velazquez,3.35,0,8,8,MS Data Science,2019
+Kristen Sloan,3.7,2,7,6,MS Data Science,2023
+Jennifer Morris,3.74,4,4,8,Certificate Data Analytics,2022
+Nathan Nelson,2.44,0,8,10,Certificate Data Analytics,2022
+Jake Shaw,2.96,4,5,9,BS Computer Science,2022
+Cassie Brock,3.72,0,8,3,MS Computer Science,2022
+Dr. Andrea Marshall,2.63,1,6,1,BS Computer Science,2023
+Ryan Murphy,2.2,2,2,6,MS Data Science,2023
+Aimee Gonzalez,2.53,4,5,5,MS Computer Science,2021
+Elizabeth Dean,2.37,3,5,7,MBA Product Management,2021
+Kevin Snyder,3.71,1,9,5,MS Computer Science,2020
+Christie Mccullough,3.96,2,3,4,BS Data Science,2023
+Danielle Smith,2.86,1,2,7,MBA Product Management,2022
+David Reed,3.61,3,2,3,MS Cloud Computing,2024
+Sherry Tapia,3.03,2,4,6,MS Computer Science,2023
+Matthew Sweeney,3.72,0,2,1,MS Cloud Computing,2019
+Ashley Moreno,2.43,0,7,5,MS Computer Science,2024
+Johnathan Brown,2.67,4,8,6,MS Business Analytics,2021
+Michelle Davis DVM,2.69,2,10,7,BS Data Science,2023
+Kelly Haynes,2.4,4,2,10,MS Human-Computer Interaction,2021
+William Miller,2.71,3,1,9,MS Computer Science,2022
+Casey Wilkins,3.23,1,2,8,MS Human-Computer Interaction,2024
+Keith Graham,3.62,4,9,6,MS Cloud Computing,2022
+Cynthia Green,3.7,1,5,2,BS Data Science,2020
+Robert Haynes,2.63,2,9,5,MS Information Technology,2024
+Emily Nelson,2.79,4,8,8,MS Business Analytics,2022
+Dale Chan,2.83,1,3,3,BS Computer Science,2024
+Brittney Martin,2.5,1,6,2,MBA Product Management,2019
+Jason Herrera,2.19,0,0,8,MS Cybersecurity,2022
+Christine Parker,3.05,2,9,2,BS Data Science,2020
+Bryan Moore,2.17,1,3,7,MS Artificial Intelligence,2024
+Samantha Terry,2.57,4,2,3,Certificate Data Analytics,2019
+Russell Murphy,2.07,3,7,6,MS Business Analytics,2023
+David Kelly,3.87,1,8,9,MS Computer Science,2020
+Megan Green,3.18,4,6,8,MS Human-Computer Interaction,2023
+Amanda Sullivan MD,3.28,2,7,9,MS Artificial Intelligence,2023
+Danielle Murray,2.45,2,5,2,MS Computer Science,2022
+Brenda Smith,2.52,0,8,5,BS Computer Science,2020
+Vickie Anderson,2.69,0,7,8,MS Cybersecurity,2022
+Jacqueline Mccoy,2.6,4,3,7,MS Artificial Intelligence,2019
+Lauren Green,3.1,4,6,4,MS Cloud Computing,2022
+Alison Brown,2.5,1,4,7,MS Cloud Computing,2019
+Jill Anderson,2.84,4,10,4,MS Cybersecurity,2021
+Sandra Rivera,2.57,3,3,9,MS Artificial Intelligence,2019
+Joel Jackson,2.36,3,9,5,BS Data Science,2022
+Samantha Foster,2.54,1,5,10,MS Computer Science,2019
+Michael Thompson,2.3,1,1,9,BS Computer Science,2021
+Cody Ramirez,2.54,0,3,8,MS Information Technology,2019
+Amanda Harvey,2.3,2,6,8,MBA Product Management,2021
+Edward Jenkins,3.57,3,0,8,MS Business Analytics,2021
+Amy Ramirez,2.16,2,6,3,BS Computer Science,2019
+Curtis Wilkerson,3.09,2,6,3,MBA Product Management,2019
+Lydia Pham,2.24,3,3,4,MS Cloud Computing,2024
+Virginia Casey,3.99,0,8,4,MS Computer Science,2024
+Joshua Washington,3.96,2,5,8,MS Cloud Computing,2020
+Kathryn Price,3.26,4,8,1,MS Information Technology,2019
+Francis Robinson,2.51,2,0,5,MBA Product Management,2024
+Paula Brown,2.44,3,5,2,MBA Product Management,2019
+Kendra Wang DVM,2.33,0,6,5,MS Data Science,2020
+Ariel Sandoval,2.02,3,9,1,MS Data Science,2020
+Robert Stark,2.74,1,7,2,MBA Product Management,2019
+Zachary Robinson,3.37,0,0,6,MS Human-Computer Interaction,2021
+Rebecca Kelly,3.29,1,7,9,BS Data Science,2020
+Sarah Thompson,2.63,2,7,9,MS Human-Computer Interaction,2024
+Renee Wolfe,2.39,1,4,7,MS Business Analytics,2019
+Alyssa Haynes,2.97,2,8,8,MS Cybersecurity,2024
+Kristy Hart,2.98,4,5,10,Certificate Data Analytics,2021
+William Keith,3.46,4,2,5,MS Data Science,2019
+Eric Henry Jr.,3.06,2,8,8,MS Artificial Intelligence,2021
+Daniel Fox,2.91,1,0,9,MS Cloud Computing,2023
+Thomas Harris,3.71,2,1,10,MBA Product Management,2024
+Mitchell Sellers,3.93,4,10,7,MBA Product Management,2022
+Erica Johnson,3.53,2,5,3,MS Data Science,2022
+Sylvia Schroeder,3.28,4,10,2,BS Data Science,2019
+Shannon Yu,2.09,0,3,3,Certificate Data Analytics,2019
+Tom Foster,2.97,4,10,2,BS Computer Science,2022
+Eric Taylor,3.32,4,4,9,MS Data Science,2019
+Travis Conner,2.73,0,0,10,MS Information Technology,2020
+Marie Thompson,3.31,0,5,2,MS Computer Science,2023
+Melissa Mcfarland,3.49,0,9,7,MS Business Analytics,2021
+Courtney Chapman,3.06,0,3,2,MS Artificial Intelligence,2023
+Eric Barker,2.19,3,3,4,MS Cybersecurity,2020
+Nicholas Rush,3.05,1,8,4,MS Data Science,2024
+Jenna Gamble,3.12,4,5,2,MS Human-Computer Interaction,2024
+Amanda Guzman,2.92,1,2,7,BS Data Science,2023
+Tracy Walker,2.8,1,8,6,MS Human-Computer Interaction,2023
+Taylor Taylor,2.89,4,5,6,MS Business Analytics,2021
+Cynthia Haas,2.82,2,9,7,MS Information Technology,2020
+Stephen Davis,3.13,4,4,4,MS Cloud Computing,2021
+Margaret Tanner,3.92,0,0,8,MS Cloud Computing,2021
+Derek Wright,3.19,2,0,9,Certificate Data Analytics,2021
+David Rodriguez,3.97,0,4,4,MS Business Analytics,2023
+James Oconnor,3.02,1,1,10,MS Data Science,2019
+Stacey Snyder,2.92,2,5,3,Certificate Data Analytics,2023
+Joshua Garcia,2.5,0,9,5,MS Artificial Intelligence,2022
+Sean Curtis,3.14,0,5,4,MS Information Technology,2022
+Carla Jones,2.35,4,10,10,BS Data Science,2021
+Elizabeth Flores,2.07,0,0,10,MS Cloud Computing,2021
+Angela Jackson,2.7,0,3,7,MS Cloud Computing,2024
+Nicholas Payne,3.31,3,0,10,BS Computer Science,2021
+Anna Wheeler,3.05,4,2,6,MS Cybersecurity,2021
+Karen Johnson,3.0,0,10,4,Certificate Data Analytics,2024
+Carmen Preston,3.99,4,8,8,MS Data Science,2019
+Brian Harris,2.44,1,2,5,MS Cloud Computing,2021
+Michael Bowen,2.17,0,8,10,MS Information Technology,2022
+Deborah Campbell,2.53,3,2,7,MS Cybersecurity,2020
+Anthony Armstrong,2.96,3,10,4,MS Computer Science,2023
+Brittany Ward,2.39,4,3,10,MS Information Technology,2020
+Edward Stanley,2.14,4,1,7,MS Business Analytics,2019
+Christina Johnson,3.34,2,3,7,MS Business Analytics,2021
+Edgar Miller,2.69,1,5,1,MS Artificial Intelligence,2023
+Elizabeth Sanders,3.64,1,7,8,MS Data Science,2019
+Matthew Davis MD,3.85,2,2,4,MBA Product Management,2024
+Stephen Wood,3.71,0,3,2,MS Information Technology,2023
+Dennis Marshall,3.85,2,1,5,BS Computer Science,2021
+Derrick Brown,2.9,1,8,1,MS Business Analytics,2020
+Mary Miller,2.41,4,7,9,MS Artificial Intelligence,2023
+Joshua Arellano,3.46,0,6,3,MS Information Technology,2023
+Kristen Randall,3.81,2,2,9,BS Computer Science,2019
+Jennifer Nichols,2.57,0,7,10,MS Artificial Intelligence,2024
+Karen Keith,3.89,2,10,2,MS Cloud Computing,2024
+Blake Orr,2.72,2,10,2,BS Computer Science,2022
+Kathryn Lester,2.46,0,5,7,MS Cybersecurity,2022
+Megan Oliver,3.73,1,3,9,BS Data Science,2023
+Peter Thompson,3.93,0,0,9,MS Information Technology,2020
+Dr. Rhonda Martinez,3.84,3,6,5,MS Business Analytics,2024
+William Graham,2.31,2,5,6,MS Human-Computer Interaction,2024
+Lori Flowers MD,2.6,0,10,9,MS Artificial Intelligence,2021
+Suzanne Jones,3.76,2,3,1,MS Cybersecurity,2020
+James Nguyen,2.68,1,1,7,MS Human-Computer Interaction,2024
+Jimmy Marks,2.76,1,6,10,MS Human-Computer Interaction,2020
+Lisa Mills,3.15,4,5,7,MS Artificial Intelligence,2022
+Jason Hernandez,3.08,1,9,4,MS Human-Computer Interaction,2023
+Olivia Ayers,3.37,2,8,4,Certificate Data Analytics,2020
+Kristine Garcia,2.86,4,2,3,MS Human-Computer Interaction,2021
+Joseph Cooper,2.14,0,2,9,MS Information Technology,2021
+James Washington,3.68,0,5,3,MS Information Technology,2022
+Amanda Hill,3.92,2,2,5,MS Computer Science,2020
+Lee Steele,2.21,4,9,3,BS Computer Science,2021
+Steve Rivera,3.21,4,3,10,MBA Product Management,2020
+Patrick Mccall,3.37,3,2,6,BS Data Science,2023
+Alicia Roth,3.69,2,2,8,MS Information Technology,2022
+Douglas Vasquez,2.98,1,3,3,Certificate Data Analytics,2019
+Annette Melton,2.82,3,3,1,MS Artificial Intelligence,2024
+William Ramos,3.34,0,2,4,MBA Product Management,2022
+Debra Butler,3.73,2,7,8,MS Information Technology,2020
+Chelsea Lewis,2.86,3,5,1,MS Data Science,2022
+Natalie Malone,3.22,4,8,10,MS Data Science,2024
+Samantha Robertson,3.75,0,7,1,MS Cybersecurity,2022
+Eric Hunter,3.65,4,8,1,MBA Product Management,2022
+Samuel Suarez,3.97,3,8,1,MS Cybersecurity,2024
+Corey Whitaker,3.93,3,6,4,MS Artificial Intelligence,2021
+Danielle Bryant,3.55,1,6,5,MS Computer Science,2021
+Michele Hill,3.23,4,2,1,MS Information Technology,2022
+Kathy Reid,3.66,4,1,8,BS Data Science,2020
+Andre Watson,3.56,3,6,9,Certificate Data Analytics,2021
+Cassandra Harrell,2.9,4,3,3,MS Computer Science,2022
+Hannah Martin,2.18,1,1,6,MS Information Technology,2019
+Nicole Barker,2.23,2,1,8,MS Human-Computer Interaction,2023
+James Martin,3.41,1,6,9,MS Data Science,2023
+Traci Vincent,2.76,4,10,3,MS Business Analytics,2020
+Megan Adams,2.32,0,6,3,Certificate Data Analytics,2021
+Alejandro Deleon,2.62,1,1,8,MS Artificial Intelligence,2020
+Alexa Buck,3.92,2,0,1,MS Data Science,2022
+Lindsay Smith,3.0,0,9,8,MS Cybersecurity,2022
+Robert Torres,2.48,3,7,10,MS Human-Computer Interaction,2022
+Maria Coleman,2.88,0,3,10,MS Data Science,2023
+Gregory King,2.56,0,2,9,MBA Product Management,2020
+Michael Holloway,2.11,1,0,6,BS Computer Science,2024
+Brian Hunt,3.16,2,1,10,MS Artificial Intelligence,2019
+Sarah Brooks,2.22,2,9,3,Certificate Data Analytics,2024
+Lisa Evans,3.38,4,2,10,MS Data Science,2022
+Arthur Mcneil,3.5,0,4,6,BS Computer Science,2021
+Shannon Green,2.74,3,8,7,BS Data Science,2019
+Stephanie Evans,2.59,2,5,3,BS Data Science,2023
+Ralph Yoder,2.83,1,9,4,MS Information Technology,2019
+Rebekah Greene,2.22,3,9,9,BS Data Science,2024
+Melanie Griffith,2.57,2,8,10,MS Business Analytics,2023
+Yolanda Green,3.99,4,9,6,Certificate Data Analytics,2022
+James Johnson,3.04,1,9,8,MS Computer Science,2020
+Laura Lee,3.42,0,0,4,BS Computer Science,2022
+Courtney Nichols,3.25,1,9,2,MS Information Technology,2022
+Susan Powers,2.83,4,10,6,MS Business Analytics,2020
+Sarah Pittman,2.02,2,4,4,MS Information Technology,2019
+Catherine Davis,2.62,2,0,9,MS Cybersecurity,2019
+David Stokes,3.37,4,9,6,MS Cloud Computing,2019
+Catherine Frazier,3.66,2,10,4,MS Business Analytics,2022
+Brandon Kelly,3.83,1,7,1,MS Human-Computer Interaction,2020
+Elizabeth French,3.25,3,6,9,MS Business Analytics,2024
+David Carter,2.11,4,10,9,MS Artificial Intelligence,2021
+Julie Delacruz,3.11,4,10,1,MBA Product Management,2021
+Terry Jones,3.6,1,4,6,BS Data Science,2019
+Kathryn Dillon,2.68,4,2,7,MS Human-Computer Interaction,2023
+Edwin Brown,3.21,0,4,3,MS Data Science,2024
+Brenda Gonzalez,3.72,3,1,1,MS Artificial Intelligence,2022
+Keith Knox,3.75,2,3,6,MS Computer Science,2023
+Eugene Baldwin,2.6,0,3,2,MS Business Analytics,2019
+Katherine Welch,2.89,4,2,1,MS Computer Science,2020
+Mark Smith,2.68,4,4,8,MS Information Technology,2021
+Philip Jackson,2.29,1,3,2,MS Cybersecurity,2024
+Katherine Gallagher,2.07,4,1,7,MS Information Technology,2019
+Lucas Schultz,2.62,4,1,1,MS Human-Computer Interaction,2021
+Vincent Reyes,2.93,4,10,1,BS Data Science,2024
+Curtis Watson,2.62,1,5,10,MS Artificial Intelligence,2020
+Frank Whitaker,2.39,2,7,5,MS Cybersecurity,2024
+Michael Sims,2.24,2,1,3,Certificate Data Analytics,2019
+Michael Cooper,3.92,0,3,9,MS Cybersecurity,2023
+James Chapman,2.7,1,4,6,MS Artificial Intelligence,2023
+Rodney Evans,2.49,4,5,2,MS Artificial Intelligence,2023
+Nicholas Carlson,2.89,3,10,3,BS Computer Science,2019
+Stephen Cowan,2.21,3,6,1,BS Data Science,2020
+Steven Howard,3.41,3,9,10,MS Human-Computer Interaction,2021
+Travis Hull,2.62,4,1,4,MS Information Technology,2022
+Darryl Acosta,3.14,3,1,2,MS Information Technology,2022
+Nicholas Lawrence,2.62,1,3,8,MS Computer Science,2020
+Jacob Santos,3.72,2,6,10,MS Artificial Intelligence,2020
+Shawn Scott,3.4,3,7,6,MS Business Analytics,2019
+Amber Vang,2.13,3,7,2,MS Business Analytics,2020
+Martha Smith,2.56,4,2,6,MS Data Science,2023
+Jennifer James,2.21,4,10,2,MS Business Analytics,2019
+Kara Hernandez,3.58,3,9,9,MS Computer Science,2022
+Lorraine Turner,2.48,1,7,4,MS Cybersecurity,2022
+Mary Nelson,2.13,4,6,4,MS Information Technology,2022
+Breanna Rivas,3.13,1,2,6,MS Cybersecurity,2024
+Nathan Wilson,3.34,0,9,10,MS Computer Science,2023
+Brian Gonzalez,2.93,3,2,9,BS Data Science,2021
+Dennis Mills,3.91,0,10,2,MS Data Science,2023
+Michael Phillips,3.54,3,10,7,MS Business Analytics,2024
+Jon Clark,2.12,4,10,4,Certificate Data Analytics,2019
+Erin Smith,3.51,4,4,3,MS Computer Science,2022
+Susan Conley,3.23,1,10,8,MBA Product Management,2021
+Brittany Davis,2.6,2,1,5,MS Cloud Computing,2023
+Misty Garcia,2.02,1,4,9,MS Cloud Computing,2019
+David Hinton,2.74,0,8,9,BS Computer Science,2021
+John Garcia,2.22,1,6,5,BS Computer Science,2024
+Andrew Roberts,3.18,3,6,6,MS Information Technology,2022
+Emily Rodgers,2.87,1,7,4,MS Human-Computer Interaction,2020
+Peter Williams,2.38,3,2,7,MS Business Analytics,2021
+Mary Jackson,3.99,0,1,3,Certificate Data Analytics,2024
+Jeffrey Howell,2.03,3,2,8,MS Human-Computer Interaction,2019
+Anna Briggs,2.27,4,6,7,MS Computer Science,2023
+James Rivers,2.36,4,7,9,MS Cloud Computing,2022
+James Jefferson,2.71,4,0,3,MS Cloud Computing,2023
+Mariah Robles,3.0,4,4,4,MS Information Technology,2022
+Michael Brown,3.85,0,0,10,MS Business Analytics,2023
+Caitlin Perry,2.97,4,7,6,BS Data Science,2024
+Rebekah Gregory,2.16,3,8,9,MS Artificial Intelligence,2019
+James Howard,3.05,1,7,10,BS Data Science,2024
+Michael Roberson,3.48,4,9,2,MS Human-Computer Interaction,2021
+Bianca Knapp,3.23,0,7,6,MS Cybersecurity,2022
+Jason Williams,3.03,2,6,8,MS Data Science,2021
+Ernest Bush,3.92,1,0,5,MS Artificial Intelligence,2024
+Patricia Ray,3.85,4,4,5,MS Information Technology,2019
+Vanessa Santiago,3.26,4,0,10,Certificate Data Analytics,2024
+Joseph Haynes,3.98,2,7,10,BS Computer Science,2019
+Matthew Wright,2.25,2,2,2,MS Artificial Intelligence,2023
+Michael Cruz,2.56,0,9,5,BS Computer Science,2020
+Kristin Huerta,3.82,3,5,3,MS Human-Computer Interaction,2020
+Mason Moore,2.52,1,8,4,MS Computer Science,2019
+Sarah Booth,2.69,4,2,2,Certificate Data Analytics,2022
+John Allen,3.51,1,10,7,MS Cloud Computing,2022
+Amber Walker,3.45,4,5,3,MBA Product Management,2019
+Jennifer Young,3.28,1,7,2,BS Computer Science,2022
+Robert West,2.95,4,3,8,MS Information Technology,2022
+Jillian Wilson,3.37,2,2,7,MS Computer Science,2023
+Matthew Garcia MD,3.74,3,6,1,MS Artificial Intelligence,2024
+April Davis,2.63,0,1,9,MS Human-Computer Interaction,2023
+Lisa Torres,3.27,2,5,7,MS Data Science,2021
+Christine Powers,2.53,4,6,2,MS Artificial Intelligence,2022
+Heidi Brown,3.55,4,3,4,MS Information Technology,2023
+Jesse Castro,2.67,4,0,3,MS Business Analytics,2024
+Kara Sandoval,2.02,3,1,2,BS Computer Science,2023
+Ashley Malone,2.21,1,4,8,MS Business Analytics,2021
+Glenn Gallegos,2.39,0,0,1,MS Data Science,2023
+Dorothy Boyd,3.31,0,1,4,MS Data Science,2019
+Amber Martin,3.71,4,2,3,MS Cloud Computing,2019
+Mitchell Griffith,3.39,3,10,5,MS Artificial Intelligence,2019
+Levi Lopez,3.28,2,4,5,MS Cloud Computing,2020
+Jenna Bryant,3.56,3,6,5,BS Computer Science,2021
+Michelle Rodriguez,3.99,1,7,5,MS Artificial Intelligence,2019
+Timothy Monroe,2.98,3,2,4,MS Data Science,2024
+Patricia Hayes,2.98,3,3,3,MS Cybersecurity,2023
+Tina Taylor,3.29,2,1,8,MS Information Technology,2019
+Mr. Anthony Mcconnell PhD,2.15,2,7,10,MS Information Technology,2019
+Mr. Thomas Thompson,3.79,0,0,3,MS Human-Computer Interaction,2024
+Monica Anderson,2.78,2,6,3,MS Information Technology,2023
+Kyle Andrade,2.01,3,6,8,MS Computer Science,2024
+Janice Petty,3.56,1,0,2,MS Cybersecurity,2022
+Pamela Hill,3.91,4,8,8,BS Data Science,2021
+Tracy Chavez,2.67,0,10,5,MS Cloud Computing,2024
+Jason Graves,2.18,0,7,9,MS Business Analytics,2021
+Elizabeth Miles,3.3,0,6,3,MS Cybersecurity,2024
+Michelle Walls,2.38,2,7,7,BS Data Science,2019
+Christina Weber,3.77,1,2,8,MS Information Technology,2019
+Gregory Chambers,2.39,3,6,10,MBA Product Management,2019
+Miss Tina Gordon,3.59,4,7,5,MS Computer Science,2019
+Erica Wilson,2.07,0,6,1,MS Business Analytics,2019
+John Duncan,2.42,4,2,9,MS Computer Science,2024
+Jennifer Adkins,3.16,1,7,2,BS Computer Science,2024
+Donna Boone,2.04,1,10,10,BS Computer Science,2020
+Kelly Johnson,2.03,0,7,1,MS Artificial Intelligence,2023
+Michael Gonzalez,2.34,0,1,10,BS Data Science,2022
+Candace Mitchell,3.19,0,3,10,MBA Product Management,2022
+Ryan Vaughn,2.67,0,10,7,MS Business Analytics,2023
+Paul Johnson,3.09,0,9,6,MBA Product Management,2020
+Ashley Parrish,2.67,1,6,2,MS Artificial Intelligence,2020
+Sharon Newton,3.39,3,3,9,Certificate Data Analytics,2023
+Cynthia Mueller,2.08,4,6,2,MS Human-Computer Interaction,2020
+Donna Beck,2.03,0,0,8,BS Data Science,2020
+Jasmine Frye,3.85,3,7,10,MS Artificial Intelligence,2024
+Emily Arnold,2.25,2,8,3,MS Human-Computer Interaction,2022
+David Oliver,2.82,0,9,3,MS Data Science,2020
+Sheila Greer,3.43,2,5,10,BS Data Science,2022
+Michele Holland,2.01,0,8,4,MBA Product Management,2019
+Kimberly Morrison,3.24,1,7,9,MS Cybersecurity,2024
+Tracey Phillips,3.32,1,1,5,BS Computer Science,2020
+Michael Lopez,3.37,1,2,8,MS Computer Science,2024
+Jose Bennett,3.85,2,4,1,MS Human-Computer Interaction,2020
+Justin Anderson,2.87,3,0,6,MS Data Science,2019
+Dawn Rivera,3.48,1,0,9,Certificate Data Analytics,2022
+Brittney Hernandez,3.03,3,9,2,MBA Product Management,2023
+Anthony Randolph,2.65,2,3,4,MS Information Technology,2019
+Mary Henry,2.65,3,3,2,MBA Product Management,2022
+Heather Bowers,3.78,4,7,2,MS Computer Science,2019
+Daniel White,3.78,4,7,3,MBA Product Management,2020
+Jonathan Perry,2.77,1,10,3,MS Computer Science,2021
+Anna Walker,3.95,1,0,4,MS Business Analytics,2024
+Gary Ward,3.14,0,7,5,Certificate Data Analytics,2022
+Paul Moreno,2.84,2,9,6,MBA Product Management,2020
+Samantha Zavala MD,3.58,4,8,10,Certificate Data Analytics,2020
+Jill Conway,2.17,1,9,9,MS Computer Science,2022
+Lisa Haley,3.67,3,3,5,BS Computer Science,2020
+Erica Moon,2.65,4,2,10,MBA Product Management,2023
+Janice Fernandez,3.8,0,7,7,BS Computer Science,2024
+Thomas Short,3.54,4,6,1,MS Cloud Computing,2022
+Robert Griffin,3.62,3,3,2,MS Computer Science,2019
+Steven Lee,3.12,3,3,1,MS Information Technology,2020
+Tiffany Jackson,2.72,0,0,4,MS Human-Computer Interaction,2022
+Kimberly Smith,3.34,3,9,3,MS Information Technology,2024
+Michael Ayala,3.17,1,6,8,MS Computer Science,2020
+Jessica Garcia,3.58,3,10,6,MS Human-Computer Interaction,2019
+Michele Cherry,3.72,2,8,2,MS Cloud Computing,2019
+Maria Case,2.59,4,8,5,MS Information Technology,2023
+Brittany Stevens,3.59,2,0,2,MS Data Science,2023
+Brandon Brown,3.89,0,6,6,BS Computer Science,2021
+Kristin Andrews,2.93,2,2,1,MS Business Analytics,2024
+David Hughes,3.12,1,2,2,MS Cybersecurity,2021
+Jessica Smith,2.48,3,9,2,MS Human-Computer Interaction,2024
+Kimberly May,2.42,2,4,4,MS Business Analytics,2023
+Nicole Richards,3.36,0,5,5,BS Computer Science,2021
+Angel Reilly,2.9,0,7,9,MS Cybersecurity,2024
+Richard Turner,3.06,3,9,9,MS Artificial Intelligence,2021
+Preston Kim,3.6,3,1,2,MBA Product Management,2019
+Matthew Wells,2.78,0,1,3,MS Artificial Intelligence,2020
+Brandy Myers,2.55,1,3,3,MS Computer Science,2023
+Kimberly Choi,3.9,3,10,1,MS Artificial Intelligence,2023
+Michael Sloan,3.86,3,7,8,MS Business Analytics,2024
+Monica Brooks,3.29,0,0,5,MBA Product Management,2020
+Kristen Peters,3.67,2,6,9,MS Human-Computer Interaction,2023
+Aaron Carlson,2.69,4,10,6,MS Computer Science,2024
+Theresa Torres,3.06,3,4,9,MS Computer Science,2023
+Stephanie Cooper,2.26,2,3,5,Certificate Data Analytics,2022
+Matthew Hunt,2.74,1,5,5,BS Computer Science,2021
+Daniel Davenport,2.91,1,8,3,MS Data Science,2021
+Christopher Marsh,2.36,1,2,3,MS Information Technology,2020
+Sarah Randolph,2.23,1,7,6,MS Data Science,2021
+Julia Dunn MD,2.74,0,10,4,MS Cybersecurity,2021
+Brett Swanson,3.96,3,8,3,MS Business Analytics,2020
+Mr. Carl Rios,3.07,3,7,2,BS Computer Science,2020
+Manuel Mccullough,3.9,0,8,6,Certificate Data Analytics,2023
+Jerry Jensen,2.66,2,9,5,MS Computer Science,2024
+Kevin Cunningham,2.29,3,5,10,MS Information Technology,2024
+Eugene Patterson,2.22,1,10,8,BS Computer Science,2023
+David Walker,2.23,4,3,1,MS Cloud Computing,2022
+Jessica Larsen,2.71,4,10,6,BS Computer Science,2020
+Nicholas Humphrey,3.17,1,0,4,MS Artificial Intelligence,2019
+Ian Torres,3.08,0,8,8,MS Human-Computer Interaction,2022
+Casey Obrien,2.39,4,8,6,MS Data Science,2019
+Shannon Taylor,3.82,1,6,6,MS Cloud Computing,2021
+Deborah Mercado,2.77,2,5,1,MS Artificial Intelligence,2021
+Bernard Smith,3.96,1,7,9,BS Data Science,2024
+Amanda Perkins,3.99,1,6,8,MS Artificial Intelligence,2024
+Kevin Escobar,3.79,4,1,3,MS Data Science,2020
+Kimberly Lutz,2.42,2,1,8,MS Cybersecurity,2023
+Reginald Diaz,3.51,3,10,2,BS Computer Science,2021
+Raymond Quinn,2.83,4,2,9,MS Computer Science,2020
+John Dixon,2.37,4,7,7,MS Artificial Intelligence,2019
+Jonathan Bates,3.65,2,7,5,MS Data Science,2023
+Renee Mendez,3.48,0,2,4,BS Computer Science,2021
+Jose Griffin,2.6,2,6,8,BS Data Science,2020
+Travis Hopkins,2.98,0,4,4,BS Computer Science,2022
+Nancy Webb,3.99,2,9,2,MS Data Science,2022
+Daniel Freeman,3.13,3,1,5,MS Human-Computer Interaction,2021
+Jacob Williams,3.03,2,2,10,BS Computer Science,2023
+Terry Ward,2.12,1,5,6,MS Computer Science,2020
+Jesse Williams,2.11,2,0,6,MS Cloud Computing,2021
+Mrs. Michele Boyd,2.58,1,10,2,MS Cybersecurity,2020
+Sandy Baker,3.53,4,5,10,Certificate Data Analytics,2021
+Carrie Valdez,3.65,2,1,5,MS Artificial Intelligence,2023
+Matthew Houston,3.16,1,8,3,BS Computer Science,2021
+Jamie Solomon,2.75,2,2,8,MS Cloud Computing,2019
+Heather Parrish,2.44,1,8,9,MBA Product Management,2023
+Mr. Larry Shaw,3.38,4,1,9,MS Cybersecurity,2022
+Christopher Jones,2.92,1,0,2,BS Data Science,2022
+Christine Lopez,2.7,3,9,6,Certificate Data Analytics,2023
+Mitchell Wilson,3.53,2,0,6,Certificate Data Analytics,2024
+Robert Cortez,3.63,1,3,4,Certificate Data Analytics,2021
+Mr. Daniel Martin,2.25,3,1,3,BS Data Science,2019
+Alison Williams,2.04,0,3,8,MS Cloud Computing,2019
+Candace Soto,2.07,0,7,9,MS Data Science,2019
+Kenneth Brown,3.82,2,10,1,BS Data Science,2019
+Christopher Mullen,3.51,1,9,2,MS Data Science,2020
+Kristy Smith,2.37,0,2,6,BS Computer Science,2024
+Mary Campbell,3.88,2,2,10,MS Business Analytics,2023
+Jerry Haney,3.56,4,9,10,MBA Product Management,2019
+Carolyn Greer,2.2,4,3,10,BS Computer Science,2024
+Rebecca Hoover,2.38,4,0,5,Certificate Data Analytics,2024
+Matthew Baker,2.2,3,5,4,MS Cybersecurity,2024
+Grace Chavez,3.18,0,2,8,MS Human-Computer Interaction,2021
+Crystal Cruz,3.96,4,3,7,MBA Product Management,2022
+Dale Heath,2.23,3,1,6,BS Data Science,2023
+Jennifer Hernandez,2.27,2,8,6,MS Information Technology,2024
+John Mendez,2.08,0,6,6,MS Computer Science,2021
+Richard Gordon,2.91,3,3,5,MS Human-Computer Interaction,2023
+John Anderson,2.81,0,7,7,MBA Product Management,2024
+Samantha Prince,2.73,3,10,1,MS Human-Computer Interaction,2019
+Marie Boyd,2.79,0,1,9,MS Human-Computer Interaction,2020
+Andrew Moreno,2.79,1,1,10,BS Data Science,2021
+Robert Clarke,3.95,4,6,6,MBA Product Management,2019
+Kevin Figueroa,2.47,3,4,7,MS Information Technology,2024
+Melissa Davis,3.53,3,5,10,MS Artificial Intelligence,2022
+John Hall,3.33,4,4,7,MS Computer Science,2020
+Diane Mcdowell,3.54,2,7,2,BS Data Science,2022
+Colin Fletcher,2.46,0,0,3,BS Computer Science,2019
+Laura Wilson,3.0,3,9,1,Certificate Data Analytics,2024
+Matthew Watts,2.65,4,1,5,MS Data Science,2019
+Jack Moore,3.32,3,3,9,MS Computer Science,2021
+Dawn Wyatt,3.32,2,8,8,MS Cybersecurity,2021
+Jacob Hill,3.62,0,0,9,MS Cybersecurity,2022
+Nicole Gutierrez,3.76,3,5,2,MS Cloud Computing,2022
+Karen Wood,2.89,1,8,1,BS Computer Science,2024
+Dawn Parker,3.72,1,7,5,MS Information Technology,2022
+Michael Fitzgerald,2.27,0,9,7,MS Computer Science,2024
+Mary Adkins,2.98,4,9,9,MS Human-Computer Interaction,2022
+Michael Martin,2.95,0,6,3,MS Cybersecurity,2021
+James Morgan,2.99,2,4,7,MS Data Science,2021
+Melissa Mann,2.12,1,5,10,BS Computer Science,2021
+Vincent Smith,3.62,2,6,10,BS Computer Science,2019
+Charles Frost,2.86,2,0,6,MS Cloud Computing,2024
+Austin Walker,2.49,2,9,4,MS Human-Computer Interaction,2019
+Andrew Cruz,3.82,0,5,2,MS Artificial Intelligence,2020
+Miss Kelly Dawson,2.04,3,10,6,BS Computer Science,2022
+Theresa Wilkins,3.14,0,7,7,MS Artificial Intelligence,2023
+Jessica Harris,2.04,4,6,6,MS Cloud Computing,2021
+Regina Mitchell,3.15,1,5,8,BS Data Science,2022
+Kyle Black,3.01,4,4,6,Certificate Data Analytics,2021
+Christopher Johnson,3.94,0,8,4,MS Computer Science,2020
+Aaron Moore,2.57,4,6,1,MS Artificial Intelligence,2020
+Penny Gomez MD,3.25,4,1,2,MS Information Technology,2023
+Kelly Mclaughlin,2.67,4,7,2,MS Data Science,2022
+Brandon Mitchell,2.42,2,8,2,MS Human-Computer Interaction,2021
+Suzanne Bailey,2.87,1,6,9,MS Business Analytics,2022
+Destiny Obrien,2.5,4,2,9,MS Computer Science,2019
+Timothy Andrews,3.26,4,7,9,Certificate Data Analytics,2020
+Jason Rodriguez,3.32,4,9,8,MS Artificial Intelligence,2022
+Edward Arroyo,3.87,1,5,1,MS Cybersecurity,2022
+Tina Walter,2.3,2,6,3,MS Information Technology,2022
+Laura Benson,2.64,1,6,2,MS Human-Computer Interaction,2021
+Kristine Carrillo,3.65,4,3,3,MS Artificial Intelligence,2022
+Tonya Ellis,2.48,0,3,3,MBA Product Management,2021
+Kevin Johnson,2.93,3,10,9,MS Cloud Computing,2019
+Austin Schultz,2.4,0,4,5,Certificate Data Analytics,2021
+Megan Hall MD,3.32,0,7,3,MS Human-Computer Interaction,2019
+Kelli Smith,2.11,4,4,2,MS Business Analytics,2019
+Danielle Davis,3.8,0,6,7,MS Business Analytics,2024
+Samantha Jones,3.69,4,8,4,BS Data Science,2019
+Karen Gomez,3.04,2,7,10,MS Cybersecurity,2019
+Debra Valentine,2.48,2,9,2,MS Business Analytics,2024
+Susan Porter,2.78,1,2,4,MS Cloud Computing,2019
+Nicolas Salas,2.35,3,4,5,MS Computer Science,2023
+Dale Wright,2.11,0,5,9,MS Business Analytics,2023
+Brittney Rodriguez,2.85,1,5,4,MS Artificial Intelligence,2022
+Megan Alvarado,3.43,4,0,5,BS Computer Science,2024
+Pamela Weaver,3.32,1,4,1,MS Information Technology,2023
+John Oliver,2.77,0,8,6,MS Human-Computer Interaction,2020
+William Prince PhD,3.72,3,4,7,BS Computer Science,2021
+William Moon IV,2.18,1,2,4,MS Artificial Intelligence,2022
+Kenneth Brown,3.26,2,1,7,BS Computer Science,2022
+Karen Fernandez,2.94,3,1,7,MS Business Analytics,2020
+Jennifer Parks,3.4,2,6,9,BS Data Science,2023
+William Wolfe,3.46,2,7,9,MS Information Technology,2024
+Michael Smith,2.05,1,10,1,MS Human-Computer Interaction,2022
+Kevin Nguyen,3.58,3,3,3,BS Computer Science,2024
+Debbie Dunn,2.61,0,2,10,BS Data Science,2020
+John Austin,3.03,3,5,3,MS Data Science,2022
+Jonathan Clark,2.96,1,10,3,MS Artificial Intelligence,2023
+Jacqueline Dickerson,3.65,0,6,5,MBA Product Management,2021
+Christopher Anderson,2.36,1,0,7,MS Data Science,2019
+Crystal Garcia,3.85,1,1,10,MS Human-Computer Interaction,2022
+David Reynolds,2.4,3,9,3,BS Computer Science,2022
+Charles Haley,3.2,2,2,3,BS Data Science,2023
+Robert Thompson,2.23,3,10,9,MS Cloud Computing,2022
+Dr. Samuel Holmes DDS,2.24,2,4,4,MBA Product Management,2024
+Elizabeth Hart,2.99,1,9,3,MS Cloud Computing,2020
+Jennifer Vaughn,3.99,1,6,5,MS Information Technology,2020
+Robert Woods,2.82,2,4,3,BS Computer Science,2020
+Joanna Cook,3.24,4,10,4,MS Business Analytics,2024
+Justin Frederick,2.92,1,5,1,MS Computer Science,2024
+Alejandro Martinez,2.8,3,6,4,MS Information Technology,2024
+Tracey Gonzalez,3.19,4,0,2,BS Data Science,2019
+Mariah Thompson,2.67,2,9,4,MS Computer Science,2024
+Heather Nunez,3.93,0,0,10,MS Information Technology,2021
+Dr. Steve James,3.01,3,10,7,MS Artificial Intelligence,2021
+Mark Thomas,2.26,4,2,9,BS Computer Science,2021
+Robert Rogers,2.34,3,2,8,MS Business Analytics,2019
+Laura Sweeney,2.63,1,4,9,MS Cloud Computing,2019
+Christopher Perez,2.63,2,5,3,MS Computer Science,2022
+Eddie Adams,2.57,2,8,5,MS Data Science,2021
+Denise Wallace,2.87,3,2,3,MS Business Analytics,2023
+Heidi Matthews,3.71,1,2,8,BS Computer Science,2019
+Jennifer White,2.46,2,2,1,MS Computer Science,2024
+Nicholas Stanley,2.93,0,7,2,MS Computer Science,2021
+Mercedes Miller,3.98,3,7,9,MS Computer Science,2019
+Brian Brown,3.69,2,1,3,BS Data Science,2020
+Kimberly Johnson,3.74,4,4,3,Certificate Data Analytics,2023
+Phillip Miller,3.78,4,0,10,MBA Product Management,2023
+Christopher Pena,3.53,0,3,3,MS Cloud Computing,2022
+Ellen Wright,3.35,2,10,6,BS Computer Science,2024
+Mark Anderson,2.24,0,5,6,MS Data Science,2020
+Alyssa Alvarado,2.06,3,7,8,MS Information Technology,2024
+Erika Alvarez,3.91,0,5,10,MS Human-Computer Interaction,2019
+Kimberly Nelson,3.31,4,2,8,MS Business Analytics,2020
+Wayne Wolfe,3.73,0,1,5,MS Business Analytics,2023
+Kyle Welch,3.9,3,4,7,BS Data Science,2020
+Kristy Mills,2.48,0,3,7,BS Data Science,2020
+Emily Reed,2.78,1,1,7,MS Artificial Intelligence,2021
+Regina Ramos,2.98,2,10,7,MS Information Technology,2023
+David Torres,2.26,4,3,2,MS Business Analytics,2022
+Robert Charles,2.89,2,9,7,MS Computer Science,2023
+John Smith,2.85,4,2,7,MS Business Analytics,2022
+Theresa Woods,3.26,4,5,2,BS Computer Science,2022
+Jeffrey Carter,3.35,4,10,3,MS Computer Science,2024
+Adam Brooks,3.05,3,1,5,MS Computer Science,2022
+Justin Foster,2.6,2,3,3,MS Human-Computer Interaction,2023
+Omar Price,2.86,4,1,10,BS Computer Science,2019
+Dennis Henderson,3.03,3,1,9,MS Cloud Computing,2022
+Phillip Kent,3.32,2,4,10,MS Artificial Intelligence,2023
+Melinda Mitchell,2.16,0,10,9,BS Computer Science,2022
+Rhonda Gutierrez,2.36,0,1,3,MS Cloud Computing,2022
+Catherine Roberts,3.75,4,7,5,MS Business Analytics,2024
+Lisa Nelson,2.9,1,3,5,MS Business Analytics,2020
+Chelsea Smith,2.16,0,6,10,MS Artificial Intelligence,2023
+Joseph Lopez,2.04,0,2,7,BS Data Science,2024
+Derrick Espinoza,2.95,4,7,7,MS Human-Computer Interaction,2021
+Crystal Hernandez,3.24,3,4,10,MS Business Analytics,2019
+Glenn Collins DDS,2.25,0,0,1,MBA Product Management,2024
+Mrs. Raven Rivera DVM,3.94,3,10,1,MBA Product Management,2020
+Amy Rowe,3.3,4,3,7,MS Human-Computer Interaction,2019
+John Lee,2.6,3,6,8,Certificate Data Analytics,2019
+Ruth Clayton,2.23,3,7,3,MS Information Technology,2022
+Randy Wright,2.04,1,3,8,MS Data Science,2021
+Jessica Rojas,3.14,2,0,7,BS Computer Science,2019
+Joel Wise,3.26,3,9,7,MS Cloud Computing,2023
+Vickie Kennedy,3.46,3,6,5,BS Computer Science,2022
+Emily Morris,3.03,3,3,10,MS Human-Computer Interaction,2024
+Amanda Pineda,2.12,4,5,1,MS Cloud Computing,2023
+Dawn Little,2.13,0,7,7,MS Computer Science,2023
+Stephen Boyer,3.88,3,0,6,MS Computer Science,2020
+Brian Chen,2.58,2,7,4,MS Computer Science,2020
+Christopher Hill,3.02,2,9,10,MS Human-Computer Interaction,2024
+Richard Smith,3.31,3,6,3,MS Artificial Intelligence,2024
+Richard Alvarez,3.31,1,9,6,MS Computer Science,2020
+Jacqueline Davis,2.56,3,2,2,MS Human-Computer Interaction,2020
+Brandon Montgomery,2.4,0,6,10,MS Computer Science,2022
+Yolanda Garrett,2.61,0,0,4,MS Cybersecurity,2021
+Matthew Miles,3.76,1,2,6,MS Human-Computer Interaction,2023
+Beth Hall,2.06,3,1,2,MS Business Analytics,2023
+Dr. Nicole Trujillo,2.45,3,4,9,MBA Product Management,2021
+Corey Norris,3.57,2,2,1,MS Cybersecurity,2024
+Chad Roach,3.75,0,0,10,MS Human-Computer Interaction,2022
+Mr. Edward Terry,3.6,4,9,2,BS Data Science,2019
+Cody Bailey,3.65,0,2,1,MS Cybersecurity,2024
+Denise Guerra,2.24,1,4,4,MS Business Analytics,2024
+Kristen Jones,2.88,0,2,9,MS Computer Science,2024
+Edward Baker,2.73,1,7,3,BS Data Science,2022
+Aaron Little,3.54,3,5,1,MBA Product Management,2021
+Cody Smith,3.01,2,6,2,MS Artificial Intelligence,2021
+Patty Allen,3.26,4,6,4,Certificate Data Analytics,2020
+Mary Ryan,2.28,3,7,7,MS Cloud Computing,2023
+Joseph Jimenez,3.59,3,2,6,BS Computer Science,2019
+Lisa Morris,3.44,0,5,9,BS Data Science,2021
+Ashley Mills,2.8,0,6,3,MS Cloud Computing,2019
+Russell Anderson,3.32,0,10,3,MS Data Science,2024
+Christina Washington,3.6,3,6,9,MS Artificial Intelligence,2024
+Kenneth Huff,3.4,2,5,5,MS Information Technology,2019
+Kelly Miles,3.65,1,6,9,MS Data Science,2022
+Jacob Obrien,3.29,4,10,9,MS Data Science,2022
+Timothy Clark,3.39,2,1,7,MBA Product Management,2019
+Steve Miller PhD,3.07,1,8,7,MS Information Technology,2023
+Justin Hurley,2.57,4,4,2,MS Cybersecurity,2023
+Jacob Erickson,2.68,0,8,3,BS Computer Science,2023
+Deborah Williams,2.52,3,8,5,MS Information Technology,2019
+Eric Blackburn,3.46,4,5,6,MS Artificial Intelligence,2019
+Anne Hardy,2.1,2,9,2,MS Computer Science,2024
+Chelsey Fox,2.01,4,9,6,MBA Product Management,2024
+Mario White,3.79,1,5,9,MS Data Science,2021
+Jennifer Garcia,2.57,1,6,10,MS Human-Computer Interaction,2023
+Heather Ellis,3.48,4,9,2,MS Business Analytics,2020
+Sonya Jackson,3.65,0,2,6,MS Computer Science,2024
+James Morgan,2.85,0,0,7,BS Data Science,2022
+Zachary Ramos,3.78,3,1,8,MBA Product Management,2021
+Ethan Frey,3.35,4,8,7,MS Data Science,2022
+Jacob Duran,3.74,3,7,10,MS Computer Science,2024
+Nicholas Franklin,3.86,3,2,8,MS Information Technology,2020
+Cindy Cannon,3.01,3,2,8,MS Information Technology,2024
+Dawn Nixon,3.03,1,7,9,BS Data Science,2022
+James Barber,2.07,2,1,3,MS Cybersecurity,2023
+Ms. Kelly Holder,3.7,2,9,2,BS Data Science,2021
+Eric Walker,2.08,2,4,3,BS Data Science,2021
+Alison Short,2.61,1,2,8,BS Computer Science,2023
+Desiree Spencer,2.84,1,2,5,MS Artificial Intelligence,2024
+Tammy Moore,2.98,2,1,2,MS Cybersecurity,2019
+Henry Taylor,2.84,4,7,10,MS Artificial Intelligence,2021
+Kevin Hall,3.56,4,2,8,MS Information Technology,2020
+Anna Ross,3.01,3,2,8,MS Computer Science,2024
+Morgan Cummings,2.65,4,6,10,MS Human-Computer Interaction,2022
+Carrie Petersen,2.47,4,0,7,MS Business Analytics,2024
+Laura Velez,3.78,0,2,5,MS Human-Computer Interaction,2024
+Elizabeth Cross,2.05,0,10,5,MS Cybersecurity,2023
+Angela Brown,2.17,4,0,10,MS Cybersecurity,2023
+Hannah Montoya,3.04,0,1,8,MS Cybersecurity,2024
+Sean Kane,3.87,2,3,3,BS Computer Science,2020
+Matthew Guzman,3.66,0,8,10,MS Computer Science,2023
+Richard Reyes,2.64,3,0,10,BS Computer Science,2021
+Andrew Fernandez,2.87,4,5,7,BS Computer Science,2022
+Jonathan Walker,2.51,4,2,2,BS Data Science,2021
+Nicholas Long,2.29,1,4,5,BS Data Science,2022
+Kurt Wagner,3.36,2,2,1,MS Data Science,2019
+Dylan Foster,3.43,0,5,5,MS Cloud Computing,2020
+Bradley Duncan,2.83,3,1,6,MS Artificial Intelligence,2019
+James Miller,2.41,1,7,10,MS Data Science,2023
+Patricia Anderson,3.5,2,0,7,BS Data Science,2021
+Justin Freeman,2.93,3,0,7,BS Data Science,2022
+Christina Gilbert,3.27,4,9,1,MS Artificial Intelligence,2024
+Danielle Jones,2.2,1,4,9,MS Human-Computer Interaction,2023
+Erica Glass,2.81,4,3,2,MS Human-Computer Interaction,2020
+Michael Henderson,2.75,4,6,3,MBA Product Management,2023
+Frank Wheeler,2.9,4,4,1,MS Computer Science,2024
+Eric Huerta,3.94,3,4,1,BS Computer Science,2023
+Wanda Ramos,2.5,1,9,7,MS Business Analytics,2023
+Andrew Meyers,2.56,4,9,3,MS Information Technology,2019
+James Todd,2.6,0,2,7,MS Information Technology,2024
+Ashley Brown,3.11,1,9,5,MS Cloud Computing,2023
+Tammy Melton,3.91,2,10,6,MS Human-Computer Interaction,2021
+Alexis Benson,3.96,1,10,8,MS Artificial Intelligence,2021
+Jerry Johnson,2.68,2,0,8,MS Data Science,2024
+Joshua Harris,2.27,3,0,1,MS Data Science,2019
+Deanna Webb,3.35,3,6,7,MS Cybersecurity,2023
+Brenda Hale,2.16,0,10,2,MS Cybersecurity,2022
+Kevin Alvarado,3.34,4,5,6,MS Cloud Computing,2022
+Christopher Campbell,2.35,3,5,1,BS Data Science,2020
+Lisa Brown,2.89,0,4,4,MS Information Technology,2024
+Alejandra Price,3.84,0,9,6,MBA Product Management,2024
+Samuel Keller,2.61,3,5,4,MBA Product Management,2019
+Alicia Dillon,2.56,0,3,10,MBA Product Management,2024
+Crystal James,2.79,4,7,5,MS Data Science,2020
+Ariana Stewart,3.1,4,9,10,MS Human-Computer Interaction,2020
+Kim Lopez,2.13,0,2,3,MS Information Technology,2021
+Judith House,3.87,2,3,4,MS Cybersecurity,2024
+David Moreno,2.05,2,10,9,MS Data Science,2023
+James Moore,3.77,0,5,1,MS Cloud Computing,2022
+Harold Garrett,3.69,0,10,7,MS Artificial Intelligence,2023
+William Mason,2.93,0,3,6,MS Cybersecurity,2019
+Lori Johns,2.56,3,5,7,MS Cybersecurity,2019
+Robin Johnson,2.78,4,0,6,BS Data Science,2024
+Diana Hernandez,2.45,1,3,7,BS Data Science,2020
+Mary Miller,2.66,0,0,2,MS Human-Computer Interaction,2022
+Tyler Salazar,2.86,2,4,1,MS Data Science,2020
+Crystal Allen,2.22,0,5,4,MS Business Analytics,2023
+Wesley Browning,3.59,4,7,2,MS Data Science,2019
+Joshua Clark,3.25,0,0,10,BS Data Science,2019
+Joshua Mcbride,2.75,0,7,2,Certificate Data Analytics,2019
+Ellen Thornton,2.6,0,10,7,BS Data Science,2019
+Brandy Forbes,3.12,3,1,5,MS Cloud Computing,2023
+Brianna Fitzpatrick,3.5,4,0,4,MS Data Science,2022
+Emily Grant,2.77,4,1,7,MS Data Science,2021
+Bailey Stewart,3.3,4,5,1,MS Computer Science,2023
+Monica Cannon,2.38,4,1,2,BS Computer Science,2023
+Jennifer Jenkins,3.58,1,10,4,MS Data Science,2023
+Timothy Shannon,2.51,4,7,7,MS Computer Science,2020
+Denise Maxwell,2.49,1,4,1,BS Computer Science,2023
+Cody Farmer,2.87,4,8,6,MS Artificial Intelligence,2020
+Debra Bradley,2.29,2,4,5,MS Data Science,2021
+David Mcdaniel,3.94,1,0,9,MS Data Science,2020
+Michael Woods,3.01,3,5,9,BS Computer Science,2020
+Lisa Joseph,3.95,2,3,4,BS Data Science,2024
+Samuel Henry,2.95,2,9,8,MS Data Science,2023
+Corey Johnson,3.93,3,5,10,MS Artificial Intelligence,2020
+Alexis Nelson,2.21,1,0,1,MS Computer Science,2024
+Patrick Mcneil,2.45,4,3,4,MS Computer Science,2020
+Andrea Ho,2.96,3,3,6,MS Information Technology,2022
+Dr. Katherine Nguyen,2.37,0,1,1,MS Business Analytics,2021
+David Sullivan,2.06,2,7,2,Certificate Data Analytics,2020
+Nicolas James,3.26,0,3,6,BS Computer Science,2020
+Logan Newton,2.57,1,5,4,MS Artificial Intelligence,2023
+Kelly Liu,2.49,1,4,4,BS Computer Science,2019
+Kelly Hayes,2.04,0,5,3,MS Cloud Computing,2020
+Amanda Forbes,2.61,2,10,4,MS Business Analytics,2020
+Jennifer Moss,3.88,0,1,10,MS Cloud Computing,2020
+Kelli Mccoy,3.77,1,8,3,MBA Product Management,2022
+Eddie Sanders,3.39,3,10,6,MS Data Science,2020
+Ronald Murray,3.84,1,8,10,MS Data Science,2021
+Louis Brown,3.58,0,10,6,MBA Product Management,2021
+Brenda Gallegos,3.75,3,3,9,MS Data Science,2024
+Nathan Wilson,2.16,4,1,8,MS Human-Computer Interaction,2020
+Teresa Horton,3.02,3,8,9,MS Business Analytics,2022
+Jason Hayes,2.36,3,7,6,MS Cybersecurity,2022
+Kevin Marquez,2.54,4,10,7,MS Human-Computer Interaction,2019
+Jesse Wright,2.41,1,6,4,MS Computer Science,2020
+Susan Hogan,2.61,1,5,7,MS Data Science,2021
+Becky Wilson,3.1,2,7,3,BS Data Science,2023
+Jack Mills,2.7,3,8,10,BS Computer Science,2023
+Richard Hunt,2.67,3,6,8,MS Computer Science,2021
+Jamie James,3.61,3,0,6,MS Artificial Intelligence,2020
+Susan Cunningham,2.88,0,5,5,MS Human-Computer Interaction,2019
+Brittany Melton,2.59,4,10,9,MS Cybersecurity,2019
+Michael Barnes,3.57,0,1,4,BS Data Science,2021
+Randy Griffin,2.08,1,10,4,MS Business Analytics,2021
+Autumn Anderson,2.5,4,2,5,MBA Product Management,2024
+Marcus King,3.48,2,4,5,BS Computer Science,2021
+Scott Stephens,3.57,4,10,7,MS Cloud Computing,2019
+Stephen Young,2.94,3,3,9,Certificate Data Analytics,2020
+Karen Ortiz,3.45,1,8,4,MS Computer Science,2023
+Kyle Sanchez,3.57,3,5,8,MS Information Technology,2019
+Lisa Grant,2.63,3,3,4,MS Cloud Computing,2022
+Amber Hernandez,2.9,2,2,9,BS Computer Science,2023
+Amanda Nash,3.75,0,7,5,MS Information Technology,2024
+Sara Evans,3.67,3,6,6,MBA Product Management,2024
+Amber Butler,3.51,2,9,9,MS Artificial Intelligence,2019
+Michael Carr,3.14,1,5,1,Certificate Data Analytics,2023
+Linda Cobb,3.26,4,6,10,MS Data Science,2022
+Jesse Riley,2.41,4,6,7,BS Data Science,2020
+Anna Evans,2.95,3,10,6,MS Data Science,2021
+James Jones,2.19,4,2,2,MS Human-Computer Interaction,2019
+Joshua Carter,3.65,0,2,10,MS Computer Science,2020
+Michael Hill,2.14,1,3,7,MS Artificial Intelligence,2021
+Kelly Dominguez,3.32,0,5,2,MS Computer Science,2023
+Ashley Blair,2.02,3,2,6,MS Cloud Computing,2019
+Victoria Webb,2.26,0,6,7,MS Computer Science,2020
+Taylor Andersen,2.26,3,10,4,MS Artificial Intelligence,2022
+Lee Stewart,2.32,4,3,10,MS Artificial Intelligence,2023
+Whitney Gomez,3.43,1,0,8,MS Artificial Intelligence,2020
+Justin Stone,2.89,1,8,7,MS Data Science,2021
+Katherine White,3.82,3,9,8,MS Computer Science,2019
+Michelle Krause,3.47,3,5,5,MS Human-Computer Interaction,2024
+Alexander Garrett,3.69,4,2,5,MS Cloud Computing,2022
+Ryan Marsh,2.5,3,7,10,MS Information Technology,2022
+Mrs. Felicia Castro DDS,3.82,4,1,3,MS Information Technology,2022
+Curtis Campbell,3.4,1,4,1,MBA Product Management,2024
+Elizabeth Hunter,3.08,1,7,2,MS Information Technology,2022
+Aaron Jennings,3.98,2,1,9,BS Data Science,2019
+Nathaniel Gilbert,3.01,3,2,6,MS Cloud Computing,2021
+Christopher Rivera,2.41,0,1,1,MS Computer Science,2024
+Michael Hendricks,3.39,2,6,8,MS Cloud Computing,2020
+Maria Olson,2.79,0,2,1,MS Artificial Intelligence,2021
+Stephanie Herrera,3.34,3,1,8,MS Computer Science,2019
+Richard Gutierrez,3.1,3,2,4,MS Information Technology,2022
+Sandy Evans,3.64,0,9,3,Certificate Data Analytics,2019
+Emily Herrera,2.35,3,2,2,MS Cybersecurity,2019
+Michael Marsh,3.34,2,2,1,MS Human-Computer Interaction,2022
+Heather Montes,2.72,0,10,4,MS Information Technology,2023
+Andre Terrell,2.43,4,10,1,MS Human-Computer Interaction,2024
+Sarah Duncan,3.43,2,7,2,MS Cloud Computing,2019
+Kurt Hancock,3.2,1,3,1,MS Cloud Computing,2021
+Michele Edwards,3.82,0,6,4,BS Data Science,2019
+Jason Crawford,3.98,0,3,6,MBA Product Management,2019
+Jesse Sampson,3.59,1,0,3,MS Information Technology,2022
+Eric Rodriguez,3.03,4,10,6,MS Business Analytics,2020
+Paula Gentry,3.25,3,1,9,MS Cloud Computing,2020
+Alexander Webb,2.43,1,0,6,MS Business Analytics,2022
+Cheryl Mclean,3.31,1,7,1,MS Cloud Computing,2020
+Kelly Rowe,2.13,4,5,5,MS Human-Computer Interaction,2019
+Shane Short,2.13,2,9,4,MS Cloud Computing,2022
+Megan Anderson,3.97,4,9,2,MS Information Technology,2020
+Julia Reeves,2.5,2,10,2,MS Data Science,2024
+April Randolph,2.78,1,10,3,MS Business Analytics,2024
+Linda Miller,2.64,2,0,8,BS Data Science,2023
+Angel Meyer,3.82,4,10,8,MS Cloud Computing,2024
+Emily Lane,2.46,0,3,10,MS Information Technology,2019
+Steven Flores,3.23,1,6,2,MS Artificial Intelligence,2020
+Donald Flores,3.24,2,7,1,Certificate Data Analytics,2021
+Bruce Hernandez,2.4,0,3,7,MBA Product Management,2024
+Adrian Dean,3.2,2,2,8,MS Information Technology,2021
+Christine Bell,2.64,3,10,1,MS Cybersecurity,2021
+Charles Bush,3.5,2,5,4,MS Information Technology,2020
+David Jones,2.41,1,10,1,MS Human-Computer Interaction,2024
+Gina Wallace,3.44,4,5,10,MS Cloud Computing,2020
+John Lowe,2.88,3,1,1,BS Data Science,2020
+Anthony Simmons,2.1,1,1,3,MBA Product Management,2020
+Kyle Watkins,3.19,4,1,4,MBA Product Management,2022
+Melissa Jensen,3.45,1,3,5,Certificate Data Analytics,2022
+Robert Marquez,2.35,2,9,4,MS Artificial Intelligence,2022
+Kim Beltran,3.94,3,1,4,MS Artificial Intelligence,2021
+Julie Anderson,2.8,3,6,3,MS Computer Science,2023
+Tamara Mcdonald,3.22,3,0,7,Certificate Data Analytics,2022
+Michael Mckinney,2.85,4,8,2,MS Artificial Intelligence,2020
+David Walker,3.11,3,7,3,MS Artificial Intelligence,2021
+Lisa Durham,2.91,4,7,7,MS Cybersecurity,2019
+Michael Ortega,2.67,1,3,8,MBA Product Management,2019
+Sonya Chavez,2.03,2,7,9,MS Information Technology,2022
+John Bell,3.85,2,6,7,MS Information Technology,2022
+Christopher Tate,2.62,3,0,10,BS Data Science,2019
+Bethany Garcia,2.77,1,6,10,Certificate Data Analytics,2021
+Rebecca Nguyen,3.54,3,10,6,MS Cybersecurity,2024
+Rebecca Patel,2.74,3,6,1,MS Human-Computer Interaction,2024
+Jason Oliver,2.49,2,10,8,BS Computer Science,2024
+Valerie Reyes,3.35,4,7,3,MS Artificial Intelligence,2024
+Robert Garza,2.29,4,10,4,MS Data Science,2020
+Jessica Cobb,2.02,3,6,2,MS Human-Computer Interaction,2024
+Cynthia Bates,3.17,1,6,2,MS Cybersecurity,2020
+Timothy Andrews,3.66,2,8,5,MS Information Technology,2023
+Mr. Joel Peters,3.32,2,6,7,MS Data Science,2024
+Casey Blanchard,3.74,4,5,2,MS Human-Computer Interaction,2020
+Brian Cervantes,2.54,3,4,4,MS Information Technology,2019
+Jamie Snyder,3.97,0,1,8,BS Computer Science,2024
+Ann Montoya,2.84,2,6,7,MS Human-Computer Interaction,2020
+Stephanie Fields,2.35,1,3,3,MS Information Technology,2022
+Charles Hernandez,2.36,4,3,2,MS Computer Science,2020
+Jean Lane,2.4,2,6,3,MBA Product Management,2022
+Michael Stewart,3.25,1,1,10,BS Data Science,2021
+Susan Torres,2.17,0,5,2,MS Artificial Intelligence,2019
+Jessica Haas,3.17,0,0,8,MS Computer Science,2019
+Brandon Smith,2.53,4,0,1,MS Human-Computer Interaction,2019
+Mrs. Bethany Phillips,2.42,4,8,1,MS Cloud Computing,2021
+Joshua Brown,3.86,4,6,8,MS Business Analytics,2021
+Samantha Howard,2.74,1,5,6,MS Business Analytics,2024
+Sharon Young,2.8,2,5,10,BS Computer Science,2019
+Jennifer Flores,2.01,1,0,7,MS Information Technology,2023
+James Gardner,2.25,1,5,9,MS Artificial Intelligence,2022
+Karen Lopez,3.24,3,10,8,MS Cybersecurity,2020
+Tim Larsen,2.01,2,0,6,BS Computer Science,2024
+Zachary Santiago,2.65,4,7,8,MBA Product Management,2022
+Benjamin Smith,3.48,3,7,2,MS Business Analytics,2024
+Katelyn Kim,3.71,3,4,2,MS Information Technology,2023
+Angela May MD,2.39,4,8,3,MS Cybersecurity,2019
+Richard Munoz,2.26,4,7,2,MS Artificial Intelligence,2020
+Christopher Hicks,3.79,4,3,2,MS Computer Science,2020
+Joanna Kelly,2.42,3,0,2,BS Data Science,2020
+Larry Lane,3.86,2,3,6,MS Cloud Computing,2024
+Cynthia Shaw,2.52,0,10,8,MS Human-Computer Interaction,2020
+Joshua Richardson,3.85,2,3,8,BS Data Science,2023
+Laura Bush,3.53,2,6,10,BS Data Science,2024
+John Vaughn,3.49,4,6,7,MS Human-Computer Interaction,2020
+Nicholas Terrell,2.45,0,1,2,MS Artificial Intelligence,2019
+Dr. Julie Miller,2.68,0,9,10,MBA Product Management,2021
+Ann Kennedy,2.25,4,0,6,MS Cloud Computing,2021
+Toni Miller,2.12,3,6,9,MBA Product Management,2021
+Rebecca Edwards,3.54,4,9,3,MS Cybersecurity,2020
+Greg Osborne,2.21,3,5,1,MS Cybersecurity,2020
+Jose Harrison,3.63,3,10,5,MBA Product Management,2022
+Jennifer Yu,2.29,0,9,5,Certificate Data Analytics,2021
+Donna Johnson,2.62,4,7,2,MS Artificial Intelligence,2024
+Nicole Acosta,3.66,3,0,8,MS Artificial Intelligence,2021
+Amy Kennedy,2.31,1,0,4,MS Information Technology,2020
+Anthony Mooney,3.71,1,0,7,MS Artificial Intelligence,2023
+Lori Mitchell,2.78,3,5,7,MS Human-Computer Interaction,2022
+Jonathan York,2.78,2,4,9,MS Information Technology,2024
+Casey Campbell,3.85,0,2,9,MS Cloud Computing,2021
+Alexis Rodriguez,3.5,2,7,10,BS Computer Science,2024
+Kevin Hernandez,2.33,3,4,3,MS Computer Science,2020
+Robert Green,2.42,0,5,4,MS Information Technology,2024
+Kari Lloyd,3.71,1,6,2,MS Human-Computer Interaction,2022
+Grace Miller,3.36,0,5,3,BS Computer Science,2022
+Timothy Moore,2.36,4,10,1,BS Data Science,2021
+Wyatt Townsend II,3.19,3,3,3,MS Human-Computer Interaction,2019
+Mark Clark,2.24,2,9,7,MS Computer Science,2020
+Haley May,3.31,0,7,7,MS Information Technology,2024
+Audrey Jackson,2.76,0,1,8,MS Business Analytics,2019
+Eric Reese,2.17,4,3,8,MS Human-Computer Interaction,2019
+Kim James,3.17,2,1,10,MS Computer Science,2023
+Karen Thomas,2.36,3,4,8,MS Human-Computer Interaction,2023
+Alexandra Ho,2.25,4,2,6,BS Data Science,2022
+Michael Nixon,3.63,4,8,1,MS Cloud Computing,2023
+Amanda Hardin,2.98,4,10,9,MS Data Science,2019
+Tina Reynolds,3.51,0,2,4,MS Human-Computer Interaction,2023
+Shannon Rogers,3.39,3,5,1,MS Cybersecurity,2019
+Brett Pena,2.08,1,1,10,MBA Product Management,2023
+Raymond Curry,2.51,0,8,1,BS Data Science,2021
+Leah Lee,2.73,3,10,9,Certificate Data Analytics,2019
+Michael White,2.5,2,10,1,MS Cybersecurity,2023
+Megan Decker,2.89,2,8,10,MS Computer Science,2021
+Brent Garcia,3.21,0,10,9,MBA Product Management,2019
+Daniel Campbell,2.47,2,3,4,Certificate Data Analytics,2020
+Alexander Davis,3.2,2,4,4,MS Data Science,2020
+Mary Houston,3.46,4,4,7,BS Data Science,2021
+Margaret Erickson,2.76,3,1,3,MS Cloud Computing,2021
+Scott Anderson,3.35,1,1,3,MS Cybersecurity,2024
+Stephanie Knight,3.47,2,9,4,MS Information Technology,2024
+Stephanie Dominguez,3.3,1,6,9,MS Data Science,2020
+John Mayer,2.63,0,9,7,MS Cloud Computing,2020
+Tammy Hill,2.16,0,10,2,MS Cybersecurity,2023
+Steven Carrillo,2.81,0,5,6,MS Human-Computer Interaction,2021
+Christopher Jones,3.56,2,0,3,MBA Product Management,2019
+Janet Cook,2.75,0,1,4,MS Cloud Computing,2020
+Tyler Baker,3.05,3,1,5,MS Data Science,2023
+John Mcfarland,2.7,4,4,10,MS Artificial Intelligence,2023
+Cassandra Vasquez,2.2,2,6,1,Certificate Data Analytics,2020
+Randy Robinson,2.69,4,6,9,MS Cybersecurity,2022
+Susan Baldwin,3.18,4,2,5,BS Computer Science,2024
+Benjamin Duncan,2.25,2,0,7,MS Data Science,2024
+Jeremy Mosley,3.28,1,10,6,MS Information Technology,2023
+Martin Fitzpatrick,2.84,3,5,8,Certificate Data Analytics,2022
+Deborah Graves,3.0,4,3,5,MS Cloud Computing,2021
+Laura Robertson,3.27,3,5,2,MS Artificial Intelligence,2019
+Katherine Graham,3.27,1,1,2,MS Information Technology,2020
+Priscilla Floyd,3.15,2,8,2,MS Information Technology,2022
+April Finley,3.62,4,2,1,MS Cloud Computing,2022
+Karen Bradley,3.0,0,6,9,MS Information Technology,2019
+Heather Maldonado,3.23,3,8,1,MS Information Technology,2024
+Mark Benjamin,2.69,4,0,9,MS Human-Computer Interaction,2023
+Joseph Woodward,2.9,4,3,3,MS Human-Computer Interaction,2020
+Joe Miranda,2.15,2,0,3,MS Cybersecurity,2022
+Cassandra Williams,2.99,0,5,3,MS Business Analytics,2024
+Connor Dominguez,2.5,2,4,9,BS Data Science,2022
+Lydia Howard,2.59,4,6,4,BS Computer Science,2020
+Mark Moss,3.85,3,9,9,BS Computer Science,2022
+Corey Cortez,2.11,3,5,1,MS Data Science,2021
+Katherine Brown,2.71,1,6,1,MS Business Analytics,2021
+Elizabeth Ferguson,2.02,1,1,7,MS Computer Science,2023
+Joann Forbes,3.03,0,7,3,MS Cloud Computing,2019
+Anthony French,2.31,3,6,5,MBA Product Management,2021
+Bruce Roman,2.6,4,4,7,Certificate Data Analytics,2019
+Judy Gregory,3.98,1,5,8,Certificate Data Analytics,2024
+Brittany Riley,2.87,1,1,6,MS Information Technology,2020
+Amanda Thomas,2.57,3,5,3,MS Cloud Computing,2019
+Kaitlin Hardin,2.32,2,1,4,MS Computer Science,2022
+Michael Anderson,2.98,1,5,8,MS Human-Computer Interaction,2022
+Anthony Parker,3.0,0,1,7,Certificate Data Analytics,2019
+Joy Jackson,2.25,0,10,6,MS Cybersecurity,2020
+Sabrina Rodriguez,2.1,4,0,6,MS Cloud Computing,2022
+Robert Walker PhD,2.96,0,6,5,MS Computer Science,2020
+Robert Hendrix,3.24,1,4,9,Certificate Data Analytics,2019
+Erika Daugherty,3.73,3,3,4,MS Human-Computer Interaction,2022
+Brenda Copeland,3.41,4,9,2,MS Information Technology,2020
+Pamela Watkins,2.38,1,3,10,MS Human-Computer Interaction,2019
+Bryan Thomas,2.26,1,2,1,MS Artificial Intelligence,2022
+Michael Tran,2.04,0,6,4,BS Data Science,2022
+Timothy Williams,3.05,2,6,4,MBA Product Management,2022
+Ryan Salazar,2.12,0,4,7,MS Human-Computer Interaction,2019
+Alexis Tucker,2.54,3,3,5,MS Business Analytics,2021
+Christopher Davis,3.79,0,0,3,BS Computer Science,2024
+Stacie Butler,3.49,3,4,4,MS Artificial Intelligence,2023
+Patricia Schwartz,2.2,3,5,3,MS Artificial Intelligence,2021
+Mark Mills,2.61,0,10,2,MS Human-Computer Interaction,2023
+Todd Bishop,3.54,2,5,3,MS Business Analytics,2024
+Christopher Porter,3.56,2,3,9,MS Data Science,2024
+Lori Patton,2.55,0,1,10,MS Cloud Computing,2020
+Aaron Young,3.26,0,9,10,BS Data Science,2024
+Joseph Davis,3.63,3,1,4,MS Information Technology,2019
+Philip Fernandez,3.88,2,7,10,MS Business Analytics,2020
+Randy Hopkins,3.07,1,3,3,BS Computer Science,2022
+Cory Hogan,3.1,2,5,5,MS Cybersecurity,2022
+Tracy Wells,3.26,0,7,2,MS Cloud Computing,2022
+Michael Williams,3.05,1,9,9,BS Computer Science,2021
+Dominique Hamilton,3.39,0,9,3,MS Artificial Intelligence,2019
+Robert Chang,3.59,3,7,4,MS Information Technology,2024
+Patrick Buckley,3.06,1,7,9,BS Data Science,2023
+Richard Washington,2.77,4,4,7,MS Cloud Computing,2020
+Steven Griffith,2.37,1,9,3,MS Data Science,2024
+Erika Gonzalez,2.02,4,8,9,MS Computer Science,2021
+Erika Maxwell,2.61,2,8,4,MS Artificial Intelligence,2019
+Brent Rojas,2.34,1,4,1,MS Cybersecurity,2019
+Jaime Walker,3.28,2,0,5,Certificate Data Analytics,2024
+John Zamora,3.96,0,0,4,MS Cybersecurity,2024
+Timothy Gibson,2.69,2,1,10,MS Business Analytics,2024
+Chad Cortez,3.77,1,6,5,MS Information Technology,2023
+Vanessa Harris,2.59,0,5,1,MS Human-Computer Interaction,2020
+Michael Brown,3.46,2,0,5,Certificate Data Analytics,2023
+Samuel Ellis,3.31,3,10,10,BS Data Science,2021
+Greg Tanner,3.74,1,7,10,MS Cybersecurity,2020
+Rachel Little,2.65,3,2,4,MS Data Science,2022
+Carolyn Cordova,2.46,1,7,7,MS Business Analytics,2019
+Angelica Vincent,2.99,1,3,8,Certificate Data Analytics,2023
+Zachary Vargas PhD,2.98,2,0,3,MS Human-Computer Interaction,2021
+Nicholas Fitzgerald,2.33,4,3,3,MS Cloud Computing,2019
+Garrett Riley,2.29,3,10,7,MBA Product Management,2022
+Leslie Hernandez,2.2,0,9,9,Certificate Data Analytics,2019
+Abigail Baird,2.76,0,10,1,BS Data Science,2019
+John Mack,2.26,1,10,2,MS Artificial Intelligence,2023
+Joseph Mendoza,2.03,4,5,1,BS Data Science,2024
+Samantha Chavez,2.17,4,7,3,MS Computer Science,2020
+Justin Smith,2.61,1,0,8,Certificate Data Analytics,2023
+Tiffany Anderson,3.38,0,0,9,BS Data Science,2019
+Matthew Davis,3.09,3,2,2,MS Cybersecurity,2019
+Eric Warner,3.82,3,6,1,MBA Product Management,2020
+Nicole Johnson,2.71,3,10,5,MBA Product Management,2024
+Raymond Sawyer,3.65,1,1,2,MS Computer Science,2020
+Richard Wood,2.2,0,9,5,MS Business Analytics,2021
+Mark Dalton,2.24,4,2,2,BS Computer Science,2020
+Steven Cook,2.86,1,10,6,MS Data Science,2022
+Jeffery Nelson,2.3,2,5,5,MS Data Science,2019
+Kimberly Norton,2.54,2,4,8,MS Human-Computer Interaction,2024
+Angela Gilmore,3.6,1,5,1,Certificate Data Analytics,2020
+Amy Dougherty,2.78,0,9,8,BS Data Science,2022
+Stacy Rodriguez,3.92,0,5,5,Certificate Data Analytics,2020
+Manuel Diaz,2.36,2,7,7,MS Business Analytics,2022
+Justin Jones,2.96,2,2,7,MS Data Science,2024
+Christine Zavala,3.84,4,7,7,MS Cloud Computing,2023
+Brian Mendoza,3.07,1,6,9,MS Cybersecurity,2019
+Lauren Haley,3.16,4,3,7,MS Cybersecurity,2024
+Patrick Perez,2.17,1,0,6,BS Computer Science,2021
+Derek Frazier,3.12,0,5,3,BS Data Science,2021
+Arthur Reed,3.7,3,2,3,MS Artificial Intelligence,2023
+Mr. Bryan Mckinney,3.94,1,3,7,MBA Product Management,2019
+Kim Carter,3.49,1,6,2,MS Information Technology,2024
+Rebecca Dougherty,2.05,0,1,7,MS Business Analytics,2024
+Teresa Jones,3.16,1,0,8,MS Data Science,2020
+Judith Miller,2.73,0,0,2,MBA Product Management,2023
+Donna Frye,3.66,1,7,7,Certificate Data Analytics,2024
+Donald Terry,2.28,2,7,9,MS Information Technology,2022
+Shaun Meyer DDS,3.45,0,4,8,MS Human-Computer Interaction,2019
+Wayne Weaver,2.31,1,8,1,MS Data Science,2020
+Gregory Wallace,2.02,3,8,7,MS Human-Computer Interaction,2024
+Dorothy Brown,3.66,2,3,10,MS Cybersecurity,2022
+Crystal Meza,3.86,4,6,5,BS Data Science,2020
+Jennifer Cooper,3.49,0,3,7,MS Data Science,2022
+Erin Watkins,2.37,0,7,9,MS Data Science,2022
+Sarah Wallace,2.63,1,0,7,MS Cloud Computing,2021
+Carlos Clarke,3.29,0,1,4,MS Artificial Intelligence,2019
+David Washington,2.73,1,4,6,BS Computer Science,2020
+Patricia Williams,3.08,4,0,2,MBA Product Management,2021
+Jesus Jackson,2.38,0,3,4,MS Human-Computer Interaction,2021
+Michelle Mitchell,2.17,0,9,10,MS Data Science,2022
+Sara Schwartz,2.09,2,0,6,BS Data Science,2021
+Brittany Young,3.5,1,5,7,MS Cybersecurity,2022
+Eugene Martinez,3.45,0,5,3,MS Information Technology,2022
+Cody Hart,3.79,4,2,9,BS Data Science,2019
+Evan Cooper,3.17,4,0,7,MS Computer Science,2021
+Joshua Martin,2.32,0,3,8,BS Data Science,2020
+Thomas Sullivan,3.61,1,8,3,MS Information Technology,2023
+Mr. Jimmy Flores Jr.,3.98,4,5,10,MS Human-Computer Interaction,2022
+Vanessa Rivera,3.57,2,9,6,MS Artificial Intelligence,2022
+Kara Roberts,2.08,1,9,7,MBA Product Management,2023
+Veronica Berry,2.15,3,1,3,MS Data Science,2019
+Keith Meadows,2.29,0,7,5,MS Cybersecurity,2019
+Michael Dennis,2.91,1,1,3,MS Artificial Intelligence,2021
+Brenda Pierce,3.15,0,2,6,BS Data Science,2024
+James Randall,3.54,2,7,5,MS Computer Science,2024
+Brandon Brown,3.85,3,0,2,MS Data Science,2021
+Lauren Walker,3.72,4,10,7,MS Cloud Computing,2020
+Diana Johnson,2.88,2,5,9,MS Data Science,2019
+Jill Powers,3.36,2,10,9,MS Computer Science,2019
+Jorge Lee,3.24,1,8,1,MS Information Technology,2019
+Larry Harding,2.31,3,2,2,MS Artificial Intelligence,2023
+Heather Hernandez,2.8,3,7,2,MBA Product Management,2024
+Jaclyn Watson,2.19,4,7,8,MS Computer Science,2019
+Gregory Madden,2.17,3,3,2,MS Cloud Computing,2022
+Anita Luna,2.66,4,7,6,MS Business Analytics,2020
+Willie Lara,3.4,2,7,8,BS Data Science,2019
+Robert Waller,3.09,1,5,8,Certificate Data Analytics,2023
+Steven Taylor,2.06,0,5,10,MS Cloud Computing,2022
+Angelica Clark,3.96,1,0,4,BS Computer Science,2024
+Sean Hatfield,2.85,1,1,5,MS Human-Computer Interaction,2020
+Tyler Avila,2.14,2,7,7,BS Data Science,2022
+Jason Rocha,3.05,0,1,5,Certificate Data Analytics,2022
+Justin Page,2.68,1,5,5,Certificate Data Analytics,2022
+Breanna Lopez,2.96,1,6,9,MS Information Technology,2021
+Julian Williams,3.83,0,8,10,MS Cloud Computing,2023
+Sandra Torres,2.4,1,5,10,MS Data Science,2024
+Julie Johnson,3.97,1,7,6,BS Computer Science,2020
+Dennis Blanchard,3.0,3,4,6,BS Data Science,2023
+Kaitlyn Valdez,3.44,3,10,8,Certificate Data Analytics,2023
+Jennifer Vasquez,2.19,1,6,4,MS Information Technology,2024
+Danielle Wilson,3.09,3,3,3,MS Data Science,2021
+Zachary Jones,2.42,4,0,4,MS Human-Computer Interaction,2021
+Lauren Cunningham,3.63,2,8,1,MS Artificial Intelligence,2019
+Lori Alvarez,3.4,3,5,8,MS Cloud Computing,2021
+Barbara Hunt,3.66,2,1,7,MS Cybersecurity,2020
+Sarah Martin,2.92,4,9,6,Certificate Data Analytics,2020
+Francisco Johns,3.09,3,10,7,MS Artificial Intelligence,2021
+Christopher Nelson,3.4,0,1,2,BS Data Science,2024
+Thomas Kelly,2.03,3,9,7,BS Data Science,2023
+Joseph Mayer,2.2,4,0,8,MS Cybersecurity,2024
+Pamela White,2.58,1,7,7,MBA Product Management,2023
+Paul Stephens,2.76,0,5,4,MS Computer Science,2022
+Samantha Cohen,2.83,2,3,7,BS Computer Science,2023
+Michael Barker,2.57,3,10,5,MS Artificial Intelligence,2020
+Kevin Morrow,2.01,0,0,7,BS Computer Science,2020
+Joseph Watson,3.58,4,5,9,MS Information Technology,2021
+Mr. Thomas Garcia,2.34,1,8,10,MS Cloud Computing,2022
+Daniel Lopez,2.39,4,6,7,BS Computer Science,2020
+Lisa Guerra,3.88,1,6,7,MS Information Technology,2021
+Kim Arnold,3.03,0,2,7,MBA Product Management,2023
+Ashley Stevens,2.24,2,8,10,MS Cloud Computing,2020
+Robert Mclean,3.9,0,0,4,BS Data Science,2022
+Eric Cox,2.02,0,9,10,Certificate Data Analytics,2024
+Stacy Harper,3.09,3,0,2,MS Data Science,2024
+Gloria Mckinney,3.47,2,2,8,MS Human-Computer Interaction,2020
+Robert Walker,3.31,1,8,4,MS Artificial Intelligence,2020
+Brenda Perez,3.45,0,4,7,MS Artificial Intelligence,2019
+Carlos Miller,3.87,4,1,1,MS Human-Computer Interaction,2019
+Rachel Jones,2.92,0,2,10,BS Data Science,2021
+Nicole Williams,2.52,0,7,3,BS Data Science,2021
+Ricky Palmer,3.83,0,7,4,MS Cloud Computing,2019
+Bryan King,2.83,0,3,8,MS Human-Computer Interaction,2024
+Michael Webster,2.84,3,2,6,MS Human-Computer Interaction,2020
+Tamara Harris,2.6,4,10,3,MS Human-Computer Interaction,2023
+Cathy Bell,3.71,2,7,2,MS Business Analytics,2023
+Ryan Mcmahon,3.2,4,4,1,Certificate Data Analytics,2019
+Hannah Martin,2.39,0,8,1,MS Cybersecurity,2023
+Monica Allen,3.52,0,3,4,MS Business Analytics,2019
+Annette Lane,2.66,1,4,4,BS Data Science,2021
+Daniel Lee,2.96,4,10,2,MS Business Analytics,2021
+Steven Medina,2.93,4,6,8,MS Cloud Computing,2020
+Annette Lewis,2.5,2,6,4,MS Human-Computer Interaction,2019
+Michelle Richardson,3.17,1,3,10,MS Artificial Intelligence,2024
+Jessica Rosario,2.98,4,4,8,MS Cloud Computing,2021
+Henry Gray,3.25,3,3,10,MS Cloud Computing,2023
+Darren Rodriguez,2.71,1,0,2,MS Computer Science,2023
+Mrs. Ashley Taylor,2.51,4,10,7,MS Artificial Intelligence,2023
+Michele Hawkins,2.7,1,5,1,BS Data Science,2022
+Garrett Wilson,3.58,0,3,6,MBA Product Management,2024
+Kyle Collins,2.74,0,0,3,MS Business Analytics,2021
+Jill Spencer,3.38,3,9,6,MBA Product Management,2021
+Scott Lopez,3.8,3,4,9,BS Data Science,2023
+Ryan Alvarez,2.42,4,4,4,BS Data Science,2024
+Cassie Lutz,3.22,3,10,2,MS Data Science,2022
+Brian Kim DDS,2.64,1,0,6,MBA Product Management,2022
+Charles Morales,3.0,0,1,5,MS Cloud Computing,2022
+Ashley Schaefer,2.34,3,3,6,MS Data Science,2023
+Amy Hester,2.04,4,0,1,MS Human-Computer Interaction,2022
+Kurt Ewing,2.57,4,8,7,BS Computer Science,2019
+Ryan Hardy,2.67,3,1,1,BS Data Science,2022
+Micheal Perkins,3.45,2,6,5,MS Business Analytics,2019
+Richard Schneider,3.11,4,0,6,MS Computer Science,2022
+John Morrison,2.6,0,5,8,MS Computer Science,2023
+John Ramirez,2.21,0,2,4,BS Computer Science,2019
+Ashley King,3.99,1,1,7,MBA Product Management,2020
+Mark Taylor Jr.,3.45,0,0,6,MS Cybersecurity,2021
+Barry Gregory,3.77,0,4,1,BS Data Science,2019
+Janet Shelton,2.53,2,2,10,MS Cloud Computing,2020
+Marco Davis,3.17,2,2,2,Certificate Data Analytics,2023
+Paul Saunders,3.78,3,10,7,MS Human-Computer Interaction,2019
+Christina Bates,3.04,3,10,4,MS Data Science,2022
+Dennis Cooper PhD,3.95,3,3,6,MS Information Technology,2019
+Tiffany Johnson,2.53,0,5,5,MS Information Technology,2023
+Thomas Reyes,3.67,1,1,4,MS Human-Computer Interaction,2019
+James Stevens,3.94,0,10,1,MBA Product Management,2020
+Justin Dalton,2.94,3,1,7,MBA Product Management,2021
+Michael Henry,2.42,4,5,10,MS Cybersecurity,2021
+Mike Freeman,3.42,0,2,3,MS Cybersecurity,2020
+Michael Keller,3.83,4,8,7,MS Computer Science,2020
+Laura Alvarez,3.56,2,6,4,BS Data Science,2020
+Katie Myers,3.37,0,2,10,MS Human-Computer Interaction,2022
+Wesley Jensen MD,3.75,0,7,2,MBA Product Management,2020
+Erica Johnson,2.53,4,7,8,MS Human-Computer Interaction,2021
+Russell Bailey,2.53,2,6,9,BS Data Science,2020
+Alyssa Vance,2.3,4,5,9,MS Cloud Computing,2019
+Brent Reed,2.88,0,10,6,BS Data Science,2022
+Gregory Stanley,3.46,2,3,7,MBA Product Management,2022
+Matthew Watkins,2.35,4,7,5,MS Cybersecurity,2023
+Ana Torres,2.87,1,1,1,MS Human-Computer Interaction,2020
+Alejandro Nguyen,2.23,2,3,1,MS Data Science,2019
+Scott Bradley,3.06,4,6,5,MBA Product Management,2022
+Deborah Dominguez,2.79,2,7,4,MS Information Technology,2020
+Victoria Gray,2.34,2,9,4,MS Business Analytics,2021
+Kenneth Stokes,3.47,4,9,2,Certificate Data Analytics,2022
+Michael Rogers,3.48,2,10,4,Certificate Data Analytics,2019
+Pamela Morgan,2.33,1,0,6,MS Computer Science,2024
+Heidi Graham,2.95,1,4,6,BS Computer Science,2019
+Ryan Cobb PhD,2.34,2,7,1,MS Data Science,2023
+Donna Williams,2.0,0,0,4,MS Computer Science,2019
+Jennifer Perez PhD,3.13,4,8,5,MBA Product Management,2020
+Ryan Davis,3.51,2,5,2,BS Data Science,2022
+Austin Solis,2.98,2,10,6,MS Cybersecurity,2022
+Daniel Flynn,2.51,2,4,8,BS Computer Science,2024
+Elizabeth Brock,2.67,4,7,9,MS Human-Computer Interaction,2019
+Joshua Gonzalez,2.54,0,2,9,MS Information Technology,2022
+Mario Chavez,3.71,3,0,3,MS Business Analytics,2020
+Catherine Smith,3.16,1,1,7,MS Business Analytics,2020
+Shari Ray,3.84,0,4,7,MS Human-Computer Interaction,2024
+Victor Harmon,3.36,1,4,8,MS Cybersecurity,2024
+Timothy Patel,2.7,4,6,6,MS Cloud Computing,2021
+Patricia Hamilton,2.62,4,5,1,MS Data Science,2023
+Lori Boyd,2.25,2,4,8,MS Data Science,2019
+Charles Hernandez,3.94,1,7,8,MS Human-Computer Interaction,2024
+Elizabeth Graham,2.3,4,10,5,MS Data Science,2020
+Ronald Brown,2.61,2,0,5,BS Data Science,2022
+Jason Colon,2.08,0,0,5,MS Data Science,2022
+Dawn Burke,2.61,0,0,7,MS Business Analytics,2021
+Brian Lee,2.28,4,2,5,MS Cybersecurity,2019
+Ronald Marshall,3.43,1,6,3,MS Information Technology,2023
+Jessica Lucas,3.84,0,7,5,MBA Product Management,2021
+Christopher Taylor,2.5,3,1,7,MS Cloud Computing,2021
+Robert Hopkins,3.84,1,9,10,MS Artificial Intelligence,2022
+Samuel Stuart,3.36,1,10,6,MS Data Science,2020
+Mr. Scott Miller,2.5,1,4,7,MS Cybersecurity,2021
+Sharon Lester,2.17,3,8,10,MS Human-Computer Interaction,2020
+Jack Sandoval,2.75,1,8,7,BS Data Science,2022
+Tony Ramsey,3.39,2,7,9,MS Human-Computer Interaction,2021
+Brian Navarro,2.86,3,0,7,MS Cloud Computing,2023
+Kelly Calderon,2.05,1,9,7,BS Data Science,2021
+Tara King,3.57,2,2,10,MS Cybersecurity,2023
+Cynthia Martinez,3.09,0,6,10,MS Artificial Intelligence,2020
+Erin Silva,2.81,4,7,1,MS Computer Science,2019
+Paul Young,2.17,0,5,5,MS Human-Computer Interaction,2023
+Charles Thompson,2.19,3,5,5,MS Data Science,2019
+Jessica King,2.24,4,0,10,MS Human-Computer Interaction,2024
+Katherine Brooks,2.41,3,2,3,MS Cybersecurity,2020
+Emily Coleman,3.79,2,0,3,MS Artificial Intelligence,2022
+Tracey Suarez,3.25,0,0,4,BS Data Science,2020
+Heidi Baldwin,3.21,0,3,2,MS Cybersecurity,2020
+Alisha Rasmussen,2.21,3,6,1,MS Cybersecurity,2019
+Sarah Bates,3.85,3,2,5,MS Cloud Computing,2020
+Melissa Mccormick,3.68,4,10,9,MS Artificial Intelligence,2022
+Juan Parker,3.72,3,2,10,BS Data Science,2024
+Heidi Burnett,2.04,1,2,3,MS Information Technology,2023
+Sean Mathews,3.48,3,7,9,MBA Product Management,2021
+Theodore Long,2.58,3,5,2,MS Data Science,2024
+Dawn Davis,2.55,0,7,7,MS Information Technology,2022
+Cynthia Clark,3.63,2,7,3,BS Computer Science,2019
+Sydney Welch,3.13,2,0,1,MS Data Science,2024
+Pamela Sullivan,3.3,0,5,10,MS Computer Science,2020
+Sean Morrow,2.94,0,2,8,MS Artificial Intelligence,2021
+Kaitlin Gutierrez,3.0,2,8,9,MBA Product Management,2022
+Michelle Mcdowell,3.03,1,5,3,MS Human-Computer Interaction,2024
+Samantha Hale,3.44,1,4,6,MS Computer Science,2024
+Heather Guzman,2.61,3,6,7,BS Data Science,2022
+Nancy Chavez,3.21,4,10,3,MS Data Science,2023
+Anthony May,2.52,4,5,6,MS Data Science,2023
+Rachel Taylor,3.23,0,0,7,BS Data Science,2024
+Mark Edwards,2.32,0,7,2,MS Human-Computer Interaction,2024
+Christopher Black,2.95,1,1,4,MS Information Technology,2020
+Sandra Hines,3.46,0,0,7,MS Cloud Computing,2023
+Melissa Sparks,2.5,0,7,1,MS Information Technology,2021
+John Moss,3.21,2,1,1,Certificate Data Analytics,2024
+Michael Serrano,2.9,4,8,3,MS Human-Computer Interaction,2020
+Christina Perry,2.39,2,3,8,MS Computer Science,2020
+Shawn Duffy,3.48,1,1,7,MS Cybersecurity,2023
+Courtney Vaughan,2.05,0,2,2,MBA Product Management,2019
+Maria Sims,2.72,4,1,7,MS Data Science,2021
+Valerie Gonzalez,2.37,1,3,9,MS Computer Science,2023
+Caroline Morales,3.66,2,9,9,MS Business Analytics,2023
+David Davis,3.71,3,10,2,MS Computer Science,2022
+Travis Wilson,3.75,1,8,10,BS Data Science,2021
+Jessica Mora,2.2,0,9,8,MBA Product Management,2023
+Michael Wilson,2.66,2,6,4,MS Artificial Intelligence,2024
+Cheryl Atkins,2.72,0,8,3,MS Artificial Intelligence,2023
+Donna Snyder,2.48,4,4,9,MS Data Science,2022
+Scott Greene,3.24,0,9,9,MS Information Technology,2022
+Diane Byrd MD,3.87,0,0,5,MS Human-Computer Interaction,2021
+Charles Roberts,2.84,0,2,4,MS Business Analytics,2020
+Luke Solomon,3.09,0,3,6,MS Human-Computer Interaction,2022
+Michael Ellis,2.15,0,5,10,MS Data Science,2019
+Casey Morris,3.9,4,1,10,MS Information Technology,2023
+Melissa Reeves,2.96,0,1,3,MS Artificial Intelligence,2019
+Nancy Scott,2.99,2,6,4,MS Human-Computer Interaction,2022
+Anthony Cook,2.61,0,0,4,BS Computer Science,2020
+Terry Barajas,3.07,0,8,7,MS Human-Computer Interaction,2022
+Tracy George,2.1,1,6,7,MS Information Technology,2024
+Amber King,2.85,3,1,3,BS Data Science,2023
+Elizabeth Foster,3.97,1,5,6,MS Business Analytics,2022
+Walter Hansen,3.84,0,9,4,MBA Product Management,2019
+Debbie Gordon,2.45,0,0,9,MS Data Science,2024
+Sherry Anderson,2.5,0,2,1,BS Data Science,2022
+Joseph Thomas,2.36,2,9,1,MS Business Analytics,2024
+Andrew Anderson,3.78,4,6,5,Certificate Data Analytics,2022
+Sandy Adkins,3.32,2,8,2,BS Data Science,2020
+Diane Mcdowell,2.99,3,4,6,MBA Product Management,2021
+Pam Baker,3.56,1,8,5,MS Human-Computer Interaction,2021
+Steven Stewart,2.64,0,0,9,MS Cybersecurity,2021
+Pamela Hernandez DVM,3.8,2,1,10,MS Computer Science,2020
+Rebecca Brown,3.82,2,8,9,MBA Product Management,2020
+David Johnson,2.25,1,7,3,BS Computer Science,2024
+Michael Graham,3.53,3,0,2,BS Computer Science,2021
+Tammy Williams MD,2.56,0,0,7,MS Artificial Intelligence,2021
+Karina Vasquez,3.71,0,6,7,MS Computer Science,2022
+Sharon Martinez,2.89,3,2,4,MBA Product Management,2024
+Sean White,2.86,2,0,1,MS Human-Computer Interaction,2023
+Jordan Nelson,3.53,2,4,1,MS Data Science,2023
+Laurie Silva,2.43,4,6,1,MS Business Analytics,2022
+Kelly Duncan,3.57,4,6,1,BS Data Science,2024
+Billy Tate,3.86,3,6,5,MS Cybersecurity,2023
+Stacy Johnson,3.44,1,6,9,MS Artificial Intelligence,2022
+Melanie Long,3.49,0,4,4,Certificate Data Analytics,2024
+Tiffany Hood,3.9,4,4,2,MBA Product Management,2021
+Brad Rivas,3.14,2,5,1,MS Data Science,2021
+Jordan Moses,3.32,0,4,10,BS Computer Science,2023
+Abigail Booker,3.32,3,7,5,Certificate Data Analytics,2019
+Tiffany Nguyen,2.88,2,7,8,BS Computer Science,2024
+Morgan Bernard,3.69,0,9,4,MS Cloud Computing,2019
+Christine Williams,2.55,2,1,10,MS Cybersecurity,2022
+Erica Brown,2.36,3,2,5,MS Artificial Intelligence,2020
+Trevor James,3.26,0,3,3,MS Data Science,2019
+Christopher Hanna,3.31,4,7,3,MS Human-Computer Interaction,2023
+Ann Phelps,2.63,1,0,9,MS Information Technology,2024
+Richard Mitchell,3.98,2,8,5,BS Computer Science,2024
+Martha Martinez,2.09,0,1,4,MS Business Analytics,2023
+Jeffrey Drake MD,2.89,1,3,9,BS Data Science,2021
+Bonnie Wade,3.14,3,4,7,BS Data Science,2020
+Kayla Burns,2.05,2,6,10,MS Business Analytics,2024
+Karen Hart,2.75,0,2,5,MS Data Science,2021
+Peter Shepherd,2.09,0,1,3,MS Data Science,2023
+Jessica Simmons,2.42,4,9,6,MS Cybersecurity,2024
+Glenn Ford,2.69,4,0,4,MS Cloud Computing,2024
+Michael Moore,3.45,0,1,7,MS Human-Computer Interaction,2020
+Mark Warren IV,3.13,4,6,10,MS Human-Computer Interaction,2023
+Terry Woods,3.47,4,7,9,BS Computer Science,2024
+Carl Leach,3.05,2,3,8,MS Business Analytics,2023
+Kelly Phillips,2.59,1,5,4,MS Business Analytics,2020
+Billy Williams,2.91,1,7,2,MS Information Technology,2024
+Jeffery Davis,3.92,0,5,7,MS Business Analytics,2023
+Laura King,3.01,3,9,6,MS Human-Computer Interaction,2020
+Brad Gordon,2.9,4,2,7,MBA Product Management,2023
+Matthew White,2.49,4,10,7,MS Human-Computer Interaction,2020
+James Miller,3.21,2,1,5,MS Business Analytics,2019
+Elizabeth Matthews,2.82,4,7,9,Certificate Data Analytics,2024
+Michael Hanson,3.76,3,0,4,Certificate Data Analytics,2020
+Vincent Savage,2.24,3,1,5,MS Cybersecurity,2020
+Cody Burgess,3.74,1,1,7,BS Computer Science,2020
+Shelby Rodriguez,3.03,3,5,9,MS Cloud Computing,2020
+Abigail Wilson,2.8,2,1,9,MBA Product Management,2021
+John Holt,3.79,4,9,6,MS Data Science,2019
+Tracy Guzman,3.99,2,7,1,BS Data Science,2022
+Mr. William Ward,3.26,3,2,7,MS Artificial Intelligence,2024
+Melissa Foster,2.37,0,2,10,MS Cybersecurity,2019
+Calvin Smith,3.19,3,6,6,MS Human-Computer Interaction,2021
+Alan Waller,2.88,4,4,9,MS Information Technology,2019
+Christine Wong,2.46,0,9,8,MS Business Analytics,2023
+Jessica Garrett,3.79,3,4,10,MS Cybersecurity,2021
+Cheryl Turner,2.77,0,3,3,Certificate Data Analytics,2022
+John Johnson,3.04,2,1,10,MS Data Science,2021
+Christian Park,2.57,2,7,2,MS Artificial Intelligence,2022
+Kaitlyn Heath,2.45,2,9,3,MS Artificial Intelligence,2019
+Christina Hudson,3.85,0,3,5,Certificate Data Analytics,2023
+Amber Smith,3.68,4,0,3,BS Computer Science,2023
+Michelle Petty,3.08,3,0,4,BS Computer Science,2021
+Nancy Larson,2.41,3,8,10,MS Cloud Computing,2020
+Donna Freeman,3.66,0,7,5,BS Data Science,2022
+Mr. Logan Gregory,2.99,2,10,2,Certificate Data Analytics,2019
+Katherine Klein,3.94,1,1,2,MS Information Technology,2021
+Jennifer Stewart,2.31,3,10,6,MS Artificial Intelligence,2024
+Steven Butler,3.03,2,0,2,MS Information Technology,2022
+Johnny Mcmillan,2.2,1,8,9,MS Business Analytics,2024
+Michael Smith,3.68,0,3,1,MS Human-Computer Interaction,2020
+Corey Cooper,3.17,1,4,4,MS Human-Computer Interaction,2022
+Daniel Stout,2.3,3,4,3,MS Information Technology,2020
+Lance Kirby,2.4,1,0,2,MS Cybersecurity,2022
+Bonnie Carter,2.13,1,2,9,MS Data Science,2019
+Toni Whitaker,2.84,3,10,5,MS Data Science,2023
+Morgan Flynn,2.47,4,10,6,MS Computer Science,2020
+Sarah Howell,3.76,3,7,4,MS Artificial Intelligence,2024
+Paul Estrada,2.78,3,4,6,MS Cybersecurity,2019
+Curtis Obrien,2.44,3,5,5,MS Cloud Computing,2020
+Jason Chaney,3.32,3,5,2,Certificate Data Analytics,2024
+Daniel Williams,2.23,1,7,7,MS Information Technology,2022
+Stanley Kelly,3.2,2,4,4,BS Computer Science,2023
+Ronald Kline,2.43,4,5,7,BS Computer Science,2021
+Arthur Jordan,3.35,3,6,7,MS Cloud Computing,2022
+Barbara Walker,2.52,3,3,1,MS Artificial Intelligence,2021
+Gerald Kelly,3.27,3,6,1,MS Artificial Intelligence,2020
+Shawn Adams,3.15,1,10,3,MS Cybersecurity,2019
+Michael Robertson,3.9,2,2,10,MS Data Science,2023
+Michelle House,3.08,0,5,1,MS Cloud Computing,2021
+Jim Skinner,3.53,0,8,9,BS Data Science,2020
+Brian Bishop,2.72,4,6,4,Certificate Data Analytics,2024
+Theresa Colon,2.46,2,6,3,MS Business Analytics,2020
+Brian Soto,3.11,0,0,4,BS Computer Science,2023
+Susan Moore,2.21,0,2,7,MS Computer Science,2021
+Jeremy Hunter,2.6,1,0,4,MS Human-Computer Interaction,2021
+Annette Holland,3.5,3,2,7,MS Human-Computer Interaction,2024
+Chad Allison,3.75,0,8,2,BS Data Science,2024
+Jason Mack,3.41,0,8,7,BS Computer Science,2023
+Robert Peterson,3.84,4,6,2,MS Information Technology,2020
+Angela Watson,3.66,3,8,5,MS Business Analytics,2024
+Heather Ortega,2.05,1,1,5,MS Computer Science,2021
+Paul Fisher,3.94,3,4,10,MS Computer Science,2022
+Robert Gutierrez,2.19,2,7,7,MS Cybersecurity,2021
+Jimmy Phelps,3.82,1,6,9,MS Cybersecurity,2019
+Heidi Johnson,3.99,4,1,7,MS Business Analytics,2022
+Adam Drake,2.45,1,7,1,MS Cloud Computing,2021
+Angela Edwards,2.95,2,5,2,MS Human-Computer Interaction,2020
+Mrs. Amy Malone,3.62,4,2,2,BS Data Science,2020
+Margaret Orr,3.73,1,1,8,MS Data Science,2020
+Mark Reeves,2.81,4,3,8,MS Cybersecurity,2019
+Kelly Phillips,3.53,2,5,5,MS Cloud Computing,2020
+Michael Spencer,2.07,3,0,10,MS Data Science,2021
+Patrick Blankenship,3.38,4,7,9,MS Computer Science,2021
+Douglas Rose,3.92,3,7,4,MS Business Analytics,2023
+Melody Griffin,3.11,3,1,2,BS Data Science,2022
+Joshua Kramer,2.25,4,1,1,Certificate Data Analytics,2020
+Melissa Barron,2.39,3,7,2,BS Computer Science,2020
+Jennifer Gonzalez,3.25,1,8,9,MS Computer Science,2022
+Andrew Cook,2.8,3,4,5,BS Data Science,2024
+Natalie Martinez,3.84,2,9,5,MS Cybersecurity,2021
+Diane Davis DDS,3.13,2,8,3,Certificate Data Analytics,2024
+Nicole Moore,2.41,2,8,10,MS Information Technology,2023
+Robert Vargas,2.5,2,2,8,MBA Product Management,2020
+Raymond Barber,3.05,2,6,8,BS Computer Science,2020
+Mrs. Amy Watson,2.3,2,3,2,BS Computer Science,2020
+Heather Williams,3.39,2,1,9,MS Computer Science,2019
+Belinda Evans,3.25,0,5,10,Certificate Data Analytics,2024
+Jody Bird,3.12,0,3,4,MS Business Analytics,2021
+Virginia Cunningham,2.57,2,5,7,MS Data Science,2023
+Lori Ferguson,3.53,4,10,5,MS Cybersecurity,2024
+Hayley Mitchell,2.41,0,3,10,Certificate Data Analytics,2021
+Michelle Chambers,2.36,1,8,10,BS Data Science,2023
+Kelly Wright,3.29,4,9,7,MS Business Analytics,2023
+Kevin Carson,2.55,3,3,10,MS Human-Computer Interaction,2020
+Brent Dawson,2.01,0,9,4,MBA Product Management,2020
+Angela Brown,2.29,2,1,8,BS Computer Science,2019
+Karen Griffin,2.27,3,5,8,MS Cloud Computing,2021
+Joseph Chapman,3.0,4,6,2,MBA Product Management,2022
+Jennifer Baker,3.55,2,8,8,MS Business Analytics,2021
+Mr. Jeremiah Galvan MD,3.06,1,10,10,MBA Product Management,2021
+Samantha Thomas,3.42,3,7,7,MS Cybersecurity,2024
+Michael Anderson,3.58,3,10,2,MS Cybersecurity,2021
+Sharon Wilson,2.36,2,6,6,MS Computer Science,2020
+John Francis,3.23,2,2,4,MS Cloud Computing,2024
+Jaclyn Crane,3.99,2,8,4,MS Computer Science,2020
+Jennifer Martinez,2.01,0,5,5,MS Business Analytics,2021
+Amanda Hernandez,3.01,2,0,1,MS Data Science,2024
+William Turner,2.55,0,4,8,MS Cloud Computing,2021
+Dr. Charles Lawrence,3.25,3,9,10,BS Computer Science,2024
+Steven Small,2.91,4,1,3,MS Computer Science,2019
+Robert Burns,2.74,1,2,10,MS Information Technology,2020
+Gregory Harrell,2.17,3,10,2,BS Computer Science,2024
+Kenneth Knight,2.12,2,3,2,MS Cybersecurity,2024
+Rachael Alvarez,3.23,2,2,1,MS Business Analytics,2023
+Lisa Gill,3.44,0,10,6,MS Cybersecurity,2022
+Julia Cole,2.83,1,8,1,BS Data Science,2020
+Sean Nguyen,3.46,3,0,2,Certificate Data Analytics,2021
+Mary Ortiz,3.22,1,10,9,MS Cloud Computing,2024
+James Weaver,3.68,2,8,1,MS Artificial Intelligence,2021
+Stacy Fitzgerald,2.24,0,9,8,MS Data Science,2022
+Sharon Mann,2.18,0,2,2,Certificate Data Analytics,2021
+Rebecca Zimmerman,3.18,0,3,1,Certificate Data Analytics,2024
+Becky Hansen,2.75,1,4,2,MS Information Technology,2024
+Luke Ray,3.28,1,4,4,MS Information Technology,2019
+Kelly Lopez,2.76,2,2,5,Certificate Data Analytics,2023
+Steven Martinez,2.63,2,3,4,MBA Product Management,2020
+Catherine Smith,3.96,3,4,5,MS Information Technology,2019
+Danielle Thornton,2.98,2,10,10,MS Business Analytics,2023
+Jill Roman,2.9,4,6,3,BS Computer Science,2020
+Jennifer Williams,3.08,3,5,4,MS Information Technology,2024
+Allison Kim,3.62,2,8,5,MBA Product Management,2023
+Scott Stewart,3.66,4,3,5,BS Data Science,2021
+Brian Garcia,2.44,0,8,5,BS Computer Science,2024
+Charles Scott,3.26,3,9,8,Certificate Data Analytics,2021
+Eric Russell,2.74,4,0,7,MS Human-Computer Interaction,2021
+Lucas Nguyen,3.4,1,6,6,BS Computer Science,2022
+Anthony Price,2.67,2,4,2,Certificate Data Analytics,2020
+Jason Nguyen,2.93,3,9,3,BS Computer Science,2022
+Ronald Martinez,3.19,3,7,7,MS Information Technology,2020
+Paul Willis,2.51,2,7,6,MS Data Science,2024
+Paul Cruz Jr.,2.8,4,1,1,MBA Product Management,2022
+John Russell,2.85,3,9,5,MS Data Science,2019
+Mr. David Mercado,2.33,4,8,3,MS Artificial Intelligence,2020
+Victor Leonard,3.9,1,10,10,Certificate Data Analytics,2021
+Justin Glover,3.58,2,2,1,BS Data Science,2021
+Jason Miller,2.92,0,10,3,MS Computer Science,2020
+Christina Faulkner,2.4,2,1,3,MS Artificial Intelligence,2020
+William Casey,2.47,0,3,4,MS Cloud Computing,2020
+Jessica Buck,3.37,3,2,6,BS Computer Science,2021
+Aaron Marshall,2.2,3,3,9,MS Human-Computer Interaction,2022
+Donna Stanton,3.34,1,1,8,MS Information Technology,2022
+Timothy Olson,2.26,2,4,3,MS Cloud Computing,2024
+Sara James,3.46,3,8,7,MS Data Science,2019
+Mark Richards,2.69,1,9,10,BS Computer Science,2020
+Amber Stevenson,3.54,2,8,6,MS Business Analytics,2019
+Elizabeth Foster,3.22,1,2,7,BS Data Science,2022
+Charles Hawkins,2.38,3,1,4,MS Artificial Intelligence,2021
+Jeffrey Bishop,2.77,1,4,3,MS Cloud Computing,2021
+Emily Fleming,2.77,2,6,8,BS Computer Science,2020
+Dean Mullins,2.33,3,1,9,BS Data Science,2021
+David Bird,3.37,3,0,2,MS Human-Computer Interaction,2020
+Joe Greene,2.64,3,10,10,MS Cybersecurity,2022
+Michael Lucas,2.02,0,4,7,MS Cloud Computing,2022
+John Valenzuela,2.52,3,8,2,MS Data Science,2021
+Jennifer Woodard,3.56,2,1,6,MS Cybersecurity,2020
+Pamela Medina,3.96,0,2,9,MS Cloud Computing,2019
+Mariah Jones,2.67,1,8,10,MS Artificial Intelligence,2023
+Ronnie Powers,3.46,0,7,8,MS Cloud Computing,2021
+Heather Hess,2.08,2,0,8,MS Computer Science,2023
+Heather Thompson,3.37,2,10,5,MS Cloud Computing,2021
+Melissa Smith,3.53,2,2,1,MS Cybersecurity,2021
+Timothy Wallace,2.71,2,4,1,MS Computer Science,2024
+Alejandro Campbell,2.07,0,8,2,MS Business Analytics,2024
+Heather Davis,2.79,4,1,3,BS Data Science,2020
+Elizabeth Robbins,3.45,2,5,8,MS Cloud Computing,2022
+Johnny Cox,3.38,4,9,4,MS Information Technology,2022
+Tanner Mann,2.08,0,2,6,MS Business Analytics,2023
+Craig Nicholson,3.95,4,1,2,MS Cloud Computing,2021
+Sergio Carroll,3.85,3,0,5,MS Cloud Computing,2020
+Juan Keller MD,3.9,0,6,5,MS Information Technology,2019
+Krystal Jones,3.59,2,9,10,MS Artificial Intelligence,2023
+Austin Green,3.08,0,5,4,MS Information Technology,2023
+Crystal Mills,2.95,1,4,7,MS Artificial Intelligence,2023
+Cheryl Gregory,3.34,1,10,10,MS Cloud Computing,2021
+Melissa Patel MD,2.55,0,6,7,MBA Product Management,2024
+Jordan Pace,2.26,4,10,5,MS Computer Science,2021
+Terri Williams,2.19,2,3,4,BS Computer Science,2019
+Jessica Carney,3.22,4,6,10,MS Computer Science,2024
+Michael Owens,3.19,3,8,9,MS Cloud Computing,2019
+Peter Stephenson,2.69,3,2,6,MS Business Analytics,2022
+Donald Fisher,3.71,4,2,8,MBA Product Management,2024
+Aaron Lee,2.78,4,1,7,BS Computer Science,2024
+Kenneth Johnson,2.97,1,8,6,BS Data Science,2021
+Vanessa Coleman,2.61,3,0,6,MS Computer Science,2020
+David Martin,3.25,2,9,3,MS Data Science,2022
+Mark Davis,2.83,4,7,1,MS Artificial Intelligence,2020
+Robert Watkins,2.75,3,9,9,Certificate Data Analytics,2019
+Felicia Wright,2.19,0,9,4,MBA Product Management,2021
+David Peterson,2.36,3,8,3,MS Information Technology,2022
+Gavin Bauer,2.7,4,4,4,MS Cloud Computing,2021
+Patricia Harvey,3.54,2,8,2,MS Human-Computer Interaction,2023
+Lori Riley,3.07,3,7,4,MS Cloud Computing,2021
+Antonio Johnson,3.65,1,6,8,Certificate Data Analytics,2021
+Ryan Brown,2.01,1,10,6,MS Computer Science,2019
+Thomas Ramos,2.77,3,3,7,MS Cloud Computing,2024
+Mark Jones,2.06,4,9,4,Certificate Data Analytics,2023
+Kristin Phillips,4.0,3,0,10,MS Data Science,2021
+Brendan Walton,3.22,3,10,3,MS Data Science,2019
+Kyle Keller,3.9,4,10,1,MS Information Technology,2022
+James Pope,3.1,3,5,4,Certificate Data Analytics,2024
+Lisa Morgan,3.75,1,5,3,MS Computer Science,2020
+Rachel Gibson,2.59,4,7,1,MBA Product Management,2022
+Corey Garcia,2.49,1,2,10,MS Computer Science,2022
+Andrea Clarke,3.0,2,2,2,MS Data Science,2020
+Kenneth Walsh,2.92,0,10,2,BS Computer Science,2024
+Jason Hardy,2.81,3,1,9,MS Computer Science,2022
+David Robles,3.92,4,10,9,BS Data Science,2023
+Eric Graham,3.43,0,4,8,MS Computer Science,2022
+Nicole Collins,3.66,3,8,1,MS Business Analytics,2024
+Patricia Hernandez,3.3,0,2,7,BS Data Science,2021
+Grant Wood,3.52,1,5,10,BS Data Science,2022
+Kevin Gregory,3.31,3,3,3,MBA Product Management,2021
+Jonathon Conley,2.19,3,3,2,MS Computer Science,2021
+Jennifer Gonzalez,2.68,3,4,8,MS Business Analytics,2023
+Terry Glover,2.55,1,8,1,Certificate Data Analytics,2021
+Michael Neal,2.05,2,4,6,MS Data Science,2021
+Ms. Erin Lane,3.89,2,7,3,MS Data Science,2024
+Lisa Barnes,2.88,1,2,5,Certificate Data Analytics,2023
+Jesse Mccormick,2.58,1,0,7,MS Artificial Intelligence,2020
+Daniel Smith,3.17,0,4,3,MS Data Science,2021
+David Hanson,3.44,3,9,9,MS Cloud Computing,2020
+Nicholas Cisneros,3.94,4,5,3,MS Data Science,2023
+Patrick Harris,2.75,1,8,8,MS Human-Computer Interaction,2022
+William Cox,2.35,0,5,7,BS Computer Science,2020
+Alvin Wilson,2.62,2,9,4,Certificate Data Analytics,2024
+Cory Willis,3.58,3,7,4,MS Business Analytics,2023
+Amanda Johnson,3.83,4,3,1,MS Information Technology,2024
+Christopher Mcclure,2.41,0,5,1,MS Cloud Computing,2023
+Gina Spencer,2.13,4,1,9,MS Cybersecurity,2019
+Alex Cameron,2.89,1,4,9,MBA Product Management,2024
+Alisha Byrd,2.37,3,2,4,MBA Product Management,2019
+Richard Rodriguez,3.96,2,1,5,MS Cybersecurity,2024
+Elizabeth Allen,2.38,4,4,2,Certificate Data Analytics,2019
+Mary Pugh,2.42,4,7,4,MS Data Science,2022
+Yolanda Keith,2.2,0,3,1,MS Business Analytics,2022
+Ana Thomas,2.23,1,1,2,MS Computer Science,2023
+Rebecca Lee,3.18,2,9,10,MS Computer Science,2019
+James Greene,3.16,3,10,2,MS Information Technology,2020
+Dana Williams,3.18,0,4,10,MS Computer Science,2022
+Chelsea Nichols,3.2,1,5,8,MS Human-Computer Interaction,2023
+Erin Brown,2.97,2,4,5,MS Human-Computer Interaction,2023
+Shelley York,2.5,4,8,5,MS Human-Computer Interaction,2021
+Stacey Clark,3.25,3,0,2,Certificate Data Analytics,2021
+John Alvarado,3.79,3,2,9,MS Computer Science,2020
+Jordan Potter,2.13,2,1,7,MS Human-Computer Interaction,2022
+Katrina Jimenez,2.68,1,1,9,Certificate Data Analytics,2020
+Frank Brooks,2.43,2,8,9,MS Artificial Intelligence,2022
+Michelle Simpson,2.21,1,9,5,MS Data Science,2024
+James Morse,2.31,3,2,3,MBA Product Management,2020
+Amanda Robinson,3.22,4,7,3,MS Business Analytics,2024
+Scott Foster,3.19,2,3,7,MS Information Technology,2021
+Stephen Duncan,2.94,1,4,5,MS Business Analytics,2021
+Jacqueline Pierce,3.45,2,6,6,MS Computer Science,2023
+Bradley Wallace,2.79,3,0,7,BS Computer Science,2022
+Kevin Marshall,2.71,2,0,3,MS Computer Science,2024
+Jessica Mcdonald,2.4,2,0,5,MS Artificial Intelligence,2021
+Robert Stewart,2.85,4,8,7,MS Business Analytics,2024
+Christopher Hall,2.4,4,7,4,MS Data Science,2021
+Heather Miller,2.21,2,7,4,Certificate Data Analytics,2024
+Kayla Schneider,3.19,3,7,1,MS Human-Computer Interaction,2020
+Tammy Garcia,2.56,3,0,10,MS Data Science,2019
+Andrew Gonzalez,2.11,4,5,6,MS Artificial Intelligence,2022
+Gary Turner,3.85,1,1,2,MS Computer Science,2021
+Melinda Hill,3.95,1,9,7,Certificate Data Analytics,2021
+Yolanda Murillo,3.15,3,3,9,BS Data Science,2021
+Nancy Gaines,3.15,4,4,5,MS Cybersecurity,2024
+Elijah Short,2.04,2,5,2,MS Information Technology,2022
+Jennifer Sullivan,3.49,2,7,4,Certificate Data Analytics,2020
+Mary Kennedy,2.92,2,4,6,MBA Product Management,2023
+Paige Hernandez,3.5,0,10,1,Certificate Data Analytics,2022
+Darrell Curry,2.85,4,0,8,BS Computer Science,2023
+Jose Hartman,2.75,0,8,10,MS Cloud Computing,2021
+Miranda Murray,3.58,4,5,8,MS Artificial Intelligence,2024
+Emily Lopez,2.13,0,8,2,MS Data Science,2019
+Melissa Clark,3.06,4,7,9,BS Data Science,2023
+Justin Brooks,3.3,3,4,4,BS Data Science,2022
+Bethany Harding,2.9,2,1,3,MS Human-Computer Interaction,2020
+Robert Flowers,3.3,4,6,6,MS Computer Science,2019
+Jason Jennings,2.8,4,6,5,BS Computer Science,2019
+Richard Medina,2.02,1,4,6,MS Cloud Computing,2020
+Alexander Floyd,3.17,3,10,6,MS Cybersecurity,2024
+Brittany Cisneros,2.4,4,2,10,MS Business Analytics,2020
+Mark Morrison,3.55,1,1,4,MS Artificial Intelligence,2019
+Sharon Baird,3.07,4,5,1,Certificate Data Analytics,2019
+James Ferguson,2.65,1,3,6,MBA Product Management,2021
+Brian Hudson,2.33,1,5,5,MBA Product Management,2019
+Steven Davis,2.27,3,0,8,BS Data Science,2022
+Juan Johnson,3.74,0,7,4,MS Cloud Computing,2022
+Katherine Lopez,2.8,4,1,4,MS Cloud Computing,2019
+Victor Campbell,3.94,4,1,9,MS Data Science,2020
+Matthew Jones,3.51,4,5,2,MS Computer Science,2024
+Joseph Jackson,3.99,1,1,7,MBA Product Management,2023
+Jennifer Moore,2.72,0,7,5,MS Cybersecurity,2019
+Joshua Mendoza,2.01,0,5,7,MS Cloud Computing,2021
+Troy Glenn,3.89,2,3,2,MS Cloud Computing,2024
+Daniel Reynolds,2.17,0,4,7,MS Computer Science,2024
+Karen Munoz,3.29,1,3,6,BS Computer Science,2020
+Laurie Shaw,3.13,1,2,3,MS Cybersecurity,2024
+Desiree Smith,2.94,4,3,1,BS Computer Science,2024
+Austin Ross,3.32,3,2,6,MS Data Science,2022
+Kelly Kent,2.34,1,5,9,Certificate Data Analytics,2019
+Julia Johnston,3.57,1,4,1,MS Computer Science,2022
+Donna Ibarra,3.25,2,0,5,MS Data Science,2019
+Michael Dawson,2.66,1,6,8,BS Computer Science,2019
+Louis Patrick,3.08,4,2,10,MS Information Technology,2020
+David Yoder,2.2,0,6,6,MBA Product Management,2019
+Judith Bartlett,2.22,3,8,8,MS Computer Science,2022
+Keith Long,2.27,0,4,10,MS Human-Computer Interaction,2022
+Cynthia Harrell,2.94,2,10,5,Certificate Data Analytics,2023
+Mark Carter,2.73,0,7,10,MS Human-Computer Interaction,2022
+Melissa Bowen,3.5,1,3,10,MBA Product Management,2023
+Johnny Riddle,2.26,0,1,3,MBA Product Management,2024
+Whitney Jones,2.81,1,3,10,BS Data Science,2021
+Randall Nguyen,2.37,3,10,5,MS Business Analytics,2023
+David Hunter,3.04,1,5,10,MS Artificial Intelligence,2022
+Benjamin Neal,2.75,0,6,3,MS Data Science,2024
+Jane Reese,2.1,0,2,4,Certificate Data Analytics,2024
+Jennifer Smith,2.07,3,5,4,Certificate Data Analytics,2019
+Thomas Murphy,3.14,1,10,8,MS Business Analytics,2023
+Kari Jones,2.81,4,4,4,MS Computer Science,2023
+Dana Dodson,2.88,4,5,5,MS Human-Computer Interaction,2021
+Robert Skinner,3.99,2,7,3,MS Artificial Intelligence,2023
+Albert Garcia,2.91,2,8,2,MS Human-Computer Interaction,2021
+Joseph Myers,2.13,0,8,6,MS Cloud Computing,2020
+Phillip Byrd,2.19,0,8,8,BS Data Science,2024
+Hunter Robinson,2.59,3,6,6,MS Artificial Intelligence,2023
+Michael Robinson,3.97,1,6,2,MS Cybersecurity,2023
+Sara Cain,2.39,1,5,4,BS Computer Science,2023
+Michelle Prince,3.2,4,8,3,MS Data Science,2019
+Eric Williams,3.6,1,8,6,MS Cybersecurity,2020
+Raymond Wang,2.75,1,10,2,MS Human-Computer Interaction,2024
+Jade Allen,3.72,1,8,4,MS Information Technology,2023
+Javier Hays,2.85,0,6,4,MS Artificial Intelligence,2021
+Corey Caldwell,2.78,3,7,9,MS Cloud Computing,2021
+Stephen Robles,2.27,0,4,5,BS Computer Science,2024
+Carol Jackson,3.11,4,9,5,MBA Product Management,2019
+Brian Murphy,2.12,1,7,7,Certificate Data Analytics,2020
+Chelsey Clark,3.53,1,10,4,MS Cloud Computing,2022
+Teresa Martinez,2.78,2,1,4,MBA Product Management,2020
+Howard Thompson,3.93,3,1,5,Certificate Data Analytics,2024
+Eugene Price,3.48,3,2,3,MBA Product Management,2024
+Austin Briggs,2.55,0,8,6,BS Computer Science,2021
+Jackie Jones,3.05,1,10,10,MS Computer Science,2022
+Eric George,2.6,4,7,2,MS Cybersecurity,2020
+Mrs. Kimberly Mooney,2.14,0,6,6,MS Artificial Intelligence,2021
+Carolyn Haley,2.23,4,2,8,MS Cloud Computing,2024
+Vicki Horton,3.38,1,8,8,MS Artificial Intelligence,2019
+Valerie Benson,2.18,2,3,10,MS Data Science,2024
+Mark Henson,2.99,0,10,7,MS Cloud Computing,2019
+Samuel Olson,3.73,2,4,5,MS Information Technology,2024
+Lee Richards,3.02,2,5,7,MS Human-Computer Interaction,2019
+Martin Hall,2.03,4,7,8,MBA Product Management,2020
+Virginia Hall,3.18,3,8,5,BS Data Science,2023
+Stephanie Parker,3.67,4,10,7,MS Data Science,2022
+Nicole Harvey,2.08,0,9,2,MS Data Science,2019
+James Phillips,2.23,4,10,4,MS Business Analytics,2024
+Dan Johnson,3.81,0,5,7,MS Cloud Computing,2024
+Linda Bautista,3.58,4,0,8,MS Data Science,2022
+Erin Ramirez,3.63,0,3,7,MS Human-Computer Interaction,2023
+Paige Meyer,2.36,2,6,6,BS Data Science,2019
+Maria Roberts,3.46,2,5,5,MS Business Analytics,2020
+Ryan Rivera,2.55,3,10,1,MS Business Analytics,2021
+Joshua Knox,3.54,4,8,3,MBA Product Management,2024
+Danielle Mcdaniel,2.64,1,7,7,MS Business Analytics,2019
+Lisa James,2.67,1,5,10,MS Cybersecurity,2021
+Jeremy Smith,2.2,3,5,2,MS Human-Computer Interaction,2023
+Andrea Lee,2.99,1,4,3,MS Cloud Computing,2024
+Brenda Harris,2.97,2,2,6,MS Computer Science,2020
+Kevin Guerra,2.65,4,4,2,MBA Product Management,2023
+Cynthia Miller,3.4,4,8,9,MS Artificial Intelligence,2020
+Emily Griffith,2.8,0,1,2,MBA Product Management,2024
+Christopher Wright,3.2,1,5,7,MS Artificial Intelligence,2023
+Jerome Reid,2.71,0,4,3,MS Cloud Computing,2023
+Richard Miller,3.14,1,7,2,MS Business Analytics,2019
+Jennifer Jackson,2.49,2,0,3,MS Human-Computer Interaction,2022
+Jonathan Moss,2.45,1,7,4,MBA Product Management,2024
+Sally Leon,3.62,2,3,3,BS Computer Science,2019
+James Dickerson,3.72,3,8,8,MS Computer Science,2023
+Tammy Larson,4.0,1,8,4,MS Cloud Computing,2023
+Nicholas Scott,2.8,2,5,10,MS Cloud Computing,2021
+Jesse Brooks,2.86,2,8,6,MBA Product Management,2021
+Andrea Taylor,2.15,1,8,3,MS Business Analytics,2023
+Christopher Lopez,2.26,3,8,9,MS Information Technology,2021
+Jonathan Swanson,2.21,2,10,10,MBA Product Management,2023
+Timothy Bentley DVM,3.64,2,9,4,MS Computer Science,2019
+John Davidson,2.92,4,6,8,MS Computer Science,2019
+Jennifer Williams,3.91,4,7,3,BS Computer Science,2023
+Janice Cunningham,3.3,1,1,6,MS Computer Science,2024
+Jeffrey Scott,2.71,2,0,5,MS Data Science,2024
+Miranda Hicks,3.2,1,6,7,MS Information Technology,2020
+Michael Horton DDS,3.32,2,5,5,MS Cybersecurity,2020
+Nancy Allen,3.14,1,8,9,MS Cloud Computing,2024
+Robert Mccoy,3.17,0,5,1,MS Data Science,2023
+Melissa Brewer,2.24,0,8,2,MS Data Science,2022
+Jesus Becker,3.46,4,2,4,MBA Product Management,2020
+Lance Lynn,2.06,0,5,8,MS Information Technology,2019
+Alexandria Wise,2.19,3,6,7,MS Data Science,2022
+Sydney Sanders,3.39,1,1,3,MS Business Analytics,2021
+Stephanie Stone,2.71,3,1,7,MS Artificial Intelligence,2020
+Jay Gallegos,2.52,2,10,4,MBA Product Management,2024
+Eric Ponce,2.16,4,4,8,BS Data Science,2019
+Janet Parker,3.76,0,10,1,MS Cybersecurity,2021
+Shawn Luna,2.19,0,0,1,MS Cybersecurity,2021
+Mark Frank,2.77,4,5,1,MS Data Science,2019
+Charles Goodman,3.91,4,7,4,MS Human-Computer Interaction,2020
+Jennifer Parker,3.07,1,9,6,BS Data Science,2021
+Dr. April Jones,3.15,1,8,8,MS Information Technology,2020
+Kelly Pena,3.63,4,0,8,BS Computer Science,2023
+Carolyn Brooks,3.78,2,1,2,MS Artificial Intelligence,2021
+Christina White,3.37,1,1,10,MS Cybersecurity,2022
+Joanne Olsen,2.39,2,7,3,MS Data Science,2024
+Anthony White,3.1,0,10,7,MS Computer Science,2023
+Deanna Barrera,2.13,1,3,4,MS Business Analytics,2022
+Mark Weber,2.38,2,0,7,BS Computer Science,2022
+Carol Carter,3.62,4,1,10,BS Data Science,2024
+Donald Peterson,3.31,4,8,9,MS Data Science,2023
+Karen Chambers,2.79,1,4,9,MS Human-Computer Interaction,2021
+Antonio Walton,2.27,3,6,4,MS Artificial Intelligence,2022
+Kevin Huerta,2.75,3,1,8,BS Computer Science,2021
+Joseph Smith,3.12,2,7,10,MS Cloud Computing,2021
+Victoria Juarez,3.54,0,3,1,MS Cybersecurity,2019
+Kara Rogers,2.61,4,8,10,MS Information Technology,2020
+Jacob Wu,3.28,0,0,1,MS Cybersecurity,2021
+Dr. Teresa Ortega MD,2.77,0,10,6,MS Cybersecurity,2022
+Henry Rivera,3.48,4,5,9,Certificate Data Analytics,2024
+Jesus Hale,3.4,3,2,4,BS Data Science,2020
+Stacy Taylor,3.42,1,7,2,MS Information Technology,2020
+Sheila Ramirez,3.14,0,6,10,BS Computer Science,2020
+Robin Richardson,3.8,0,3,2,MS Artificial Intelligence,2024
+Mary Alvarez,3.63,3,3,6,Certificate Data Analytics,2021
+Cole Andersen,3.84,1,2,7,BS Computer Science,2023
+Robin Smith,2.49,4,10,5,MS Cloud Computing,2021
+Angel Aguirre,2.41,0,6,5,MS Cloud Computing,2022
+Jeremy Lawson,2.75,2,9,4,MS Computer Science,2019
+Lonnie Miller,3.25,3,2,7,BS Computer Science,2024
+Timothy Galvan,3.38,0,1,2,MS Human-Computer Interaction,2020
+Dr. Susan Navarro,3.8,1,8,8,BS Data Science,2021
+Cory Thomas,2.33,3,4,5,MS Human-Computer Interaction,2023
+Laura Vincent,2.57,0,1,10,MS Artificial Intelligence,2022
+Bethany Robles,3.65,4,7,4,BS Data Science,2020
+Michael Dunn,2.25,3,1,1,MS Computer Science,2019
+Carol Griffin,2.46,0,1,7,Certificate Data Analytics,2020
+Matthew Allen,2.87,1,7,6,MS Computer Science,2023
+Paul Keller,3.54,1,5,9,MBA Product Management,2019
+Jeffrey Baldwin,3.14,2,2,3,MS Business Analytics,2021
+Timothy Orr,2.92,3,2,1,MS Cloud Computing,2021
+Connie Scott,3.01,1,5,4,Certificate Data Analytics,2024
+Steven Martinez,3.44,0,3,1,MS Computer Science,2023
+Joseph Swanson,3.06,1,8,9,Certificate Data Analytics,2021
+Michael Wiggins,2.11,4,8,2,MS Cloud Computing,2019
+Pamela Burke,3.24,2,5,3,MS Information Technology,2019
+Jamie Love,2.29,1,0,2,MS Human-Computer Interaction,2022
+Jane May,2.01,4,1,1,MS Cloud Computing,2020
+Savannah Stokes,3.52,4,1,1,MS Data Science,2019
+Brian Miller,3.3,3,4,8,MS Data Science,2024
+Patrick Pineda,3.23,1,10,8,MS Information Technology,2022
+Audrey Richardson,3.23,3,7,6,MS Human-Computer Interaction,2020
+Tiffany Ray,2.91,1,4,6,MBA Product Management,2024
+Antonio Nichols,3.46,1,5,7,MS Artificial Intelligence,2024
+Veronica Flores,2.04,0,7,5,Certificate Data Analytics,2022
+Michael Hogan,3.42,3,2,9,MBA Product Management,2024
+Lindsay Walker,2.71,3,7,7,MS Cloud Computing,2024
+Joshua Murray,2.9,2,5,7,MS Computer Science,2021
+Tommy Hood,3.33,4,3,3,MS Information Technology,2020
+Mr. Kyle Thomas DDS,2.43,1,10,4,MS Data Science,2023
+Michele George,2.73,3,5,8,MS Cybersecurity,2024
+William Martinez,2.61,3,1,7,Certificate Data Analytics,2023
+Michelle Mendoza DVM,3.3,3,0,5,MS Data Science,2020
+Michael Bennett DVM,2.43,3,8,9,Certificate Data Analytics,2022
+Ronald Clark,2.36,1,6,8,BS Computer Science,2023
+Rita Graves,3.33,4,2,5,MS Information Technology,2024
+Sean White,2.8,3,5,4,Certificate Data Analytics,2022
+Mr. William Hopkins,2.49,2,9,3,MS Computer Science,2023
+Wendy Kelley,3.06,0,1,1,MS Human-Computer Interaction,2019
+Michael Mooney,2.04,0,5,1,MS Business Analytics,2021
+Jeanne Rose,2.41,2,1,3,MBA Product Management,2021
+Michael Lee,3.25,3,7,6,MS Data Science,2021
+Jennifer Anderson,3.41,0,8,5,MS Artificial Intelligence,2020
+Lauren Trujillo,3.8,3,1,3,Certificate Data Analytics,2023
+Michelle Ellis,3.82,4,8,7,Certificate Data Analytics,2024
+Chad Dominguez,2.94,1,1,5,MS Information Technology,2024
+Charles Robinson,3.89,0,2,8,BS Data Science,2022
+Nancy Smith,2.95,0,9,8,Certificate Data Analytics,2024
+Laura Gregory,3.98,4,9,6,MS Computer Science,2020
+Brittany Clements MD,2.89,4,5,1,MS Computer Science,2021
+Tammy Davis,3.98,1,2,6,BS Data Science,2023
+Catherine Williams,2.6,0,10,7,Certificate Data Analytics,2020
+Miss Leslie Booker,3.92,0,5,6,MS Artificial Intelligence,2023
+Jennifer Johnson,3.97,4,9,8,BS Computer Science,2022
+John Watts,3.98,1,8,6,MS Artificial Intelligence,2021
+Marissa Bennett,3.96,2,2,1,MS Computer Science,2019
+Rebecca Barrett,3.3,3,6,5,MS Artificial Intelligence,2021
+Sharon Santos,2.08,0,5,8,MS Human-Computer Interaction,2023
+Matthew Richardson,2.06,4,0,10,BS Computer Science,2021
+Bradley Burns,2.76,3,0,8,MS Cloud Computing,2024
+Katrina Johnson,3.34,2,8,7,MS Business Analytics,2022
+Laura Hill,2.81,2,4,6,Certificate Data Analytics,2023
+Rebecca White,2.39,0,7,5,MS Artificial Intelligence,2024
+Mr. Jeffrey Duncan,2.17,0,0,6,MS Cybersecurity,2020
+Arthur Stout,3.61,0,2,2,MBA Product Management,2021
+Cathy Hess,2.13,0,1,10,MBA Product Management,2019
+Justin Herrera,3.45,0,2,6,MS Data Science,2023
+Katherine Stone,3.25,2,10,8,MS Human-Computer Interaction,2019
+Michelle Tyler,3.23,1,3,1,MS Information Technology,2024
+Paul Sheppard,3.85,0,0,3,BS Data Science,2022
+Catherine George,3.58,0,1,4,MBA Product Management,2022
+Justin Mcbride,2.64,3,3,9,MBA Product Management,2024
+Carl Harris,3.98,1,7,10,MS Information Technology,2021
+Justin York,3.46,3,2,10,BS Computer Science,2023
+William Hunter,2.01,2,2,3,MBA Product Management,2023
+Joshua Henderson,3.15,0,1,4,MS Information Technology,2020
+April Turner,2.37,1,6,6,MBA Product Management,2024
+Kelly Patton,3.67,3,8,5,MS Data Science,2024
+Jill Ray,2.57,2,3,7,MS Artificial Intelligence,2023
+Kelly Andersen,2.01,1,1,5,MS Artificial Intelligence,2019
+Joshua Clark,2.13,0,9,6,MS Information Technology,2022
+Robert Young,2.16,0,5,8,BS Computer Science,2023
+Elijah Wall,3.54,4,10,6,MS Information Technology,2019
+Lindsey Robinson,3.14,2,7,6,MS Computer Science,2021
+Carl Dean,3.0,4,3,8,MS Business Analytics,2020
+David James,3.17,2,6,1,MS Information Technology,2022
+Jennifer Miller,3.76,3,7,6,MS Cloud Computing,2022
+Jeffery Neal,2.31,0,2,7,MS Cloud Computing,2021
+Andrea Oconnor,2.76,2,0,3,MS Cloud Computing,2022
+Melissa Lee MD,3.58,4,2,3,Certificate Data Analytics,2020
+Samantha Jacobs,2.19,1,4,7,MS Computer Science,2021
+Christian Riddle,2.4,1,4,8,MS Cloud Computing,2023
+Alexander Munoz,2.56,4,7,4,MS Computer Science,2022
+Caleb Rodriguez,2.87,0,5,3,MS Computer Science,2019
+Andrea Bowman,2.13,3,9,6,MS Information Technology,2021
+Gavin Nelson,2.28,1,6,9,MS Computer Science,2022
+Courtney Smith,2.03,1,5,5,MS Human-Computer Interaction,2024
+Wayne Gray,2.62,4,1,10,MS Cloud Computing,2023
+Timothy Thompson,2.26,2,2,5,MS Business Analytics,2021
+Elizabeth Nicholson,3.13,0,7,8,BS Data Science,2021
+Joseph Graves PhD,2.83,1,5,4,MS Business Analytics,2024
+Lisa Mosley,3.83,4,5,8,MS Artificial Intelligence,2023
+Travis Price,3.59,2,10,4,Certificate Data Analytics,2023
+Patrick Faulkner,3.94,4,9,4,MS Information Technology,2020
+Linda Atkinson,3.63,4,7,4,MS Computer Science,2019
+Cameron Smith,2.63,1,9,2,MS Cloud Computing,2021
+Brittney Martinez,2.16,4,4,8,MS Computer Science,2019
+Nicolas Brown,2.9,1,5,4,MS Artificial Intelligence,2019
+Vanessa Zimmerman,2.95,0,5,4,MS Human-Computer Interaction,2021
+Lee Mann,3.65,1,4,8,MS Cybersecurity,2021
+William Lindsey,2.97,4,3,6,MS Data Science,2024
+Desiree Patterson,2.38,0,4,10,MS Data Science,2024
+Sierra Cervantes,2.12,4,4,4,MS Cybersecurity,2020
+Scott Meza,3.58,0,4,7,MS Information Technology,2021
+Erik Davis,2.41,0,10,5,BS Computer Science,2024
+Nicholas Duffy,3.52,3,2,2,MS Business Analytics,2022
+Anthony Paul,3.25,4,7,9,Certificate Data Analytics,2021
+Katherine Baxter,2.22,2,3,5,MS Computer Science,2024
+Jessica Romero,3.21,4,2,5,Certificate Data Analytics,2021
+Karen Robertson,3.91,2,8,2,BS Computer Science,2022
+Dr. Melissa Sullivan DDS,2.74,3,8,6,MS Information Technology,2019
+Nichole Klein,3.26,1,5,6,MS Cloud Computing,2023
+Nicole Sanchez,3.67,2,5,1,MS Human-Computer Interaction,2023
+Tiffany Morrow,3.51,0,2,1,MS Cybersecurity,2022
+Kelsey Lynch,2.13,1,1,2,Certificate Data Analytics,2023
+Traci Craig,2.33,2,5,4,BS Data Science,2021
+Kelly Walker,2.16,3,6,6,BS Data Science,2023
+Ryan Palmer,2.12,3,2,7,MS Human-Computer Interaction,2023
+Jenny Gray,3.65,1,1,4,MS Computer Science,2021
+Brian Sloan,2.45,4,0,1,MS Human-Computer Interaction,2019
+Joshua Miranda,3.29,0,0,4,MS Computer Science,2020
+Edwin Carter,3.52,4,5,3,Certificate Data Analytics,2021
+Oscar Carroll,2.78,4,4,7,BS Computer Science,2022
+Eric Fitzpatrick,2.05,0,0,7,MS Cybersecurity,2020
+Samantha Johnson,3.18,4,7,4,MBA Product Management,2019
+Luke Freeman,2.7,2,8,2,MS Data Science,2020
+Luis Murphy,2.79,0,10,3,MS Cybersecurity,2024
+Aaron Zamora,3.25,2,8,5,MS Cybersecurity,2022
+Henry Garcia,2.32,2,5,4,MS Data Science,2020
+Bradley Robertson Jr.,2.65,0,10,5,MS Cloud Computing,2021
+John Moore,2.9,4,6,8,MS Data Science,2020
+Courtney Foster,2.37,0,3,1,MS Cloud Computing,2020
+Jeffrey White,3.52,1,9,5,MS Information Technology,2021
+Ashley Gonzales,2.72,1,9,1,MS Human-Computer Interaction,2021
+Candice Gomez,2.43,0,3,1,MS Artificial Intelligence,2020
+Ian Harrell,3.72,3,5,4,MS Computer Science,2022
+Colton Williams,3.97,3,7,10,Certificate Data Analytics,2023
+Patrick Santana,3.19,4,1,4,BS Data Science,2019
+Cristian Mendoza,3.71,0,4,10,BS Computer Science,2019
+Deborah Fisher,2.61,4,2,7,MS Information Technology,2019
+Rebecca Klein,2.11,1,6,4,MS Human-Computer Interaction,2024
+Phillip Macias,3.75,3,10,2,MS Artificial Intelligence,2019
+Tammy Cameron,2.59,2,2,1,BS Data Science,2021
+Brian Rodriguez,2.91,0,7,4,BS Data Science,2020
+Christopher Porter,2.03,1,7,2,MS Information Technology,2023
+Cynthia Gregory,3.39,0,9,5,MS Artificial Intelligence,2022
+William Mclaughlin,2.13,0,6,3,MBA Product Management,2024
+Dylan Tucker,2.75,3,7,1,MS Computer Science,2022
+Danielle Hernandez,2.35,0,10,1,MS Data Science,2019
+Danielle Wang,3.92,2,7,5,MS Information Technology,2020
+Wendy Wright,3.6,2,3,1,MS Human-Computer Interaction,2020
+Christina Mccarthy,3.38,0,9,1,MS Human-Computer Interaction,2022
+Meredith Shaw,3.12,0,4,8,MBA Product Management,2021
+Willie Garza,2.18,3,8,6,MS Computer Science,2020
+Crystal Anderson,2.75,4,8,6,MS Information Technology,2020
+William Hickman,2.64,1,9,6,MS Cloud Computing,2022
+Luis Davis,2.74,1,10,6,MS Artificial Intelligence,2022
+Jason Torres,3.35,3,1,7,MS Business Analytics,2023
+Crystal Rogers,2.51,2,10,3,MS Business Analytics,2022
+Jordan Schneider,2.9,1,0,9,MS Human-Computer Interaction,2021
+Derrick Ramirez,3.01,2,8,3,MS Data Science,2024
+Jason Flores,3.66,1,3,3,MS Data Science,2024
+Andrew Williams,2.79,4,8,7,BS Data Science,2019
+Christy Kennedy,3.04,2,8,10,BS Computer Science,2024
+Ashlee Lopez,3.88,2,7,4,MS Human-Computer Interaction,2019
+Heidi Torres,2.65,3,8,6,MS Cybersecurity,2024
+Adam Arnold,3.64,2,6,4,MS Data Science,2024
+Erin Figueroa,3.5,3,2,2,MBA Product Management,2024
+Richard Rice,3.79,0,8,4,MS Information Technology,2019
+Matthew Clark,2.99,2,3,2,MS Information Technology,2022
+Stephen Anderson,2.61,0,3,4,MS Cybersecurity,2019
+Barbara Willis,2.03,1,2,5,BS Data Science,2024
+Martha Lee,2.14,0,6,5,MS Computer Science,2021
+Tammy Jones,3.32,4,4,1,MS Information Technology,2021
+Grace Swanson,2.78,3,9,4,MS Artificial Intelligence,2023
+Christina Le MD,3.84,0,10,10,MS Data Science,2022
+Joshua King,3.95,2,0,8,MS Business Analytics,2021
+Sarah Meadows,3.4,0,6,7,MS Cybersecurity,2024
+Stephanie West,3.17,3,0,6,MS Human-Computer Interaction,2022
+Susan Jones,2.08,3,4,8,BS Data Science,2023
+Timothy Gordon,2.18,0,7,4,MS Information Technology,2022
+Kyle Horton,3.5,3,0,4,MS Data Science,2021
+Angel Knight,2.62,4,6,8,MBA Product Management,2019
+Melissa Yang,2.02,0,8,3,MS Data Science,2022
+Michael Berg,2.14,2,9,3,MS Computer Science,2022
+Carol Christensen,3.6,0,4,9,MS Human-Computer Interaction,2023
+Richard Morales,2.24,1,7,9,MS Computer Science,2021
+Clinton Moore,3.71,4,5,1,MS Artificial Intelligence,2022
+Michael Suarez,2.22,1,7,3,BS Data Science,2022
+Joy Zimmerman,2.5,1,6,7,MS Information Technology,2019
+Elizabeth Robinson,2.6,4,7,4,MS Business Analytics,2020
+Kristen Jackson,3.43,1,2,2,BS Data Science,2020
+David Williams,3.48,0,7,10,MS Data Science,2022
+Stephen Ho,2.73,4,5,7,BS Computer Science,2024
+Richard Day,3.09,0,4,7,MS Computer Science,2022
+Rodney Nichols,3.11,0,1,7,BS Data Science,2021
+Gregory Jacobs,3.76,3,8,6,MS Computer Science,2020
+Bradley Thornton,3.81,0,2,3,BS Data Science,2019
+Miranda Ortiz,3.14,4,5,4,MS Computer Science,2023
+Erika Brown,2.53,1,9,2,MS Human-Computer Interaction,2022
+Samantha Robinson,2.23,1,2,1,MBA Product Management,2021
+Cassandra Bonilla,2.27,2,0,7,BS Computer Science,2023
+Veronica Osborne,3.58,2,9,2,MS Cybersecurity,2023
+Ashley Reese,2.02,1,7,3,MS Business Analytics,2020
+Matthew Berg,2.38,3,3,8,MS Computer Science,2019
+Kristen Montoya,2.34,4,1,9,MS Human-Computer Interaction,2020
+Derrick Perkins,3.33,0,7,9,Certificate Data Analytics,2023
+Nicole Moore,3.98,1,3,2,MS Data Science,2024
+Nicholas Richardson,3.51,2,6,6,MBA Product Management,2019
+Anna White,3.5,3,0,1,MS Business Analytics,2020
+Scott Lopez,3.34,3,9,6,MS Cloud Computing,2020
+Nicholas Holland Jr.,3.5,4,8,3,MS Computer Science,2022
+Christopher Long,3.29,4,8,3,MBA Product Management,2021
+Andrea Jones,2.99,4,0,2,MS Cloud Computing,2022
+Terry Waller,2.13,1,10,2,MS Information Technology,2019
+Joseph Acosta,2.74,3,10,7,MS Artificial Intelligence,2021
+Lindsey Gray,2.61,2,4,9,MS Data Science,2022
+Ronald Hines,3.02,4,8,7,MS Information Technology,2024
+Amanda Wright,3.21,3,5,10,Certificate Data Analytics,2019
+Charles Burton,3.38,4,9,6,MS Cybersecurity,2024
+Vincent Rosario,2.13,2,9,5,MS Artificial Intelligence,2023
+Noah Morgan,2.46,4,3,6,MBA Product Management,2021
+Christina Castillo,3.94,4,10,4,MS Business Analytics,2022
+Jill Martin,2.56,1,9,10,MS Cloud Computing,2020
+Christopher Brown,3.6,2,8,5,MBA Product Management,2023
+Lori Martinez,2.64,4,2,8,MS Data Science,2019
+Ashley Phillips,3.45,1,3,5,MS Human-Computer Interaction,2023
+Sara Thomas,3.58,3,5,6,Certificate Data Analytics,2020
+Allison Simmons,2.78,3,8,5,MS Data Science,2021
+Matthew Perez,2.29,2,1,10,BS Data Science,2022
+Janice Henson,3.63,0,3,7,BS Computer Science,2021
+Ashley Jackson,3.86,4,4,8,MS Cybersecurity,2023
+Brian Sosa,3.13,0,6,4,MS Artificial Intelligence,2024
+Luis Wilson,3.96,3,6,10,BS Data Science,2022
+Tamara Huang,2.63,0,5,3,Certificate Data Analytics,2019
+Cassandra Moreno,2.08,0,8,2,MS Artificial Intelligence,2023
+Meghan Hernandez,2.54,3,3,2,MS Information Technology,2019
+Elizabeth Roth,3.78,0,1,10,BS Computer Science,2021
+Brian Hendricks,3.95,3,3,5,MS Artificial Intelligence,2020
+Tasha Cochran,2.44,2,8,10,MS Data Science,2021
+Angela Smith,3.68,4,9,3,BS Computer Science,2021
+Brittany Rios,3.52,1,8,3,MS Cloud Computing,2023
+James Griffith,2.03,4,9,3,BS Data Science,2021
+Karen Jones,3.62,1,6,2,BS Data Science,2020
+Tina Ramirez,2.48,1,3,10,Certificate Data Analytics,2021
+Zachary White,2.21,2,6,4,MS Human-Computer Interaction,2023
+Francisco Coleman,3.72,1,3,7,MS Computer Science,2019
+Jennifer Leon,3.69,3,7,7,MS Information Technology,2020
+Robert Valdez,3.48,3,0,7,MS Data Science,2023
+Jason Crawford,3.53,3,6,4,MS Human-Computer Interaction,2023
+Kim Underwood,2.68,4,9,1,MS Computer Science,2022
+Kevin Fisher,3.68,2,2,10,MBA Product Management,2024
+Melissa Goodman,2.15,3,3,7,Certificate Data Analytics,2020
+Cynthia Smith,2.63,1,4,7,MS Artificial Intelligence,2020
+Alicia Grant DVM,2.76,4,3,8,BS Computer Science,2024
+Amy Bailey,3.4,0,6,8,MS Information Technology,2023
+Sharon Fuentes,2.69,3,6,7,BS Computer Science,2024
+Charles Castaneda,2.89,3,4,7,BS Data Science,2021
+Susan Sanchez,2.46,3,2,6,MS Artificial Intelligence,2020
+Amy Taylor,2.44,4,9,10,MS Human-Computer Interaction,2023
+Michele Bennett,3.62,2,0,1,MS Cloud Computing,2020
+Vincent Watson,2.18,4,8,3,BS Data Science,2019
+Mary Jones,2.5,3,2,9,MS Artificial Intelligence,2021
+Sheila Johnson,2.28,1,3,7,MS Artificial Intelligence,2022
+Bob Jones,2.62,1,1,9,BS Data Science,2023
+Robin Hernandez,2.1,4,7,3,MS Artificial Intelligence,2022
+Patrick Adkins,3.79,1,9,4,BS Computer Science,2024
+Elizabeth Jenkins,2.15,1,8,2,MS Artificial Intelligence,2019
+Richard Dominguez,3.56,1,2,9,MS Business Analytics,2023
+Christopher Ibarra,3.86,2,2,4,BS Computer Science,2021
+Paul Gordon,3.03,4,0,1,MS Cybersecurity,2022
+Ronnie Frazier,2.27,1,2,1,MS Computer Science,2020
+Kristen Gallegos,3.72,2,7,6,MS Data Science,2020
+Kathryn Fletcher,2.91,1,2,2,MS Information Technology,2024
+Christopher Dudley,3.21,3,2,1,BS Data Science,2019
+Vanessa Martinez,2.57,3,8,9,MS Computer Science,2023
+Manuel Robinson,3.45,4,5,9,MS Computer Science,2023
+Paul Hansen,3.15,4,6,7,MS Artificial Intelligence,2020
+Rose Mcdonald,3.01,0,3,8,Certificate Data Analytics,2019
+Martin Wilcox,3.2,0,9,6,MS Artificial Intelligence,2022
+Robert Lucas,2.77,0,5,5,MS Business Analytics,2022
+Brian Miller,2.4,3,10,1,MBA Product Management,2020
+Sarah Johnson,2.9,1,10,10,MS Information Technology,2021
+Joshua Jones,2.79,1,7,3,BS Computer Science,2021
+Nicole Parker,2.97,3,5,8,MS Information Technology,2020
+Margaret Johnson,2.93,1,2,7,BS Computer Science,2024
+William Cunningham,3.85,0,5,5,MS Business Analytics,2022
+Rachel Williams,3.82,4,4,7,BS Data Science,2021
+Tony Smith,3.64,0,7,9,MS Computer Science,2019
+Douglas Sanders,2.7,4,2,4,MS Artificial Intelligence,2019
+Paul Swanson,3.98,4,4,3,MS Information Technology,2019
+Michele Davis,2.05,4,5,4,MS Human-Computer Interaction,2019
+Patrick Garcia,2.9,3,5,6,MS Data Science,2023
+Brittany Matthews,2.65,4,9,6,BS Computer Science,2019
+Kevin Christian,3.77,4,0,8,MS Cloud Computing,2024
+Christian Ford,3.56,0,2,10,MS Cybersecurity,2022
+Anna Higgins,2.66,2,2,8,MS Information Technology,2020
+Rhonda Pena,3.52,4,6,4,BS Data Science,2021
+Candace Stuart,2.79,2,0,1,BS Computer Science,2020
+Monica Curtis,2.39,3,2,10,MBA Product Management,2022
+Gloria Floyd,3.09,0,1,5,MBA Product Management,2020
+Isaac Chase,3.72,3,1,5,MS Information Technology,2020
+Steven Schroeder,2.94,3,1,3,MS Human-Computer Interaction,2019
+Daniel Bishop,3.34,2,7,6,MS Data Science,2021
+Christian Burton,3.15,2,10,9,MS Information Technology,2024
+Robert Thomas PhD,2.65,4,8,3,MS Human-Computer Interaction,2024
+Tracy Harrington,2.56,1,0,10,MBA Product Management,2022
+Brandon Edwards,2.97,2,7,6,MS Cybersecurity,2024
+Candice Ramirez,3.98,2,4,1,MS Data Science,2019
+Brandon White,3.65,1,3,9,MBA Product Management,2022
+Deanna Kennedy,3.81,4,8,2,MS Information Technology,2021
+Shawn Santos,2.83,4,5,7,MS Cloud Computing,2021
+Caleb Carroll,2.16,3,10,3,MS Data Science,2019
+Scott Morales,3.55,3,6,1,MS Cloud Computing,2020
+Sylvia Anderson,2.83,2,1,1,MS Business Analytics,2021
+Ryan Crane,2.47,4,3,8,MS Cloud Computing,2022
+Michael Hunter,2.86,1,9,4,MS Artificial Intelligence,2020
+Shawn Fleming,2.67,4,6,10,MS Business Analytics,2019
+Maria Figueroa,2.2,0,2,2,MS Information Technology,2023
+Roberto Smith,2.86,1,0,2,MS Information Technology,2019
+Donna Moore,2.94,2,5,1,Certificate Data Analytics,2024
+Benjamin Price,3.37,4,1,6,MS Human-Computer Interaction,2019
+Brandon Owens,2.33,0,0,5,MS Business Analytics,2023
+Stephanie Marshall,2.16,0,3,1,MS Data Science,2020
+Nicholas Lowery,3.79,2,9,8,BS Data Science,2021
+Patricia Gonzalez,3.23,4,4,9,BS Data Science,2020
+Evan Davies,2.13,1,10,10,MS Artificial Intelligence,2024
+Dr. John Ramirez,3.03,1,4,8,MS Data Science,2019
+Christopher Harrison,2.79,1,7,6,MS Human-Computer Interaction,2022
+Erica Johnson,2.72,2,10,9,MS Artificial Intelligence,2024
+Jamie Mayer,3.63,2,10,7,MBA Product Management,2021
+Jeffrey Kennedy,2.42,1,0,8,Certificate Data Analytics,2019
+Sean Cisneros,2.12,0,7,2,Certificate Data Analytics,2020
+Debra Reid,2.3,2,5,2,MS Artificial Intelligence,2023
+Benjamin Sullivan,2.48,3,1,8,MS Cloud Computing,2024
+Michael Savage,3.34,4,4,9,MS Information Technology,2024
+Mckenzie Green,2.42,0,5,8,MS Human-Computer Interaction,2020
+Anna Valenzuela,2.78,0,0,6,BS Data Science,2021
+Paul Martin,2.78,3,5,8,MS Computer Science,2022
+Jason Alvarez,2.27,3,10,6,MS Information Technology,2021
+Caitlyn Horton,3.92,1,0,10,MS Information Technology,2020
+Michael Price,3.91,3,5,7,BS Data Science,2020
