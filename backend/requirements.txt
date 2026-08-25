@@ -31,6 +31,14 @@ tensorflow-cpu==2.16.2
 # prophet only needs to load a pre-trained pickle for inference; CmdStan not required
 prophet==1.1.6
 
+# Auth — JWT + password hashing for role-based access control
+# python-jose: HS256 encode/decode. passlib[bcrypt]: password hashing.
+# python-multipart: required by FastAPI to parse the OAuth2 password form body.
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+bcrypt==4.0.1
+python-multipart==0.0.9
+
 # Validation
 pydantic==2.7.1
 pydantic-settings==2.2.1

@@ -85,3 +85,72 @@ def seed_if_empty() -> None:
     except Exception as exc:
         # Non-fatal: parquet-backed ML endpoints work without Postgres data.
         log.error("Startup seed failed: %s", exc)
+
+
+# ── Demo users ────────────────────────────────────────────────────────────────
+# One account per role so the platform is demonstrable immediately after
+# `docker compose up`. Passwords are read from DEMO_PASSWORD and hashed with
+# bcrypt at seed time — no credential is stored in source control.
+#
+# These are DEMO accounts. Rotate DEMO_PASSWORD and re-seed before exposing
+# this deployment to anyone.
+_DEMO_USERS = [
+    # (username,     role,          display_name,             institution)
+    ("admin",        "ADMIN",       "Platform Administrator",  None),
+    ("student",      "STUDENT",     "Demo Student",            None),
+    ("moe",          "MOE",         "Ministry of Education",   None),
+    ("mol",          "MOL",         "Ministry of Labour",      None),
+    ("university",   "UNIVERSITY",  "Tech Institute",          "Tech Institute"),
+]
+
+
+def seed_users_if_empty() -> None:
+    """Create the five demo accounts if the users table is empty.
+
+    Idempotent: exits silently once any user exists, so a password changed
+    through the app is never overwritten on restart.
+    """
+    from services.auth_service import hash_password
+
+    password = os.getenv("DEMO_PASSWORD", "pathwise123")
+
+    try:
+        from db.database import SessionLocal
+        from models.user import User
+    except Exception as exc:
+        log.error("User seed skipped — could not import the ORM layer: %s", exc)
+        return
+
+    session = None
+    try:
+        session = SessionLocal()
+        existing = session.query(User).count()
+
+        if existing > 0:
+            log.info("User seed skipped — %d account(s) already present.", existing)
+            return
+
+        log.info("Users table is empty — creating %d demo accounts ...", len(_DEMO_USERS))
+        for username, role, display_name, institution in _DEMO_USERS:
+            session.add(User(
+                username         = username,
+                password_hash    = hash_password(password),
+                role             = role,
+                display_name     = display_name,
+                institution_name = institution,
+            ))
+        session.commit()
+
+        log.info(
+            "Demo accounts created: %s (password from DEMO_PASSWORD)",
+            ", ".join(u[0] for u in _DEMO_USERS),
+        )
+
+    except Exception as exc:
+        # Non-fatal at startup, but login will not work until this succeeds.
+        if session is not None:
+            session.rollback()
+        log.error("User seed failed — login will be unavailable: %s", exc)
+    finally:
+        if session is not None:
+            session.close()

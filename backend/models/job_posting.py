@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Numeric, Boolean, Date, TIMESTAMP, text
 from sqlalchemy.dialects.postgresql import ARRAY, TEXT
-from backend.db.database import Base
+from db.database import Base
 
 
 class JobPosting(Base):

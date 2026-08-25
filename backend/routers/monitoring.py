@@ -1,8 +1,14 @@
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
 
 from services import monitoring_service
+from services.auth_service import require_roles, ROLE_ADMIN
 
-router = APIRouter(prefix="/monitoring", tags=["Monitoring"])
+# Model drift and the raw prediction log are operator concerns — ADMIN only.
+router = APIRouter(
+    prefix="/monitoring",
+    tags=["Monitoring"],
+    dependencies=[Depends(require_roles(ROLE_ADMIN))],
+)
 
 
 @router.get("/drift")

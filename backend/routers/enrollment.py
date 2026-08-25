@@ -1,8 +1,11 @@
 import time
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
 from typing import List, Optional
 
 from services import enrollment_service
+from services.auth_service import (
+    require_roles, ROLE_STUDENT, ROLE_MOE, ROLE_UNIVERSITY,
+)
 from schemas.enrollment import (
     EnrollmentSummary,
     EnrollmentForecastResponse,
@@ -15,7 +18,13 @@ from schemas.enrollment import (
     SkillRoadmapResponse,
 )
 
-router = APIRouter(prefix="/enrollment", tags=["Enrollment Intelligence"])
+# Students use the evaluator and roadmap; MoE and universities use the
+# institutional forecasts. MoL has no enrolment-planning remit, so it is excluded.
+router = APIRouter(
+    prefix="/enrollment",
+    tags=["Enrollment Intelligence"],
+    dependencies=[Depends(require_roles(ROLE_STUDENT, ROLE_MOE, ROLE_UNIVERSITY))],
+)
 
 
 @router.get("/summary", response_model=EnrollmentSummary)

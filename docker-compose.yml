@@ -39,6 +39,9 @@ services:
       API_HOST: ${API_HOST}
       API_PORT: ${API_PORT}
       FRONTEND_URL: ${FRONTEND_URL}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRE_MINUTES: ${JWT_EXPIRE_MINUTES}
+      DEMO_PASSWORD: ${DEMO_PASSWORD}
     ports:
       - "${API_HOST_PORT:-8000}:8000"
     # Default (BACKEND_RELOAD unset) runs without uvicorn's file watcher.

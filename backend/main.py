@@ -39,8 +39,32 @@ app.add_middleware(
 )
 
 # ── Routers ───────────────────────────────────────────────────────────────────
-from routers import market, enrollment, monitoring, recommendations  # noqa: E402
+from routers import (  # noqa: E402
+    auth,
+    careers,
+    education,
+    enrollment,
+    institution,
+    labour,
+    market,
+    monitoring,
+    recommendations,
+    search,
+)
 
+# Public
+app.include_router(auth.router,             prefix="/api")
+
+# Role-scoped — each router declares its own require_roles dependency
+app.include_router(careers.router,          prefix="/api")   # STUDENT
+app.include_router(labour.router,           prefix="/api")   # MOL + MOE
+app.include_router(education.router,        prefix="/api")   # MOE
+app.include_router(institution.router,      prefix="/api")   # UNIVERSITY
+
+# Any authenticated role; results are filtered per role inside the router
+app.include_router(search.router,           prefix="/api")
+
+# Original dashboards — now authenticated
 app.include_router(market.router,           prefix="/api")
 app.include_router(enrollment.router,       prefix="/api")
 app.include_router(monitoring.router,       prefix="/api")
@@ -88,14 +112,22 @@ def on_startup() -> None:
     """Runs once when uvicorn finishes loading, before accepting requests."""
     log.info("PathWise API starting up ...")
 
-    # 1. Seed the database on first-ever start (idempotent)
+    # 1. Warn loudly if the JWT signing key is still the built-in default
     try:
-        from startup_seed import seed_if_empty
+        from services.auth_service import warn_if_insecure
+        warn_if_insecure()
+    except Exception as exc:
+        log.error("Auth configuration check failed: %s", exc)
+
+    # 2. Seed the database on first-ever start (idempotent)
+    try:
+        from startup_seed import seed_if_empty, seed_users_if_empty
         seed_if_empty()
+        seed_users_if_empty()
     except Exception as exc:
         log.error("Startup seed raised an unexpected error: %s", exc)
 
-    # 2. Load all ML models into memory now so requests are instant
+    # 3. Load all ML models into memory now so requests are instant
     _prewarm_models()
 
     log.info("PathWise API ready.")
