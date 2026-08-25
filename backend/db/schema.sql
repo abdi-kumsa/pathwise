@@ -11,6 +11,32 @@ DROP TABLE IF EXISTS placements CASCADE;
 DROP TABLE IF EXISTS job_postings CASCADE;
 DROP TABLE IF EXISTS enrollments CASCADE;
 DROP TABLE IF EXISTS students CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+
+
+-- ── users ─────────────────────────────────────────────────
+-- Authentication and role-based access control.
+--
+-- NOTE: this is the ONLY table on the API request path. The other four are an
+-- ETL/warehouse sink (see docs/TECHNICAL.md §4) — every /api/* dashboard
+-- endpoint reads parquet/CSV, not Postgres. Consequence: the database being
+-- down no longer degrades silently, it blocks login outright.
+--
+-- institution_name scopes a UNIVERSITY user to their own institution's rows.
+-- It is read from the JWT, never from a query parameter, so one university
+-- cannot request another's data.
+CREATE TABLE users (
+    id               SERIAL PRIMARY KEY,
+    username         VARCHAR(64)     NOT NULL UNIQUE,
+    password_hash    VARCHAR(255)    NOT NULL,
+    role             VARCHAR(16)     NOT NULL
+                     CHECK (role IN ('ADMIN', 'STUDENT', 'MOE', 'MOL', 'UNIVERSITY')),
+    display_name     VARCHAR(120)    NOT NULL,
+    institution_name VARCHAR(120),   -- required for UNIVERSITY, NULL otherwise
+    created_at       TIMESTAMPTZ     NOT NULL DEFAULT NOW(),
+
+    CHECK (role <> 'UNIVERSITY' OR institution_name IS NOT NULL)
+);
 
 
 -- ── students ──────────────────────────────────────────────
@@ -97,3 +123,8 @@ CREATE INDEX idx_job_postings_internship  ON job_postings (is_internship);
 CREATE INDEX idx_placements_student_id    ON placements (student_id);
 CREATE INDEX idx_placements_placed        ON placements (placed);
 CREATE INDEX idx_placements_status        ON placements (placement_status);
+
+-- Users
+-- username already has a UNIQUE index from the constraint; role is indexed
+-- because every authenticated request filters on it.
+CREATE INDEX idx_users_role               ON users (role);

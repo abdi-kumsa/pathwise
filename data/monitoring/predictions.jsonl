@@ -17,3 +17,17 @@
 {"ts": 1787648364.6246712, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 49.9}
 {"ts": 1787648364.6963913, "inputs": {"gpa": 2.3, "internships": 0, "projects": 1, "communication_score": 3, "program": "Certificate Data Analytics"}, "probability": 0.1467, "prediction": "Not Placed", "latency_ms": 60.5}
 {"ts": 1787648379.5023184, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 55.9}
+{"ts": 1787651694.0381072, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 50.9}
+{"ts": 1787651694.1045244, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 54.4}
+{"ts": 1787651694.1635532, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 48.0}
+{"ts": 1787651694.2250593, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 49.5}
+{"ts": 1787651694.2847567, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 47.8}
+{"ts": 1787651694.350769, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 54.0}
+{"ts": 1787651694.4087815, "inputs": {"gpa": 2.3, "internships": 0, "projects": 1, "communication_score": 3, "program": "Certificate Data Analytics"}, "probability": 0.1467, "prediction": "Not Placed", "latency_ms": 48.0}
+{"ts": 1787651829.7736607, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 58.8}
+{"ts": 1787651830.2242293, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 438.5}
+{"ts": 1787651830.2944102, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 55.7}
+{"ts": 1787651830.3577454, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 51.2}
+{"ts": 1787651830.42252, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 53.1}
+{"ts": 1787651830.484785, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 49.6}
+{"ts": 1787651830.5430572, "inputs": {"gpa": 2.3, "internships": 0, "projects": 1, "communication_score": 3, "program": "Certificate Data Analytics"}, "probability": 0.1467, "prediction": "Not Placed", "latency_ms": 50.0}

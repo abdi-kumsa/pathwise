@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, SmallInteger, String, TIMESTAMP, UniqueConstraint, text
-from backend.db.database import Base
+from db.database import Base
 
 
 class Enrollment(Base):

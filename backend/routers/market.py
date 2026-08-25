@@ -1,7 +1,10 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from typing import List
 
 from services import market_service
+from services.auth_service import (
+    require_roles, ROLE_MOE, ROLE_MOL, ROLE_UNIVERSITY, ROLE_STUDENT,
+)
 from schemas.market import (
     MarketOverview,
     CompanyCount,
@@ -12,7 +15,13 @@ from schemas.market import (
     DemandForecastPoint,
 )
 
-router = APIRouter(prefix="/market", tags=["Market Demand"])
+# Market demand is background context for every role, so all four are admitted
+# (ADMIN is implicit). It is no longer reachable unauthenticated.
+router = APIRouter(
+    prefix="/market",
+    tags=["Market Demand"],
+    dependencies=[Depends(require_roles(ROLE_MOE, ROLE_MOL, ROLE_UNIVERSITY, ROLE_STUDENT))],
+)
 
 
 @router.get("/overview", response_model=MarketOverview)

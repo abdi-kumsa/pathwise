@@ -1,7 +1,10 @@
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
 from typing import Optional
 
 from services import salary_service, escape_route_service
+from services.auth_service import (
+    require_roles, ROLE_STUDENT, ROLE_MOE, ROLE_UNIVERSITY,
+)
 from schemas.salary import (
     SalaryRequest,
     SalaryPrediction,
@@ -12,7 +15,13 @@ from schemas.escape_route import (
     EscapeRouteResponse,
 )
 
-router = APIRouter(prefix="/recommendations", tags=["Recommendations"])
+# Salary forecasting and escape routes are student-facing guidance; MoE and
+# universities read the same figures for programme planning.
+router = APIRouter(
+    prefix="/recommendations",
+    tags=["Recommendations"],
+    dependencies=[Depends(require_roles(ROLE_STUDENT, ROLE_MOE, ROLE_UNIVERSITY))],
+)
 
 
 @router.get("/salary-forecast", response_model=SalaryForecastResponse)

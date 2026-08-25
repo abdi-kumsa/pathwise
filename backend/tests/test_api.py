@@ -19,13 +19,65 @@ import pytest
 import httpx
 
 BASE_URL = os.getenv("BASE_URL", "http://127.0.0.1:8000")
+DEMO_PASSWORD = os.getenv("DEMO_PASSWORD", "pathwise123")
+
+ROLES = ["admin", "student", "moe", "mol", "university"]
+
 
 # ── Shared fixtures ────────────────────────────────────────────────────────────
 
+def _login(username: str) -> str:
+    """Return a bearer token for one of the seeded demo accounts."""
+    r = httpx.post(
+        f"{BASE_URL}/api/auth/login",
+        data={"username": username, "password": DEMO_PASSWORD},
+        timeout=30,
+    )
+    assert r.status_code == 200, f"login failed for {username}: {r.status_code} {r.text}"
+    return r.json()["access_token"]
+
+
 @pytest.fixture(scope="session")
-def client():
+def tokens():
+    """One token per role, fetched once for the whole session."""
+    return {u: _login(u) for u in ROLES}
+
+
+@pytest.fixture(scope="session")
+def client(tokens):
+    """Admin-authenticated client.
+
+    Every /api/* route now requires a role. ADMIN satisfies all of them, so the
+    existing endpoint tests below use this and keep asserting behaviour rather
+    than authorisation. Authorisation itself is covered by TestRoleMatrix.
+    """
+    with httpx.Client(
+        base_url=BASE_URL,
+        timeout=30,
+        headers={"Authorization": f"Bearer {tokens['admin']}"},
+    ) as c:
+        yield c
+
+
+@pytest.fixture(scope="session")
+def anon():
+    """Unauthenticated client, for asserting endpoints are actually closed."""
     with httpx.Client(base_url=BASE_URL, timeout=30) as c:
         yield c
+
+
+@pytest.fixture(scope="session")
+def role_clients(tokens):
+    """A client per role, keyed by username."""
+    clients = {}
+    for user, token in tokens.items():
+        clients[user] = httpx.Client(
+            base_url=BASE_URL, timeout=30,
+            headers={"Authorization": f"Bearer {token}"},
+        )
+    yield clients
+    for c in clients.values():
+        c.close()
 
 
 STRONG_STUDENT = {
@@ -76,6 +128,11 @@ class TestHealth:
         assert r.status_code == 200
         assert "PathWise" in r.json().get("message", "")
 
+    def test_health_is_public(self, anon):
+        """/health must stay unauthenticated — docker-compose probes it."""
+        assert anon.get("/health").status_code == 200
+        assert anon.get("/").status_code == 200
+
     def test_health_reload_is_idempotent(self, client):
         """Reloading a fully-warm API must be a no-op, not a regression."""
         r = client.post("/health/reload")
@@ -84,6 +141,398 @@ class TestHealth:
         assert body["status"] == "ok"
         assert all(body["models"].values())
         assert body["recovered"] == []   # nothing was broken, so nothing recovered
+
+
+# =============================================================================
+# Authentication
+# =============================================================================
+
+class TestAuth:
+
+    @pytest.mark.parametrize("username", ROLES)
+    def test_login_succeeds_for_every_demo_account(self, username):
+        r = httpx.post(f"{BASE_URL}/api/auth/login",
+                       data={"username": username, "password": DEMO_PASSWORD}, timeout=30)
+        assert r.status_code == 200
+        body = r.json()
+        assert body["token_type"] == "bearer"
+        assert body["access_token"]
+        assert body["user"]["username"] == username
+        assert body["user"]["home"].startswith("/")
+
+    def test_login_wrong_password_401(self, anon):
+        r = anon.post("/api/auth/login",
+                      data={"username": "student", "password": "definitely-wrong"})
+        assert r.status_code == 401
+
+    def test_login_unknown_user_401(self, anon):
+        r = anon.post("/api/auth/login",
+                      data={"username": "no-such-user", "password": DEMO_PASSWORD})
+        assert r.status_code == 401
+
+    def test_login_does_not_leak_which_accounts_exist(self, anon):
+        """Unknown user and wrong password must be indistinguishable, or the
+        endpoint becomes a username oracle."""
+        unknown = anon.post("/api/auth/login",
+                            data={"username": "no-such-user", "password": "x"})
+        wrong = anon.post("/api/auth/login",
+                          data={"username": "student", "password": "x"})
+        assert unknown.status_code == wrong.status_code == 401
+        assert unknown.json()["detail"] == wrong.json()["detail"]
+
+    def test_me_requires_token(self, anon):
+        assert anon.get("/api/auth/me").status_code == 401
+
+    def test_me_rejects_garbage_token(self, anon):
+        r = anon.get("/api/auth/me", headers={"Authorization": "Bearer not-a-jwt"})
+        assert r.status_code == 401
+
+    def test_me_rejects_tampered_token(self, tokens, anon):
+        """Flipping a character in the signature must invalidate the token."""
+        good = tokens["student"]
+        tampered = good[:-4] + ("aaaa" if not good.endswith("aaaa") else "bbbb")
+        r = anon.get("/api/auth/me", headers={"Authorization": f"Bearer {tampered}"})
+        assert r.status_code == 401
+
+    def test_me_returns_role_and_home(self, role_clients):
+        body = role_clients["mol"].get("/api/auth/me").json()
+        assert body["role"] == "MOL"
+        assert body["role_label"] == "Ministry of Labour"
+        assert body["home"] == "/mol/overview"
+
+    def test_university_token_carries_institution(self, role_clients):
+        body = role_clients["university"].get("/api/auth/me").json()
+        assert body["role"] == "UNIVERSITY"
+        assert body["institution"] == "Tech Institute"
+
+    def test_non_university_roles_have_no_institution(self, role_clients):
+        for user in ("admin", "student", "moe", "mol"):
+            assert role_clients[user].get("/api/auth/me").json()["institution"] is None
+
+
+# =============================================================================
+# Role-based access control
+# =============================================================================
+
+# endpoint -> the roles that must be allowed. Every other role must get 403,
+# and an unauthenticated caller must get 401.
+_MATRIX = {
+    "/api/careers/jobs":            {"admin", "student"},
+    "/api/labour/overview":         {"admin", "moe", "mol"},
+    "/api/labour/supply-demand":    {"admin", "moe", "mol"},
+    "/api/labour/mismatch":         {"admin", "moe", "mol"},
+    "/api/education/overview":      {"admin", "moe"},
+    "/api/education/investment-quadrant": {"admin", "moe"},
+    "/api/institution/me":          {"admin", "university"},
+    "/api/institution/expansion":   {"admin", "university"},
+    "/api/monitoring/drift":        {"admin"},
+    "/api/market/overview":         {"admin", "student", "moe", "mol", "university"},
+    "/api/enrollment/summary":      {"admin", "student", "moe", "university"},
+}
+
+
+class TestRoleMatrix:
+
+    @pytest.mark.parametrize("endpoint,allowed", sorted((k, tuple(sorted(v))) for k, v in _MATRIX.items()))
+    def test_allowed_roles_get_200(self, role_clients, endpoint, allowed):
+        for user in allowed:
+            r = role_clients[user].get(endpoint)
+            assert r.status_code == 200, f"{user} should reach {endpoint}, got {r.status_code}"
+
+    @pytest.mark.parametrize("endpoint,allowed", sorted((k, tuple(sorted(v))) for k, v in _MATRIX.items()))
+    def test_disallowed_roles_get_403(self, role_clients, endpoint, allowed):
+        for user in set(ROLES) - set(allowed):
+            r = role_clients[user].get(endpoint)
+            assert r.status_code == 403, f"{user} must NOT reach {endpoint}, got {r.status_code}"
+
+    @pytest.mark.parametrize("endpoint", sorted(_MATRIX))
+    def test_unauthenticated_gets_401(self, anon, endpoint):
+        assert anon.get(endpoint).status_code == 401
+
+    def test_admin_reaches_every_protected_endpoint(self, role_clients):
+        for endpoint in _MATRIX:
+            assert role_clients["admin"].get(endpoint).status_code == 200, endpoint
+
+
+# =============================================================================
+# Careers — the student job -> department recommender
+# =============================================================================
+
+class TestCareers:
+
+    def test_jobs_catalogue(self, role_clients):
+        body = role_clients["student"].get("/api/careers/jobs").json()
+        assert len(body) == 33
+        assert {"job_title", "job_family"} <= set(body[0])
+
+    def test_search_prefix_ranks_first(self, role_clients):
+        body = role_clients["student"].get("/api/careers/search", params={"q": "data"}).json()
+        assert body, "expected matches for 'data'"
+        assert body[0]["job_title"].lower().startswith("data")
+
+    def test_search_empty_query_rejected(self, role_clients):
+        assert role_clients["student"].get("/api/careers/search", params={"q": ""}).status_code == 422
+
+    def test_recommend_returns_ranked_programs(self, role_clients):
+        r = role_clients["student"].post("/api/careers/recommend",
+                                         json={"job_title": "Data Scientist", "top_n": 5})
+        assert r.status_code == 200
+        body = r.json()
+        assert body["job_family"] == "Data & Analytics"
+        assert len(body["recommendations"]) == 5
+        ranks = [x["rank"] for x in body["recommendations"]]
+        assert ranks == sorted(ranks) == list(range(1, 6))
+        scores = [x["score"] for x in body["recommendations"]]
+        assert scores == sorted(scores, reverse=True), "recommendations must be ordered by score"
+
+    def test_recommend_top_result_is_a_direct_route(self, role_clients):
+        """A data-science target must surface a data programme first, or the
+        field-match weighting is not working."""
+        body = role_clients["student"].post(
+            "/api/careers/recommend", json={"job_title": "Data Scientist"}).json()
+        assert body["recommendations"][0]["is_direct_route"] is True
+
+    def test_recommend_is_personalised_only_with_full_profile(self, role_clients):
+        full = role_clients["student"].post("/api/careers/recommend", json={
+            "job_title": "ML Engineer", "gpa": 3.4, "internships": 1,
+            "projects": 3, "communication_score": 7,
+        }).json()
+        assert full["personalised"] is True
+
+        partial = role_clients["student"].post("/api/careers/recommend", json={
+            "job_title": "ML Engineer", "gpa": 3.4,
+        }).json()
+        assert partial["personalised"] is False, \
+            "a partial profile must not be treated as a full one"
+
+    def test_recommend_factors_sum_to_score(self, role_clients):
+        body = role_clients["student"].post(
+            "/api/careers/recommend", json={"job_title": "Cloud Architect"}).json()
+        top = body["recommendations"][0]
+        assert abs(sum(f["contribution"] for f in top["factors"]) - top["score"]) < 0.5
+
+    def test_recommend_weights_sum_to_one(self, role_clients):
+        body = role_clients["student"].post(
+            "/api/careers/recommend", json={"job_title": "Data Scientist"}).json()
+        assert abs(sum(body["weights"].values()) - 1.0) < 1e-9
+
+    def test_recommend_unknown_job_404(self, role_clients):
+        r = role_clients["student"].post("/api/careers/recommend",
+                                         json={"job_title": "Chief Vibes Officer"})
+        assert r.status_code == 404
+
+    def test_recommend_rejects_out_of_range_gpa(self, role_clients):
+        r = role_clients["student"].post("/api/careers/recommend", json={
+            "job_title": "Data Scientist", "gpa": 9.9, "internships": 1,
+            "projects": 3, "communication_score": 7,
+        })
+        assert r.status_code == 422
+
+
+# =============================================================================
+# Labour market (MoL)
+# =============================================================================
+
+class TestLabour:
+
+    def test_overview_schema(self, role_clients):
+        b = role_clients["mol"].get("/api/labour/overview").json()
+        assert b["occupations_tracked"] == 33
+        assert b["fields_tracked"] == 9
+        assert b["total_openings"] > 0
+
+    def test_emerging_sorted_by_growth(self, role_clients):
+        b = role_clients["mol"].get("/api/labour/emerging", params={"level": "family"}).json()
+        growths = [r["openings_cagr_pct"] for r in b]
+        assert growths == sorted(growths, reverse=True)
+        assert b[0]["series"], "each row must carry its yearly series for sparklines"
+
+    def test_emerging_title_level(self, role_clients):
+        b = role_clients["mol"].get("/api/labour/emerging",
+                                    params={"level": "title", "top_n": 5}).json()
+        assert len(b) == 5
+        assert "job_title" in b[0]
+
+    def test_emerging_rejects_bad_level(self, role_clients):
+        assert role_clients["mol"].get("/api/labour/emerging",
+                                       params={"level": "nonsense"}).status_code == 422
+
+    def test_supply_demand_gap(self, role_clients):
+        b = role_clients["mol"].get("/api/labour/supply-demand").json()
+        assert len(b["fields"]) == 9
+        gaps = [f["gap"] for f in b["fields"]]
+        assert gaps == sorted(gaps, reverse=True)
+        assert b["largest_gap_field"] == b["fields"][0]["field"]
+        for f in b["fields"]:
+            assert f["supply_total"] == f["supply_graduates"] + f["supply_bootcamp"]
+            assert f["severity"] in {"critical", "high", "moderate", "low"}
+
+    def test_mismatch_is_flagged_non_comparable(self, role_clients):
+        """The fit distribution is near-uniform in this dataset. Every response
+        must say so, or the figures read as a ranking they cannot support."""
+        for by in ("overview", "field", "program"):
+            b = role_clients["mol"].get("/api/labour/mismatch", params={"by": by}).json()
+            assert b["comparable"] is False
+            assert "caveat" in b and b["caveat"]
+
+    def test_mismatch_overview_totals(self, role_clients):
+        b = role_clients["mol"].get("/api/labour/mismatch").json()
+        assert sum(x["count"] for x in b["breakdown"]) == b["total_placed"]
+        assert abs(b["match_rate_pct"] + b["mismatch_rate_pct"] - 100) < 0.2
+
+    def test_regional_unknown_field_404(self, role_clients):
+        assert role_clients["mol"].get("/api/labour/regional",
+                                       params={"field": "Underwater Basket Weaving"}).status_code == 404
+
+    def test_occupation_detail(self, role_clients):
+        b = role_clients["mol"].get("/api/labour/occupation/Data Scientist").json()
+        assert b["job_family"] == "Data & Analytics"
+        assert len(b["series"]) == 6      # 2020-2025
+
+
+# =============================================================================
+# Education supply (MoE)
+# =============================================================================
+
+class TestEducation:
+
+    def test_overview_counts(self, role_clients):
+        b = role_clients["moe"].get("/api/education/overview").json()
+        assert b["institutions"] == 8
+        assert b["programs"] == 12
+        assert b["fields"] == 9
+
+    def test_investment_quadrant_partitions_all_fields(self, role_clients):
+        b = role_clients["moe"].get("/api/education/investment-quadrant").json()
+        assert len(b["points"]) == 9
+        valid = {"Invest", "Sustain", "Oversupply risk", "Review"}
+        for p in b["points"]:
+            assert p["quadrant"] in valid
+            assert p["action"]
+
+    def test_investment_quadrant_split_is_at_the_median(self, role_clients):
+        b = role_clients["moe"].get("/api/education/investment-quadrant").json()
+        for p in b["points"]:
+            high_d = p["demand_growth_pct"] >= b["demand_median"]
+            high_s = p["supply_growth_pct"] >= b["supply_median"]
+            expected = {
+                (True, False):  "Invest",
+                (True, True):   "Sustain",
+                (False, True):  "Oversupply risk",
+                (False, False): "Review",
+            }[(high_d, high_s)]
+            assert p["quadrant"] == expected, p["field"]
+
+    def test_investment_priority_ranked_and_auditable(self, role_clients):
+        b = role_clients["moe"].get("/api/education/investment-priority").json()
+        assert abs(sum(b["weights"].values()) - 1.0) < 1e-9
+        scores = [f["score"] for f in b["fields"]]
+        assert scores == sorted(scores, reverse=True)
+        assert [f["rank"] for f in b["fields"]] == list(range(1, len(b["fields"]) + 1))
+        top = b["fields"][0]
+        assert abs(sum(f["contribution"] for f in top["factors"]) - top["score"]) < 0.5
+
+    def test_field_detail(self, role_clients):
+        b = role_clients["moe"].get("/api/education/field/Cybersecurity").json()
+        assert b["field"] == "Cybersecurity"
+        assert b["programs"]
+
+    def test_field_detail_unknown_404(self, role_clients):
+        assert role_clients["moe"].get("/api/education/field/Nonsense").status_code == 404
+
+
+# =============================================================================
+# Institution (University) — including row scoping
+# =============================================================================
+
+class TestInstitution:
+
+    def test_me_returns_own_institution(self, role_clients):
+        b = role_clients["university"].get("/api/institution/me").json()
+        assert b["institution"] == "Tech Institute"
+
+    def test_cannot_read_another_institution_via_query_param(self, role_clients):
+        """Row scoping comes from the signed token, so a crafted parameter must
+        be ignored rather than honoured."""
+        b = role_clients["university"].get(
+            "/api/institution/me", params={"institution": "Southern State"}).json()
+        assert b["institution"] == "Tech Institute"
+
+        for path in ("/api/institution/portfolio", "/api/institution/expansion",
+                     "/api/institution/resources", "/api/institution/benchmark"):
+            body = role_clients["university"].get(
+                path, params={"institution": "Southern State"}).json()
+            assert body["institution"] == "Tech Institute", path
+
+    def test_portfolio_has_twelve_programs(self, role_clients):
+        b = role_clients["university"].get("/api/institution/portfolio").json()
+        assert len(b["programs"]) == 12
+
+    def test_expansion_recommendations_valid(self, role_clients):
+        b = role_clients["university"].get("/api/institution/expansion").json()
+        assert abs(sum(b["weights"].values()) - 1.0) < 1e-9
+        scores = [p["score"] for p in b["programs"]]
+        assert scores == sorted(scores, reverse=True)
+        for p in b["programs"]:
+            assert p["recommendation"] in {"Expand", "Hold", "Consolidate"}
+            assert p["price_position"] in {"premium", "parity", "discount", "unknown"}
+            assert p["rationale"]
+
+    def test_resource_funnel_is_monotonic(self, role_clients):
+        """Inquiries >= applications >= enrolments, or the funnel is wrong."""
+        b = role_clients["university"].get("/api/institution/resources").json()
+        counts = [s["count"] for s in b["funnel"]]
+        assert counts == sorted(counts, reverse=True), counts
+
+    def test_benchmark_anonymises_peers(self, role_clients):
+        b = role_clients["university"].get("/api/institution/benchmark").json()
+        assert b["peer_count"] == 7
+        labels = [p["label"] for p in b["peers"]]
+        assert all(l.startswith("Peer ") for l in labels)
+        # No real institution name may appear anywhere in the peer records.
+        blob = str(b["peers"])
+        for name in ("Southern State", "Midwest College", "Pacific University",
+                     "Mountain Tech", "Northeast Institute", "Coastal University",
+                     "State University"):
+            assert name not in blob, f"peer data leaked {name}"
+
+    def test_benchmark_declares_metric_direction(self, role_clients):
+        b = role_clients["university"].get("/api/institution/benchmark").json()
+        assert b["direction"]["acceptance_rate_pct"] == "lower"
+        assert b["direction"]["avg_tuition"] == "neutral"
+        # A neutral metric must not be given a percentile.
+        assert "avg_tuition" not in b["percentile"]
+
+
+# =============================================================================
+# Cross-entity search
+# =============================================================================
+
+class TestSearch:
+
+    def test_search_requires_auth(self, anon):
+        assert anon.get("/api/search", params={"q": "data"}).status_code == 401
+
+    def test_student_never_sees_institutions(self, role_clients):
+        b = role_clients["student"].get("/api/search", params={"q": "tech"}).json()
+        assert all(r["kind"] != "institution" for r in b["results"])
+
+    def test_admin_can_see_institutions(self, role_clients):
+        b = role_clients["admin"].get("/api/search", params={"q": "tech institute"}).json()
+        assert any(r["kind"] == "institution" for r in b["results"])
+
+    def test_mol_sees_occupations_not_programs(self, role_clients):
+        b = role_clients["mol"].get("/api/search", params={"q": "data"}).json()
+        kinds = {r["kind"] for r in b["results"]}
+        assert "occupation" in kinds
+        assert "program" not in kinds
+
+    def test_results_carry_a_route(self, role_clients):
+        b = role_clients["student"].get("/api/search", params={"q": "data"}).json()
+        assert all(r["route"] for r in b["results"])
+
+    def test_empty_query_rejected(self, role_clients):
+        assert role_clients["student"].get("/api/search", params={"q": ""}).status_code == 422
 
 
 # =============================================================================

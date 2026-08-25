@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, SmallInteger, String, Numeric, TIMESTAMP, text
-from backend.db.database import Base
+from db.database import Base
 
 
 class Student(Base):

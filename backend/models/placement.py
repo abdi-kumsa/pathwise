@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, SmallInteger, String, Numeric, Boolean, TIMESTAMP, ForeignKey, text
 from sqlalchemy.orm import relationship
-from backend.db.database import Base
+from db.database import Base
 
 
 class Placement(Base):
