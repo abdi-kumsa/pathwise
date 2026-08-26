@@ -69,11 +69,14 @@ export default function Sidebar({ open = false, onClose = () => {} }) {
 
         <div className="sidebar-footer">
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div className="sf-avatar">{initials(user?.display_name)}</div>
-            <div style={{ minWidth: 0, flex: 1 }}>
-              <div className="sf-name">{user?.display_name ?? 'Not signed in'}</div>
-              <div className="sf-role">{user?.institution ?? user?.role_label ?? ''}</div>
-            </div>
+            {/* The name is the way into your own account — password, identity */}
+            <NavLink to="/account" onClick={onClose} className="sf-identity" title="Your account">
+              <div className="sf-avatar">{initials(user?.display_name)}</div>
+              <div style={{ minWidth: 0 }}>
+                <div className="sf-name">{user?.display_name ?? 'Not signed in'}</div>
+                <div className="sf-role">{user?.institution ?? user?.role_label ?? ''}</div>
+              </div>
+            </NavLink>
             <button onClick={logout} className="sf-logout" title="Sign out" aria-label="Sign out">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
                    strokeLinecap="round" strokeLinejoin="round">

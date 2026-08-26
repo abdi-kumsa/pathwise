@@ -50,6 +50,7 @@ from routers import (  # noqa: E402
     monitoring,
     recommendations,
     search,
+    users,
 )
 
 # Public
@@ -60,6 +61,7 @@ app.include_router(careers.router,          prefix="/api")   # STUDENT
 app.include_router(labour.router,           prefix="/api")   # MOL + MOE
 app.include_router(education.router,        prefix="/api")   # MOE
 app.include_router(institution.router,      prefix="/api")   # UNIVERSITY
+app.include_router(users.router,            prefix="/api")   # ADMIN
 
 # Any authenticated role; results are filtered per role inside the router
 app.include_router(search.router,           prefix="/api")

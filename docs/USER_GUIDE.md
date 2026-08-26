@@ -49,7 +49,14 @@ You will only ever see pages your role can open. If you try to reach another
 role's page directly you are returned to your own home page — this is enforced
 by the server, not just hidden in the menu.
 
-Sign out with the arrow button at the bottom of the sidebar.
+**Your account.** Click your name at the bottom of the sidebar to see your
+identity and change your password. Every role has this. Sign out with the arrow
+button beside it.
+
+If you are an administrator, you also get **Accounts** in the sidebar, where you
+can create accounts, change someone's role, reset a password, or deactivate
+someone who should no longer have access. Deactivating is reversible — the
+account is disabled rather than erased.
 
 ### The layout
 

@@ -163,10 +163,36 @@ demo accounts are created automatically the first time the stack starts.
 
 The login page lists these too — click one to fill the form.
 
-> ⚠️ **Demo credentials only.** Change `DEMO_PASSWORD` in `.env` and re-seed
-> (`docker compose down -v && docker compose up`) before putting this anywhere
-> other people can reach. Also set `JWT_SECRET` — if it is blank the API uses a
-> built-in development signing key and warns about it in the startup log.
+> ⚠️ **Demo credentials only.** See "Replacing the demo accounts" below before
+> putting this anywhere other people can reach. Also set `JWT_SECRET` — if it is
+> blank the API uses a built-in development signing key and warns about it in the
+> startup log.
+
+### Changing your own password
+
+Any role can do this — click your name at the bottom of the sidebar, then use
+**Change password**. You need your current password.
+
+### Replacing the demo accounts
+
+Sign in as `admin` and open **Accounts** in the sidebar. From there you can
+create accounts, change roles, reset passwords, and deactivate people who should
+no longer have access.
+
+To retire the demo accounts, do it **in this order** — the platform refuses to
+remove the last remaining administrator, so removing `admin` first would leave
+you locked out:
+
+1. Sign in as `admin` → **Accounts** → **Add account** → create your own
+   administrator
+2. Sign out, sign back in as your new administrator
+3. Deactivate `admin`, `student`, `moe`, `mol` and `university`
+4. Change `DEMO_PASSWORD` in `.env`, so that a future
+   `docker compose down -v` cannot recreate the old accounts with the old password
+
+Deactivating is reversible — the account is disabled, not erased, and you can
+reactivate it later from the same screen. A deactivated person cannot sign in,
+and if they are signed in already they lose access within about 30 seconds.
 
 * ⚙️ **Interactive API Documentation (Swagger UI):**  
   👉 [http://localhost:8000/docs](http://localhost:8000/docs)

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, TIMESTAMP, text
+from sqlalchemy import Boolean, Column, Integer, String, TIMESTAMP, text
 from db.database import Base
 
 
@@ -10,6 +10,11 @@ class User(Base):
     institution_name scopes a UNIVERSITY user to their own institution's rows.
     It is always read from the JWT, never from a request parameter, so one
     university cannot ask for another's data.
+
+    is_active is a soft delete: accounts are deactivated rather than removed so
+    the record survives and the action is reversible. An inactive user cannot
+    obtain a token, and an already-issued one stops working within the
+    status-cache TTL in services/auth_service.py.
     """
     __tablename__ = "users"
 
@@ -19,4 +24,5 @@ class User(Base):
     role             = Column(String(16), nullable=False, index=True)
     display_name     = Column(String(120), nullable=False)
     institution_name = Column(String(120), nullable=True)
+    is_active        = Column(Boolean, nullable=False, server_default=text("TRUE"), index=True)
     created_at       = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text("NOW()"))

@@ -8,6 +8,7 @@ import CommandBar from './components/CommandBar'
 import LoadingSpinner from './components/LoadingSpinner'
 
 import LoginPage from './pages/LoginPage'
+import AccountPage from './pages/AccountPage'
 
 // Student
 import CareerExplorerPage from './pages/student/CareerExplorerPage'
@@ -105,6 +106,9 @@ function AppRoutes() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/" element={<HomeRedirect />} />
+
+      {/* Own account — every signed-in role, no allow list */}
+      <Route path="/account" element={<Protected><AccountPage /></Protected>} />
 
       {/* ── Student ──────────────────────────────────────────────────────── */}
       <Route path="/student/careers"        element={<Protected allow={STUDENT}><CareerExplorerPage /></Protected>} />
