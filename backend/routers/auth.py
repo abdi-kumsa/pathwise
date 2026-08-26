@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
 from schemas.auth import LoginResponse, UserOut
+from schemas.users import PasswordChange
 from services import auth_service
 
 log = logging.getLogger(__name__)
@@ -82,6 +83,31 @@ def read_me(user: dict = Depends(auth_service.get_current_user)):
 
     merged = {**user, "display_name": (stored or {}).get("display_name") or user["username"]}
     return _user_out(merged)
+
+
+@router.post("/change-password", status_code=204)
+def change_password(
+    body: PasswordChange,
+    user: dict = Depends(auth_service.get_current_user),
+):
+    """Change your own password. Any role.
+
+    Lives on the auth router rather than /api/users because it is about the
+    caller's own account, not administration — every role needs it, including
+    the four that can never reach the admin console.
+
+    The current password is required: without it, an unattended session could
+    be used to lock the real owner out of their own account.
+    """
+    try:
+        auth_service.change_own_password(
+            user["username"], body.current_password, body.new_password
+        )
+    except auth_service.UserError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message)
+    except Exception as exc:
+        log.error("Password change failed for %s: %s", user["username"], exc)
+        raise HTTPException(status_code=500, detail="Could not change password.")
 
 
 @router.get("/roles", tags=["Authentication"])

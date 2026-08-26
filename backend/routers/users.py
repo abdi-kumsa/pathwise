@@ -1,0 +1,145 @@
+"""
+User management — administrator only.
+
+Thin router: every rule (self-lockout, last-admin, institution pairing,
+username immutability) lives in services/auth_service.py so it holds regardless
+of caller. This layer translates UserError into the right HTTP status.
+"""
+import logging
+
+from fastapi import APIRouter, Depends, HTTPException
+from typing import List
+
+from schemas.users import (
+    UserOut, UserCreate, UserUpdate, PasswordReset, InstitutionOption,
+)
+from services import auth_service
+from services.auth_service import UserError, require_roles, ROLE_ADMIN
+
+log = logging.getLogger(__name__)
+
+router = APIRouter(
+    prefix="/users",
+    tags=["User Management"],
+    dependencies=[Depends(require_roles(ROLE_ADMIN))],
+)
+
+# The admin's own identity, for the self-lockout guards.
+_admin = require_roles(ROLE_ADMIN)
+
+
+def _raise(exc: UserError):
+    raise HTTPException(status_code=exc.status_code, detail=exc.message)
+
+
+@router.get("", response_model=List[UserOut])
+def list_users():
+    """Every account, active first. Password hashes are never returned."""
+    try:
+        return auth_service.list_users()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("", response_model=UserOut, status_code=201)
+def create_user(body: UserCreate):
+    """Create an account. 409 if the username is taken."""
+    try:
+        return auth_service.create_user(
+            username     = body.username,
+            password     = body.password,
+            role         = body.role,
+            display_name = body.display_name,
+            institution  = body.institution_name,
+        )
+    except UserError as e:
+        _raise(e)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.patch("/{username}", response_model=UserOut)
+def update_user(username: str, body: UserUpdate, actor: dict = Depends(_admin)):
+    """Update role, display name, institution or active status.
+
+    The username itself cannot be changed — it is the JWT subject.
+    """
+    try:
+        return auth_service.update_user(
+            username,
+            actor        = actor["username"],
+            role         = body.role,
+            display_name = body.display_name,
+            institution  = body.institution_name,
+            active       = body.is_active,
+        )
+    except UserError as e:
+        _raise(e)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/{username}/password", response_model=UserOut)
+def reset_password(username: str, body: PasswordReset):
+    """Set a user's password without knowing the current one."""
+    try:
+        return auth_service.set_password(username, body.new_password)
+    except UserError as e:
+        _raise(e)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.delete("/{username}", response_model=UserOut)
+def deactivate_user(username: str, actor: dict = Depends(_admin)):
+    """Deactivate an account.
+
+    A soft delete: the row survives, the action is reversible via PATCH, and
+    the record that the account existed is preserved. The user cannot obtain a
+    new token, and any token they already hold stops working within the
+    status-cache TTL (see services/auth_service.py).
+
+    Returns the updated account rather than 204 so the client can re-render the
+    row without a second request.
+    """
+    try:
+        return auth_service.set_active(username, False, actor=actor["username"])
+    except UserError as e:
+        _raise(e)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.delete("/{username}/permanent", status_code=204)
+def delete_user_permanently(username: str, actor: dict = Depends(_admin)):
+    """Erase an account and free its username.
+
+    Deactivation (DELETE /api/users/{username}) is the normal path — reversible
+    and keeps the record. This is for genuine erasure, and is deliberately not
+    surfaced as a button in the admin console: an irreversible action one click
+    away from a reversible one is a trap.
+
+    Same self-lockout and last-admin guards apply.
+    """
+    try:
+        auth_service.delete_user(username, actor=actor["username"])
+    except UserError as e:
+        _raise(e)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/meta/institutions", response_model=List[InstitutionOption])
+def list_institutions():
+    """Institutions a UNIVERSITY account may be scoped to.
+
+    Read from the dataset, so the create form cannot offer an institution that
+    would yield empty dashboards.
+
+    Nested under /meta/ so it cannot collide with a username in /{username}.
+    """
+    try:
+        from services import _datasets as ds
+        return ds.institutions()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

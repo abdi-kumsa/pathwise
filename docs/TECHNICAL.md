@@ -289,9 +289,71 @@ the password in `DEMO_PASSWORD` (default `pathwise123`):
 `admin` · `student` · `moe` · `mol` · `university` (scoped to Tech Institute)
 
 Seeding is idempotent — it exits silently once any user exists, so a changed
-password is never overwritten on restart. **These are demo credentials.** Rotate
-`DEMO_PASSWORD` and re-seed before exposing the deployment to anyone. There is
-no user CRUD in this build; accounts are provisioned at startup.
+password is never overwritten on restart. **These are demo credentials.**
+See §5.6 for how to replace them with real accounts.
+
+### 5.6 User management
+
+An administrator manages accounts from **Accounts** in the sidebar
+(`/admin/users`). Every rule below is enforced in
+`services/auth_service.py`, not in the router or the UI, so it holds regardless
+of caller.
+
+**Deactivation, not deletion.** `DELETE /api/users/{username}` sets
+`is_active = false`. The row survives, the action is reversible, and the record
+that the account existed is preserved. A permanent-delete route
+(`DELETE /api/users/{username}/permanent`) exists for genuine erasure and test
+teardown but is deliberately **not** surfaced as a button — an irreversible
+action one click from a reversible one is a trap.
+
+**Revocation is not instant, and here is why.** `get_current_user` authorises
+from token claims with no database hit — that is what keeps it fast and lets it
+survive a brief Postgres outage (§5.4). With an 8-hour token lifetime, checking
+`is_active` only at login would let a deactivated user keep full access for the
+rest of their token's life; revoking access would revoke nothing.
+
+So the status is checked per request behind a **30-second TTL cache**
+(`_ACTIVE_TTL` in `auth_service.py`):
+
+| Change made via | Takes effect |
+|---|---|
+| The API (admin console) | Immediately — the cache entry is evicted |
+| Directly in the database | Within 30 seconds |
+
+If the lookup fails, the last known value is served (defaulting to active), so a
+database blip degrades to the previous behaviour rather than locking every user
+out at once.
+
+**Guard rails.** These exist because each one is a realistic way to make the
+platform unmanageable:
+
+1. You cannot deactivate or demote **your own** account.
+2. You cannot deactivate, demote or delete the **last active administrator**.
+3. **Usernames are immutable.** The username is the JWT `sub`; changing it would
+   orphan every token already issued to that person. Role, display name,
+   institution and password are all editable.
+4. A `UNIVERSITY` account must be scoped to an institution, and it must be one of
+   the eight in the dataset — otherwise the account authenticates and then shows
+   empty dashboards, which reads as a bug rather than a mistake.
+5. Passwords are at least 8 characters. Length only; no composition rules.
+
+The UI disables the controls that these guards would reject, with the reason in
+the tooltip, so the constraint is visible before the click rather than as an
+error afterwards.
+
+**Self-service.** `POST /api/auth/change-password` is available to **every
+role**, not just administrators, and requires the current password — without
+that, an unattended session could be used to lock the real owner out of their own
+account. Reachable at `/account`, via the name in the sidebar footer.
+
+**Replacing the demo accounts.** Do it in this order, or guard 2 will (correctly)
+stop you:
+
+1. Sign in as `admin`, create your own administrator account
+2. Sign out, sign in as the new administrator
+3. Deactivate the five seeded accounts
+4. Rotate `DEMO_PASSWORD` in `.env` so a future `docker compose down -v` does not
+   reseed the old credentials
 
 ---
 
@@ -311,6 +373,7 @@ Except where noted, every endpoint below requires
 | POST | `/api/auth/login` | public | OAuth2 password form → `{access_token, token_type, expires_in, user}` |
 | GET | `/api/auth/me` | any role | Current caller; used to rehydrate a session on page load |
 | GET | `/api/auth/roles` | any role | Role vocabulary and landing routes |
+| POST | `/api/auth/change-password` | any role | Change your own password; requires the current one. 204 on success. |
 
 ```bash
 TOKEN=$(curl -s -X POST http://localhost:8000/api/auth/login \
@@ -373,7 +436,26 @@ Scoped to the caller's own institution; no institution parameter is accepted.
 | GET | `/api/institution/resources` | Recruitment funnel and cost per enrolment |
 | GET | `/api/institution/benchmark` | Standing vs anonymised peers |
 
-### 6.5 Search — any role
+### 6.5 User management — `ADMIN`
+
+| Method | Path | Description |
+|---|---|---|
+| GET | `/api/users` | All accounts, active first. Never returns password hashes. |
+| POST | `/api/users` | Create. 409 if the username is taken, 422 on invalid input. |
+| PATCH | `/api/users/{username}` | Role, display name, institution, active status |
+| POST | `/api/users/{username}/password` | Admin reset — no current password needed |
+| DELETE | `/api/users/{username}` | Deactivate (soft). Returns the updated account. |
+| DELETE | `/api/users/{username}/permanent` | Erase and free the username. Not in the UI. |
+| GET | `/api/users/meta/institutions` | The eight institutions a `UNIVERSITY` account may use |
+
+`DELETE` returns a body rather than 204 so the client can re-render the row
+without a second request. `PATCH` accepts no `username` field — see guard 3 in
+§5.6.
+
+The institution route is nested under `/meta/` so it cannot be shadowed by a
+username in `/{username}`.
+
+### 6.6 Search — any role
 
 | Method | Path | Description |
 |---|---|---|
@@ -381,7 +463,7 @@ Scoped to the caller's own institution; no institution parameter is accepted.
 
 Each result carries the route the frontend should navigate to.
 
-### 6.6 Health
+### 6.7 Health
 
 | Method | Path | Description |
 |---|---|---|
@@ -430,7 +512,7 @@ on an already-warm singleton. Loading all five from cold takes ~15 s.
 
 ---
 
-### 6.7 Market Demand
+### 6.8 Market Demand
 
 | Method | Path | Query params | Description |
 |---|---|---|---|
@@ -467,7 +549,7 @@ on an already-warm singleton. Loading all five from cold takes ~15 s.
 
 ---
 
-### 6.8 Enrollment Intelligence
+### 6.9 Enrollment Intelligence
 
 | Method | Path | Query params | Description |
 |---|---|---|---|
@@ -519,7 +601,7 @@ on an already-warm singleton. Loading all five from cold takes ~15 s.
 
 ---
 
-### 6.9 Monitoring
+### 6.10 Monitoring
 
 | Method | Path | Query params | Description |
 |---|---|---|---|

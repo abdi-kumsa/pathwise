@@ -25,6 +25,10 @@ DROP TABLE IF EXISTS users CASCADE;
 -- institution_name scopes a UNIVERSITY user to their own institution's rows.
 -- It is read from the JWT, never from a query parameter, so one university
 -- cannot request another's data.
+-- is_active: accounts are deactivated rather than deleted, so the record that
+-- an account existed survives. An inactive user cannot log in, and their
+-- existing token stops working within the status-cache TTL (see
+-- services/auth_service.py).
 CREATE TABLE users (
     id               SERIAL PRIMARY KEY,
     username         VARCHAR(64)     NOT NULL UNIQUE,
@@ -33,6 +37,7 @@ CREATE TABLE users (
                      CHECK (role IN ('ADMIN', 'STUDENT', 'MOE', 'MOL', 'UNIVERSITY')),
     display_name     VARCHAR(120)    NOT NULL,
     institution_name VARCHAR(120),   -- required for UNIVERSITY, NULL otherwise
+    is_active        BOOLEAN         NOT NULL DEFAULT TRUE,
     created_at       TIMESTAMPTZ     NOT NULL DEFAULT NOW(),
 
     CHECK (role <> 'UNIVERSITY' OR institution_name IS NOT NULL)

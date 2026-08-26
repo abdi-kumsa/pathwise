@@ -255,6 +255,330 @@ class TestRoleMatrix:
 
 
 # =============================================================================
+# User management (ADMIN)
+# =============================================================================
+
+# Accounts these tests create. Torn down after the module so the suite can be
+# re-run against the same live database without colliding with itself.
+_SCRATCH = ["t_create", "t_edit", "t_deact", "t_pw", "t_self", "t_uni", "t_admin2"]
+
+
+def _purge(admin_client):
+    """Remove scratch accounts so the suite can run repeatedly.
+
+    Uses the permanent-delete route rather than deactivation: a deactivated
+    leftover would still occupy its username and fail the next run's create.
+    404s are expected and ignored — the account may not exist yet.
+    """
+    for name in _SCRATCH:
+        admin_client.delete(f"/api/users/{name}/permanent")
+
+
+@pytest.fixture(scope="class")
+def scratch(role_clients):
+    """Clean before and after, so a previous failed run cannot poison this one."""
+    admin = role_clients["admin"]
+    _purge(admin)
+    yield admin
+    _purge(admin)
+
+
+def _new_user(client, username, **over):
+    body = {
+        "username":     username,
+        "password":     "scratchpass123",
+        "role":         "STUDENT",
+        "display_name": f"Scratch {username}",
+        **over,
+    }
+    return client.post("/api/users", json=body)
+
+
+class TestUserManagement:
+
+    # ── Access ────────────────────────────────────────────────────────────
+
+    def test_only_admin_can_list(self, role_clients, anon):
+        assert role_clients["admin"].get("/api/users").status_code == 200
+        for user in ("student", "moe", "mol", "university"):
+            assert role_clients[user].get("/api/users").status_code == 403, user
+        assert anon.get("/api/users").status_code == 401
+
+    @pytest.mark.parametrize("method,path", [
+        ("post",   "/api/users"),
+        ("patch",  "/api/users/student"),
+        ("delete", "/api/users/student"),
+        ("post",   "/api/users/student/password"),
+        ("delete", "/api/users/student/permanent"),
+        ("get",    "/api/users/meta/institutions"),
+    ])
+    def test_every_route_is_admin_only(self, role_clients, method, path):
+        for user in ("student", "moe", "mol", "university"):
+            client = role_clients[user]
+            # httpx's get/delete take no json= kwarg, so only send a body where
+            # the verb accepts one.
+            if method in ("post", "patch"):
+                r = getattr(client, method)(path, json={})
+            else:
+                r = getattr(client, method)(path)
+            assert r.status_code == 403, f"{user} reached {method.upper()} {path}"
+
+    def test_list_never_returns_password_hashes(self, role_clients):
+        body = role_clients["admin"].get("/api/users").json()
+        assert body
+        for u in body:
+            assert "password_hash" not in u
+        # And not under any other spelling either.
+        assert "$2b$" not in str(body), "a bcrypt hash leaked into the response"
+
+    def test_list_includes_the_seeded_accounts(self, role_clients):
+        names = {u["username"] for u in role_clients["admin"].get("/api/users").json()}
+        assert {"admin", "student", "moe", "mol", "university"} <= names
+
+    # ── Create ────────────────────────────────────────────────────────────
+
+    def test_create_then_login(self, scratch):
+        r = _new_user(scratch, "t_create")
+        assert r.status_code == 201, r.text
+        body = r.json()
+        assert body["username"] == "t_create"
+        assert body["is_active"] is True
+
+        # The account must actually work, not merely have been written.
+        login = httpx.post(f"{BASE_URL}/api/auth/login",
+                           data={"username": "t_create", "password": "scratchpass123"},
+                           timeout=30)
+        assert login.status_code == 200
+
+    def test_create_duplicate_username_409(self, scratch):
+        _new_user(scratch, "t_create")
+        assert _new_user(scratch, "t_create").status_code == 409
+
+    @pytest.mark.parametrize("field,value", [
+        ("password", "short"),          # under the 8-char minimum
+        ("username", "AB"),             # too short, and uppercase
+        ("username", "has spaces"),
+        ("username", "Uppercase"),
+        ("role",     "WIZARD"),
+        ("display_name", ""),
+    ])
+    def test_create_rejects_invalid_input(self, scratch, field, value):
+        body = {
+            "username":     "t_bad",
+            "password":     "scratchpass123",
+            "role":         "STUDENT",
+            "display_name": "Bad Input",
+            field:          value,      # overrides the key under test
+        }
+        assert scratch.post("/api/users", json=body).status_code == 422
+
+    def test_university_account_requires_a_valid_institution(self, scratch):
+        # No institution at all.
+        assert _new_user(scratch, "t_uni", role="UNIVERSITY").status_code == 422
+        # An institution that is not in the dataset — it would authenticate and
+        # then show empty dashboards, which reads as a bug.
+        assert _new_user(scratch, "t_uni", role="UNIVERSITY",
+                         institution_name="Hogwarts").status_code == 422
+        # A real one succeeds.
+        r = _new_user(scratch, "t_uni", role="UNIVERSITY",
+                      institution_name="Tech Institute")
+        assert r.status_code == 201
+        assert r.json()["institution_name"] == "Tech Institute"
+
+    def test_institution_options_are_available(self, scratch):
+        body = scratch.get("/api/users/meta/institutions").json()
+        assert len(body) == 8
+        assert {"name", "type", "state"} <= set(body[0])
+
+    # ── Update ────────────────────────────────────────────────────────────
+
+    def test_update_fields(self, scratch):
+        _new_user(scratch, "t_edit")
+        r = scratch.patch("/api/users/t_edit",
+                          json={"display_name": "Renamed", "role": "MOL"})
+        assert r.status_code == 200
+        assert r.json()["display_name"] == "Renamed"
+        assert r.json()["role"] == "MOL"
+
+    def test_username_cannot_be_changed(self, scratch):
+        _new_user(scratch, "t_edit")
+        # Extra keys are ignored by the schema rather than renaming the account,
+        # because the username is the JWT subject.
+        scratch.patch("/api/users/t_edit", json={"username": "t_renamed"})
+        assert scratch.get("/api/users").json()
+        names = {u["username"] for u in scratch.get("/api/users").json()}
+        assert "t_edit" in names
+        assert "t_renamed" not in names
+
+    def test_update_unknown_user_404(self, scratch):
+        assert scratch.patch("/api/users/nobody_here",
+                             json={"display_name": "X"}).status_code == 404
+
+    def test_promoting_to_university_requires_institution(self, scratch):
+        _new_user(scratch, "t_edit")
+        # Changing role alone must not leave a UNIVERSITY account unscoped.
+        r = scratch.patch("/api/users/t_edit", json={"role": "UNIVERSITY"})
+        assert r.status_code == 422
+
+    # ── Guard rails ───────────────────────────────────────────────────────
+
+    def test_admin_cannot_deactivate_self(self, scratch):
+        r = scratch.delete("/api/users/admin")
+        assert r.status_code == 400
+        assert "your own" in r.json()["detail"].lower()
+        # And is still able to work.
+        assert scratch.get("/api/users").status_code == 200
+
+    def test_admin_cannot_demote_self(self, scratch):
+        r = scratch.patch("/api/users/admin", json={"role": "STUDENT"})
+        assert r.status_code == 400
+        assert scratch.get("/api/users").json()  # still an admin
+
+    def test_cannot_remove_the_last_active_admin(self, scratch):
+        """With a second admin present the guard must allow it; with none, refuse."""
+        _new_user(scratch, "t_admin2", role="ADMIN")
+
+        # Two admins exist, so deactivating the spare is allowed.
+        assert scratch.delete("/api/users/t_admin2").status_code == 200
+
+        # admin is now the only active one, and cannot be removed even by
+        # another route (it is also self, so both guards apply).
+        assert scratch.delete("/api/users/admin").status_code == 400
+
+    # ── Deactivate / reactivate ───────────────────────────────────────────
+
+    def test_deactivate_blocks_login_and_revokes_token(self, scratch):
+        _new_user(scratch, "t_deact")
+
+        token = httpx.post(
+            f"{BASE_URL}/api/auth/login",
+            data={"username": "t_deact", "password": "scratchpass123"},
+            timeout=30,
+        ).json()["access_token"]
+
+        live = httpx.Client(base_url=BASE_URL, timeout=30,
+                            headers={"Authorization": f"Bearer {token}"})
+        assert live.get("/api/careers/jobs").status_code == 200
+
+        r = scratch.delete("/api/users/t_deact")
+        assert r.status_code == 200
+        assert r.json()["is_active"] is False
+
+        # Cannot get a new token ...
+        assert httpx.post(f"{BASE_URL}/api/auth/login",
+                          data={"username": "t_deact", "password": "scratchpass123"},
+                          timeout=30).status_code == 401
+
+        # ... and the one they already hold stops working. This is the whole
+        # point of the feature: without the status check a deactivated user
+        # would keep full access until their token expired.
+        assert live.get("/api/careers/jobs").status_code == 401
+        live.close()
+
+    def test_reactivate_restores_access(self, scratch):
+        _new_user(scratch, "t_deact")
+        scratch.delete("/api/users/t_deact")
+
+        r = scratch.patch("/api/users/t_deact", json={"is_active": True})
+        assert r.status_code == 200
+        assert r.json()["is_active"] is True
+
+        assert httpx.post(f"{BASE_URL}/api/auth/login",
+                          data={"username": "t_deact", "password": "scratchpass123"},
+                          timeout=30).status_code == 200
+
+    def test_deactivated_account_is_not_disclosed_at_login(self, scratch):
+        """A disabled account and a wrong password must be indistinguishable,
+        or login becomes an oracle for which accounts exist and are disabled."""
+        _new_user(scratch, "t_deact")
+        scratch.delete("/api/users/t_deact")
+
+        disabled = httpx.post(f"{BASE_URL}/api/auth/login",
+                              data={"username": "t_deact", "password": "scratchpass123"},
+                              timeout=30)
+        wrong = httpx.post(f"{BASE_URL}/api/auth/login",
+                           data={"username": "t_deact", "password": "wrong-entirely"},
+                           timeout=30)
+        assert disabled.status_code == wrong.status_code == 401
+        assert disabled.json()["detail"] == wrong.json()["detail"]
+
+    # ── Passwords ─────────────────────────────────────────────────────────
+
+    def test_admin_reset_replaces_the_password(self, scratch):
+        _new_user(scratch, "t_pw")
+
+        assert scratch.post("/api/users/t_pw/password",
+                            json={"new_password": "brandnew456"}).status_code == 200
+
+        # The old one must stop working and the new one must start —
+        # asserting only 200 would pass even if nothing had been written.
+        assert httpx.post(f"{BASE_URL}/api/auth/login",
+                          data={"username": "t_pw", "password": "scratchpass123"},
+                          timeout=30).status_code == 401
+        assert httpx.post(f"{BASE_URL}/api/auth/login",
+                          data={"username": "t_pw", "password": "brandnew456"},
+                          timeout=30).status_code == 200
+
+    def test_admin_reset_rejects_short_password(self, scratch):
+        _new_user(scratch, "t_pw")
+        assert scratch.post("/api/users/t_pw/password",
+                            json={"new_password": "abc"}).status_code == 422
+
+
+class TestChangeOwnPassword:
+    """Self-service — every role, including those that never see the console."""
+
+    def test_requires_authentication(self, anon):
+        r = anon.post("/api/auth/change-password",
+                      json={"current_password": "x", "new_password": "yyyyyyyy"})
+        assert r.status_code == 401
+
+    def test_full_change_cycle(self, role_clients):
+        admin = role_clients["admin"]
+        _purge(admin)
+        try:
+            assert _new_user(admin, "t_self").status_code == 201
+
+            token = httpx.post(f"{BASE_URL}/api/auth/login",
+                               data={"username": "t_self", "password": "scratchpass123"},
+                               timeout=30).json()["access_token"]
+            me = httpx.Client(base_url=BASE_URL, timeout=30,
+                              headers={"Authorization": f"Bearer {token}"})
+
+            # Wrong current password is refused.
+            assert me.post("/api/auth/change-password",
+                           json={"current_password": "not-it",
+                                 "new_password": "changed12345"}).status_code == 401
+
+            # Reusing the same password is refused — it is almost always a
+            # mistake, and silently accepting it implies something happened.
+            assert me.post("/api/auth/change-password",
+                           json={"current_password": "scratchpass123",
+                                 "new_password": "scratchpass123"}).status_code == 422
+
+            # Too short is refused by validation.
+            assert me.post("/api/auth/change-password",
+                           json={"current_password": "scratchpass123",
+                                 "new_password": "abc"}).status_code == 422
+
+            # The real change succeeds ...
+            assert me.post("/api/auth/change-password",
+                           json={"current_password": "scratchpass123",
+                                 "new_password": "changed12345"}).status_code == 204
+            me.close()
+
+            # ... and takes effect both ways.
+            assert httpx.post(f"{BASE_URL}/api/auth/login",
+                              data={"username": "t_self", "password": "scratchpass123"},
+                              timeout=30).status_code == 401
+            assert httpx.post(f"{BASE_URL}/api/auth/login",
+                              data={"username": "t_self", "password": "changed12345"},
+                              timeout=30).status_code == 200
+        finally:
+            _purge(admin)
+
+
+# =============================================================================
 # Careers — the student job -> department recommender
 # =============================================================================
 
