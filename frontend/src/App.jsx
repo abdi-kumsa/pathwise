@@ -8,6 +8,7 @@ import CommandBar from './components/CommandBar'
 import LoadingSpinner from './components/LoadingSpinner'
 
 import LoginPage from './pages/LoginPage'
+import SignUpPage from './pages/SignUpPage'
 import AccountPage from './pages/AccountPage'
 
 // Student
@@ -45,10 +46,10 @@ import AdminMonitoringPage from './pages/admin/AdminMonitoringPage'
 import AdminUsersPage from './pages/admin/AdminUsersPage'
 
 const STUDENT    = ['STUDENT']
-const MOL        = ['MOL']
-const MOE        = ['MOE']
-const MOL_OR_MOE = ['MOL', 'MOE']
-const UNIVERSITY = ['UNIVERSITY']
+const MOL        = ['MOL', 'ADMIN']
+const MOE        = ['MOE', 'ADMIN']
+const MOL_OR_MOE = ['MOL', 'MOE', 'ADMIN']
+const UNIVERSITY = ['UNIVERSITY', 'ADMIN']
 const ADMIN      = ['ADMIN']
 
 /** Signed-in chrome: sidebar, top bar, command bar, routed page. */
@@ -105,6 +106,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignUpPage />} />
       <Route path="/" element={<HomeRedirect />} />
 
       {/* Own account — every signed-in role, no allow list */}

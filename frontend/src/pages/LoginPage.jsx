@@ -1,20 +1,14 @@
 import { useState } from 'react'
-import { useNavigate, useLocation, Navigate } from 'react-router-dom'
+import { useNavigate, useLocation, Navigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { User, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react'
 
-// Shown on the page so the platform is demonstrable without a credentials
-// handout. These are seeded demo accounts, not production users — see
-// backend/startup_seed.py and the warning in SETUP_GUIDE.md.
-const DEMO_ACCOUNTS = [
-  { username: 'student',    label: 'Student',              blurb: 'Find which department leads to a target job' },
-  { username: 'mol',        label: 'Ministry of Labour',   blurb: 'Emerging occupations and workforce shortfalls' },
-  { username: 'moe',        label: 'Ministry of Education', blurb: 'Where to invest in new education capacity' },
-  { username: 'university', label: 'University',           blurb: 'Portfolio, expansion and resource efficiency' },
-  { username: 'admin',      label: 'Administrator',        blurb: 'Everything, plus model monitoring' },
-]
-
-const DEMO_PASSWORD = 'pathwise123'
-
+/**
+ * Sign in — split-panel card matching the PathWise login mock.
+ *
+ * Left: form. Right: isometric dashboard illustration + trust row.
+ * Auth behaviour is unchanged; this file is presentation only.
+ */
 export default function LoginPage() {
   const { login, user, booting } = useAuth()
   const navigate = useNavigate()
@@ -22,12 +16,13 @@ export default function LoginPage() {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  const [rememberMe, setRememberMe] = useState(false)
   const [error, setError] = useState(null)
   const [busy, setBusy] = useState(false)
 
   const expired = new URLSearchParams(location.search).get('expired') === '1'
 
-  // Already signed in — go straight to the role's home.
   if (!booting && user) {
     return <Navigate to={user.home ?? '/'} replace />
   }
@@ -38,6 +33,7 @@ export default function LoginPage() {
     setError(null)
     try {
       const me = await login(username.trim(), password)
+      // TODO: persist rememberMe preference if implementing that feature
       navigate(location.state?.from ?? me.home ?? '/', { replace: true })
     } catch (err) {
       setError(err?.message ?? 'Sign in failed')
@@ -46,183 +42,574 @@ export default function LoginPage() {
     }
   }
 
-  const fillDemo = (name) => {
-    setUsername(name)
-    setPassword(DEMO_PASSWORD)
-    setError(null)
+  const handleGoogleSignIn = () => {
+    alert('Google sign-in not yet implemented')
   }
 
   return (
     <div className="login-page">
+      <div className="login-bg" aria-hidden="true">
+        <span className="orb orb-1" />
+        <span className="orb orb-2" />
+        <span className="orb orb-3" />
+        <span className="orb orb-4" />
+        <span className="orb orb-5" />
+        <span className="dots dots-tr" />
+        <span className="dots dots-bl" />
+        <svg className="waves" viewBox="0 0 520 420" preserveAspectRatio="none">
+          {[0, 1, 2, 3, 4, 5].map(i => (
+            <path
+              key={i}
+              d={`M ${520 - i * 28} 420
+                  C ${480 - i * 30} ${280 - i * 18},
+                    ${360 - i * 26} ${160 - i * 16},
+                    ${210 - i * 24} ${70 - i * 10}`}
+              fill="none"
+              stroke="rgba(147, 197, 253, 0.18)"
+              strokeWidth="1.2"
+            />
+          ))}
+        </svg>
+      </div>
+
       <div className="login-card">
-        {/* ── Form ───────────────────────────────────────────────────────── */}
-        <div className="login-form-side">
-          <div className="brand" style={{ border: 'none', padding: '0 0 24px' }}>
-            <div className="brand-mark">P</div>
+        <div className="login-left">
+          <div className="login-brand">
+            <div className="login-mark">P</div>
             <div>
-              <div className="brand-name" style={{ color: 'var(--navy)' }}>PathWise</div>
-              <div className="brand-tag">Market &amp; Enrolment Intelligence</div>
+              <div className="login-wordmark">PathWise</div>
+              <div className="login-tagline">Market &amp; Enrolment Intelligence</div>
             </div>
           </div>
 
-          <h1 className="login-title">Sign in</h1>
-          <p className="login-sub">Your dashboard is built from your role.</p>
+          <h1 className="login-title">Welcome back 👋</h1>
+          <p className="login-sub">Sign in to access your dashboard</p>
 
           {expired && (
-            <div className="login-note">Your session expired. Please sign in again.</div>
+            <div className="login-note" role="status">
+              Your session expired. Please sign in again.
+            </div>
           )}
 
-          <form onSubmit={submit}>
+          <form onSubmit={submit} className="login-form">
             <label className="login-label" htmlFor="username">Username</label>
-            <input
-              id="username"
-              className="login-input"
-              value={username}
-              onChange={e => setUsername(e.target.value)}
-              autoComplete="username"
-              autoFocus
-              required
-            />
+            <div className="login-input-wrap">
+              <User className="login-input-icon" size={18} strokeWidth={1.8} />
+              <input
+                id="username"
+                className="login-input"
+                value={username}
+                onChange={e => setUsername(e.target.value)}
+                placeholder="Enter your username"
+                autoComplete="username"
+                autoFocus
+                required
+              />
+            </div>
 
             <label className="login-label" htmlFor="password">Password</label>
-            <input
-              id="password"
-              className="login-input"
-              type="password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              autoComplete="current-password"
-              required
-            />
+            <div className="login-input-wrap">
+              <Lock className="login-input-icon" size={18} strokeWidth={1.8} />
+              <input
+                id="password"
+                className="login-input"
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                autoComplete="current-password"
+                required
+              />
+              <button
+                type="button"
+                className="login-input-toggle"
+                onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+              >
+                {showPassword ? <Eye size={18} strokeWidth={1.8} /> : <EyeOff size={18} strokeWidth={1.8} />}
+              </button>
+            </div>
+
+            <div className="login-remember-row">
+              <label className="login-remember">
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={e => setRememberMe(e.target.checked)}
+                />
+                <span>Remember me</span>
+              </label>
+              <a
+                href="#"
+                className="login-forgot"
+                onClick={e => { e.preventDefault(); alert('Password reset not yet implemented') }}
+              >
+                Forgot password?
+              </a>
+            </div>
 
             {error && <p className="login-error" role="alert">{error}</p>}
 
-            <button className="login-submit" type="submit" disabled={busy || !username || !password}>
-              {busy ? 'Signing in…' : 'Sign in'}
+            <button
+              className="login-submit"
+              type="submit"
+              disabled={busy || !username || !password}
+            >
+              <span>{busy ? 'Signing in…' : 'Sign in'}</span>
+              <ArrowRight className="login-submit-arrow" size={18} strokeWidth={2.2} />
             </button>
           </form>
-        </div>
 
-        {/* ── Demo accounts ──────────────────────────────────────────────── */}
-        <div className="login-demo-side">
-          <p className="login-demo-title">Demo accounts</p>
-          <p className="login-demo-sub">
-            Select one to fill the form. Password is <code>{DEMO_PASSWORD}</code> for all.
-          </p>
-
-          <div className="login-demo-list">
-            {DEMO_ACCOUNTS.map(a => (
-              <button
-                key={a.username}
-                type="button"
-                className={`login-demo-item${username === a.username ? ' selected' : ''}`}
-                onClick={() => fillDemo(a.username)}
-              >
-                <span className="login-demo-role">{a.label}</span>
-                <span className="login-demo-blurb">{a.blurb}</span>
-              </button>
-            ))}
+          <div className="login-divider">
+            <span>or</span>
           </div>
 
-          <p className="login-demo-foot">
-            Demo credentials only — rotate <code>DEMO_PASSWORD</code> before any real deployment.
+          <button className="login-google" type="button" onClick={handleGoogleSignIn}>
+            <svg className="login-google-icon" viewBox="0 0 24 24" width="20" height="20">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+            </svg>
+            Sign in with Google
+          </button>
+
+          <p className="login-foot">
+            Don&apos;t have an account? <Link to="/signup" className="login-link">Sign up</Link>
           </p>
+        </div>
+
+        <div className="login-right" aria-hidden="true">
+          <div className="login-illustration">
+            <img
+              src="/login-illustration.png"
+              alt=""
+              className="login-illustration-img"
+            />
+          </div>
+
+          <div className="login-security">
+            <svg className="login-shield" viewBox="0 0 24 24" width="22" height="22">
+              <path
+                fill="#2563EB"
+                d="M12 2.1 20 5.4v6.2c0 5.1-3.4 9.6-8 10.8-4.6-1.2-8-5.7-8-10.8V5.4L12 2.1Z"
+              />
+              <path
+                fill="none"
+                stroke="#fff"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M8.6 12.1 11 14.5l4.6-4.8"
+              />
+            </svg>
+            <span>Your data is secure and encrypted</span>
+          </div>
         </div>
       </div>
 
       <style>{`
         .login-page {
-          min-height: 100vh;
+          position: relative;
+          min-height: 100dvh;
           display: flex;
           align-items: center;
           justify-content: center;
-          background: linear-gradient(150deg, #0F172A 0%, #1E293B 55%, #24365C 100%);
-          padding: 24px;
+          padding: 32px 20px;
+          overflow: hidden;
+          background:
+            radial-gradient(1100px 760px at 78% 64%, #163A73 0%, rgba(22,58,115,0) 60%),
+            radial-gradient(820px 640px at 10% 16%, #12325F 0%, rgba(18,50,95,0) 58%),
+            linear-gradient(135deg, #06101F 0%, #0A1B38 46%, #0C214C 100%);
+          background-color: #08172E;
         }
-        .login-card {
-          width: 100%;
-          max-width: 940px;
-          background: var(--white);
-          border-radius: 18px;
-          box-shadow: var(--shadow-pop);
-          display: grid;
-          grid-template-columns: 1fr 1fr;
+
+        .login-bg {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
           overflow: hidden;
         }
-        .login-form-side { padding: 40px 44px 44px; }
+
+        .orb {
+          position: absolute;
+          border-radius: 50%;
+          will-change: transform;
+        }
+
+        .orb-1 {
+          width: 480px; height: 480px;
+          left: -200px; top: -180px;
+          background: radial-gradient(circle at 34% 30%,
+            rgba(59,130,246,0.32) 0%, rgba(37,99,235,0.16) 44%, rgba(30,64,175,0) 72%);
+          animation: drift-a 22s ease-in-out infinite;
+        }
+
+        .orb-2 {
+          width: 32px; height: 32px;
+          left: 9%; top: 11%;
+          background: linear-gradient(150deg, #5B9BF8 0%, #2563EB 55%, #1D4ED8 100%);
+          box-shadow: 0 8px 24px rgba(37,99,235,0.5);
+          animation: drift-b 13s ease-in-out infinite;
+        }
+
+        .orb-3 {
+          width: 96px; height: 96px;
+          right: 8%; top: 38%;
+          background: linear-gradient(155deg, #4F8DF5 0%, #2563EB 48%, #16337A 100%);
+          box-shadow: 0 18px 50px rgba(29,78,216,0.42);
+          animation: drift-c 18s ease-in-out infinite;
+        }
+
+        .orb-4 {
+          width: 360px; height: 360px;
+          left: -110px; bottom: -150px;
+          background: radial-gradient(circle at 60% 40%,
+            rgba(37,99,235,0.24) 0%, rgba(30,58,138,0.1) 48%, rgba(15,23,42,0) 74%);
+          animation: drift-d 26s ease-in-out infinite;
+        }
+
+        .orb-5 {
+          width: 16px; height: 16px;
+          right: 22%; bottom: 15%;
+          background: linear-gradient(150deg, #7CB0FA 0%, #3B82F6 100%);
+          box-shadow: 0 6px 16px rgba(59,130,246,0.48);
+          animation: drift-b 16s ease-in-out infinite reverse;
+        }
+
+        @keyframes drift-a {
+          0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+          50%      { transform: translate3d(26px, 34px, 0) scale(1.05); }
+        }
+        @keyframes drift-b {
+          0%, 100% { transform: translate3d(0, 0, 0); }
+          33%      { transform: translate3d(16px, -22px, 0); }
+          66%      { transform: translate3d(-12px, -10px, 0); }
+        }
+        @keyframes drift-c {
+          0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+          50%      { transform: translate3d(-22px, 28px, 0) scale(1.04); }
+        }
+        @keyframes drift-d {
+          0%, 100% { transform: translate3d(0, 0, 0); }
+          50%      { transform: translate3d(30px, -24px, 0); }
+        }
+
+        .dots {
+          position: absolute;
+          background-image: radial-gradient(rgba(147,197,253,0.4) 1.35px, transparent 1.35px);
+          background-size: 18px 18px;
+        }
+        .dots-tr { width: 180px; height: 140px; right: 5%; top: 5%; }
+        .dots-bl { width: 170px; height: 140px; left: 3.5%; bottom: 8%; }
+
+        .waves {
+          position: absolute;
+          right: 0; bottom: 0;
+          width: 460px; height: 380px;
+        }
+
+        .login-card {
+          position: relative;
+          z-index: 1;
+          width: 100%;
+          max-width: 1020px;
+          background: #FFFFFF;
+          border-radius: 24px;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          min-height: 640px;
+          box-shadow:
+            0 28px 64px rgba(3, 12, 30, 0.38),
+            0 2px 6px rgba(3, 12, 30, 0.16);
+          overflow: hidden;
+        }
+
+        .login-left {
+          padding: 44px 48px 36px;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .login-right {
+          background: #F3F5FA;
+          padding: 36px 36px 28px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .login-brand {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 36px;
+        }
+        .login-mark {
+          width: 44px; height: 44px;
+          border-radius: 12px;
+          background: linear-gradient(155deg, #3B82F6, #1D4ED8);
+          display: flex; align-items: center; justify-content: center;
+          font-family: 'Sora', sans-serif;
+          font-weight: 700; font-size: 20px; color: #fff;
+          flex-shrink: 0;
+          box-shadow: 0 6px 16px rgba(37,99,235,0.28);
+        }
+        .login-wordmark {
+          font-family: 'Sora', sans-serif;
+          font-weight: 700; font-size: 18px;
+          color: #0F172A; letter-spacing: -0.02em;
+          line-height: 1.15;
+        }
+        .login-tagline {
+          font-size: 10px; font-weight: 700;
+          color: #3B82F6;
+          letter-spacing: 0.08em; text-transform: uppercase;
+          margin-top: 3px;
+        }
+
         .login-title {
           font-family: 'Sora', sans-serif;
-          font-size: 24px; font-weight: 600; color: var(--navy);
-          letter-spacing: -0.015em;
+          font-size: 32px; font-weight: 700;
+          color: #0F172A; letter-spacing: -0.03em;
+          line-height: 1.1;
         }
-        .login-sub { font-size: 13.5px; color: var(--text-secondary); margin: 6px 0 22px; }
-        .login-note {
-          font-size: 12.5px; color: var(--amber);
-          background: var(--amber-bg); border-radius: 8px;
-          padding: 9px 12px; margin-bottom: 16px;
+        .login-sub {
+          font-size: 14.5px; color: #64748B;
+          margin: 8px 0 26px;
         }
-        .login-label {
-          display: block; font-size: 12.5px; font-weight: 600;
-          color: var(--navy); margin-bottom: 6px;
-        }
-        .login-input {
-          width: 100%; font-size: 14px; padding: 11px 13px;
-          border: 1px solid var(--border); border-radius: 9px;
-          margin-bottom: 16px; color: var(--navy); background: var(--white);
-          font-family: inherit;
-        }
-        .login-input:focus {
-          outline: none; border-color: var(--blue);
-          box-shadow: 0 0 0 3px var(--blue-light);
-        }
-        .login-error { font-size: 13px; color: var(--red); margin-bottom: 12px; }
-        .login-submit {
-          width: 100%; padding: 12px; border-radius: 10px; border: none;
-          background: var(--blue); color: #fff; font-size: 14px; font-weight: 600;
-          font-family: 'Sora', sans-serif; cursor: pointer; transition: background .15s ease;
-        }
-        .login-submit:hover:not(:disabled) { background: #2563EB; }
-        .login-submit:disabled { background: #94A3B8; cursor: not-allowed; }
 
-        .login-demo-side {
-          background: var(--page);
-          border-left: 1px solid var(--border);
-          padding: 40px 36px 44px;
-          display: flex; flex-direction: column;
+        .login-note {
+          font-size: 12.5px; color: #92400E;
+          background: #FEF3C7; border-radius: 9px;
+          padding: 10px 12px; margin-bottom: 16px;
         }
-        .login-demo-title {
-          font-family: 'Sora', sans-serif; font-size: 14px;
-          font-weight: 600; color: var(--navy);
+
+        .login-form { display: flex; flex-direction: column; }
+
+        .login-label {
+          display: block; font-size: 13px; font-weight: 600;
+          color: #0F172A; margin-bottom: 8px;
         }
-        .login-demo-sub { font-size: 12.5px; color: var(--text-secondary); margin: 6px 0 16px; }
-        .login-demo-sub code, .login-demo-foot code {
-          font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;
-          background: var(--white); border: 1px solid var(--border);
-          border-radius: 5px; padding: 1px 5px;
+
+        .login-input-wrap {
+          position: relative;
+          margin-bottom: 18px;
         }
-        .login-demo-list { display: flex; flex-direction: column; gap: 8px; }
-        .login-demo-item {
-          text-align: left; background: var(--white);
-          border: 1px solid var(--border); border-radius: 10px;
-          padding: 10px 13px; cursor: pointer; display: flex;
-          flex-direction: column; gap: 2px; font-family: inherit;
+
+        .login-input-icon {
+          position: absolute;
+          left: 14px; top: 50%;
+          transform: translateY(-50%);
+          color: #94A3B8;
+          pointer-events: none;
+        }
+
+        .login-input {
+          width: 100%; font-size: 14px;
+          padding: 13px 44px 13px 44px;
+          border: 1px solid #E5E7EB; border-radius: 10px;
+          color: #0F172A; background: #FFFFFF;
+          font-family: inherit;
           transition: border-color .15s ease, box-shadow .15s ease;
         }
-        .login-demo-item:hover { border-color: var(--blue); }
-        .login-demo-item.selected {
-          border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-light);
-        }
-        .login-demo-role { font-size: 13px; font-weight: 600; color: var(--navy); }
-        .login-demo-blurb { font-size: 11.5px; color: var(--text-muted); }
-        .login-demo-foot {
-          margin-top: auto; padding-top: 18px;
-          font-size: 11.5px; color: var(--text-muted); line-height: 1.5;
+        .login-input::placeholder { color: #94A3B8; }
+        .login-input:focus {
+          outline: none; border-color: #2563EB;
+          box-shadow: 0 0 0 3px rgba(37,99,235,0.14);
         }
 
-        @media (max-width: 820px) {
-          .login-card { grid-template-columns: 1fr; max-width: 460px; }
-          .login-form-side { padding: 32px 28px 24px; }
-          .login-demo-side { border-left: none; border-top: 1px solid var(--border); padding: 24px 28px 32px; }
+        .login-input-toggle {
+          position: absolute;
+          right: 12px; top: 50%;
+          transform: translateY(-50%);
+          background: none; border: none;
+          color: #94A3B8; cursor: pointer;
+          padding: 4px; display: flex;
+          transition: color .15s ease;
+        }
+        .login-input-toggle:hover { color: #0F172A; }
+
+        .login-remember-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 18px;
+        }
+
+        .login-remember {
+          display: flex; align-items: center;
+          gap: 8px; font-size: 13px;
+          color: #64748B;
+          cursor: pointer; user-select: none;
+        }
+        .login-remember input[type="checkbox"] {
+          appearance: none;
+          width: 16px; height: 16px;
+          border: 1.5px solid #CBD5E1;
+          border-radius: 4px;
+          background: #fff;
+          cursor: pointer;
+          display: grid;
+          place-content: center;
+          flex-shrink: 0;
+          transition: background .12s ease, border-color .12s ease;
+        }
+        .login-remember input[type="checkbox"]:checked {
+          background: #2563EB;
+          border-color: #2563EB;
+        }
+        .login-remember input[type="checkbox"]:checked::after {
+          content: '';
+          width: 8px; height: 5px;
+          border: 2px solid #fff;
+          border-top: 0; border-right: 0;
+          transform: rotate(-45deg) translateY(-1px);
+        }
+
+        .login-forgot {
+          font-size: 13px; color: #2563EB;
+          text-decoration: none; font-weight: 600;
+        }
+        .login-forgot:hover { text-decoration: underline; }
+
+        .login-error { font-size: 13px; color: #E4483F; margin-bottom: 12px; }
+
+        .login-submit {
+          position: relative;
+          width: 100%; padding: 14px 48px;
+          border-radius: 10px; border: none;
+          background: #2563EB;
+          color: #fff; font-size: 15px; font-weight: 600;
+          font-family: 'Sora', sans-serif; cursor: pointer;
+          transition: background .15s ease, transform .1s ease, box-shadow .15s ease;
+          box-shadow: 0 8px 20px rgba(37,99,235,0.28);
+          display: flex; align-items: center; justify-content: center;
+        }
+        .login-submit-arrow {
+          position: absolute;
+          right: 18px; top: 50%;
+          transform: translateY(-50%);
+        }
+        .login-submit:hover:not(:disabled) {
+          background: #1D4ED8;
+          box-shadow: 0 10px 24px rgba(37,99,235,0.34);
+        }
+        .login-submit:active:not(:disabled) { transform: translateY(1px); }
+        .login-submit:disabled {
+          background: #2563EB;
+          box-shadow: 0 8px 20px rgba(37,99,235,0.28);
+          cursor: not-allowed;
+          opacity: 0.9;
+        }
+
+        .login-divider {
+          margin: 22px 0;
+          text-align: center;
+          position: relative;
+        }
+        .login-divider::before {
+          content: '';
+          position: absolute;
+          left: 0; right: 0; top: 50%;
+          height: 1px;
+          background: #E5E7EB;
+        }
+        .login-divider span {
+          display: inline-block;
+          background: #fff;
+          padding: 0 12px;
+          font-size: 13px;
+          color: #94A3B8;
+          position: relative;
+        }
+
+        .login-google {
+          width: 100%; padding: 12px 20px;
+          border: 1px solid #E5E7EB;
+          border-radius: 10px;
+          background: #FFFFFF;
+          color: #0F172A;
+          font-size: 14.5px; font-weight: 600;
+          font-family: inherit;
+          cursor: pointer;
+          display: flex; align-items: center; justify-content: center;
+          gap: 12px;
+          transition: background .15s ease, border-color .15s ease;
+        }
+        .login-google:hover {
+          background: #F8FAFC;
+          border-color: #D1D5DB;
+        }
+
+        .login-google-icon { flex-shrink: 0; }
+
+        .login-foot {
+          font-size: 13px; color: #94A3B8;
+          text-align: center; margin-top: auto;
+          padding-top: 22px;
+        }
+        .login-link {
+          color: #2563EB; font-weight: 700; text-decoration: none;
+        }
+        .login-link:hover { text-decoration: underline; }
+
+        .login-illustration {
+          flex: 1;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 0;
+        }
+
+        .login-illustration-img {
+          width: 108%;
+          max-width: 520px;
+          height: auto;
+          object-fit: contain;
+          animation: float-ill 7s ease-in-out infinite;
+        }
+
+        @keyframes float-ill {
+          0%, 100% { transform: translateY(0); }
+          50%      { transform: translateY(-8px); }
+        }
+
+        .login-security {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-top: 8px;
+          font-size: 13px;
+          color: #94A3B8;
+          font-weight: 500;
+        }
+
+        .login-shield { flex-shrink: 0; display: block; }
+
+        @media (max-width: 900px) {
+          .login-card {
+            grid-template-columns: 1fr;
+            max-width: 460px;
+            min-height: 0;
+          }
+          .login-right { display: none; }
+          .login-left { padding: 36px 32px 32px; }
+          .login-foot { margin-top: 24px; padding-top: 0; }
+        }
+
+        @media (max-width: 560px) {
+          .login-left { padding: 28px 22px 24px; }
+          .login-title { font-size: 28px; }
+          .waves { width: 240px; height: 220px; }
+          .dots-tr, .dots-bl { display: none; }
+          .orb-3 { width: 72px; height: 72px; right: 4%; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .orb, .login-illustration-img { animation: none !important; }
+          .login-submit, .login-google { transition: none; }
         }
       `}</style>
     </div>

@@ -23,6 +23,10 @@
   /* Layout. --sidebar-w is read by both the sidebar and the main content
      offset, so the two can never drift apart. */
   --sidebar-w: 264px;
+  --sidebar-bg: #1B2533;
+  --sidebar-accent: #5BB5A2;
+  --sidebar-active-bg: #2A3545;
+  --sidebar-muted: #8B9BB4;
   --radius: 14px;
   --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04);
   --shadow-pop: 0 12px 32px rgba(15, 23, 42, 0.16);
@@ -64,55 +68,71 @@ body {
 .sidebar {
   width: var(--sidebar-w);
   flex-shrink: 0;
-  background: var(--navy);
-  padding: 24px 16px 20px;
+  background: var(--sidebar-bg);
+  padding: 22px 14px 18px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   height: 100vh;
   position: fixed;
   left: 0;
   top: 0;
   z-index: 40;
-  overflow-y: auto;
+  overflow: hidden;
   transition: transform 0.22s ease;
 }
 
 .sidebar-nav {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 22px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
 }
 
 .nav-section-title {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.08em;
   color: #64748B;
   text-transform: uppercase;
-  padding: 8px 12px 6px;
+  padding: 4px 12px 8px;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 0 8px 18px;
+  gap: 11px;
+  padding: 2px 8px 18px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
 }
 
 .brand-mark {
   width: 34px;
   height: 34px;
   border-radius: 9px;
-  background: linear-gradient(155deg, var(--blue), #1D4ED8);
+  background: var(--sidebar-accent);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Sora', sans-serif;
   font-weight: 700;
   font-size: 15px;
-  color: var(--white);
+  color: var(--sidebar-bg);
   flex-shrink: 0;
 }
 
@@ -125,20 +145,21 @@ body {
 }
 
 .brand-tag {
-  font-size: 11px;
-  color: var(--blue);
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  font-size: 10.5px;
+  color: var(--sidebar-accent);
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  margin-top: 2px;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 11px;
-  padding: 9px 12px;
+  gap: 12px;
+  padding: 10px 12px;
   border-radius: 8px;
-  color: #B6C0D4;
+  color: var(--sidebar-muted);
   font-size: 13.5px;
   font-weight: 500;
   text-decoration: none;
@@ -152,41 +173,57 @@ body {
 }
 
 .nav-icon {
-  width: 17px;
-  height: 17px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
-  opacity: 0.85;
+  opacity: 0.9;
   display: flex;
   align-items: center;
+  color: inherit;
+}
+
+.nav-icon svg {
+  width: 18px;
+  height: 18px;
 }
 
 .nav-item.active {
-  background: var(--navy-700);
+  background: var(--sidebar-active-bg);
   color: var(--white);
+  font-weight: 600;
 }
 
 .nav-item.active::before {
   content: "";
   position: absolute;
-  left: -16px;
-  top: 6px;
-  bottom: 6px;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
   width: 3px;
-  background: var(--blue);
-  border-radius: 0 3px 3px 0;
+  background: var(--sidebar-accent);
+  border-radius: 0 4px 4px 0;
 }
 
 .nav-item.active .nav-icon {
   opacity: 1;
-  color: var(--blue);
+  color: var(--sidebar-accent);
 }
 
 .sidebar-footer {
-  margin-top: auto;
+  flex-shrink: 0;
+  margin-top: 4px;
   padding: 10px 12px;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sf-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
 }
 
 .sf-identity {
@@ -207,10 +244,10 @@ body {
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  background: var(--blue);
-  color: #fff;
+  background: var(--sidebar-accent);
+  color: var(--sidebar-bg);
   font-family: 'Sora', sans-serif;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 13px;
   display: flex;
   align-items: center;

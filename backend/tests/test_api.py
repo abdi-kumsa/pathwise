@@ -209,6 +209,71 @@ class TestAuth:
         for user in ("admin", "student", "moe", "mol"):
             assert role_clients[user].get("/api/auth/me").json()["institution"] is None
 
+    def test_signup_creates_student_account(self, anon):
+        """Self-registration creates a STUDENT account and signs them in."""
+        r = anon.post("/api/auth/signup", json={
+            "username": "newsignup1",
+            "password": "password123",
+            "display_name": "New User",
+        })
+        assert r.status_code == 201
+        body = r.json()
+        assert body["token_type"] == "bearer"
+        assert body["access_token"]
+        assert body["user"]["username"] == "newsignup1"
+        assert body["user"]["role"] == "STUDENT"
+        assert body["user"]["display_name"] == "New User"
+        assert body["user"]["home"] == "/student/careers"
+
+        # Cleanup
+        admin_token = _login("admin")
+        httpx.delete(f"{BASE_URL}/api/users/newsignup1/permanent",
+                     headers={"Authorization": f"Bearer {admin_token}"}, timeout=30)
+
+    def test_signup_rejects_duplicate_username(self, anon):
+        anon.post("/api/auth/signup", json={
+            "username": "newsignup2", "password": "password123", "display_name": "First"
+        })
+        r = anon.post("/api/auth/signup", json={
+            "username": "newsignup2", "password": "different", "display_name": "Second"
+        })
+        assert r.status_code == 409
+        assert "already taken" in r.json()["detail"].lower()
+
+        # Cleanup
+        admin_token = _login("admin")
+        httpx.delete(f"{BASE_URL}/api/users/newsignup2/permanent",
+                     headers={"Authorization": f"Bearer {admin_token}"}, timeout=30)
+
+    def test_signup_rejects_short_password(self, anon):
+        r = anon.post("/api/auth/signup", json={
+            "username": "newsignup3", "password": "short", "display_name": "Test"
+        })
+        assert r.status_code == 422
+
+    def test_signup_rejects_invalid_username(self, anon):
+        r = anon.post("/api/auth/signup", json={
+            "username": "Invalid Username!", "password": "password123", "display_name": "Test"
+        })
+        assert r.status_code == 422
+
+    def test_signup_token_is_valid(self, anon):
+        """The token returned by sign-up must authenticate API calls."""
+        signup = anon.post("/api/auth/signup", json={
+            "username": "newsignup4", "password": "password123", "display_name": "Test User"
+        })
+        token = signup.json()["access_token"]
+
+        # Use the token to call /api/auth/me
+        r = anon.get("/api/auth/me", headers={"Authorization": f"Bearer {token}"})
+        assert r.status_code == 200
+        assert r.json()["username"] == "newsignup4"
+
+        # Cleanup
+        admin_token = _login("admin")
+        httpx.delete(f"{BASE_URL}/api/users/newsignup4/permanent",
+                     headers={"Authorization": f"Bearer {admin_token}"}, timeout=30)
+
 
 # =============================================================================
 # Role-based access control

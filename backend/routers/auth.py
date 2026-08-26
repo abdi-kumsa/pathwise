@@ -5,6 +5,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 
 from schemas.auth import LoginResponse, UserOut
 from schemas.users import PasswordChange
+from schemas.signup import SignUpRequest
 from services import auth_service
 
 log = logging.getLogger(__name__)
@@ -117,3 +118,41 @@ def list_roles():
         {"role": r, "label": auth_service.ROLE_LABELS[r], "home": auth_service.ROLE_HOME[r]}
         for r in auth_service.ALL_ROLES
     ]
+
+
+@router.post("/signup", response_model=LoginResponse, status_code=201)
+def signup(body: SignUpRequest):
+    """
+    Self-registration: creates a STUDENT account and returns a signed-in session.
+
+    No role picker, no institution — students get career exploration and market
+    data but are never scoped to a university's internal metrics. Ministry,
+    university and admin accounts are provisioned by an administrator.
+
+    Returns 409 if the username is already taken, 422 on validation failure.
+    """
+    try:
+        user = auth_service.create_user(
+            username=body.username,
+            password=body.password,
+            role="STUDENT",
+            display_name=body.display_name,
+            institution=None,
+        )
+    except auth_service.UserError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message)
+    except Exception as exc:
+        log.error("Sign-up failed for %s: %s", body.username, exc)
+        raise HTTPException(status_code=500, detail="Could not create account.")
+
+    # Sign them in immediately rather than making them re-type credentials.
+    token = auth_service.create_access_token(
+        user["username"], user["role"], user.get("institution")
+    )
+    return LoginResponse(
+        access_token=token,
+        token_type="bearer",
+        expires_in=auth_service.JWT_EXPIRE_MINUTES * 60,
+        user=_user_out(user),
+    )
+
