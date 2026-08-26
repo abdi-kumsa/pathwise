@@ -4,7 +4,7 @@ import { navFor } from '../config/navConfig'
 
 function Icon({ d }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"
          strokeLinecap="round" strokeLinejoin="round">
       <path d={d} />
     </svg>
@@ -68,7 +68,7 @@ export default function Sidebar({ open = false, onClose = () => {} }) {
         </nav>
 
         <div className="sidebar-footer">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div className="sf-row">
             {/* The name is the way into your own account — password, identity */}
             <NavLink to="/account" onClick={onClose} className="sf-identity" title="Your account">
               <div className="sf-avatar">{initials(user?.display_name)}</div>
