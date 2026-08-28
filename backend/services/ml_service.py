@@ -80,7 +80,7 @@ def get_shap_cache():
     """Compute SHAP values on 200 test samples once and cache the result."""
     global _shap_cache
     if _shap_cache is None:
-        from explain_predictions import compute_shap_values
+        from explain_predictions import compute_shap_values  # type: ignore
         _shap_cache = compute_shap_values(n_samples=200)
     return _shap_cache
 
@@ -107,26 +107,26 @@ def loaded_status() -> dict:
 # ── Inference wrappers ────────────────────────────────────────────────────────
 
 def predict_placement(student_dict: dict) -> dict:
-    from predict_placement import predict_placement as _fn
+    from predict_placement import predict_placement as _fn  # type: ignore
     return _fn(student_dict)
 
 
 def predict_salary(student_dict: dict) -> dict:
-    from predict_salary import predict_salary as _fn
+    from predict_salary import predict_salary as _fn  # type: ignore
     return _fn(student_dict)
 
 
 def explain_student(student_dict: dict) -> dict:
-    from explain_predictions import explain_student as _fn
+    from explain_predictions import explain_student as _fn  # type: ignore
     return _fn(student_dict)
 
 
 def forecast_enrollment(program: str, n_years: int = 3) -> list:
-    from predict_enrollment import predict_next_years
+    from predict_enrollment import predict_next_years  # type: ignore
     return predict_next_years(program, n_years=n_years)
 
 
 def forecast_demand(months_ahead: int = 12):
     """Returns a pandas DataFrame with columns: month, predicted_postings, lower_bound, upper_bound."""
-    from predict_demand import predict_demand
+    from predict_demand import predict_demand  # type: ignore
     return predict_demand(months_ahead)
