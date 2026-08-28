@@ -73,3 +73,10 @@
 {"ts": 1787718567.2060378, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 80.4}
 {"ts": 1787718567.294621, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 72.5}
 {"ts": 1787718567.3828013, "inputs": {"gpa": 2.3, "internships": 0, "projects": 1, "communication_score": 3, "program": "Certificate Data Analytics"}, "probability": 0.1467, "prediction": "Not Placed", "latency_ms": 76.6}
+{"ts": 1787720658.9928737, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 66.7}
+{"ts": 1787720659.0720258, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 65.3}
+{"ts": 1787720659.1568482, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 69.8}
+{"ts": 1787720659.229209, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 58.2}
+{"ts": 1787720659.3095071, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 65.4}
+{"ts": 1787720659.3922417, "inputs": {"gpa": 3.9, "internships": 4, "projects": 5, "communication_score": 9, "program": "MS Data Science"}, "probability": 0.9559, "prediction": "Placed", "latency_ms": 65.9}
+{"ts": 1787720659.4768126, "inputs": {"gpa": 2.3, "internships": 0, "projects": 1, "communication_score": 3, "program": "Certificate Data Analytics"}, "probability": 0.1467, "prediction": "Not Placed", "latency_ms": 73.0}
