@@ -2,7 +2,6 @@ databases:
   - name: pathwise-db
     databaseName: pathwise
     user: pathwise
-    plan: free
     region: oregon
 
 services:
@@ -11,7 +10,6 @@ services:
   - type: web
     name: pathwise-backend
     runtime: python
-    plan: free
     region: oregon
     buildCommand: pip install -r backend/requirements.txt
     startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
@@ -40,7 +38,6 @@ services:
   - type: web
     name: pathwise-frontend
     runtime: static
-    plan: free
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
     envVars:
