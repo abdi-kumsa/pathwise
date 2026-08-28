@@ -1,11 +1,11 @@
-services:
-  # PostgreSQL Database
-  - type: pserv
-    name: pathwise-db
-    plan: free
+databases:
+  - name: pathwise-db
     databaseName: pathwise
-    databaseUser: pathwise
+    user: pathwise
+    plan: free
     region: oregon
+
+services:
 
   # FastAPI Backend
   - type: web
