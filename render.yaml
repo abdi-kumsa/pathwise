@@ -1,9 +1,8 @@
-databases:
-  - name: pathwise-db
-    databaseName: pathwise
-    user: pathwise
-    plan: free
-    region: oregon
+# NOTE: no `databases:` block — Render allows one free-tier Postgres per
+# account and this one is shared with another project. DATABASE_URL is set
+# manually on the backend service and points at that existing instance, with
+# ?options=-csearch_path%3Dpathwise so every table PathWise creates lands in
+# its own `pathwise` schema rather than `public`. See docs/RENDER_DEPLOYMENT.md.
 
 services:
 
@@ -18,10 +17,10 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
+      # Internal connection string of the shared Postgres instance, with a
+      # search_path pointing at the dedicated `pathwise` schema.
       - key: DATABASE_URL
-        fromDatabase:
-          name: pathwise-db
-          property: connectionString
+        sync: false
       - key: API_HOST
         value: 0.0.0.0
       # Comma-separated CORS allowlist read by main.py. Must be the exact
