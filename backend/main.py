@@ -1,7 +1,7 @@
 import logging
 import os
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
@@ -22,13 +22,16 @@ app = FastAPI(
 
 # ── CORS ──────────────────────────────────────────────────────────────────────
 # Reads FRONTEND_URL from .env so the allowed origin is never hard-coded.
-# Multiple origins can be separated by commas:
-#   FRONTEND_URL=http://localhost:3000,https://pathwise.example.com
-_origins = [
-    o.strip()
-    for o in os.getenv("FRONTEND_URL", "http://localhost:3000").split(",")
-    if o.strip()
-]
+# Defaults include standard dev ports and automatically strips trailing slashes.
+_raw_origins = os.getenv(
+    "FRONTEND_URL",
+    "http://localhost:3000,http://localhost:3001,http://127.0.0.1:3000,http://127.0.0.1:3001",
+)
+_origins = []
+for origin in _raw_origins.split(","):
+    clean = origin.strip().rstrip("/")
+    if clean and clean not in _origins:
+        _origins.append(clean)
 
 app.add_middleware(
     CORSMiddleware,
@@ -37,6 +40,17 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+# ── Security Headers ──────────────────────────────────────────────────────────
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    return response
 
 # ── Routers ───────────────────────────────────────────────────────────────────
 from routers import (  # noqa: E402

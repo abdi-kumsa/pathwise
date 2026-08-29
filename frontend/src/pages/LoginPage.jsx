@@ -1,24 +1,46 @@
 import { useState } from 'react'
 import { useNavigate, useLocation, Navigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { User, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react'
+import { User, Lock, Eye, EyeOff, ArrowRight, Loader2, Info, X, ShieldAlert, Sparkles } from 'lucide-react'
+
+const DEMO_ACCOUNTS = [
+  { role: 'Student', username: 'student', label: 'Student' },
+  { role: 'Administrator', username: 'admin', label: 'Admin' },
+  { role: 'Ministry of Education', username: 'moe', label: 'MoE' },
+  { role: 'Ministry of Labour', username: 'mol', label: 'MoL' },
+  { role: 'University', username: 'university', label: 'University' },
+]
 
 /**
  * Sign in — split-panel card matching the PathWise login mock.
  *
- * Left: form. Right: isometric dashboard illustration + trust row.
- * Auth behaviour is unchanged; this file is presentation only.
+ * Left: form + demo account quick fill.
+ * Right: isometric dashboard illustration + trust row.
  */
 export default function LoginPage() {
   const { login, user, booting } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
 
-  const [username, setUsername] = useState('')
+  const [rememberMe, setRememberMe] = useState(() => {
+    try {
+      return !!localStorage.getItem('pathwise.remembered_username')
+    } catch {
+      return false
+    }
+  })
+  const [username, setUsername] = useState(() => {
+    try {
+      return localStorage.getItem('pathwise.remembered_username') || ''
+    } catch {
+      return ''
+    }
+  })
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
-  const [rememberMe, setRememberMe] = useState(false)
   const [error, setError] = useState(null)
+  const [infoNotice, setInfoNotice] = useState(null)
+  const [showForgotModal, setShowForgotModal] = useState(false)
   const [busy, setBusy] = useState(false)
 
   const expired = new URLSearchParams(location.search).get('expired') === '1'
@@ -28,22 +50,39 @@ export default function LoginPage() {
   }
 
   const submit = async (e) => {
-    e.preventDefault()
+    if (e) e.preventDefault()
     setBusy(true)
     setError(null)
+    setInfoNotice(null)
+    const cleanUser = username.trim().toLowerCase()
     try {
-      const me = await login(username.trim(), password)
-      // TODO: persist rememberMe preference if implementing that feature
+      const me = await login(cleanUser, password)
+      try {
+        if (rememberMe) {
+          localStorage.setItem('pathwise.remembered_username', cleanUser)
+        } else {
+          localStorage.removeItem('pathwise.remembered_username')
+        }
+      } catch {
+        // Ignore storage access errors
+      }
       navigate(location.state?.from ?? me.home ?? '/', { replace: true })
     } catch (err) {
-      setError(err?.message ?? 'Sign in failed')
+      setError(err?.message ?? 'Sign in failed. Please check your credentials.')
     } finally {
       setBusy(false)
     }
   }
 
+  const handleQuickFill = (acc) => {
+    setUsername(acc.username)
+    setPassword('pathwise123')
+    setError(null)
+    setInfoNotice(null)
+  }
+
   const handleGoogleSignIn = () => {
-    alert('Google sign-in not yet implemented')
+    setInfoNotice('Google Single Sign-On (SSO) is coming in a future update. Please sign in using your account credentials or pick a demo profile above.')
   }
 
   return (
@@ -83,11 +122,47 @@ export default function LoginPage() {
           </div>
 
           <h1 className="login-title">Welcome back 👋</h1>
-          <p className="login-sub">Sign in to access your dashboard</p>
+          <p className="login-sub">Sign in to access your intelligence dashboard</p>
+
+          {/* Quick-fill demo account pills */}
+          <div className="demo-picker">
+            <div className="demo-picker-header">
+              <Sparkles size={13} className="demo-sparkle" />
+              <span>Demo Quick-Fill:</span>
+            </div>
+            <div className="demo-chips">
+              {DEMO_ACCOUNTS.map((acc) => (
+                <button
+                  key={acc.username}
+                  type="button"
+                  className={`demo-chip ${username.toLowerCase() === acc.username ? 'demo-chip-active' : ''}`}
+                  onClick={() => handleQuickFill(acc)}
+                  title={`Fill ${acc.role} credentials`}
+                >
+                  {acc.label}
+                </button>
+              ))}
+            </div>
+          </div>
 
           {expired && (
             <div className="login-note" role="status">
               Your session expired. Please sign in again.
+            </div>
+          )}
+
+          {infoNotice && (
+            <div className="login-info-notice" role="status">
+              <Info size={16} className="login-info-icon" />
+              <span>{infoNotice}</span>
+              <button
+                type="button"
+                className="login-info-close"
+                onClick={() => setInfoNotice(null)}
+                aria-label="Dismiss notice"
+              >
+                <X size={14} />
+              </button>
             </div>
           )}
 
@@ -99,11 +174,12 @@ export default function LoginPage() {
                 id="username"
                 className="login-input"
                 value={username}
-                onChange={e => setUsername(e.target.value)}
+                onChange={e => setUsername(e.target.value.toLowerCase().replace(/\s+/g, ''))}
                 placeholder="Enter your username"
                 autoComplete="username"
-                autoFocus
+                autoFocus={!username}
                 required
+                aria-invalid={!!error}
               />
             </div>
 
@@ -119,6 +195,7 @@ export default function LoginPage() {
                 placeholder="Enter your password"
                 autoComplete="current-password"
                 required
+                aria-invalid={!!error}
               />
               <button
                 type="button"
@@ -139,13 +216,13 @@ export default function LoginPage() {
                 />
                 <span>Remember me</span>
               </label>
-              <a
-                href="#"
+              <button
+                type="button"
                 className="login-forgot"
-                onClick={e => { e.preventDefault(); alert('Password reset not yet implemented') }}
+                onClick={() => setShowForgotModal(true)}
               >
                 Forgot password?
-              </a>
+              </button>
             </div>
 
             {error && <p className="login-error" role="alert">{error}</p>}
@@ -155,8 +232,17 @@ export default function LoginPage() {
               type="submit"
               disabled={busy || !username || !password}
             >
-              <span>{busy ? 'Signing in…' : 'Sign in'}</span>
-              <ArrowRight className="login-submit-arrow" size={18} strokeWidth={2.2} />
+              {busy ? (
+                <>
+                  <Loader2 className="login-submit-spinner" size={18} />
+                  <span>Signing in…</span>
+                </>
+              ) : (
+                <>
+                  <span>Sign in</span>
+                  <ArrowRight className="login-submit-arrow" size={18} strokeWidth={2.2} />
+                </>
+              )}
             </button>
           </form>
 
@@ -207,6 +293,55 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
+
+      {/* Forgot password modal */}
+      {showForgotModal && (
+        <div className="login-modal-backdrop" onClick={() => setShowForgotModal(false)}>
+          <div className="login-modal" onClick={e => e.stopPropagation()} role="dialog" aria-modal="true">
+            <div className="login-modal-header">
+              <div className="login-modal-icon-wrap">
+                <ShieldAlert size={22} className="login-modal-icon" />
+              </div>
+              <div>
+                <h2 className="login-modal-title">Password Reset</h2>
+                <p className="login-modal-sub">Account security &amp; recovery</p>
+              </div>
+              <button
+                type="button"
+                className="login-modal-close"
+                onClick={() => setShowForgotModal(false)}
+                aria-label="Close dialog"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <div className="login-modal-body">
+              <p>
+                For institutional security and role access integrity, password changes are managed directly by your <strong>Platform Administrator</strong> or inside your account profile once logged in.
+              </p>
+              <div className="login-modal-tips">
+                <div className="tip-row">
+                  <span className="tip-dot" />
+                  <span><strong>Demo Accounts:</strong> If you are testing the application, use the password <code>pathwise123</code>.</span>
+                </div>
+                <div className="tip-row">
+                  <span className="tip-dot" />
+                  <span><strong>Organizational Users:</strong> Contact your system admin or ministry supervisor for credential resets.</span>
+                </div>
+              </div>
+            </div>
+            <div className="login-modal-footer">
+              <button
+                type="button"
+                className="login-modal-btn"
+                onClick={() => setShowForgotModal(false)}
+              >
+                Got it
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <style>{`
         .login-page {
@@ -326,7 +461,7 @@ export default function LoginPage() {
         }
 
         .login-left {
-          padding: 44px 48px 36px;
+          padding: 40px 44px 32px;
           display: flex;
           flex-direction: column;
         }
@@ -343,7 +478,7 @@ export default function LoginPage() {
           display: flex;
           align-items: center;
           gap: 12px;
-          margin-bottom: 36px;
+          margin-bottom: 24px;
         }
         .login-mark {
           width: 44px; height: 44px;
@@ -370,13 +505,60 @@ export default function LoginPage() {
 
         .login-title {
           font-family: 'Sora', sans-serif;
-          font-size: 32px; font-weight: 700;
+          font-size: 28px; font-weight: 700;
           color: #0F172A; letter-spacing: -0.03em;
-          line-height: 1.1;
+          line-height: 1.15;
         }
         .login-sub {
-          font-size: 14.5px; color: #64748B;
-          margin: 8px 0 26px;
+          font-size: 13.5px; color: #64748B;
+          margin: 6px 0 16px;
+        }
+
+        /* Demo picker */
+        .demo-picker {
+          background: #F8FAFC;
+          border: 1px solid #E2E8F0;
+          border-radius: 10px;
+          padding: 10px 12px;
+          margin-bottom: 18px;
+        }
+        .demo-picker-header {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 11.5px;
+          font-weight: 600;
+          color: #475569;
+          margin-bottom: 8px;
+          text-transform: uppercase;
+          letter-spacing: 0.04em;
+        }
+        .demo-sparkle { color: #3B82F6; }
+        .demo-chips {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+        }
+        .demo-chip {
+          font-size: 11.5px;
+          font-weight: 600;
+          padding: 4px 10px;
+          border-radius: 6px;
+          border: 1px solid #CBD5E1;
+          background: #FFFFFF;
+          color: #1E293B;
+          cursor: pointer;
+          transition: all .15s ease;
+        }
+        .demo-chip:hover {
+          border-color: #3B82F6;
+          color: #2563EB;
+          background: #EFF6FF;
+        }
+        .demo-chip-active {
+          border-color: #2563EB;
+          background: #2563EB;
+          color: #FFFFFF !important;
         }
 
         .login-note {
@@ -385,16 +567,37 @@ export default function LoginPage() {
           padding: 10px 12px; margin-bottom: 16px;
         }
 
+        .login-info-notice {
+          display: flex;
+          align-items: flex-start;
+          gap: 8px;
+          font-size: 12.5px;
+          color: #1E40AF;
+          background: #EFF6FF;
+          border: 1px solid #BFDBFE;
+          border-radius: 9px;
+          padding: 10px 12px;
+          margin-bottom: 16px;
+          line-height: 1.4;
+        }
+        .login-info-icon { flex-shrink: 0; margin-top: 1px; color: #3B82F6; }
+        .login-info-close {
+          background: none; border: none; padding: 2px;
+          color: #60A5FA; cursor: pointer; margin-left: auto;
+          display: flex; align-items: center; justify-content: center;
+        }
+        .login-info-close:hover { color: #1E40AF; }
+
         .login-form { display: flex; flex-direction: column; }
 
         .login-label {
           display: block; font-size: 13px; font-weight: 600;
-          color: #0F172A; margin-bottom: 8px;
+          color: #0F172A; margin-bottom: 6px;
         }
 
         .login-input-wrap {
           position: relative;
-          margin-bottom: 18px;
+          margin-bottom: 16px;
         }
 
         .login-input-icon {
@@ -407,7 +610,7 @@ export default function LoginPage() {
 
         .login-input {
           width: 100%; font-size: 14px;
-          padding: 13px 44px 13px 44px;
+          padding: 12px 44px 12px 44px;
           border: 1px solid #E5E7EB; border-radius: 10px;
           color: #0F172A; background: #FFFFFF;
           font-family: inherit;
@@ -434,7 +637,7 @@ export default function LoginPage() {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 18px;
+          margin-bottom: 16px;
         }
 
         .login-remember {
@@ -468,16 +671,26 @@ export default function LoginPage() {
         }
 
         .login-forgot {
+          background: none; border: none; padding: 0;
           font-size: 13px; color: #2563EB;
-          text-decoration: none; font-weight: 600;
+          cursor: pointer; font-weight: 600;
+          font-family: inherit;
         }
         .login-forgot:hover { text-decoration: underline; }
 
-        .login-error { font-size: 13px; color: #E4483F; margin-bottom: 12px; }
+        .login-error {
+          font-size: 12.5px;
+          color: #B91C1C;
+          background: #FEF2F2;
+          border: 1px solid #FECACA;
+          border-radius: 8px;
+          padding: 8px 12px;
+          margin-bottom: 12px;
+        }
 
         .login-submit {
           position: relative;
-          width: 100%; padding: 14px 48px;
+          width: 100%; padding: 13px 44px;
           border-radius: 10px; border: none;
           background: #2563EB;
           color: #fff; font-size: 15px; font-weight: 600;
@@ -485,11 +698,19 @@ export default function LoginPage() {
           transition: background .15s ease, transform .1s ease, box-shadow .15s ease;
           box-shadow: 0 8px 20px rgba(37,99,235,0.28);
           display: flex; align-items: center; justify-content: center;
+          gap: 8px;
         }
         .login-submit-arrow {
           position: absolute;
           right: 18px; top: 50%;
           transform: translateY(-50%);
+        }
+        .login-submit-spinner {
+          animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
         .login-submit:hover:not(:disabled) {
           background: #1D4ED8;
@@ -497,14 +718,13 @@ export default function LoginPage() {
         }
         .login-submit:active:not(:disabled) { transform: translateY(1px); }
         .login-submit:disabled {
-          background: #2563EB;
-          box-shadow: 0 8px 20px rgba(37,99,235,0.28);
+          background: #93C5FD;
+          box-shadow: none;
           cursor: not-allowed;
-          opacity: 0.9;
         }
 
         .login-divider {
-          margin: 22px 0;
+          margin: 18px 0;
           text-align: center;
           position: relative;
         }
@@ -525,12 +745,12 @@ export default function LoginPage() {
         }
 
         .login-google {
-          width: 100%; padding: 12px 20px;
+          width: 100%; padding: 11px 20px;
           border: 1px solid #E5E7EB;
           border-radius: 10px;
           background: #FFFFFF;
           color: #0F172A;
-          font-size: 14.5px; font-weight: 600;
+          font-size: 14px; font-weight: 600;
           font-family: inherit;
           cursor: pointer;
           display: flex; align-items: center; justify-content: center;
@@ -547,7 +767,7 @@ export default function LoginPage() {
         .login-foot {
           font-size: 13px; color: #94A3B8;
           text-align: center; margin-top: auto;
-          padding-top: 22px;
+          padding-top: 18px;
         }
         .login-link {
           color: #2563EB; font-weight: 700; text-decoration: none;
@@ -588,6 +808,125 @@ export default function LoginPage() {
 
         .login-shield { flex-shrink: 0; display: block; }
 
+        /* Modal */
+        .login-modal-backdrop {
+          position: fixed;
+          inset: 0;
+          background: rgba(15, 23, 42, 0.65);
+          backdrop-filter: blur(4px);
+          z-index: 99;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+          animation: fadeIn .18s ease;
+        }
+        .login-modal {
+          background: #FFFFFF;
+          border-radius: 16px;
+          max-width: 460px;
+          width: 100%;
+          padding: 24px;
+          box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
+          animation: scaleUp .2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes scaleUp {
+          from { transform: scale(0.95); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+        .login-modal-header {
+          display: flex;
+          align-items: flex-start;
+          gap: 14px;
+          margin-bottom: 16px;
+        }
+        .login-modal-icon-wrap {
+          width: 40px; height: 40px;
+          border-radius: 10px;
+          background: #EFF6FF;
+          color: #2563EB;
+          display: flex; align-items: center; justify-content: center;
+          flex-shrink: 0;
+        }
+        .login-modal-title {
+          font-family: 'Sora', sans-serif;
+          font-size: 18px;
+          font-weight: 700;
+          color: #0F172A;
+          margin: 0;
+        }
+        .login-modal-sub {
+          font-size: 12.5px;
+          color: #64748B;
+          margin: 2px 0 0;
+        }
+        .login-modal-close {
+          margin-left: auto;
+          background: none; border: none;
+          color: #94A3B8; cursor: pointer;
+          padding: 4px; display: flex;
+        }
+        .login-modal-close:hover { color: #0F172A; }
+        .login-modal-body {
+          font-size: 13.5px;
+          color: #334155;
+          line-height: 1.55;
+        }
+        .login-modal-tips {
+          margin-top: 14px;
+          padding: 12px 14px;
+          background: #F8FAFC;
+          border-radius: 10px;
+          border: 1px solid #E2E8F0;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+        .tip-row {
+          display: flex;
+          align-items: flex-start;
+          gap: 8px;
+          font-size: 12.5px;
+          color: #475569;
+        }
+        .tip-dot {
+          width: 6px; height: 6px;
+          border-radius: 50%;
+          background: #3B82F6;
+          margin-top: 6px;
+          flex-shrink: 0;
+        }
+        .tip-row code {
+          background: #E2E8F0;
+          padding: 1px 5px;
+          border-radius: 4px;
+          font-family: monospace;
+          color: #0F172A;
+        }
+        .login-modal-footer {
+          margin-top: 20px;
+          display: flex;
+          justify-content: flex-end;
+        }
+        .login-modal-btn {
+          padding: 9px 20px;
+          border-radius: 8px;
+          border: none;
+          background: #2563EB;
+          color: #FFFFFF;
+          font-weight: 600;
+          font-size: 13.5px;
+          cursor: pointer;
+          transition: background .15s ease;
+        }
+        .login-modal-btn:hover {
+          background: #1D4ED8;
+        }
+
         @media (max-width: 900px) {
           .login-card {
             grid-template-columns: 1fr;
@@ -595,13 +934,13 @@ export default function LoginPage() {
             min-height: 0;
           }
           .login-right { display: none; }
-          .login-left { padding: 36px 32px 32px; }
-          .login-foot { margin-top: 24px; padding-top: 0; }
+          .login-left { padding: 32px 28px 28px; }
+          .login-foot { margin-top: 20px; padding-top: 0; }
         }
 
         @media (max-width: 560px) {
-          .login-left { padding: 28px 22px 24px; }
-          .login-title { font-size: 28px; }
+          .login-left { padding: 24px 20px 20px; }
+          .login-title { font-size: 24px; }
           .waves { width: 240px; height: 220px; }
           .dots-tr, .dots-bl { display: none; }
           .orb-3 { width: 72px; height: 72px; right: 4%; }

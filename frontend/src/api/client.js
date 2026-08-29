@@ -43,13 +43,19 @@ client.interceptors.response.use(
 
     // 403 is a role problem, not a session problem. Keep the session and let
     // the page render the message — logging out here would be baffling.
-    const message =
+    let message =
       error.response?.data?.detail ||
       error.response?.data?.message ||
       error.message ||
       'An unexpected error occurred'
 
-    const wrapped = new Error(message)
+    if (Array.isArray(message)) {
+      message = message.map((m) => (typeof m === 'object' && m?.msg ? m.msg : String(m))).join(', ')
+    } else if (typeof message === 'object' && message !== null) {
+      message = message.msg || message.message || JSON.stringify(message)
+    }
+
+    const wrapped = new Error(String(message))
     wrapped.status = status
     return Promise.reject(wrapped)
   }

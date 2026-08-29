@@ -3,7 +3,7 @@ import { useNavigate, Navigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import apiClient from '../api/client'
 import { setToken } from '../api/client'
-import { User, Lock, Mail, ArrowRight } from 'lucide-react'
+import { User, Lock, Mail, ArrowRight, Loader2, Info, X } from 'lucide-react'
 
 /**
  * Self-registration for STUDENT accounts.
@@ -20,6 +20,7 @@ export default function SignUpPage() {
   const [password, setPassword] = useState('')
   const [displayName, setDisplayName] = useState('')
   const [error, setError] = useState(null)
+  const [infoNotice, setInfoNotice] = useState(null)
   const [busy, setBusy] = useState(false)
 
   // Already signed in — go to their home.
@@ -31,9 +32,10 @@ export default function SignUpPage() {
     e.preventDefault()
     setBusy(true)
     setError(null)
+    setInfoNotice(null)
     try {
       const { data } = await apiClient.post('/api/auth/signup', {
-        username: username.trim(),
+        username: username.trim().toLowerCase(),
         password,
         display_name: displayName.trim(),
       })
@@ -48,7 +50,7 @@ export default function SignUpPage() {
   }
 
   const handleGoogleSignUp = () => {
-    alert('Google sign-up not yet implemented')
+    setInfoNotice('Google Single Sign-On (SSO) is scheduled for an upcoming release. Please create your student account using the form.')
   }
 
   return (
@@ -90,6 +92,21 @@ export default function SignUpPage() {
           <h1 className="login-title">Create your account 👋</h1>
           <p className="login-sub">Join PathWise and explore career pathways</p>
 
+          {infoNotice && (
+            <div className="login-info-notice" role="status">
+              <Info size={16} className="login-info-icon" />
+              <span>{infoNotice}</span>
+              <button
+                type="button"
+                className="login-info-close"
+                onClick={() => setInfoNotice(null)}
+                aria-label="Dismiss notice"
+              >
+                <X size={14} />
+              </button>
+            </div>
+          )}
+
           <form onSubmit={submit} className="login-form">
             <label className="login-label" htmlFor="su-name">Your name</label>
             <div className="login-input-wrap">
@@ -112,7 +129,7 @@ export default function SignUpPage() {
                 id="su-username"
                 className="login-input"
                 value={username}
-                onChange={e => setUsername(e.target.value.toLowerCase())}
+                onChange={e => setUsername(e.target.value.toLowerCase().replace(/\s+/g, ''))}
                 placeholder="Lowercase letters, digits, dot, dash or underscore"
                 autoComplete="username"
                 required
@@ -141,8 +158,17 @@ export default function SignUpPage() {
               type="submit"
               disabled={busy || !username || !password || !displayName}
             >
-              <span>{busy ? 'Creating account…' : 'Sign up'}</span>
-              <ArrowRight className="login-submit-arrow" size={18} strokeWidth={2.2} />
+              {busy ? (
+                <>
+                  <Loader2 className="login-submit-spinner" size={18} />
+                  <span>Creating account…</span>
+                </>
+              ) : (
+                <>
+                  <span>Sign up</span>
+                  <ArrowRight className="login-submit-arrow" size={18} strokeWidth={2.2} />
+                </>
+              )}
             </button>
           </form>
 
@@ -193,7 +219,6 @@ export default function SignUpPage() {
           </div>
         </div>
       </div>
-
 
       <style>{`
         .login-page {
@@ -366,6 +391,27 @@ export default function SignUpPage() {
           margin: 8px 0 26px;
         }
 
+        .login-info-notice {
+          display: flex;
+          align-items: flex-start;
+          gap: 8px;
+          font-size: 12.5px;
+          color: #1E40AF;
+          background: #EFF6FF;
+          border: 1px solid #BFDBFE;
+          border-radius: 9px;
+          padding: 10px 12px;
+          margin-bottom: 16px;
+          line-height: 1.4;
+        }
+        .login-info-icon { flex-shrink: 0; margin-top: 1px; color: #3B82F6; }
+        .login-info-close {
+          background: none; border: none; padding: 2px;
+          color: #60A5FA; cursor: pointer; margin-left: auto;
+          display: flex; align-items: center; justify-content: center;
+        }
+        .login-info-close:hover { color: #1E40AF; }
+
         .login-form { display: flex; flex-direction: column; }
 
         .login-label {
@@ -400,7 +446,15 @@ export default function SignUpPage() {
           box-shadow: 0 0 0 3px rgba(37,99,235,0.14);
         }
 
-        .login-error { font-size: 13px; color: #E4483F; margin-bottom: 12px; }
+        .login-error {
+          font-size: 12.5px;
+          color: #B91C1C;
+          background: #FEF2F2;
+          border: 1px solid #FECACA;
+          border-radius: 8px;
+          padding: 8px 12px;
+          margin-bottom: 12px;
+        }
 
         .login-submit {
           position: relative;
@@ -412,11 +466,19 @@ export default function SignUpPage() {
           transition: background .15s ease, transform .1s ease, box-shadow .15s ease;
           box-shadow: 0 8px 20px rgba(37,99,235,0.28);
           display: flex; align-items: center; justify-content: center;
+          gap: 8px;
         }
         .login-submit-arrow {
           position: absolute;
           right: 18px; top: 50%;
           transform: translateY(-50%);
+        }
+        .login-submit-spinner {
+          animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
         .login-submit:hover:not(:disabled) {
           background: #1D4ED8;
@@ -424,10 +486,9 @@ export default function SignUpPage() {
         }
         .login-submit:active:not(:disabled) { transform: translateY(1px); }
         .login-submit:disabled {
-          background: #2563EB;
-          box-shadow: 0 8px 20px rgba(37,99,235,0.28);
+          background: #93C5FD;
+          box-shadow: none;
           cursor: not-allowed;
-          opacity: 0.9;
         }
 
         .login-divider {
