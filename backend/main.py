@@ -135,7 +135,15 @@ def on_startup() -> None:
     except Exception as exc:
         log.error("Auth configuration check failed: %s", exc)
 
-    # 2. Seed the database on first-ever start (idempotent)
+    # 2. Ensure database tables exist and seed if empty
+    try:
+        from db.database import engine, Base
+        import models  # noqa: F401 - registers Student, Enrollment, JobPosting, Placement, User
+        Base.metadata.create_all(bind=engine)
+        log.info("Database tables verified / created.")
+    except Exception as exc:
+        log.error("Database table creation failed: %s", exc)
+
     try:
         from startup_seed import seed_if_empty, seed_users_if_empty
         seed_if_empty()
