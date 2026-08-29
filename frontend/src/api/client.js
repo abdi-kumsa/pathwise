@@ -11,7 +11,7 @@ const client = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 15000,
+  timeout: 60000,
 })
 
 // Attach the bearer token to every outgoing request. Reading from localStorage
@@ -49,7 +49,11 @@ client.interceptors.response.use(
       error.message ||
       'An unexpected error occurred'
 
-    if (Array.isArray(message)) {
+    if (error.code === 'ECONNABORTED' || (typeof message === 'string' && message.includes('timeout'))) {
+      message = 'The server is waking up from inactivity (Render free tier cold start). Please wait a few seconds and try again.'
+    } else if (message === 'Network Error') {
+      message = 'Could not connect to backend server. It may still be starting up.'
+    } else if (Array.isArray(message)) {
       message = message.map((m) => (typeof m === 'object' && m?.msg ? m.msg : String(m))).join(', ')
     } else if (typeof message === 'object' && message !== null) {
       message = message.msg || message.message || JSON.stringify(message)
