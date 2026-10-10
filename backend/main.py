@@ -52,8 +52,46 @@ async def add_security_headers(request: Request, call_next):
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
     return response
 
+
+# ── Provenance stamp (Wave 0) ─────────────────────────────────────────────────
+# Every successful JSON object under /api/* carries a provenance block so a
+# figure cannot be quoted without its source. Auth is excluded: tokens are not
+# a dataset. List bodies are left alone so existing array-shaped endpoints do
+# not change their contract.
+@app.middleware("http")
+async def stamp_provenance(request: Request, call_next):
+    from starlette.responses import Response
+    from services._provenance import attach_default_if_missing
+
+    response = await call_next(request)
+    path = request.url.path
+    if (
+        not path.startswith("/api/")
+        or path.startswith("/api/auth")
+        or response.status_code >= 400
+    ):
+        return response
+    content_type = response.headers.get("content-type", "")
+    if "application/json" not in content_type:
+        return response
+
+    chunks = []
+    async for chunk in response.body_iterator:
+        chunks.append(chunk)
+    body = attach_default_if_missing(b"".join(chunks))
+    headers = dict(response.headers)
+    headers.pop("content-length", None)
+    return Response(
+        content=body,
+        status_code=response.status_code,
+        headers=headers,
+        media_type=content_type,
+    )
+
 # ── Routers ───────────────────────────────────────────────────────────────────
 from routers import (  # noqa: E402
+    admin,
+    ahp,
     auth,
     careers,
     education,
@@ -61,9 +99,14 @@ from routers import (  # noqa: E402
     institution,
     labour,
     market,
+    methodology,
+    model1,
+    model2,
+    model3,
     monitoring,
     recommendations,
     search,
+    student,
     users,
 )
 
@@ -75,7 +118,14 @@ app.include_router(careers.router,          prefix="/api")   # STUDENT
 app.include_router(labour.router,           prefix="/api")   # MOL + MOE
 app.include_router(education.router,        prefix="/api")   # MOE
 app.include_router(institution.router,      prefix="/api")   # UNIVERSITY
+app.include_router(model1.router,           prefix="/api")   # MOE + UNIVERSITY
+app.include_router(model2.router,           prefix="/api")   # MOL + MOE
+app.include_router(model3.router,           prefix="/api")   # MOE + MOL + UNIVERSITY
+app.include_router(student.router,          prefix="/api")   # STUDENT
 app.include_router(users.router,            prefix="/api")   # ADMIN
+app.include_router(admin.router,            prefix="/api")   # ADMIN
+app.include_router(methodology.router,      prefix="/api")   # ADMIN
+app.include_router(ahp.router,              prefix="/api")   # ADMIN
 
 # Any authenticated role; results are filtered per role inside the router
 app.include_router(search.router,           prefix="/api")
@@ -145,9 +195,16 @@ def on_startup() -> None:
         log.error("Database table creation failed: %s", exc)
 
     try:
-        from startup_seed import seed_if_empty, seed_users_if_empty
+        from startup_seed import (
+            apply_wave5_user_columns,
+            patch_demo_student_profile,
+            seed_if_empty,
+            seed_users_if_empty,
+        )
+        apply_wave5_user_columns()
         seed_if_empty()
         seed_users_if_empty()
+        patch_demo_student_profile()
     except Exception as exc:
         log.error("Startup seed raised an unexpected error: %s", exc)
 

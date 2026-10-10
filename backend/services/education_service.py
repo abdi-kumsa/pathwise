@@ -1,16 +1,10 @@
 """
 Education-supply intelligence — the Ministry of Education view.
 
-Answers "which fields are emerging and worth investing in?" by joining the two
-Assets datasets on the shared field vocabulary (see services/_datasets.py):
-
-    education supply  (enrollment CSV, field_of_study)
-            ═══ joined on the identical nine values ═══
-    labour demand     (jobs CSV, job_family)
-
-The centrepiece is get_investment_quadrant(): demand growth on one axis, the
-graduate supply growth meant to serve it on the other. A field where demand is
-climbing faster than supply is where new capacity pays off.
+Reads Ethiopia fact tables via services/_datasets.py (enrollment_compat /
+jobs_compat backed by data/ethiopia/). Model 3 policy-priority is the W.MOE.05
+ranker. get_investment_priority() remains on its own route and is not the
+widget page.
 """
 from . import _datasets as ds
 from . import labour_market_service as labour
@@ -30,6 +24,28 @@ def get_overview() -> dict:
         ds.YEAR_MAX - ds.YEAR_MIN,
     )
 
+    capacity_utilization_pct = None
+    projected_intake = None
+    try:
+        from ml.features.model1 import c4_quota
+        from services import constraint_service as m1
+        q = c4_quota.frame()
+        if not q.empty and "program_capacity" in q.columns:
+            qy = int(q["year"].max())
+            cap = float(q[q["year"] == qy]["program_capacity"].sum())
+            latest_enr = float(by_year.loc[ds.YEAR_MAX])
+            if cap > 0:
+                capacity_utilization_pct = round(latest_enr / cap * 100, 1)
+        cons = m1.constrained_demand(horizon=1)
+        if not cons.empty and "constrained_enrollment" in cons.columns:
+            year = int(cons["academic_year"].max())
+            projected_intake = round(float(
+                cons[cons["academic_year"] == year]["constrained_enrollment"].sum()
+            ), 1)
+    except Exception:
+        capacity_utilization_pct = None
+        projected_intake = None
+
     return {
         'total_enrollment':      int(e['enrollment_count'].sum()),
         'enrollment_latest_year': int(by_year.loc[ds.YEAR_MAX]),
@@ -43,6 +59,8 @@ def get_overview() -> dict:
         'avg_net_price':         round(float(e['net_price'].mean()), 2),
         'avg_roi_10yr':          round(float(e['roi_10yr_usd'].mean()), 2),
         'stem_share_pct':        round(float(e['stem_designated'].mean()) * 100, 1),
+        'capacity_utilization_pct': capacity_utilization_pct,
+        'projected_intake':      projected_intake,
         'dataset_label':         ds.DATASET_LABEL,
     }
 
@@ -313,4 +331,156 @@ def get_field_detail(field: str) -> dict:
         ],
         'programs':      programs,
         'dataset_label': ds.DATASET_LABEL,
+    }
+
+
+def _records(df):
+    import json
+    if df is None or getattr(df, "empty", True):
+        return []
+    return json.loads(df.to_json(orient="records"))
+
+
+def demand_constrained_comparison(horizon: int = 3) -> dict:
+    """National unconstrained vs constrained demand by field and year (W.MOE.02)."""
+    from services import constraint_service as m1
+
+    unconstrained = m1.unconstrained_demand(horizon=horizon, dimensions=["field", "academic_year"])
+    constrained = m1.constrained_demand(horizon=horizon, dimensions=["field", "academic_year"])
+    if unconstrained is None or unconstrained.empty:
+        return {"horizon": horizon, "n": 0, "rows": []}
+    left = unconstrained.rename(columns={"unconstrained_demand": "unconstrained"})
+    keep_u = [c for c in ("field", "academic_year", "unconstrained") if c in left.columns]
+    left = left[keep_u]
+    if constrained is not None and not constrained.empty:
+        keep_c = [c for c in (
+            "field", "academic_year", "constrained_enrollment", "binding_constraint", "constraint_loss",
+        ) if c in constrained.columns]
+        merged = left.merge(constrained[keep_c], on=["field", "academic_year"], how="outer")
+    else:
+        merged = left
+        merged["constrained_enrollment"] = 0
+        merged["binding_constraint"] = "none"
+        merged["constraint_loss"] = 0
+    merged = merged.fillna({"unconstrained": 0, "constrained_enrollment": 0, "binding_constraint": "none", "constraint_loss": 0})
+    return {
+        "horizon": horizon,
+        "grain": "national",
+        "n": int(len(merged)),
+        "rows": _records(merged),
+    }
+
+
+def institution_comparison(horizon: int = 1) -> dict:
+    """All registered HEIs: capacity, forecast accuracy, outcomes, alignment (W.MOE.07)."""
+    from ml.features.model1 import c4_quota, c7_outcomes
+    from services import alignment_service as m3
+    from services import constraint_service as m1
+
+    e = ds.enrollment()
+    latest_year = int(e["year"].max())
+    enrol = e[e["year"] == latest_year].groupby("institution_name").agg(
+        enrollment=("enrollment_count", "sum"),
+        applications=("applications_count", "sum"),
+        employment_rate_pct=("employment_rate_6mo_pct", "mean"),
+        region=("institution_state", "first"),
+    ).reset_index()
+
+    quota = c4_quota.frame()
+    cap_map = {}
+    if not quota.empty and "institution" in quota.columns:
+        qy = int(quota["year"].max())
+        qnow = quota[quota["year"] == qy]
+        cap_map = qnow.groupby("institution")["program_capacity"].sum().to_dict() if "program_capacity" in qnow.columns else {}
+
+    cons = m1.constrained_demand(horizon=horizon)
+    un_map, c_map, bind_map = {}, {}, {}
+    if cons is not None and not cons.empty and "institution" in cons.columns:
+        cy = int(cons["academic_year"].max())
+        now = cons[cons["academic_year"] == cy]
+        un_map = now.groupby("institution")["unconstrained_demand"].sum().to_dict()
+        c_map = now.groupby("institution")["constrained_enrollment"].sum().to_dict()
+        bind_map = (
+            now.groupby("institution")["binding_constraint"]
+            .agg(lambda s: s.value_counts().index[0] if len(s) else "none")
+            .to_dict()
+        )
+
+    outcomes = c7_outcomes.frame()
+    emp_map = {}
+    if not outcomes.empty and "institution" in outcomes.columns:
+        oy = int(outcomes["year"].max())
+        onow = outcomes[outcomes["year"] == oy]
+        if "graduate_employment_rate_pct" in onow.columns:
+            emp_map = onow.groupby("institution")["graduate_employment_rate_pct"].mean().to_dict()
+
+    region_status = {}
+    try:
+        regional = m3.regional_alignment(horizon=horizon)
+        if regional is not None and not regional.empty and "region" in regional.columns:
+            latest = int(regional["period"].max()) if "period" in regional.columns else None
+            now = regional[regional["period"] == latest] if latest is not None else regional
+            for region, slice_ in now.groupby("region"):
+                statuses = [str(s) for s in slice_["status"].tolist()] if "status" in slice_.columns else []
+                region_status[region] = max(set(statuses), key=statuses.count) if statuses else "balanced"
+    except Exception:
+        region_status = {}
+
+    rows = []
+    for _, r in enrol.iterrows():
+        name = r["institution_name"]
+        unconstrained = float(un_map.get(name, 0) or 0)
+        constrained = float(c_map.get(name, 0) or 0)
+        realised = float(r["enrollment"] or 0)
+        capacity = float(cap_map.get(name, 0) or 0)
+        accuracy = None
+        if constrained:
+            accuracy = round(1.0 - abs(constrained - realised) / max(constrained, 1.0), 3)
+        alignment = region_status.get(r["region"], "balanced")
+        rows.append({
+            "institution": name,
+            "region": r["region"],
+            "enrollment": int(realised),
+            "applications": int(r["applications"] or 0),
+            "capacity": round(capacity, 1),
+            "capacity_utilization_pct": round(realised / capacity * 100, 1) if capacity else None,
+            "unconstrained_demand": round(unconstrained, 1),
+            "constrained_enrollment": round(constrained, 1),
+            "forecast_accuracy": accuracy,
+            "binding_constraint": bind_map.get(name, "none"),
+            "employment_rate_pct": round(float(emp_map.get(name, r["employment_rate_pct"] or 0)), 1),
+            "alignment_status": alignment,
+        })
+    rows.sort(key=lambda x: x["enrollment"], reverse=True)
+    return {"n": len(rows), "year": latest_year, "rows": rows}
+
+
+def policy_impact() -> dict:
+    """Simulated quota/capacity YoY versus subsequent enrolment and employment (W.MOE.08)."""
+    from ml.features.model1 import c4_quota, c7_outcomes
+
+    quota = c4_quota.frame()
+    e = ds.enrollment()
+    out = c7_outcomes.frame()
+    years = sorted(int(y) for y in e["year"].unique())
+    series = []
+    for year in years:
+        qy = quota[quota["year"] == year] if not quota.empty and "year" in quota.columns else quota.iloc[0:0]
+        ey = e[e["year"] == year]
+        oy = out[out["year"] == year] if not out.empty and "year" in out.columns else out.iloc[0:0]
+        series.append({
+            "year": year,
+            "approved_intake_quota": float(qy["approved_intake_quota"].sum()) if "approved_intake_quota" in qy.columns and not qy.empty else 0,
+            "program_capacity": float(qy["program_capacity"].sum()) if "program_capacity" in qy.columns and not qy.empty else 0,
+            "enrollment": float(ey["enrollment_count"].sum()) if not ey.empty else 0,
+            "employment_rate_pct": round(float(oy["graduate_employment_rate_pct"].mean()), 1) if not oy.empty and "graduate_employment_rate_pct" in oy.columns else None,
+        })
+    return {
+        "official_forecast": False,
+        "n": len(series),
+        "series": series,
+        "note": (
+            "Simulated quota and capacity against subsequent enrolment and employment. "
+            "Not a real MoE circular or an official impact evaluation."
+        ),
     }

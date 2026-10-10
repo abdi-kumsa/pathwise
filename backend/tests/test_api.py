@@ -203,7 +203,7 @@ class TestAuth:
     def test_university_token_carries_institution(self, role_clients):
         body = role_clients["university"].get("/api/auth/me").json()
         assert body["role"] == "UNIVERSITY"
-        assert body["institution"] == "Tech Institute"
+        assert body["institution"] == "Addis Ababa University"
 
     def test_non_university_roles_have_no_institution(self, role_clients):
         for user in ("admin", "student", "moe", "mol"):
@@ -223,7 +223,7 @@ class TestAuth:
         assert body["user"]["username"] == "newsignup1"
         assert body["user"]["role"] == "STUDENT"
         assert body["user"]["display_name"] == "New User"
-        assert body["user"]["home"] == "/student/careers"
+        assert body["user"]["home"] == "/student/profile"
 
         # Cleanup
         admin_token = _login("admin")
@@ -359,6 +359,12 @@ def _new_user(client, username, **over):
     return client.post("/api/users", json=body)
 
 
+def _user_rows(body):
+    if isinstance(body, dict):
+        return body.get("rows") or []
+    return body
+
+
 class TestUserManagement:
 
     # ── Access ────────────────────────────────────────────────────────────
@@ -391,13 +397,13 @@ class TestUserManagement:
     def test_list_never_returns_password_hashes(self, role_clients):
         body = role_clients["admin"].get("/api/users").json()
         assert body
-        for u in body:
+        for u in _user_rows(body):
             assert "password_hash" not in u
         # And not under any other spelling either.
         assert "$2b$" not in str(body), "a bcrypt hash leaked into the response"
 
     def test_list_includes_the_seeded_accounts(self, role_clients):
-        names = {u["username"] for u in role_clients["admin"].get("/api/users").json()}
+        names = {u["username"] for u in _user_rows(role_clients["admin"].get("/api/users").json())}
         assert {"admin", "student", "moe", "mol", "university"} <= names
 
     # ── Create ────────────────────────────────────────────────────────────
@@ -446,9 +452,9 @@ class TestUserManagement:
                          institution_name="Hogwarts").status_code == 422
         # A real one succeeds.
         r = _new_user(scratch, "t_uni", role="UNIVERSITY",
-                      institution_name="Tech Institute")
+                      institution_name="Addis Ababa University")
         assert r.status_code == 201
-        assert r.json()["institution_name"] == "Tech Institute"
+        assert r.json()["institution_name"] == "Addis Ababa University"
 
     def test_institution_options_are_available(self, scratch):
         body = scratch.get("/api/users/meta/institutions").json()
@@ -471,7 +477,7 @@ class TestUserManagement:
         # because the username is the JWT subject.
         scratch.patch("/api/users/t_edit", json={"username": "t_renamed"})
         assert scratch.get("/api/users").json()
-        names = {u["username"] for u in scratch.get("/api/users").json()}
+        names = {u["username"] for u in _user_rows(scratch.get("/api/users").json())}
         assert "t_edit" in names
         assert "t_renamed" not in names
 
@@ -854,24 +860,24 @@ class TestInstitution:
 
     def test_me_returns_own_institution(self, role_clients):
         b = role_clients["university"].get("/api/institution/me").json()
-        assert b["institution"] == "Tech Institute"
+        assert b["institution"] == "Addis Ababa University"
 
     def test_cannot_read_another_institution_via_query_param(self, role_clients):
         """Row scoping comes from the signed token, so a crafted parameter must
         be ignored rather than honoured."""
         b = role_clients["university"].get(
             "/api/institution/me", params={"institution": "Southern State"}).json()
-        assert b["institution"] == "Tech Institute"
+        assert b["institution"] == "Addis Ababa University"
 
         for path in ("/api/institution/portfolio", "/api/institution/expansion",
                      "/api/institution/resources", "/api/institution/benchmark"):
             body = role_clients["university"].get(
                 path, params={"institution": "Southern State"}).json()
-            assert body["institution"] == "Tech Institute", path
+            assert body["institution"] == "Addis Ababa University", path
 
-    def test_portfolio_has_twelve_programs(self, role_clients):
+    def test_portfolio_has_eight_programs(self, role_clients):
         b = role_clients["university"].get("/api/institution/portfolio").json()
-        assert len(b["programs"]) == 12
+        assert len(b["programs"]) == 8
 
     def test_expansion_recommendations_valid(self, role_clients):
         b = role_clients["university"].get("/api/institution/expansion").json()

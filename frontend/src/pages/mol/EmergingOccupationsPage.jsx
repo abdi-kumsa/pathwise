@@ -6,6 +6,7 @@ import {
 import SectionHeader from '../../components/SectionHeader'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
+import DataNote from '../../components/DataNote'
 import useFetch from '../../hooks/useFetch'
 import { getEmerging } from '../../api/roles'
 import {
@@ -67,6 +68,9 @@ export default function EmergingOccupationsPage() {
         title="Emerging occupations"
         subtitle="Which parts of the labour market are growing, and how fast"
       />
+      <DataNote tone="simulated">
+        Simulated Ethiopian structure, 2016–2025. Not official MoLS statistics.
+      </DataNote>
 
       {error && <ErrorBanner message={error} onRetry={refetch} />}
 
@@ -94,7 +98,7 @@ export default function EmergingOccupationsPage() {
         <>
           <div className="panel" style={{ marginBottom: 20 }}>
             <p className="panel-title">Openings over time</p>
-            <p className="panel-sub">Annual job openings, 2020–2025</p>
+            <p className="panel-sub">Annual job openings, 2016–2025</p>
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={chartData} margin={{ top: 4, right: 20, left: 0, bottom: 0 }}>
                 <CartesianGrid {...gridProps} />

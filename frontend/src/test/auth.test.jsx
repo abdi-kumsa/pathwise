@@ -33,7 +33,7 @@ import RoleRoute from '../components/RoleRoute'
 
 const STUDENT = {
   username: 'student', role: 'STUDENT', role_label: 'Student',
-  display_name: 'Demo Student', institution: null, home: '/student/careers',
+  display_name: 'Demo Student', institution: null, home: '/student/profile',
 }
 
 const MOE = {
@@ -144,7 +144,7 @@ describe('RoleRoute', () => {
     <Routes>
       <Route path="/login" element={<p>login page</p>} />
       <Route path="/moe/overview" element={<p>moe home</p>} />
-      <Route path="/student/careers" element={<p>student home</p>} />
+      <Route path="/student/profile" element={<p>student home</p>} />
       <Route path="/secret" element={
         <RoleRoute allow={['MOE']}><p>moe only content</p></RoleRoute>
       } />

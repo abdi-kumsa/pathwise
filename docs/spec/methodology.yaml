@@ -1,0 +1,172 @@
+# ==============================================================================
+# DOC1 — Methodological Note on Relative Importance
+#
+# Executable transcription of DOC1 lines 233-242 ("Methodological Note" and
+# "Recommended Procedure").
+#
+# This file exists because the methodology is a DELIVERABLE, not a preamble.
+# Each step names the artefact that discharges it, and
+# tests/test_spec_coverage.py asserts that artefact exists.
+# ==============================================================================
+
+# DOC1 line 234, verbatim. This is the sentence that governs how every priority
+# percentage in model1_attributes.yaml and model2_attributes.yaml is treated.
+governing_statement: >-
+  The proposed percentages should be interpreted as domain-informed priorities
+  for data collection, feature engineering and model design—not as fixed weights
+  manually imposed on a machine-learning model.
+
+procedure:
+  - id: PROC.S1
+    step: 1
+    text: >-
+      Use literature review, the approved proposal and Ethiopia-specific domain
+      knowledge to define candidate attributes.
+    satisfied_by:
+      artefact: docs/spec/model1_attributes.yaml
+      also:
+        - docs/spec/model2_attributes.yaml
+    note: >-
+      This registry IS the candidate attribute definition. 20 categories and
+      every named variable, transcribed from the approved document.
+
+  - id: PROC.S2
+    step: 2
+    text: >-
+      Validate attribute relevance with experts from higher education, the
+      Ministry of Education, labor and skills institutions, statistics,
+      economics and relevant sectors.
+    satisfied_by:
+      table: expert_validations
+      endpoint: /api/methodology/expert-validations
+      component: frontend/src/pages/admin/AdminMethodologyPage.jsx
+    # The six expert domains DOC1 names. A validation record cites one of these.
+    expert_domains:
+      - higher_education
+      - ministry_of_education
+      - labour_and_skills
+      - statistics
+      - economics
+      - sector_specialist
+
+  - id: PROC.S3
+    step: 3
+    text: >-
+      Prioritize Tier 1 and Tier 2 variables for data collection because they
+      are expected to have the greatest predictive value and are most important
+      for model validity.
+    satisfied_by:
+      artefact: scripts/spec_report.py
+      endpoint: /api/methodology/priority-tiers
+    note: >-
+      Tiers are declared in each model spec under `priority_tiers` and carry
+      DOC1's combined percentages (M1 70/18/12, M2 55/30/15).
+
+  - id: PROC.S4
+    step: 4
+    text: Train multiple models and compare predictive performance.
+    satisfied_by:
+      artefact: ml/compare_models.py
+      report: docs/MODEL_COMPARISON.md
+      endpoint: /api/methodology/model-comparison
+    # A comparison with one candidate is not a comparison.
+    minimum_candidates_per_target: 3
+    required_validation: grouped_time_series_cv
+    note: >-
+      No random train/test split on a time series. Candidates include a naive
+      or seasonal-naive baseline so any gain is measured against something.
+
+  - id: PROC.S5
+    step: 5
+    text: >-
+      Calculate empirical feature importance after training using model-based
+      importance and SHAP values.
+    satisfied_by:
+      artefact: ml/explain_predictions.py
+      report: docs/FEATURE_IMPORTANCE.md
+      endpoint: /api/methodology/feature-importance
+    methods:
+      - model_based_importance
+      - shap
+      - permutation_importance
+    note: >-
+      "after training" — importance is computed from fitted models, never
+      asserted in advance. Extends the existing placement-model SHAP cache in
+      backend/services/ml_service.py to every model.
+
+  - id: PROC.S6
+    step: 6
+    text: >-
+      Report the final data-driven feature rankings separately from the proposed
+      expert/data-collection priorities.
+    satisfied_by:
+      report: docs/FEATURE_IMPORTANCE.md
+      widget: W.ADM.04
+    # This is the one step with a NEGATIVE requirement: the two rankings must be
+    # visibly adjacent and never combined into a single number.
+    constraint: >-
+      Learned importance and collection priority appear in separate, labelled
+      panels. No endpoint may return a single figure blending them, and no chart
+      may plot them as one series.
+    enforced_by: tests/test_spec_coverage.py::test_learned_and_priority_never_merged
+
+  - id: PROC.S7
+    step: 7
+    text: >-
+      If fixed pre-training weights are required, explicitly add a separate AHP
+      or hybrid AHP-ML methodology rather than inserting subjective percentages
+      directly into the ML algorithm.
+    satisfied_by:
+      module: ml/ahp/
+      endpoint: /api/ahp/weights
+      also_endpoint: /api/ahp/consistency
+      component: frontend/src/pages/admin/AdminMethodologyPage.jsx
+    # Saaty's AHP. CR > 0.1 means the pairwise judgements are inconsistent and
+    # the resulting weights are not usable — the module refuses them rather than
+    # returning a number that looks fine.
+    requirements:
+      - pairwise_comparison_matrix
+      - principal_eigenvector_weights
+      - consistency_ratio
+    consistency_ratio_max: 0.1
+    constraint: >-
+      Structurally separate from model training. No AHP weight may enter a
+      learner's loss function or reweight a training sample. AHP output is
+      displayed beside SHAP output, never blended into it.
+    enforced_by: tests/test_ahp.py
+
+# ── The honesty constraints carried forward ──────────────────────────────────
+# Not from DOC1, but decisions taken with the client that bind how DOC2's
+# "ranked" widgets may be built. Recorded here so they are testable rather than
+# remembered. See docs/DATA_PROVENANCE.md.
+ranking_constraints:
+  - id: RANK.R1
+    rule: >-
+      Graduate fit classification is not comparable across fields and must not
+      enter any ranking, composite score or league table.
+    reason: >-
+      Distribution is near-uniform across fields (~80/13/5, spread 5.3pp); the
+      generator encoded no between-group signal. Ranking it charts noise.
+    applies_to: [W.STU.06, W.UNI.05, W.MOE.05, W.MOL.04]
+    enforced_by: tests/test_spec_coverage.py::test_fit_classification_not_ranked
+
+  - id: RANK.R2
+    rule: >-
+      Ranked outputs rank on supply-demand gap, projected labour demand,
+      capacity and eligibility — the factors that carry real variance.
+    applies_to: [W.STU.06, W.MOE.05]
+
+  - id: RANK.R3
+    rule: >-
+      Every composite score returns its `weights`, its `method`, and the
+      per-factor decomposition that produced it. No score is presented as an
+      absolute measure.
+    applies_to: all_scoring_endpoints
+
+  - id: RANK.R4
+    rule: >-
+      Severity buckets are quartile ranks of the absolute gap, not fixed
+      coverage thresholds.
+    reason: >-
+      Coverage sits in a narrow band across fields, so any fixed threshold
+      buckets every field identically.

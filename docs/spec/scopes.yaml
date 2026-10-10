@@ -1,0 +1,152 @@
+# ==============================================================================
+# DOC2 — Per-dashboard audience and data scope
+#
+# Executable transcription of the "Audience:" and "Scope:" lines that head each
+# of DOC2's five dashboard sections.
+#
+# Scope is an ACCESS-CONTROL requirement, not a description. Each rule below is
+# asserted by tests/test_scopes.py across all 5 roles x every endpoint: 200 in
+# scope, 403 out of scope.
+#
+# The five DOC2 audiences map 1:1 onto the roles that already exist in
+# backend/services/auth_service.py — no new role model is introduced.
+# ==============================================================================
+
+# ADMIN satisfies every require_roles() check by construction (see _ADMIN in
+# auth_service.py), so a newly added router can never lock the administrator out.
+# That is deliberate and predates this work.
+admin_is_superset: true
+
+dashboards:
+  - id: SCOPE.STU
+    role: STUDENT
+    dashboard: Student Dashboard
+    audience: Individual students
+    scope_text: >-
+      Personal data plus anonymized and aggregated field-level information only.
+    rules:
+      - id: SCOPE.STU.R1
+        rule: A student may read their own records only.
+        implementation: >-
+          Row identity comes from the signed JWT `sub`, never from a query
+          parameter or body field.
+      - id: SCOPE.STU.R2
+        rule: >-
+          Field-level information is exposed only in anonymized, aggregated
+          form. No endpoint reachable by STUDENT may return another
+          identifiable student's record.
+        implementation: >-
+          student_scope dependency in auth_service; aggregate responses enforce
+          a minimum cell size before release.
+      - id: SCOPE.STU.R3
+        rule: >-
+          A student may not read institution-level operational data (funnel
+          internals, resource plans, peer comparisons).
+    denied_roles_for_reference: [MOE, MOL, UNIVERSITY]
+
+  - id: SCOPE.UNI
+    role: UNIVERSITY
+    dashboard: University / Institutional Planner Dashboard
+    audience: Registrars, deans and institutional planning offices
+    scope_text: >-
+      Defaults to the institution's own data; cross-institution access requires
+      elevated permission.
+    rules:
+      - id: SCOPE.UNI.R1
+        rule: Rows are scoped to the caller's own institution by default.
+        implementation: >-
+          `institution` is read from the signed JWT, NEVER from a query
+          parameter. There is an existing test asserting a crafted
+          `?institution=` is ignored — it must keep passing.
+      - id: SCOPE.UNI.R2
+        rule: >-
+          Cross-institution access is possible but requires an explicit
+          elevated grant, which is recorded and auditable.
+        implementation: >-
+          A CROSS_INSTITUTION grant on the user record. Absent the grant, a
+          cross-institution request is 403, not a silent narrowing to own rows.
+      - id: SCOPE.UNI.R3
+        rule: >-
+          Every cross-institution read is written to the audit log (W.ADM.08).
+
+  - id: SCOPE.MOE
+    role: MOE
+    dashboard: Ministry of Education Dashboard
+    audience: National and regional education policymakers
+    scope_text: >-
+      All registered HEIs with authorized aggregate and institution-level views.
+    rules:
+      - id: SCOPE.MOE.R1
+        rule: >-
+          Read access spans all registered HEIs, at both aggregate and
+          institution level.
+      - id: SCOPE.MOE.R2
+        rule: >-
+          "Authorized" is load-bearing: institution-level drill-down is
+          logged, and no individual student record is reachable.
+      - id: SCOPE.MOE.R3
+        rule: >-
+          Scenario runs are attributable to the user who ran them and carry
+          their assumptions (see W.ADM.05 — scenarios must not be mistaken for
+          official forecasts).
+
+  - id: SCOPE.MOL
+    role: MOL
+    dashboard: Ministry of Labor and Skills Dashboard
+    audience: Labor-market policymakers and workforce planners
+    scope_text: >-
+      National and regional labor-market data linked with higher education
+      output.
+    rules:
+      - id: SCOPE.MOL.R1
+        rule: >-
+          Read access spans national and regional labour data, plus the
+          higher-education output it links to (graduate supply, absorption).
+      - id: SCOPE.MOL.R2
+        rule: >-
+          Education-side access is limited to aggregate graduate output. No
+          individual student record and no institution's internal operational
+          data.
+      - id: SCOPE.MOL.R3
+        rule: Every report export is written to the audit log (W.MOL.09, W.ADM.08).
+
+  - id: SCOPE.ADM
+    role: ADMIN
+    dashboard: System Administrator Dashboard
+    audience: Platform and technical administrators
+    scope_text: >-
+      Operations, data governance, model governance and access control.
+    rules:
+      - id: SCOPE.ADM.R1
+        rule: >-
+          Full platform access, including every other role's views, by
+          construction.
+      - id: SCOPE.ADM.R2
+        rule: >-
+          Administrative actions are themselves audited — the administrator is
+          not outside the audit log.
+      - id: SCOPE.ADM.R3
+        rule: >-
+          Existing safety guards hold and live in auth_service, not the router:
+          no self-deactivate, no self-demote, no removing the last active
+          admin, usernames immutable (they are the JWT `sub`), and a UNIVERSITY
+          user must map to a real institution.
+
+# ── Cross-cutting rules ──────────────────────────────────────────────────────
+global_rules:
+  - id: SCOPE.G1
+    rule: >-
+      Scope is enforced server-side. Hiding a nav link or a component is
+      presentation, never access control.
+    enforced_by: tests/test_scopes.py
+
+  - id: SCOPE.G2
+    rule: >-
+      Any identifier that selects rows a caller is entitled to (institution,
+      student identity) is read from the signed token, never from client input.
+
+  - id: SCOPE.G3
+    rule: >-
+      Out-of-scope requests return 403. They do not return 200 with an empty
+      body or with the caller's own rows substituted in — that hides a
+      permission bug behind plausible output.

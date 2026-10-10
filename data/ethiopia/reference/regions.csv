@@ -1,0 +1,15 @@
+code,name,type,tigray_shock
+AA,Addis Ababa,city,False
+DD,Dire Dawa,city,False
+AM,Amhara,region,False
+OR,Oromia,region,False
+TG,Tigray,region,True
+SN,Sidama,region,False
+SE,South Ethiopia,region,False
+SW,South West Ethiopia,region,False
+CN,Central Ethiopia,region,False
+SO,Somali,region,False
+AF,Afar,region,False
+BG,Benishangul-Gumuz,region,False
+GM,Gambela,region,False
+HR,Harari,region,False

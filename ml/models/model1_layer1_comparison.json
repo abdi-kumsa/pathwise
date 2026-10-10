@@ -1,0 +1,24 @@
+{
+  "n_holdout_rows": 304,
+  "split": "chronological last-2-years per series",
+  "target": "program_enrollment_count",
+  "estimators": {
+    "seasonal_naive": {
+      "rmse": 62.52,
+      "mae": 49.54
+    },
+    "historical_mean": {
+      "rmse": 54.91,
+      "mae": 44.79
+    },
+    "ols_lags": {
+      "rmse": 0.0,
+      "mae": 0.0
+    }
+  },
+  "selected_for_request_path": "ols_lags if a series has 4+ history years, else seasonal_naive",
+  "not_compared": [
+    "US LSTM (ml/models/enrollment_lstm.keras) \u2014 univariate US enrollment path",
+    "US Prophet (ml/models/demand_prophet.pkl) \u2014 US labour-demand path"
+  ]
+}

@@ -1,0 +1,751 @@
+# ==============================================================================
+# DOC2 — Role-Based Dashboard Specification: all 44 widgets
+#
+# Executable transcription of:
+#   docs/feedback/comments Role-Based Dashboard Specification.docx
+#
+# Every widget keeps all five columns DOC2 specified — content, visualization,
+# primary source/model, purpose — because the visualization type and the stated
+# purpose are requirements, not commentary. A gap chart delivered as a table has
+# not satisfied its row.
+#
+# `satisfied_by` names the endpoint and component that discharge the widget;
+# tests/test_spec_coverage.py asserts both exist, are routed, and answer 200 for
+# the owning role and 403 for a role outside scope (see scopes.yaml).
+#
+# `reuses` names existing code the build should extend rather than duplicate.
+# `status` is one of: existing | extend | new  — the burn-down for Waves 5-7.
+# ==============================================================================
+
+# ── System architecture, DOC2 lines 5-9 ──────────────────────────────────────
+architecture:
+  components:
+    - id: SYS.M1
+      name: "Model 1 - Student Education Demand Forecasting"
+      description: >-
+        Predicts what students are likely to apply for and enroll in by
+        institution, campus, region, program and academic year.
+      spec: docs/spec/model1_attributes.yaml
+      satisfied_by:
+        module: ml/model1/layer1_demand.py
+        service: backend/services/constraint_service.py
+    - id: SYS.M2
+      name: "Model 2 - Labor Market Demand Forecasting"
+      description: >-
+        Predicts future employment demand, occupational demand, sector growth
+        and skill shortages.
+      spec: docs/spec/model2_attributes.yaml
+      satisfied_by:
+        module: ml/model2/forecast.py
+        service: backend/services/model2_service.py
+    - id: SYS.M3
+      name: "Model 3 - Education-Employment Alignment and Recommendation Engine"
+      description: >-
+        Compares expected graduate supply with future labor-market demand and
+        generates program, policy and student-level recommendations.
+      satisfied_by:
+        module: ml/model3/
+        service: backend/services/alignment_service.py
+  # DOC2 line 9 — the mandatory constraint layer, restated here because it is an
+  # architectural requirement of the dashboard spec too, not only of DOC1.
+  constraint_layer:
+    id: SYS.CL
+    requirement: >-
+      For Ethiopia, predicted enrollment must pass through a policy and capacity
+      constraint layer incorporating entrance examination eligibility,
+      placement/allocation rules, approved intake quotas, strategic priority
+      fields and institutional capacity.
+    inputs:
+      - entrance_examination_eligibility
+      - placement_allocation_rules
+      - approved_intake_quotas
+      - strategic_priority_fields
+      - institutional_capacity
+    satisfied_by:
+      service: backend/services/constraint_service.py
+      spec_ref: M1.L2
+
+dashboards:
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # 1. STUDENT DASHBOARD  (9 widgets)
+  # ══════════════════════════════════════════════════════════════════════════
+  - id: DASH.STU
+    name: Student Dashboard
+    role: STUDENT
+    scope_ref: SCOPE.STU
+    widgets:
+      - id: W.STU.01
+        widget: Profile and academic eligibility
+        content: >-
+          Program, department, institution, year, enrollment status and
+          eligibility indicators
+        visualization: Info cards
+        source_model: SIS + academic/admissions records
+        purpose: Personalizes guidance and keeps recommendations realistic.
+        status: new
+        satisfied_by:
+          endpoint: /api/student/profile
+          component: frontend/src/pages/student/ProfilePage.jsx
+        reuses:
+          - frontend/src/components/KPICard.jsx
+          - frontend/src/components/StatCard.jsx
+
+      - id: W.STU.02
+        widget: Future labor-market outlook
+        content: >-
+          3-5 year projected demand for occupations and sectors related to the
+          student's field
+        visualization: Trend chart
+        source_model: Labor Market Demand Forecasting Model
+        purpose: Shows future career prospects.
+        status: extend
+        horizon_years: [3, 5]
+        satisfied_by:
+          endpoint: /api/student/labour-outlook
+          component: frontend/src/pages/student/LabourOutlookPage.jsx
+        reuses:
+          - backend/services/market_service.py
+          - frontend/src/pages/MarketOverviewPage.jsx
+
+      - id: W.STU.03
+        widget: Student demand vs market demand
+        content: >-
+          Popularity/enrollment demand compared with projected labor-market
+          demand
+        visualization: Gap/comparison chart
+        source_model: Education Demand + Labor Demand models
+        purpose: Shows when popularity and employment opportunity diverge.
+        status: new
+        satisfied_by:
+          endpoint: /api/student/demand-comparison
+          component: frontend/src/pages/student/DemandComparisonPage.jsx
+
+      - id: W.STU.04
+        widget: Field opportunity and alignment
+        content: >-
+          Projected labor demand, expected graduate supply and employment
+          outcome indicators
+        visualization: Metric card with explanation
+        source_model: Alignment Engine
+        purpose: >-
+          Supports informed choices; the reasons behind the score are visible.
+        status: new
+        # "the reasons behind the score are visible" is RANK.R3 restated by the
+        # client. The card must ship the decomposition, not just the number.
+        requires_decomposition: true
+        satisfied_by:
+          endpoint: /api/student/field-alignment
+          component: frontend/src/pages/student/FieldAlignmentPage.jsx
+
+      - id: W.STU.05
+        widget: Graduate supply-demand gap
+        content: Expected graduates versus projected labor demand
+        visualization: Gap chart
+        source_model: Alignment Engine
+        purpose: Shows shortage, balance or oversupply risk.
+        status: new
+        satisfied_by:
+          endpoint: /api/student/supply-demand-gap
+          component: frontend/src/pages/student/SupplyDemandGapPage.jsx
+        reuses:
+          - backend/services/alignment_service.py
+
+      - id: W.STU.06
+        widget: Alternative field recommendations
+        content: >-
+          Related programs ranked using labor demand, expected supply,
+          eligibility and skills fit
+        visualization: Ranked list
+        source_model: Recommendation Engine
+        purpose: Helps students explore realistic alternatives.
+        status: extend
+        ranking_factors:
+          - labour_demand
+          - expected_supply
+          - eligibility
+          - skills_fit
+        ranking_constraint_ref: [RANK.R1, RANK.R2, RANK.R3]
+        satisfied_by:
+          endpoint: /api/student/alternatives
+          component: frontend/src/pages/EscapeRoutePage.jsx
+        reuses:
+          - backend/services/escape_route_service.py
+          - backend/services/career_service.py
+
+      - id: W.STU.07
+        widget: Skill-gap recommendations
+        content: Priority technical, digital and soft skills
+        visualization: Tagged list
+        source_model: Skills data + curriculum mapping
+        purpose: Provides actionable employability steps.
+        status: extend
+        skill_classes: [technical, digital, soft]
+        satisfied_by:
+          endpoint: /api/student/skill-gaps
+          component: frontend/src/pages/SkillRoadmapPage.jsx
+        reuses:
+          - backend/services/enrollment_service.py   # _SHAP_TO_SKILL mapping
+
+      - id: W.STU.08
+        widget: Program-to-occupation pathways
+        content: Related occupations and career pathways
+        visualization: Interactive pathway map
+        source_model: Program-occupation mapping + forecasts
+        purpose: Makes the education-to-employment link explicit.
+        status: new
+        interactive: true
+        satisfied_by:
+          endpoint: /api/student/pathways
+          component: frontend/src/pages/student/PathwayMapPage.jsx
+
+      - id: W.STU.09
+        widget: Opportunities and alerts
+        content: Scholarships, internships, training and job fairs
+        visualization: Notification feed
+        source_model: Authorized education and labor feeds
+        purpose: Converts insight into action.
+        status: new
+        feed_kinds: [scholarship, internship, training, job_fair]
+        satisfied_by:
+          endpoint: /api/student/opportunities
+          component: frontend/src/pages/student/OpportunitiesPage.jsx
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # 2. UNIVERSITY / INSTITUTIONAL PLANNER DASHBOARD  (10 widgets)
+  # ══════════════════════════════════════════════════════════════════════════
+  - id: DASH.UNI
+    name: University / Institutional Planner Dashboard
+    role: UNIVERSITY
+    scope_ref: SCOPE.UNI
+    widgets:
+      - id: W.UNI.01
+        widget: Enrollment and capacity summary
+        content: >-
+          Enrollment, applications, capacity utilization and year-over-year
+          change
+        visualization: Metric cards
+        source_model: Institutional SIS/capacity records
+        purpose: Institutional operating snapshot.
+        status: extend
+        satisfied_by:
+          endpoint: /api/institution/me
+          component: frontend/src/pages/university/InstitutionOverviewPage.jsx
+
+      - id: W.UNI.02
+        widget: Unconstrained student demand forecast
+        content: >-
+          Likely applications and program preferences before policy/capacity
+          limits
+        visualization: Line/bar chart
+        source_model: Education Demand Model
+        purpose: Shows underlying student demand.
+        status: new
+        spec_ref: M1.L1
+        satisfied_by:
+          endpoint: /api/model1/demand/unconstrained
+          component: frontend/src/pages/university/DemandForecastPage.jsx
+
+      - id: W.UNI.03
+        widget: Policy-constrained enrollment forecast
+        content: >-
+          Realistic enrollment after exam, placement, quota and capacity
+          constraints
+        visualization: Scenario chart
+        source_model: Forecast + Constraint Layer
+        purpose: Supports realistic planning.
+        status: new
+        spec_ref: M1.L2
+        satisfied_by:
+          endpoint: /api/model1/demand/constrained
+          component: frontend/src/pages/university/ConstrainedForecastPage.jsx
+
+      - id: W.UNI.04
+        widget: Program demand vs labor demand
+        content: >-
+          Student demand, expected graduate supply and future labor demand by
+          field
+        visualization: Three-way comparison
+        source_model: All models
+        purpose: Prevents planning based only on popularity.
+        status: new
+        # Three series, not two. All-pairs colour rule in chartTheme caps a
+        # scatter at 3 slots — this is exactly at the limit.
+        series_count: 3
+        satisfied_by:
+          endpoint: /api/institution/demand-vs-labour
+          component: frontend/src/pages/university/ThreeWayComparisonPage.jsx
+
+      - id: W.UNI.05
+        widget: Program health and alignment flags
+        content: Shortage, balanced, oversupply and risk indicators
+        visualization: Severity-tagged list
+        source_model: Alignment Engine
+        purpose: >-
+          Identifies programs needing expansion, reduction or review.
+        status: extend
+        severity_buckets: [shortage, balanced, oversupply]
+        ranking_constraint_ref: [RANK.R1, RANK.R4]
+        satisfied_by:
+          endpoint: /api/institution/program-health
+          component: frontend/src/pages/university/ProgramPortfolioPage.jsx
+        reuses:
+          - backend/services/institution_service.py
+          - backend/services/mismatch_service.py
+
+      - id: W.UNI.06
+        widget: Application and placement funnel
+        content: "Applications -> offers/placement -> acceptance -> enrollment"
+        visualization: Funnel chart
+        source_model: Admissions/placement/registrar data
+        purpose: >-
+          Identifies whether losses come from demand or constraints.
+        status: new
+        # The stated purpose is only achievable if the constraint layer reports
+        # the binding constraint per row — see M1.L2.
+        stages: [applications, offers_placement, acceptance, enrollment]
+        requires: constraint_attribution
+        satisfied_by:
+          endpoint: /api/institution/funnel
+          component: frontend/src/pages/university/FunnelPage.jsx
+        reuses:
+          - frontend/src/config/chartTheme.js   # ORDINAL blue ramp for stages
+
+      - id: W.UNI.07
+        widget: Cohort progression
+        content: Retention, dropout, transfer and completion by program
+        visualization: Cohort chart
+        source_model: SIS
+        purpose: Improves enrollment and graduate-supply forecasts.
+        status: new
+        spec_ref: M1.C6
+        satisfied_by:
+          endpoint: /api/institution/cohort-progression
+          component: frontend/src/pages/university/CohortProgressionPage.jsx
+
+      - id: W.UNI.08
+        widget: Graduate outcome feedback
+        content: Employment and time-to-employment for previous cohorts
+        visualization: Trend chart
+        source_model: Graduate tracking + labor data
+        purpose: Feeds outcomes back into planning.
+        status: new
+        spec_ref: M1.C7
+        satisfied_by:
+          endpoint: /api/institution/graduate-outcomes
+          component: frontend/src/pages/university/GraduateOutcomesPage.jsx
+
+      - id: W.UNI.09
+        widget: Resource and quota planning
+        content: Faculty, facilities, budget and intake scenarios
+        visualization: Scenario table
+        source_model: Forecasts + capacity records
+        purpose: Supports operational decisions.
+        status: extend
+        satisfied_by:
+          endpoint: /api/institution/resource-planning
+          component: frontend/src/pages/university/ResourceEfficiencyPage.jsx
+        reuses:
+          - backend/services/scenario_service.py
+
+      - id: W.UNI.10
+        widget: Curriculum and skills alignment
+        content: >-
+          Employer-demanded skills compared with curriculum/graduate skills
+        visualization: Heatmap
+        source_model: Skills extraction + curriculum data
+        purpose: Supports curriculum modernization.
+        status: new
+        satisfied_by:
+          endpoint: /api/institution/curriculum-alignment
+          component: frontend/src/pages/university/CurriculumAlignmentPage.jsx
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # 3. MINISTRY OF EDUCATION DASHBOARD  (8 widgets)
+  # ══════════════════════════════════════════════════════════════════════════
+  - id: DASH.MOE
+    name: Ministry of Education Dashboard
+    role: MOE
+    scope_ref: SCOPE.MOE
+    widgets:
+      - id: W.MOE.01
+        widget: National education and demand overview
+        content: >-
+          HEIs, enrollment, student demand, capacity and projected intake
+        visualization: Metric cards
+        source_model: National institutional data
+        purpose: National snapshot.
+        status: extend
+        satisfied_by:
+          endpoint: /api/education/overview
+          component: frontend/src/pages/moe/EducationOverviewPage.jsx
+
+      - id: W.MOE.02
+        widget: Unconstrained vs constrained demand
+        content: >-
+          Student demand compared with policy/capacity-constrained enrollment
+        visualization: Scenario comparison
+        source_model: Demand Model + Constraint Layer
+        purpose: Separates demand from administrative supply.
+        status: new
+        spec_ref: [M1.L1, M1.L2]
+        satisfied_by:
+          endpoint: /api/education/demand-constrained-comparison
+          component: frontend/src/pages/moe/ConstraintComparisonPage.jsx
+
+      - id: W.MOE.03
+        widget: National field supply-demand gap
+        content: Expected graduate supply versus projected labor demand
+        visualization: Gap chart
+        source_model: Alignment Engine
+        purpose: Identifies over- and under-production.
+        status: extend
+        satisfied_by:
+          endpoint: /api/education/supply-demand-gap
+          component: frontend/src/pages/moe/NationalGapPage.jsx
+        reuses:
+          - backend/services/labour_market_service.py   # /api/labour/supply-demand
+
+      - id: W.MOE.04
+        widget: Quota and placement policy simulator
+        content: >-
+          Effects of quota, priority-field, placement and capacity changes
+        visualization: Interactive scenario controls
+        source_model: Scenario engine
+        purpose: Tests policy before implementation.
+        status: new
+        interactive: true
+        levers: [quota, priority_field, placement_rule, capacity]
+        # Every run is persisted with its assumptions — W.ADM.05 exists to stop
+        # a scenario being mistaken for an official forecast.
+        requires: [scenario_persistence, audit_log]
+        satisfied_by:
+          endpoint: /api/education/policy-simulator
+          component: frontend/src/pages/moe/PolicySimulatorPage.jsx
+
+      - id: W.MOE.05
+        widget: Strategic field prioritization
+        content: >-
+          Fields ranked by labor shortage, national priority, student demand and
+          feasibility
+        visualization: Priority matrix
+        source_model: Alignment + policy data
+        purpose: Supports expansion decisions.
+        status: extend
+        ranking_factors:
+          - labour_shortage
+          - national_priority
+          - student_demand
+          - feasibility
+        ranking_constraint_ref: [RANK.R1, RANK.R2, RANK.R3]
+        satisfied_by:
+          endpoint: /api/model3/policy-priority
+          component: frontend/src/pages/moe/InvestmentPriorityPage.jsx
+        reuses:
+          - backend/services/alignment_service.py
+
+      - id: W.MOE.06
+        widget: Regional education-labor alignment
+        content: Enrollment, graduate supply and labor demand by region
+        visualization: Map/drill-down
+        source_model: Education, demographic and labor data
+        purpose: Reveals geographic mismatches.
+        status: new
+        interactive: true
+        satisfied_by:
+          endpoint: /api/education/regional-alignment
+          component: frontend/src/pages/moe/RegionalAlignmentPage.jsx
+        reuses:
+          - frontend/src/components/EthiopiaRegionMap.jsx
+
+      - id: W.MOE.07
+        widget: Institution comparison
+        content: >-
+          Capacity, forecast accuracy, graduate outcomes and alignment
+        visualization: Table/heatmap
+        source_model: National warehouse
+        purpose: Supports oversight.
+        status: new
+        satisfied_by:
+          endpoint: /api/education/institution-comparison
+          component: frontend/src/pages/moe/InstitutionComparisonPage.jsx
+
+      - id: W.MOE.08
+        widget: Policy impact monitoring
+        content: Observed results of prior quota/program decisions
+        visualization: Trend analysis
+        source_model: Historical policy/outcome data
+        purpose: Supports policy learning.
+        status: new
+        satisfied_by:
+          endpoint: /api/education/policy-impact
+          component: frontend/src/pages/moe/PolicyImpactPage.jsx
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # 4. MINISTRY OF LABOR AND SKILLS DASHBOARD  (9 widgets)
+  # ══════════════════════════════════════════════════════════════════════════
+  - id: DASH.MOL
+    name: Ministry of Labor and Skills Dashboard
+    role: MOL
+    scope_ref: SCOPE.MOL
+    widgets:
+      - id: W.MOL.01
+        widget: Labor-market overview
+        content: >-
+          Employment, unemployment, underemployment, vacancies and participation
+        visualization: Metric cards
+        source_model: Labor statistics
+        purpose: National labor pulse.
+        status: extend
+        satisfied_by:
+          endpoint: /api/labour/overview
+          component: frontend/src/pages/mol/LabourOverviewPage.jsx
+
+      - id: W.MOL.02
+        widget: Formal vs informal absorption
+        content: >-
+          Formal employment, informal work, self-employment and underemployment
+        visualization: Stacked charts
+        source_model: Labor-force/sector data
+        purpose: Avoids relying only on formal job postings.
+        status: new
+        spec_ref: [M2.C3, M2.R2]
+        satisfied_by:
+          endpoint: /api/model2/formal-informal
+          component: frontend/src/pages/mol/FormalInformalPage.jsx
+
+      - id: W.MOL.03
+        widget: Sector and occupational demand forecast
+        content: Projected demand by sector, occupation and region
+        visualization: Forecast charts
+        source_model: Labor Demand Model
+        purpose: Shows future worker needs.
+        status: extend
+        satisfied_by:
+          endpoint: /api/model2/forecast
+          component: frontend/src/pages/mol/SectorForecastPage.jsx
+        reuses:
+          - frontend/src/pages/mol/RegionalDemandPage.jsx
+
+      - id: W.MOL.04
+        widget: Skills demand and shortage heatmap
+        content: >-
+          Employer-demanded skills versus graduate pipeline skills
+        visualization: Heatmap
+        source_model: Skills extraction + graduate data
+        purpose: Identifies actionable skills gaps.
+        status: extend
+        spec_ref: M2.C5
+        ranking_constraint_ref: [RANK.R1]
+        satisfied_by:
+          endpoint: /api/model2/skills-shortage
+          component: frontend/src/pages/mol/SkillsMismatchPage.jsx
+        reuses:
+          - backend/services/mismatch_service.py
+
+      - id: W.MOL.05
+        widget: Public-sector hiring pipeline
+        content: >-
+          Civil-service recruitment and government project staffing demand
+        visualization: Timeline/table
+        source_model: Authorized government planning data
+        purpose: Captures policy-driven demand.
+        status: new
+        spec_ref: M2.C6
+        satisfied_by:
+          endpoint: /api/model2/public-pipeline
+          component: frontend/src/pages/mol/PublicHiringPage.jsx
+
+      - id: W.MOL.06
+        widget: FDI and industrial development pipeline
+        content: >-
+          Investment projects, industrial parks and expected employment
+        visualization: Map/timeline
+        source_model: Investment/industry data
+        purpose: Uses leading indicators of demand.
+        status: new
+        spec_ref: M2.C7
+        satisfied_by:
+          endpoint: /api/model2/fdi-pipeline
+          component: frontend/src/pages/mol/FdiPipelinePage.jsx
+        reuses:
+          - frontend/src/components/EthiopiaRegionMap.jsx
+
+      - id: W.MOL.07
+        widget: Graduate absorption and transition
+        content: Time-to-employment and employment type after graduation
+        visualization: Trend chart
+        source_model: Graduate tracking
+        purpose: Measures real absorption.
+        status: new
+        satisfied_by:
+          endpoint: /api/labour/graduate-absorption
+          component: frontend/src/pages/mol/GraduateAbsorptionPage.jsx
+
+      - id: W.MOL.08
+        widget: Migration and labor supply pressure
+        content: >-
+          Where available, skilled emigration, return migration and regional
+          mobility
+        visualization: Trend/flow view
+        source_model: Authorized migration/labor data
+        purpose: Improves shortage interpretation.
+        status: new
+        spec_ref: M2.C9
+        # "Where available" is in the source text — this widget must degrade to
+        # an explicit unavailable state rather than imply coverage it lacks.
+        conditional_availability: true
+        satisfied_by:
+          endpoint: /api/model2/migration
+          component: frontend/src/pages/mol/MigrationPage.jsx
+        reuses:
+          - frontend/src/components/EmptyState.jsx
+
+      - id: W.MOL.09
+        widget: Workforce planning report
+        content: >-
+          Exportable recommendations by sector, occupation, skill and region
+        visualization: Generated report
+        source_model: Aggregated outputs
+        purpose: Supports planning coordination.
+        status: new
+        exportable: true
+        export_formats: [csv, xlsx, pdf]
+        breakdowns: [sector, occupation, skill, region]
+        requires: [provenance_stamp, audit_log]
+        satisfied_by:
+          endpoint: /api/labour/workforce-report
+          component: frontend/src/pages/mol/WorkforceReportPage.jsx
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # 5. SYSTEM ADMINISTRATOR DASHBOARD  (8 widgets)
+  # ══════════════════════════════════════════════════════════════════════════
+  - id: DASH.ADM
+    name: System Administrator Dashboard
+    role: ADMIN
+    scope_ref: SCOPE.ADM
+    widgets:
+      - id: W.ADM.01
+        widget: Platform health
+        content: Users, uptime, errors and services
+        visualization: Metric cards
+        source_model: System logs
+        purpose: Operational monitoring.
+        status: extend
+        satisfied_by:
+          endpoint: /api/admin/platform-health
+          component: frontend/src/pages/admin/AdminOverviewPage.jsx
+
+      - id: W.ADM.02
+        widget: Data pipeline monitor
+        content: >-
+          Status, freshness and last sync of all education, labor, policy and
+          investment feeds
+        visualization: Status list
+        source_model: Pipeline logs
+        purpose: Detects stale inputs.
+        status: new
+        # "all ... feeds" — every table in docs/spec/ingestion/ must appear.
+        feed_families: [education, labor, policy, investment]
+        satisfied_by:
+          endpoint: /api/admin/pipeline-status
+          component: frontend/src/pages/admin/AdminPipelinePage.jsx
+        reuses:
+          - backend/services/_validate.py
+
+      - id: W.ADM.03
+        widget: Model performance monitor
+        content: MAE/RMSE and other metrics, drift and retraining date
+        visualization: Charts/table
+        source_model: Evaluation logs
+        purpose: Detects degradation.
+        status: extend
+        metrics: [mae, rmse, drift, last_retrained]
+        satisfied_by:
+          endpoint: /api/monitoring/drift
+          component: frontend/src/pages/admin/AdminMonitoringPage.jsx
+        reuses:
+          - backend/services/monitoring_service.py
+          - ml/monitor_models.py
+
+      - id: W.ADM.04
+        widget: Feature importance and explainability
+        content: >-
+          Latest empirical feature importance and SHAP summaries by model/version
+        visualization: Charts/tables
+        source_model: Explainability outputs
+        purpose: >-
+          Separates learned importance from initial collection priorities.
+        status: new
+        spec_ref: [PROC.S5, PROC.S6]
+        # The stated purpose IS the constraint. Two adjacent labelled panels;
+        # no single blended figure. Enforced by
+        # tests/test_spec_coverage.py::test_learned_and_priority_never_merged
+        panels: [learned_importance, collection_priority]
+        never_merged: true
+        satisfied_by:
+          endpoint: /api/methodology/feature-importance
+          component: frontend/src/pages/admin/AdminMethodologyPage.jsx
+
+      - id: W.ADM.05
+        widget: Scenario governance
+        content: Saved scenarios, assumptions, users and approval status
+        visualization: Audit table
+        source_model: Scenario logs
+        purpose: >-
+          Prevents scenarios being mistaken for official forecasts.
+        status: new
+        tracked_fields: [scenario, assumptions, user, approval_status]
+        satisfied_by:
+          endpoint: /api/admin/scenarios
+          component: frontend/src/pages/admin/AdminScenariosPage.jsx
+
+      - id: W.ADM.06
+        widget: Data quality and anomaly flags
+        content: >-
+          Missing values, duplicates, outliers and inconsistent records
+        visualization: Alert list
+        source_model: Validation pipeline
+        purpose: Protects forecast quality.
+        status: new
+        checks: [missing_values, duplicates, outliers, inconsistent_records]
+        satisfied_by:
+          endpoint: /api/admin/data-quality
+          component: frontend/src/pages/admin/AdminDataQualityPage.jsx
+        reuses:
+          - backend/services/_validate.py
+          - data/data_quality_check.py
+
+      - id: W.ADM.07
+        widget: User and role management
+        content: Users, roles and institutional affiliation
+        visualization: Table
+        source_model: User management
+        purpose: Controls access.
+        status: existing
+        satisfied_by:
+          endpoint: /api/users
+          component: frontend/src/pages/admin/AdminUsersPage.jsx
+
+      - id: W.ADM.08
+        widget: Audit log
+        content: Views, exports, queries, model runs and scenario actions
+        visualization: Searchable table
+        source_model: Access logs
+        purpose: Provides accountability.
+        status: new
+        searchable: true
+        tracked_actions: [view, export, query, model_run, scenario_action]
+        satisfied_by:
+          endpoint: /api/admin/audit-log
+          component: frontend/src/pages/admin/AdminAuditLogPage.jsx
+
+# DOC2 widget count, asserted by
+# tests/test_spec_coverage.py::test_widget_count_matches_document
+expected_widget_counts:
+  DASH.STU: 9
+  DASH.UNI: 10
+  DASH.MOE: 8
+  DASH.MOL: 9
+  DASH.ADM: 8
+  total: 44

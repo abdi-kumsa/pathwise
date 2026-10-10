@@ -4,6 +4,7 @@ import SectionHeader from '../components/SectionHeader'
 import KPICard from '../components/KPICard'
 import ErrorBanner from '../components/ErrorBanner'
 import LoadingSpinner from '../components/LoadingSpinner'
+import DataNote from '../components/DataNote'
 import useFetch from '../hooks/useFetch'
 import { getEnrollmentSummary, getEnrollmentForecast } from '../api/enrollment'
 
@@ -52,6 +53,10 @@ export default function EnrollmentForecastPage() {
   return (
     <div>
       <SectionHeader title="Enrollment forecast" showLiveIndicator={true} />
+      <DataNote tone="caution">
+        This page is the leftover US placement / salary / LSTM path. It is not
+        an Ethiopia Model 1 or Model 2 score.
+      </DataNote>
 
       {sumError && <ErrorBanner message={sumError} onRetry={sumRefetch} />}
       {fcError  && <ErrorBanner message={fcError}  onRetry={fcRefetch}  />}

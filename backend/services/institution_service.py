@@ -38,21 +38,41 @@ def get_profile(institution: str) -> dict:
         ds.YEAR_MAX - ds.YEAR_MIN,
     )
 
+    years = sorted(int(y) for y in by_year.index)
+    yoy = None
+    latest_enrollment = int(by_year.loc[years[-1]]) if years else 0
+    if len(years) >= 2:
+        prev, last = float(by_year.loc[years[-2]]), float(by_year.loc[years[-1]])
+        yoy = round((last - prev) / prev * 100, 1) if prev else None
+
+    capacity_util = None
+    try:
+        from ml.features.model1 import c4_quota
+        quota = c4_quota.frame()
+        q = quota[quota["institution"] == institution] if "institution" in quota.columns else quota
+        if not q.empty and "program_capacity" in q.columns:
+            qy = int(q["year"].max())
+            cap = float(q[q["year"] == qy]["program_capacity"].sum())
+            if cap > 0:
+                capacity_util = round(latest_enrollment / cap * 100, 1)
+    except Exception:
+        capacity_util = None
+
     return {
         'institution':       institution,
         'type':              sub['institution_type'].mode().iloc[0],
         'state':             sub['institution_state'].mode().iloc[0],
+        'region':            sub['institution_state'].mode().iloc[0],
         'campus_setting':    sub['campus_setting'].mode().iloc[0],
-        'us_news_ranking':   int(sub['us_news_ranking'].mode().iloc[0]),
         'total_enrollment':  int(sub['enrollment_count'].sum()),
+        'latest_enrollment': latest_enrollment,
         'enrollment_cagr_pct': growth,
+        'yoy_change_pct':    yoy,
+        'capacity_utilization_pct': capacity_util,
         'total_applications': int(sub['applications_count'].sum()),
         'programs':          int(sub['program_name'].nunique()),
         'avg_acceptance_rate_pct': round(float(sub['acceptance_rate_pct'].mean()), 1),
         'avg_yield_rate_pct': round(float(sub['yield_rate_pct'].mean()), 1),
-        'avg_tuition':       round(float(sub['tuition_usd'].mean()), 2),
-        'avg_net_price':     round(float(sub['net_price'].mean()), 2),
-        'total_marketing_spend': int(sub['marketing_spend_usd'].sum()),
         'avg_employment_rate_pct': round(float(sub['employment_rate_6mo_pct'].mean()), 1),
         'series': [
             {'year': int(y), 'enrollment': int(v)} for y, v in by_year.items()
@@ -155,8 +175,14 @@ def get_expansion_opportunities(institution: str) -> dict:
         })
 
     if not records:
-        return {'institution': institution, 'programs': [],
-                'weights': _EXPANSION_WEIGHTS, 'dataset_label': ds.DATASET_LABEL}
+        return {
+            'institution': institution,
+            'programs': [],
+            'weights': _EXPANSION_WEIGHTS,
+            'method': 'No programmes in scope.',
+            'fit_classification_used': False,
+            'dataset_label': ds.DATASET_LABEL,
+        }
 
     df = pd.DataFrame(records)
     # Fewer competitors = more room, so invert before normalising.
@@ -210,8 +236,10 @@ def get_expansion_opportunities(institution: str) -> dict:
         'method': (
             "Each factor is min-max normalised across this institution's own "
             "programmes, then combined with the published weights. Scores rank "
-            "programmes against each other, not against an absolute standard."
+            "programmes against each other, not against an absolute standard. "
+            "Graduate fit classification does not enter."
         ),
+        'fit_classification_used': False,
         'dataset_label': ds.DATASET_LABEL,
     }
 

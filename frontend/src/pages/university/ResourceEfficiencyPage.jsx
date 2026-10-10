@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell,
 } from 'recharts'
@@ -6,19 +7,26 @@ import SectionHeader from '../../components/SectionHeader'
 import KPICard from '../../components/KPICard'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
+import DataNote from '../../components/DataNote'
 import useFetch from '../../hooks/useFetch'
-import { getResourceEfficiency } from '../../api/roles'
+import { getResourceEfficiency, getResourcePlanning } from '../../api/roles'
 import {
   SERIES, ORDINAL_BLUE, axisProps, gridProps, tooltipProps, RADIUS_H,
   fmtCompact, fmtMoney, fmtPct, fmtNum,
 } from '../../config/chartTheme'
 
 export default function ResourceEfficiencyPage() {
+  const [quota, setQuota] = useState(1)
+  const [capacity, setCapacity] = useState(1)
   const { data, loading, error, refetch } = useFetch(getResourceEfficiency)
+  const planning = useFetch(() => getResourcePlanning(quota, capacity), [quota, capacity])
 
   const funnel = data?.funnel ?? []
   const programs = data?.programs ?? []
   const maxStage = funnel[0]?.count ?? 1
+  const plan = planning.data
+  const capRows = plan?.capacity ?? []
+  const finRows = plan?.finance ?? []
 
   return (
     <div>
@@ -172,6 +180,72 @@ export default function ResourceEfficiencyPage() {
                 </tbody>
               </table>
             </div>
+          </div>
+
+          <div className="panel" style={{ marginTop: 20 }} data-testid="resource-planning">
+            <p className="panel-title">Resource and quota scenarios</p>
+            <p className="panel-sub">Faculty, facilities, budget and intake — unofficial what-if at this institution</p>
+            <DataNote tone="simulated">
+              {plan?.note || 'This run is not an official MoE forecast.'}
+              {plan?.official_forecast === false ? ' official_forecast: false.' : ''}
+            </DataNote>
+            <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', margin: '12px 0' }}>
+              <label style={{ fontSize: 13 }}>
+                Quota scale
+                <input type="range" min="0.5" max="1.5" step="0.1" value={quota}
+                       onChange={e => setQuota(Number(e.target.value))}
+                       style={{ display: 'block', width: 180 }} />
+                {quota.toFixed(1)}×
+              </label>
+              <label style={{ fontSize: 13 }}>
+                Capacity scale
+                <input type="range" min="0.5" max="1.5" step="0.1" value={capacity}
+                       onChange={e => setCapacity(Number(e.target.value))}
+                       style={{ display: 'block', width: 180 }} />
+                {capacity.toFixed(1)}×
+              </label>
+            </div>
+            {planning.loading && <LoadingSpinner message="Re-running scenario…" height={80} />}
+            {plan && (
+              <div className="table-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th style={{ textAlign: 'left' }}>Lever</th>
+                      <th>Baseline</th>
+                      <th>Scenario</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style={{ textAlign: 'left' }}>Intake (constrained enrolment)</td>
+                      <td className="num">{fmtNum(plan.baseline?.constrained_enrollment)}</td>
+                      <td className="num">{fmtNum(plan.scenario?.constrained_enrollment)}</td>
+                    </tr>
+                    <tr>
+                      <td style={{ textAlign: 'left' }}>Expected graduates</td>
+                      <td className="num">{fmtNum(plan.baseline?.expected_graduates)}</td>
+                      <td className="num">{fmtNum(plan.scenario?.expected_graduates)}</td>
+                    </tr>
+                    <tr>
+                      <td style={{ textAlign: 'left' }}>Faculty–student ratio (latest)</td>
+                      <td className="num">{capRows[0]?.faculty_student_ratio ?? '—'}</td>
+                      <td className="num">{capRows[0]?.faculty_student_ratio ?? '—'}</td>
+                    </tr>
+                    <tr>
+                      <td style={{ textAlign: 'left' }}>Classrooms / labs</td>
+                      <td className="num">{`${capRows[0]?.classroom_count ?? '—'} / ${capRows[0]?.laboratory_count ?? '—'}`}</td>
+                      <td className="num">scaled {capacity.toFixed(1)}×</td>
+                    </tr>
+                    <tr>
+                      <td style={{ textAlign: 'left' }}>Tuition (ETB)</td>
+                      <td className="num">{fmtNum(finRows[0]?.tuition_fee_etb)}</td>
+                      <td className="num">{fmtNum(finRows[0]?.tuition_fee_etb)}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         </>
       )}

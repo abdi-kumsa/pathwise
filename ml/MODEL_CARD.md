@@ -1,155 +1,138 @@
 # PathWise ML Model Card
 
-## Overview
+Ethiopia Models 1–3 are the request-path scores. Placement XGBoost remains on
+the leftover student tools. AHP is a **separate** methodology and does not
+train anything. US LSTM and Prophet are appendix-only: **not compared**.
 
-Four models power the PathWise intelligence dashboards.  All are trained on
-synthetic institutional data (3,000 students, 12 programmes, 2019–2024).
+Figures are simulated Ethiopian structure (2016–2025) until official files
+replace the parquets. See [docs/DATA_PROVENANCE.md](../docs/DATA_PROVENANCE.md).
 
 ---
 
-## 1. XGBoost — Placement Prediction
+## 1. Model 1 — Student education demand
+
+| Attribute | Value |
+|-----------|-------|
+| Task | Forecast programme enrolment (HEI × campus × programme × year) |
+| Request-path estimators | `ols_lags` (when history ≥ 4 years), else `seasonal_naive` |
+| Comparison candidates | `seasonal_naive`, `historical_mean`, `ols_lags` |
+| Validation | Grouped chronological holdout (last two observed years) |
+| Constraint layer | Exam eligibility, placement rules, intake quotas, priority fields, capacity (`ml/model1/layer2_constraints.py`) |
+| Collection-priority yaml | `docs/spec/model1_attributes.yaml` (not used as weights) |
+
+`ols_lags` holdout RMSE on the simulated lag construction is near-zero. That is
+not ministry accuracy (WV.OLS1). Monitoring headlines use seasonal-naive.
+
+**Artefacts**
+- `ml/model1/layer1_demand.py` — unconstrained forecast
+- `ml/model1/layer2_constraints.py` — constrained enrolment
+- `ml/model1/compare.py` — holdout comparison
+- `backend/services/constraint_service.py` — API wrapper
+
+AHP and DOC1 collection priorities do not enter training.
+
+---
+
+## 2. Model 2 — Labour-market demand
+
+| Attribute | Value |
+|-----------|-------|
+| Task | Forecast employment / vacancies (region × sector × year) |
+| Request-path estimators | `ols_lags` or `seasonal_naive` (same rule as M1) |
+| Comparison candidates | `seasonal_naive`, `historical_mean`, `ols_lags` |
+| Validation | Grouped chronological holdout |
+| Collection-priority yaml | `docs/spec/model2_attributes.yaml` |
+
+**Artefacts**
+- `ml/model2/forecast.py`
+- `ml/model2/compare.py`
+- `backend/services/model2_service.py` / `labour_market_service.py`
+
+---
+
+## 3. Model 3 — Alignment and scenarios
+
+| Attribute | Value |
+|-----------|-------|
+| Task | Graduate supply vs labour demand; student / policy / institution actions |
+| Method | Explicit weighted scores after min-max normalisation |
+| Fit classification | `fit_classification_used: false` on every ranking payload |
+| What-if | Scenario runner; persisted runs stay `official_forecast: false` |
+
+Student alternatives, field alignment and MoE policy-priority return `weights`,
+`method` and per-factor rows (RANK.R3). Programme health ranks on the sign of
+labour minus expected graduates; severity is a quartile of \|gap\| (RANK.R4).
+
+**Artefacts**
+- `ml/model3/gap.py`, `recommend.py`, `pathways.py`, `scenario.py`, `supply.py`
+- `backend/services/alignment_service.py`
+
+---
+
+## 4. Placement XGBoost (leftover US tools)
 
 | Attribute | Value |
 |-----------|-------|
 | Task | Binary classification (placed / not placed) |
 | Algorithm | XGBoost (`XGBClassifier`) |
-| Input features | 16 (GPA, internships, projects, communication score, programme one-hot) |
-| Training rows | 2,400 |
-| Test rows | 600 |
-| Accuracy | 88.17 % |
-| Precision | 88.17 % |
-| Recall | 100 % |
-| F1-score | 93.71 % |
+| Training rows | 2,400 synthetic US-style students |
+| Accuracy / F1 | 88.17 % / 93.71 % |
 
-**Top features (by importance)**
+Used by `/student/evaluator` and career-explorer odds when a full profile is
+filled. **Not** an Ethiopia Model 1 or Model 2 score (WV.US1).
 
-| Rank | Feature | Importance |
-|------|---------|------------|
-| 1 | Certificate Data Analytics | 10.2 % |
-| 2 | MS Information Technology | 8.5 % |
-| 3 | Projects | 6.5 % |
-| 4 | Internships | 6.2 % |
+Salary XGBoost (`XGBRegressor`, RMSE ≈ $14k, R² 0.36) remains on
+`/student/salary`. Read as a programme-level USD band, not an ETB forecast.
 
 **Artefacts**
-- `ml/models/placement_xgboost.pkl` — trained model
-- `ml/models/placement_feature_names.pkl` — ordered feature list
-- `ml/predict_placement.py` — inference entry point
-- `ml/explain_predictions.py` — SHAP explainability
+- `ml/models/placement_xgboost.pkl`, `salary_xgboost.pkl`
+- `ml/predict_placement.py`, `ml/predict_salary.py`
+- `ml/explain_predictions.py` — SHAP for this model
 
 ---
 
-## 2. XGBoost — Salary Prediction
+## 5. AHP — separate methodology
+
+Saaty pairwise comparison → principal eigenvector weights → consistency
+ratio. CR > 0.1 **refuses** the matrix (`weights: null`). Output is shown next
+to SHAP on the admin methodology page. It does not reweight training samples
+or enter a loss.
+
+**Artefacts:** `ml/ahp/`, `GET|POST /api/ahp/weights`, `POST /api/ahp/consistency`
+
+---
+
+## Appendix — US LSTM / Prophet (not compared)
+
+These artefacts stay on leftover tool routes. They are **not** scored as
+Ethiopia models and do not appear in `ml/models/ethiopia_comparison.json`
+except under `not_compared`.
+
+### LSTM — enrolment (US programmes)
 
 | Attribute | Value |
 |-----------|-------|
-| Task | Regression (expected starting salary, USD) |
-| Algorithm | XGBoost (`XGBRegressor`) |
-| Input features | Same 16-feature vector as the placement model |
-| RMSE | $14,288 |
-| MAE | $12,128 |
-| R² | **0.36** |
+| Task | Programme enrolment count |
+| Algorithm | 2-layer LSTM 32→16 (Keras/TensorFlow) |
+| Route | `/university/enrollment` |
+| Artefacts | `ml/models/enrollment_lstm.keras`, `enrollment_scaler.pkl` |
 
-**Top features (by importance)**
-
-| Rank | Feature | Importance |
-|------|---------|------------|
-| 1 | Certificate Data Analytics | 30.5 % |
-| 2 | MS Human-Computer Interaction | 13.8 % |
-| 3 | MS Artificial Intelligence | 11.2 % |
-| 4 | MBA Product Management | 10.2 % |
-
-> **Interpretation caveat.** An R² of 0.36 means the model explains roughly a
-> third of the variance in starting salary; the remaining two-thirds is driven
-> by factors absent from the synthetic feature set (employer, negotiation,
-> geography, prior experience). Feature importances are dominated by programme
-> one-hots, so predictions are best read as *programme-level salary bands* with
-> a wide error margin (MAE ≈ $12k) rather than individual salary estimates.
-> Do not present a single-point prediction to a student without that band.
-
-**Artefacts**
-- `ml/models/salary_xgboost.pkl` — trained model
-- `ml/models/salary_xgboost_meta.pkl` — feature list + metadata
-- `ml/predict_salary.py` — inference entry point
-
----
-
-## 3. LSTM — Enrollment Forecasting
+### Prophet — job-market postings (US)
 
 | Attribute | Value |
 |-----------|-------|
-| Task | Regression (monthly/annual enrolment count per programme) |
-| Algorithm | LSTM (2-layer, 32→16 units, Keras/TensorFlow) |
-| Input | 3-year sliding window per programme (normalised) |
-| Programmes | 12 |
-| Sequence length | 3 years |
-| Test year | 2024 (held-out) |
-| Metric | RMSE, MAE (count units) |
+| Task | Monthly job postings |
+| Algorithm | Prophet, yearly multiplicative seasonality |
+| Route | leftover `/api/market/demand-forecast` |
+| Artefacts | `ml/models/demand_prophet.pkl` |
 
-**Design notes**
-
-The dataset is small (72 programme×year rows).  Each programme is normalised
-independently with its own `MinMaxScaler` so the model learns relative trends.
-Rolling-forward inference allows multi-year forecasting (2025, 2026, …).
-
-**Artefacts**
-- `ml/models/enrollment_lstm.keras` — trained model
-- `ml/models/enrollment_scaler.pkl` — per-programme scalers
-- `ml/models/enrollment_lstm_meta.pkl` — programme list + seq_len
-- `ml/predict_enrollment.py` — inference entry point
+Do not mix these RMSE figures with Ethiopia M1/M2 comparison tables.
 
 ---
 
-## 4. Prophet — Job-Market Demand Forecasting
+## Explainability rule
 
-| Attribute | Value |
-|-----------|-------|
-| Task | Time-series regression (monthly job postings) |
-| Algorithm | Facebook Prophet (additive/multiplicative seasonality) |
-| Frequency | Monthly (`MS`) |
-| Training period | Jan 2019 – Jun 2024 |
-| Test period | Jul–Dec 2024 (6 months) |
-| Seasonality | Yearly (multiplicative); peaks Jan–Mar and Aug–Sep |
-
-**Artefacts**
-- `ml/models/demand_prophet.pkl` — fitted Prophet model
-- `ml/predict_demand.py` — inference entry point
-
----
-
-## Explainability
-
-SHAP `TreeExplainer` is used for the XGBoost model.  Call
-`explain_predictions.explain_student(student_dict)` to receive:
-- Overall placement probability
-- Per-feature SHAP contributions (ranked by magnitude)
-- Base (expected) value
-
----
-
-## Limitations
-
-- All data is synthetic — performance metrics reflect simulated distributions.
-- The salary regressor has low explanatory power (R² = 0.36) and should be surfaced as a band, not a point estimate — see §2.
-- The LSTM has a small training set; predictions for programmes with low/volatile enrolment may be unstable.
-- Prophet demand series is a proxy derived from student counts; replace with real job-posting data in production.
-- No demographic fairness audit has been performed.
-
----
-
-## Retraining
-
-Re-run the four training scripts in order:
-
-```bash
-python ml/train_xgboost.py
-python ml/train_salary_xgboost.py
-python ml/train_lstm.py
-python ml/train_prophet.py
-python ml/generate_model_metrics.py   # refresh metrics JSON
-```
-
-Or run all of them in one step:
-
-```bash
-python ml/retrain_all.py
-```
+SHAP and permutation importance are **learned**, after training.
+DOC1 collection priorities are **expert / data-collection**. Two panels. Never one
+blended number. See [docs/METHODOLOGY.md](../docs/METHODOLOGY.md) and
+[docs/FEATURE_IMPORTANCE.md](../docs/FEATURE_IMPORTANCE.md).

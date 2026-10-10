@@ -63,6 +63,7 @@ secrets/
 *.csv
 !Assets/*.csv
 !data/mock/*.csv
+!data/ethiopia/**/*.csv
 
 *.pkl
 !ml/models/*.pkl
@@ -70,6 +71,7 @@ secrets/
 
 *.parquet
 !data/processed/*.parquet
+!data/ethiopia/**/*.parquet
 
 # ── OS ───────────────────────────────────────────────
 .DS_Store

@@ -1,28 +1,28 @@
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  BarChart, Bar, Cell,
+  BarChart, Bar,
 } from 'recharts'
 
 import SectionHeader from '../../components/SectionHeader'
 import KPICard from '../../components/KPICard'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
+import DataNote from '../../components/DataNote'
 import useFetch from '../../hooks/useFetch'
-import { getEducationOverview, getFieldTrends, getInvestmentQuadrant } from '../../api/roles'
+import { getEducationOverview, getFieldTrends } from '../../api/roles'
 import {
-  SERIES, VERDICT_COLOR, axisProps, gridProps, tooltipProps, RADIUS_H,
-  fmtCompact, fmtMoney, fmtPct, fmtDelta, deltaDirection,
+  SERIES, axisProps, gridProps, tooltipProps, RADIUS_H,
+  fmtCompact, fmtPct, fmtDelta, deltaDirection,
 } from '../../config/chartTheme'
 
 export default function EducationOverviewPage() {
   const { data, loading, error, refetch } = useFetch(() =>
-    Promise.all([getEducationOverview(), getFieldTrends(), getInvestmentQuadrant()])
-      .then(([overview, trends, quadrant]) => ({ overview, trends, quadrant }))
+    Promise.all([getEducationOverview(), getFieldTrends()])
+      .then(([overview, trends]) => ({ overview, trends }))
   )
 
   const o = data?.overview
   const trends = data?.trends ?? []
-  const quadrant = data?.quadrant
 
   // National enrolment by year, summed across fields.
   const years = [...new Set(trends.flatMap(t => t.series.map(s => s.year)))].sort()
@@ -37,8 +37,8 @@ export default function EducationOverviewPage() {
   return (
     <div>
       <SectionHeader
-        title="Education supply overview"
-        subtitle="National enrolment, outcomes and where capacity should go next"
+        title="National education snapshot"
+        subtitle="Ethiopian HEIs, enrolment, student demand, capacity and projected intake"
       />
 
       {error && <ErrorBanner message={error} onRetry={refetch} />}
@@ -46,34 +46,39 @@ export default function EducationOverviewPage() {
 
       {o && (
         <>
+          <div style={{ marginBottom: 16 }}>
+            <DataNote tone="simulated">
+              Simulated Ethiopian structure. Headline cards are HEIs, enrolment, applications and capacity — not USD net-price or 10-year ROI.
+            </DataNote>
+          </div>
           <div className="kpi-grid">
             <KPICard
-              label="Total enrolment"
-              value={fmtCompact(o.total_enrollment)}
+              label="HEIs"
+              value={fmtCompact(o.institutions)}
+              delta={`${o.programs} programmes · ${o.fields} fields`}
+              deltaDirection="neutral"
+              icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg>}
+            />
+            <KPICard
+              label="Enrolment"
+              value={fmtCompact(o.enrollment_latest_year ?? o.total_enrollment)}
               delta={fmtDelta(o.enrollment_cagr_pct) + ' / yr'}
               deltaDirection={deltaDirection(o.enrollment_cagr_pct)}
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 10 12 5 2 10l10 5 10-5ZM6 12v5c0 1 3 3 6 3s6-2 6-3v-5"/></svg>}
             />
             <KPICard
-              label="Employment at 6 months"
-              value={fmtPct(o.avg_employment_rate_pct)}
-              delta={`${o.programs} programmes · ${o.fields} fields`}
-              deltaDirection="up"
-              icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6 9 17l-5-5"/></svg>}
-            />
-            <KPICard
-              label="Average net price"
-              value={fmtMoney(o.avg_net_price)}
-              delta={`list ${fmtMoney(o.avg_tuition)}`}
+              label="Student demand"
+              value={fmtCompact(o.total_applications)}
+              delta="Applications (simulated)"
               deltaDirection="neutral"
-              icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>}
+              icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8"/></svg>}
             />
             <KPICard
-              label="10-year ROI"
-              value={fmtMoney(o.avg_roi_10yr)}
-              delta={`${fmtPct(o.stem_share_pct, 0)} STEM designated`}
-              deltaDirection="up"
-              icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 3v18h18"/><path d="M18.7 8 13 13.7l-3-3L4 16.5"/></svg>}
+              label="Capacity utilisation"
+              value={o.capacity_utilization_pct != null ? fmtPct(o.capacity_utilization_pct) : '—'}
+              delta={o.projected_intake != null ? `Projected intake ${fmtCompact(o.projected_intake)}` : 'Projected intake unavailable'}
+              deltaDirection="neutral"
+              icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 3v18h18M18.7 8 13 13.7l-3-3L4 16.5"/></svg>}
             />
           </div>
 
@@ -107,8 +112,7 @@ export default function EducationOverviewPage() {
             <div className="panel">
               <p className="panel-title">Enrolment growth by field</p>
               <p className="panel-sub">
-                Compound annual growth 2020–2025. Colour marks the investment
-                verdict; the verdict is also written out below.
+                Compound annual growth 2016–2025.
               </p>
               <ResponsiveContainer width="100%" height={280}>
                 <BarChart
@@ -121,47 +125,11 @@ export default function EducationOverviewPage() {
                   <YAxis type="category" dataKey="field" {...axisProps} width={130}
                          tick={{ fontSize: 10, fill: '#64748B' }} />
                   <Tooltip {...tooltipProps} formatter={v => [`${v}% / yr`, 'Enrolment growth']} />
-                  <Bar isAnimationActive={false} dataKey="enrollment_cagr_pct" radius={RADIUS_H} barSize={16}>
-                    {[...trends]
-                      .sort((a, b) => b.enrollment_cagr_pct - a.enrollment_cagr_pct)
-                      .map(t => {
-                        const q = quadrant?.points?.find(p => p.field === t.field)?.quadrant
-                        return <Cell key={t.field} fill={VERDICT_COLOR[q] ?? SERIES[0]} />
-                      })}
-                  </Bar>
+                  <Bar isAnimationActive={false} dataKey="enrollment_cagr_pct" fill={SERIES[0]} radius={RADIUS_H} barSize={16} />
                 </BarChart>
               </ResponsiveContainer>
-              <div className="ov-legend">
-                {['Invest', 'Sustain', 'Oversupply risk', 'Review'].map(q => (
-                  <span key={q}><i style={{ background: VERDICT_COLOR[q] }} /> {q}</span>
-                ))}
-              </div>
             </div>
           </div>
-
-          {quadrant?.invest_fields?.length > 0 && (
-            <div className="panel">
-              <p className="panel-title">Priority for new capacity</p>
-              <p className="panel-sub">
-                Fields where labour demand is growing faster than the graduates
-                being produced for it
-              </p>
-              <div className="ov-invest">
-                {quadrant.invest_fields.map(f => {
-                  const p = quadrant.points.find(x => x.field === f)
-                  return (
-                    <div key={f} className="ov-invest-item">
-                      <p className="ov-invest-field">{f}</p>
-                      <p className="ov-invest-nums">
-                        demand {fmtDelta(p.demand_growth_pct)}/yr · supply {fmtDelta(p.supply_growth_pct)}/yr
-                      </p>
-                      <p className="ov-invest-progs">{p.programs.join(', ')}</p>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-          )}
         </>
       )}
 

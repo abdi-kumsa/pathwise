@@ -9,6 +9,7 @@ import SectionHeader from '../../components/SectionHeader'
 import KPICard from '../../components/KPICard'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
+import DataNote from '../../components/DataNote'
 import { searchJobs, recommendPrograms } from '../../api/roles'
 import {
   SERIES, axisProps, gridProps, tooltipProps, RADIUS_V, RADIUS_H,
@@ -170,6 +171,10 @@ export default function CareerExplorerPage() {
         title="Career explorer"
         subtitle="Choose the job you want. See which department gets you there, and why."
       />
+      <DataNote tone="simulated">
+        Simulated structure, not official MoE or MoLS statistics. Placement odds
+        still use the leftover US XGBoost path when a full profile is filled in.
+      </DataNote>
 
       {error && <ErrorBanner message={error} onRetry={() => run()} />}
 
@@ -205,7 +210,7 @@ export default function CareerExplorerPage() {
           {/* ── Demand for the target job ────────────────────────────────── */}
           <div className="kpi-grid">
             <KPICard
-              label="Openings (2020–2025)"
+              label="Openings (2016–2025)"
               value={fmtCompact(demand.total_openings)}
               delta={fmtDelta(demand.openings_cagr_pct) + ' / yr'}
               deltaDirection={deltaDirection(demand.openings_cagr_pct)}

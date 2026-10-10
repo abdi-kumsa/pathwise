@@ -7,6 +7,7 @@ import SectionHeader from '../../components/SectionHeader'
 import KPICard from '../../components/KPICard'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
+import DataNote from '../../components/DataNote'
 import useFetch from '../../hooks/useFetch'
 import { getRegionalDemand } from '../../api/roles'
 import {
@@ -38,6 +39,10 @@ export default function RegionalDemandPage() {
         title="Regional demand"
         subtitle="Where in the country the openings actually are"
       />
+      <DataNote tone="simulated">
+        Leftover US metro / field vocabulary. Not an Ethiopia Model 1 or Model 2
+        score, and not official MoLS statistics.
+      </DataNote>
 
       {error && <ErrorBanner message={error} onRetry={refetch} />}
 
