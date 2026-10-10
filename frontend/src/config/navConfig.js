@@ -35,19 +35,22 @@ export const ICONS = {
 
 const STUDENT = [
   {
-    title: 'Plan your path',
+    title: 'Your programme',
     links: [
-      { to: '/student/careers',       label: 'Career explorer',   icon: ICONS.compass },
-      { to: '/student/evaluator',     label: 'Placement odds',    icon: ICONS.student },
-      { to: '/student/skill-roadmap', label: 'Skill roadmap',     icon: ICONS.target },
+      { to: '/student/profile',           label: 'Profile & eligibility', icon: ICONS.student },
+      { to: '/student/outlook',           label: 'Labour outlook',       icon: ICONS.trend },
+      { to: '/student/demand-comparison', label: 'Demand comparison',    icon: ICONS.scales },
+      { to: '/student/alignment',         label: 'Field opportunity',    icon: ICONS.target },
+      { to: '/student/gap',               label: 'Supply–demand gap',    icon: ICONS.gap },
     ],
   },
   {
     title: 'Explore options',
     links: [
-      { to: '/student/alternatives',  label: 'Alternative paths', icon: ICONS.route },
-      { to: '/student/salary',        label: 'Salary outlook',    icon: ICONS.money },
-      { to: '/student/market',        label: 'Job market',        icon: ICONS.bars },
+      { to: '/student/alternatives',   label: 'Alternative paths', icon: ICONS.route },
+      { to: '/student/skill-roadmap',  label: 'Skill roadmap',     icon: ICONS.check },
+      { to: '/student/pathways',       label: 'Pathways',          icon: ICONS.map },
+      { to: '/student/opportunities',  label: 'Opportunities',     icon: ICONS.alert },
     ],
   },
 ]
@@ -56,16 +59,20 @@ const MOL = [
   {
     title: 'Labour market',
     links: [
-      { to: '/mol/overview',      label: 'Overview',             icon: ICONS.bars },
-      { to: '/mol/emerging',      label: 'Emerging occupations', icon: ICONS.trend },
-      { to: '/mol/supply-demand', label: 'Supply & demand gap',  icon: ICONS.scales },
+      { to: '/mol/overview',         label: 'Labour pulse',        icon: ICONS.bars },
+      { to: '/mol/formal-informal',  label: 'Formal vs informal',  icon: ICONS.users },
+      { to: '/mol/forecast',         label: 'Sector forecast',     icon: ICONS.trend },
+      { to: '/mol/mismatch',         label: 'Skills heatmap',      icon: ICONS.grid },
     ],
   },
   {
-    title: 'Workforce quality',
+    title: 'Pipelines',
     links: [
-      { to: '/mol/mismatch', label: 'Skills mismatch',  icon: ICONS.gap },
-      { to: '/mol/regional', label: 'Regional demand',  icon: ICONS.map },
+      { to: '/mol/public',     label: 'Public hiring',        icon: ICONS.building },
+      { to: '/mol/fdi',        label: 'FDI and parks',        icon: ICONS.map },
+      { to: '/mol/absorption', label: 'Graduate absorption',  icon: ICONS.check },
+      { to: '/mol/migration',  label: 'Migration',            icon: ICONS.route },
+      { to: '/mol/report',     label: 'Workforce report',     icon: ICONS.activity },
     ],
   },
 ]
@@ -74,16 +81,19 @@ const MOE = [
   {
     title: 'Education supply',
     links: [
-      { to: '/moe/overview',     label: 'Overview',        icon: ICONS.bars },
-      { to: '/moe/fields',       label: 'Field explorer',  icon: ICONS.grid },
+      { to: '/moe/overview',     label: 'National snapshot',    icon: ICONS.bars },
+      { to: '/moe/constraints',  label: 'Demand vs capacity',   icon: ICONS.scales },
+      { to: '/moe/gap',          label: 'National field gap',   icon: ICONS.gap },
+      { to: '/moe/simulator',    label: 'Policy simulator',     icon: ICONS.activity },
     ],
   },
   {
     title: 'Investment planning',
     links: [
-      { to: '/moe/quadrant',   label: 'Investment matrix',   icon: ICONS.target },
-      { to: '/moe/priorities', label: 'Investment priority', icon: ICONS.trend },
-      { to: '/moe/labour',     label: 'Labour demand',       icon: ICONS.scales },
+      { to: '/moe/priorities',    label: 'Field priority',           icon: ICONS.trend },
+      { to: '/moe/regions',       label: 'Regional alignment',       icon: ICONS.map },
+      { to: '/moe/institutions',  label: 'Institution comparison',   icon: ICONS.building },
+      { to: '/moe/impact',        label: 'Policy impact',            icon: ICONS.alert },
     ],
   },
 ]
@@ -92,17 +102,21 @@ const UNIVERSITY = [
   {
     title: 'My institution',
     links: [
-      { to: '/university/overview',  label: 'Overview',           icon: ICONS.building },
-      { to: '/university/portfolio', label: 'Programme portfolio', icon: ICONS.grid },
+      { to: '/university/overview',   label: 'Overview',            icon: ICONS.building },
+      { to: '/university/portfolio',  label: 'Programme health',    icon: ICONS.grid },
+      { to: '/university/demand',     label: 'Unconstrained demand', icon: ICONS.trend },
+      { to: '/university/constrained', label: 'Constrained enrolment', icon: ICONS.activity },
+      { to: '/university/three-way',  label: 'Demand vs labour',    icon: ICONS.scales },
     ],
   },
   {
-    title: 'Planning',
+    title: 'Progression',
     links: [
-      { to: '/university/expansion', label: 'Expansion',        icon: ICONS.trend },
-      { to: '/university/resources', label: 'Resource efficiency', icon: ICONS.funnel },
-      { to: '/university/benchmark', label: 'Peer benchmark',   icon: ICONS.scales },
-      { to: '/university/enrollment', label: 'Enrolment forecast', icon: ICONS.activity },
+      { to: '/university/funnel',      label: 'Admissions funnel',  icon: ICONS.funnel },
+      { to: '/university/cohort',      label: 'Cohort progression', icon: ICONS.users },
+      { to: '/university/outcomes',    label: 'Graduate outcomes',  icon: ICONS.check },
+      { to: '/university/curriculum',  label: 'Curriculum heatmap', icon: ICONS.target },
+      { to: '/university/resources',   label: 'Resource planning',  icon: ICONS.money },
     ],
   },
 ]
@@ -111,28 +125,46 @@ const ADMIN = [
   {
     title: 'Platform',
     links: [
-      { to: '/admin/overview',   label: 'Overview',      icon: ICONS.grid },
-      { to: '/admin/monitoring', label: 'Model monitoring', icon: ICONS.alert },
-      { to: '/admin/users',      label: 'Accounts',      icon: ICONS.users },
+      { to: '/admin/overview',   label: 'Overview',          icon: ICONS.grid },
+      { to: '/admin/pipeline',   label: 'Data pipeline',     icon: ICONS.activity },
+      { to: '/admin/quality',    label: 'Data quality',      icon: ICONS.alert },
+      { to: '/admin/monitoring', label: 'Model monitoring',  icon: ICONS.trend },
+      { to: '/admin/users',      label: 'Accounts',          icon: ICONS.users },
+    ],
+  },
+  {
+    title: 'Governance',
+    links: [
+      { to: '/admin/scenarios', label: 'Scenarios',  icon: ICONS.shield },
+      { to: '/admin/audit',     label: 'Audit log',  icon: ICONS.check },
+    ],
+  },
+  {
+    title: 'Methodology',
+    links: [
+      { to: '/admin/methodology', label: 'Importance & AHP', icon: ICONS.scales },
     ],
   },
   {
     title: 'Ministry views',
     links: [
       { to: '/mol/overview',      label: 'Labour market',    icon: ICONS.bars },
-      { to: '/mol/supply-demand', label: 'Supply & demand',  icon: ICONS.scales },
-      { to: '/mol/mismatch',      label: 'Skills mismatch',  icon: ICONS.gap },
-      { to: '/moe/quadrant',      label: 'Investment matrix', icon: ICONS.target },
-      { to: '/moe/priorities',    label: 'Investment priority', icon: ICONS.trend },
+      { to: '/mol/forecast',      label: 'Sector forecast',  icon: ICONS.trend },
+      { to: '/mol/mismatch',      label: 'Skills heatmap',   icon: ICONS.gap },
+      { to: '/mol/report',        label: 'Workforce report', icon: ICONS.activity },
+      { to: '/moe/overview',      label: 'Education supply', icon: ICONS.building },
+      { to: '/moe/priorities',    label: 'Field priority',   icon: ICONS.trend },
+      { to: '/moe/simulator',     label: 'Policy simulator', icon: ICONS.target },
     ],
   },
   {
     title: 'Institution & student',
     links: [
       { to: '/university/overview',  label: 'Institution',     icon: ICONS.building },
-      { to: '/university/expansion', label: 'Expansion',       icon: ICONS.activity },
-      { to: '/student/careers',      label: 'Career explorer', icon: ICONS.compass },
-      { to: '/student/evaluator',    label: 'Placement odds',  icon: ICONS.student },
+      { to: '/university/portfolio', label: 'Programme health', icon: ICONS.grid },
+      { to: '/university/three-way', label: 'Demand vs labour', icon: ICONS.scales },
+      { to: '/student/profile',      label: 'Student profile', icon: ICONS.student },
+      { to: '/student/alternatives', label: 'Alternatives',    icon: ICONS.route },
     ],
   },
 ]

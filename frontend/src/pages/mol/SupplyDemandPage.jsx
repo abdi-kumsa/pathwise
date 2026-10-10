@@ -43,7 +43,7 @@ export default function SupplyDemandPage() {
             <KPICard
               label="Total demand"
               value={fmtCompact(totalDemand)}
-              delta="Openings 2020–2025"
+              delta="Openings 2016–2025"
               deltaDirection="neutral"
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 7h-9M14 17H5M17 3l3 4-3 4M7 13l-3 4 3 4"/></svg>}
             />

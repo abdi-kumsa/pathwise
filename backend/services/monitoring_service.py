@@ -12,6 +12,7 @@ Two public functions used by the rest of the backend:
 import json
 import logging
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 log = logging.getLogger(__name__)
@@ -19,6 +20,8 @@ log = logging.getLogger(__name__)
 _ROOT        = Path(__file__).resolve().parent.parent.parent
 _MONITOR_DIR = _ROOT / "data" / "monitoring"
 _LOG_FILE    = _MONITOR_DIR / "predictions.jsonl"
+_M1_CMP      = _ROOT / "ml" / "models" / "model1_layer1_comparison.json"
+_M2_CMP      = _ROOT / "ml" / "models" / "model2_comparison.json"
 
 # ── Baseline ──────────────────────────────────────────────────────────────────
 # Training-time mean placement probability across 2,400 training rows.
@@ -31,6 +34,60 @@ DRIFT_THRESHOLD = 0.10
 
 
 # ── Internal ──────────────────────────────────────────────────────────────────
+
+def _read_json(path: Path) -> dict | None:
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (ValueError, OSError):
+        return None
+
+
+def _mtime(path: Path) -> str | None:
+    if not path.exists():
+        return None
+    return datetime.fromtimestamp(path.stat().st_mtime, tz=timezone.utc).isoformat()
+
+
+def _ethiopia_metrics() -> dict:
+    m1 = _read_json(_M1_CMP) or {}
+    m2 = _read_json(_M2_CMP) or {}
+    ethiopia = {
+        "model1": _ethiopia_block(m1, "M1 enrollment"),
+        "model2": _ethiopia_block(m2, "M2 employment"),
+        "not_compared": sorted(set(
+            list(m1.get("not_compared") or [])
+            + list(m2.get("not_compared") or [])
+        )),
+    }
+    naive = ethiopia["model1"].get("estimators", {}).get("seasonal_naive") or {}
+    selected = ethiopia["model1"].get("selected") or ethiopia["model2"].get("selected") or {}
+    headline = naive or selected
+    return {
+        "mae": headline.get("mae"),
+        "rmse": headline.get("rmse"),
+        "last_retrained": _mtime(_M1_CMP) or _mtime(_M2_CMP),
+        "ethiopia": ethiopia,
+        "us_models_not_compared": ethiopia["not_compared"],
+    }
+
+
+def _ethiopia_block(cmp: dict, label: str) -> dict:
+    estimators = cmp.get("estimators") or {}
+    selected_name = "ols_lags" if "ols_lags" in estimators else next(iter(estimators), None)
+    selected = estimators.get(selected_name) or {}
+    return {
+        "label": label,
+        "split": cmp.get("split"),
+        "estimators": estimators,
+        "selected_name": selected_name,
+        "selected": selected,
+        "mae": selected.get("mae"),
+        "rmse": selected.get("rmse"),
+        "not_compared": cmp.get("not_compared") or [],
+    }
+
 
 def _ensure_dir() -> None:
     _MONITOR_DIR.mkdir(parents=True, exist_ok=True)
@@ -81,6 +138,7 @@ def get_drift_report(window: int = 100) -> dict:
             "drift":            None,
             "alert":            False,
             "recommendation":   "No predictions logged yet.",
+            **_ethiopia_metrics(),
         }
 
     lines  = _LOG_FILE.read_text(encoding="utf-8").splitlines()
@@ -106,11 +164,14 @@ def get_drift_report(window: int = 100) -> dict:
             "drift":            None,
             "alert":            False,
             "recommendation":   "No valid probability values found in window.",
+            **_ethiopia_metrics(),
         }
 
     mean_prob = round(sum(probs) / len(probs), 4)
     drift     = round(abs(mean_prob - BASELINE_MEAN_PROB), 4)
     alert     = drift > DRIFT_THRESHOLD
+
+    extras = _ethiopia_metrics()
 
     if alert:
         recommendation = (
@@ -131,6 +192,7 @@ def get_drift_report(window: int = 100) -> dict:
         "drift":            drift,
         "alert":            alert,
         "recommendation":   recommendation,
+        **extras,
     }
 
 

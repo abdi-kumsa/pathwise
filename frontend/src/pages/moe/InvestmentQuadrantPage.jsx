@@ -141,7 +141,7 @@ export default function InvestmentQuadrantPage() {
           <div className="panel" style={{ marginBottom: 20 }}>
             <p className="panel-title">Demand growth vs graduate supply growth</p>
             <p className="panel-sub">
-              Compound annual growth 2020–2025. Split at the median of each axis
+              Compound annual growth 2016–2025. Split at the median of each axis
               ({fmtDelta(dMed)} demand, {fmtDelta(sMed)} supply), so the four
               quadrants always partition the nine fields.
             </p>

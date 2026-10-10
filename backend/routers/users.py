@@ -9,12 +9,11 @@ import logging
 
 from fastapi import APIRouter, Depends, HTTPException
 from typing import List
-
 from schemas.users import (
     UserOut, UserCreate, UserUpdate, PasswordReset, InstitutionOption,
 )
 from services import auth_service
-from services.auth_service import UserError, require_roles, ROLE_ADMIN
+from services.auth_service import UserError, log_audit, require_roles, ROLE_ADMIN
 
 log = logging.getLogger(__name__)
 
@@ -32,26 +31,32 @@ def _raise(exc: UserError):
     raise HTTPException(status_code=exc.status_code, detail=exc.message)
 
 
-@router.get("", response_model=List[UserOut])
+@router.get("")
 def list_users():
-    """Every account, active first. Password hashes are never returned."""
+    """Every account, active first. Password hashes are never returned.
+
+    Wrapped in an object so provenance middleware can stamp the payload.
+    """
     try:
-        return auth_service.list_users()
+        rows = auth_service.list_users()
+        return {"n": len(rows), "rows": rows}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.post("", response_model=UserOut, status_code=201)
-def create_user(body: UserCreate):
+def create_user(body: UserCreate, actor: dict = Depends(_admin)):
     """Create an account. 409 if the username is taken."""
     try:
-        return auth_service.create_user(
+        row = auth_service.create_user(
             username     = body.username,
             password     = body.password,
             role         = body.role,
             display_name = body.display_name,
             institution  = body.institution_name,
         )
+        log_audit(actor, "user_create", body.username, {"role": body.role})
+        return row
     except UserError as e:
         _raise(e)
     except Exception as e:
@@ -65,7 +70,7 @@ def update_user(username: str, body: UserUpdate, actor: dict = Depends(_admin)):
     The username itself cannot be changed — it is the JWT subject.
     """
     try:
-        return auth_service.update_user(
+        row = auth_service.update_user(
             username,
             actor        = actor["username"],
             role         = body.role,
@@ -73,6 +78,13 @@ def update_user(username: str, body: UserUpdate, actor: dict = Depends(_admin)):
             institution  = body.institution_name,
             active       = body.is_active,
         )
+        action = "user_role_change" if body.role is not None else (
+            "user_deactivate" if body.is_active is False else "user_update"
+        )
+        log_audit(actor, action, username, {
+            "role": body.role, "is_active": body.is_active,
+        })
+        return row
     except UserError as e:
         _raise(e)
     except Exception as e:
@@ -80,10 +92,12 @@ def update_user(username: str, body: UserUpdate, actor: dict = Depends(_admin)):
 
 
 @router.post("/{username}/password", response_model=UserOut)
-def reset_password(username: str, body: PasswordReset):
+def reset_password(username: str, body: PasswordReset, actor: dict = Depends(_admin)):
     """Set a user's password without knowing the current one."""
     try:
-        return auth_service.set_password(username, body.new_password)
+        row = auth_service.set_password(username, body.new_password)
+        log_audit(actor, "user_password_reset", username)
+        return row
     except UserError as e:
         _raise(e)
     except Exception as e:
@@ -103,7 +117,9 @@ def deactivate_user(username: str, actor: dict = Depends(_admin)):
     row without a second request.
     """
     try:
-        return auth_service.set_active(username, False, actor=actor["username"])
+        row = auth_service.set_active(username, False, actor=actor["username"])
+        log_audit(actor, "user_deactivate", username)
+        return row
     except UserError as e:
         _raise(e)
     except Exception as e:
@@ -123,6 +139,7 @@ def delete_user_permanently(username: str, actor: dict = Depends(_admin)):
     """
     try:
         auth_service.delete_user(username, actor=actor["username"])
+        log_audit(actor, "user_delete", username)
     except UserError as e:
         _raise(e)
     except Exception as e:

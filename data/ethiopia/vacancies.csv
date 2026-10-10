@@ -1,0 +1,1121 @@
+region,year,occupation,occupation_frequency,vacancy_count,required_education,required_experience_years,hiring_trend_pct,time_to_fill_days,sector,field,provenance
+Addis Ababa,2016,Civil Engineer,162,162,bachelor,2,9.282141188593853,56.230130723742455,Construction,Engineering & Technology,simulated
+Addis Ababa,2017,Civil Engineer,233,233,bachelor,2,4.277232784202288,48.92541306203521,Construction,Engineering & Technology,simulated
+Addis Ababa,2018,Civil Engineer,201,201,bachelor,1,5.157013656005226,48.712396913943316,Construction,Engineering & Technology,simulated
+Addis Ababa,2019,Civil Engineer,127,127,bachelor,2,-0.6703534877517225,53.5348061310762,Construction,Engineering & Technology,simulated
+Addis Ababa,2020,Civil Engineer,134,134,bachelor,1,6.346635269558885,45.35208178836926,Construction,Engineering & Technology,simulated
+Addis Ababa,2021,Civil Engineer,228,228,bachelor,2,3.6473451379525192,48.311040446841986,Construction,Engineering & Technology,simulated
+Addis Ababa,2022,Civil Engineer,182,182,bachelor,2,0.6034134199025609,28.271508802352283,Construction,Engineering & Technology,simulated
+Addis Ababa,2023,Civil Engineer,150,150,bachelor,1,8.348484668526172,30.079612896963862,Construction,Engineering & Technology,simulated
+Addis Ababa,2024,Civil Engineer,132,132,bachelor,3,1.1033623190479953,51.23188668125863,Construction,Engineering & Technology,simulated
+Addis Ababa,2025,Civil Engineer,155,155,bachelor,4,2.5037109419434542,37.80598885909575,Construction,Engineering & Technology,simulated
+Dire Dawa,2016,Civil Engineer,160,160,bachelor,2,2.663612214378493,71.769169405811,Construction,Engineering & Technology,simulated
+Dire Dawa,2017,Civil Engineer,178,178,bachelor,1,2.475645602823951,18.036425873587753,Construction,Engineering & Technology,simulated
+Dire Dawa,2018,Civil Engineer,189,189,bachelor,2,4.3792378405130306,49.70900848822522,Construction,Engineering & Technology,simulated
+Dire Dawa,2019,Civil Engineer,211,211,bachelor,4,1.4139276219811405,48.32375755466844,Construction,Engineering & Technology,simulated
+Dire Dawa,2020,Civil Engineer,207,207,bachelor,4,4.525085765867868,54.77107387845409,Construction,Engineering & Technology,simulated
+Dire Dawa,2021,Civil Engineer,174,174,bachelor,1,6.946334592710802,54.186636778345935,Construction,Engineering & Technology,simulated
+Dire Dawa,2022,Civil Engineer,113,113,bachelor,4,1.3547277952061827,57.572175310483914,Construction,Engineering & Technology,simulated
+Dire Dawa,2023,Civil Engineer,191,191,bachelor,4,-3.6043547057831953,55.25837899210693,Construction,Engineering & Technology,simulated
+Dire Dawa,2024,Civil Engineer,171,171,bachelor,0,1.9445049684012496,57.46654626982214,Construction,Engineering & Technology,simulated
+Dire Dawa,2025,Civil Engineer,143,143,bachelor,2,5.783202070200566,29.764200619415526,Construction,Engineering & Technology,simulated
+Amhara,2016,Civil Engineer,191,191,bachelor,2,4.869745806722502,50.208932319339986,Construction,Engineering & Technology,simulated
+Amhara,2017,Civil Engineer,171,171,bachelor,4,1.6250376299804214,33.33095475850556,Construction,Engineering & Technology,simulated
+Amhara,2018,Civil Engineer,152,152,bachelor,4,0.18670932010973873,69.64452578452854,Construction,Engineering & Technology,simulated
+Amhara,2019,Civil Engineer,111,111,bachelor,0,5.813774242826579,33.161975595097225,Construction,Engineering & Technology,simulated
+Amhara,2020,Civil Engineer,139,139,bachelor,2,0.2238106061672216,59.0742601529889,Construction,Engineering & Technology,simulated
+Amhara,2021,Civil Engineer,203,203,bachelor,1,2.4185021704338037,80.48828545254368,Construction,Engineering & Technology,simulated
+Amhara,2022,Civil Engineer,179,179,bachelor,1,1.2859054564458328,38.34319681121069,Construction,Engineering & Technology,simulated
+Amhara,2023,Civil Engineer,158,158,bachelor,3,5.1293230836992425,54.853467849376955,Construction,Engineering & Technology,simulated
+Amhara,2024,Civil Engineer,231,231,bachelor,2,4.473772681498934,51.666098074297516,Construction,Engineering & Technology,simulated
+Amhara,2025,Civil Engineer,197,197,bachelor,0,0.8405609080114052,35.53520420948469,Construction,Engineering & Technology,simulated
+Oromia,2016,Civil Engineer,201,201,bachelor,1,1.4542348339338005,55.308422292068755,Construction,Engineering & Technology,simulated
+Oromia,2017,Civil Engineer,227,227,bachelor,2,2.0955055586089033,30.734248468922786,Construction,Engineering & Technology,simulated
+Oromia,2018,Civil Engineer,127,127,bachelor,3,1.8849653937395106,47.56633420721158,Construction,Engineering & Technology,simulated
+Oromia,2019,Civil Engineer,179,179,bachelor,1,2.3190976107858456,56.1508197500701,Construction,Engineering & Technology,simulated
+Oromia,2020,Civil Engineer,149,149,bachelor,3,5.350164669892563,58.40168546531933,Construction,Engineering & Technology,simulated
+Oromia,2021,Civil Engineer,153,153,bachelor,1,2.7089417821681923,56.67412128357362,Construction,Engineering & Technology,simulated
+Oromia,2022,Civil Engineer,172,172,bachelor,4,5.637342885159826,39.12884840140849,Construction,Engineering & Technology,simulated
+Oromia,2023,Civil Engineer,152,152,bachelor,1,0.09765822445754502,82.44424575038165,Construction,Engineering & Technology,simulated
+Oromia,2024,Civil Engineer,101,101,bachelor,4,4.490058247325845,39.82319056629559,Construction,Engineering & Technology,simulated
+Oromia,2025,Civil Engineer,165,165,bachelor,4,3.9879726860127143,60.38824768522227,Construction,Engineering & Technology,simulated
+Tigray,2016,Civil Engineer,169,169,bachelor,0,-1.2435503774468017,40.72827915992917,Construction,Engineering & Technology,simulated
+Tigray,2017,Civil Engineer,199,199,bachelor,4,7.932976548420046,36.415298056934795,Construction,Engineering & Technology,simulated
+Tigray,2018,Civil Engineer,134,134,bachelor,2,3.1329522492750876,39.37880421091795,Construction,Engineering & Technology,simulated
+Tigray,2019,Civil Engineer,131,131,bachelor,2,1.7152683016300947,54.254848439662574,Construction,Engineering & Technology,simulated
+Tigray,2020,Civil Engineer,166,166,bachelor,2,2.6599443907982008,55.21805972519218,Construction,Engineering & Technology,simulated
+Tigray,2021,Civil Engineer,105,105,bachelor,1,1.9908317086202703,57.99741297960537,Construction,Engineering & Technology,simulated
+Tigray,2022,Civil Engineer,72,72,bachelor,3,1.9652714956171666,52.578464252115566,Construction,Engineering & Technology,simulated
+Tigray,2023,Civil Engineer,160,160,bachelor,0,0.9620509964353259,36.526851010195955,Construction,Engineering & Technology,simulated
+Tigray,2024,Civil Engineer,183,183,bachelor,4,5.5195894776047965,45.314022918949824,Construction,Engineering & Technology,simulated
+Tigray,2025,Civil Engineer,133,133,bachelor,1,0.026685515920945146,51.75761344228656,Construction,Engineering & Technology,simulated
+Sidama,2016,Civil Engineer,191,191,bachelor,0,2.7153171712947106,34.44952943481424,Construction,Engineering & Technology,simulated
+Sidama,2017,Civil Engineer,169,169,bachelor,2,6.6888555473703875,73.56672916731459,Construction,Engineering & Technology,simulated
+Sidama,2018,Civil Engineer,171,171,bachelor,3,3.9808389067182115,27.34757689065305,Construction,Engineering & Technology,simulated
+Sidama,2019,Civil Engineer,134,134,bachelor,4,-2.7891028616263043,53.38888255677814,Construction,Engineering & Technology,simulated
+Sidama,2020,Civil Engineer,257,257,bachelor,1,3.1112485269002703,46.842200582369415,Construction,Engineering & Technology,simulated
+Sidama,2021,Civil Engineer,165,165,bachelor,3,5.64916987040816,50.587887939749876,Construction,Engineering & Technology,simulated
+Sidama,2022,Civil Engineer,182,182,bachelor,4,4.502691322120212,46.200188365587806,Construction,Engineering & Technology,simulated
+Sidama,2023,Civil Engineer,195,195,bachelor,1,5.49769161479092,28.381448232674654,Construction,Engineering & Technology,simulated
+Sidama,2024,Civil Engineer,168,168,bachelor,1,1.678120803349909,34.59732365950583,Construction,Engineering & Technology,simulated
+Sidama,2025,Civil Engineer,150,150,bachelor,0,0.2538736494858034,57.89895555552119,Construction,Engineering & Technology,simulated
+South Ethiopia,2016,Civil Engineer,195,195,bachelor,3,-1.817442213133531,71.38612228017779,Construction,Engineering & Technology,simulated
+South Ethiopia,2017,Civil Engineer,163,163,bachelor,4,7.361577753585605,56.989584654280605,Construction,Engineering & Technology,simulated
+South Ethiopia,2018,Civil Engineer,170,170,bachelor,0,4.418450664959626,45.25987579628212,Construction,Engineering & Technology,simulated
+South Ethiopia,2019,Civil Engineer,164,164,bachelor,0,5.579884392114304,41.56187928427652,Construction,Engineering & Technology,simulated
+South Ethiopia,2020,Civil Engineer,164,164,bachelor,1,1.1108907802948518,39.66640177084767,Construction,Engineering & Technology,simulated
+South Ethiopia,2021,Civil Engineer,250,250,bachelor,1,5.518940711821146,50.82394165566558,Construction,Engineering & Technology,simulated
+South Ethiopia,2022,Civil Engineer,158,158,bachelor,4,2.0834429719569187,69.46744882299407,Construction,Engineering & Technology,simulated
+South Ethiopia,2023,Civil Engineer,191,191,bachelor,2,4.868847065574573,50.39802033217648,Construction,Engineering & Technology,simulated
+South Ethiopia,2024,Civil Engineer,144,144,bachelor,3,0.31041831449792445,62.34402131765516,Construction,Engineering & Technology,simulated
+South Ethiopia,2025,Civil Engineer,150,150,bachelor,1,1.5702722999507097,57.75813920938051,Construction,Engineering & Technology,simulated
+South West Ethiopia,2016,Civil Engineer,152,152,bachelor,1,-3.5942278147168683,44.128814792597844,Construction,Engineering & Technology,simulated
+South West Ethiopia,2017,Civil Engineer,203,203,bachelor,1,1.4339967064928079,54.71135544672198,Construction,Engineering & Technology,simulated
+South West Ethiopia,2018,Civil Engineer,179,179,bachelor,3,1.162548646864464,45.10140080419697,Construction,Engineering & Technology,simulated
+South West Ethiopia,2019,Civil Engineer,121,121,bachelor,3,2.769811488430596,42.94134769836943,Construction,Engineering & Technology,simulated
+South West Ethiopia,2020,Civil Engineer,218,218,bachelor,0,1.9406779096675917,39.8978379087508,Construction,Engineering & Technology,simulated
+South West Ethiopia,2021,Civil Engineer,181,181,bachelor,2,7.971286959930061,14.0,Construction,Engineering & Technology,simulated
+South West Ethiopia,2022,Civil Engineer,178,178,bachelor,1,1.7136281915969447,54.3239605658472,Construction,Engineering & Technology,simulated
+South West Ethiopia,2023,Civil Engineer,227,227,bachelor,2,2.3095637805988076,40.169156317020594,Construction,Engineering & Technology,simulated
+South West Ethiopia,2024,Civil Engineer,217,217,bachelor,2,2.844076561555881,55.33497304921202,Construction,Engineering & Technology,simulated
+South West Ethiopia,2025,Civil Engineer,218,218,bachelor,4,2.8674500656862185,51.66549341905077,Construction,Engineering & Technology,simulated
+Central Ethiopia,2016,Civil Engineer,200,200,bachelor,1,5.969930172561465,35.6291193374033,Construction,Engineering & Technology,simulated
+Central Ethiopia,2017,Civil Engineer,174,174,bachelor,0,4.918762281433001,35.32284962173229,Construction,Engineering & Technology,simulated
+Central Ethiopia,2018,Civil Engineer,214,214,bachelor,2,6.312946749662002,55.353419523536566,Construction,Engineering & Technology,simulated
+Central Ethiopia,2019,Civil Engineer,173,173,bachelor,2,3.579012228374849,51.21027431462665,Construction,Engineering & Technology,simulated
+Central Ethiopia,2020,Civil Engineer,260,260,bachelor,0,2.655015014269843,45.6543715431231,Construction,Engineering & Technology,simulated
+Central Ethiopia,2021,Civil Engineer,187,187,bachelor,2,0.16421887087557696,43.40682982236507,Construction,Engineering & Technology,simulated
+Central Ethiopia,2022,Civil Engineer,139,139,bachelor,3,5.010250411400017,48.315253847432444,Construction,Engineering & Technology,simulated
+Central Ethiopia,2023,Civil Engineer,150,150,bachelor,4,2.624297176185608,45.04736749704299,Construction,Engineering & Technology,simulated
+Central Ethiopia,2024,Civil Engineer,182,182,bachelor,2,0.2718470633041581,30.702472373428485,Construction,Engineering & Technology,simulated
+Central Ethiopia,2025,Civil Engineer,144,144,bachelor,4,1.1931949824808548,35.58544495751563,Construction,Engineering & Technology,simulated
+Somali,2016,Civil Engineer,210,210,bachelor,1,5.063954068543177,41.21521043780682,Construction,Engineering & Technology,simulated
+Somali,2017,Civil Engineer,188,188,bachelor,0,2.833967565424282,40.694157795996304,Construction,Engineering & Technology,simulated
+Somali,2018,Civil Engineer,232,232,bachelor,3,-0.6750232831092493,65.28320702926386,Construction,Engineering & Technology,simulated
+Somali,2019,Civil Engineer,156,156,bachelor,3,2.3442046933226903,51.39213092575693,Construction,Engineering & Technology,simulated
+Somali,2020,Civil Engineer,241,241,bachelor,0,4.031143551661664,58.24040273729071,Construction,Engineering & Technology,simulated
+Somali,2021,Civil Engineer,220,220,bachelor,3,4.2778362409814426,60.20810155881645,Construction,Engineering & Technology,simulated
+Somali,2022,Civil Engineer,156,156,bachelor,3,7.562495322211146,35.54777785418194,Construction,Engineering & Technology,simulated
+Somali,2023,Civil Engineer,158,158,bachelor,2,2.1711817120968284,41.95333423967531,Construction,Engineering & Technology,simulated
+Somali,2024,Civil Engineer,150,150,bachelor,1,4.185571458083781,55.439243538666545,Construction,Engineering & Technology,simulated
+Somali,2025,Civil Engineer,202,202,bachelor,2,1.9582960306524626,42.980088627629975,Construction,Engineering & Technology,simulated
+Afar,2016,Civil Engineer,224,224,bachelor,3,1.64687197896804,59.1539711144049,Construction,Engineering & Technology,simulated
+Afar,2017,Civil Engineer,179,179,bachelor,0,1.7373336536238646,42.05260103268595,Construction,Engineering & Technology,simulated
+Afar,2018,Civil Engineer,224,224,bachelor,1,3.591339223350495,34.003928984418515,Construction,Engineering & Technology,simulated
+Afar,2019,Civil Engineer,189,189,bachelor,2,2.4680128602334857,37.05065265370804,Construction,Engineering & Technology,simulated
+Afar,2020,Civil Engineer,155,155,bachelor,4,6.106056853912168,35.31109818892379,Construction,Engineering & Technology,simulated
+Afar,2021,Civil Engineer,142,142,bachelor,2,4.735337476666555,43.08968461550106,Construction,Engineering & Technology,simulated
+Afar,2022,Civil Engineer,202,202,bachelor,1,4.442486294600398,31.515224331758077,Construction,Engineering & Technology,simulated
+Afar,2023,Civil Engineer,201,201,bachelor,2,-2.248093252105842,59.103905803003215,Construction,Engineering & Technology,simulated
+Afar,2024,Civil Engineer,178,178,bachelor,2,3.5928018829240855,27.529837212402203,Construction,Engineering & Technology,simulated
+Afar,2025,Civil Engineer,234,234,bachelor,3,3.8362149837322668,57.075943149369,Construction,Engineering & Technology,simulated
+Benishangul-Gumuz,2016,Civil Engineer,148,148,bachelor,4,-0.27474489201727215,49.79072032180014,Construction,Engineering & Technology,simulated
+Benishangul-Gumuz,2017,Civil Engineer,142,142,bachelor,1,15.518088079772491,55.261908585883525,Construction,Engineering & Technology,simulated
+Benishangul-Gumuz,2018,Civil Engineer,233,233,bachelor,2,3.997510270802615,58.864115990945834,Construction,Engineering & Technology,simulated
+Benishangul-Gumuz,2019,Civil Engineer,137,137,bachelor,4,1.3185487149010118,59.67004231401845,Construction,Engineering & Technology,simulated
+Benishangul-Gumuz,2020,Civil Engineer,171,171,bachelor,3,1.422567297259111,33.33031819407373,Construction,Engineering & Technology,simulated
+Benishangul-Gumuz,2021,Civil Engineer,101,101,bachelor,2,-1.2403268484967267,48.548442047654184,Construction,Engineering & Technology,simulated
+Benishangul-Gumuz,2022,Civil Engineer,206,206,bachelor,1,2.896537138323193,32.640477513837524,Construction,Engineering & Technology,simulated
+Benishangul-Gumuz,2023,Civil Engineer,178,178,bachelor,4,4.75732742994706,60.36216527953206,Construction,Engineering & Technology,simulated
+Benishangul-Gumuz,2024,Civil Engineer,217,217,bachelor,4,3.2382346683288326,56.841738070483764,Construction,Engineering & Technology,simulated
+Benishangul-Gumuz,2025,Civil Engineer,132,132,bachelor,1,-2.020424465594788,73.11903178022503,Construction,Engineering & Technology,simulated
+Gambela,2016,Civil Engineer,178,178,bachelor,0,-4.004363866097575,66.53878902219576,Construction,Engineering & Technology,simulated
+Gambela,2017,Civil Engineer,226,226,bachelor,0,-0.9140133714980898,44.19231865226503,Construction,Engineering & Technology,simulated
+Gambela,2018,Civil Engineer,190,190,bachelor,4,4.221893038378449,60.54750809694235,Construction,Engineering & Technology,simulated
+Gambela,2019,Civil Engineer,192,192,bachelor,4,-0.9155623946849034,35.559299142737,Construction,Engineering & Technology,simulated
+Gambela,2020,Civil Engineer,175,175,bachelor,2,2.426855693699352,44.82417653059175,Construction,Engineering & Technology,simulated
+Gambela,2021,Civil Engineer,107,107,bachelor,4,5.0141367979463185,55.52706574683955,Construction,Engineering & Technology,simulated
+Gambela,2022,Civil Engineer,200,200,bachelor,1,2.289724251999197,40.71514750265102,Construction,Engineering & Technology,simulated
+Gambela,2023,Civil Engineer,139,139,bachelor,1,6.857314612836807,47.75389643631725,Construction,Engineering & Technology,simulated
+Gambela,2024,Civil Engineer,113,113,bachelor,4,-2.210648123351871,50.97611287907599,Construction,Engineering & Technology,simulated
+Gambela,2025,Civil Engineer,185,185,bachelor,0,1.6451992963155277,36.7261242227322,Construction,Engineering & Technology,simulated
+Harari,2016,Civil Engineer,202,202,bachelor,4,-1.8542420830204724,62.44667203588421,Construction,Engineering & Technology,simulated
+Harari,2017,Civil Engineer,142,142,bachelor,3,-0.2954487563946042,64.30409221698525,Construction,Engineering & Technology,simulated
+Harari,2018,Civil Engineer,222,222,bachelor,3,-0.13121469908062178,37.08334630732364,Construction,Engineering & Technology,simulated
+Harari,2019,Civil Engineer,162,162,bachelor,2,6.040499389324051,63.53991858761414,Construction,Engineering & Technology,simulated
+Harari,2020,Civil Engineer,186,186,bachelor,2,2.4765878313474516,37.52611310211936,Construction,Engineering & Technology,simulated
+Harari,2021,Civil Engineer,119,119,bachelor,0,3.8072944942679943,58.804482301894396,Construction,Engineering & Technology,simulated
+Harari,2022,Civil Engineer,159,159,bachelor,1,2.0376597010798543,49.00497520051501,Construction,Engineering & Technology,simulated
+Harari,2023,Civil Engineer,171,171,bachelor,0,6.091157330848846,53.91204066149864,Construction,Engineering & Technology,simulated
+Harari,2024,Civil Engineer,177,177,bachelor,0,0.027759559217457763,21.198686933262657,Construction,Engineering & Technology,simulated
+Harari,2025,Civil Engineer,158,158,bachelor,0,2.5149703909059515,54.37521175386703,Construction,Engineering & Technology,simulated
+Addis Ababa,2016,Software Developer,173,173,bachelor,3,-4.368910194224664,54.326245452391014,ICT,Natural & Computational Sciences,simulated
+Addis Ababa,2017,Software Developer,188,188,bachelor,4,5.034601541856,48.327148448394325,ICT,Natural & Computational Sciences,simulated
+Addis Ababa,2018,Software Developer,225,225,bachelor,4,2.8986048363228463,50.88609451116083,ICT,Natural & Computational Sciences,simulated
+Addis Ababa,2019,Software Developer,206,206,bachelor,2,4.041028857089945,53.731065032952195,ICT,Natural & Computational Sciences,simulated
+Addis Ababa,2020,Software Developer,190,190,bachelor,4,5.253157733731371,27.908264656983256,ICT,Natural & Computational Sciences,simulated
+Addis Ababa,2021,Software Developer,154,154,bachelor,4,6.979604608839635,39.92897172280826,ICT,Natural & Computational Sciences,simulated
+Addis Ababa,2022,Software Developer,176,176,bachelor,1,2.684755751859431,37.99341205165486,ICT,Natural & Computational Sciences,simulated
+Addis Ababa,2023,Software Developer,227,227,bachelor,4,2.27664844832276,45.34746182001932,ICT,Natural & Computational Sciences,simulated
+Addis Ababa,2024,Software Developer,100,100,bachelor,3,-0.11811422857589005,56.195644771947244,ICT,Natural & Computational Sciences,simulated
+Addis Ababa,2025,Software Developer,162,162,bachelor,1,-0.20337548509471137,42.23446693093484,ICT,Natural & Computational Sciences,simulated
+Dire Dawa,2016,Software Developer,155,155,bachelor,0,1.7059973849836145,67.97497919370062,ICT,Natural & Computational Sciences,simulated
+Dire Dawa,2017,Software Developer,192,192,bachelor,2,-1.3505347004657118,48.857927811901384,ICT,Natural & Computational Sciences,simulated
+Dire Dawa,2018,Software Developer,178,178,bachelor,0,2.6099688634165448,45.783118678684836,ICT,Natural & Computational Sciences,simulated
+Dire Dawa,2019,Software Developer,254,254,bachelor,3,0.3279564582948167,57.572210990472215,ICT,Natural & Computational Sciences,simulated
+Dire Dawa,2020,Software Developer,182,182,bachelor,3,1.3797135373524003,64.30022408966497,ICT,Natural & Computational Sciences,simulated
+Dire Dawa,2021,Software Developer,198,198,bachelor,4,4.502787530172538,58.677279296189845,ICT,Natural & Computational Sciences,simulated
+Dire Dawa,2022,Software Developer,193,193,bachelor,1,-0.9292913708599158,66.47571846805016,ICT,Natural & Computational Sciences,simulated
+Dire Dawa,2023,Software Developer,188,188,bachelor,4,3.1981587369358326,69.6549478413023,ICT,Natural & Computational Sciences,simulated
+Dire Dawa,2024,Software Developer,137,137,bachelor,4,-1.5288910675419087,41.62926242732328,ICT,Natural & Computational Sciences,simulated
+Dire Dawa,2025,Software Developer,184,184,bachelor,3,6.479108268632823,58.11860237260788,ICT,Natural & Computational Sciences,simulated
+Amhara,2016,Software Developer,77,77,bachelor,3,1.9736637503440932,62.73364886385706,ICT,Natural & Computational Sciences,simulated
+Amhara,2017,Software Developer,201,201,bachelor,3,3.013366169270489,45.155386177049785,ICT,Natural & Computational Sciences,simulated
+Amhara,2018,Software Developer,135,135,bachelor,1,2.5844063937917294,31.341677534288877,ICT,Natural & Computational Sciences,simulated
+Amhara,2019,Software Developer,245,245,bachelor,1,3.242374784712085,73.11258304527914,ICT,Natural & Computational Sciences,simulated
+Amhara,2020,Software Developer,162,162,bachelor,1,4.477173025301145,44.888630577883596,ICT,Natural & Computational Sciences,simulated
+Amhara,2021,Software Developer,218,218,bachelor,4,6.595543259967809,61.18980451427916,ICT,Natural & Computational Sciences,simulated
+Amhara,2022,Software Developer,234,234,bachelor,2,1.6273744984725358,61.6785203620868,ICT,Natural & Computational Sciences,simulated
+Amhara,2023,Software Developer,207,207,bachelor,2,1.4556802176374835,42.10904737329056,ICT,Natural & Computational Sciences,simulated
+Amhara,2024,Software Developer,176,176,bachelor,3,3.2923229630457294,47.932211369762534,ICT,Natural & Computational Sciences,simulated
+Amhara,2025,Software Developer,173,173,bachelor,1,2.116630904353695,34.032966092794496,ICT,Natural & Computational Sciences,simulated
+Oromia,2016,Software Developer,211,211,bachelor,2,3.169063275332037,43.09377038064144,ICT,Natural & Computational Sciences,simulated
+Oromia,2017,Software Developer,210,210,bachelor,2,2.144987414556171,35.92508964481321,ICT,Natural & Computational Sciences,simulated
+Oromia,2018,Software Developer,219,219,bachelor,3,3.3867006492490113,63.2856076542015,ICT,Natural & Computational Sciences,simulated
+Oromia,2019,Software Developer,150,150,bachelor,3,2.7412129304131647,42.825827234378615,ICT,Natural & Computational Sciences,simulated
+Oromia,2020,Software Developer,185,185,bachelor,2,5.300998685559994,40.55136746969048,ICT,Natural & Computational Sciences,simulated
+Oromia,2021,Software Developer,230,230,bachelor,1,7.011663966665379,51.078536552444874,ICT,Natural & Computational Sciences,simulated
+Oromia,2022,Software Developer,148,148,bachelor,2,2.6878024260419684,69.26840056392082,ICT,Natural & Computational Sciences,simulated
+Oromia,2023,Software Developer,175,175,bachelor,0,6.456993568731683,49.33742046301511,ICT,Natural & Computational Sciences,simulated
+Oromia,2024,Software Developer,181,181,bachelor,0,2.3472692070508927,58.676582463013176,ICT,Natural & Computational Sciences,simulated
+Oromia,2025,Software Developer,150,150,bachelor,2,5.399343915833506,65.29048065503855,ICT,Natural & Computational Sciences,simulated
+Tigray,2016,Software Developer,156,156,bachelor,4,5.620594653607339,58.43053224247831,ICT,Natural & Computational Sciences,simulated
+Tigray,2017,Software Developer,154,154,bachelor,2,2.7014810159882225,46.55076356658998,ICT,Natural & Computational Sciences,simulated
+Tigray,2018,Software Developer,263,263,bachelor,0,2.5417768317679137,34.2247751377292,ICT,Natural & Computational Sciences,simulated
+Tigray,2019,Software Developer,141,141,bachelor,3,1.2896294867285145,52.336050759206984,ICT,Natural & Computational Sciences,simulated
+Tigray,2020,Software Developer,123,123,bachelor,3,-1.652468229792901,64.82285111686606,ICT,Natural & Computational Sciences,simulated
+Tigray,2021,Software Developer,101,101,bachelor,4,3.7760293162199368,34.920160340485594,ICT,Natural & Computational Sciences,simulated
+Tigray,2022,Software Developer,124,124,bachelor,0,3.1673065529978004,42.25055597611804,ICT,Natural & Computational Sciences,simulated
+Tigray,2023,Software Developer,157,157,bachelor,1,4.836992938428273,58.444017322250765,ICT,Natural & Computational Sciences,simulated
+Tigray,2024,Software Developer,206,206,bachelor,2,1.268409804659228,58.94288891927292,ICT,Natural & Computational Sciences,simulated
+Tigray,2025,Software Developer,161,161,bachelor,0,-3.2748236958255976,42.4441931248091,ICT,Natural & Computational Sciences,simulated
+Sidama,2016,Software Developer,157,157,bachelor,2,5.094977538338039,50.31374616048047,ICT,Natural & Computational Sciences,simulated
+Sidama,2017,Software Developer,260,260,bachelor,3,1.6874161953146622,24.147449623558103,ICT,Natural & Computational Sciences,simulated
+Sidama,2018,Software Developer,191,191,bachelor,0,0.2857877047092967,44.42960063336401,ICT,Natural & Computational Sciences,simulated
+Sidama,2019,Software Developer,148,148,bachelor,1,1.2880286724470644,66.27004574531622,ICT,Natural & Computational Sciences,simulated
+Sidama,2020,Software Developer,184,184,bachelor,1,6.994036046557134,44.45428112651968,ICT,Natural & Computational Sciences,simulated
+Sidama,2021,Software Developer,130,130,bachelor,2,-0.3161423694691168,47.04004741852237,ICT,Natural & Computational Sciences,simulated
+Sidama,2022,Software Developer,114,114,bachelor,4,2.046858896238199,61.58326140074857,ICT,Natural & Computational Sciences,simulated
+Sidama,2023,Software Developer,231,231,bachelor,3,4.649117909652948,47.95349070604705,ICT,Natural & Computational Sciences,simulated
+Sidama,2024,Software Developer,157,157,bachelor,4,7.45491454241367,49.697003811135716,ICT,Natural & Computational Sciences,simulated
+Sidama,2025,Software Developer,161,161,bachelor,0,2.605836903599596,44.79969193401486,ICT,Natural & Computational Sciences,simulated
+South Ethiopia,2016,Software Developer,201,201,bachelor,1,4.015456264373029,54.817938613175116,ICT,Natural & Computational Sciences,simulated
+South Ethiopia,2017,Software Developer,193,193,bachelor,2,0.28439212250784873,46.20632226535413,ICT,Natural & Computational Sciences,simulated
+South Ethiopia,2018,Software Developer,158,158,bachelor,3,1.3334735977665848,62.92010369757557,ICT,Natural & Computational Sciences,simulated
+South Ethiopia,2019,Software Developer,187,187,bachelor,2,-1.0453445394617713,32.04339731691026,ICT,Natural & Computational Sciences,simulated
+South Ethiopia,2020,Software Developer,228,228,bachelor,3,2.0254723603425546,61.54248970323792,ICT,Natural & Computational Sciences,simulated
+South Ethiopia,2021,Software Developer,173,173,bachelor,4,0.012179287447725784,34.468313565852924,ICT,Natural & Computational Sciences,simulated
+South Ethiopia,2022,Software Developer,205,205,bachelor,2,5.0989142139713515,43.417332284752554,ICT,Natural & Computational Sciences,simulated
+South Ethiopia,2023,Software Developer,170,170,bachelor,0,3.1211900021683685,23.76037816868273,ICT,Natural & Computational Sciences,simulated
+South Ethiopia,2024,Software Developer,180,180,bachelor,0,7.432345459973209,61.08881702371821,ICT,Natural & Computational Sciences,simulated
+South Ethiopia,2025,Software Developer,257,257,bachelor,2,7.201454557957371,64.73632088116105,ICT,Natural & Computational Sciences,simulated
+South West Ethiopia,2016,Software Developer,181,181,bachelor,4,-1.175428092071492,49.56418566731577,ICT,Natural & Computational Sciences,simulated
+South West Ethiopia,2017,Software Developer,202,202,bachelor,0,2.291596742229028,29.500368359867135,ICT,Natural & Computational Sciences,simulated
+South West Ethiopia,2018,Software Developer,243,243,bachelor,2,7.301525605044383,56.90608124956689,ICT,Natural & Computational Sciences,simulated
+South West Ethiopia,2019,Software Developer,234,234,bachelor,2,5.9077215822047595,39.84693547248004,ICT,Natural & Computational Sciences,simulated
+South West Ethiopia,2020,Software Developer,159,159,bachelor,2,0.5841044753689371,69.18143496139717,ICT,Natural & Computational Sciences,simulated
+South West Ethiopia,2021,Software Developer,181,181,bachelor,3,4.148770366982539,32.02764444971589,ICT,Natural & Computational Sciences,simulated
+South West Ethiopia,2022,Software Developer,212,212,bachelor,3,6.1524285409991055,39.775067321865016,ICT,Natural & Computational Sciences,simulated
+South West Ethiopia,2023,Software Developer,233,233,bachelor,4,5.3521499248539275,42.41172198029961,ICT,Natural & Computational Sciences,simulated
+South West Ethiopia,2024,Software Developer,236,236,bachelor,2,4.224079853379067,36.07659123287479,ICT,Natural & Computational Sciences,simulated
+South West Ethiopia,2025,Software Developer,212,212,bachelor,4,3.165025125015818,48.59218218379821,ICT,Natural & Computational Sciences,simulated
+Central Ethiopia,2016,Software Developer,182,182,bachelor,0,0.835941302243822,29.815673410362358,ICT,Natural & Computational Sciences,simulated
+Central Ethiopia,2017,Software Developer,111,111,bachelor,1,3.7483561287589624,18.914248377754674,ICT,Natural & Computational Sciences,simulated
+Central Ethiopia,2018,Software Developer,209,209,bachelor,1,2.243183921484195,60.318326602169215,ICT,Natural & Computational Sciences,simulated
+Central Ethiopia,2019,Software Developer,169,169,bachelor,2,4.0464169558781204,24.501936542109036,ICT,Natural & Computational Sciences,simulated
+Central Ethiopia,2020,Software Developer,90,90,bachelor,2,4.057139874127268,59.40313216340162,ICT,Natural & Computational Sciences,simulated
+Central Ethiopia,2021,Software Developer,172,172,bachelor,0,3.6164185854244293,57.434871730497974,ICT,Natural & Computational Sciences,simulated
+Central Ethiopia,2022,Software Developer,174,174,bachelor,4,0.1779744637228009,28.12282598820122,ICT,Natural & Computational Sciences,simulated
+Central Ethiopia,2023,Software Developer,158,158,bachelor,1,4.9368762807554845,39.467460893202215,ICT,Natural & Computational Sciences,simulated
+Central Ethiopia,2024,Software Developer,206,206,bachelor,4,1.5437147726607396,50.90448290376768,ICT,Natural & Computational Sciences,simulated
+Central Ethiopia,2025,Software Developer,153,153,bachelor,4,1.7551076175508005,16.699040750706317,ICT,Natural & Computational Sciences,simulated
+Somali,2016,Software Developer,213,213,bachelor,3,2.7061679843985957,36.656070563536844,ICT,Natural & Computational Sciences,simulated
+Somali,2017,Software Developer,253,253,bachelor,2,1.0271659127094477,41.81353602947073,ICT,Natural & Computational Sciences,simulated
+Somali,2018,Software Developer,141,141,bachelor,3,6.584477041587294,64.00671926575325,ICT,Natural & Computational Sciences,simulated
+Somali,2019,Software Developer,232,232,bachelor,0,1.5067248525785897,68.06914452549438,ICT,Natural & Computational Sciences,simulated
+Somali,2020,Software Developer,172,172,bachelor,3,1.933791070905431,51.911433703987015,ICT,Natural & Computational Sciences,simulated
+Somali,2021,Software Developer,154,154,bachelor,0,3.367243623540294,54.43907851423929,ICT,Natural & Computational Sciences,simulated
+Somali,2022,Software Developer,196,196,bachelor,4,2.549878900651337,39.27260188996145,ICT,Natural & Computational Sciences,simulated
+Somali,2023,Software Developer,121,121,bachelor,0,2.779989277418429,41.55323597992544,ICT,Natural & Computational Sciences,simulated
+Somali,2024,Software Developer,175,175,bachelor,1,-0.7960884789444789,54.119757135012804,ICT,Natural & Computational Sciences,simulated
+Somali,2025,Software Developer,114,114,bachelor,3,2.524912420423891,38.03045058709784,ICT,Natural & Computational Sciences,simulated
+Afar,2016,Software Developer,144,144,bachelor,0,3.071400658959594,54.55534676147902,ICT,Natural & Computational Sciences,simulated
+Afar,2017,Software Developer,135,135,bachelor,2,0.7888579937572064,61.47876613712015,ICT,Natural & Computational Sciences,simulated
+Afar,2018,Software Developer,171,171,bachelor,3,1.7571990465466512,53.46293644321706,ICT,Natural & Computational Sciences,simulated
+Afar,2019,Software Developer,80,80,bachelor,4,5.87850527253232,42.536547864968846,ICT,Natural & Computational Sciences,simulated
+Afar,2020,Software Developer,130,130,bachelor,0,2.341029956681412,46.67525506332743,ICT,Natural & Computational Sciences,simulated
+Afar,2021,Software Developer,185,185,bachelor,2,0.01836887095953177,58.45405429042914,ICT,Natural & Computational Sciences,simulated
+Afar,2022,Software Developer,159,159,bachelor,0,2.434328897596872,55.95397816222354,ICT,Natural & Computational Sciences,simulated
+Afar,2023,Software Developer,178,178,bachelor,3,1.644140817581417,44.11507639461293,ICT,Natural & Computational Sciences,simulated
+Afar,2024,Software Developer,228,228,bachelor,3,3.914598065013849,49.78331051903818,ICT,Natural & Computational Sciences,simulated
+Afar,2025,Software Developer,272,272,bachelor,3,4.158786374709736,50.16732621651434,ICT,Natural & Computational Sciences,simulated
+Benishangul-Gumuz,2016,Software Developer,171,171,bachelor,4,-4.6131332140824135,60.33258672338168,ICT,Natural & Computational Sciences,simulated
+Benishangul-Gumuz,2017,Software Developer,129,129,bachelor,0,1.2048030136966532,31.197809734127176,ICT,Natural & Computational Sciences,simulated
+Benishangul-Gumuz,2018,Software Developer,150,150,bachelor,2,5.223377964638315,63.46877644288803,ICT,Natural & Computational Sciences,simulated
+Benishangul-Gumuz,2019,Software Developer,257,257,bachelor,2,3.2555941871366487,45.37123748947288,ICT,Natural & Computational Sciences,simulated
+Benishangul-Gumuz,2020,Software Developer,211,211,bachelor,4,0.585374693710401,43.59344392494227,ICT,Natural & Computational Sciences,simulated
+Benishangul-Gumuz,2021,Software Developer,178,178,bachelor,3,-2.1671383756172515,60.803393654407856,ICT,Natural & Computational Sciences,simulated
+Benishangul-Gumuz,2022,Software Developer,189,189,bachelor,3,-0.9262153728731892,40.019181278293416,ICT,Natural & Computational Sciences,simulated
+Benishangul-Gumuz,2023,Software Developer,151,151,bachelor,4,2.4931423452366617,47.59724861487381,ICT,Natural & Computational Sciences,simulated
+Benishangul-Gumuz,2024,Software Developer,214,214,bachelor,3,1.1465774872022068,74.25256459002989,ICT,Natural & Computational Sciences,simulated
+Benishangul-Gumuz,2025,Software Developer,169,169,bachelor,4,0.7329478897162405,25.378179648755065,ICT,Natural & Computational Sciences,simulated
+Gambela,2016,Software Developer,183,183,bachelor,1,0.1500741740940521,55.49988486571475,ICT,Natural & Computational Sciences,simulated
+Gambela,2017,Software Developer,183,183,bachelor,2,-1.4334226056430834,55.50823083390986,ICT,Natural & Computational Sciences,simulated
+Gambela,2018,Software Developer,169,169,bachelor,0,5.392253201280926,59.25438227523724,ICT,Natural & Computational Sciences,simulated
+Gambela,2019,Software Developer,134,134,bachelor,0,3.7336349887008065,50.43928709769773,ICT,Natural & Computational Sciences,simulated
+Gambela,2020,Software Developer,177,177,bachelor,3,2.6289440201836913,59.262040111267034,ICT,Natural & Computational Sciences,simulated
+Gambela,2021,Software Developer,196,196,bachelor,2,-1.819669604898035,22.27848166981861,ICT,Natural & Computational Sciences,simulated
+Gambela,2022,Software Developer,105,105,bachelor,2,1.1120718057235024,42.56756970677229,ICT,Natural & Computational Sciences,simulated
+Gambela,2023,Software Developer,177,177,bachelor,0,2.9154040650541297,47.41672716190406,ICT,Natural & Computational Sciences,simulated
+Gambela,2024,Software Developer,225,225,bachelor,2,3.834891148290012,51.949192403995575,ICT,Natural & Computational Sciences,simulated
+Gambela,2025,Software Developer,129,129,bachelor,2,4.33446137656946,52.47085977109053,ICT,Natural & Computational Sciences,simulated
+Harari,2016,Software Developer,178,178,bachelor,1,5.409461255852256,50.72024276827479,ICT,Natural & Computational Sciences,simulated
+Harari,2017,Software Developer,196,196,bachelor,0,-5.4768074480825835,41.62179524539824,ICT,Natural & Computational Sciences,simulated
+Harari,2018,Software Developer,122,122,bachelor,2,0.23744776008392066,65.75119588244627,ICT,Natural & Computational Sciences,simulated
+Harari,2019,Software Developer,218,218,bachelor,4,3.5533743428537345,61.62467312455838,ICT,Natural & Computational Sciences,simulated
+Harari,2020,Software Developer,142,142,bachelor,3,5.305904814319785,36.722240103139754,ICT,Natural & Computational Sciences,simulated
+Harari,2021,Software Developer,126,126,bachelor,2,2.196759599636714,37.414315203764964,ICT,Natural & Computational Sciences,simulated
+Harari,2022,Software Developer,254,254,bachelor,0,1.560037652739668,35.983598391103435,ICT,Natural & Computational Sciences,simulated
+Harari,2023,Software Developer,193,193,bachelor,0,5.968861012500511,51.490914687079155,ICT,Natural & Computational Sciences,simulated
+Harari,2024,Software Developer,141,141,bachelor,2,2.0547750754010696,51.79026773201815,ICT,Natural & Computational Sciences,simulated
+Harari,2025,Software Developer,161,161,bachelor,2,5.519282071896328,54.3260737952715,ICT,Natural & Computational Sciences,simulated
+Addis Ababa,2016,General Practitioner,189,189,bachelor,3,-0.4728710028506815,42.02123869886941,Health,Medicine & Health Sciences,simulated
+Addis Ababa,2017,General Practitioner,138,138,bachelor,3,3.9609681015041103,35.699872378555625,Health,Medicine & Health Sciences,simulated
+Addis Ababa,2018,General Practitioner,183,183,bachelor,0,4.499980157578374,33.63995432302188,Health,Medicine & Health Sciences,simulated
+Addis Ababa,2019,General Practitioner,198,198,bachelor,3,0.3263079120103356,36.42816084146501,Health,Medicine & Health Sciences,simulated
+Addis Ababa,2020,General Practitioner,174,174,bachelor,2,0.8959959739543697,26.666320060356945,Health,Medicine & Health Sciences,simulated
+Addis Ababa,2021,General Practitioner,142,142,bachelor,2,2.0370951775827075,70.42855034631556,Health,Medicine & Health Sciences,simulated
+Addis Ababa,2022,General Practitioner,195,195,bachelor,4,2.6468239444342885,66.85162202856165,Health,Medicine & Health Sciences,simulated
+Addis Ababa,2023,General Practitioner,170,170,bachelor,4,2.4290618031313866,43.1347462942929,Health,Medicine & Health Sciences,simulated
+Addis Ababa,2024,General Practitioner,207,207,bachelor,4,5.180716503130123,60.753248913247006,Health,Medicine & Health Sciences,simulated
+Addis Ababa,2025,General Practitioner,204,204,bachelor,0,2.439482805820976,31.218375423447032,Health,Medicine & Health Sciences,simulated
+Dire Dawa,2016,General Practitioner,171,171,bachelor,0,1.0524514972291792,45.12758356550674,Health,Medicine & Health Sciences,simulated
+Dire Dawa,2017,General Practitioner,199,199,bachelor,2,1.442974466676768,31.502252172757363,Health,Medicine & Health Sciences,simulated
+Dire Dawa,2018,General Practitioner,141,141,bachelor,1,4.37185063600397,36.507190759727806,Health,Medicine & Health Sciences,simulated
+Dire Dawa,2019,General Practitioner,231,231,bachelor,3,2.4001015287256906,75.3363100803017,Health,Medicine & Health Sciences,simulated
+Dire Dawa,2020,General Practitioner,190,190,bachelor,4,5.0932211013436905,65.83173045200533,Health,Medicine & Health Sciences,simulated
+Dire Dawa,2021,General Practitioner,162,162,bachelor,2,6.498881719393603,40.514489309615925,Health,Medicine & Health Sciences,simulated
+Dire Dawa,2022,General Practitioner,165,165,bachelor,3,5.30107613310239,44.037453823331894,Health,Medicine & Health Sciences,simulated
+Dire Dawa,2023,General Practitioner,246,246,bachelor,0,6.316126129791533,48.4751608712185,Health,Medicine & Health Sciences,simulated
+Dire Dawa,2024,General Practitioner,141,141,bachelor,4,-2.239073319529721,56.89553048597827,Health,Medicine & Health Sciences,simulated
+Dire Dawa,2025,General Practitioner,147,147,bachelor,4,6.1406593801626475,31.370233976548928,Health,Medicine & Health Sciences,simulated
+Amhara,2016,General Practitioner,153,153,bachelor,3,4.5040302980644835,40.48681146443609,Health,Medicine & Health Sciences,simulated
+Amhara,2017,General Practitioner,166,166,bachelor,0,5.381590653569399,60.0815474884792,Health,Medicine & Health Sciences,simulated
+Amhara,2018,General Practitioner,165,165,bachelor,3,-0.42254881141968337,51.04363941733139,Health,Medicine & Health Sciences,simulated
+Amhara,2019,General Practitioner,212,212,bachelor,1,3.3783904279863193,36.90004492975467,Health,Medicine & Health Sciences,simulated
+Amhara,2020,General Practitioner,251,251,bachelor,2,5.195566111562506,50.60054231679385,Health,Medicine & Health Sciences,simulated
+Amhara,2021,General Practitioner,198,198,bachelor,0,1.0329260985514388,46.171004649390675,Health,Medicine & Health Sciences,simulated
+Amhara,2022,General Practitioner,191,191,bachelor,1,-1.484406866435549,68.55001404126125,Health,Medicine & Health Sciences,simulated
+Amhara,2023,General Practitioner,206,206,bachelor,3,3.086482309588197,49.189087504971475,Health,Medicine & Health Sciences,simulated
+Amhara,2024,General Practitioner,247,247,bachelor,1,0.5794182766345792,58.20092430459985,Health,Medicine & Health Sciences,simulated
+Amhara,2025,General Practitioner,198,198,bachelor,2,0.47528722709793847,61.064192955838436,Health,Medicine & Health Sciences,simulated
+Oromia,2016,General Practitioner,191,191,bachelor,4,4.225809692715124,52.088319208610486,Health,Medicine & Health Sciences,simulated
+Oromia,2017,General Practitioner,176,176,bachelor,2,3.960777017375517,55.51428762032714,Health,Medicine & Health Sciences,simulated
+Oromia,2018,General Practitioner,216,216,bachelor,1,2.3234616986165735,50.86873187102418,Health,Medicine & Health Sciences,simulated
+Oromia,2019,General Practitioner,227,227,bachelor,4,4.5748308313509,44.07926927784283,Health,Medicine & Health Sciences,simulated
+Oromia,2020,General Practitioner,182,182,bachelor,4,4.873230619358792,49.821742762176676,Health,Medicine & Health Sciences,simulated
+Oromia,2021,General Practitioner,225,225,bachelor,1,1.6422743918110267,51.94686941511434,Health,Medicine & Health Sciences,simulated
+Oromia,2022,General Practitioner,255,255,bachelor,3,7.05212590258638,46.99488545697801,Health,Medicine & Health Sciences,simulated
+Oromia,2023,General Practitioner,160,160,bachelor,3,5.900544291579447,26.060198296448633,Health,Medicine & Health Sciences,simulated
+Oromia,2024,General Practitioner,187,187,bachelor,0,4.406279841783521,22.769996995348976,Health,Medicine & Health Sciences,simulated
+Oromia,2025,General Practitioner,126,126,bachelor,3,2.714037799428544,53.69838855332549,Health,Medicine & Health Sciences,simulated
+Tigray,2016,General Practitioner,200,200,bachelor,0,4.825599971376791,53.24274123706877,Health,Medicine & Health Sciences,simulated
+Tigray,2017,General Practitioner,174,174,bachelor,3,4.344000614134235,40.230392810230605,Health,Medicine & Health Sciences,simulated
+Tigray,2018,General Practitioner,205,205,bachelor,0,4.2186160296864035,53.5542650819062,Health,Medicine & Health Sciences,simulated
+Tigray,2019,General Practitioner,168,168,bachelor,0,4.587375504107268,66.51237932071626,Health,Medicine & Health Sciences,simulated
+Tigray,2020,General Practitioner,139,139,bachelor,1,5.716233594937544,45.51288361568734,Health,Medicine & Health Sciences,simulated
+Tigray,2021,General Practitioner,116,116,bachelor,1,2.3635684606212513,63.07443558689111,Health,Medicine & Health Sciences,simulated
+Tigray,2022,General Practitioner,38,38,bachelor,0,0.21930459278544134,49.07963939823871,Health,Medicine & Health Sciences,simulated
+Tigray,2023,General Practitioner,115,115,bachelor,2,6.741275508953646,45.25129738081274,Health,Medicine & Health Sciences,simulated
+Tigray,2024,General Practitioner,158,158,bachelor,1,4.830342894008063,43.996383041621144,Health,Medicine & Health Sciences,simulated
+Tigray,2025,General Practitioner,140,140,bachelor,2,0.1843885120837978,63.30083021403336,Health,Medicine & Health Sciences,simulated
+Sidama,2016,General Practitioner,196,196,bachelor,3,4.23057482009061,24.61614714634409,Health,Medicine & Health Sciences,simulated
+Sidama,2017,General Practitioner,167,167,bachelor,2,2.2550782676452212,59.77663515034995,Health,Medicine & Health Sciences,simulated
+Sidama,2018,General Practitioner,121,121,bachelor,0,7.486057106130709,27.37090988433187,Health,Medicine & Health Sciences,simulated
+Sidama,2019,General Practitioner,180,180,bachelor,0,4.2483540818326295,58.47670225046689,Health,Medicine & Health Sciences,simulated
+Sidama,2020,General Practitioner,93,93,bachelor,4,2.4531437755893477,44.60068598975208,Health,Medicine & Health Sciences,simulated
+Sidama,2021,General Practitioner,262,262,bachelor,3,2.4611004107884216,53.39826802697242,Health,Medicine & Health Sciences,simulated
+Sidama,2022,General Practitioner,175,175,bachelor,2,4.381593146621196,58.72007477407786,Health,Medicine & Health Sciences,simulated
+Sidama,2023,General Practitioner,148,148,bachelor,1,3.381565928232156,50.255548541382126,Health,Medicine & Health Sciences,simulated
+Sidama,2024,General Practitioner,114,114,bachelor,0,5.227308836165372,42.4604389761758,Health,Medicine & Health Sciences,simulated
+Sidama,2025,General Practitioner,284,284,bachelor,0,5.407675754505981,53.42217747125655,Health,Medicine & Health Sciences,simulated
+South Ethiopia,2016,General Practitioner,240,240,bachelor,1,3.4605753254053577,31.030012497904163,Health,Medicine & Health Sciences,simulated
+South Ethiopia,2017,General Practitioner,206,206,bachelor,0,6.491784174993161,40.88554670814524,Health,Medicine & Health Sciences,simulated
+South Ethiopia,2018,General Practitioner,106,106,bachelor,0,7.397583003403664,48.962392014461955,Health,Medicine & Health Sciences,simulated
+South Ethiopia,2019,General Practitioner,238,238,bachelor,2,3.047611744699693,42.04172851137696,Health,Medicine & Health Sciences,simulated
+South Ethiopia,2020,General Practitioner,265,265,bachelor,4,2.3773271180721114,53.52726415655934,Health,Medicine & Health Sciences,simulated
+South Ethiopia,2021,General Practitioner,168,168,bachelor,4,4.945427868641925,53.35122133409096,Health,Medicine & Health Sciences,simulated
+South Ethiopia,2022,General Practitioner,199,199,bachelor,0,-1.1559990151288089,38.01374636409931,Health,Medicine & Health Sciences,simulated
+South Ethiopia,2023,General Practitioner,150,150,bachelor,3,3.7315792407723096,38.21900295921604,Health,Medicine & Health Sciences,simulated
+South Ethiopia,2024,General Practitioner,121,121,bachelor,1,3.969040829176121,56.2490188707511,Health,Medicine & Health Sciences,simulated
+South Ethiopia,2025,General Practitioner,159,159,bachelor,4,1.9998209601863235,55.36771779144642,Health,Medicine & Health Sciences,simulated
+South West Ethiopia,2016,General Practitioner,186,186,bachelor,0,2.6058502169573465,38.02274249395799,Health,Medicine & Health Sciences,simulated
+South West Ethiopia,2017,General Practitioner,223,223,bachelor,3,2.2217631687400474,38.53498254119933,Health,Medicine & Health Sciences,simulated
+South West Ethiopia,2018,General Practitioner,215,215,bachelor,1,3.458114946406921,35.94858838580493,Health,Medicine & Health Sciences,simulated
+South West Ethiopia,2019,General Practitioner,241,241,bachelor,2,3.941801193175671,50.636845776623275,Health,Medicine & Health Sciences,simulated
+South West Ethiopia,2020,General Practitioner,163,163,bachelor,4,0.22883572797516694,33.55527128788823,Health,Medicine & Health Sciences,simulated
+South West Ethiopia,2021,General Practitioner,255,255,bachelor,3,0.8439409896315935,59.51619364249775,Health,Medicine & Health Sciences,simulated
+South West Ethiopia,2022,General Practitioner,235,235,bachelor,1,0.7974554564615235,55.55733380570821,Health,Medicine & Health Sciences,simulated
+South West Ethiopia,2023,General Practitioner,235,235,bachelor,1,3.856210272228933,39.042555926954606,Health,Medicine & Health Sciences,simulated
+South West Ethiopia,2024,General Practitioner,192,192,bachelor,0,0.5658376133975227,44.89629975051979,Health,Medicine & Health Sciences,simulated
+South West Ethiopia,2025,General Practitioner,182,182,bachelor,2,-0.00507842020873106,50.996831408111426,Health,Medicine & Health Sciences,simulated
+Central Ethiopia,2016,General Practitioner,200,200,bachelor,4,-2.395499301532145,49.25346208182086,Health,Medicine & Health Sciences,simulated
+Central Ethiopia,2017,General Practitioner,252,252,bachelor,0,4.144307921403849,48.187484156791555,Health,Medicine & Health Sciences,simulated
+Central Ethiopia,2018,General Practitioner,165,165,bachelor,0,3.521105561417917,56.487743679751986,Health,Medicine & Health Sciences,simulated
+Central Ethiopia,2019,General Practitioner,136,136,bachelor,0,3.303339475523538,42.465651796452875,Health,Medicine & Health Sciences,simulated
+Central Ethiopia,2020,General Practitioner,194,194,bachelor,3,2.018172385689506,54.509409550555844,Health,Medicine & Health Sciences,simulated
+Central Ethiopia,2021,General Practitioner,208,208,bachelor,4,2.9237763573810267,22.075106659445247,Health,Medicine & Health Sciences,simulated
+Central Ethiopia,2022,General Practitioner,205,205,bachelor,3,0.903040688915504,42.889519239110356,Health,Medicine & Health Sciences,simulated
+Central Ethiopia,2023,General Practitioner,212,212,bachelor,3,5.0831187164561875,61.16441937037283,Health,Medicine & Health Sciences,simulated
+Central Ethiopia,2024,General Practitioner,220,220,bachelor,4,1.8015442743015673,55.51725788963718,Health,Medicine & Health Sciences,simulated
+Central Ethiopia,2025,General Practitioner,176,176,bachelor,3,3.9147292337518156,46.43492361898518,Health,Medicine & Health Sciences,simulated
+Somali,2016,General Practitioner,162,162,bachelor,4,0.19543473297998615,39.31845551813554,Health,Medicine & Health Sciences,simulated
+Somali,2017,General Practitioner,177,177,bachelor,0,2.878125525891615,54.8107312630735,Health,Medicine & Health Sciences,simulated
+Somali,2018,General Practitioner,168,168,bachelor,2,6.0748128042001195,41.9716351545172,Health,Medicine & Health Sciences,simulated
+Somali,2019,General Practitioner,187,187,bachelor,0,6.032104838461635,40.311544239476596,Health,Medicine & Health Sciences,simulated
+Somali,2020,General Practitioner,150,150,bachelor,2,4.72844784972402,60.88565723807919,Health,Medicine & Health Sciences,simulated
+Somali,2021,General Practitioner,192,192,bachelor,2,2.362776097324433,31.897353069419683,Health,Medicine & Health Sciences,simulated
+Somali,2022,General Practitioner,185,185,bachelor,0,6.109508605004947,60.849075964813814,Health,Medicine & Health Sciences,simulated
+Somali,2023,General Practitioner,211,211,bachelor,3,8.527672859554334,29.379331005550274,Health,Medicine & Health Sciences,simulated
+Somali,2024,General Practitioner,189,189,bachelor,4,6.881100350765854,41.36845480028633,Health,Medicine & Health Sciences,simulated
+Somali,2025,General Practitioner,220,220,bachelor,3,1.8766538447441006,53.04318253137574,Health,Medicine & Health Sciences,simulated
+Afar,2016,General Practitioner,175,175,bachelor,3,3.834077751020329,59.03409266117308,Health,Medicine & Health Sciences,simulated
+Afar,2017,General Practitioner,175,175,bachelor,1,5.228404839231663,60.45400559370701,Health,Medicine & Health Sciences,simulated
+Afar,2018,General Practitioner,163,163,bachelor,1,4.862951721072629,42.823001505918704,Health,Medicine & Health Sciences,simulated
+Afar,2019,General Practitioner,204,204,bachelor,1,5.596064064269437,55.07614950817844,Health,Medicine & Health Sciences,simulated
+Afar,2020,General Practitioner,188,188,bachelor,0,3.351798225488676,36.39173968691422,Health,Medicine & Health Sciences,simulated
+Afar,2021,General Practitioner,207,207,bachelor,3,0.5319274438722896,54.16636625741321,Health,Medicine & Health Sciences,simulated
+Afar,2022,General Practitioner,215,215,bachelor,0,-1.4116662313666852,39.158976234824415,Health,Medicine & Health Sciences,simulated
+Afar,2023,General Practitioner,207,207,bachelor,0,6.1424040932775235,23.020389330154202,Health,Medicine & Health Sciences,simulated
+Afar,2024,General Practitioner,183,183,bachelor,2,3.226125079165262,46.11572507505617,Health,Medicine & Health Sciences,simulated
+Afar,2025,General Practitioner,274,274,bachelor,2,1.6530147550523133,60.58553374597835,Health,Medicine & Health Sciences,simulated
+Benishangul-Gumuz,2016,General Practitioner,220,220,bachelor,2,3.2971239211753574,48.00572295480212,Health,Medicine & Health Sciences,simulated
+Benishangul-Gumuz,2017,General Practitioner,150,150,bachelor,0,0.9243156629848754,43.082004800524686,Health,Medicine & Health Sciences,simulated
+Benishangul-Gumuz,2018,General Practitioner,134,134,bachelor,2,2.5113338632927173,49.941830248676794,Health,Medicine & Health Sciences,simulated
+Benishangul-Gumuz,2019,General Practitioner,197,197,bachelor,2,2.5091559349624943,38.77097823275351,Health,Medicine & Health Sciences,simulated
+Benishangul-Gumuz,2020,General Practitioner,197,197,bachelor,2,1.785350577343221,36.20855503175762,Health,Medicine & Health Sciences,simulated
+Benishangul-Gumuz,2021,General Practitioner,162,162,bachelor,3,2.5460804866371625,61.7408048764863,Health,Medicine & Health Sciences,simulated
+Benishangul-Gumuz,2022,General Practitioner,207,207,bachelor,1,7.751727287411008,47.582609340565796,Health,Medicine & Health Sciences,simulated
+Benishangul-Gumuz,2023,General Practitioner,236,236,bachelor,3,6.053157252230017,61.80770269313905,Health,Medicine & Health Sciences,simulated
+Benishangul-Gumuz,2024,General Practitioner,192,192,bachelor,4,3.012881716713051,58.2018836629461,Health,Medicine & Health Sciences,simulated
+Benishangul-Gumuz,2025,General Practitioner,148,148,bachelor,1,2.3426121489735063,68.00357992441917,Health,Medicine & Health Sciences,simulated
+Gambela,2016,General Practitioner,204,204,bachelor,2,-0.052883412444000744,42.81543855186295,Health,Medicine & Health Sciences,simulated
+Gambela,2017,General Practitioner,193,193,bachelor,2,2.8963132736827064,33.29577987095222,Health,Medicine & Health Sciences,simulated
+Gambela,2018,General Practitioner,210,210,bachelor,4,2.2866240141157794,57.548779122218725,Health,Medicine & Health Sciences,simulated
+Gambela,2019,General Practitioner,261,261,bachelor,2,6.8133164826586,45.112890239237,Health,Medicine & Health Sciences,simulated
+Gambela,2020,General Practitioner,135,135,bachelor,3,8.867430551091113,64.05663378326793,Health,Medicine & Health Sciences,simulated
+Gambela,2021,General Practitioner,179,179,bachelor,2,6.9056156036083145,62.02452013674123,Health,Medicine & Health Sciences,simulated
+Gambela,2022,General Practitioner,104,104,bachelor,2,3.296902834735066,37.60101199772029,Health,Medicine & Health Sciences,simulated
+Gambela,2023,General Practitioner,183,183,bachelor,0,4.0356735571391,38.470594991286895,Health,Medicine & Health Sciences,simulated
+Gambela,2024,General Practitioner,175,175,bachelor,1,4.988140044478466,44.38332950927555,Health,Medicine & Health Sciences,simulated
+Gambela,2025,General Practitioner,112,112,bachelor,2,1.8812507308654816,36.64385364888585,Health,Medicine & Health Sciences,simulated
+Harari,2016,General Practitioner,128,128,bachelor,3,5.0089110529440575,36.396744430267205,Health,Medicine & Health Sciences,simulated
+Harari,2017,General Practitioner,129,129,bachelor,0,2.7433830642910344,32.1183371689217,Health,Medicine & Health Sciences,simulated
+Harari,2018,General Practitioner,170,170,bachelor,3,3.76121586398677,52.081627964439576,Health,Medicine & Health Sciences,simulated
+Harari,2019,General Practitioner,148,148,bachelor,3,3.1763999726253833,63.3665961376137,Health,Medicine & Health Sciences,simulated
+Harari,2020,General Practitioner,96,96,bachelor,1,0.054203708994208455,64.84672483599309,Health,Medicine & Health Sciences,simulated
+Harari,2021,General Practitioner,212,212,bachelor,3,4.96286804020909,37.75941194077102,Health,Medicine & Health Sciences,simulated
+Harari,2022,General Practitioner,190,190,bachelor,4,-2.927990274278967,49.75811790895909,Health,Medicine & Health Sciences,simulated
+Harari,2023,General Practitioner,204,204,bachelor,4,-0.5351352157699232,55.22380332665415,Health,Medicine & Health Sciences,simulated
+Harari,2024,General Practitioner,183,183,bachelor,3,1.9672495963376975,50.131771606024884,Health,Medicine & Health Sciences,simulated
+Harari,2025,General Practitioner,193,193,bachelor,4,-4.018875490639173,43.745082384266155,Health,Medicine & Health Sciences,simulated
+Addis Ababa,2016,Agronomist,183,183,bachelor,0,4.685538328874342,49.03043342526389,Agriculture,Agriculture & Life Sciences,simulated
+Addis Ababa,2017,Agronomist,183,183,bachelor,4,4.802974716028025,43.06995366036791,Agriculture,Agriculture & Life Sciences,simulated
+Addis Ababa,2018,Agronomist,181,181,bachelor,2,3.1386877873160923,25.874599880150605,Agriculture,Agriculture & Life Sciences,simulated
+Addis Ababa,2019,Agronomist,182,182,bachelor,4,3.1598387788106175,58.806903628822,Agriculture,Agriculture & Life Sciences,simulated
+Addis Ababa,2020,Agronomist,166,166,bachelor,1,0.563268590721905,65.31137389050826,Agriculture,Agriculture & Life Sciences,simulated
+Addis Ababa,2021,Agronomist,191,191,bachelor,4,6.4788380199664966,66.43501729348716,Agriculture,Agriculture & Life Sciences,simulated
+Addis Ababa,2022,Agronomist,150,150,bachelor,1,2.6807803279203988,55.37282974719255,Agriculture,Agriculture & Life Sciences,simulated
+Addis Ababa,2023,Agronomist,123,123,bachelor,2,4.137247159694778,52.85097401706608,Agriculture,Agriculture & Life Sciences,simulated
+Addis Ababa,2024,Agronomist,134,134,bachelor,2,4.111244526532362,72.87616275869942,Agriculture,Agriculture & Life Sciences,simulated
+Addis Ababa,2025,Agronomist,168,168,bachelor,0,3.8243731390428817,40.73993305503603,Agriculture,Agriculture & Life Sciences,simulated
+Dire Dawa,2016,Agronomist,189,189,bachelor,1,2.3526586683925954,77.38933252354067,Agriculture,Agriculture & Life Sciences,simulated
+Dire Dawa,2017,Agronomist,184,184,bachelor,4,-0.9104323602196938,55.71413405406848,Agriculture,Agriculture & Life Sciences,simulated
+Dire Dawa,2018,Agronomist,225,225,bachelor,2,2.5580673127927596,36.99168850968037,Agriculture,Agriculture & Life Sciences,simulated
+Dire Dawa,2019,Agronomist,144,144,bachelor,3,2.525655754170167,43.59817849273259,Agriculture,Agriculture & Life Sciences,simulated
+Dire Dawa,2020,Agronomist,157,157,bachelor,4,5.302918289147133,63.20392570679633,Agriculture,Agriculture & Life Sciences,simulated
+Dire Dawa,2021,Agronomist,148,148,bachelor,2,0.6980052723195733,48.9285846511386,Agriculture,Agriculture & Life Sciences,simulated
+Dire Dawa,2022,Agronomist,196,196,bachelor,2,3.867114396047834,67.02065164936467,Agriculture,Agriculture & Life Sciences,simulated
+Dire Dawa,2023,Agronomist,171,171,bachelor,4,5.01784427880906,54.21558321123842,Agriculture,Agriculture & Life Sciences,simulated
+Dire Dawa,2024,Agronomist,183,183,bachelor,2,1.0801134830866745,36.37111540071808,Agriculture,Agriculture & Life Sciences,simulated
+Dire Dawa,2025,Agronomist,197,197,bachelor,4,-1.0950673746958648,54.13850089797566,Agriculture,Agriculture & Life Sciences,simulated
+Amhara,2016,Agronomist,134,134,bachelor,4,2.0093359009649725,65.43877341463202,Agriculture,Agriculture & Life Sciences,simulated
+Amhara,2017,Agronomist,171,171,bachelor,0,2.366150405704464,58.39100831429934,Agriculture,Agriculture & Life Sciences,simulated
+Amhara,2018,Agronomist,191,191,bachelor,3,1.9897412943601425,43.26547542871438,Agriculture,Agriculture & Life Sciences,simulated
+Amhara,2019,Agronomist,274,274,bachelor,1,-1.1882371749630218,33.56963472815241,Agriculture,Agriculture & Life Sciences,simulated
+Amhara,2020,Agronomist,227,227,bachelor,3,0.6937489800278134,26.970921319114133,Agriculture,Agriculture & Life Sciences,simulated
+Amhara,2021,Agronomist,230,230,bachelor,3,0.38300922600029264,42.106697554661515,Agriculture,Agriculture & Life Sciences,simulated
+Amhara,2022,Agronomist,183,183,bachelor,2,5.311083857939173,48.25118080500952,Agriculture,Agriculture & Life Sciences,simulated
+Amhara,2023,Agronomist,144,144,bachelor,3,1.0151909777707502,63.56373934306249,Agriculture,Agriculture & Life Sciences,simulated
+Amhara,2024,Agronomist,168,168,bachelor,4,2.975040374651153,26.945433903272285,Agriculture,Agriculture & Life Sciences,simulated
+Amhara,2025,Agronomist,209,209,bachelor,4,5.6846214544999505,70.10917617844287,Agriculture,Agriculture & Life Sciences,simulated
+Oromia,2016,Agronomist,103,103,bachelor,0,4.5977084284291365,40.808123125979456,Agriculture,Agriculture & Life Sciences,simulated
+Oromia,2017,Agronomist,122,122,bachelor,0,3.2688276211298413,42.608382773897375,Agriculture,Agriculture & Life Sciences,simulated
+Oromia,2018,Agronomist,128,128,bachelor,0,4.416255603585124,50.09915406757993,Agriculture,Agriculture & Life Sciences,simulated
+Oromia,2019,Agronomist,187,187,bachelor,2,4.108564141821203,27.703402002482317,Agriculture,Agriculture & Life Sciences,simulated
+Oromia,2020,Agronomist,177,177,bachelor,0,2.055149607760089,38.04682199687804,Agriculture,Agriculture & Life Sciences,simulated
+Oromia,2021,Agronomist,150,150,bachelor,1,2.2665278076870132,58.97259618047103,Agriculture,Agriculture & Life Sciences,simulated
+Oromia,2022,Agronomist,241,241,bachelor,1,-0.9018515782716587,36.72821735229542,Agriculture,Agriculture & Life Sciences,simulated
+Oromia,2023,Agronomist,206,206,bachelor,3,6.251809567250844,36.39825989464173,Agriculture,Agriculture & Life Sciences,simulated
+Oromia,2024,Agronomist,187,187,bachelor,1,3.6912221797424083,40.27860854754806,Agriculture,Agriculture & Life Sciences,simulated
+Oromia,2025,Agronomist,187,187,bachelor,3,-0.029508111471328924,28.393479827550525,Agriculture,Agriculture & Life Sciences,simulated
+Tigray,2016,Agronomist,303,303,bachelor,2,8.33677753332674,66.1085950068789,Agriculture,Agriculture & Life Sciences,simulated
+Tigray,2017,Agronomist,114,114,bachelor,4,3.904461352899319,32.466276127438434,Agriculture,Agriculture & Life Sciences,simulated
+Tigray,2018,Agronomist,168,168,bachelor,1,-0.9355655557005602,37.742519114608896,Agriculture,Agriculture & Life Sciences,simulated
+Tigray,2019,Agronomist,158,158,bachelor,0,3.097067741478961,35.56573686498283,Agriculture,Agriculture & Life Sciences,simulated
+Tigray,2020,Agronomist,185,185,bachelor,1,3.6847249182982615,47.19212757227827,Agriculture,Agriculture & Life Sciences,simulated
+Tigray,2021,Agronomist,106,106,bachelor,2,-0.587454887252151,59.42408478583759,Agriculture,Agriculture & Life Sciences,simulated
+Tigray,2022,Agronomist,72,72,bachelor,0,4.926883018919611,54.678744503294396,Agriculture,Agriculture & Life Sciences,simulated
+Tigray,2023,Agronomist,159,159,bachelor,4,2.9952705341420995,38.56337604670365,Agriculture,Agriculture & Life Sciences,simulated
+Tigray,2024,Agronomist,142,142,bachelor,3,3.258259894866218,34.62085235349904,Agriculture,Agriculture & Life Sciences,simulated
+Tigray,2025,Agronomist,200,200,bachelor,0,3.8572085217078804,44.04792742859719,Agriculture,Agriculture & Life Sciences,simulated
+Sidama,2016,Agronomist,144,144,bachelor,4,5.365118020830849,51.86876016512274,Agriculture,Agriculture & Life Sciences,simulated
+Sidama,2017,Agronomist,182,182,bachelor,4,1.0440243239040772,53.75807817968078,Agriculture,Agriculture & Life Sciences,simulated
+Sidama,2018,Agronomist,154,154,bachelor,2,5.813992155021586,35.641197962964156,Agriculture,Agriculture & Life Sciences,simulated
+Sidama,2019,Agronomist,104,104,bachelor,3,6.272538396802192,27.066726305509842,Agriculture,Agriculture & Life Sciences,simulated
+Sidama,2020,Agronomist,164,164,bachelor,0,1.1904998906982016,74.6888466526372,Agriculture,Agriculture & Life Sciences,simulated
+Sidama,2021,Agronomist,175,175,bachelor,0,3.8997626383577306,57.48585569043676,Agriculture,Agriculture & Life Sciences,simulated
+Sidama,2022,Agronomist,154,154,bachelor,1,3.9400230445796867,57.0456410062055,Agriculture,Agriculture & Life Sciences,simulated
+Sidama,2023,Agronomist,151,151,bachelor,1,4.109975829748004,47.89272592161206,Agriculture,Agriculture & Life Sciences,simulated
+Sidama,2024,Agronomist,225,225,bachelor,3,8.08053863864142,52.06467734543974,Agriculture,Agriculture & Life Sciences,simulated
+Sidama,2025,Agronomist,174,174,bachelor,1,2.394519480691595,47.91785900675823,Agriculture,Agriculture & Life Sciences,simulated
+South Ethiopia,2016,Agronomist,154,154,bachelor,0,2.9702122915176914,71.323334593395,Agriculture,Agriculture & Life Sciences,simulated
+South Ethiopia,2017,Agronomist,162,162,bachelor,2,2.698384346074219,42.78827070468874,Agriculture,Agriculture & Life Sciences,simulated
+South Ethiopia,2018,Agronomist,254,254,bachelor,3,3.2341020937437026,51.755798971778894,Agriculture,Agriculture & Life Sciences,simulated
+South Ethiopia,2019,Agronomist,134,134,bachelor,3,9.607967282399809,36.83321710747518,Agriculture,Agriculture & Life Sciences,simulated
+South Ethiopia,2020,Agronomist,181,181,bachelor,0,2.0623357764809116,49.72353777613991,Agriculture,Agriculture & Life Sciences,simulated
+South Ethiopia,2021,Agronomist,166,166,bachelor,1,2.8667981119264634,60.977491554231584,Agriculture,Agriculture & Life Sciences,simulated
+South Ethiopia,2022,Agronomist,163,163,bachelor,0,2.9176167082629623,48.75501164896536,Agriculture,Agriculture & Life Sciences,simulated
+South Ethiopia,2023,Agronomist,187,187,bachelor,1,2.5417379606238955,37.649545169340236,Agriculture,Agriculture & Life Sciences,simulated
+South Ethiopia,2024,Agronomist,170,170,bachelor,4,2.8948889488798466,55.83490211502314,Agriculture,Agriculture & Life Sciences,simulated
+South Ethiopia,2025,Agronomist,138,138,bachelor,1,2.271447293035493,35.992648766312065,Agriculture,Agriculture & Life Sciences,simulated
+South West Ethiopia,2016,Agronomist,231,231,bachelor,3,3.9310041416563175,52.08894975006489,Agriculture,Agriculture & Life Sciences,simulated
+South West Ethiopia,2017,Agronomist,191,191,bachelor,0,-2.8622054099757523,23.72474632767709,Agriculture,Agriculture & Life Sciences,simulated
+South West Ethiopia,2018,Agronomist,184,184,bachelor,0,1.3928609822410163,42.90552022573326,Agriculture,Agriculture & Life Sciences,simulated
+South West Ethiopia,2019,Agronomist,137,137,bachelor,0,-0.06327396786481687,47.99933515350312,Agriculture,Agriculture & Life Sciences,simulated
+South West Ethiopia,2020,Agronomist,103,103,bachelor,4,1.3314637686816604,47.715761306774844,Agriculture,Agriculture & Life Sciences,simulated
+South West Ethiopia,2021,Agronomist,275,275,bachelor,4,0.5451292621527024,52.87643396031558,Agriculture,Agriculture & Life Sciences,simulated
+South West Ethiopia,2022,Agronomist,188,188,bachelor,1,2.466771058600771,65.29747008958877,Agriculture,Agriculture & Life Sciences,simulated
+South West Ethiopia,2023,Agronomist,207,207,bachelor,0,4.753014095004839,31.029012938818795,Agriculture,Agriculture & Life Sciences,simulated
+South West Ethiopia,2024,Agronomist,183,183,bachelor,1,0.8459101530771611,40.48242611059168,Agriculture,Agriculture & Life Sciences,simulated
+South West Ethiopia,2025,Agronomist,177,177,bachelor,0,4.1419111423602555,59.77924181930722,Agriculture,Agriculture & Life Sciences,simulated
+Central Ethiopia,2016,Agronomist,217,217,bachelor,0,3.1390588309382776,44.10615454160145,Agriculture,Agriculture & Life Sciences,simulated
+Central Ethiopia,2017,Agronomist,170,170,bachelor,1,1.0492668768635767,42.85848837718387,Agriculture,Agriculture & Life Sciences,simulated
+Central Ethiopia,2018,Agronomist,194,194,bachelor,0,2.6256830361235868,38.307814234299514,Agriculture,Agriculture & Life Sciences,simulated
+Central Ethiopia,2019,Agronomist,218,218,bachelor,3,-2.006038652095951,60.517793690080055,Agriculture,Agriculture & Life Sciences,simulated
+Central Ethiopia,2020,Agronomist,122,122,bachelor,0,1.80977697124901,51.850913213556105,Agriculture,Agriculture & Life Sciences,simulated
+Central Ethiopia,2021,Agronomist,263,263,bachelor,2,0.9055584462955548,35.993389605748845,Agriculture,Agriculture & Life Sciences,simulated
+Central Ethiopia,2022,Agronomist,183,183,bachelor,0,3.447912612921203,48.535388571823866,Agriculture,Agriculture & Life Sciences,simulated
+Central Ethiopia,2023,Agronomist,186,186,bachelor,0,0.48832005520031974,50.15073131442578,Agriculture,Agriculture & Life Sciences,simulated
+Central Ethiopia,2024,Agronomist,164,164,bachelor,1,4.9949694812777,32.11517880361967,Agriculture,Agriculture & Life Sciences,simulated
+Central Ethiopia,2025,Agronomist,168,168,bachelor,4,4.319964846683392,36.22166734595598,Agriculture,Agriculture & Life Sciences,simulated
+Somali,2016,Agronomist,136,136,bachelor,4,3.8611026417580616,60.445828328683604,Agriculture,Agriculture & Life Sciences,simulated
+Somali,2017,Agronomist,189,189,bachelor,1,9.15584078692642,39.878874464634336,Agriculture,Agriculture & Life Sciences,simulated
+Somali,2018,Agronomist,209,209,bachelor,3,7.027442043905488,64.31293504601024,Agriculture,Agriculture & Life Sciences,simulated
+Somali,2019,Agronomist,208,208,bachelor,4,-1.3408337988727155,56.42689493069941,Agriculture,Agriculture & Life Sciences,simulated
+Somali,2020,Agronomist,147,147,bachelor,4,-0.6366175157484766,51.23978730101513,Agriculture,Agriculture & Life Sciences,simulated
+Somali,2021,Agronomist,165,165,bachelor,1,1.0544142638642633,55.11122276851216,Agriculture,Agriculture & Life Sciences,simulated
+Somali,2022,Agronomist,177,177,bachelor,2,4.8429815976535595,70.84749744638165,Agriculture,Agriculture & Life Sciences,simulated
+Somali,2023,Agronomist,191,191,bachelor,0,-1.514933747130022,29.30064184907565,Agriculture,Agriculture & Life Sciences,simulated
+Somali,2024,Agronomist,182,182,bachelor,1,3.336770133527888,54.13878693862591,Agriculture,Agriculture & Life Sciences,simulated
+Somali,2025,Agronomist,177,177,bachelor,4,5.405239106612069,55.39926989840737,Agriculture,Agriculture & Life Sciences,simulated
+Afar,2016,Agronomist,139,139,bachelor,3,-0.8565831664629528,53.37628745866937,Agriculture,Agriculture & Life Sciences,simulated
+Afar,2017,Agronomist,168,168,bachelor,2,3.401734933879825,51.88818749721642,Agriculture,Agriculture & Life Sciences,simulated
+Afar,2018,Agronomist,191,191,bachelor,1,3.0851993400638427,50.26700740878176,Agriculture,Agriculture & Life Sciences,simulated
+Afar,2019,Agronomist,233,233,bachelor,2,7.742002056687673,47.78748805813513,Agriculture,Agriculture & Life Sciences,simulated
+Afar,2020,Agronomist,159,159,bachelor,4,4.126805094967342,45.55934849792026,Agriculture,Agriculture & Life Sciences,simulated
+Afar,2021,Agronomist,110,110,bachelor,1,5.807621872816896,57.78466561347463,Agriculture,Agriculture & Life Sciences,simulated
+Afar,2022,Agronomist,225,225,bachelor,0,3.476531553427703,51.12663520280014,Agriculture,Agriculture & Life Sciences,simulated
+Afar,2023,Agronomist,220,220,bachelor,2,-0.037614388970530044,43.77030631185147,Agriculture,Agriculture & Life Sciences,simulated
+Afar,2024,Agronomist,177,177,bachelor,3,1.6534808561298315,39.454209179263664,Agriculture,Agriculture & Life Sciences,simulated
+Afar,2025,Agronomist,162,162,bachelor,4,4.174075662658023,47.18069070205474,Agriculture,Agriculture & Life Sciences,simulated
+Benishangul-Gumuz,2016,Agronomist,121,121,bachelor,2,3.3415094704874515,50.03883060675834,Agriculture,Agriculture & Life Sciences,simulated
+Benishangul-Gumuz,2017,Agronomist,181,181,bachelor,2,1.8232199508243467,57.45176943371503,Agriculture,Agriculture & Life Sciences,simulated
+Benishangul-Gumuz,2018,Agronomist,194,194,bachelor,3,3.9259929614413993,67.16897612132385,Agriculture,Agriculture & Life Sciences,simulated
+Benishangul-Gumuz,2019,Agronomist,139,139,bachelor,2,1.9473239206565909,43.96388723625456,Agriculture,Agriculture & Life Sciences,simulated
+Benishangul-Gumuz,2020,Agronomist,230,230,bachelor,3,1.0188515973259356,46.73029478762778,Agriculture,Agriculture & Life Sciences,simulated
+Benishangul-Gumuz,2021,Agronomist,184,184,bachelor,0,5.990956075382982,43.44376238588317,Agriculture,Agriculture & Life Sciences,simulated
+Benishangul-Gumuz,2022,Agronomist,152,152,bachelor,1,2.1392868347361365,78.76385558511664,Agriculture,Agriculture & Life Sciences,simulated
+Benishangul-Gumuz,2023,Agronomist,195,195,bachelor,2,4.495695357379757,47.99651107329368,Agriculture,Agriculture & Life Sciences,simulated
+Benishangul-Gumuz,2024,Agronomist,185,185,bachelor,4,4.406696865759681,52.18987011034088,Agriculture,Agriculture & Life Sciences,simulated
+Benishangul-Gumuz,2025,Agronomist,180,180,bachelor,0,2.1192342972737106,53.09209117182152,Agriculture,Agriculture & Life Sciences,simulated
+Gambela,2016,Agronomist,183,183,bachelor,4,5.626487638606225,39.90862763664333,Agriculture,Agriculture & Life Sciences,simulated
+Gambela,2017,Agronomist,133,133,bachelor,0,2.0044655812619077,35.0012198018694,Agriculture,Agriculture & Life Sciences,simulated
+Gambela,2018,Agronomist,161,161,bachelor,1,2.1824249124662662,44.218549217529855,Agriculture,Agriculture & Life Sciences,simulated
+Gambela,2019,Agronomist,185,185,bachelor,4,2.482806354094829,37.172451439821565,Agriculture,Agriculture & Life Sciences,simulated
+Gambela,2020,Agronomist,228,228,bachelor,3,1.638840505889593,37.36648000698723,Agriculture,Agriculture & Life Sciences,simulated
+Gambela,2021,Agronomist,121,121,bachelor,2,-0.8511773028909237,60.56950277854014,Agriculture,Agriculture & Life Sciences,simulated
+Gambela,2022,Agronomist,217,217,bachelor,2,6.415450559862858,55.40116804785916,Agriculture,Agriculture & Life Sciences,simulated
+Gambela,2023,Agronomist,188,188,bachelor,3,5.154849135314005,55.421530355669816,Agriculture,Agriculture & Life Sciences,simulated
+Gambela,2024,Agronomist,186,186,bachelor,2,2.7320116193900947,28.704302668390547,Agriculture,Agriculture & Life Sciences,simulated
+Gambela,2025,Agronomist,147,147,bachelor,4,7.500403014115037,38.07047823995968,Agriculture,Agriculture & Life Sciences,simulated
+Harari,2016,Agronomist,105,105,bachelor,0,3.6215354733661083,51.65847061404142,Agriculture,Agriculture & Life Sciences,simulated
+Harari,2017,Agronomist,173,173,bachelor,0,5.276903538431948,66.35609811774384,Agriculture,Agriculture & Life Sciences,simulated
+Harari,2018,Agronomist,159,159,bachelor,1,5.796240828794762,41.06683244593545,Agriculture,Agriculture & Life Sciences,simulated
+Harari,2019,Agronomist,240,240,bachelor,3,5.787918019380492,33.09585987367804,Agriculture,Agriculture & Life Sciences,simulated
+Harari,2020,Agronomist,243,243,bachelor,3,1.2813887563862234,56.20396803190914,Agriculture,Agriculture & Life Sciences,simulated
+Harari,2021,Agronomist,221,221,bachelor,4,3.2466957013084103,40.44158087712877,Agriculture,Agriculture & Life Sciences,simulated
+Harari,2022,Agronomist,169,169,bachelor,3,5.103054186844339,43.12947331235689,Agriculture,Agriculture & Life Sciences,simulated
+Harari,2023,Agronomist,153,153,bachelor,4,-0.6931155784201923,40.869240440365914,Agriculture,Agriculture & Life Sciences,simulated
+Harari,2024,Agronomist,175,175,bachelor,2,-1.3618108172808858,59.75950263628997,Agriculture,Agriculture & Life Sciences,simulated
+Harari,2025,Agronomist,139,139,bachelor,1,-0.2733290723793136,66.83429723701506,Agriculture,Agriculture & Life Sciences,simulated
+Addis Ababa,2016,Accountant,213,213,bachelor,0,4.263001681116084,63.73648141460558,Finance,Business & Economics,simulated
+Addis Ababa,2017,Accountant,215,215,bachelor,0,2.138899387202624,35.21942056190689,Finance,Business & Economics,simulated
+Addis Ababa,2018,Accountant,128,128,bachelor,4,0.25001596651932934,38.42781053079196,Finance,Business & Economics,simulated
+Addis Ababa,2019,Accountant,173,173,bachelor,3,6.494700696967045,29.873069466166545,Finance,Business & Economics,simulated
+Addis Ababa,2020,Accountant,181,181,bachelor,2,1.6091420448599707,59.15821852439845,Finance,Business & Economics,simulated
+Addis Ababa,2021,Accountant,146,146,bachelor,2,2.3415736438239776,49.692266164937955,Finance,Business & Economics,simulated
+Addis Ababa,2022,Accountant,208,208,bachelor,2,6.1519500143630035,42.65842025152042,Finance,Business & Economics,simulated
+Addis Ababa,2023,Accountant,199,199,bachelor,1,2.525213616504847,56.89086544347831,Finance,Business & Economics,simulated
+Addis Ababa,2024,Accountant,261,261,bachelor,3,2.9599611514698276,42.81566976291661,Finance,Business & Economics,simulated
+Addis Ababa,2025,Accountant,156,156,bachelor,0,1.2517579836992685,47.77623800346191,Finance,Business & Economics,simulated
+Dire Dawa,2016,Accountant,148,148,bachelor,2,-4.913752810322738,64.61941484766092,Finance,Business & Economics,simulated
+Dire Dawa,2017,Accountant,245,245,bachelor,0,4.621894558776441,37.513415496637165,Finance,Business & Economics,simulated
+Dire Dawa,2018,Accountant,129,129,bachelor,4,4.597899218810115,63.183570237469624,Finance,Business & Economics,simulated
+Dire Dawa,2019,Accountant,186,186,bachelor,0,5.144569746197577,53.33816118638333,Finance,Business & Economics,simulated
+Dire Dawa,2020,Accountant,149,149,bachelor,4,5.363927710228644,36.1141935008591,Finance,Business & Economics,simulated
+Dire Dawa,2021,Accountant,212,212,bachelor,2,2.6309846354201074,44.86933125201248,Finance,Business & Economics,simulated
+Dire Dawa,2022,Accountant,195,195,bachelor,2,5.22171386921181,37.808353023709,Finance,Business & Economics,simulated
+Dire Dawa,2023,Accountant,202,202,bachelor,4,0.10007120119567325,45.85495488977837,Finance,Business & Economics,simulated
+Dire Dawa,2024,Accountant,175,175,bachelor,4,3.023157929159681,44.85791208457514,Finance,Business & Economics,simulated
+Dire Dawa,2025,Accountant,237,237,bachelor,2,1.9275084269253007,42.34617214293924,Finance,Business & Economics,simulated
+Amhara,2016,Accountant,104,104,bachelor,0,0.15482879231378321,36.72379662260762,Finance,Business & Economics,simulated
+Amhara,2017,Accountant,169,169,bachelor,0,3.5998956830022655,34.97876470752464,Finance,Business & Economics,simulated
+Amhara,2018,Accountant,147,147,bachelor,1,1.725467933189486,36.66619103121518,Finance,Business & Economics,simulated
+Amhara,2019,Accountant,265,265,bachelor,3,6.760096117039891,64.10209569646901,Finance,Business & Economics,simulated
+Amhara,2020,Accountant,128,128,bachelor,1,-0.007975418661088085,70.11386606974305,Finance,Business & Economics,simulated
+Amhara,2021,Accountant,213,213,bachelor,1,0.36853552991541205,52.433684272809494,Finance,Business & Economics,simulated
+Amhara,2022,Accountant,120,120,bachelor,4,2.5610927000958217,56.8757702405497,Finance,Business & Economics,simulated
+Amhara,2023,Accountant,219,219,bachelor,1,3.050809943130018,45.311992386258936,Finance,Business & Economics,simulated
+Amhara,2024,Accountant,50,50,bachelor,2,1.3560225368829308,49.225760479189795,Finance,Business & Economics,simulated
+Amhara,2025,Accountant,270,270,bachelor,0,0.014862018357084228,48.255256775799786,Finance,Business & Economics,simulated
+Oromia,2016,Accountant,199,199,bachelor,0,3.0030500598357506,62.10698805701418,Finance,Business & Economics,simulated
+Oromia,2017,Accountant,163,163,bachelor,4,4.3587937719875685,52.967480441373056,Finance,Business & Economics,simulated
+Oromia,2018,Accountant,176,176,bachelor,3,0.8135865160599005,44.41620353596073,Finance,Business & Economics,simulated
+Oromia,2019,Accountant,128,128,bachelor,3,1.8961001516425016,61.65818514997075,Finance,Business & Economics,simulated
+Oromia,2020,Accountant,196,196,bachelor,1,-0.9972002880279067,51.84061905971324,Finance,Business & Economics,simulated
+Oromia,2021,Accountant,177,177,bachelor,3,4.343539380036777,64.59859897807155,Finance,Business & Economics,simulated
+Oromia,2022,Accountant,163,163,bachelor,2,5.295328331483404,40.7589649508537,Finance,Business & Economics,simulated
+Oromia,2023,Accountant,183,183,bachelor,4,-1.9914712209517695,44.30333288601464,Finance,Business & Economics,simulated
+Oromia,2024,Accountant,232,232,bachelor,0,5.248543589685902,59.47577841982044,Finance,Business & Economics,simulated
+Oromia,2025,Accountant,233,233,bachelor,2,2.1320807722507222,59.3073686229846,Finance,Business & Economics,simulated
+Tigray,2016,Accountant,269,269,bachelor,1,-0.2991578715780463,40.8605458278784,Finance,Business & Economics,simulated
+Tigray,2017,Accountant,198,198,bachelor,0,-1.154271668672246,38.85498428351765,Finance,Business & Economics,simulated
+Tigray,2018,Accountant,166,166,bachelor,4,7.491275037090286,56.253765700358144,Finance,Business & Economics,simulated
+Tigray,2019,Accountant,135,135,bachelor,1,12.669018239171983,47.80175648152567,Finance,Business & Economics,simulated
+Tigray,2020,Accountant,112,112,bachelor,0,0.41884646850222884,31.8242255073833,Finance,Business & Economics,simulated
+Tigray,2021,Accountant,110,110,bachelor,0,-3.6672956751963817,59.78701136752323,Finance,Business & Economics,simulated
+Tigray,2022,Accountant,116,116,bachelor,3,5.289281985645714,34.887088430716815,Finance,Business & Economics,simulated
+Tigray,2023,Accountant,114,114,bachelor,2,4.373873910526494,45.48550509006176,Finance,Business & Economics,simulated
+Tigray,2024,Accountant,154,154,bachelor,0,6.296911065671481,63.35994388654859,Finance,Business & Economics,simulated
+Tigray,2025,Accountant,197,197,bachelor,2,2.1114217618212705,54.256953899665504,Finance,Business & Economics,simulated
+Sidama,2016,Accountant,145,145,bachelor,2,5.376062193899136,71.17907886357176,Finance,Business & Economics,simulated
+Sidama,2017,Accountant,147,147,bachelor,2,0.6842561219507544,54.61589006897263,Finance,Business & Economics,simulated
+Sidama,2018,Accountant,169,169,bachelor,1,6.294275088585329,68.43365647701147,Finance,Business & Economics,simulated
+Sidama,2019,Accountant,182,182,bachelor,3,5.200961544776839,41.796485987268504,Finance,Business & Economics,simulated
+Sidama,2020,Accountant,188,188,bachelor,4,2.7330663485998707,69.88700040221109,Finance,Business & Economics,simulated
+Sidama,2021,Accountant,126,126,bachelor,4,2.987554426346257,48.64524621728116,Finance,Business & Economics,simulated
+Sidama,2022,Accountant,205,205,bachelor,4,2.2525371440677073,40.85079922982171,Finance,Business & Economics,simulated
+Sidama,2023,Accountant,89,89,bachelor,1,5.90619510290274,30.36081204972048,Finance,Business & Economics,simulated
+Sidama,2024,Accountant,115,115,bachelor,0,2.1628622754623428,44.39659125777562,Finance,Business & Economics,simulated
+Sidama,2025,Accountant,168,168,bachelor,1,5.685926705637258,41.378147067360615,Finance,Business & Economics,simulated
+South Ethiopia,2016,Accountant,203,203,bachelor,1,3.825112779420507,58.832299842590615,Finance,Business & Economics,simulated
+South Ethiopia,2017,Accountant,236,236,bachelor,2,-0.8728235921991478,44.43963745896178,Finance,Business & Economics,simulated
+South Ethiopia,2018,Accountant,243,243,bachelor,2,2.5024700515498037,48.04570891763041,Finance,Business & Economics,simulated
+South Ethiopia,2019,Accountant,191,191,bachelor,0,2.0675458030496072,54.56580374697376,Finance,Business & Economics,simulated
+South Ethiopia,2020,Accountant,199,199,bachelor,0,1.7755699874913078,42.55095619148237,Finance,Business & Economics,simulated
+South Ethiopia,2021,Accountant,169,169,bachelor,2,3.6746909251835183,50.1656891198714,Finance,Business & Economics,simulated
+South Ethiopia,2022,Accountant,151,151,bachelor,1,3.012640419555953,65.56342875934864,Finance,Business & Economics,simulated
+South Ethiopia,2023,Accountant,237,237,bachelor,4,0.35199208642000324,42.11593609339063,Finance,Business & Economics,simulated
+South Ethiopia,2024,Accountant,163,163,bachelor,1,4.81602250509234,49.7631161206716,Finance,Business & Economics,simulated
+South Ethiopia,2025,Accountant,157,157,bachelor,2,7.129009211970783,42.73888122537531,Finance,Business & Economics,simulated
+South West Ethiopia,2016,Accountant,209,209,bachelor,2,2.837082800615868,56.08502801484383,Finance,Business & Economics,simulated
+South West Ethiopia,2017,Accountant,241,241,bachelor,2,3.76247875257054,42.13399566802636,Finance,Business & Economics,simulated
+South West Ethiopia,2018,Accountant,239,239,bachelor,3,3.4259068298183077,60.332095474218576,Finance,Business & Economics,simulated
+South West Ethiopia,2019,Accountant,192,192,bachelor,0,9.142381302279244,48.022286068443435,Finance,Business & Economics,simulated
+South West Ethiopia,2020,Accountant,225,225,bachelor,4,4.096711637024646,43.655077045385056,Finance,Business & Economics,simulated
+South West Ethiopia,2021,Accountant,165,165,bachelor,4,4.241579280996946,37.58086431456438,Finance,Business & Economics,simulated
+South West Ethiopia,2022,Accountant,156,156,bachelor,0,6.100931915091445,48.96638546061263,Finance,Business & Economics,simulated
+South West Ethiopia,2023,Accountant,182,182,bachelor,3,0.3534616703080564,68.34824812503314,Finance,Business & Economics,simulated
+South West Ethiopia,2024,Accountant,224,224,bachelor,0,-0.6316348340470479,52.21863503344782,Finance,Business & Economics,simulated
+South West Ethiopia,2025,Accountant,142,142,bachelor,1,4.929073551128147,51.860306207700084,Finance,Business & Economics,simulated
+Central Ethiopia,2016,Accountant,200,200,bachelor,2,0.40038885868057505,40.31126442600826,Finance,Business & Economics,simulated
+Central Ethiopia,2017,Accountant,192,192,bachelor,2,2.3944267202659137,51.03792034211906,Finance,Business & Economics,simulated
+Central Ethiopia,2018,Accountant,139,139,bachelor,2,6.4877576822141165,51.98803122299506,Finance,Business & Economics,simulated
+Central Ethiopia,2019,Accountant,195,195,bachelor,1,4.007275435270415,41.85684366811866,Finance,Business & Economics,simulated
+Central Ethiopia,2020,Accountant,245,245,bachelor,2,3.443002315739672,56.243680588455184,Finance,Business & Economics,simulated
+Central Ethiopia,2021,Accountant,217,217,bachelor,0,-0.11401023971262259,48.67635735923616,Finance,Business & Economics,simulated
+Central Ethiopia,2022,Accountant,269,269,bachelor,0,2.7339937820831306,56.73599115997394,Finance,Business & Economics,simulated
+Central Ethiopia,2023,Accountant,166,166,bachelor,3,3.884160794555724,42.50021172631187,Finance,Business & Economics,simulated
+Central Ethiopia,2024,Accountant,160,160,bachelor,0,7.205803268288411,42.23461535902973,Finance,Business & Economics,simulated
+Central Ethiopia,2025,Accountant,225,225,bachelor,0,1.9208431167972753,41.44632285747964,Finance,Business & Economics,simulated
+Somali,2016,Accountant,195,195,bachelor,1,4.661666162948411,46.36644232833864,Finance,Business & Economics,simulated
+Somali,2017,Accountant,157,157,bachelor,2,1.086289513951093,71.65603395791437,Finance,Business & Economics,simulated
+Somali,2018,Accountant,178,178,bachelor,3,5.1823787208027285,37.90025121548585,Finance,Business & Economics,simulated
+Somali,2019,Accountant,225,225,bachelor,0,2.910645061753349,31.394762344256236,Finance,Business & Economics,simulated
+Somali,2020,Accountant,158,158,bachelor,3,3.2028840965903504,38.47690688879784,Finance,Business & Economics,simulated
+Somali,2021,Accountant,143,143,bachelor,3,3.7305034954196707,48.5272091320022,Finance,Business & Economics,simulated
+Somali,2022,Accountant,228,228,bachelor,4,3.153417597137607,53.995778799670994,Finance,Business & Economics,simulated
+Somali,2023,Accountant,123,123,bachelor,2,4.7401023612363895,52.92841801616886,Finance,Business & Economics,simulated
+Somali,2024,Accountant,218,218,bachelor,1,2.2562149037845263,44.5047739383092,Finance,Business & Economics,simulated
+Somali,2025,Accountant,237,237,bachelor,1,3.7073072204066086,30.048473977751886,Finance,Business & Economics,simulated
+Afar,2016,Accountant,205,205,bachelor,0,5.711451963462386,54.465011873976664,Finance,Business & Economics,simulated
+Afar,2017,Accountant,229,229,bachelor,0,5.597148332530289,59.24840351959781,Finance,Business & Economics,simulated
+Afar,2018,Accountant,225,225,bachelor,0,1.2653941349266495,34.276980775593316,Finance,Business & Economics,simulated
+Afar,2019,Accountant,146,146,bachelor,2,4.826737105807152,21.319236911398406,Finance,Business & Economics,simulated
+Afar,2020,Accountant,179,179,bachelor,0,6.059611291473866,46.59345221551,Finance,Business & Economics,simulated
+Afar,2021,Accountant,165,165,bachelor,4,6.290037751981892,46.897104592993436,Finance,Business & Economics,simulated
+Afar,2022,Accountant,169,169,bachelor,0,3.7141016873154458,44.022210771738884,Finance,Business & Economics,simulated
+Afar,2023,Accountant,166,166,bachelor,1,6.625581631689112,48.58670813029871,Finance,Business & Economics,simulated
+Afar,2024,Accountant,162,162,bachelor,0,3.4962830329136705,41.28301608316695,Finance,Business & Economics,simulated
+Afar,2025,Accountant,165,165,bachelor,2,0.8711768532341835,50.36279179390675,Finance,Business & Economics,simulated
+Benishangul-Gumuz,2016,Accountant,127,127,bachelor,0,1.6338190666194337,56.59965854510473,Finance,Business & Economics,simulated
+Benishangul-Gumuz,2017,Accountant,199,199,bachelor,3,3.260016607590507,58.15371478366694,Finance,Business & Economics,simulated
+Benishangul-Gumuz,2018,Accountant,242,242,bachelor,3,-0.27716142536110944,40.735609846273086,Finance,Business & Economics,simulated
+Benishangul-Gumuz,2019,Accountant,160,160,bachelor,1,4.596525093560313,41.73325100236259,Finance,Business & Economics,simulated
+Benishangul-Gumuz,2020,Accountant,157,157,bachelor,1,3.747222617250202,55.616116918585725,Finance,Business & Economics,simulated
+Benishangul-Gumuz,2021,Accountant,131,131,bachelor,4,1.714398388336465,25.259649232114622,Finance,Business & Economics,simulated
+Benishangul-Gumuz,2022,Accountant,84,84,bachelor,1,3.788565834852771,50.06886320998469,Finance,Business & Economics,simulated
+Benishangul-Gumuz,2023,Accountant,243,243,bachelor,3,-1.1893394564788693,23.038745996181913,Finance,Business & Economics,simulated
+Benishangul-Gumuz,2024,Accountant,135,135,bachelor,4,1.4666101975656138,54.994313173070125,Finance,Business & Economics,simulated
+Benishangul-Gumuz,2025,Accountant,191,191,bachelor,0,5.568790769085453,52.449208918000885,Finance,Business & Economics,simulated
+Gambela,2016,Accountant,163,163,bachelor,0,4.093638024805924,29.638051947722253,Finance,Business & Economics,simulated
+Gambela,2017,Accountant,52,52,bachelor,3,3.9755581488214764,50.81149787878439,Finance,Business & Economics,simulated
+Gambela,2018,Accountant,242,242,bachelor,2,3.772946012341039,44.254435182894504,Finance,Business & Economics,simulated
+Gambela,2019,Accountant,147,147,bachelor,0,2.299366960282441,59.46160741728939,Finance,Business & Economics,simulated
+Gambela,2020,Accountant,198,198,bachelor,3,3.266783772756907,37.20549138861018,Finance,Business & Economics,simulated
+Gambela,2021,Accountant,226,226,bachelor,0,5.675214195293647,50.226282845613504,Finance,Business & Economics,simulated
+Gambela,2022,Accountant,202,202,bachelor,1,1.8290063257837168,44.87893775205988,Finance,Business & Economics,simulated
+Gambela,2023,Accountant,143,143,bachelor,2,2.340474117181077,60.3700978809427,Finance,Business & Economics,simulated
+Gambela,2024,Accountant,213,213,bachelor,0,5.397945295877281,43.61622922659162,Finance,Business & Economics,simulated
+Gambela,2025,Accountant,133,133,bachelor,2,2.6078088952399963,47.06774431376258,Finance,Business & Economics,simulated
+Harari,2016,Accountant,207,207,bachelor,3,5.52645116659092,23.821107726700724,Finance,Business & Economics,simulated
+Harari,2017,Accountant,148,148,bachelor,3,2.7716010265954463,53.752245393658804,Finance,Business & Economics,simulated
+Harari,2018,Accountant,263,263,bachelor,0,1.2254149749689858,42.92007743108309,Finance,Business & Economics,simulated
+Harari,2019,Accountant,150,150,bachelor,1,0.7794088616075068,48.551008843826125,Finance,Business & Economics,simulated
+Harari,2020,Accountant,219,219,bachelor,2,0.8507143295101618,45.64536338349746,Finance,Business & Economics,simulated
+Harari,2021,Accountant,138,138,bachelor,3,5.457569998521511,65.65383495114926,Finance,Business & Economics,simulated
+Harari,2022,Accountant,116,116,bachelor,1,1.054486607928156,48.75452413706208,Finance,Business & Economics,simulated
+Harari,2023,Accountant,176,176,bachelor,3,-0.35265219206995857,62.505800008054244,Finance,Business & Economics,simulated
+Harari,2024,Accountant,173,173,bachelor,0,3.2907713048208502,37.552830914444286,Finance,Business & Economics,simulated
+Harari,2025,Accountant,172,172,bachelor,0,-1.5932992460931779,19.714616811134803,Finance,Business & Economics,simulated
+Addis Ababa,2016,Social Worker,141,141,bachelor,4,-1.3925091759300035,42.03025063992217,Public administration,Social Sciences & Humanities,simulated
+Addis Ababa,2017,Social Worker,158,158,bachelor,4,2.8460917160537518,55.369840712925225,Public administration,Social Sciences & Humanities,simulated
+Addis Ababa,2018,Social Worker,248,248,bachelor,0,0.5397161677201603,55.9978951154752,Public administration,Social Sciences & Humanities,simulated
+Addis Ababa,2019,Social Worker,236,236,bachelor,0,0.19932154203100794,35.224518789037845,Public administration,Social Sciences & Humanities,simulated
+Addis Ababa,2020,Social Worker,123,123,bachelor,2,3.933039051367678,65.79844516090341,Public administration,Social Sciences & Humanities,simulated
+Addis Ababa,2021,Social Worker,215,215,bachelor,1,3.9638164507096665,48.54909304818356,Public administration,Social Sciences & Humanities,simulated
+Addis Ababa,2022,Social Worker,195,195,bachelor,0,6.2579904900739125,47.74942729461226,Public administration,Social Sciences & Humanities,simulated
+Addis Ababa,2023,Social Worker,190,190,bachelor,4,1.9787555400210053,49.360808860425,Public administration,Social Sciences & Humanities,simulated
+Addis Ababa,2024,Social Worker,169,169,bachelor,3,5.183191937034405,65.85905049798833,Public administration,Social Sciences & Humanities,simulated
+Addis Ababa,2025,Social Worker,178,178,bachelor,3,3.8301334702784864,58.33973555915915,Public administration,Social Sciences & Humanities,simulated
+Dire Dawa,2016,Social Worker,174,174,bachelor,1,2.4575383972584595,41.40596421217912,Public administration,Social Sciences & Humanities,simulated
+Dire Dawa,2017,Social Worker,200,200,bachelor,0,4.281305133749484,59.07051248816948,Public administration,Social Sciences & Humanities,simulated
+Dire Dawa,2018,Social Worker,179,179,bachelor,1,5.769155658754098,39.185548521197,Public administration,Social Sciences & Humanities,simulated
+Dire Dawa,2019,Social Worker,149,149,bachelor,3,1.670109012506301,27.076889467666522,Public administration,Social Sciences & Humanities,simulated
+Dire Dawa,2020,Social Worker,171,171,bachelor,3,1.915919394753324,64.05836085751335,Public administration,Social Sciences & Humanities,simulated
+Dire Dawa,2021,Social Worker,231,231,bachelor,3,5.223222016301982,24.780536038814144,Public administration,Social Sciences & Humanities,simulated
+Dire Dawa,2022,Social Worker,237,237,bachelor,3,7.196028196767643,40.75117940748979,Public administration,Social Sciences & Humanities,simulated
+Dire Dawa,2023,Social Worker,174,174,bachelor,2,3.224071677521484,36.81177982770697,Public administration,Social Sciences & Humanities,simulated
+Dire Dawa,2024,Social Worker,115,115,bachelor,1,3.166484098709208,83.43378847899896,Public administration,Social Sciences & Humanities,simulated
+Dire Dawa,2025,Social Worker,113,113,bachelor,3,-1.1370834224800417,54.86393035887297,Public administration,Social Sciences & Humanities,simulated
+Amhara,2016,Social Worker,123,123,bachelor,2,-4.185918539016303,51.51261731350731,Public administration,Social Sciences & Humanities,simulated
+Amhara,2017,Social Worker,137,137,bachelor,1,4.6084720854088355,47.09033709463076,Public administration,Social Sciences & Humanities,simulated
+Amhara,2018,Social Worker,183,183,bachelor,4,2.3105237059427552,37.26229032759508,Public administration,Social Sciences & Humanities,simulated
+Amhara,2019,Social Worker,147,147,bachelor,4,0.26251312433376883,66.1677749086808,Public administration,Social Sciences & Humanities,simulated
+Amhara,2020,Social Worker,164,164,bachelor,2,3.6469012672162977,38.35511287127272,Public administration,Social Sciences & Humanities,simulated
+Amhara,2021,Social Worker,178,178,bachelor,0,2.326129784234361,65.8821097221358,Public administration,Social Sciences & Humanities,simulated
+Amhara,2022,Social Worker,164,164,bachelor,3,4.776250262545247,31.60132064485265,Public administration,Social Sciences & Humanities,simulated
+Amhara,2023,Social Worker,187,187,bachelor,4,1.1041832899964996,33.49610452397043,Public administration,Social Sciences & Humanities,simulated
+Amhara,2024,Social Worker,131,131,bachelor,4,9.607568359776504,38.33630738004373,Public administration,Social Sciences & Humanities,simulated
+Amhara,2025,Social Worker,188,188,bachelor,4,3.776064649445798,41.64014001665713,Public administration,Social Sciences & Humanities,simulated
+Oromia,2016,Social Worker,236,236,bachelor,2,1.5057410651793683,68.81272089931642,Public administration,Social Sciences & Humanities,simulated
+Oromia,2017,Social Worker,158,158,bachelor,1,0.5743655545756252,46.32799747835398,Public administration,Social Sciences & Humanities,simulated
+Oromia,2018,Social Worker,214,214,bachelor,4,4.844484282611799,50.71890828471194,Public administration,Social Sciences & Humanities,simulated
+Oromia,2019,Social Worker,234,234,bachelor,4,4.326627181182043,66.36660670689358,Public administration,Social Sciences & Humanities,simulated
+Oromia,2020,Social Worker,145,145,bachelor,1,2.9961634974586144,37.75343501587198,Public administration,Social Sciences & Humanities,simulated
+Oromia,2021,Social Worker,139,139,bachelor,1,3.9552737556142143,55.98298568780842,Public administration,Social Sciences & Humanities,simulated
+Oromia,2022,Social Worker,184,184,bachelor,4,0.24170836074570712,43.30726981027142,Public administration,Social Sciences & Humanities,simulated
+Oromia,2023,Social Worker,132,132,bachelor,1,3.3484649137296727,53.85441031844737,Public administration,Social Sciences & Humanities,simulated
+Oromia,2024,Social Worker,233,233,bachelor,3,3.93105505153995,65.23335214591735,Public administration,Social Sciences & Humanities,simulated
+Oromia,2025,Social Worker,139,139,bachelor,2,-0.09061749915919437,30.306396663834484,Public administration,Social Sciences & Humanities,simulated
+Tigray,2016,Social Worker,204,204,bachelor,0,4.195133750820844,45.406145695609105,Public administration,Social Sciences & Humanities,simulated
+Tigray,2017,Social Worker,252,252,bachelor,3,4.969653117104244,38.354287844412696,Public administration,Social Sciences & Humanities,simulated
+Tigray,2018,Social Worker,167,167,bachelor,1,0.3284034157456479,62.185992979780934,Public administration,Social Sciences & Humanities,simulated
+Tigray,2019,Social Worker,169,169,bachelor,1,5.022274719977007,45.646602379349815,Public administration,Social Sciences & Humanities,simulated
+Tigray,2020,Social Worker,159,159,bachelor,4,7.330940448961959,44.45858394174272,Public administration,Social Sciences & Humanities,simulated
+Tigray,2021,Social Worker,166,166,bachelor,0,3.379585358042707,37.79052499865607,Public administration,Social Sciences & Humanities,simulated
+Tigray,2022,Social Worker,64,64,bachelor,0,2.515673253188252,57.872206201092396,Public administration,Social Sciences & Humanities,simulated
+Tigray,2023,Social Worker,212,212,bachelor,3,4.6720898695571655,52.04758748772697,Public administration,Social Sciences & Humanities,simulated
+Tigray,2024,Social Worker,229,229,bachelor,1,-0.15685679822549536,63.99181694767956,Public administration,Social Sciences & Humanities,simulated
+Tigray,2025,Social Worker,178,178,bachelor,4,6.85339062556749,54.08455444139289,Public administration,Social Sciences & Humanities,simulated
+Sidama,2016,Social Worker,227,227,bachelor,3,1.6822879838242708,45.304640148051924,Public administration,Social Sciences & Humanities,simulated
+Sidama,2017,Social Worker,119,119,bachelor,4,4.40928227816733,59.7222229151093,Public administration,Social Sciences & Humanities,simulated
+Sidama,2018,Social Worker,157,157,bachelor,3,-2.5358790235686817,46.13643339354923,Public administration,Social Sciences & Humanities,simulated
+Sidama,2019,Social Worker,129,129,bachelor,0,4.293058536881103,52.01907242191533,Public administration,Social Sciences & Humanities,simulated
+Sidama,2020,Social Worker,180,180,bachelor,3,3.6024119340305267,50.32144967101782,Public administration,Social Sciences & Humanities,simulated
+Sidama,2021,Social Worker,192,192,bachelor,4,1.5429734402956483,59.896604095042846,Public administration,Social Sciences & Humanities,simulated
+Sidama,2022,Social Worker,143,143,bachelor,3,6.046705528007476,35.68231184262899,Public administration,Social Sciences & Humanities,simulated
+Sidama,2023,Social Worker,126,126,bachelor,2,0.3896796937685978,69.80466966805646,Public administration,Social Sciences & Humanities,simulated
+Sidama,2024,Social Worker,155,155,bachelor,4,3.9158886376261144,15.314270447633383,Public administration,Social Sciences & Humanities,simulated
+Sidama,2025,Social Worker,141,141,bachelor,2,6.535187349009249,36.53558676691795,Public administration,Social Sciences & Humanities,simulated
+South Ethiopia,2016,Social Worker,169,169,bachelor,2,3.736681756875654,41.60975062092623,Public administration,Social Sciences & Humanities,simulated
+South Ethiopia,2017,Social Worker,201,201,bachelor,2,6.6155605333738485,35.26024866161721,Public administration,Social Sciences & Humanities,simulated
+South Ethiopia,2018,Social Worker,160,160,bachelor,2,4.749642699410707,48.39737611869773,Public administration,Social Sciences & Humanities,simulated
+South Ethiopia,2019,Social Worker,174,174,bachelor,3,-0.8734237503372237,34.40331515710046,Public administration,Social Sciences & Humanities,simulated
+South Ethiopia,2020,Social Worker,187,187,bachelor,3,0.8790762206363301,43.89485187138607,Public administration,Social Sciences & Humanities,simulated
+South Ethiopia,2021,Social Worker,177,177,bachelor,0,8.854206419692659,42.030228010409516,Public administration,Social Sciences & Humanities,simulated
+South Ethiopia,2022,Social Worker,235,235,bachelor,4,5.0094006294930065,37.83068731288179,Public administration,Social Sciences & Humanities,simulated
+South Ethiopia,2023,Social Worker,185,185,bachelor,1,2.0237738941310948,72.17299330207817,Public administration,Social Sciences & Humanities,simulated
+South Ethiopia,2024,Social Worker,196,196,bachelor,4,7.462300557992494,43.769955374847015,Public administration,Social Sciences & Humanities,simulated
+South Ethiopia,2025,Social Worker,202,202,bachelor,2,4.756031827721907,52.168550560115186,Public administration,Social Sciences & Humanities,simulated
+South West Ethiopia,2016,Social Worker,175,175,bachelor,3,1.4251301666926757,61.36434875524793,Public administration,Social Sciences & Humanities,simulated
+South West Ethiopia,2017,Social Worker,168,168,bachelor,3,6.344487927476763,60.55542157654886,Public administration,Social Sciences & Humanities,simulated
+South West Ethiopia,2018,Social Worker,201,201,bachelor,3,5.75668453571946,54.853134531715824,Public administration,Social Sciences & Humanities,simulated
+South West Ethiopia,2019,Social Worker,51,51,bachelor,2,0.9557189904645638,50.02487020677848,Public administration,Social Sciences & Humanities,simulated
+South West Ethiopia,2020,Social Worker,191,191,bachelor,2,6.872116497382426,55.03985050016356,Public administration,Social Sciences & Humanities,simulated
+South West Ethiopia,2021,Social Worker,96,96,bachelor,1,3.4941145679101293,62.5896433079629,Public administration,Social Sciences & Humanities,simulated
+South West Ethiopia,2022,Social Worker,184,184,bachelor,4,1.7643752791460363,59.39067124516417,Public administration,Social Sciences & Humanities,simulated
+South West Ethiopia,2023,Social Worker,165,165,bachelor,1,4.482141127719201,53.142531959401765,Public administration,Social Sciences & Humanities,simulated
+South West Ethiopia,2024,Social Worker,182,182,bachelor,0,3.5041812345086263,63.32772776294873,Public administration,Social Sciences & Humanities,simulated
+South West Ethiopia,2025,Social Worker,207,207,bachelor,3,5.599306266436546,38.83301908353114,Public administration,Social Sciences & Humanities,simulated
+Central Ethiopia,2016,Social Worker,146,146,bachelor,3,4.873642668422688,54.3776433969634,Public administration,Social Sciences & Humanities,simulated
+Central Ethiopia,2017,Social Worker,149,149,bachelor,1,4.95140544232252,40.46591800337479,Public administration,Social Sciences & Humanities,simulated
+Central Ethiopia,2018,Social Worker,206,206,bachelor,2,2.4371970804184797,41.56826818369222,Public administration,Social Sciences & Humanities,simulated
+Central Ethiopia,2019,Social Worker,185,185,bachelor,0,3.2076185433273876,35.441229638544385,Public administration,Social Sciences & Humanities,simulated
+Central Ethiopia,2020,Social Worker,204,204,bachelor,0,5.151442496178558,51.78042096185436,Public administration,Social Sciences & Humanities,simulated
+Central Ethiopia,2021,Social Worker,162,162,bachelor,3,3.322355442295364,46.42246021343399,Public administration,Social Sciences & Humanities,simulated
+Central Ethiopia,2022,Social Worker,184,184,bachelor,2,2.729950751689703,25.952035022843983,Public administration,Social Sciences & Humanities,simulated
+Central Ethiopia,2023,Social Worker,211,211,bachelor,0,3.993016742081836,49.79896997607047,Public administration,Social Sciences & Humanities,simulated
+Central Ethiopia,2024,Social Worker,133,133,bachelor,4,1.211531851980542,40.99557144699507,Public administration,Social Sciences & Humanities,simulated
+Central Ethiopia,2025,Social Worker,160,160,bachelor,3,0.04570622036815708,73.81983262181717,Public administration,Social Sciences & Humanities,simulated
+Somali,2016,Social Worker,240,240,bachelor,1,2.91585653154618,69.91837145952633,Public administration,Social Sciences & Humanities,simulated
+Somali,2017,Social Worker,244,244,bachelor,2,1.1502064896643964,50.97211734560861,Public administration,Social Sciences & Humanities,simulated
+Somali,2018,Social Worker,172,172,bachelor,1,2.5863219674309326,46.97198713138819,Public administration,Social Sciences & Humanities,simulated
+Somali,2019,Social Worker,188,188,bachelor,1,3.5410020194845124,65.25816633808049,Public administration,Social Sciences & Humanities,simulated
+Somali,2020,Social Worker,147,147,bachelor,0,0.3124712126261109,50.842141302832886,Public administration,Social Sciences & Humanities,simulated
+Somali,2021,Social Worker,221,221,bachelor,2,4.422573835548593,44.203535649457,Public administration,Social Sciences & Humanities,simulated
+Somali,2022,Social Worker,191,191,bachelor,3,1.5207496372062814,54.798637851762976,Public administration,Social Sciences & Humanities,simulated
+Somali,2023,Social Worker,218,218,bachelor,1,2.0299384856340996,68.82445031837263,Public administration,Social Sciences & Humanities,simulated
+Somali,2024,Social Worker,262,262,bachelor,1,5.740384929454761,27.255571560635005,Public administration,Social Sciences & Humanities,simulated
+Somali,2025,Social Worker,127,127,bachelor,2,2.7888891234286066,40.106960496061774,Public administration,Social Sciences & Humanities,simulated
+Afar,2016,Social Worker,205,205,bachelor,0,2.4800666647708214,55.43288515697026,Public administration,Social Sciences & Humanities,simulated
+Afar,2017,Social Worker,172,172,bachelor,3,1.645506698170504,70.87913942888568,Public administration,Social Sciences & Humanities,simulated
+Afar,2018,Social Worker,167,167,bachelor,0,4.142402673106417,52.5860677905867,Public administration,Social Sciences & Humanities,simulated
+Afar,2019,Social Worker,173,173,bachelor,4,8.878230462064268,50.521188747867555,Public administration,Social Sciences & Humanities,simulated
+Afar,2020,Social Worker,220,220,bachelor,4,6.176416270851211,44.029475676766964,Public administration,Social Sciences & Humanities,simulated
+Afar,2021,Social Worker,137,137,bachelor,0,4.914347723212083,51.591249569762965,Public administration,Social Sciences & Humanities,simulated
+Afar,2022,Social Worker,211,211,bachelor,2,4.200473722955162,28.868701758253582,Public administration,Social Sciences & Humanities,simulated
+Afar,2023,Social Worker,160,160,bachelor,4,1.2383576042262654,53.951523283492854,Public administration,Social Sciences & Humanities,simulated
+Afar,2024,Social Worker,160,160,bachelor,2,1.5793944086112415,55.18186333446701,Public administration,Social Sciences & Humanities,simulated
+Afar,2025,Social Worker,185,185,bachelor,3,1.1372920913375606,58.07056618456495,Public administration,Social Sciences & Humanities,simulated
+Benishangul-Gumuz,2016,Social Worker,242,242,bachelor,1,-2.768736748558262,50.84585960010593,Public administration,Social Sciences & Humanities,simulated
+Benishangul-Gumuz,2017,Social Worker,174,174,bachelor,3,-2.089356288800734,32.51502365604453,Public administration,Social Sciences & Humanities,simulated
+Benishangul-Gumuz,2018,Social Worker,211,211,bachelor,0,3.2015884290192616,40.19888518102447,Public administration,Social Sciences & Humanities,simulated
+Benishangul-Gumuz,2019,Social Worker,223,223,bachelor,1,-0.07450606995588949,37.3448697659086,Public administration,Social Sciences & Humanities,simulated
+Benishangul-Gumuz,2020,Social Worker,167,167,bachelor,4,0.7958487691466329,60.73884901650371,Public administration,Social Sciences & Humanities,simulated
+Benishangul-Gumuz,2021,Social Worker,146,146,bachelor,1,4.952190497983705,55.61941130532819,Public administration,Social Sciences & Humanities,simulated
+Benishangul-Gumuz,2022,Social Worker,173,173,bachelor,0,3.158535523492902,22.67027074694316,Public administration,Social Sciences & Humanities,simulated
+Benishangul-Gumuz,2023,Social Worker,158,158,bachelor,2,3.6081406922852572,58.434502762593816,Public administration,Social Sciences & Humanities,simulated
+Benishangul-Gumuz,2024,Social Worker,173,173,bachelor,4,1.2799500848379206,42.380395389792696,Public administration,Social Sciences & Humanities,simulated
+Benishangul-Gumuz,2025,Social Worker,204,204,bachelor,1,3.8752288519476386,47.735785949140684,Public administration,Social Sciences & Humanities,simulated
+Gambela,2016,Social Worker,205,205,bachelor,3,-0.3371066904312867,34.67610947249602,Public administration,Social Sciences & Humanities,simulated
+Gambela,2017,Social Worker,204,204,bachelor,4,-0.43495997771318073,43.42829957148278,Public administration,Social Sciences & Humanities,simulated
+Gambela,2018,Social Worker,175,175,bachelor,2,-1.1693523372243027,33.902764350559586,Public administration,Social Sciences & Humanities,simulated
+Gambela,2019,Social Worker,107,107,bachelor,4,4.529078531312488,52.76968150595914,Public administration,Social Sciences & Humanities,simulated
+Gambela,2020,Social Worker,149,149,bachelor,1,5.91573343861151,53.28415442433399,Public administration,Social Sciences & Humanities,simulated
+Gambela,2021,Social Worker,155,155,bachelor,1,5.967805287171217,49.651254850488144,Public administration,Social Sciences & Humanities,simulated
+Gambela,2022,Social Worker,192,192,bachelor,1,-0.7905959880821642,29.159172840371042,Public administration,Social Sciences & Humanities,simulated
+Gambela,2023,Social Worker,263,263,bachelor,2,0.9310672226476262,48.78208171026087,Public administration,Social Sciences & Humanities,simulated
+Gambela,2024,Social Worker,198,198,bachelor,4,2.614373705334911,45.88141263373597,Public administration,Social Sciences & Humanities,simulated
+Gambela,2025,Social Worker,199,199,bachelor,0,0.4004924038638813,42.71355481078091,Public administration,Social Sciences & Humanities,simulated
+Harari,2016,Social Worker,87,87,bachelor,2,-0.2451229659388381,58.244961724115136,Public administration,Social Sciences & Humanities,simulated
+Harari,2017,Social Worker,169,169,bachelor,2,4.7435186094288575,52.61862568229972,Public administration,Social Sciences & Humanities,simulated
+Harari,2018,Social Worker,190,190,bachelor,2,3.187343563688412,51.053761310250906,Public administration,Social Sciences & Humanities,simulated
+Harari,2019,Social Worker,268,268,bachelor,4,2.134969834255749,56.786633574727674,Public administration,Social Sciences & Humanities,simulated
+Harari,2020,Social Worker,175,175,bachelor,4,5.173837161179444,70.69901205242678,Public administration,Social Sciences & Humanities,simulated
+Harari,2021,Social Worker,190,190,bachelor,0,1.2924153046600224,53.60989453317555,Public administration,Social Sciences & Humanities,simulated
+Harari,2022,Social Worker,191,191,bachelor,1,4.8554238272405135,36.796969920570675,Public administration,Social Sciences & Humanities,simulated
+Harari,2023,Social Worker,230,230,bachelor,0,4.938400014237141,59.224754859307936,Public administration,Social Sciences & Humanities,simulated
+Harari,2024,Social Worker,197,197,bachelor,1,4.1015584393863325,44.94747085364707,Public administration,Social Sciences & Humanities,simulated
+Harari,2025,Social Worker,185,185,bachelor,4,2.71012157920372,52.09663461336473,Public administration,Social Sciences & Humanities,simulated
+Addis Ababa,2016,Legal Officer,183,183,bachelor,2,2.545981335627797,47.95680916640175,Public administration,Law,simulated
+Addis Ababa,2017,Legal Officer,108,108,bachelor,4,5.5610780848934915,52.175149267580665,Public administration,Law,simulated
+Addis Ababa,2018,Legal Officer,155,155,bachelor,4,1.7297257618902835,41.90231627589341,Public administration,Law,simulated
+Addis Ababa,2019,Legal Officer,194,194,bachelor,2,6.576558704168763,51.358500184271456,Public administration,Law,simulated
+Addis Ababa,2020,Legal Officer,148,148,bachelor,2,5.122618237172837,52.85135795519415,Public administration,Law,simulated
+Addis Ababa,2021,Legal Officer,218,218,bachelor,3,3.9836426830952716,57.249983176586454,Public administration,Law,simulated
+Addis Ababa,2022,Legal Officer,260,260,bachelor,1,9.017859121170094,59.23789177806553,Public administration,Law,simulated
+Addis Ababa,2023,Legal Officer,284,284,bachelor,4,0.5418702184129871,52.58941799655798,Public administration,Law,simulated
+Addis Ababa,2024,Legal Officer,186,186,bachelor,0,4.174386678278716,52.292824851918304,Public administration,Law,simulated
+Addis Ababa,2025,Legal Officer,211,211,bachelor,0,2.7329759655413937,41.81004572005496,Public administration,Law,simulated
+Dire Dawa,2016,Legal Officer,198,198,bachelor,0,2.686170630681732,30.70668701533734,Public administration,Law,simulated
+Dire Dawa,2017,Legal Officer,182,182,bachelor,2,0.6783892057597973,47.60427294112994,Public administration,Law,simulated
+Dire Dawa,2018,Legal Officer,136,136,bachelor,4,5.249264983605537,40.849913782312164,Public administration,Law,simulated
+Dire Dawa,2019,Legal Officer,142,142,bachelor,2,4.954102323297916,58.95932317728304,Public administration,Law,simulated
+Dire Dawa,2020,Legal Officer,196,196,bachelor,2,1.4257854531418306,44.02217135179818,Public administration,Law,simulated
+Dire Dawa,2021,Legal Officer,177,177,bachelor,3,-1.3135674057961566,36.20220326303592,Public administration,Law,simulated
+Dire Dawa,2022,Legal Officer,230,230,bachelor,0,6.067451394403674,60.18811585284754,Public administration,Law,simulated
+Dire Dawa,2023,Legal Officer,167,167,bachelor,2,2.256623663945245,59.598755241433956,Public administration,Law,simulated
+Dire Dawa,2024,Legal Officer,210,210,bachelor,3,2.9661797193265995,49.710958684921536,Public administration,Law,simulated
+Dire Dawa,2025,Legal Officer,169,169,bachelor,3,2.866328802091503,39.77227963994147,Public administration,Law,simulated
+Amhara,2016,Legal Officer,177,177,bachelor,2,1.853149466543905,57.4937746995372,Public administration,Law,simulated
+Amhara,2017,Legal Officer,123,123,bachelor,2,3.843592966426046,36.93971526614605,Public administration,Law,simulated
+Amhara,2018,Legal Officer,146,146,bachelor,2,4.177096908363264,20.90838262118249,Public administration,Law,simulated
+Amhara,2019,Legal Officer,186,186,bachelor,4,3.113634472865671,36.358050284120736,Public administration,Law,simulated
+Amhara,2020,Legal Officer,187,187,bachelor,1,2.89058752942374,32.98813179832316,Public administration,Law,simulated
+Amhara,2021,Legal Officer,262,262,bachelor,3,5.15351456310036,50.957596715715404,Public administration,Law,simulated
+Amhara,2022,Legal Officer,141,141,bachelor,2,2.4145208974565078,50.90280729110242,Public administration,Law,simulated
+Amhara,2023,Legal Officer,195,195,bachelor,3,3.5621894128822955,52.107683251025215,Public administration,Law,simulated
+Amhara,2024,Legal Officer,173,173,bachelor,0,1.4051648058843662,35.23801336958303,Public administration,Law,simulated
+Amhara,2025,Legal Officer,253,253,bachelor,4,4.040016059453889,69.6730389835322,Public administration,Law,simulated
+Oromia,2016,Legal Officer,169,169,bachelor,3,3.1990111470543563,61.751518500002085,Public administration,Law,simulated
+Oromia,2017,Legal Officer,181,181,bachelor,2,3.412306384958327,46.617600183181004,Public administration,Law,simulated
+Oromia,2018,Legal Officer,160,160,bachelor,1,2.9778472128138795,57.96523999522104,Public administration,Law,simulated
+Oromia,2019,Legal Officer,216,216,bachelor,1,6.535846763098008,53.05405706926874,Public administration,Law,simulated
+Oromia,2020,Legal Officer,119,119,bachelor,0,2.936996812499239,48.14898041653424,Public administration,Law,simulated
+Oromia,2021,Legal Officer,232,232,bachelor,2,5.8405677352752745,46.2610282476725,Public administration,Law,simulated
+Oromia,2022,Legal Officer,277,277,bachelor,1,2.3307723568646717,34.89122087058379,Public administration,Law,simulated
+Oromia,2023,Legal Officer,117,117,bachelor,2,0.049814378376593194,60.162541046679216,Public administration,Law,simulated
+Oromia,2024,Legal Officer,209,209,bachelor,0,3.249697964209896,57.67763060200497,Public administration,Law,simulated
+Oromia,2025,Legal Officer,98,98,bachelor,0,7.430528294805785,60.63044423940029,Public administration,Law,simulated
+Tigray,2016,Legal Officer,212,212,bachelor,3,-2.1038456050479013,45.3771359591399,Public administration,Law,simulated
+Tigray,2017,Legal Officer,230,230,bachelor,4,2.9824265321550336,56.91211930954799,Public administration,Law,simulated
+Tigray,2018,Legal Officer,237,237,bachelor,4,2.355726775756949,54.908476356545066,Public administration,Law,simulated
+Tigray,2019,Legal Officer,113,113,bachelor,0,4.225878167462095,56.995628367429205,Public administration,Law,simulated
+Tigray,2020,Legal Officer,186,186,bachelor,2,3.6965700222878155,49.76344241514846,Public administration,Law,simulated
+Tigray,2021,Legal Officer,139,139,bachelor,1,0.6054044719072018,64.70560617922152,Public administration,Law,simulated
+Tigray,2022,Legal Officer,127,127,bachelor,2,1.9887180004096987,52.11234698263582,Public administration,Law,simulated
+Tigray,2023,Legal Officer,115,115,bachelor,0,1.5947161235096377,49.5773099509376,Public administration,Law,simulated
+Tigray,2024,Legal Officer,144,144,bachelor,3,0.24499496601271442,55.83509566351041,Public administration,Law,simulated
+Tigray,2025,Legal Officer,245,245,bachelor,1,8.49229706022427,35.597766613302866,Public administration,Law,simulated
+Sidama,2016,Legal Officer,145,145,bachelor,1,5.055847556446105,46.89603401035293,Public administration,Law,simulated
+Sidama,2017,Legal Officer,223,223,bachelor,3,4.615286400751626,28.15409558846623,Public administration,Law,simulated
+Sidama,2018,Legal Officer,186,186,bachelor,3,1.8715913981937926,44.42055809786497,Public administration,Law,simulated
+Sidama,2019,Legal Officer,214,214,bachelor,4,3.2096400445334816,43.76553586466635,Public administration,Law,simulated
+Sidama,2020,Legal Officer,268,268,bachelor,1,4.0009589436796,57.35474980743597,Public administration,Law,simulated
+Sidama,2021,Legal Officer,191,191,bachelor,1,1.0333520360234667,37.94758737204277,Public administration,Law,simulated
+Sidama,2022,Legal Officer,209,209,bachelor,2,3.146788022199564,33.52216282040628,Public administration,Law,simulated
+Sidama,2023,Legal Officer,184,184,bachelor,2,7.064359747031196,37.25731053263546,Public administration,Law,simulated
+Sidama,2024,Legal Officer,171,171,bachelor,1,5.997551907792911,42.974189467119,Public administration,Law,simulated
+Sidama,2025,Legal Officer,203,203,bachelor,2,6.754404056662368,31.547701051278835,Public administration,Law,simulated
+South Ethiopia,2016,Legal Officer,131,131,bachelor,2,5.727527617328109,53.321634192960815,Public administration,Law,simulated
+South Ethiopia,2017,Legal Officer,227,227,bachelor,4,-0.9789082395274651,53.4773991790765,Public administration,Law,simulated
+South Ethiopia,2018,Legal Officer,70,70,bachelor,2,6.2486419004733476,45.38522281489554,Public administration,Law,simulated
+South Ethiopia,2019,Legal Officer,92,92,bachelor,2,2.7541170570719213,62.723543212638106,Public administration,Law,simulated
+South Ethiopia,2020,Legal Officer,200,200,bachelor,4,2.534911588193626,73.68588180465048,Public administration,Law,simulated
+South Ethiopia,2021,Legal Officer,103,103,bachelor,0,1.3765996536608565,33.771696123558485,Public administration,Law,simulated
+South Ethiopia,2022,Legal Officer,213,213,bachelor,1,5.7904156833212,57.54760179560615,Public administration,Law,simulated
+South Ethiopia,2023,Legal Officer,191,191,bachelor,4,2.9890187278724882,36.66409620858332,Public administration,Law,simulated
+South Ethiopia,2024,Legal Officer,208,208,bachelor,4,5.1762226839546726,67.20261164610434,Public administration,Law,simulated
+South Ethiopia,2025,Legal Officer,171,171,bachelor,3,6.556139396122341,51.50259665148857,Public administration,Law,simulated
+South West Ethiopia,2016,Legal Officer,207,207,bachelor,4,1.537778059488007,40.85089331039673,Public administration,Law,simulated
+South West Ethiopia,2017,Legal Officer,237,237,bachelor,4,2.3770679459653206,56.76155468469541,Public administration,Law,simulated
+South West Ethiopia,2018,Legal Officer,181,181,bachelor,2,-0.4259782449976992,26.310522322004957,Public administration,Law,simulated
+South West Ethiopia,2019,Legal Officer,170,170,bachelor,3,2.5528524514214608,38.67462912276582,Public administration,Law,simulated
+South West Ethiopia,2020,Legal Officer,189,189,bachelor,4,6.98642406161513,49.01802630541283,Public administration,Law,simulated
+South West Ethiopia,2021,Legal Officer,184,184,bachelor,2,4.754510509562317,51.688287089608316,Public administration,Law,simulated
+South West Ethiopia,2022,Legal Officer,208,208,bachelor,3,3.3851124942606337,40.8950575263399,Public administration,Law,simulated
+South West Ethiopia,2023,Legal Officer,196,196,bachelor,0,-2.537480521790215,51.74231669890833,Public administration,Law,simulated
+South West Ethiopia,2024,Legal Officer,99,99,bachelor,1,0.6709695980256689,63.90022014824804,Public administration,Law,simulated
+South West Ethiopia,2025,Legal Officer,185,185,bachelor,0,3.1221467126399,53.43625111440321,Public administration,Law,simulated
+Central Ethiopia,2016,Legal Officer,147,147,bachelor,4,4.852089834354079,41.95899063244096,Public administration,Law,simulated
+Central Ethiopia,2017,Legal Officer,139,139,bachelor,4,2.0661272928332988,46.70800947667702,Public administration,Law,simulated
+Central Ethiopia,2018,Legal Officer,136,136,bachelor,0,1.5211166818230941,45.57307728300892,Public administration,Law,simulated
+Central Ethiopia,2019,Legal Officer,172,172,bachelor,0,4.220246727284543,48.37492315620333,Public administration,Law,simulated
+Central Ethiopia,2020,Legal Officer,196,196,bachelor,2,2.5127213297363458,56.20467608817321,Public administration,Law,simulated
+Central Ethiopia,2021,Legal Officer,70,70,bachelor,1,2.103034496707008,41.152100937252705,Public administration,Law,simulated
+Central Ethiopia,2022,Legal Officer,184,184,bachelor,1,4.372250089068549,56.70400113866653,Public administration,Law,simulated
+Central Ethiopia,2023,Legal Officer,124,124,bachelor,1,3.5587435831002106,32.62923485366521,Public administration,Law,simulated
+Central Ethiopia,2024,Legal Officer,199,199,bachelor,4,0.9894611272624139,27.474620094383607,Public administration,Law,simulated
+Central Ethiopia,2025,Legal Officer,176,176,bachelor,1,0.10499817801047717,30.197410586085077,Public administration,Law,simulated
+Somali,2016,Legal Officer,187,187,bachelor,1,3.986180802891022,30.828170355621044,Public administration,Law,simulated
+Somali,2017,Legal Officer,174,174,bachelor,2,4.701409665604117,46.36331116161131,Public administration,Law,simulated
+Somali,2018,Legal Officer,193,193,bachelor,0,2.0382606030279424,40.08464268986989,Public administration,Law,simulated
+Somali,2019,Legal Officer,204,204,bachelor,2,4.687708545060115,41.337928716989374,Public administration,Law,simulated
+Somali,2020,Legal Officer,210,210,bachelor,3,2.572192032174172,31.755933675045735,Public administration,Law,simulated
+Somali,2021,Legal Officer,134,134,bachelor,4,-0.41415795221561513,40.131248872360096,Public administration,Law,simulated
+Somali,2022,Legal Officer,204,204,bachelor,0,1.5402320851517741,45.91793562405277,Public administration,Law,simulated
+Somali,2023,Legal Officer,97,97,bachelor,1,4.429537968577575,21.02838615593018,Public administration,Law,simulated
+Somali,2024,Legal Officer,151,151,bachelor,4,4.113854014685405,50.86783159572444,Public administration,Law,simulated
+Somali,2025,Legal Officer,178,178,bachelor,0,6.643723170460523,72.17826805012783,Public administration,Law,simulated
+Afar,2016,Legal Officer,180,180,bachelor,0,2.600679340988672,40.66955266808788,Public administration,Law,simulated
+Afar,2017,Legal Officer,195,195,bachelor,0,6.178856225672432,18.117851110608505,Public administration,Law,simulated
+Afar,2018,Legal Officer,173,173,bachelor,0,3.982915766226818,52.96554011750651,Public administration,Law,simulated
+Afar,2019,Legal Officer,115,115,bachelor,0,4.755317613134788,60.109531725504276,Public administration,Law,simulated
+Afar,2020,Legal Officer,187,187,bachelor,1,4.107048737362661,35.545750621265185,Public administration,Law,simulated
+Afar,2021,Legal Officer,133,133,bachelor,4,5.005334975709754,61.149763121612395,Public administration,Law,simulated
+Afar,2022,Legal Officer,150,150,bachelor,2,0.8053863539614623,50.3717975392051,Public administration,Law,simulated
+Afar,2023,Legal Officer,133,133,bachelor,4,6.20958517749038,42.42119721723236,Public administration,Law,simulated
+Afar,2024,Legal Officer,194,194,bachelor,3,4.460058593739687,55.990630111433155,Public administration,Law,simulated
+Afar,2025,Legal Officer,112,112,bachelor,0,1.3008417510519203,46.120542203564796,Public administration,Law,simulated
+Benishangul-Gumuz,2016,Legal Officer,158,158,bachelor,4,1.5070166076473617,56.57821261393981,Public administration,Law,simulated
+Benishangul-Gumuz,2017,Legal Officer,199,199,bachelor,3,2.7301399352486175,57.07619639062486,Public administration,Law,simulated
+Benishangul-Gumuz,2018,Legal Officer,118,118,bachelor,3,1.0644138844444015,46.717004041774814,Public administration,Law,simulated
+Benishangul-Gumuz,2019,Legal Officer,161,161,bachelor,4,3.1499608214791537,48.11383672216359,Public administration,Law,simulated
+Benishangul-Gumuz,2020,Legal Officer,185,185,bachelor,3,4.433401560930828,32.89522863637468,Public administration,Law,simulated
+Benishangul-Gumuz,2021,Legal Officer,200,200,bachelor,2,-0.7815857894376288,14.467639958930086,Public administration,Law,simulated
+Benishangul-Gumuz,2022,Legal Officer,258,258,bachelor,0,1.8799031259700985,25.63523706146438,Public administration,Law,simulated
+Benishangul-Gumuz,2023,Legal Officer,161,161,bachelor,3,3.5169887581581256,50.91334025540998,Public administration,Law,simulated
+Benishangul-Gumuz,2024,Legal Officer,131,131,bachelor,0,3.92188889620366,50.86258484748343,Public administration,Law,simulated
+Benishangul-Gumuz,2025,Legal Officer,185,185,bachelor,4,4.901066448391783,46.69211859843755,Public administration,Law,simulated
+Gambela,2016,Legal Officer,235,235,bachelor,3,4.736296090864862,56.76143655413962,Public administration,Law,simulated
+Gambela,2017,Legal Officer,114,114,bachelor,4,4.102260946378196,40.31832737508413,Public administration,Law,simulated
+Gambela,2018,Legal Officer,139,139,bachelor,3,3.404220873123963,29.221228724462673,Public administration,Law,simulated
+Gambela,2019,Legal Officer,181,181,bachelor,3,2.4560575726051654,60.45813717248647,Public administration,Law,simulated
+Gambela,2020,Legal Officer,154,154,bachelor,2,3.9669971296751787,47.598103067273655,Public administration,Law,simulated
+Gambela,2021,Legal Officer,230,230,bachelor,2,7.806332417036031,45.47341519518015,Public administration,Law,simulated
+Gambela,2022,Legal Officer,150,150,bachelor,1,-0.5575820448236994,32.38764993242364,Public administration,Law,simulated
+Gambela,2023,Legal Officer,232,232,bachelor,0,4.429650146890503,37.70197704094075,Public administration,Law,simulated
+Gambela,2024,Legal Officer,305,305,bachelor,2,4.549307293264386,38.44201255982489,Public administration,Law,simulated
+Gambela,2025,Legal Officer,251,251,bachelor,3,1.6726794147640895,44.584644575503965,Public administration,Law,simulated
+Harari,2016,Legal Officer,107,107,bachelor,2,2.139946620698176,72.9917498433406,Public administration,Law,simulated
+Harari,2017,Legal Officer,155,155,bachelor,2,4.2004709528526,48.056705989183946,Public administration,Law,simulated
+Harari,2018,Legal Officer,157,157,bachelor,3,2.429242641347309,44.73979027955282,Public administration,Law,simulated
+Harari,2019,Legal Officer,192,192,bachelor,2,8.363670601906378,55.73391734901658,Public administration,Law,simulated
+Harari,2020,Legal Officer,214,214,bachelor,2,-0.2831847512213299,44.648821424500596,Public administration,Law,simulated
+Harari,2021,Legal Officer,150,150,bachelor,0,2.8748228267357296,42.06999097420879,Public administration,Law,simulated
+Harari,2022,Legal Officer,112,112,bachelor,2,2.6480321266333418,44.03956123925668,Public administration,Law,simulated
+Harari,2023,Legal Officer,135,135,bachelor,2,1.8114976548158688,37.64030980463548,Public administration,Law,simulated
+Harari,2024,Legal Officer,132,132,bachelor,2,1.8279454931323778,56.98322720083017,Public administration,Law,simulated
+Harari,2025,Legal Officer,165,165,bachelor,0,3.286971563058298,49.03543309596111,Public administration,Law,simulated
+Addis Ababa,2016,Secondary Teacher,195,195,bachelor,3,5.247792123738597,33.83993658441941,Education,Education,simulated
+Addis Ababa,2017,Secondary Teacher,181,181,bachelor,4,-0.012314175105053504,46.55126226745496,Education,Education,simulated
+Addis Ababa,2018,Secondary Teacher,215,215,bachelor,2,5.64639124619321,44.36129879959037,Education,Education,simulated
+Addis Ababa,2019,Secondary Teacher,216,216,bachelor,3,1.2694349466815067,42.49865799953126,Education,Education,simulated
+Addis Ababa,2020,Secondary Teacher,185,185,bachelor,2,1.6316453894717289,56.341650509262884,Education,Education,simulated
+Addis Ababa,2021,Secondary Teacher,189,189,bachelor,0,3.842199843471615,37.74446281096265,Education,Education,simulated
+Addis Ababa,2022,Secondary Teacher,164,164,bachelor,1,3.843744574321067,38.31106178332077,Education,Education,simulated
+Addis Ababa,2023,Secondary Teacher,128,128,bachelor,3,-2.3319223640523354,56.94973309294879,Education,Education,simulated
+Addis Ababa,2024,Secondary Teacher,217,217,bachelor,4,3.1891770168488813,43.47439333608475,Education,Education,simulated
+Addis Ababa,2025,Secondary Teacher,228,228,bachelor,4,2.4743395573051,54.546133133644624,Education,Education,simulated
+Dire Dawa,2016,Secondary Teacher,162,162,bachelor,4,4.918090311417441,60.94033422772908,Education,Education,simulated
+Dire Dawa,2017,Secondary Teacher,129,129,bachelor,4,5.85610426867071,36.30247232282863,Education,Education,simulated
+Dire Dawa,2018,Secondary Teacher,86,86,bachelor,2,4.267926326819188,29.811228405284307,Education,Education,simulated
+Dire Dawa,2019,Secondary Teacher,100,100,bachelor,2,1.763020293760789,40.45724892607967,Education,Education,simulated
+Dire Dawa,2020,Secondary Teacher,234,234,bachelor,0,4.836361172298162,50.51628356922008,Education,Education,simulated
+Dire Dawa,2021,Secondary Teacher,242,242,bachelor,0,0.7707541788426382,46.94455829358388,Education,Education,simulated
+Dire Dawa,2022,Secondary Teacher,117,117,bachelor,2,5.785058535343952,58.47328268025819,Education,Education,simulated
+Dire Dawa,2023,Secondary Teacher,175,175,bachelor,2,-0.7235935784853247,46.963197272612796,Education,Education,simulated
+Dire Dawa,2024,Secondary Teacher,152,152,bachelor,0,1.933217419787859,42.62329609208429,Education,Education,simulated
+Dire Dawa,2025,Secondary Teacher,266,266,bachelor,4,4.998299852015194,60.91122150960953,Education,Education,simulated
+Amhara,2016,Secondary Teacher,159,159,bachelor,4,5.666991904711136,65.90523319374282,Education,Education,simulated
+Amhara,2017,Secondary Teacher,128,128,bachelor,2,1.7062735293830111,37.028906569570964,Education,Education,simulated
+Amhara,2018,Secondary Teacher,199,199,bachelor,1,2.0792298984121396,43.545538236576284,Education,Education,simulated
+Amhara,2019,Secondary Teacher,101,101,bachelor,3,0.6143954747809692,66.08777282520994,Education,Education,simulated
+Amhara,2020,Secondary Teacher,199,199,bachelor,2,2.087095587288852,44.72326072080935,Education,Education,simulated
+Amhara,2021,Secondary Teacher,180,180,bachelor,1,3.810597335767144,64.51251233064778,Education,Education,simulated
+Amhara,2022,Secondary Teacher,153,153,bachelor,4,1.0168698140389016,24.38202103898186,Education,Education,simulated
+Amhara,2023,Secondary Teacher,216,216,bachelor,3,7.3686305893669495,57.1855236858944,Education,Education,simulated
+Amhara,2024,Secondary Teacher,189,189,bachelor,0,4.1471940589220395,57.63297809016367,Education,Education,simulated
+Amhara,2025,Secondary Teacher,185,185,bachelor,4,3.7342473604894626,46.40457597404111,Education,Education,simulated
+Oromia,2016,Secondary Teacher,213,213,bachelor,0,4.0481502521429285,37.7634560521918,Education,Education,simulated
+Oromia,2017,Secondary Teacher,200,200,bachelor,3,8.985316629332415,56.398219948521565,Education,Education,simulated
+Oromia,2018,Secondary Teacher,226,226,bachelor,3,-2.8144056188897206,46.41966978196873,Education,Education,simulated
+Oromia,2019,Secondary Teacher,197,197,bachelor,2,-2.222218898956813,44.593599285233665,Education,Education,simulated
+Oromia,2020,Secondary Teacher,176,176,bachelor,0,0.5757768565150485,64.04825236453141,Education,Education,simulated
+Oromia,2021,Secondary Teacher,36,36,bachelor,3,3.678671669606282,61.96285211101171,Education,Education,simulated
+Oromia,2022,Secondary Teacher,178,178,bachelor,4,1.9315563757396426,37.13919612342117,Education,Education,simulated
+Oromia,2023,Secondary Teacher,179,179,bachelor,0,2.046116124279911,41.13811991730679,Education,Education,simulated
+Oromia,2024,Secondary Teacher,172,172,bachelor,1,0.9052829151860289,34.536156624029964,Education,Education,simulated
+Oromia,2025,Secondary Teacher,196,196,bachelor,2,0.5025498038841625,33.09541036606438,Education,Education,simulated
+Tigray,2016,Secondary Teacher,137,137,bachelor,1,4.673446189577329,57.012388917037654,Education,Education,simulated
+Tigray,2017,Secondary Teacher,188,188,bachelor,0,4.338846408774624,47.342532614422545,Education,Education,simulated
+Tigray,2018,Secondary Teacher,198,198,bachelor,0,1.1759020997218932,35.092225658679006,Education,Education,simulated
+Tigray,2019,Secondary Teacher,234,234,bachelor,2,3.313385131081025,60.62147494698368,Education,Education,simulated
+Tigray,2020,Secondary Teacher,136,136,bachelor,0,-0.4415690417704994,55.75593532031055,Education,Education,simulated
+Tigray,2021,Secondary Teacher,85,85,bachelor,0,1.6143038632766484,71.46964463620803,Education,Education,simulated
+Tigray,2022,Secondary Teacher,113,113,bachelor,1,-0.005276671921185638,25.709438374610855,Education,Education,simulated
+Tigray,2023,Secondary Teacher,170,170,bachelor,4,-2.6009514868886745,41.98107351267391,Education,Education,simulated
+Tigray,2024,Secondary Teacher,147,147,bachelor,4,1.8976345164035313,35.33134312036401,Education,Education,simulated
+Tigray,2025,Secondary Teacher,131,131,bachelor,1,3.6377076585691874,60.7958253217897,Education,Education,simulated
+Sidama,2016,Secondary Teacher,110,110,bachelor,3,4.353535460454337,53.358155025211346,Education,Education,simulated
+Sidama,2017,Secondary Teacher,171,171,bachelor,4,1.5073236304421074,57.103029621194885,Education,Education,simulated
+Sidama,2018,Secondary Teacher,193,193,bachelor,1,2.447343475644336,48.665857555001516,Education,Education,simulated
+Sidama,2019,Secondary Teacher,136,136,bachelor,4,2.3913912930261594,53.89845622572979,Education,Education,simulated
+Sidama,2020,Secondary Teacher,146,146,bachelor,0,0.5261699878471697,33.15982826147694,Education,Education,simulated
+Sidama,2021,Secondary Teacher,204,204,bachelor,2,5.93499562806792,33.795289001307744,Education,Education,simulated
+Sidama,2022,Secondary Teacher,218,218,bachelor,2,-2.5336225107186534,30.780640018644007,Education,Education,simulated
+Sidama,2023,Secondary Teacher,204,204,bachelor,1,-1.0598729408509753,40.57730226934556,Education,Education,simulated
+Sidama,2024,Secondary Teacher,176,176,bachelor,4,3.461703468438448,66.82269760843045,Education,Education,simulated
+Sidama,2025,Secondary Teacher,147,147,bachelor,4,3.246508710806476,53.43144918242183,Education,Education,simulated
+South Ethiopia,2016,Secondary Teacher,208,208,bachelor,3,1.9148287733088734,55.81779015984522,Education,Education,simulated
+South Ethiopia,2017,Secondary Teacher,142,142,bachelor,0,2.8057577775491707,54.014971658467516,Education,Education,simulated
+South Ethiopia,2018,Secondary Teacher,219,219,bachelor,2,3.2263712969322818,47.046192118007546,Education,Education,simulated
+South Ethiopia,2019,Secondary Teacher,201,201,bachelor,4,8.473037988012173,58.25508248819353,Education,Education,simulated
+South Ethiopia,2020,Secondary Teacher,195,195,bachelor,4,0.8888043986794849,44.11108342714156,Education,Education,simulated
+South Ethiopia,2021,Secondary Teacher,216,216,bachelor,4,0.6580939116886535,55.70941904839442,Education,Education,simulated
+South Ethiopia,2022,Secondary Teacher,184,184,bachelor,4,2.460114224258397,40.840455072761735,Education,Education,simulated
+South Ethiopia,2023,Secondary Teacher,141,141,bachelor,4,4.528985621582608,47.07933236111675,Education,Education,simulated
+South Ethiopia,2024,Secondary Teacher,136,136,bachelor,3,11.558246518520875,45.582318798985554,Education,Education,simulated
+South Ethiopia,2025,Secondary Teacher,246,246,bachelor,1,-3.4632060980061397,44.75435718473674,Education,Education,simulated
+South West Ethiopia,2016,Secondary Teacher,218,218,bachelor,3,1.393419779643863,47.682878207890866,Education,Education,simulated
+South West Ethiopia,2017,Secondary Teacher,219,219,bachelor,0,8.358608477728406,60.78607490231434,Education,Education,simulated
+South West Ethiopia,2018,Secondary Teacher,159,159,bachelor,0,2.436408859980157,37.59302510273576,Education,Education,simulated
+South West Ethiopia,2019,Secondary Teacher,173,173,bachelor,1,2.315487061591795,33.59333077868062,Education,Education,simulated
+South West Ethiopia,2020,Secondary Teacher,213,213,bachelor,0,1.3976349936284709,49.77359460513301,Education,Education,simulated
+South West Ethiopia,2021,Secondary Teacher,141,141,bachelor,2,1.6193730751746371,56.25211470256557,Education,Education,simulated
+South West Ethiopia,2022,Secondary Teacher,198,198,bachelor,2,3.778659923763867,47.10748341003799,Education,Education,simulated
+South West Ethiopia,2023,Secondary Teacher,140,140,bachelor,1,2.58190129023077,53.18439316969101,Education,Education,simulated
+South West Ethiopia,2024,Secondary Teacher,192,192,bachelor,0,3.4152442930245943,48.30510926952162,Education,Education,simulated
+South West Ethiopia,2025,Secondary Teacher,104,104,bachelor,3,0.9798997019785824,53.89957209599807,Education,Education,simulated
+Central Ethiopia,2016,Secondary Teacher,235,235,bachelor,4,5.4482582145165654,25.435524250187665,Education,Education,simulated
+Central Ethiopia,2017,Secondary Teacher,235,235,bachelor,1,2.4033338805878692,39.42332825421251,Education,Education,simulated
+Central Ethiopia,2018,Secondary Teacher,194,194,bachelor,0,4.289803027328391,46.51237320129362,Education,Education,simulated
+Central Ethiopia,2019,Secondary Teacher,27,27,bachelor,4,0.973216789759614,50.29316082151903,Education,Education,simulated
+Central Ethiopia,2020,Secondary Teacher,222,222,bachelor,4,5.626269499455169,37.27244061566826,Education,Education,simulated
+Central Ethiopia,2021,Secondary Teacher,209,209,bachelor,1,4.8610347289873115,28.428303990312468,Education,Education,simulated
+Central Ethiopia,2022,Secondary Teacher,223,223,bachelor,4,2.2963115348889906,44.415742608560386,Education,Education,simulated
+Central Ethiopia,2023,Secondary Teacher,138,138,bachelor,0,4.577022490003984,51.62457562671979,Education,Education,simulated
+Central Ethiopia,2024,Secondary Teacher,203,203,bachelor,4,3.514466561989377,44.44919357279785,Education,Education,simulated
+Central Ethiopia,2025,Secondary Teacher,223,223,bachelor,1,4.51592071262012,50.07419750857666,Education,Education,simulated
+Somali,2016,Secondary Teacher,174,174,bachelor,4,-1.9615880169743773,43.58038402363248,Education,Education,simulated
+Somali,2017,Secondary Teacher,230,230,bachelor,2,1.2378426045874253,40.013536273937596,Education,Education,simulated
+Somali,2018,Secondary Teacher,141,141,bachelor,0,0.7150189202621009,51.343569101898765,Education,Education,simulated
+Somali,2019,Secondary Teacher,160,160,bachelor,4,1.656967007018411,40.484765870869005,Education,Education,simulated
+Somali,2020,Secondary Teacher,189,189,bachelor,2,-1.6725131044330306,38.876939082464325,Education,Education,simulated
+Somali,2021,Secondary Teacher,176,176,bachelor,2,4.097275169104073,49.53232692665025,Education,Education,simulated
+Somali,2022,Secondary Teacher,212,212,bachelor,0,4.037956593540294,72.6155469312558,Education,Education,simulated
+Somali,2023,Secondary Teacher,181,181,bachelor,1,3.221184845960361,54.23112470401573,Education,Education,simulated
+Somali,2024,Secondary Teacher,158,158,bachelor,3,3.1450536997813985,28.151908795698663,Education,Education,simulated
+Somali,2025,Secondary Teacher,195,195,bachelor,0,4.411314990498498,28.754020805396955,Education,Education,simulated
+Afar,2016,Secondary Teacher,186,186,bachelor,3,6.694695348682789,63.71809130304652,Education,Education,simulated
+Afar,2017,Secondary Teacher,213,213,bachelor,2,6.026703393229697,43.61731782331411,Education,Education,simulated
+Afar,2018,Secondary Teacher,190,190,bachelor,0,0.5071047711197503,48.99198786179785,Education,Education,simulated
+Afar,2019,Secondary Teacher,176,176,bachelor,0,2.4941964299998194,47.28911757438583,Education,Education,simulated
+Afar,2020,Secondary Teacher,182,182,bachelor,1,1.5388108447621738,32.64440221543185,Education,Education,simulated
+Afar,2021,Secondary Teacher,207,207,bachelor,2,5.141449539977243,52.29543754637555,Education,Education,simulated
+Afar,2022,Secondary Teacher,134,134,bachelor,3,3.712613897504826,35.17988281284458,Education,Education,simulated
+Afar,2023,Secondary Teacher,149,149,bachelor,4,2.633564226919721,62.19533033823696,Education,Education,simulated
+Afar,2024,Secondary Teacher,189,189,bachelor,2,2.4958356916547286,40.00469668104471,Education,Education,simulated
+Afar,2025,Secondary Teacher,163,163,bachelor,1,4.805673569875124,24.960029592404933,Education,Education,simulated
+Benishangul-Gumuz,2016,Secondary Teacher,232,232,bachelor,2,3.4064080691599337,38.02708762879138,Education,Education,simulated
+Benishangul-Gumuz,2017,Secondary Teacher,226,226,bachelor,3,3.694863665850241,41.6884439787616,Education,Education,simulated
+Benishangul-Gumuz,2018,Secondary Teacher,141,141,bachelor,3,3.4814532477623223,58.74607549025157,Education,Education,simulated
+Benishangul-Gumuz,2019,Secondary Teacher,191,191,bachelor,4,4.135292183156485,43.99509827104031,Education,Education,simulated
+Benishangul-Gumuz,2020,Secondary Teacher,214,214,bachelor,0,7.594980317127375,40.166693274353875,Education,Education,simulated
+Benishangul-Gumuz,2021,Secondary Teacher,195,195,bachelor,0,8.473474892805967,60.503458384025244,Education,Education,simulated
+Benishangul-Gumuz,2022,Secondary Teacher,209,209,bachelor,4,3.132086122743406,45.91360778598451,Education,Education,simulated
+Benishangul-Gumuz,2023,Secondary Teacher,157,157,bachelor,1,-0.8393189708021875,55.68740654445238,Education,Education,simulated
+Benishangul-Gumuz,2024,Secondary Teacher,118,118,bachelor,3,2.226877384993638,36.53432174292094,Education,Education,simulated
+Benishangul-Gumuz,2025,Secondary Teacher,236,236,bachelor,1,-0.6227390281958134,40.006364860423474,Education,Education,simulated
+Gambela,2016,Secondary Teacher,157,157,bachelor,3,1.4683006247707873,65.540581943657,Education,Education,simulated
+Gambela,2017,Secondary Teacher,125,125,bachelor,0,13.213544911020922,35.29472787154151,Education,Education,simulated
+Gambela,2018,Secondary Teacher,298,298,bachelor,0,2.7242744534938637,50.71955541896279,Education,Education,simulated
+Gambela,2019,Secondary Teacher,164,164,bachelor,0,3.867642786590771,39.15585869131908,Education,Education,simulated
+Gambela,2020,Secondary Teacher,208,208,bachelor,1,0.5262210425775162,53.1257631835682,Education,Education,simulated
+Gambela,2021,Secondary Teacher,194,194,bachelor,3,1.2071616734988229,42.86752829930123,Education,Education,simulated
+Gambela,2022,Secondary Teacher,200,200,bachelor,3,2.6443672440549992,59.16786279195078,Education,Education,simulated
+Gambela,2023,Secondary Teacher,226,226,bachelor,4,6.258163043627371,53.00380809793113,Education,Education,simulated
+Gambela,2024,Secondary Teacher,143,143,bachelor,2,2.5215003587303526,54.07806168978922,Education,Education,simulated
+Gambela,2025,Secondary Teacher,154,154,bachelor,2,1.49957352946798,39.58328423831996,Education,Education,simulated
+Harari,2016,Secondary Teacher,127,127,bachelor,4,0.4175979257165454,54.79519365921702,Education,Education,simulated
+Harari,2017,Secondary Teacher,137,137,bachelor,0,1.3264224190565432,48.038172611074884,Education,Education,simulated
+Harari,2018,Secondary Teacher,252,252,bachelor,2,-0.4555549394825009,32.25768590382186,Education,Education,simulated
+Harari,2019,Secondary Teacher,145,145,bachelor,2,1.357920728540556,75.65526033395771,Education,Education,simulated
+Harari,2020,Secondary Teacher,218,218,bachelor,0,7.632133158775374,40.64903093574653,Education,Education,simulated
+Harari,2021,Secondary Teacher,163,163,bachelor,1,1.821907038156778,60.32217410964071,Education,Education,simulated
+Harari,2022,Secondary Teacher,177,177,bachelor,0,4.08500833738582,58.907707189203464,Education,Education,simulated
+Harari,2023,Secondary Teacher,107,107,bachelor,1,-1.2478612626339167,28.005185830179705,Education,Education,simulated
+Harari,2024,Secondary Teacher,162,162,bachelor,1,6.100798047137687,45.60972157895588,Education,Education,simulated
+Harari,2025,Secondary Teacher,204,204,bachelor,2,1.7693213679774862,57.89761873266199,Education,Education,simulated

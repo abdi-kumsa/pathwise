@@ -1,0 +1,37 @@
+# Wave 8/9 — product caveats, not missing widgets.
+#
+# Spec coverage is 259/259. These entries record residual honesty limits so they
+# cannot be mistaken for unfinished DOC1/DOC2 rows. A waiver MUST NOT name a
+# missing widget, component, or endpoint.
+#
+# tests/test_spec_coverage.py::test_waivers_are_caveats_not_coverage_holes
+
+waivers:
+  - id: WV.US1
+    caveat: >-
+      Placement XGBoost, salary XGBoost, US LSTM enrolment and Prophet demand
+      artefacts remain on disk and on leftover tool routes (/student/evaluator,
+      /student/salary, /student/market, /university/enrollment). They are not
+      Ethiopia Model 1 or Model 2 scores. Wave 9 hid those links from role nav;
+      bookmarked URLs still work.
+    retires_when: >-
+      Those tool routes are removed or the artefacts are retrained on Ethiopia
+      fact tables and labelled as such.
+    does_not_excuse: widgets
+
+  - id: WV.SIM1
+    caveat: >-
+      Every Ethiopia figure is provenance.tier simulated until official CSA,
+      MoE or ESS files replace the parquets under docs/spec/ingestion/.
+    retires_when: An official file is ingested for a table and that series is
+      restamped tier official.
+    does_not_excuse: widgets
+
+  - id: WV.OLS1
+    caveat: >-
+      M1/M2 ols_lags chronological holdout RMSE is near-zero on the simulated
+      lag construction. Comparison still includes seasonal-naive and
+      historical-mean. Figures are not ministry accuracy.
+    retires_when: Holdout RMSE is recomputed on official series that are not
+      generated from the same lags.
+    does_not_excuse: widgets

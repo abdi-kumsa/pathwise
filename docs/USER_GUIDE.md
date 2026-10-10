@@ -1,344 +1,203 @@
 # PathWise — User Guide
 
-PathWise is a predictive analytics platform that helps academic institutions answer two questions at the same time: what does the job market need right now, and how should we adjust our enrolment and curriculum to match it?
+PathWise is a role-based education–employment alignment platform for Ethiopia.
+It forecasts student demand (Model 1), labour demand (Model 2) and the gap
+between them (Model 3), then shows each audience only the pages it is allowed
+to see.
 
-The platform has two dashboard modules. **Module 1 — Market Demand** is for department heads and institutional leaders who need to track hiring trends and skill gaps. **Module 2 — Student Enrollment Intelligence** is for admissions staff and students who need enrolment forecasts, risk signals, and personalised placement advice.
-
----
-
-## Table of Contents
-
-1. [Getting Around the Dashboard](#1-getting-around-the-dashboard)
-2. [Module 1 — Market Demand Dashboard](#2-module-1--market-demand-dashboard)
-   - [Overview](#21-overview)
-   - [Hiring Analytics](#22-hiring-analytics)
-   - [Skill Gap Analysis](#23-skill-gap-analysis)
-   - [Demand Forecast](#24-demand-forecast)
-3. [Module 2 — Student Enrollment Intelligence Dashboard](#3-module-2--student-enrollment-intelligence-dashboard)
-   - [Enrollment Trends](#31-enrollment-trends)
-   - [Admission Risk](#32-admission-risk)
-   - [Placements by Stream](#33-placements-by-stream)
-   - [Student Evaluator](#34-student-evaluator)
-4. [How to Use the Student Evaluator — Step by Step](#4-how-to-use-the-student-evaluator--step-by-step)
-5. [Interpreting SHAP Feature Contributions](#5-interpreting-shap-feature-contributions)
-6. [Interpreting Admission Risk Scores](#6-interpreting-admission-risk-scores)
-7. [FAQ](#7-faq)
+The numbers are **simulated Ethiopian structure, 2016–2025**, not official MoE,
+MoLS or ESS statistics. The chip in the top bar says so. So does the amber
+note on each widget page.
 
 ---
 
-## 1. Getting Around the Dashboard
+## Signing in
 
-### Signing in
+Open PathWise at `http://localhost:3001`.
 
-Open PathWise at `http://localhost:3001`. You will be asked to sign in.
+All demo accounts use the password **`pathwise123`**.
 
-**PathWise is role based** — the dashboard is assembled around who you are, so
-two people signing in with different accounts see different pages. Pick the
-account matching your role (the login page lists them; click one to fill the
-form). All demo accounts use the password `pathwise123`.
-
-| Sign in as | You get | You land on |
+| Sign in as | Role | You land on |
 |---|---|---|
-| `student` | Career explorer, placement odds, skill roadmap, alternative paths, salary outlook | Career explorer |
-| `mol` | Labour overview, emerging occupations, supply & demand gap, skills mismatch, regional demand | Labour market overview |
-| `moe` | Education overview, field explorer, investment matrix, investment priority, labour demand | Education supply overview |
-| `university` | Institution overview, programme portfolio, expansion, resource efficiency, peer benchmark | Your institution |
-| `admin` | All of the above, plus model monitoring and the permission matrix | Platform overview |
+| `student` | Student | Profile & eligibility |
+| `university` | University (Addis Ababa University) | Institution overview |
+| `moe` | Ministry of Education | National snapshot |
+| `mol` | Ministry of Labour | Labour pulse |
+| `admin` | Administrator | Platform overview |
 
-You will only ever see pages your role can open. If you try to reach another
-role's page directly you are returned to your own home page — this is enforced
-by the server, not just hidden in the menu.
+You only see pages your role can open. Hitting another role’s URL returns you
+to your home page — the API enforces this, not just the menu.
 
-**Your account.** Click your name at the bottom of the sidebar to see your
-identity and change your password. Every role has this. Sign out with the arrow
-button beside it.
-
-If you are an administrator, you also get **Accounts** in the sidebar, where you
-can create accounts, change someone's role, reset a password, or deactivate
-someone who should no longer have access. Deactivating is reversible — the
-account is disabled rather than erased.
-
-### The layout
-
-- **Sidebar (left)** — your role's pages, grouped into sections. On a narrow
-  screen or phone it collapses; tap the ☰ button at the top left to open it.
-- **Search (top)** — press `Ctrl K` (or `Cmd K` on a Mac) anywhere to search
-  occupations, fields and programmes. Results are limited to things your role
-  can open. Arrow keys to move, Enter to go.
-- **Dataset chip (top right)** — a reminder of which dataset you are looking at.
-
-All data loads automatically when a page opens — there is no refresh button. While
-loading, placeholder dashes (—) appear in the KPI cards until values arrive.
-
-If a page shows a red error banner, the API is temporarily unavailable. Click
-**Retry** inside the banner.
-
-### A note on the numbers
-
-Some pages carry a small grey or amber note beneath a chart. These are not
-decoration — they say what a figure can and cannot be used for. The one on the
-**Skills mismatch** page matters most: the credential-fit percentages describe
-the system as a whole and are *not* a ranking between fields, because the
-distribution barely varies between them in this dataset. For a mismatch signal
-that does vary meaningfully, use **Supply & demand gap**.
-
-Full detail in [DATA_PROVENANCE.md](DATA_PROVENANCE.md).
+Click your name in the sidebar footer for **Your account** (password change).
+Sign out with the arrow beside it.
 
 ---
 
-## 2. Module 1 — Market Demand Dashboard
+## Layout
 
-### 2.1 Overview
+- **Sidebar** — your role’s pages, grouped as in the lists below. On a phone,
+  tap ☰.
+- **Search (`Ctrl K` / `Cmd K`)** — occupations, fields and programmes your
+  role may open.
+- **Provenance chip** — source and vintage. Hover for the caveat.
 
-**What it shows:** A snapshot of the entire hiring landscape sourced from the platform's placement and job-posting dataset.
-
-| Card | What it means |
-|---|---|
-| Total companies | Number of distinct organisations that have hired from this institution |
-| Total placements | Number of successful job placements recorded |
-| Average salary | Mean starting salary across all placed graduates (USD) |
-| Avg time to hire | Mean number of days from graduation to signed offer |
-| Top role | The job title appearing most frequently among placed graduates |
-
-**How to use it:** This page is the entry point for any conversation about institutional performance. Share the total placements and average salary figures with prospective students or accreditation bodies as headline indicators.
+If a page shows a red error banner, the API is down. Click **Retry**.
 
 ---
 
-### 2.2 Hiring Analytics
+## What a ranking is (and is not)
 
-**What it shows:** A deeper breakdown of the hiring picture across four dimensions.
+- **Fit classification is not a ranking.** Matched / overeducated /
+  undereducated is near-uniform across fields. Alternative paths, field
+  priority and programme health do **not** use it.
+- **What-if is not circular.** A saved MoE simulator run is a draft
+  (`official_forecast: false`). It does not become next year’s baseline.
+- **Scores are relative.** A 70 means high among the rows on screen, not
+  “70% good”. Open the factor breakdown.
 
-**Top hiring companies bar chart** — the organisations placing the most graduates. Use this to decide which employers deserve a dedicated relationship programme or on-campus recruitment visit.
-
-**Job-to-internship ratio** — the ratio of full-time job placements to internships undertaken. A ratio below 1.0 means the institution produces more intern-ready graduates than job-ready ones; a ratio above 1.0 suggests strong direct-hire outcomes.
-
-**Hiring sources (by industry sector)** — which industry sectors are absorbing graduates. Technology and Finance typically dominate; a large share going to Consulting suggests generalist graduates rather than specialist ones.
-
-**Average time-to-hire KPI** — how long graduates wait for an offer after graduation. Anything above 90 days warrants a review of career services timing and employer outreach.
-
----
-
-### 2.3 Skill Gap Analysis
-
-**What it shows:** Where employer demand for skills outpaces the institution's current curriculum delivery.
-
-The bar chart compares **Demand Score** (how heavily employers weight this skill, derived from SHAP feature importance on the placement model) against **Curriculum Coverage** (how well current graduates demonstrate the skill, derived from actual student data). The gap between the two bars is the **Gap Score**.
-
-| KPI Card | What it means |
-|---|---|
-| Top gap skill | The single skill with the largest demand–coverage gap |
-| Average gap score | Mean gap across all tracked skills — higher means the curriculum is broadly misaligned |
-| Number of skills tracked | Total skills with demand data |
-
-**How to use it:** Sort attention by gap score. A large gap in GPA (academic performance) suggests the intake quality needs attention. A large gap in Industry Experience (internships) suggests the institution needs more mandatory placement years or co-op programmes. A large gap in Communication Skills suggests soft-skills training is under-weighted in the curriculum.
+Leftover US tools (career explorer, placement odds, salary, job market,
+expansion, peer benchmark, enrolment LSTM, field explorer, investment matrix,
+emerging occupations, leftover supply–demand, regional demand) still exist as
+bookmarked URLs. They are hidden from role nav. They are labelled on the page
+and are not Ethiopia Model 1 or Model 2.
 
 ---
 
-### 2.4 Demand Forecast
+## 1. Student
 
-**What it shows:** A 12-month forward view of hiring demand based on the Prophet time-series model trained on historical job-posting data.
+Sidebar follows `navConfig.js`.
 
-The area chart shows three lines:
-- **Predicted postings** — the model's best estimate
-- **Upper bound** — 80% confidence interval ceiling
-- **Lower bound** — 80% confidence interval floor
+### Your programme
 
-The shaded band between upper and lower bounds represents forecast uncertainty. A narrow band means the model is confident; a wide band means external factors (economic cycles, seasonal hiring patterns) are harder to predict.
+1. **Profile & eligibility** — your signed-in identity. Query-string
+   `username` / `student_id` are ignored.
+2. **Labour outlook** — 3- and 5-year vacancy outlook for your field.
+   Occupation cells smaller than 5 are withheld.
+3. **Demand comparison** — student demand vs labour demand.
+4. **Field opportunity** — alignment score with published weights.
+5. **Supply–demand gap** — expected graduates vs vacancies.
 
-**KPI Cards:**
-- **12-month total** — sum of predicted postings across the entire forecast horizon, useful for capacity planning
-- **Peak month** — the month with the highest predicted demand
-- **Trend** — whether demand is expected to grow, hold, or contract
+### Explore options
 
-**How to use it:** Use peak month data to time career fairs and employer outreach. Use the 12-month total to set enrolment targets — if hiring demand is forecast to contract, intake should be adjusted to avoid a cohort graduating into a tighter market.
-
----
-
-## 3. Module 2 — Student Enrollment Intelligence Dashboard
-
-### 3.1 Enrollment Trends
-
-**What it shows:** Historical enrolment counts and a 3-year LSTM-powered forecast for any of the 12 programmes.
-
-**Summary KPI cards (top row):**
-- **Total students** — total enrolment across all years and programmes in the dataset
-- **Programmes** — number of distinct programmes
-- **Avg placement rate** — institution-wide mean placement rate across all programmes
-- **Top programme** — programme with the highest student count
-
-**Programme selector dropdown** — choosing a programme updates the forecast chart to show that programme's historical trend (solid line) merged into the LSTM forecast (dashed line). The two lines share their last historical data point so the transition is seamless.
-
-**How to use it:** Compare programmes side-by-side by toggling the dropdown. A programme with a flat or declining historical trend and a forecast that continues flat is a candidate for intake reduction or a curriculum refresh to attract more applicants.
+6. **Alternative paths** — ranked on labour demand, supply, eligibility and
+   skills. Fit classification does not enter.
+7. **Skill roadmap** — technical / digital / soft / emerging demand.
+8. **Pathways** — programme graph for your field.
+9. **Opportunities** — scholarships, internships, training, hiring windows.
+   Lists do not include other students’ accounts.
 
 ---
 
-### 3.2 Admission Risk
+## 2. University (Addis Ababa University)
 
-**What it shows:** All programmes ranked by **admission risk score** — a measure of how much enrolment declined in the most recent year compared to the year before.
+The token carries the institution. You cannot pass `?institution=` for another
+HEI without a `CROSS_INSTITUTION` grant.
 
-**Risk score:** A positive number means enrolment is falling. Zero means stable or growing. The higher the number, the faster the decline. Risk scores are expressed as percentage-point change (e.g. a score of 24.5 means enrolment fell roughly 24.5% year-on-year).
+### My institution
 
-**Trend badge:**
-- **Declining** (red) — enrolment fell more than 2% year-on-year
-- **Stable** (amber) — change within ±2%
-- **Growing** (green) — enrolment grew more than 2%
+1. **Overview** — this HEI only.
+2. **Programme health** — expand / maintain / review / consolidate from the
+   labour–graduate gap. Not fit class.
+3. **Unconstrained demand** — Model 1 layer 1.
+4. **Constrained enrolment** — Model 1 after exam, quota, priority and
+   capacity.
+5. **Demand vs labour** — three series: student demand, expected graduates,
+   labour demand.
 
-**Recommended intake** — a model-suggested target intake for the next year, computed as the programme's two-year average enrolment multiplied by its placement rate. It is a starting point for planning discussions, not a hard directive.
+### Progression
 
-**Limit slider** — drag left or right to show fewer or more programmes in the table. The API is called automatically 500 ms after you release the slider (debounced) so the table does not flicker on every pixel of movement.
-
-**How to use it:** Programmes with high risk scores and a Declining badge need immediate attention — they may need marketing investment, a curriculum update, or an intake reduction to protect placement rates. Programmes with a Growing badge and a reasonable recommended intake can be considered for capacity expansion.
-
----
-
-### 3.3 Placements by Stream
-
-**What it shows:** Placement rate, average starting salary, and student count for each of the 12 programmes, sorted from highest to lowest placement rate.
-
-| Column | What it means |
-|---|---|
-| Programme | Degree or certificate name |
-| Placement rate | Percentage of that programme's graduates who secured employment |
-| Avg salary | Mean starting salary for placed graduates from that programme (USD) |
-| Students | Total number of students enrolled in that programme across all years |
-
-**Summary KPI cards:**
-- **Overall placement rate** — weighted mean across all programmes
-- **Top programme** — programme with the highest individual placement rate
-- **Avg salary** — institution-wide mean starting salary
-
-**How to use it:** Cross-reference placement rate against student count. A programme with a very high placement rate but low student count might be under-marketed. A programme with a high student count but low placement rate is where the curriculum or employer relationships need the most work.
+6. **Admissions funnel**
+7. **Cohort progression**
+8. **Graduate outcomes**
+9. **Curriculum heatmap**
+10. **Resource planning** — unofficial what-if; `official_forecast` stays false.
 
 ---
 
-### 3.4 Student Evaluator
+## 3. Ministry of Education
 
-**What it shows:** A personalised XGBoost placement probability score for any hypothetical student profile, along with a SHAP waterfall chart explaining the prediction, skill-building recommendations, and alternative career pathways.
+### Education supply
 
-This is the only interactive page in the platform — you adjust the student profile controls and the model runs a real-time prediction.
+1. **National snapshot**
+2. **Demand vs capacity** — unconstrained vs constrained.
+3. **National field gap**
+4. **Policy simulator** — quota, priority field, placement rule, capacity.
+   Persist writes a **draft**. It is not an official circular.
 
----
+### Investment planning
 
-## 4. How to Use the Student Evaluator — Step by Step
-
-**Step 1 — Set the student profile**
-
-Use the sliders on the left panel to set the student's attributes:
-
-| Control | Range | What it represents |
-|---|---|---|
-| GPA | 2.0 – 4.0 | Cumulative grade point average |
-| Internships | 0 – 10 | Number of internship or co-op placements completed |
-| Projects | 0 – 10 | Number of independent or academic projects completed |
-| Communication score | 1 – 10 | Self-assessed or assessed communication ability (1 = very low, 10 = excellent) |
-
-Use the **Programme** dropdown below the sliders to select the student's current degree programme.
-
-**Step 2 — Click "Predict Placement"**
-
-The button runs the XGBoost model against the profile you set. The button label changes to **Predicting…** while the model computes. This typically takes less than one second.
-
-**Step 3 — Read the probability circle**
-
-The large circle in the results panel shows the placement probability as a percentage:
-- **Green (≥ 75%)** — strong likelihood of placement
-- **Amber (50–74%)** — moderate likelihood; targeted improvements recommended
-- **Red (< 50%)** — low likelihood; significant skill development needed
-
-Below the circle, the **Placed** or **Not Placed** badge shows the model's binary classification (threshold: 50%).
-
-**Step 4 — Study the SHAP waterfall chart**
-
-The horizontal bar chart below the probability circle shows which parts of the student's profile drove the prediction. See §5 for a full explanation of how to read this chart.
-
-**Step 5 — Review Skill Recommendations**
-
-Below the SHAP chart, a **Skill Recommendations** section lists the top skills to develop, each with a **priority badge** (High / Medium / Low) and a one-line reason explaining why that skill matters. These are ordered by how much improving that skill would move the placement probability.
-
-**Step 6 — Review Alternative Pathways**
-
-At the bottom, the **Alternative Pathways** section lists supplementary qualifications (certificates, part-time courses) the student can pursue to increase their employability independent of their main programme.
-
-**Step 7 — Reset and try another profile**
-
-Click **Reset** to clear the results and run a new prediction with a different profile. This is useful for comparing a student's current profile against a target profile (e.g. "what if they did one more internship?").
+5. **Field priority** — reads `/api/model3/policy-priority` (labour shortage,
+   national priority, student demand, feasibility). The yaml investment
+   ranker stays on `/api/education/investment-priority` and is not swapped
+   into this page.
+6. **Regional alignment**
+7. **Institution comparison**
+8. **Policy impact** — unofficial; `official_forecast: false`.
 
 ---
 
-## 5. Interpreting SHAP Feature Contributions
+## 4. Ministry of Labour
 
-SHAP (SHapley Additive exPlanations) answers the question: *how much did each feature push this prediction higher or lower compared to the average prediction?*
+### Labour market
 
-**Reading the chart:**
+1. **Labour pulse**
+2. **Formal vs informal**
+3. **Sector forecast** — Model 2 (OLS-on-lags or seasonal-naive).
+4. **Skills heatmap** — fit classification is listed alphabetically with a
+   caveat; it is not a league table.
 
-- Each bar represents one feature (GPA, Internships, Projects, Communication)
-- **Bars pointing right (positive SHAP)** — this feature pushed the probability *up*
-- **Bars pointing left (negative SHAP)** — this feature pushed the probability *down*
-- The longer the bar, the stronger the influence
-- The **base value** shown below the circle is the model's average prediction across all students. It is the starting point before any individual features are applied.
+### Pipelines
 
-**Example interpretation:**
-
-> Base value: 2.04 log-odds (≈ 88% avg probability)
-> GPA: +1.29 (long bar right) → high GPA is the biggest driver of this student's strong prediction
-> Internships: +0.74 → 3 internships are contributing positively
-> Projects: -0.12 → project count is slightly below where the model expects
-
-This tells you that even if this student's GPA dropped slightly, the internships would maintain a strong prediction. Conversely, if they had zero internships, the GPA alone would not be enough.
-
-**What to do with this information:**
-
-- Features with long **negative** bars are the highest-priority improvement areas
-- Features already strongly positive confirm what the student is doing well — reinforce those
-- The Skill Recommendations section translates SHAP results into plain-language actions so students do not need to understand the underlying math
+5. **Public hiring**
+6. **FDI and parks**
+7. **Graduate absorption**
+8. **Migration**
+9. **Workforce report** — download writes a `report_export` audit row.
+   `official_forecast` stays false.
 
 ---
 
-## 6. Interpreting Admission Risk Scores
+## 5. Administrator
 
-The admission risk score is computed from year-on-year enrolment change per programme:
+### Platform
 
-```
-risk_score = max(0, -(current_year_count - prev_year_count) / prev_year_count × 100)
-```
+1. **Overview** — API health and account counts.
+2. **Data pipeline** — all **20** Ethiopia feeds (education, labor, policy,
+   investment).
+3. **Data quality** — validation failures from `_validate.py`.
+4. **Model monitoring** — Ethiopia M1/M2 RMSE against seasonal-naive.
+   Leftover US placement drift (baseline 0.88) is secondary.
+5. **Accounts** — create, role, reset password, deactivate. Never deletes
+   from the UI. Last-admin and self-lockout guards are server-side.
 
-In plain terms: if a programme lost students, the risk score equals the percentage it lost. If it grew or held steady, the risk score is 0.
+### Governance
 
-**Score thresholds (suggested interpretation):**
+6. **Scenarios** — persisted what-ifs. Approval does not set
+   `official_forecast`.
+7. **Audit log** — searchable by action (try `report_export`).
 
-| Risk score | Interpretation | Suggested action |
-|---|---|---|
-| 0 – 5 | Normal variation | Monitor quarterly |
-| 5 – 15 | Mild decline | Review programme marketing and employer relations |
-| 15 – 25 | Significant decline | Curriculum review; consider intake reduction |
-| 25+ | Severe decline | Strategic review; programme restructure may be needed |
+### Methodology
 
-**Important caveat:** The dataset covers 2019–2024 and includes the pandemic years (2020–2021) which saw unusual enrolment patterns across all programmes. A high risk score for a programme that declined during 2020–2021 but has since recovered should be weighted accordingly.
+8. **Importance & AHP** — two panels: learned importance (SHAP /
+   permutation) and collection-priority tiers. They are never blended.
+   AHP pairwise weights: consistency ratio **> 0.1 is refused** (422,
+   `weights: null`). AHP does not train Models 1–3.
+
+Admin can also open ministry, institution and student views from the
+sidebar. The API still requires the right role for writes; admin is allowed
+to read.
 
 ---
 
-## 7. FAQ
+## FAQ
 
-**Q: Does PathWise use real student data?**
-A: No. All data in the platform is synthetic — generated using the Python Faker library to simulate realistic student profiles, enrolment patterns, and job placements. No personally identifiable information is stored or processed.
+**Can I quote these figures in a ministry circular?** No. They are simulated
+until an official parquet replaces the generator file. See
+[DATA_PROVENANCE.md](DATA_PROVENANCE.md).
 
-**Q: How often is the data refreshed?**
-A: The ML models were trained on the 2019–2024 synthetic dataset. The platform does not pull live data automatically. To update the models with new data, re-run the data generation scripts and then re-train (see the Technical Reference, §7).
+**Why do leftover US pages still exist?** Wave 9 hid them from role nav. It
+does not delete them. Bookmarked URLs still work. Ethiopia scores live on
+the Model 1–3 widget pages.
 
-**Q: Why does the SHAP chart show log-odds values instead of percentages?**
-A: SHAP contributions are additive in log-odds space, which is the internal representation the XGBoost model uses. Converting individual contributions to probabilities would make them non-additive and harder to interpret. The base value and individual bars all operate in log-odds; the circular probability display at the top converts the final sum back to a 0–100% range for readability.
-
-**Q: Can I evaluate a student not in the dataset?**
-A: Yes — the Student Evaluator accepts any combination of GPA, internships, projects, communication score, and programme. The model has no memory of individual students from the training data; it only learned the statistical relationship between these features and placement outcomes.
-
-**Q: The prediction is 97% — does that mean this student is guaranteed a job?**
-A: No. The probability reflects the statistical likelihood based on historical patterns in a synthetic dataset. Real placement depends on many factors the model does not capture: economic conditions, interview performance, location preferences, and the specific role. The score is a guide for prioritising support, not a guarantee.
-
-**Q: What do the alternative pathways mean?**
-A: They are supplementary qualifications (graduate certificates, cloud certifications, MBA modules) that the platform's recommendation engine identifies as high-value additions based on which skills have the largest gap between employer demand and current graduate supply. They are not affiliated with any specific institution.
-
-**Q: The page shows a red error banner — what should I do?**
-A: Click **Retry** inside the banner. If the error persists, check that the backend container is running: open `http://localhost:8000/health` in a new browser tab. If it shows an error or does not load, contact your system administrator or consult the Troubleshooting section of the Technical Reference.
-
-**Q: Can I export the charts or data?**
-A: The current version does not have a built-in export feature. To extract data, use the API directly — all endpoints are documented at `http://localhost:8000/docs` and return standard JSON that can be copied or piped to a file.
+**Why did AHP return 422?** The pairwise matrix is inconsistent (CR > 0.1).
+Fix the judgements; do not paste those weights into a learner.

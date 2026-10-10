@@ -60,7 +60,7 @@ ROLE_LABELS = {
 # so the landing route is defined once, on the server.
 ROLE_HOME = {
     ROLE_ADMIN:      "/admin/overview",
-    ROLE_STUDENT:    "/student/careers",
+    ROLE_STUDENT:    "/student/profile",
     ROLE_MOE:        "/moe/overview",
     ROLE_MOL:        "/mol/overview",
     ROLE_UNIVERSITY: "/university/overview",
@@ -118,6 +118,10 @@ def _row_to_dict(row, include_hash: bool = False) -> dict:
         "display_name":     row.display_name,
         "institution_name": row.institution_name,
         "is_active":        bool(row.is_active),
+        "cross_institution": bool(getattr(row, "cross_institution", False)),
+        "program":          getattr(row, "program", None),
+        "field":            getattr(row, "field", None),
+        "enrollment_year":  getattr(row, "enrollment_year", None),
         "created_at":       row.created_at.isoformat() if row.created_at else None,
     }
     if include_hash:
@@ -318,6 +322,95 @@ def _guard_scope_check(user: dict) -> dict:
             detail="University account is not linked to an institution.",
         )
     return user
+
+
+MIN_CELL_SIZE = 5
+
+
+def student_scope(user: dict = Depends(require_roles(ROLE_STUDENT))) -> dict:
+    """SCOPE.STU — own record plus anonymised field aggregates.
+
+    Identity is JWT `sub`. Query `username` / `student_id` are ignored even if
+    a client sends them. ADMIN is allowed through require_roles and receives
+    the demo student profile when it has none of its own.
+    """
+    stored = get_user(user["username"]) or {}
+    program = stored.get("program")
+    field = stored.get("field")
+    year = stored.get("enrollment_year")
+    institution = stored.get("institution_name") or user.get("institution")
+    if user["role"] == ROLE_ADMIN and not program:
+        demo = get_user("student") or {}
+        program = demo.get("program")
+        field = demo.get("field")
+        year = demo.get("enrollment_year")
+        institution = institution or demo.get("institution_name")
+    return {
+        **user,
+        "program": program,
+        "field": field,
+        "enrollment_year": year,
+        "institution": institution or user.get("institution"),
+        "display_name": stored.get("display_name") or user.get("username"),
+        "enrollment_status": "enrolled" if program else "unlinked",
+    }
+
+
+def cell_released(n: int) -> bool:
+    """Aggregate cells smaller than MIN_CELL_SIZE are withheld, not invented."""
+    return int(n) >= MIN_CELL_SIZE
+
+
+def log_audit(user: dict, action: str, resource: str | None = None, payload: dict | None = None) -> None:
+    """Write one audit_log row. Failures are swallowed so a missing table cannot
+    take a dashboard off the request path. Searchable admin UI is Wave 7."""
+    try:
+        from db.database import SessionLocal
+        from models.governance import AuditLog
+
+        session = SessionLocal()
+        try:
+            session.add(AuditLog(
+                actor=user.get("username") or "unknown",
+                role=user.get("role"),
+                action=action,
+                resource=resource,
+                payload=payload or {},
+            ))
+            session.commit()
+        except Exception:
+            session.rollback()
+        finally:
+            session.close()
+    except Exception:
+        log.warning("Could not write audit row %s", action, exc_info=True)
+
+
+def assert_cross_institution(user: dict, requested: str) -> str:
+    """SCOPE.UNI.R2 — a different HEI is 403 unless the grant is on the record.
+
+    The grant is read from Postgres, not the JWT, so it can be revoked without
+    waiting for the token to expire. A successful cross read is written to
+    audit_log (W.ADM.08 UI is Wave 7).
+    """
+    stored = get_user(user["username"]) or {}
+    if user.get("role") == ROLE_ADMIN:
+        log_audit(user, "cross_institution_read", requested, {
+            "own": user.get("institution"), "requested": requested,
+        })
+        return requested
+    if not stored.get("cross_institution"):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=(
+                "Cross-institution access requires an elevated grant. "
+                "A crafted ?institution= is rejected, not silently narrowed."
+            ),
+        )
+    log_audit(user, "cross_institution_read", requested, {
+        "own": user.get("institution"), "requested": requested,
+    })
+    return requested
 
 
 def warn_if_insecure() -> None:

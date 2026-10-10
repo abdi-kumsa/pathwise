@@ -3,3 +3,4 @@ from .enrollment import Enrollment
 from .job_posting import JobPosting
 from .placement import Placement
 from .user import User
+from .governance import AuditLog, Scenario, AhpMatrix, ExpertValidation

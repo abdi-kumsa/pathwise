@@ -11,6 +11,7 @@ export default function DataNote({ children, tone = 'info' }) {
   const tones = {
     info:    { bg: '#F1F5F9', border: '#E2E8F0', fg: '#475569', icon: 'M12 16v-4M12 8h.01' },
     caution: { bg: '#FEF3C7', border: '#FDE68A', fg: '#92400E', icon: 'M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z' },
+    simulated: { bg: '#FFF7ED', border: '#FED7AA', fg: '#9A3412', icon: 'M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z' },
   }
   const t = tones[tone] ?? tones.info
 

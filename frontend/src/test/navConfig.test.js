@@ -73,8 +73,23 @@ describe('navConfig', () => {
     }
   })
 
-  it('puts the career explorer first for students — it is their primary task', () => {
-    expect(navFor('STUDENT')[0].links[0].to).toBe('/student/careers')
+  it('puts profile & eligibility first for students', () => {
+    expect(navFor('STUDENT')[0].links[0].to).toBe('/student/profile')
+  })
+
+  it('does not list leftover US tool routes in role nav', () => {
+    const leftover = [
+      '/student/careers', '/student/evaluator', '/student/salary', '/student/market',
+      '/university/expansion', '/university/benchmark', '/university/enrollment',
+      '/moe/fields', '/moe/quadrant', '/moe/labour',
+      '/mol/emerging', '/mol/supply-demand', '/mol/regional',
+    ]
+    for (const role of ['STUDENT', 'UNIVERSITY', 'MOE', 'MOL']) {
+      const routes = routesFor(role)
+      for (const path of leftover) {
+        expect(routes, `${role} still lists ${path}`).not.toContain(path)
+      }
+    }
   })
 
   it('references only icons that exist', () => {

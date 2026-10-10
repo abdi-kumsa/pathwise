@@ -156,3 +156,23 @@ def signup(body: SignUpRequest):
         user=_user_out(user),
     )
 
+
+_LEFTOVER_PATHS = {
+    "/student/careers", "/student/evaluator", "/student/salary", "/student/market",
+    "/university/expansion", "/university/benchmark", "/university/enrollment",
+    "/moe/fields", "/moe/quadrant", "/moe/labour",
+    "/mol/emerging", "/mol/supply-demand", "/mol/regional",
+}
+
+
+@router.post("/page-view")
+def page_view(body: dict, user: dict = Depends(auth_service.get_current_user)):
+    """DOC2 W.ADM.08 — record a widget-route view. Not a keystroke logger."""
+    path = str((body or {}).get("path") or "")[:200]
+    if not path.startswith("/"):
+        raise HTTPException(status_code=422, detail="path must be an absolute route")
+    if path in _LEFTOVER_PATHS:
+        return {"logged": False, "reason": "leftover_tool"}
+    auth_service.log_audit(user, "page_view", path)
+    return {"logged": True}
+

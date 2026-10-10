@@ -34,7 +34,8 @@ client.interceptors.response.use(
     // the user back to login. Skipped for the login call itself, where a 401 is
     // simply wrong credentials and must surface as an inline form error.
     const isLoginCall = error.config?.url?.includes('/api/auth/login')
-    if (status === 401 && !isLoginCall) {
+    const isPageView = error.config?.url?.includes('/api/auth/page-view')
+    if (status === 401 && !isLoginCall && !isPageView) {
       clearToken()
       if (window.location.pathname !== '/login') {
         window.location.replace('/login?expired=1')

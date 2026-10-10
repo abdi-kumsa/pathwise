@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell, ReferenceLine, ResponsiveContainer } from 'recharts'
 import SectionHeader from '../components/SectionHeader'
+import DataNote from '../components/DataNote'
 import { submitStudentProfile, getSkillRecommendations } from '../api/enrollment'
 
 const PROGRAMS = [
@@ -91,6 +92,10 @@ export default function StudentEvaluatorPage() {
   return (
     <div>
       <SectionHeader title="Student evaluator" subtitle="Predict placement outcomes based on student profile" />
+      <DataNote tone="caution">
+        This page is the leftover US placement / salary / LSTM path. It is not
+        an Ethiopia Model 1 or Model 2 score.
+      </DataNote>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', alignItems: 'start' }}>
 

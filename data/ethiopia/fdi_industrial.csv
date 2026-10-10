@@ -1,0 +1,91 @@
+region,year,industrial_park,industrial_park_operational_flag,fdi_inflow_usd,new_investment_project_count,factory_expansion_count,expected_employment,private_investment_pipeline_etb,provenance
+Sidama,2016,Hawassa Industrial Park,False,3514559,0,0,0,0,simulated
+Sidama,2017,Hawassa Industrial Park,True,53057849,10,0,1431,325956859,simulated
+Sidama,2018,Hawassa Industrial Park,True,30791365,3,5,2404,294108499,simulated
+Sidama,2019,Hawassa Industrial Park,True,38878169,4,0,1064,88463370,simulated
+Sidama,2020,Hawassa Industrial Park,True,29278698,4,4,478,256365202,simulated
+Sidama,2021,Hawassa Industrial Park,True,30963780,4,2,2464,137545975,simulated
+Sidama,2022,Hawassa Industrial Park,True,44879705,8,1,2607,310657066,simulated
+Sidama,2023,Hawassa Industrial Park,True,31763345,8,3,2861,222021069,simulated
+Sidama,2024,Hawassa Industrial Park,True,53051526,7,2,1247,27091363,simulated
+Sidama,2025,Hawassa Industrial Park,True,43173661,4,2,2866,299066647,simulated
+Addis Ababa,2016,Bole Lemi,True,37822299,4,3,1863,24060566,simulated
+Addis Ababa,2017,Bole Lemi,True,52106210,7,2,7321,53148776,simulated
+Addis Ababa,2018,Bole Lemi,True,33390247,6,2,3306,42358058,simulated
+Addis Ababa,2019,Bole Lemi,True,43153492,3,1,1423,281527715,simulated
+Addis Ababa,2020,Bole Lemi,True,29458943,4,3,1960,372020192,simulated
+Addis Ababa,2021,Bole Lemi,True,55767672,8,4,5533,48299501,simulated
+Addis Ababa,2022,Bole Lemi,True,37045047,3,5,5172,50191754,simulated
+Addis Ababa,2023,Bole Lemi,True,46856059,10,4,1504,300388798,simulated
+Addis Ababa,2024,Bole Lemi,True,30309642,7,3,3244,239399341,simulated
+Addis Ababa,2025,Bole Lemi,True,52546609,11,0,2351,358544556,simulated
+Oromia,2016,Eastern Industrial Zone,True,34544619,9,4,459,50462800,simulated
+Oromia,2017,Eastern Industrial Zone,True,50319780,10,2,2635,169168671,simulated
+Oromia,2018,Eastern Industrial Zone,True,25007594,9,2,4502,179335941,simulated
+Oromia,2019,Eastern Industrial Zone,True,49231308,11,1,4774,155347716,simulated
+Oromia,2020,Eastern Industrial Zone,True,47530967,5,2,7813,93005916,simulated
+Oromia,2021,Eastern Industrial Zone,True,25585068,9,2,698,216411862,simulated
+Oromia,2022,Eastern Industrial Zone,True,31846987,2,3,3850,136229894,simulated
+Oromia,2023,Eastern Industrial Zone,True,55421415,10,1,3196,325132325,simulated
+Oromia,2024,Eastern Industrial Zone,True,54868376,5,2,7786,95715981,simulated
+Oromia,2025,Eastern Industrial Zone,True,52492162,8,2,1205,226767299,simulated
+Oromia,2016,Adama Industrial Park,False,2556928,0,0,0,0,simulated
+Oromia,2017,Adama Industrial Park,False,3513934,0,0,0,0,simulated
+Oromia,2018,Adama Industrial Park,True,41790562,11,4,4311,381435554,simulated
+Oromia,2019,Adama Industrial Park,True,42671888,1,1,7431,231724106,simulated
+Oromia,2020,Adama Industrial Park,True,26269487,2,0,1140,153699322,simulated
+Oromia,2021,Adama Industrial Park,True,24712219,11,0,520,22790325,simulated
+Oromia,2022,Adama Industrial Park,True,29817265,2,4,5269,153533286,simulated
+Oromia,2023,Adama Industrial Park,True,52878465,6,5,3021,348113384,simulated
+Oromia,2024,Adama Industrial Park,True,30779778,7,2,932,197965335,simulated
+Oromia,2025,Adama Industrial Park,True,37810975,10,0,5546,110777763,simulated
+Amhara,2016,Kombolcha Industrial Park,False,4384695,0,0,0,0,simulated
+Amhara,2017,Kombolcha Industrial Park,False,4564927,0,0,0,0,simulated
+Amhara,2018,Kombolcha Industrial Park,False,3566894,0,0,0,0,simulated
+Amhara,2019,Kombolcha Industrial Park,True,33503862,10,3,5600,272117570,simulated
+Amhara,2020,Kombolcha Industrial Park,True,46751494,8,4,2978,241872675,simulated
+Amhara,2021,Kombolcha Industrial Park,True,36123965,10,2,1386,33049502,simulated
+Amhara,2022,Kombolcha Industrial Park,True,37323498,3,5,6749,258511875,simulated
+Amhara,2023,Kombolcha Industrial Park,True,42978081,8,1,534,246509680,simulated
+Amhara,2024,Kombolcha Industrial Park,True,29773163,6,2,3393,242105938,simulated
+Amhara,2025,Kombolcha Industrial Park,True,25452251,4,1,2270,53639105,simulated
+Tigray,2016,Mekelle Industrial Park,False,2924644,0,0,0,0,simulated
+Tigray,2017,Mekelle Industrial Park,True,35268686,4,4,4934,121621697,simulated
+Tigray,2018,Mekelle Industrial Park,True,24642574,3,2,3640,103987197,simulated
+Tigray,2019,Mekelle Industrial Park,True,48905018,5,4,2780,274969111,simulated
+Tigray,2020,Mekelle Industrial Park,True,43615760,4,4,1212,162875957,simulated
+Tigray,2021,Mekelle Industrial Park,True,44836721,4,2,3483,183334921,simulated
+Tigray,2022,Mekelle Industrial Park,True,49239406,1,4,4588,172170518,simulated
+Tigray,2023,Mekelle Industrial Park,True,53988834,5,3,3762,205125825,simulated
+Tigray,2024,Mekelle Industrial Park,True,40049514,1,4,1098,387666025,simulated
+Tigray,2025,Mekelle Industrial Park,True,46081822,1,2,7615,216384800,simulated
+Dire Dawa,2016,Dire Dawa Industrial Park,False,3383050,0,0,0,0,simulated
+Dire Dawa,2017,Dire Dawa Industrial Park,False,4491765,0,0,0,0,simulated
+Dire Dawa,2018,Dire Dawa Industrial Park,True,55975015,7,5,3989,199643281,simulated
+Dire Dawa,2019,Dire Dawa Industrial Park,True,34949904,9,2,2432,140171069,simulated
+Dire Dawa,2020,Dire Dawa Industrial Park,True,55732355,4,1,5604,327708997,simulated
+Dire Dawa,2021,Dire Dawa Industrial Park,True,37259078,7,3,1226,370675016,simulated
+Dire Dawa,2022,Dire Dawa Industrial Park,True,42946783,1,3,1199,33683086,simulated
+Dire Dawa,2023,Dire Dawa Industrial Park,True,28122432,9,3,2242,160844501,simulated
+Dire Dawa,2024,Dire Dawa Industrial Park,True,43492418,10,2,7487,86485339,simulated
+Dire Dawa,2025,Dire Dawa Industrial Park,True,49496227,1,5,887,387852235,simulated
+Oromia,2016,Jimma Industrial Park,False,3042317,0,0,0,0,simulated
+Oromia,2017,Jimma Industrial Park,False,3396694,0,0,0,0,simulated
+Oromia,2018,Jimma Industrial Park,False,3298544,0,0,0,0,simulated
+Oromia,2019,Jimma Industrial Park,False,5376354,0,0,0,0,simulated
+Oromia,2020,Jimma Industrial Park,True,43117022,3,5,4354,358326559,simulated
+Oromia,2021,Jimma Industrial Park,True,31849069,3,2,6862,177176697,simulated
+Oromia,2022,Jimma Industrial Park,True,39580861,11,5,7002,86033955,simulated
+Oromia,2023,Jimma Industrial Park,True,48717974,4,1,7914,300967837,simulated
+Oromia,2024,Jimma Industrial Park,True,30486789,7,3,6703,273754350,simulated
+Oromia,2025,Jimma Industrial Park,True,37820126,11,5,7579,288108973,simulated
+Amhara,2016,Bahir Dar Industrial Park,False,2903451,0,0,0,0,simulated
+Amhara,2017,Bahir Dar Industrial Park,False,3590852,0,0,0,0,simulated
+Amhara,2018,Bahir Dar Industrial Park,False,3404751,0,0,0,0,simulated
+Amhara,2019,Bahir Dar Industrial Park,True,33456055,2,1,1757,90573062,simulated
+Amhara,2020,Bahir Dar Industrial Park,True,51845134,5,5,6987,80811138,simulated
+Amhara,2021,Bahir Dar Industrial Park,True,49320225,8,1,5803,218234524,simulated
+Amhara,2022,Bahir Dar Industrial Park,True,30308371,5,1,4520,176063741,simulated
+Amhara,2023,Bahir Dar Industrial Park,True,46561417,1,2,810,142762672,simulated
+Amhara,2024,Bahir Dar Industrial Park,True,42299183,2,4,1210,141267140,simulated
+Amhara,2025,Bahir Dar Industrial Park,True,33884914,2,3,1197,251632347,simulated

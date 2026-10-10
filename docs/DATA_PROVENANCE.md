@@ -5,136 +5,155 @@ support. Read this before quoting a figure from the dashboards.
 
 ---
 
-## 1. The datasets
+## 1. The request-path dataset
 
-| File | Rows × cols | Period | Feeds |
-|---|---|---|---|
-| `Assets/job_market_forecasting_data.csv` | 3000 × 35 | 2020–2025, monthly | Labour demand (MoL), career explorer, investment matrix |
-| `Assets/student_enrollment_forecasting_data.csv` | 2000 × 41 | 2020–2025, by term | Education supply (MoE), institution views (University) |
-| `data/mock/students.csv` | 3000 | — | ML feature store |
-| `data/mock/placements.csv` | 3000 | — | Graduate outcomes, fit classification |
-| `data/processed/features.parquet` | 3000 × 24 | — | All ML inference |
+**PathWise serves a simulated Ethiopian structure for 2016–2025.** Real region
+names, HEI names and MoE programme bands. Generated values. Not official CSA,
+MoE or ESS statistics.
 
-Both `Assets/` files were only read by `data/load_to_db.py` before the
-role-based work — nothing queried the resulting tables, so 76 columns of
-demand, supply, cost and outcome data sat unused. They are now the backbone
-of every role dashboard.
+Every `/api/*` JSON **object** carries a `provenance` block:
+
+```json
+{
+  "source": "Simulated Ethiopian structure",
+  "tier": "simulated",
+  "as_of": "2016–2025",
+  "method": "seeded generator in data/ethiopia/generate.py",
+  "caveat": "Simulated Ethiopian structure (real regions, HEIs, MoE bands). Not official MoE, MoLS or ESS statistics."
+}
+```
+
+`tier` is `simulated` until an official file replaces a parquet in place. It may
+be `derived` for ranks, ratios and forecasts computed from stamped series. It is
+never `official` in this build.
+
+The shell chip (`ProvenanceBadge`) shows the same stamp. Widget pages add a
+page-level `DataNote`.
+
+Waiver **WV.SIM1** records this until official files exist.
 
 ---
 
-## 2. Geographic framing — read this first
+## 2. Twenty fact tables
 
-**This is a US-benchmarked reference dataset.** US metro areas (CBSA names),
-US states, USD salaries, US SOC occupation codes, US institution types.
+All live under `data/ethiopia/`. One table per DOC1 category. CSV beside parquet
+for inspection. Reference dimensions in `data/ethiopia/reference/`
+(`regions.csv`, `heis.csv`, `fields.csv`, `industrial_parks.csv`).
 
-PathWise is presented to Ethiopian stakeholders (MoE, MoL), and the two do not
-match. The decision taken was to **keep the data as it is and label it
-honestly** rather than relabel regions or convert currency, because:
+| Table | Family | Intended official source |
+|---|---|---|
+| `enrollment_history` | education | MoE EMIS |
+| `admissions_funnel` | education | MoE / HEI SIS |
+| `exam_placement` | policy | MoE placement |
+| `demographics` | education | CSA / MoE |
+| `capacity_quota` | policy | MoE quotas |
+| `institution_capacity` | education | HEI / MoE |
+| `graduate_outcomes` | education | HEI tracer / ESS |
+| `finance_support` | education | MoE / MoF |
+| `cohort_progression` | education | HEI SIS |
+| `labour_history` | labor | ESS / MoLS |
+| `vacancies` | labor | MoLS / job boards |
+| `skills_demand` | labor | MoLS |
+| `labour_demographics` | labor | ESS |
+| `formal_informal` | labor | ESS |
+| `sector_output` | labor | CSA / NBE |
+| `public_hiring` | policy | CSC / MoLS |
+| `fdi_industrial` | investment | EIC / industrial parks |
+| `macro_regional` | investment | CSA / regional bureaux |
+| `macro_financial` | investment | NBE |
+| `shocks_seasonality` | investment | CSA / disaster agencies |
 
-- the *methodology* transfers unchanged — a demand-vs-supply growth matrix works
-  on any country's data
-- relabelling US figures as Ethiopian would produce numbers nobody could defend
-  in a viva or to a ministry
+Join backbone:
 
-Every dashboard therefore carries the chip **“US benchmark dataset · 2020–2025”**
-in the top bar, and every API response includes a `dataset_label` field saying
-the same. To localise, replace the two `Assets/` CSVs with equivalents using the
-same column names — no service code changes.
+```
+field  ──►  programme / department
+ HEI   ──►  campus  ──►  region
+occupation / sector  ──►  region
+academic year 2016–2025
+```
+
+`backend/services/_datasets.py` is the reader. Models 1–3 join on field, HEI
+and region — not on US metro or SOC codes.
 
 ---
 
-## 3. The join backbone
+## 3. How to replace a parquet with an official file
 
-```
-job_title  ──►  job_family  ═══  field_of_study  ──►  program_name
-  (33)            (9)          identical vocabulary       (12)
-```
+1. Open the contract for that table under `docs/spec/ingestion/<table>.md`.
+2. Keep the grain, keys and column names. Extra columns are ignored; missing
+   required columns fail `backend/services/_validate.py`.
+3. Drop the file in place as `data/ethiopia/<table>.parquet` (CSV optional).
+4. Restamp `provenance` on those rows to `official` with the real `source` and
+   vintage. `_validate.py` accepts official rows that declare a source; it does
+   not fail them for not being all-`simulated`. Until an official file lands,
+   the API stamp stays `simulated`.
+5. Restart the backend (`docker compose restart backend` on Windows).
 
-`job_family` in the jobs data and `field_of_study` in the enrollment data share
-the **same nine values exactly** — verified, no mapping table needed. This is
-what lets a student name a target job and be told which department to join, and
-what lets MoE compare labour demand against graduate supply per field.
+Do not relabel US metros as Ethiopian regions. The US CSVs are **retired from
+the request path**. They live in `archive/us_benchmark/` and on leftover tool
+routes only (waiver **WV.US1**).
 
-Implemented in `backend/services/_datasets.py`.
+---
 
-### The one gap
+## 4. What is not on the Ethiopia request path
 
-`data/mock/placements.csv` records outcomes against `role`, drawn from the same
-33-title vocabulary, but only **28 of 33 overlap**. The five placement-only
-titles are mapped explicitly in `_datasets._PLACEMENT_ROLE_FAMILY`:
-
-| Placement role | Assigned family |
+| Source | Role today |
 |---|---|
-| QA Engineer | Software Engineering |
-| Release Manager | DevOps |
-| Scrum Master | Product Management |
-| Solutions Architect | Cloud Infrastructure |
-| UX Researcher | UX Design |
+| `data/ethiopia/*.parquet` | Models 1–3, five role dashboards, admin pipeline |
+| `data/processed/features.parquet` | Leftover US placement / salary XGBoost |
+| `data/mock/placements.csv` | Leftover US placement tools |
+| `ml/models/enrollment_lstm.keras` | Leftover university LSTM page |
+| `ml/models/demand_prophet.pkl` | Leftover US demand tool |
+| Postgres `users`, `audit_log`, `scenarios`, `ahp_matrices`, `expert_validations` | Auth and Wave 7 governance |
 
-Without this map, 371 of 2649 placed rows (14%) drop silently out of every
-family aggregate.
-
----
-
-## 4. Known limitations
-
-### 4.1 Graduate fit classification is not comparable across fields
-
-`/api/labour/mismatch` returns Matched / Overeducated / Undereducated. The
-system-wide figure is sound: **87% of placed graduates hold a role that does not
-match their credential level.**
-
-The per-field and per-programme breakdowns are **not** a ranking. The
-distribution is near-identical everywhere — roughly 80% Undereducated, 13%
-Matched, 5% Overeducated — with an observed spread of **5.3 percentage points**
-across all nine fields. `data/mock/placements.csv` is synthetic and its
-generator encoded no between-group signal.
-
-Consequences, enforced in code:
-
-- every mismatch response carries `comparable: false` and a `caveat` string
-- `SkillsMismatchPage.jsx` renders one system-wide bar, lists the breakdown
-  **alphabetically rather than by match rate**, and shows the caveat in a
-  cautionary banner above the table
-- the observed spread is printed on the page so a reader can judge for themselves
-
-**For a mismatch signal with real variance, use the supply–demand gap**
-(`/api/labour/supply-demand`), which ranges across an order of magnitude
-between fields.
-
-### 4.2 Supply–demand severity is a relative rank
-
-Coverage (supply ÷ demand) sits between 90% and 93% for every field, so any
-fixed coverage threshold would bucket all nine identically. Severity is
-therefore a **quartile rank of the absolute unfilled-headcount gap**, which does
-separate them. The response says so in `severity_basis`.
-
-### 4.3 Scores are relative, not absolute
-
-The career recommender, investment priority and expansion scores all min-max
-normalise each factor **across the current cohort** before weighting. A score of
-70 means "high within these twelve programmes", not "70% good". Every response
-returns its `weights` and a `method` string, and every score is shown decomposed
-into per-factor contributions so the ranking can be audited.
-
-### 4.4 Quadrant boundaries are medians
-
-The MoE investment matrix splits at the median of each axis, so the four
-quadrants always partition the nine fields. Membership is relative to this
-cohort. A field in "Review" has slow growth on both axes — it is not necessarily
-small, so check total openings before acting.
-
-### 4.5 Mock vs. real
-
-`data/mock/*.csv` are generated (`data/generate_mock_data.py`). The two
-`Assets/` files are the substantive datasets. Model metrics in
-`ml/MODEL_CARD.md` are computed against the mock-derived feature store and
-should be read as pipeline validation, not as claims about real-world accuracy.
+Postgres is not the analytics store. A database outage blocks sign-in; dashboard
+reads still come from parquet.
 
 ---
 
-## 5. What is *not* on the request path
+## 5. Known limitations (honesty)
 
-All `/api/*` dashboard endpoints read parquet and CSV. **Postgres serves exactly
-one table on the request path: `users`, for authentication.** The other four
-tables are an ETL sink. See `docs/TECHNICAL.md` §4.
+### 5.1 Graduate fit classification is not a ranking
+
+Fit class (matched / overeducated / undereducated) is near-uniform across
+fields. It must not enter any score, league table or alternative-path rank
+(RANK.R1). Rankings use labour demand, expected supply, eligibility and
+capacity. Every scoring payload returns `fit_classification_used: false`.
+
+### 5.2 Scores are relative
+
+Composite scores min-max normalise across the current comparison set. A score of
+70 means “high among these rows”, not “70% good”. Payloads return `weights`,
+`method` and per-factor rows (RANK.R3).
+
+### 5.3 `ols_lags` holdout is not ministry accuracy
+
+On the simulated lag construction, chronological holdout RMSE for `ols_lags` is
+near-zero. Comparison still includes seasonal-naive and historical-mean. The
+monitoring headline uses seasonal-naive. Waiver **WV.OLS1**.
+
+### 5.4 GET `/api/users` is a stamped object
+
+The accounts list returns `{ n, rows }` so provenance middleware can stamp it.
+The page still carries a DataNote.
+
+### 5.5 W.MOE.05 uses Model 3 policy-priority
+
+Yaml `satisfied_by.endpoint` is `/api/model3/policy-priority`, matching the MoE
+priority page. `education_service.get_investment_priority` remains on
+`/api/education/investment-priority` and is not swapped into the widget.
+
+### 5.6 Official ingest is unblocked, not present
+
+The contract validator accepts `provenance: official` when `source` is set.
+No official CSA / MoE / ESS file is in this build. Waiver **WV.SIM1**.
+
+---
+
+## 6. Related documents
+
+- [METHODOLOGY.md](METHODOLOGY.md) — DOC1 steps 1–7
+- [TECHNICAL.md](TECHNICAL.md) — routers, ports, tests
+- [USER_GUIDE.md](USER_GUIDE.md) — five role walkthroughs
+- [ml/MODEL_CARD.md](../ml/MODEL_CARD.md) — Ethiopia M1/M2/M3 and leftover US models
+- [spec/waivers.yaml](spec/waivers.yaml) — residual caveats

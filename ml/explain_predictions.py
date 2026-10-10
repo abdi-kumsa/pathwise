@@ -5,6 +5,7 @@ Tasks 14-15: SHAP Explainability for XGBoost placement model
 Usage:
     python ml/explain_predictions.py
 """
+import json
 import os
 import pickle
 import numpy as np
@@ -113,6 +114,151 @@ def explain_student(student: dict) -> dict:
         'base_value':      round(float(explainer.expected_value), 4),
         'contributions':   contributions,
     }
+
+
+# ── Ethiopia OLS importance (M1 / M2) — after training, never a prior ─────────
+# Model-based |coefficient| and permutation ΔRMSE on a chronological holdout.
+# US LSTM / Prophet are not scored here.
+
+_ETHIOPIA_IMPORTANCE = os.path.join(MODEL_DIR, "ethiopia_feature_importance.json")
+
+
+def _permutation_delta(model, X_test, y_test, baseline_rmse, rng):
+    """Increase in RMSE when each column is shuffled independently."""
+    out = []
+    y = np.asarray(y_test, dtype=float)
+    for name in list(X_test.columns):
+        shuffled = X_test.copy()
+        shuffled[name] = rng.permutation(shuffled[name].to_numpy())
+        pred = model.predict(shuffled)
+        rmse = float(np.sqrt(np.mean((y - pred) ** 2)))
+        out.append({
+            "feature": name,
+            "importance": round(max(rmse - baseline_rmse, 0.0), 6),
+            "method": "permutation_importance",
+        })
+    out.sort(key=lambda r: r["importance"], reverse=True)
+    return out
+
+
+def _ols_holdout_importance(frame, ycol, feature_cols, group_keys):
+    """Pooled OLS on a last-2-year chronological holdout of one Ethiopia panel."""
+    work = frame.dropna(subset=[ycol, *feature_cols]).copy()
+    if work.empty:
+        return {"model_based": [], "permutation": []}
+    hold_idx = []
+    train_idx = []
+    for _, series in work.groupby(group_keys, sort=False):
+        if len(series) < 6:
+            continue
+        train_idx.extend(series.index[:-2].tolist())
+        hold_idx.extend(series.index[-2:].tolist())
+    if len(hold_idx) < 4 or len(train_idx) < 8:
+        return {"model_based": [], "permutation": []}
+    train = work.loc[train_idx]
+    test = work.loc[hold_idx]
+    from sklearn.linear_model import LinearRegression
+    model = LinearRegression()
+    model.fit(train[feature_cols], train[ycol])
+    pred = model.predict(test[feature_cols])
+    y_test = test[ycol].to_numpy(dtype=float)
+    baseline_rmse = float(np.sqrt(np.mean((y_test - pred) ** 2)))
+    model_based = sorted(
+        [
+            {
+                "feature": name,
+                "importance": round(float(abs(coef)), 6),
+                "method": "model_based_importance",
+            }
+            for name, coef in zip(feature_cols, model.coef_)
+        ],
+        key=lambda r: r["importance"],
+        reverse=True,
+    )
+    rng = np.random.default_rng(42)
+    permutation = _permutation_delta(
+        model, test[feature_cols], y_test, baseline_rmse, rng,
+    )
+    return {
+        "model_based": model_based,
+        "permutation": permutation,
+        "holdout_rmse": round(baseline_rmse, 4),
+        "n_holdout": int(len(test)),
+        "split": "chronological last-2-years per series",
+    }
+
+
+def ethiopia_feature_importance(persist: bool = True) -> dict:
+    """Empirical importance for Ethiopia M1/M2 OLS estimators.
+
+    Placement SHAP stays in compute_shap_values / explain_student. This function
+    does not read collection-priority percentages.
+    """
+    from ml.features.model1.assemble import assemble_panel
+    from ml.features.model2 import c1_labour
+
+    m1_lags = (
+        "enrollment_lag_1y",
+        "enrollment_lag_2y",
+        "enrollment_rolling_3y_avg",
+        "applications_count",
+    )
+    m2_lags = ("employment_lag_1y", "employment_lag_2y")
+    result = {
+        "model1": {
+            "target": "program_enrollment_count",
+            **_ols_holdout_importance(
+                assemble_panel(),
+                "program_enrollment_count",
+                list(m1_lags),
+                ["institution", "campus", "program"],
+            ),
+        },
+        "model2": {
+            "target": "employment_level",
+            **_ols_holdout_importance(
+                c1_labour.frame(),
+                "employment_level",
+                list(m2_lags),
+                ["region", "sector"],
+            ),
+        },
+        "not_compared": [
+            "US LSTM (ml/models/enrollment_lstm.keras)",
+            "US Prophet (ml/models/demand_prophet.pkl)",
+        ],
+    }
+    if persist:
+        os.makedirs(MODEL_DIR, exist_ok=True)
+        with open(_ETHIOPIA_IMPORTANCE, "w", encoding="utf-8") as fh:
+            json.dump(result, fh, indent=2)
+    return result
+
+
+def placement_mean_abs_shap(n_samples: int = 200):
+    """Global mean |SHAP| ranking for the placement XGBoost model."""
+    shap_values, base_val, feature_names, _X = compute_shap_values(n_samples=n_samples)
+    mean_abs = np.abs(shap_values).mean(axis=0)
+    ranked = sorted(
+        zip(feature_names, mean_abs),
+        key=lambda x: x[1],
+        reverse=True,
+    )
+    return {
+        "method": "shap",
+        "base_value": round(float(np.mean(np.atleast_1d(base_val))), 4),
+        "rows": [
+            {"feature": name, "importance": round(float(val), 6), "method": "shap"}
+            for name, val in ranked
+        ],
+    }
+
+
+def load_cached_ethiopia_importance() -> dict | None:
+    if not os.path.exists(_ETHIOPIA_IMPORTANCE):
+        return None
+    with open(_ETHIOPIA_IMPORTANCE, encoding="utf-8") as fh:
+        return json.load(fh)
 
 
 # ── Summary printer ───────────────────────────────────────────────────────────

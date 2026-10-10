@@ -1,0 +1,86 @@
+{
+  "model1": {
+    "target": "program_enrollment_count",
+    "model_based": [
+      {
+        "feature": "enrollment_rolling_3y_avg",
+        "importance": 3.0,
+        "method": "model_based_importance"
+      },
+      {
+        "feature": "enrollment_lag_1y",
+        "importance": 1.0,
+        "method": "model_based_importance"
+      },
+      {
+        "feature": "enrollment_lag_2y",
+        "importance": 1.0,
+        "method": "model_based_importance"
+      },
+      {
+        "feature": "applications_count",
+        "importance": 0.0,
+        "method": "model_based_importance"
+      }
+    ],
+    "permutation": [
+      {
+        "feature": "enrollment_rolling_3y_avg",
+        "importance": 127.101389,
+        "method": "permutation_importance"
+      },
+      {
+        "feature": "enrollment_lag_2y",
+        "importance": 66.933932,
+        "method": "permutation_importance"
+      },
+      {
+        "feature": "enrollment_lag_1y",
+        "importance": 61.173717,
+        "method": "permutation_importance"
+      },
+      {
+        "feature": "applications_count",
+        "importance": 0.0,
+        "method": "permutation_importance"
+      }
+    ],
+    "holdout_rmse": 0.0,
+    "n_holdout": 304,
+    "split": "chronological last-2-years per series"
+  },
+  "model2": {
+    "target": "employment_level",
+    "model_based": [
+      {
+        "feature": "employment_lag_1y",
+        "importance": 0.517962,
+        "method": "model_based_importance"
+      },
+      {
+        "feature": "employment_lag_2y",
+        "importance": 0.516804,
+        "method": "model_based_importance"
+      }
+    ],
+    "permutation": [
+      {
+        "feature": "employment_lag_2y",
+        "importance": 6608.129692,
+        "method": "permutation_importance"
+      },
+      {
+        "feature": "employment_lag_1y",
+        "importance": 6465.156103,
+        "method": "permutation_importance"
+      }
+    ],
+    "holdout_rmse": 0.2131,
+    "n_holdout": 224,
+    "split": "chronological last-2-years per series"
+  },
+  "not_compared": [
+    "US LSTM (ml/models/enrollment_lstm.keras)",
+    "US Prophet (ml/models/demand_prophet.pkl)"
+  ]
+}

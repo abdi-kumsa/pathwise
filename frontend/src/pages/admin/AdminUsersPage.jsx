@@ -413,7 +413,8 @@ export default function AdminUsersPage() {
             The five seeded accounts share the password from <code>DEMO_PASSWORD</code>.
             Create your own administrator, sign in as them, then deactivate the
             seeded ones — the platform keeps at least one active administrator at
-            all times, so do it in that order.
+            all times, so do it in that order. This list is a stamped JSON object
+            (not a bare array).
           </DataNote>
         </>
       )}
