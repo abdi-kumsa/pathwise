@@ -1,14 +1,12 @@
 """
 Labour-market intelligence — the Ministry of Labour view.
 
-Answers "which occupations are emerging, and where is the workforce short?"
-from Assets/job_market_forecasting_data.csv.
-
-The headline signal is the supply-demand gap: `job_openings_count` against
-`relevant_graduates_count + bootcamp_completions`. That has real between-field
-variance, unlike the graduate fit classification in mismatch_service, and is
-what the dashboard leads with.
+Reads Ethiopia labour tables via services/_datasets.py. The headline signal for
+MoL widgets is Model 2 (forecast, skills, pipelines). Leftover /api/labour/emerging
+and mismatch routes are not Ethiopia Model 1/2 scores.
 """
+import json
+
 import pandas as pd
 
 from . import _datasets as ds
@@ -32,6 +30,39 @@ def get_overview() -> dict:
     # supply_demand_ratio < 1 means fewer qualified people than openings.
     undersupplied = int((j.groupby('job_family')['supply_demand_ratio'].mean() < 1.0).sum())
 
+    employment_level = None
+    unemployment_rate_pct = None
+    labour_force_participation_pct = None
+    underemployment = None
+    vacancies = int(latest['job_openings_count'].sum())
+    try:
+        import sys
+        from pathlib import Path
+        _root = Path(__file__).resolve().parent.parent.parent
+        if str(_root) not in sys.path:
+            sys.path.insert(0, str(_root))
+        from ml.features.model2 import c1_labour, c3_formal_informal, c4_vacancies
+        hist = c1_labour.frame()
+        if not hist.empty:
+            hy = int(hist['year'].max())
+            now = hist[hist['year'] == hy]
+            if 'employment_level' in now.columns:
+                employment_level = int(now['employment_level'].sum())
+            if 'unemployment_rate_pct' in now.columns:
+                unemployment_rate_pct = round(float(now['unemployment_rate_pct'].mean()), 1)
+            if 'labour_force_participation_pct' in now.columns:
+                labour_force_participation_pct = round(float(now['labour_force_participation_pct'].mean()), 1)
+        fi = c3_formal_informal.frame()
+        if not fi.empty and 'underemployment' in fi.columns:
+            fy = int(fi['year'].max())
+            underemployment = int(fi[fi['year'] == fy]['underemployment'].sum())
+        vac = c4_vacancies.frame()
+        if not vac.empty and 'vacancy_count' in vac.columns:
+            vy = int(vac['year'].max())
+            vacancies = int(vac[vac['year'] == vy]['vacancy_count'].sum())
+    except Exception:
+        pass
+
     return {
         'total_openings':        int(j['job_openings_count'].sum()),
         'openings_latest_year':  int(latest['job_openings_count'].sum()),
@@ -42,6 +73,16 @@ def get_overview() -> dict:
         'occupations_tracked':   int(j['job_title'].nunique()),
         'fields_tracked':        int(j['job_family'].nunique()),
         'undersupplied_fields':  undersupplied,
+        'employment_level':      employment_level,
+        'unemployment_rate_pct': unemployment_rate_pct,
+        'underemployment':       underemployment,
+        'vacancies':             vacancies,
+        'labour_force_participation_pct': labour_force_participation_pct,
+        'field_openings': [
+            {'field': str(k), 'openings': int(v)}
+            for k, v in latest.groupby('job_family')['job_openings_count'].sum()
+            .sort_values(ascending=False).items()
+        ],
         'dataset_label':         ds.DATASET_LABEL,
     }
 
@@ -262,3 +303,232 @@ def get_occupation_detail(job_title: str) -> dict:
 def _top_counts(df: pd.DataFrame, column: str, n: int) -> list:
     s = df.groupby(column)['job_openings_count'].sum().sort_values(ascending=False).head(n)
     return [{'name': k, 'openings': int(v)} for k, v in s.items()]
+
+
+def _ml_root() -> None:
+    import sys
+    from pathlib import Path
+    root = Path(__file__).resolve().parent.parent.parent
+    if str(root) not in sys.path:
+        sys.path.insert(0, str(root))
+
+
+def graduate_absorption() -> dict:
+    """National aggregate time-to-employment and employment type (W.MOL.07)."""
+    _ml_root()
+    from ml.features.model1 import c7_outcomes
+    from ml.features.model2 import c3_formal_informal
+
+    out = c7_outcomes.frame()
+    e = ds.enrollment()
+    fi = c3_formal_informal.frame()
+    years = sorted(set(int(y) for y in e['year'].unique()))
+    series = []
+    for year in years:
+        oy = out[out['year'] == year] if not out.empty and 'year' in out.columns else out.iloc[0:0]
+        ey = e[e['year'] == year]
+        fiy = fi[fi['year'] == year] if not fi.empty and 'year' in fi.columns else fi.iloc[0:0]
+        shares = {}
+        if not fiy.empty:
+            counts = {
+                'formal': float(fiy['formal_wage_employment'].sum()) if 'formal_wage_employment' in fiy.columns else 0,
+                'informal': float(fiy['informal_employment'].sum()) if 'informal_employment' in fiy.columns else 0,
+                'self_employment': float(fiy['self_employment'].sum()) if 'self_employment' in fiy.columns else 0,
+                'underemployment': float(fiy['underemployment'].sum()) if 'underemployment' in fiy.columns else 0,
+            }
+            total = sum(counts.values()) or 1.0
+            shares = {k: round(v / total, 4) for k, v in counts.items()}
+        series.append({
+            'year': year,
+            'employment_rate_pct': (
+                round(float(oy['graduate_employment_rate_pct'].mean()), 1)
+                if not oy.empty and 'graduate_employment_rate_pct' in oy.columns else None
+            ),
+            'unemployment_rate_pct': (
+                round(float(oy['graduate_unemployment_rate_pct'].mean()), 1)
+                if not oy.empty and 'graduate_unemployment_rate_pct' in oy.columns else None
+            ),
+            'employed_within_6mo_pct': (
+                round(float(ey['employment_rate_6mo_pct'].mean()), 1)
+                if not ey.empty and 'employment_rate_6mo_pct' in ey.columns else None
+            ),
+            'share_formal': shares.get('formal'),
+            'share_informal': shares.get('informal'),
+            'share_self_employment': shares.get('self_employment'),
+            'share_underemployment': shares.get('underemployment'),
+        })
+    return {
+        'grain': 'national_aggregate',
+        'fit_classification_used': False,
+        'n': len(series),
+        'series': series,
+        'note': (
+            'Aggregate graduate outcomes and labour-force employment type. '
+            'Not fit classification. Not an institution-level table (SCOPE.MOL.R2).'
+        ),
+    }
+
+
+def workforce_report(horizon: int = 3) -> dict:
+    """Planning report with sector / occupation / skill / region breakdowns (W.MOL.09)."""
+    _ml_root()
+    from services import model2_service as m2
+    from services._provenance import default_provenance
+
+    payload = {
+        'official_forecast': False,
+        'horizon': horizon,
+        'as_of': None,
+        'breakdowns': {
+            'sector': m2.as_records(m2.labour_forecast(horizon=horizon, dimensions=['sector', 'period'])),
+            'occupation': m2.as_records(m2.labour_forecast(horizon=horizon, dimensions=['occupation', 'period'])),
+            'skill': m2.as_records(m2.skills(horizon=horizon)),
+            'region': m2.as_records(m2.labour_forecast(horizon=horizon, dimensions=['region', 'period'])),
+        },
+        'note': (
+            'Simulated workforce planning breakdowns. Not an official MoLS circular. '
+            'official_forecast is false.'
+        ),
+        'provenance': default_provenance().to_dict(),
+    }
+    periods = []
+    for rows in payload['breakdowns'].values():
+        for row in rows or []:
+            p = row.get('period') or row.get('year')
+            if p is not None:
+                periods.append(int(p))
+    payload['as_of'] = max(periods) if periods else None
+    return payload
+
+
+def render_workforce_report(payload: dict, fmt: str) -> tuple[bytes, str, str]:
+    """Return (body, media_type, filename) for csv / xlsx / pdf."""
+    from services._provenance import default_provenance
+
+    fmt = (fmt or 'csv').lower()
+    prov = payload.get('provenance') or default_provenance().to_dict()
+    breakdowns = payload.get('breakdowns') or {}
+    if fmt == 'csv':
+        return _report_csv(payload, prov, breakdowns), 'text/csv; charset=utf-8', 'workforce-report.csv'
+    if fmt == 'xlsx':
+        return _report_xlsx(payload, prov, breakdowns), (
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        ), 'workforce-report.xlsx'
+    if fmt == 'pdf':
+        return _report_pdf(payload, prov, breakdowns), 'application/pdf', 'workforce-report.pdf'
+    raise ValueError(f'Unsupported format {fmt!r}. Use csv, xlsx or pdf.')
+
+
+def _flatten_rows(kind: str, rows: list) -> list[dict]:
+    out = []
+    for row in rows or []:
+        flat = {'breakdown': kind}
+        for k, v in row.items():
+            if isinstance(v, bool) or v is None:
+                flat[k] = v
+            elif isinstance(v, (int, float, str)):
+                flat[k] = v
+            else:
+                continue
+        out.append(flat)
+    return out
+
+
+def _report_csv(payload: dict, prov: dict, breakdowns: dict) -> bytes:
+    import csv
+    from io import StringIO
+
+    buf = StringIO()
+    buf.write(f"# provenance: {json.dumps(prov, ensure_ascii=False)}\n")
+    buf.write(f"# official_forecast: {payload.get('official_forecast', False)}\n")
+    buf.write(f"# note: {payload.get('note', '')}\n")
+    rows = []
+    for kind, data in breakdowns.items():
+        rows.extend(_flatten_rows(kind, data))
+    if not rows:
+        buf.write('breakdown\n')
+        return buf.getvalue().encode('utf-8')
+    fields = []
+    for row in rows:
+        for k in row:
+            if k not in fields:
+                fields.append(k)
+    writer = csv.DictWriter(buf, fieldnames=fields, extrasaction='ignore')
+    writer.writeheader()
+    writer.writerows(rows)
+    return buf.getvalue().encode('utf-8')
+
+
+def _report_xlsx(payload: dict, prov: dict, breakdowns: dict) -> bytes:
+    from io import BytesIO
+    from openpyxl import Workbook
+
+    wb = Workbook()
+    stamp = wb.active
+    stamp.title = 'Provenance'
+    stamp.append(['key', 'value'])
+    for k, v in prov.items():
+        stamp.append([k, str(v)])
+    stamp.append(['official_forecast', str(payload.get('official_forecast', False))])
+    stamp.append(['note', payload.get('note') or ''])
+    for kind, data in breakdowns.items():
+        ws = wb.create_sheet(kind[:31])
+        rows = _flatten_rows(kind, data)
+        if not rows:
+            ws.append(['empty'])
+            continue
+        headers = []
+        for row in rows:
+            for k in row:
+                if k not in headers:
+                    headers.append(k)
+        ws.append(headers)
+        for row in rows:
+            ws.append([row.get(h) for h in headers])
+    buf = BytesIO()
+    wb.save(buf)
+    return buf.getvalue()
+
+
+def _report_pdf(payload: dict, prov: dict, breakdowns: dict) -> bytes:
+    from fpdf import FPDF
+
+    def _txt(value) -> str:
+        raw = str(value).replace("\u2013", "-").replace("\u2014", "-")
+        return raw.encode("latin-1", "replace").decode("latin-1")
+
+    def _line(pdf: FPDF, text: str, h: float = 5) -> None:
+        pdf.set_x(pdf.l_margin)
+        pdf.multi_cell(pdf.epw, h, _txt(text))
+
+    pdf = FPDF()
+    pdf.set_auto_page_break(auto=True, margin=16)
+    pdf.add_page()
+    pdf.set_font("Helvetica", "B", 14)
+    _line(pdf, "PathWise workforce planning report", 8)
+    pdf.set_font("Helvetica", "", 9)
+    _line(pdf, "Simulated Ethiopian structure. Not official MoLS statistics.")
+    pdf.ln(2)
+    pdf.set_font("Helvetica", "B", 11)
+    _line(pdf, "Provenance", 6)
+    pdf.set_font("Helvetica", "", 9)
+    for k, v in prov.items():
+        _line(pdf, f"{k}: {v}")
+    _line(pdf, f"official_forecast: {payload.get('official_forecast', False)}")
+    pdf.ln(2)
+    _line(pdf, payload.get("note") or "")
+    for kind, data in breakdowns.items():
+        pdf.add_page()
+        pdf.set_font("Helvetica", "B", 12)
+        _line(pdf, kind, 7)
+        pdf.set_font("Helvetica", "", 8)
+        rows = _flatten_rows(kind, data)[:25]
+        _line(pdf, f"{len(data or [])} rows (showing {len(rows)})")
+        for row in rows:
+            parts = []
+            for k, v in list(row.items())[:5]:
+                if k == "breakdown":
+                    continue
+                parts.append(f"{k}={v}")
+            _line(pdf, " ; ".join(parts) or "-", 4)
+    return bytes(pdf.output())

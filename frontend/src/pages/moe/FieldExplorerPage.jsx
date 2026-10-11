@@ -9,6 +9,7 @@ import SectionHeader from '../../components/SectionHeader'
 import KPICard from '../../components/KPICard'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
+import DataNote from '../../components/DataNote'
 import useFetch from '../../hooks/useFetch'
 import { getFieldDetail } from '../../api/roles'
 import {
@@ -45,6 +46,10 @@ export default function FieldExplorerPage() {
         title="Field explorer"
         subtitle="Enrolment, cost, outcomes and matching labour demand for one field"
       />
+      <DataNote tone="simulated">
+        Leftover US field vocabulary (AI/ML Engineering, and so on). Not an
+        Ethiopia Model 1 or Model 2 score, and not official MoE statistics.
+      </DataNote>
 
       {error && <ErrorBanner message={error} onRetry={refetch} />}
 

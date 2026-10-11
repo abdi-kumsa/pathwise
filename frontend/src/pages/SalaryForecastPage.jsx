@@ -4,6 +4,7 @@ import SectionHeader from '../components/SectionHeader'
 import KPICard from '../components/KPICard'
 import ErrorBanner from '../components/ErrorBanner'
 import LoadingSpinner from '../components/LoadingSpinner'
+import DataNote from '../components/DataNote'
 import useFetch from '../hooks/useFetch'
 import { getSalaryForecast, predictSalary } from '../api/salary'
 
@@ -90,6 +91,10 @@ export default function SalaryForecastPage() {
         subtitle="Early-career salary predictions by programme — XGBoost regression model"
         showLiveIndicator
       />
+      <DataNote tone="caution">
+        This page is the leftover US placement / salary / LSTM path. It is not
+        an Ethiopia Model 1 or Model 2 score.
+      </DataNote>
 
       {error && <ErrorBanner message={error} onRetry={refetch} />}
 

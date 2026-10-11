@@ -4,14 +4,14 @@ import SectionHeader from '../../components/SectionHeader'
 import KPICard from '../../components/KPICard'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
+import DataNote from '../../components/DataNote'
 import useFetch from '../../hooks/useFetch'
-import client from '../../api/client'
-import { getLabourOverview, getEducationOverview } from '../../api/roles'
-import { fmtCompact, fmtPct } from '../../config/chartTheme'
+import { getPlatformHealth } from '../../api/admin'
+import { STATUS } from '../../config/chartTheme'
 
 const ROLE_CARDS = [
   {
-    role: 'Student', to: '/student/careers', tone: '#2563EB',
+    role: 'Student', to: '/student/profile', tone: '#2563EB',
     blurb: 'Career explorer — pick a target job, get ranked departments with the reasoning.',
   },
   {
@@ -29,70 +29,66 @@ const ROLE_CARDS = [
 ]
 
 export default function AdminOverviewPage() {
-  const { data, loading, error, refetch } = useFetch(() =>
-    Promise.all([
-      client.get('/health').then(r => r.data),
-      getLabourOverview(),
-      getEducationOverview(),
-    ]).then(([health, labour, education]) => ({ health, labour, education }))
-  )
-
-  const health = data?.health
-  const modelsUp = health ? Object.values(health.models).filter(Boolean).length : 0
-  const modelsTotal = health ? Object.keys(health.models).length : 5
+  const { data, loading, error, refetch } = useFetch(getPlatformHealth)
+  const modelsUp = data ? data.models_loaded : 0
+  const modelsTotal = data ? data.models_total : 5
+  const apiOk = data?.api_status === 'ok' || data?.status === 'ok'
 
   return (
     <div>
       <SectionHeader
-        title="Platform overview"
-        subtitle="System health and every role's view in one place"
+        title="Platform health"
+        subtitle="Users, API status, models loaded and process uptime"
       />
+
+      <DataNote tone="simulated">
+        Operational counts from this process. Ethiopia figures elsewhere on the
+        admin console remain simulated until official files replace them.
+      </DataNote>
 
       {error && <ErrorBanner message={error} onRetry={refetch} />}
       {loading && <LoadingSpinner message="Loading platform status…" height={280} />}
 
       {data && (
         <>
-          <div className="kpi-grid">
+          <div className="kpi-grid" style={{ marginTop: 16 }}>
+            <KPICard
+              label="Users"
+              value={data.users?.total ?? '—'}
+              delta={`${data.users?.active ?? 0} active`}
+              deltaDirection="neutral"
+              icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8"/></svg>}
+            />
             <KPICard
               label="API status"
-              value={health.status === 'ok' ? 'Healthy' : 'Degraded'}
+              value={apiOk ? 'Healthy' : 'Degraded'}
               delta={`${modelsUp}/${modelsTotal} models loaded`}
-              deltaDirection={health.status === 'ok' ? 'up' : 'down'}
+              deltaDirection={apiOk ? 'up' : 'down'}
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>}
             />
             <KPICard
-              label="Labour records"
-              value={fmtCompact(data.labour.total_openings)}
-              delta={`${data.labour.occupations_tracked} occupations`}
-              deltaDirection="neutral"
-              icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 3v18h18"/><path d="M18.7 8 13 13.7l-3-3L4 16.5"/></svg>}
+              label="Models loaded"
+              value={`${modelsUp}/${modelsTotal}`}
+              delta={apiOk ? 'All artefacts resident' : 'One or more missing'}
+              deltaDirection={apiOk ? 'up' : 'down'}
+              icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></svg>}
             />
             <KPICard
-              label="Enrolment records"
-              value={fmtCompact(data.education.total_enrollment)}
-              delta={`${data.education.institutions} institutions · ${data.education.programs} programmes`}
+              label="Uptime"
+              value={data.uptime || '—'}
+              delta={`${data.uptime_seconds ?? 0} seconds`}
               deltaDirection="neutral"
-              icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 10 12 5 2 10l10 5 10-5ZM6 12v5c0 1 3 3 6 3s6-2 6-3v-5"/></svg>}
-            />
-            <KPICard
-              label="Employment rate"
-              value={fmtPct(data.education.avg_employment_rate_pct)}
-              delta="Graduates at 6 months"
-              deltaDirection="up"
-              icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6 9 17l-5-5"/></svg>}
+              icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>}
             />
           </div>
 
-          <div className="panel" style={{ marginBottom: 20 }}>
+          <div className="panel" style={{ margin: '20px 0' }}>
             <p className="panel-title">Model status</p>
-            <p className="panel-sub">
-              Loaded artefacts, read live from the API rather than a startup snapshot
-            </p>
+            <p className="panel-sub">Loaded artefacts, read live from the API</p>
             <div className="ao-models">
-              {Object.entries(health.models).map(([name, up]) => (
+              {Object.entries(data.models || {}).map(([name, up]) => (
                 <div key={name} className="ao-model">
-                  <span className="ao-dot" style={{ background: up ? '#0CA30C' : '#D03B3B' }} />
+                  <span className="ao-dot" style={{ background: up ? STATUS.good : STATUS.critical }} />
                   <span className="ao-model-name">{name}</span>
                   <span className="ao-model-state" style={{ color: up ? 'var(--green)' : 'var(--red)' }}>
                     {up ? 'loaded' : 'missing'}
@@ -105,7 +101,7 @@ export default function AdminOverviewPage() {
           <div className="panel">
             <p className="panel-title">Role views</p>
             <p className="panel-sub">
-              As an administrator you can open any role's dashboard directly
+              As an administrator you can open any role&apos;s dashboard directly
             </p>
             <div className="ao-roles">
               {ROLE_CARDS.map(r => (

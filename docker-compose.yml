@@ -55,6 +55,7 @@ services:
       - ./backend:/app
       - ./ml:/ml
       - ./data:/data
+      - ./docs:/docs
       - ./Assets:/Assets
     depends_on:
       db:

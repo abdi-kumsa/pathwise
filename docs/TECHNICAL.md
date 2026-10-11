@@ -17,9 +17,10 @@ This document covers environment setup, architecture, all API endpoints, how to 
 9. [Monitoring & Drift Detection](#9-monitoring--drift-detection)
 10. [Troubleshooting](#10-troubleshooting)
 
-See also [DATA_PROVENANCE.md](DATA_PROVENANCE.md) — what the numbers are, the
-join key between the two datasets, and the limitations that constrain how some
-figures may be presented.
+See [DATA_PROVENANCE.md](DATA_PROVENANCE.md) — Ethiopia 2016–2025 simulated
+structure, twenty fact tables, and how leftover US tools are labelled.
+
+See also [METHODOLOGY.md](METHODOLOGY.md) and [USER_GUIDE.md](USER_GUIDE.md).
 
 ---
 
@@ -137,73 +138,61 @@ If you are actively iterating on backend code and not on Windows, set
 ## 4. Architecture
 
 ```
-Browser
+Browser  (http://localhost:3001)
   │
-  │  HTTP (port 3000)
   ▼
 ┌─────────────────────────────┐
-│  React + Vite (frontend)    │
-│  /src/pages/  12 dashboard  │
-│  /src/api/     Axios calls  │
+│  React + Vite               │
+│  five role UIs (navConfig)  │
+│  ProvenanceBadge in the shell│
 └─────────────┬───────────────┘
-              │  HTTP (port 8000)
+              │  HTTP :8000
               ▼
 ┌─────────────────────────────────────────────────┐
-│  FastAPI (backend)                              │
+│  FastAPI                                        │
 │                                                 │
-│  /api/market/*          market_service.py       │
-│  /api/enrollment/*      enrollment_service.py   │
-│  /api/monitoring/*      monitoring_service.py   │
-│  /api/recommendations/* recommendations.py      │
+│  /api/student/*         student_service         │
+│  /api/institution/*     institution_service     │
+│  /api/education/*       education_service       │
+│  /api/labour/*          labour_market_service   │
+│  /api/model1/*          constraint_service      │
+│  /api/model2/*          model2_service          │
+│  /api/model3/*          alignment_service       │
+│  /api/admin/*           admin_service           │
+│  /api/methodology/*     methodology_service     │
+│  /api/ahp/*             ml/ahp                  │
+│  /api/users             auth_service            │
+│  /api/monitoring/*      monitoring_service      │
 │                                                 │
-│  services/ml_service.py  ──►  /ml/models/      │
-│    placement_xgboost.pkl  (XGBoost)             │
-│    salary_xgboost.pkl     (XGBoost Regressor)   │
-│    enrollment_lstm.keras  (TensorFlow LSTM)     │
-│    enrollment_scaler.pkl                        │
-│    demand_prophet.pkl     (Prophet)             │
+│  leftover tools (not Ethiopia M1/M2):           │
+│    /api/market/*        market_service          │
+│    /api/enrollment/*    enrollment_service      │
+│    /api/careers/*       career_service (US odds)│
 │                                                 │
-│  data/processed/features.parquet  (all ML I/O) │
-│  data/monitoring/predictions.jsonl (drift log) │
+│  data/ethiopia/*.parquet     request-path facts │
+│  ml/model1, ml/model2, ml/model3                │
+│  ml/models/ethiopia_comparison.json             │
 └─────────────────────────────────────────────────┘
 
-        (not on the request path — see below)
-
-  data/*.csv ──► startup_seed.py ──► psycopg2 ──► ┌─────────────────────────────┐
-                 data/load_to_db.py               │  PostgreSQL 15              │
-                                                  │  students · enrollments     │
-                                                  │  job_postings · placements  │
-                                                  └─────────────────────────────┘
+  Postgres 15  — users, audit_log, scenarios, ahp_matrices, expert_validations
+  (not the analytics store)
 ```
 
-**Startup sequence** (enforced by docker-compose `depends_on` + healthchecks):
-1. Postgres starts → schema applied (first run only) → `pg_isready` passes
-2. Backend starts → seeds DB if empty → pre-warms all 4 ML models + SHAP cache → `/health` returns `ok`
-3. Frontend starts → Vite serves React app
+**Startup sequence** (docker-compose `depends_on` + healthchecks):
+1. Postgres starts → schema applied (first run) → `pg_isready` passes
+2. Backend starts → seeds users if empty → pre-warms leftover US artefacts + SHAP → `/health`
+3. Frontend starts → Vite on host port 3001
 
-**Parquet is the serving layer; Postgres is the ETL sink.**
+**Parquet is the serving layer for dashboards.** Ethiopia fact tables under
+`data/ethiopia/` feed Models 1–3 and the five role UIs. Postgres on the request
+path is authentication plus governance tables. A database outage blocks sign-in;
+analytics still read parquet.
 
-This is the single most important thing to know before reading the backend. **No
-router or service touches PostgreSQL.** Every `/api/*` endpoint is served from flat
-files:
+Leftover US CSVs (`Assets/`, `data/mock/`, `data/processed/features.parquet`)
+are **not** the backbone. They remain on the placement / salary / LSTM tool
+routes. See [DATA_PROVENANCE.md](DATA_PROVENANCE.md) and waiver WV.US1.
 
-| Source | Read by |
-|---|---|
-| `data/processed/features.parquet` | `enrollment_service.py`, `salary_service.py`, `escape_route_service.py`, `market_service.py`, and all ML inference |
-| `data/mock/placements.csv` | `market_service.py`, `enrollment_service.py` |
-| `data/monitoring/predictions.jsonl` | `monitoring_service.py` |
-
-Postgres, `backend/db/schema.sql`, `backend/db/migrations/`, and the SQLAlchemy
-models in `backend/models/` form a separate relational warehouse. It is populated
-once by `backend/startup_seed.py` → `data/load_to_db.py` and exists for ad-hoc SQL
-and future analytical work. Nothing in the request path reads from it, so **the API
-serves all 12 dashboard pages correctly even when the database is down** — the
-startup log will show `Startup seed skipped — database unreachable.` and everything
-else still works.
-
-A consequence worth knowing: a Postgres outage is silent from the dashboard's
-perspective. Check `docker compose ps` rather than the UI to confirm the DB is
-healthy.
+See also [METHODOLOGY.md](METHODOLOGY.md).
 
 ---
 
@@ -216,7 +205,7 @@ PathWise is role based. Every `/api/*` endpoint except `/health`, `/` and
 
 | Role | Lands on | Answers |
 |---|---|---|
-| `STUDENT` | `/student/careers` | "I want this job — which department do I join?" |
+| `STUDENT` | `/student/profile` | "What is my field outlook and which alternatives rank on labour demand?" |
 | `MOL` | `/mol/overview` | "Which occupations are emerging and where is the workforce short?" |
 | `MOE` | `/moe/overview` | "Which fields should we invest new education capacity in?" |
 | `UNIVERSITY` | `/university/overview` | "Which of our programmes should we expand or consolidate?" |
@@ -236,14 +225,21 @@ Enforced server-side. A disallowed role gets `403`; no token gets `401`.
 
 | Endpoint prefix | ADMIN | STUDENT | MOE | MOL | UNIVERSITY |
 |---|:--:|:--:|:--:|:--:|:--:|
-| `/api/careers` | ✓ | ✓ | | | |
-| `/api/labour` | ✓ | | ✓ | ✓ | |
-| `/api/education` | ✓ | | ✓ | | |
+| `/api/student` | ✓ | ✓ | | | |
 | `/api/institution` | ✓ | | | | ✓ |
-| `/api/market` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `/api/enrollment` | ✓ | ✓ | ✓ | | ✓ |
-| `/api/recommendations` | ✓ | ✓ | ✓ | | ✓ |
+| `/api/education` | ✓ | | ✓ | | |
+| `/api/labour` | ✓ | | ✓ | ✓ | |
+| `/api/model1` | ✓ | | ✓ | | ✓ |
+| `/api/model2` | ✓ | | ✓ | ✓ | |
+| `/api/model3` | ✓ | | ✓ | ✓ | ✓ |
+| `/api/admin` | ✓ | | | | |
+| `/api/methodology` | ✓ | | | | |
+| `/api/ahp` | ✓ | | | | |
+| `/api/users` | ✓ | | | | |
 | `/api/monitoring` | ✓ | | | | |
+| `/api/careers` | ✓ | ✓ | | | |
+| `/api/market` (leftover US) | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `/api/enrollment` (leftover US) | ✓ | ✓ | ✓ | | ✓ |
 | `/api/search` | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 MoE reads `/api/labour` because labour demand is the input to their investment
@@ -286,7 +282,7 @@ mistaken for bad credentials.
 Five accounts are seeded on first start when the `users` table is empty, using
 the password in `DEMO_PASSWORD` (default `pathwise123`):
 
-`admin` · `student` · `moe` · `mol` · `university` (scoped to Tech Institute)
+`admin` · `student` · `moe` · `mol` · `university` (scoped to Addis Ababa University)
 
 Seeding is idempotent — it exits silently once any user exists, so a changed
 password is never overwritten on restart. **These are demo credentials.**
@@ -383,7 +379,9 @@ TOKEN=$(curl -s -X POST http://localhost:8000/api/auth/login \
 curl -s -H "Authorization: Bearer $TOKEN" http://localhost:8000/api/auth/me
 ```
 
-### 6.1 Careers — `STUDENT`
+### 6.1 Careers — leftover US tool (`STUDENT`)
+
+Not Ethiopia Model 1 or 2. Hidden from role nav; the route still exists.
 
 | Method | Path | Description |
 |---|---|---|
@@ -407,7 +405,7 @@ from each programme's historical rate. The response reports which via
 | GET | `/api/labour/emerging?level=family\|title` | Ranked by growth, with yearly series |
 | GET | `/api/labour/supply-demand` | Workforce shortfall per field |
 | GET | `/api/labour/mismatch?by=overview\|field\|program` | Graduate-to-role fit |
-| GET | `/api/labour/regional?field=` | Demand by metro and state |
+| GET | `/api/labour/regional?field=` | Demand by region (leftover explorer; not a DOC2 widget) |
 | GET | `/api/labour/occupation/{title}` | Full occupation profile |
 
 `mismatch` always returns `comparable: false` and a `caveat` — the distribution
@@ -453,7 +451,58 @@ without a second request. `PATCH` accepts no `username` field — see guard 3 in
 §5.6.
 
 The institution route is nested under `/meta/` so it cannot be shadowed by a
-username in `/{username}`.
+username in `/{username}`. `GET /api/users` returns `{ n, rows }` so provenance
+middleware can stamp the object.
+
+### 6.5a Student widgets — `STUDENT`
+
+| Method | Path | Description |
+|---|---|---|
+| GET | `/api/student/profile` | JWT identity; query `username` / `student_id` ignored |
+| GET | `/api/student/labour-outlook` | 3- and 5-year vacancies |
+| GET | `/api/student/demand-comparison` | Student vs labour demand |
+| GET | `/api/student/field-alignment` | Alignment score + weights |
+| GET | `/api/student/supply-demand-gap` | Field gap rows |
+| GET | `/api/student/alternatives` | Ranked fields; `fit_classification_used: false` |
+| GET | `/api/student/skill-gaps` | Skill classes |
+| GET | `/api/student/pathways` | Programme graph |
+| GET | `/api/student/opportunities` | Scholarships / internships / training |
+
+### 6.5b Models 1–3
+
+| Method | Path | Roles | Description |
+|---|---|---|---|
+| GET | `/api/model1/demand/unconstrained` | MOE, UNIVERSITY | Layer 1 |
+| GET | `/api/model1/demand/constrained` | MOE, UNIVERSITY | After constraint layer |
+| GET | `/api/model2/forecast` | MOL, MOE | Sector / occupation forecast |
+| GET | `/api/model2/formal-informal` | MOL, MOE | Formal vs informal |
+| GET | `/api/model2/skills-shortage` | MOL, MOE | Skills heatmap data |
+| GET | `/api/model2/public-pipeline` | MOL, MOE | Public hiring |
+| GET | `/api/model2/fdi-pipeline` | MOL, MOE | FDI / parks |
+| GET | `/api/model2/migration` | MOL, MOE | Migration |
+| GET | `/api/model3/policy-priority` | MOE, MOL, UNIVERSITY | MoE priority page ranker |
+
+University `GET /api/institution/program-health` and `/funnel`, `/cohort-progression`,
+`/graduate-outcomes`, `/resource-planning`, `/curriculum-alignment`,
+`/demand-vs-labour` are the remaining DOC2 university widgets.
+
+### 6.5c Admin, methodology, AHP — `ADMIN`
+
+| Method | Path | Description |
+|---|---|---|
+| GET | `/api/admin/platform-health` | API + account counts |
+| GET | `/api/admin/pipeline-status` | 20 Ethiopia feeds |
+| GET | `/api/admin/data-quality` | Validation failures |
+| GET | `/api/admin/scenarios` | Persisted what-ifs |
+| GET | `/api/admin/audit-log` | Searchable audit |
+| GET | `/api/methodology/feature-importance` | SHAP / permutation |
+| GET | `/api/methodology/priority-tiers` | Collection-priority panels |
+| GET | `/api/methodology/model-comparison` | M1/M2 holdout table |
+| GET | `/api/methodology/expert-validations` | Step 2 records |
+| POST | `/api/ahp/weights` | Eigenvector weights; CR > 0.1 → 422 |
+| POST | `/api/ahp/consistency` | Consistency ratio only |
+
+---
 
 ### 6.6 Search — any role
 
@@ -512,7 +561,11 @@ on an already-warm singleton. Loading all five from cold takes ~15 s.
 
 ---
 
-### 6.8 Market Demand
+### 6.8 Market Demand (leftover US tools)
+
+Not Ethiopia Model 1 or Model 2. Pages that still call these routes carry a
+DataNote (WV.US1).
+
 
 | Method | Path | Query params | Description |
 |---|---|---|---|
@@ -549,7 +602,11 @@ on an already-warm singleton. Loading all five from cold takes ~15 s.
 
 ---
 
-### 6.9 Enrollment Intelligence
+### 6.9 Enrollment Intelligence (leftover US LSTM / XGBoost)
+
+Not Ethiopia Model 1. University **Enrolment forecast** still uses the LSTM
+route; Ethiopia constrained demand is `/api/model1/demand/constrained`.
+
 
 | Method | Path | Query params | Description |
 |---|---|---|---|
@@ -605,21 +662,26 @@ on an already-warm singleton. Loading all five from cold takes ~15 s.
 
 | Method | Path | Query params | Description |
 |---|---|---|---|
-| GET | `/api/monitoring/drift` | `window=100` | Drift report comparing recent prediction probabilities to the training baseline |
+| GET | `/api/monitoring/drift` | `window=100` | Ethiopia M1/M2 RMSE vs seasonal-naive, plus leftover US placement drift |
 | GET | `/api/monitoring/predictions` | `n=20` | Raw tail of the prediction log |
 
 **`GET /api/monitoring/drift` response:**
 ```json
 {
+  "rmse":             12.4,
+  "mae":              9.1,
+  "ethiopia":         { "model1": {}, "model2": {} },
   "total_logged":     847,
   "window":           100,
   "mean_probability": 0.8741,
   "baseline":         0.88,
   "drift":            0.0059,
   "alert":            false,
-  "recommendation":   "OK: model is within 0.6% of baseline. No action needed."
+  "recommendation":   "OK: Ethiopia seasonal-naive RMSE is the headline. US placement drift is leftover."
 }
 ```
+
+Headline `rmse` / `mae` are Ethiopia seasonal-naive. The 0.88 baseline is leftover US placement probability.
 
 When `alert` is `true`, run the retraining pipeline (see §7).
 
@@ -627,43 +689,45 @@ When `alert` is `true`, run the retraining pipeline (see §7).
 
 ## 7. Running Tests
 
+Wave 8 gate (host, with Docker API on `:8000`):
+
+```text
+python scripts/spec_report.py
+pytest tests/test_spec_coverage.py -m "integrity or honesty or coverage"
+pytest tests/test_honesty_live.py tests/test_scopes.py tests/test_ahp.py tests/test_constraints.py
+cd frontend && npm test
+```
+
+`spec_report.py` must print **259/259**. Honesty live and scopes need the
+backend up (`BASE_URL` defaults to `http://127.0.0.1:8000`).
+
 ### 7.1 Frontend unit tests (Vitest)
 
 ```bash
 cd frontend
-npm test              # single run — all 116 tests
+npm test              # single run
 npm run test:watch    # watch mode for development
 npm run test:coverage # generates coverage report in frontend/coverage/
 ```
 
-### 7.2 Backend integration tests (Python)
-
-**Phase 5 tests** — validate API contracts, cache behaviour, ML flows.
-Backend must be running locally on port 8000, or set `BASE_URL`:
+### 7.2 Live RBAC and honesty
 
 ```bash
-python tests/test_phase5.py
-# or
-BASE_URL=http://127.0.0.1:8000 python tests/test_phase5.py
+pytest tests/test_scopes.py -q
+pytest tests/test_honesty_live.py -q
+pytest tests/test_ahp.py tests/test_constraints.py -q
 ```
 
-**Phase 6 smoke test** — full-stack Docker integration (all 114 checks).
-Requires `docker compose up -d` and all containers healthy:
+Every `satisfied_by.endpoint` in `docs/spec/widgets.yaml` is in the 200/403
+matrix (own role + admin 200; out-of-scope 403). Student lists must not include
+other accounts’ usernames.
 
-```bash
-python tests/test_integration_docker.py
-# or with custom URLs
-BACKEND_URL=http://127.0.0.1:8000 FRONTEND_URL=http://127.0.0.1:3000 \
-  python tests/test_integration_docker.py
-```
-
-Exit code: `0` = all pass, `1` = at least one failure.
+No Playwright / browser MCP in this environment. The five-role click script is
+[WALKTHROUGH.md](WALKTHROUGH.md).
 
 ### 7.3 Backend API test suite (pytest)
 
-`backend/tests/test_api.py` is the primary backend suite — 55 tests covering
-every endpoint: status codes, response schemas, parameter forwarding, error
-handling, data consistency, and directional ML correctness.
+`backend/tests/test_api.py` covers leftover US routes plus role clients.
 
 Run inside the running container:
 
@@ -675,12 +739,16 @@ Or locally against a running backend:
 
 ```bash
 pytest backend/tests/test_api.py -v
-# override the target
 BASE_URL=http://127.0.0.1:8000 pytest backend/tests/test_api.py -v
 ```
 
-`pytest` is pinned in `backend/requirements.txt`, so it is available inside the
-backend image without any extra install step.
+`pytest` is pinned in `backend/requirements.txt`.
+
+On Windows, backend code changes need `docker compose restart backend` (uvicorn
+`--reload` is off by default).
+
+Older `tests/test_phase5.py` / `tests/test_integration_docker.py` still exist for
+leftover US routes. They are not the Wave 8 gate.
 
 ---
 
@@ -753,9 +821,14 @@ curl http://localhost:8000/api/monitoring/drift
 http://localhost:8000/api/monitoring/drift
 ```
 
-The drift endpoint compares the mean `probability` of the last 100 predictions against the training-time baseline of **0.88**. If the mean drifts more than **10 percentage points** in either direction, `alert: true` is returned.
+The drift endpoint **leads with Ethiopia M1/M2 RMSE** against seasonal-naive
+(`ethiopia` + `rmse` / `mae` on the payload). A leftover US placement-probability
+window (baseline **0.88**) remains on the same response for the old XGBoost tool
+and is not Ethiopia accuracy.
 
-### What drift means
+### What leftover US placement drift means
+
+(Not Ethiopia accuracy.)
 
 | Scenario | Likely cause | Action |
 |---|---|---|

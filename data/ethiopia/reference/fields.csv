@@ -1,0 +1,9 @@
+field,band,stem,program,occupation,sector
+Engineering & Technology,Natural science,True,BSc Civil Engineering,Civil Engineer,Construction
+Natural & Computational Sciences,Natural science,True,BSc Computer Science,Software Developer,ICT
+Medicine & Health Sciences,Natural science,True,MD Medicine,General Practitioner,Health
+Agriculture & Life Sciences,Natural science,True,BSc Agriculture,Agronomist,Agriculture
+Business & Economics,Social science,False,BA Accounting,Accountant,Finance
+Social Sciences & Humanities,Social science,False,BA Sociology,Social Worker,Public administration
+Law,Social science,False,LLB Law,Legal Officer,Public administration
+Education,Social science,False,BEd Education,Secondary Teacher,Education

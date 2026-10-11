@@ -70,7 +70,14 @@ def get_overview() -> dict:
         ) if total else "No placement outcomes recorded.",
         'comparable':    False,
         'caveat':        _CAVEAT,
-        'dataset_label': ds.DATASET_LABEL,
+        'dataset_label': 'Leftover US placement mock — not Ethiopia M1/M2',
+        'provenance': {
+            'source': 'data/mock/placements.csv',
+            'tier': 'simulated',
+            'as_of': 'US synthetic',
+            'method': 'mock generator',
+            'caveat': 'Leftover US placement mock. Not official statistics and not Ethiopia Model 1 or 2.',
+        },
     }
 
 
@@ -111,7 +118,14 @@ def get_by_field() -> dict:
         'spread_pct':  spread,
         'comparable':  False,
         'caveat':      _CAVEAT,
-        'dataset_label': ds.DATASET_LABEL,
+        'dataset_label': 'Leftover US placement mock — not Ethiopia M1/M2',
+        'provenance': {
+            'source': 'data/mock/placements.csv',
+            'tier': 'simulated',
+            'as_of': 'US synthetic',
+            'method': 'mock generator',
+            'caveat': 'Leftover US placement mock. Not official statistics and not Ethiopia Model 1 or 2.',
+        },
     }
 
 
@@ -149,5 +163,12 @@ def get_by_program() -> dict:
         'spread_pct': round(max(rates) - min(rates), 1) if rates else 0.0,
         'comparable': False,
         'caveat':     _CAVEAT,
-        'dataset_label': ds.DATASET_LABEL,
+        'dataset_label': 'Leftover US placement mock — not Ethiopia M1/M2',
+        'provenance': {
+            'source': 'data/processed/features.parquet',
+            'tier': 'simulated',
+            'as_of': 'US synthetic',
+            'method': 'mock feature store',
+            'caveat': 'Leftover US placement mock. Not official statistics and not Ethiopia Model 1 or 2.',
+        },
     }

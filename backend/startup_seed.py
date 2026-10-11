@@ -97,10 +97,10 @@ def seed_if_empty() -> None:
 _DEMO_USERS = [
     # (username,     role,          display_name,             institution)
     ("admin",        "ADMIN",       "Platform Administrator",  None),
-    ("student",      "STUDENT",     "Demo Student",            None),
+    ("student",      "STUDENT",     "Demo Student",            "Addis Ababa University"),
     ("moe",          "MOE",         "Ministry of Education",   None),
     ("mol",          "MOL",         "Ministry of Labour",      None),
-    ("university",   "UNIVERSITY",  "Tech Institute",          "Tech Institute"),
+    ("university",   "UNIVERSITY",  "Addis Ababa University",  "Addis Ababa University"),
 ]
 
 
@@ -132,13 +132,21 @@ def seed_users_if_empty() -> None:
 
         log.info("Users table is empty — creating %d demo accounts ...", len(_DEMO_USERS))
         for username, role, display_name, institution in _DEMO_USERS:
-            session.add(User(
+            kwargs = dict(
                 username         = username,
                 password_hash    = hash_password(password),
                 role             = role,
                 display_name     = display_name,
                 institution_name = institution,
-            ))
+            )
+            if username == "student":
+                kwargs.update(
+                    program="BSc Civil Engineering",
+                    field="Engineering & Technology",
+                    enrollment_year=2023,
+                    cross_institution=False,
+                )
+            session.add(User(**kwargs))
         session.commit()
 
         log.info(
@@ -154,3 +162,53 @@ def seed_users_if_empty() -> None:
     finally:
         if session is not None:
             session.close()
+
+
+def apply_wave5_user_columns() -> None:
+    """Add scope columns on an existing volume (schema.sql only runs once)."""
+    from sqlalchemy import text
+    from db.database import engine
+
+    stmts = (
+        "ALTER TABLE users ADD COLUMN IF NOT EXISTS cross_institution BOOLEAN NOT NULL DEFAULT FALSE",
+        "ALTER TABLE users ADD COLUMN IF NOT EXISTS program VARCHAR(120)",
+        "ALTER TABLE users ADD COLUMN IF NOT EXISTS field VARCHAR(120)",
+        "ALTER TABLE users ADD COLUMN IF NOT EXISTS enrollment_year SMALLINT",
+    )
+    try:
+        with engine.begin() as conn:
+            for stmt in stmts:
+                conn.execute(text(stmt))
+        log.info("Wave 5 user-scope columns are present.")
+    except Exception as exc:
+        log.error("Wave 5 user-scope migration failed: %s", exc)
+
+
+def patch_demo_student_profile() -> None:
+    """Keep the demo student on the Ethiopia join backbone even if the row
+    was seeded before Wave 5. Does not reset passwords or other accounts."""
+    try:
+        from db.database import SessionLocal
+        from models.user import User
+    except Exception as exc:
+        log.error("Demo student patch skipped: %s", exc)
+        return
+
+    session = SessionLocal()
+    try:
+        row = session.query(User).filter(User.username == "student").first()
+        if row is None:
+            return
+        row.institution_name = "Addis Ababa University"
+        row.program = "BSc Civil Engineering"
+        row.field = "Engineering & Technology"
+        row.enrollment_year = 2023
+        if getattr(row, "cross_institution", None) is None:
+            row.cross_institution = False
+        session.commit()
+        log.info("Demo student profile: AAU · BSc Civil Engineering.")
+    except Exception as exc:
+        session.rollback()
+        log.error("Demo student patch failed: %s", exc)
+    finally:
+        session.close()

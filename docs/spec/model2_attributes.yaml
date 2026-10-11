@@ -1,0 +1,419 @@
+# ==============================================================================
+# DOC1 — Model 2: Labor Market Trend Prediction Module
+#
+# Executable transcription of:
+#   docs/feedback/Comments on Recommended Attributes and Relative Importance.docx
+#
+# Same rules as model1_attributes.yaml: ids are the contract, `collection_priority`
+# is never a model weight, add but never renumber.
+# ==============================================================================
+
+model:
+  id: M2
+  name: Labor Market Trend Prediction Module
+  objective: >-
+    Forecast employment demand, employment growth, vacancies, occupational
+    demand and skill shortages by sector, occupation, region and time period.
+
+# The four dimensions the objective names.
+dimensions:
+  - sector
+  - occupation
+  - region
+  - period
+
+# The five forecast targets the objective names. Phase 3.2 must produce each.
+targets:
+  - id: M2.T.employment_demand
+    name: Employment demand
+  - id: M2.T.employment_growth
+    name: Employment growth
+  - id: M2.T.vacancies
+    name: Vacancies
+  - id: M2.T.occupational_demand
+    name: Occupational demand
+  - id: M2.T.skill_shortages
+    name: Skill shortages
+
+categories:
+  # ── 1 ───────────────────────────────────────────────────────────────────────
+  - id: M2.C1
+    name: Historical employment and unemployment trends
+    collection_priority: 20
+    priority_level: Critical
+    key_attributes: >-
+      Lagged employment, unemployment, labor-force participation, sector
+      employment history and job creation trends.
+    source_table: labour_history
+    variables:
+      - id: M2.C1.V1
+        name: Employment level
+        column: employment_level
+      - id: M2.C1.V2
+        name: Unemployment rate
+        column: unemployment_rate_pct
+      - id: M2.C1.V3
+        name: Youth unemployment
+        column: youth_unemployment_rate_pct
+      - id: M2.C1.V4
+        name: Sector employment
+        column: sector_employment
+      - id: M2.C1.V5
+        name: Employment growth
+        column: employment_growth_pct
+      - id: M2.C1.V6
+        name: Job creation
+        column: job_creation_count
+      - id: M2.C1.V7
+        name: Labor-force participation
+        column: labour_force_participation_pct
+      - id: M2.C1.V8
+        name: Lagged employment
+        column: employment_lag_1y
+        also:
+          - employment_lag_2y
+
+  # ── 2 ───────────────────────────────────────────────────────────────────────
+  - id: M2.C2
+    name: Sector-level employment and economic output
+    collection_priority: 20
+    priority_level: Critical
+    key_attributes: >-
+      Sector value-added, sector GDP growth, production/output, business
+      expansion and sector employment intensity.
+    source_table: sector_output
+    variables:
+      - id: M2.C2.V1
+        name: Sector value-added
+        column: sector_value_added_etb
+      - id: M2.C2.V2
+        name: Sector growth rate
+        column: sector_growth_rate_pct
+      - id: M2.C2.V3
+        name: Production/output
+        column: sector_output_index
+      - id: M2.C2.V4
+        name: Business formation
+        column: business_formation_count
+      - id: M2.C2.V5
+        name: Investment
+        column: sector_investment_etb
+      - id: M2.C2.V6
+        name: Employment intensity
+        column: employment_intensity
+
+  # ── 3 ───────────────────────────────────────────────────────────────────────
+  - id: M2.C3
+    name: Formal versus informal sector structure
+    collection_priority: 15
+    priority_level: Critical / Ethiopia-specific
+    key_attributes: >-
+      Formal wage employment, informal employment, self-employment,
+      underemployment and sector absorption patterns.
+    source_table: formal_informal
+    # DOC1 line 191: job-board data alone can substantially undercount actual
+    # labor absorption and self-employment. Phase 3.3 models this separately.
+    variables:
+      - id: M2.C3.V1
+        name: Formal wage employment
+        column: formal_wage_employment
+      - id: M2.C3.V2
+        name: Informal employment
+        column: informal_employment
+      - id: M2.C3.V3
+        name: Self-employment
+        column: self_employment
+      - id: M2.C3.V4
+        name: Underemployment
+        column: underemployment
+      - id: M2.C3.V5
+        name: Microenterprise activity
+        column: microenterprise_activity
+      - id: M2.C3.V6
+        name: Sector absorption patterns
+        column: sector_absorption_rate
+
+  # ── 4 ───────────────────────────────────────────────────────────────────────
+  - id: M2.C4
+    name: Job vacancy and recruitment signals
+    collection_priority: 10
+    priority_level: Medium-High
+    key_attributes: >-
+      Job postings, vacancy counts, occupation frequency, required education,
+      experience and hiring trends.
+    source_table: vacancies
+    variables:
+      - id: M2.C4.V1
+        name: Vacancy count
+        column: vacancy_count
+      - id: M2.C4.V2
+        name: Job title/occupation
+        column: occupation
+        also:
+          - occupation_frequency
+      - id: M2.C4.V3
+        name: Required education
+        column: required_education
+      - id: M2.C4.V4
+        name: Required experience
+        column: required_experience_years
+      - id: M2.C4.V5
+        name: Hiring trends
+        column: hiring_trend_pct
+        also:
+          - time_to_fill_days
+
+  # ── 5 ───────────────────────────────────────────────────────────────────────
+  - id: M2.C5
+    name: Skills demand and shortage indicators
+    collection_priority: 10
+    priority_level: Medium-High
+    key_attributes: >-
+      Technical skills, digital skills, soft skills, emerging skills, shortage
+      and oversupply indicators.
+    source_table: skills_demand
+    variables:
+      - id: M2.C5.V1
+        name: Technical skills
+        column: technical_skill_demand
+      - id: M2.C5.V2
+        name: Digital skills
+        column: digital_skill_demand
+      - id: M2.C5.V3
+        name: Soft skills
+        column: soft_skill_demand
+      - id: M2.C5.V4
+        name: Emerging skills
+        column: emerging_skill_demand
+      - id: M2.C5.V5
+        name: Shortage indicator
+        column: skill_shortage_index
+      - id: M2.C5.V6
+        name: Oversupply indicator
+        column: skill_oversupply_index
+
+  # ── 6 ───────────────────────────────────────────────────────────────────────
+  - id: M2.C6
+    name: Public-sector hiring and government project pipeline
+    collection_priority: 10
+    priority_level: High / Ethiopia-specific
+    key_attributes: >-
+      Civil service recruitment plans, hiring freezes/expansions, infrastructure
+      and mega-project staffing demand.
+    source_table: public_hiring
+    # DOC1 line 192: graduate employment can be strongly affected by
+    # civil-service recruitment and policy cycles.
+    variables:
+      - id: M2.C6.V1
+        name: Civil-service hiring plans
+        column: civil_service_hiring_plan
+      - id: M2.C6.V2
+        name: Hiring freezes/expansions
+        column: hiring_policy_state
+      - id: M2.C6.V3
+        name: Public projects
+        column: public_project_count
+      - id: M2.C6.V4
+        name: Mega-project staffing demand
+        column: megaproject_staffing_demand
+
+  # ── 7 ───────────────────────────────────────────────────────────────────────
+  - id: M2.C7
+    name: FDI and industrial development pipeline
+    collection_priority: 7
+    priority_level: High / Ethiopia-specific
+    key_attributes: >-
+      FDI inflows by sector/region, industrial parks, new investment projects,
+      factory expansion and expected employment.
+    source_table: fdi_industrial
+    # DOC1 line 193: new investments may act as leading indicators of sectoral
+    # employment demand. Line 194: they create structural breaks that standard
+    # smooth time-series models may miss — see forecasting.structural_breaks.
+    variables:
+      - id: M2.C7.V1
+        name: FDI inflows by sector/region
+        column: fdi_inflow_usd
+      - id: M2.C7.V2
+        name: Industrial parks
+        column: industrial_park
+        also:
+          - industrial_park_operational_flag
+      - id: M2.C7.V3
+        name: New investment projects
+        column: new_investment_project_count
+      - id: M2.C7.V4
+        name: Factory expansion
+        column: factory_expansion_count
+      - id: M2.C7.V5
+        name: Expected employment
+        column: expected_employment
+      - id: M2.C7.V6
+        name: Private investment pipeline
+        column: private_investment_pipeline_etb
+
+  # ── 8 ───────────────────────────────────────────────────────────────────────
+  - id: M2.C8
+    name: Macroeconomic and financial conditions
+    collection_priority: 4
+    priority_level: Medium
+    key_attributes: >-
+      GDP growth, inflation/CPI, exchange rate, forex availability, investment
+      levels and interest conditions.
+    source_table: macro_financial
+    variables:
+      - id: M2.C8.V1
+        name: GDP growth
+        column: gdp_growth_rate_pct
+      - id: M2.C8.V2
+        name: Inflation / CPI
+        column: cpi_index
+        also:
+          - inflation_rate_pct
+      - id: M2.C8.V3
+        name: Exchange rate
+        column: exchange_rate_etb_usd
+      - id: M2.C8.V4
+        name: Forex availability
+        column: forex_reserve_months
+      - id: M2.C8.V5
+        name: Investment levels
+        column: gross_investment_etb
+      - id: M2.C8.V6
+        name: Interest conditions
+        column: interest_rate_pct
+
+  # ── 9 ───────────────────────────────────────────────────────────────────────
+  - id: M2.C9
+    name: Labor-force demographics, migration and regional variation
+    collection_priority: 2
+    priority_level: Medium
+    key_attributes: >-
+      Working-age population, education level, migration/brain drain, return
+      migration and regional labor absorption.
+    source_table: labour_demographics
+    # DOC1 line 196: skilled emigration and return migration can change apparent
+    # labor shortages and labor supply. Line 195: national averages can hide
+    # major differences in industrial concentration and employment absorption.
+    variables:
+      - id: M2.C9.V1
+        name: Working-age population
+        column: working_age_population
+      - id: M2.C9.V2
+        name: Education level
+        column: education_level_distribution
+      - id: M2.C9.V3
+        name: Migration / brain drain
+        column: skilled_emigration_count
+      - id: M2.C9.V4
+        name: Return migration
+        column: return_migration_count
+      - id: M2.C9.V5
+        name: Regional labor absorption
+        column: regional_absorption_rate
+
+  # ── 10 ──────────────────────────────────────────────────────────────────────
+  - id: M2.C10
+    name: Seasonality, commodity and external shocks
+    collection_priority: 2
+    priority_level: Low-Medium
+    key_attributes: >-
+      Agricultural cycles, hiring cycles, commodity prices and major external
+      shocks.
+    source_table: shocks_seasonality
+    variables:
+      - id: M2.C10.V1
+        name: Agricultural cycles
+        column: agricultural_season
+      - id: M2.C10.V2
+        name: Hiring cycles
+        column: hiring_season_index
+      - id: M2.C10.V3
+        name: Commodity prices
+        column: commodity_price_index
+      - id: M2.C10.V4
+        name: Major external shocks
+        column: external_shock_flag
+
+# DOC1 line 189: "Total feature-priority allocation: 100%."
+total_collection_priority: 100
+
+# ── Forecasting requirements that come from the prose, not the tables ────────
+forecasting:
+  # DOC1 line 194: "major infrastructure and industrial projects can create
+  # structural breaks that standard smooth time-series models may miss."
+  structural_breaks:
+    id: M2.R1
+    requirement: >-
+      Explicit structural-break handling for industrial-park openings and
+      mega-project starts. A purely smooth time-series model is not acceptable
+      on its own.
+    satisfied_by:
+      module: ml/model2/structural_breaks.py
+  # DOC1 line 191 — a separate output, not a column.
+  formal_informal_absorption:
+    id: M2.R2
+    requirement: >-
+      Forecast formal wage / informal / self-employment / underemployment shares
+      as a distinct model output, because job-board data alone undercounts
+      absorption.
+    satisfied_by:
+      module: ml/model2/formal_informal.py
+      endpoint: /api/model2/formal-informal
+
+# ── Why the Ethiopia-specific additions matter, DOC1 lines 190-196 ───────────
+# Each rationale is bound to the artefact that answers it, so the reasoning
+# survives into the build rather than staying prose in a docx.
+ethiopia_rationale:
+  - id: M2.E1
+    factor: Formal/informal split
+    rationale: >-
+      Job-board data alone can substantially undercount actual labor absorption
+      and self-employment.
+    answered_by: [M2.C3, M2.R2, W.MOL.02]
+  - id: M2.E2
+    factor: Public-sector hiring
+    rationale: >-
+      Graduate employment can be strongly affected by civil-service recruitment
+      and policy cycles.
+    answered_by: [M2.C6, W.MOL.05]
+  - id: M2.E3
+    factor: FDI and industrial parks
+    rationale: >-
+      New investments may act as leading indicators of sectoral employment
+      demand.
+    answered_by: [M2.C7, W.MOL.06]
+  - id: M2.E4
+    factor: Government projects
+    rationale: >-
+      Major infrastructure and industrial projects can create structural breaks
+      that standard smooth time-series models may miss.
+    answered_by: [M2.C6, M2.R1]
+  - id: M2.E5
+    factor: Regional variation
+    rationale: >-
+      National averages can hide major differences in industrial concentration
+      and employment absorption.
+    answered_by: [M2.C9, W.MOL.03, W.MOE.06]
+  - id: M2.E6
+    factor: Migration
+    rationale: >-
+      Skilled emigration and return migration can change apparent labor
+      shortages and labor supply.
+    answered_by: [M2.C9, W.MOL.08]
+
+# ── Tier summary, DOC1 lines 260-271 ─────────────────────────────────────────
+priority_tiers:
+  - id: M2.T1
+    groups: [M2.C1, M2.C2, M2.C3]
+    label: >-
+      Historical labor trends + sector output + formal/informal structure
+    combined_priority: 55
+  - id: M2.T2
+    groups: [M2.C4, M2.C5, M2.C6]
+    label: Vacancies + skills + public-sector/project pipeline
+    combined_priority: 30
+  - id: M2.T3
+    groups: [M2.C7, M2.C8, M2.C9, M2.C10]
+    label: >-
+      FDI + macroeconomic + demographic/regional + seasonal context
+    combined_priority: 15

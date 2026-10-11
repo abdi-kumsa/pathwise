@@ -4,7 +4,8 @@ import client from './client'
 
 export const listUsers = async () => {
   const { data } = await client.get('/api/users')
-  return data
+  if (Array.isArray(data)) return data
+  return data?.rows ?? []
 }
 
 export const createUser = async ({ username, password, role, displayName, institution }) => {

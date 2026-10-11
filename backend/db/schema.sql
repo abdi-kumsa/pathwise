@@ -7,6 +7,10 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- ── Drop tables in dependency order (safe re-run) ─────────
+DROP TABLE IF EXISTS expert_validations CASCADE;
+DROP TABLE IF EXISTS ahp_matrices CASCADE;
+DROP TABLE IF EXISTS scenarios CASCADE;
+DROP TABLE IF EXISTS audit_log CASCADE;
 DROP TABLE IF EXISTS placements CASCADE;
 DROP TABLE IF EXISTS job_postings CASCADE;
 DROP TABLE IF EXISTS enrollments CASCADE;
@@ -17,10 +21,11 @@ DROP TABLE IF EXISTS users CASCADE;
 -- ── users ─────────────────────────────────────────────────
 -- Authentication and role-based access control.
 --
--- NOTE: this is the ONLY table on the API request path. The other four are an
--- ETL/warehouse sink (see docs/TECHNICAL.md §4) — every /api/* dashboard
--- endpoint reads parquet/CSV, not Postgres. Consequence: the database being
--- down no longer degrades silently, it blocks login outright.
+-- NOTE: `users` plus the four governance tables at the bottom of this file
+-- (audit_log, scenarios, ahp_matrices, expert_validations) are on the API
+-- request path. The warehouse tables (students, enrollments, job_postings,
+-- placements) remain an ETL sink — every /api/* dashboard endpoint still
+-- reads parquet/CSV, not those four. See docs/TECHNICAL.md §4.
 --
 -- institution_name scopes a UNIVERSITY user to their own institution's rows.
 -- It is read from the JWT, never from a query parameter, so one university
@@ -38,6 +43,10 @@ CREATE TABLE users (
     display_name     VARCHAR(120)    NOT NULL,
     institution_name VARCHAR(120),   -- required for UNIVERSITY, NULL otherwise
     is_active        BOOLEAN         NOT NULL DEFAULT TRUE,
+    cross_institution BOOLEAN        NOT NULL DEFAULT FALSE,
+    program          VARCHAR(120),
+    field            VARCHAR(120),
+    enrollment_year  SMALLINT,
     created_at       TIMESTAMPTZ     NOT NULL DEFAULT NOW(),
 
     CHECK (role <> 'UNIVERSITY' OR institution_name IS NOT NULL)
@@ -133,3 +142,52 @@ CREATE INDEX idx_placements_status        ON placements (placement_status);
 -- username already has a UNIQUE index from the constraint; role is indexed
 -- because every authenticated request filters on it.
 CREATE INDEX idx_users_role               ON users (role);
+
+-- ── audit_log / scenarios / ahp_matrices / expert_validations ──
+-- Wave 1.5 governance tables. Intentionally on the request path (Wave 7
+-- widgets W.ADM.05–08 and DOC1 procedure steps 2 and 7). Dashboard analytics
+-- still read parquet/CSV.
+CREATE TABLE audit_log (
+    id          SERIAL PRIMARY KEY,
+    actor       VARCHAR(64)     NOT NULL,
+    role        VARCHAR(16),
+    action      VARCHAR(64)     NOT NULL,
+    resource    VARCHAR(255),
+    payload     JSONB,
+    created_at  TIMESTAMPTZ     NOT NULL DEFAULT NOW()
+);
+CREATE INDEX idx_audit_log_actor       ON audit_log (actor);
+CREATE INDEX idx_audit_log_created_at  ON audit_log (created_at);
+
+CREATE TABLE scenarios (
+    id            SERIAL PRIMARY KEY,
+    name          VARCHAR(120)    NOT NULL,
+    owner         VARCHAR(64)     NOT NULL,
+    assumptions   JSONB           NOT NULL,
+    status        VARCHAR(24)     NOT NULL DEFAULT 'draft'
+                  CHECK (status IN ('draft', 'submitted', 'approved', 'rejected', 'archived')),
+    created_at    TIMESTAMPTZ     NOT NULL DEFAULT NOW()
+);
+CREATE INDEX idx_scenarios_owner  ON scenarios (owner);
+CREATE INDEX idx_scenarios_status ON scenarios (status);
+
+CREATE TABLE ahp_matrices (
+    id                    SERIAL PRIMARY KEY,
+    model                 VARCHAR(8)      NOT NULL
+                          CHECK (model IN ('M1', 'M2', 'M3')),
+    matrix                JSONB           NOT NULL,
+    consistency_ratio     NUMERIC(8, 4),
+    created_at            TIMESTAMPTZ     NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE expert_validations (
+    id            SERIAL PRIMARY KEY,
+    spec_id       VARCHAR(32)     NOT NULL,
+    expert_role   VARCHAR(64)     NOT NULL,
+    verdict       VARCHAR(24)     NOT NULL
+                  CHECK (verdict IN ('accepted', 'revision', 'rejected')),
+    notes         TEXT,
+    created_at    TIMESTAMPTZ     NOT NULL DEFAULT NOW()
+);
+CREATE INDEX idx_expert_validations_spec ON expert_validations (spec_id);
+

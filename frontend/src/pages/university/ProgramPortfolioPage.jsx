@@ -7,9 +7,10 @@ import SectionHeader from '../../components/SectionHeader'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
 import useFetch from '../../hooks/useFetch'
-import { getPortfolio } from '../../api/roles'
+import { getPortfolio, getProgramHealth } from '../../api/roles'
+import DataNote from '../../components/DataNote'
 import {
-  SERIES, axisProps, gridProps, tooltipProps, RADIUS_H,
+  SERIES, STATUS, axisProps, gridProps, tooltipProps, RADIUS_H,
   fmtCompact, fmtMoney, fmtPct, fmtNum,
 } from '../../config/chartTheme'
 
@@ -18,22 +19,32 @@ const SORTS = [
   { key: 'applications',        label: 'Applications' },
   { key: 'yield_rate_pct',      label: 'Yield rate' },
   { key: 'cost_per_enrollment', label: 'Cost per enrolment', asc: true },
-  { key: 'roi_10yr',            label: 'Student ROI' },
 ]
 
 export default function ProgramPortfolioPage() {
   const [sort, setSort] = useState(SORTS[0])
-  const { data, loading, error, refetch } = useFetch(getPortfolio)
+  const { data, loading, error, refetch } = useFetch(() =>
+    Promise.all([getPortfolio(), getProgramHealth()])
+      .then(([portfolio, health]) => ({ portfolio, health }))
+  )
 
-  const programs = [...(data?.programs ?? [])].sort((a, b) =>
+  const programs = [...(data?.portfolio?.programs ?? [])].sort((a, b) =>
     sort.asc ? a[sort.key] - b[sort.key] : b[sort.key] - a[sort.key]
   )
+  const flags = data?.health?.rows ?? []
+  const STATUS_COLOR = { shortage: STATUS.serious, balanced: STATUS.good, oversupply: STATUS.warning }
+  const ACTION_COLOR = {
+    expand: STATUS.good,
+    maintain: STATUS.warning,
+    review: STATUS.serious,
+    consolidate: STATUS.critical,
+  }
 
   return (
     <div>
       <SectionHeader
         title="Programme portfolio"
-        subtitle={data ? `All ${data.programs.length} programmes at ${data.institution}` : 'Loading…'}
+        subtitle={data?.portfolio ? `All ${data.portfolio.programs.length} programmes at ${data.portfolio.institution}` : 'Loading…'}
       />
 
       {error && <ErrorBanner message={error} onRetry={refetch} />}
@@ -41,6 +52,28 @@ export default function ProgramPortfolioPage() {
 
       {data && (
         <>
+          <DataNote tone="simulated">
+            {data.health?.method || 'Severity is a quartile of |gap|.'}
+            {' '}Fit classification is not used in these flags
+            {data.health?.fit_classification_used === false ? ' (fit_classification_used: false).' : '.'}
+          </DataNote>
+          <div className="panel" style={{ marginBottom: 20 }} data-testid="program-health">
+            <p className="panel-title">Programme health</p>
+            <p className="panel-sub">shortage · balanced · oversupply — colour plus the word</p>
+            {flags.map(f => (
+              <div key={`${f.program || ''}-${f.field || ''}`} data-testid="health-row" style={{ display: 'flex', justifyContent: 'space-between', gap: 12, padding: '8px 0', borderBottom: '1px solid var(--border)' }}>
+                <span>{f.program || f.field}</span>
+                <span>
+                  <span data-testid="health-status" style={{ color: STATUS_COLOR[f.status] || STATUS.warning, fontWeight: 600 }}>
+                    {f.status}
+                  </span>
+                  {' · '}
+                  <span style={{ color: ACTION_COLOR[f.action] || STATUS.warning }}>{f.action}</span>
+                  {` · Q${f.severity}`}
+                </span>
+              </div>
+            ))}
+          </div>
           <div className="panel" style={{ marginBottom: 20 }}>
             <div className="pp-head">
               <div>

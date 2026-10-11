@@ -5,7 +5,8 @@ from db.database import Base
 class User(Base):
     """Authentication + role-based access control.
 
-    The only table on the API request path — see the note in db/schema.sql.
+    On the API request path together with the Wave 1.5 governance tables
+    (see db/schema.sql). Dashboard analytics still read parquet/CSV.
 
     institution_name scopes a UNIVERSITY user to their own institution's rows.
     It is always read from the JWT, never from a request parameter, so one
@@ -25,4 +26,8 @@ class User(Base):
     display_name     = Column(String(120), nullable=False)
     institution_name = Column(String(120), nullable=True)
     is_active        = Column(Boolean, nullable=False, server_default=text("TRUE"), index=True)
+    cross_institution = Column(Boolean, nullable=False, server_default=text("FALSE"))
+    program          = Column(String(120), nullable=True)
+    field            = Column(String(120), nullable=True)
+    enrollment_year  = Column(Integer, nullable=True)
     created_at       = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text("NOW()"))

@@ -1,95 +1,60 @@
-# PathWise — Market Demand & Enrollment Intelligence Platform
+# PathWise
 
-A full-stack predictive analytics platform built around two interconnected dashboards:
-- **Module 1 — Market Demand Forecast Dashboard**: Hiring analytics, skill gap analysis, salary forecasting, and feature importance visualisations for institutional leaders.
-- **Module 2 — Student Enrollment Intelligence Dashboard**: Enrollment forecasting, admission risk modelling, and a student-facing placement probability evaluator with personalised skill recommendations.
+PathWise is a **five-role** education–employment alignment platform for Ethiopia.
+It forecasts student demand (Model 1), labour demand (Model 2) and the gap
+between them (Model 3), then shows each audience only the pages it may see.
+
+Figures are **simulated Ethiopian structure, 2016–2025**, not official MoE,
+MoLS or ESS statistics. See [docs/DATA_PROVENANCE.md](docs/DATA_PROVENANCE.md).
+
+| Sign in as | Role | Lands on |
+|---|---|---|
+| `student` | Student | Profile & eligibility |
+| `university` | University (Addis Ababa University) | Institution overview |
+| `moe` | Ministry of Education | National snapshot |
+| `mol` | Ministry of Labour | Labour pulse |
+| `admin` | Administrator | Platform overview |
+
+Demo password: **`pathwise123`**. Frontend `http://localhost:3001`, API `http://localhost:8000`.
+
+Leftover US placement / salary / LSTM / Prophet tools still exist as bookmarked
+routes. They are **not** Ethiopia Model 1 or 2 and are hidden from role nav.
 
 ---
 
-## Repository Structure
+## Repository
 
 ```
 pathwise/
-├── backend/      # FastAPI REST API — serves ML model inference, data queries, and recommendation logic
-├── frontend/     # React + Vite dashboard UI — both Module 1 and Module 2 interfaces
-├── ml/           # Machine learning — model training scripts, saved models, feature engineering, evaluation
-├── data/         # Raw and processed data — mock data generators, ETL loaders, CSV outputs, parquet files
-├── docker/       # Docker configuration files — Dockerfiles for backend and frontend services
-├── docs/         # Project documentation — technical setup guide, API reference, user guide
-└── docker-compose.yml  # Orchestrates all services: Postgres, FastAPI backend, React frontend
+├── backend/      FastAPI — Models 1–3, five role APIs, admin, AHP
+├── frontend/     React + Vite — five role dashboards
+├── ml/           Ethiopia M1/M2/M3, AHP, leftover US artefacts
+├── data/ethiopia 20 fact tables + reference dimensions
+├── docs/         Spec, provenance, user guide, methodology
+└── docker-compose.yml
 ```
 
----
+- [docs/USER_GUIDE.md](docs/USER_GUIDE.md) — five role walkthroughs
+- [docs/TECHNICAL.md](docs/TECHNICAL.md) — ports, routers, tests
+- [docs/METHODOLOGY.md](docs/METHODOLOGY.md) — DOC1 steps 1–7
+- [docs/WALKTHROUGH.md](docs/WALKTHROUGH.md) — recording script
 
-## Folder Details
-
-### `/backend`
-FastAPI Python application. Handles all REST API routes, database access via SQLAlchemy, and wraps trained ML models into real-time inference endpoints. Structured as:
-- `/routers` — route handlers for market demand, enrollment, and recommendations
-- `/models` — SQLAlchemy ORM table definitions
-- `/services` — ML inference service and recommendation logic
-- `/db` — database connection and session management
-
-### `/frontend`
-React + Vite single-page application. Renders both dashboard modules with interactive charts (Recharts), responsive layouts (Tailwind CSS), and live API integration (Axios).
-- `/pages` — one file per dashboard view
-- `/components` — reusable UI components (StatCard, charts, forms)
-- `/hooks` — custom React hooks (useFetch, etc.)
-- `/api` — Axios service functions per module
-
-### `/ml`
-All machine learning work lives here:
-- Training scripts for XGBoost (placement prediction), Prophet (enrollment forecasting), and LSTM (temporal demand)
-- SHAP explainability outputs
-- Saved model files (`/models/`)
-- Feature engineering pipeline
-- Model evaluation and monitoring scripts
-
-### `/data`
-Data layer for the platform:
-- `generate_mock_data.py` — Faker-based synthetic data generator (students, job postings, enrollments, placements)
-- `load_to_db.py` — ETL script to ingest CSVs into PostgreSQL
-- `data_quality_check.py` — summary report for validating loaded data
-- `/mock/` — generated CSV files
-- `/processed/` — feature-engineered parquet files ready for ML training
-
-### `/docker`
-Dockerfiles for individual services (backend and frontend). The root `docker-compose.yml` references these to spin up the full stack with a single command.
-
-### `/docs`
-- `TECHNICAL.md` — setup guide, environment variables, API reference, how to retrain models
-- `USER_GUIDE.md` — plain-language guide to navigating the dashboards
-
----
-
-## Quick Start
+## Quick start
 
 ```bash
-# 1. Copy environment config
 cp .env.example .env
-
-# 2. Start all services
 docker compose up
-
-# 3. Open the app
-#    Frontend:  http://localhost:3001
-#    API docs:  http://localhost:8000/docs
 ```
 
-Host ports are set by `FRONTEND_HOST_PORT`, `API_HOST_PORT` and `DB_HOST_PORT` in
-`.env`. The defaults deliberately avoid `3000` and `5432` so the stack does not
-collide with other projects. See [docs/TECHNICAL.md](docs/TECHNICAL.md) §3.
+Host ports: `FRONTEND_HOST_PORT` (3001), `API_HOST_PORT` (8000), `DB_HOST_PORT` (5434).
 
----
-
-## Tech Stack
+## Tech stack
 
 | Layer | Technology |
 |---|---|
-| Backend API | FastAPI (Python) |
-| Database | PostgreSQL |
-| ML Models | XGBoost · Prophet · Keras LSTM |
-| Explainability | SHAP |
-| Frontend | React + Vite · Tailwind CSS · Recharts |
-| Infrastructure | Docker Compose |
-| Mock Data | Python Faker |
+| Backend | FastAPI |
+| Auth / governance | PostgreSQL (`users`, audit, scenarios, AHP, expert validations) |
+| Dashboards | Ethiopia parquets under `data/ethiopia/` |
+| Models | OLS-on-lags + seasonal-naive (M1/M2); alignment scores (M3); AHP separate |
+| Frontend | React + Vite + Recharts |
+| Tests | pytest + Vitest |

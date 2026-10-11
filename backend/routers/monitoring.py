@@ -11,7 +11,7 @@ router = APIRouter(
 )
 
 
-@router.get("/drift")
+@router.get("/drift")  # /monitoring/drift
 def get_drift(
     window: int = Query(
         100,

@@ -1,0 +1,365 @@
+# ==============================================================================
+# DOC1 — Model 1: Higher Education Demand Forecasting
+#
+# Executable transcription of:
+#   docs/feedback/Comments on Recommended Attributes and Relative Importance.docx
+#
+# This file is the CONTRACT, not documentation. tests/test_spec_coverage.py walks
+# every `id` below and fails while any is unclaimed. Do not edit an id — other
+# files reference them. Add, never renumber.
+#
+# ── Why `collection_priority` and not `weight` ────────────────────────────────
+#
+# DOC1 is emphatic (source line 234):
+#
+#   "The proposed percentages should be interpreted as domain-informed priorities
+#    for data collection, feature engineering and model design—not as fixed
+#    weights manually imposed on a machine-learning model."
+#
+# So the field is named `collection_priority`. Nothing in ml/ may read it as a
+# model weight; tests/test_spec_coverage.py::test_collection_priority_never_used_as_weight
+# enforces that. If fixed pre-training weights are ever genuinely required, DOC1
+# step 7 says to add a separate AHP methodology — that lives in ml/ahp/, keyed to
+# these same ids, and is never blended into a learner's loss.
+# ==============================================================================
+
+model:
+  id: M1
+  name: Higher Education Demand Forecasting
+  objective: >-
+    Forecast future student enrollment by institution, campus, region,
+    program/department, and academic year.
+  # DOC1 lines 75-77. Non-negotiable: enrollment is not purely demand-driven.
+  architecture:
+    layers:
+      - id: M1.L1
+        name: Demand Forecast
+        description: >-
+          Estimate what students are likely to apply for or prefer using
+          historical enrollment, applications, demographics, employability
+          signals and related predictors.
+        satisfied_by:
+          module: ml/model1/layer1_demand.py
+          endpoint: /api/model1/demand/unconstrained
+      - id: M1.L2
+        name: Policy and Capacity Constraint
+        description: >-
+          Apply entrance-exam eligibility, centralized placement rules, MoE
+          quotas, program capacity and other administrative constraints to
+          convert unconstrained demand into realistic enrollment.
+        satisfied_by:
+          module: ml/model1/layer2_constraints.py
+          service: backend/services/constraint_service.py
+          endpoint: /api/model1/demand/constrained
+
+# The five dimensions the objective names. Every forecast endpoint must be able
+# to group by each of these.
+dimensions:
+  - institution
+  - campus
+  - region
+  - program          # program/department
+  - academic_year
+
+categories:
+  # ── 1 ───────────────────────────────────────────────────────────────────────
+  - id: M1.C1
+    name: Historical enrollment time series
+    collection_priority: 25
+    priority_level: Critical
+    key_attributes: >-
+      Prior-year enrollment (lag-1, lag-2, multi-year trends), enrollment
+      growth, department/program/campus history.
+    source_table: enrollment_history
+    variables:
+      - id: M1.C1.V1
+        name: Lag-1 enrollment
+        column: enrollment_lag_1y
+      - id: M1.C1.V2
+        name: Lag-2 enrollment
+        column: enrollment_lag_2y
+      - id: M1.C1.V3
+        name: 3-5 year rolling trend
+        column: enrollment_rolling_3y_avg
+        also:
+          - enrollment_rolling_5y_avg
+      - id: M1.C1.V4
+        name: Growth/decline rate
+        column: enrollment_growth_rate_pct
+      - id: M1.C1.V5
+        name: Department/program enrollment
+        column: program_enrollment_count
+      - id: M1.C1.V6
+        name: Campus and regional enrollment
+        column: campus_enrollment_count
+        also:
+          - region_enrollment_count
+
+  # ── 2 ───────────────────────────────────────────────────────────────────────
+  - id: M1.C2
+    name: Admissions funnel data
+    collection_priority: 15
+    priority_level: Critical
+    key_attributes: >-
+      Applications, offers/admissions, acceptances, enrollment yield rate,
+      applicants per available seat, first-choice demand.
+    source_table: admissions_funnel
+    variables:
+      - id: M1.C2.V1
+        name: Applications
+        column: applications_count
+      - id: M1.C2.V2
+        name: Offers/admissions
+        column: offers_count
+      - id: M1.C2.V3
+        name: Accepted offers
+        column: accepted_offers_count
+      - id: M1.C2.V4
+        name: Yield rate
+        column: yield_rate_pct
+      - id: M1.C2.V5
+        name: Applicants per seat
+        column: applicants_per_seat
+      - id: M1.C2.V6
+        name: First-choice program demand
+        column: first_choice_demand_count
+
+  # ── 3 ───────────────────────────────────────────────────────────────────────
+  - id: M1.C3
+    name: National entrance exam and placement data
+    collection_priority: 15
+    priority_level: High / Ethiopia-specific
+    key_attributes: >-
+      University entrance exam pass rate, score distribution, cutoff scores,
+      placement outcomes, ministry allocation rules.
+    source_table: exam_placement
+    # Ethiopia: ESSLCE administered by the Ethiopian Assessment and Examinations
+    # Service; centralized MoE placement into bands and fields.
+    variables:
+      - id: M1.C3.V1
+        name: Entrance exam participation
+        column: exam_candidates_count
+      - id: M1.C3.V2
+        name: Pass rate
+        column: exam_pass_rate_pct
+      - id: M1.C3.V3
+        name: Score distribution
+        column: exam_score_mean
+        also:
+          - exam_score_sd
+          - exam_score_p25
+          - exam_score_p50
+          - exam_score_p75
+      - id: M1.C3.V4
+        name: Program cutoff
+        column: program_cutoff_score
+      - id: M1.C3.V5
+        name: Placement decision
+        column: placed_count
+        also:
+          - placement_rate_pct
+      - id: M1.C3.V6
+        name: Field allocation
+        column: field_allocation_count
+        also:
+          - band_allocation_ratio      # e.g. the 70:30 natural:social directive
+
+  # ── 4 ───────────────────────────────────────────────────────────────────────
+  - id: M1.C4
+    name: Program capacity and quota policy
+    collection_priority: 15
+    priority_level: High / policy constraint
+    key_attributes: >-
+      MoE intake quotas, field priorities, department seats, block placement
+      capacity, program expansion or closure.
+    source_table: capacity_quota
+    variables:
+      - id: M1.C4.V1
+        name: Approved intake quota
+        column: approved_intake_quota
+      - id: M1.C4.V2
+        name: Available seats
+        column: available_seats
+      - id: M1.C4.V3
+        name: Program capacity
+        column: program_capacity
+      - id: M1.C4.V4
+        name: New program expansion
+        column: program_expansion_flag
+      - id: M1.C4.V5
+        name: Program suspension/closure
+        column: program_suspension_flag
+      - id: M1.C4.V6
+        name: Strategic priority field
+        column: strategic_priority_flag
+
+  # ── 5 ───────────────────────────────────────────────────────────────────────
+  - id: M1.C5
+    name: Demographic pipeline
+    collection_priority: 10
+    priority_level: High
+    key_attributes: >-
+      High-school completers/exam candidates, university-age population,
+      regional youth population, migration patterns.
+    source_table: demographics
+    variables:
+      - id: M1.C5.V1
+        name: High-school completers / exam candidates
+        column: grade12_completers_count
+      - id: M1.C5.V2
+        name: University-age population
+        column: university_age_population
+      - id: M1.C5.V3
+        name: Regional youth population
+        column: regional_youth_population
+      - id: M1.C5.V4
+        name: Migration patterns
+        column: net_internal_migration
+
+  # ── 6 ───────────────────────────────────────────────────────────────────────
+  - id: M1.C6
+    name: Cohort progression and retention
+    collection_priority: 8
+    priority_level: High
+    key_attributes: >-
+      Year-to-year retention, dropout, transfer, completion and
+      time-to-graduation rates.
+    source_table: cohort_progression
+    variables:
+      - id: M1.C6.V1
+        name: Retention rate
+        column: retention_rate_pct
+      - id: M1.C6.V2
+        name: Dropout rate
+        column: dropout_rate_pct
+      - id: M1.C6.V3
+        name: Transfer rate
+        column: transfer_rate_pct
+      - id: M1.C6.V4
+        name: Completion rate
+        column: completion_rate_pct
+      - id: M1.C6.V5
+        name: Time to graduation
+        column: time_to_graduation_years
+
+  # ── 7 ───────────────────────────────────────────────────────────────────────
+  - id: M1.C7
+    name: Lagged employment outcomes by field
+    collection_priority: 5
+    priority_level: Medium-High
+    key_attributes: >-
+      Graduate employment/unemployment rates, job placement, salary/employability
+      signals from previous cohorts.
+    source_table: graduate_outcomes
+    variables:
+      - id: M1.C7.V1
+        name: Graduate employment rate by field
+        column: graduate_employment_rate_pct
+      - id: M1.C7.V2
+        name: Graduate unemployment rate
+        column: graduate_unemployment_rate_pct
+      - id: M1.C7.V3
+        name: Median earnings where available
+        column: median_earnings_etb
+      - id: M1.C7.V4
+        name: Vacancy demand by field
+        column: vacancy_demand_by_field
+      - id: M1.C7.V5
+        name: Skills shortage signals
+        column: skills_shortage_signal
+
+  # ── 8 ───────────────────────────────────────────────────────────────────────
+  - id: M1.C8
+    name: Institutional capacity and quality
+    collection_priority: 3
+    priority_level: Medium
+    key_attributes: >-
+      Faculty-student ratio, laboratories, classrooms, accreditation status,
+      program quality indicators.
+    source_table: institution_capacity
+    variables:
+      - id: M1.C8.V1
+        name: Faculty-student ratio
+        column: faculty_student_ratio
+      - id: M1.C8.V2
+        name: Laboratories
+        column: laboratory_count
+      - id: M1.C8.V3
+        name: Classrooms
+        column: classroom_count
+      - id: M1.C8.V4
+        name: Accreditation status
+        column: accreditation_status
+      - id: M1.C8.V5
+        name: Program quality indicators
+        column: program_quality_index
+
+  # ── 9 ───────────────────────────────────────────────────────────────────────
+  - id: M1.C9
+    name: Tuition, financial support and scholarships
+    collection_priority: 2
+    priority_level: Medium
+    key_attributes: >-
+      Fees, stipends, scholarships, loans and other financial incentives;
+      especially relevant to private institutions and selected programs.
+    source_table: finance_support
+    variables:
+      - id: M1.C9.V1
+        name: Fees
+        column: tuition_fee_etb
+      - id: M1.C9.V2
+        name: Stipends
+        column: stipend_etb
+      - id: M1.C9.V3
+        name: Scholarships
+        column: scholarship_availability
+      - id: M1.C9.V4
+        name: Loans and other financial incentives
+        column: cost_sharing_loan_etb
+
+  # ── 10 ──────────────────────────────────────────────────────────────────────
+  - id: M1.C10
+    name: Macroeconomic and regional socio-economic conditions
+    collection_priority: 2
+    priority_level: Low-Medium
+    key_attributes: >-
+      Inflation, household-income proxies, youth unemployment, regional
+      socio-economic indicators.
+    source_table: macro_regional
+    variables:
+      - id: M1.C10.V1
+        name: Inflation
+        column: inflation_rate_pct
+      - id: M1.C10.V2
+        name: Household-income proxies
+        column: household_income_proxy_etb
+      - id: M1.C10.V3
+        name: Youth unemployment
+        column: youth_unemployment_rate_pct
+      - id: M1.C10.V4
+        name: Regional socio-economic indicators
+        column: regional_socioeconomic_index
+
+# DOC1 line 73: "Total feature-priority allocation: 100%."
+# Asserted by tests/test_spec_coverage.py::test_collection_priorities_sum_to_100
+total_collection_priority: 100
+
+# ── Tier summary, DOC1 lines 244-259 ─────────────────────────────────────────
+# Rendered by the admin methodology view (W.ADM.04 neighbour panel) and by
+# scripts/spec_report.py.
+priority_tiers:
+  - id: M1.T1
+    groups: [M1.C1, M1.C2, M1.C3, M1.C4]
+    label: >-
+      Historical enrollment + admissions funnel + exam/placement +
+      quota/capacity
+    combined_priority: 70
+  - id: M1.T2
+    groups: [M1.C5, M1.C6]
+    label: Demographic pipeline + cohort progression
+    combined_priority: 18
+  - id: M1.T3
+    groups: [M1.C7, M1.C8, M1.C9, M1.C10]
+    label: >-
+      Employment feedback + institutional/financial/economic context
+    combined_priority: 12
