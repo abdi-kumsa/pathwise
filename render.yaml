@@ -2,7 +2,7 @@
 # account and this one is shared with another project. DATABASE_URL is set
 # manually on the backend service and points at that existing instance, with
 # ?options=-csearch_path%3Dpathwise so every table PathWise creates lands in
-# its own `pathwise` schema rather than `public`. See docs/RENDER_DEPLOYMENT.md.
+# its own `pathwise` schema rather than `public`.
 
 services:
 

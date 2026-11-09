@@ -16,5 +16,4 @@ Those endpoints now exist only when the API runs with `LEGACY_US_MODELS=1`
 (waiver WV.US1). Their behaviour is covered by the `@legacy` classes in
 `backend/tests/test_api.py`, which run automatically when that flag is on.
 
-Moved here in Phase 1 of the 2026-11-07 improvement plan
-(`docs/audit/2026-11-07-improvement-plan.md`).
+Moved here in Phase 1 of the 2026-11-07 improvement work.

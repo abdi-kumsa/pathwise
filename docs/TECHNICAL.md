@@ -17,10 +17,8 @@ This document covers environment setup, architecture, all API endpoints, how to 
 9. [Monitoring & Drift Detection](#9-monitoring--drift-detection)
 10. [Troubleshooting](#10-troubleshooting)
 
-See [DATA_PROVENANCE.md](DATA_PROVENANCE.md) — Ethiopia 2016–2025 simulated
-structure, twenty fact tables, and how leftover US tools are labelled.
-
-See also [METHODOLOGY.md](METHODOLOGY.md) and [USER_GUIDE.md](USER_GUIDE.md).
+Data is Ethiopia 2016–2025 simulated structure across twenty fact tables;
+leftover US tools are labelled as such.
 
 ---
 
@@ -199,9 +197,7 @@ analytics still read parquet.
 
 Leftover US CSVs (`Assets/`, `data/mock/`, `data/processed/features.parquet`)
 are **not** the backbone. They remain on the placement / salary / LSTM tool
-routes. See [DATA_PROVENANCE.md](DATA_PROVENANCE.md) and waiver WV.US1.
-
-See also [METHODOLOGY.md](METHODOLOGY.md).
+routes. See waiver WV.US1 in `docs/spec/waivers.yaml`.
 
 ---
 
@@ -541,7 +537,7 @@ from each programme's historical rate. The response reports which via
 
 `mismatch` always returns `comparable: false` and a `caveat` — the distribution
 is near-uniform across fields in this dataset and must not be charted as a
-league table. See [DATA_PROVENANCE.md §4.1](DATA_PROVENANCE.md).
+league table.
 
 ### 6.3 Education supply — `MOE`
 
