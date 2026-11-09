@@ -106,7 +106,7 @@ export default function SectorForecastPage() {
           {dim === 'region' && (
             <div className="panel" style={{ marginTop: 16 }}>
               <p className="panel-title">Region map · {lastForecast}</p>
-              <p className="panel-sub">Schematic regions, not an official administrative map.</p>
+              <p className="panel-sub">Schematic regions, not an administrative map.</p>
               <EthiopiaRegionMap regions={mapRows} valueLabel="demand" />
             </div>
           )}
