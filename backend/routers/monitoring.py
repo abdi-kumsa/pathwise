@@ -18,13 +18,13 @@ def get_drift(
         description="Number of recent predictions to analyse for drift detection",
     )
 ):
-    """Drift report: compares recent prediction probabilities to the
-    training-time baseline (0.88).
+    """Drift report for the Ethiopia forecasts (W.ADM.03).
 
-    Use this endpoint to detect model degradation over time without
-    needing access to the server.  An `alert: true` response means the
-    mean placement probability has drifted more than 10 percentage
-    points from the baseline — trigger a retrain.
+    Per target: PSI of each model input in the latest year against the
+    reference years, and the selected model's latest backtest error against
+    its earlier origins. `alert: true` means at least one target shifted or
+    degraded — re-run the model comparison. A secondary `placement` block
+    covers the leftover US model when LEGACY_US_MODELS=1.
     """
     try:
         return monitoring_service.get_drift_report(window=window)

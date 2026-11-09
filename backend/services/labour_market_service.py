@@ -370,6 +370,20 @@ def graduate_absorption() -> dict:
 
 
 def workforce_report(horizon: int = 3) -> dict:
+    """Cached wrapper: the uncached build runs four Model 2 forecasts and was a
+    one-request CPU denial of service (audit S4)."""
+    _ml_root()
+    from ml._memo import memo
+    global _workforce_report_cached
+    if _workforce_report_cached is None:
+        _workforce_report_cached = memo(_build_workforce_report)
+    return _workforce_report_cached(horizon)
+
+
+_workforce_report_cached = None
+
+
+def _build_workforce_report(horizon: int = 3) -> dict:
     """Planning report with sector / occupation / skill / region breakdowns (W.MOL.09)."""
     _ml_root()
     from services import model2_service as m2

@@ -68,8 +68,8 @@ export default function EducationOverviewPage() {
             />
             <KPICard
               label="Student demand"
-              value={fmtCompact(o.total_applications)}
-              delta="Applications (simulated)"
+              value={fmtCompact(o.applications_latest_year ?? o.total_applications)}
+              delta="Applications, latest year (simulated)"
               deltaDirection="neutral"
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8"/></svg>}
             />

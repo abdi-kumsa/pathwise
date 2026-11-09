@@ -8,6 +8,10 @@ import os
 import pickle
 import warnings
 from pathlib import Path
+try:
+    from artifacts import verified_open, verify  # noqa: F401  (ml/ on sys.path)
+except ImportError:  # imported as part of the ml package
+    from ml.artifacts import verified_open, verify  # noqa: F401
 
 warnings.filterwarnings('ignore')
 
@@ -38,9 +42,9 @@ _shap_cache = None   # (shap_values, base_val, feature_names, X_sample)
 def get_xgboost():
     global _xgboost_model, _feature_names
     if _xgboost_model is None:
-        with open(_MODEL_DIR / 'placement_xgboost.pkl', 'rb') as f:
+        with verified_open(_MODEL_DIR / 'placement_xgboost.pkl') as f:
             _xgboost_model = pickle.load(f)
-        with open(_MODEL_DIR / 'placement_feature_names.pkl', 'rb') as f:
+        with verified_open(_MODEL_DIR / 'placement_feature_names.pkl') as f:
             _feature_names = pickle.load(f)
     return _xgboost_model, _feature_names
 
@@ -48,9 +52,9 @@ def get_xgboost():
 def get_salary_model():
     global _salary_model, _salary_meta
     if _salary_model is None:
-        with open(_MODEL_DIR / 'salary_xgboost.pkl', 'rb') as f:
+        with verified_open(_MODEL_DIR / 'salary_xgboost.pkl') as f:
             _salary_model = pickle.load(f)
-        with open(_MODEL_DIR / 'salary_xgboost_meta.pkl', 'rb') as f:
+        with verified_open(_MODEL_DIR / 'salary_xgboost_meta.pkl') as f:
             _salary_meta = pickle.load(f)
     return _salary_model, _salary_meta
 
@@ -60,10 +64,10 @@ def get_lstm():
     if _lstm_model is None:
         os.environ.setdefault('TF_CPP_MIN_LOG_LEVEL', '3')
         from tensorflow.keras.models import load_model
-        _lstm_model = load_model(str(_MODEL_DIR / 'enrollment_lstm.keras'))
-        with open(_MODEL_DIR / 'enrollment_scaler.pkl', 'rb') as f:
+        _lstm_model = load_model(str(verify(_MODEL_DIR / 'enrollment_lstm.keras')))
+        with verified_open(_MODEL_DIR / 'enrollment_scaler.pkl') as f:
             _lstm_scalers = pickle.load(f)
-        with open(_MODEL_DIR / 'enrollment_lstm_meta.pkl', 'rb') as f:
+        with verified_open(_MODEL_DIR / 'enrollment_lstm_meta.pkl') as f:
             _lstm_meta = pickle.load(f)
     return _lstm_model, _lstm_scalers, _lstm_meta
 
@@ -71,7 +75,7 @@ def get_lstm():
 def get_prophet():
     global _prophet_model
     if _prophet_model is None:
-        with open(_MODEL_DIR / 'demand_prophet.pkl', 'rb') as f:
+        with verified_open(_MODEL_DIR / 'demand_prophet.pkl') as f:
             _prophet_model = pickle.load(f)
     return _prophet_model
 

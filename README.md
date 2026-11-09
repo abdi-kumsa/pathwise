@@ -17,8 +17,10 @@ MoLS or ESS statistics. See [docs/DATA_PROVENANCE.md](docs/DATA_PROVENANCE.md).
 
 Demo password: **`pathwise123`**. Frontend `http://localhost:3001`, API `http://localhost:8000`.
 
-Leftover US placement / salary / LSTM / Prophet tools still exist as bookmarked
-routes. They are **not** Ethiopia Model 1 or 2 and are hidden from role nav.
+The leftover US placement / salary / LSTM / Prophet tools are **off by default**.
+They are not Ethiopia Model 1 or 2, and the 2026-11-07 audit found each loses to
+a trivial baseline. Set `LEGACY_US_MODELS=1` (and `VITE_LEGACY_US_MODELS=true`,
+plus `--build-arg LEGACY_US_MODELS=1` for the image) to bring them back.
 
 ---
 
@@ -38,6 +40,7 @@ pathwise/
 - [docs/TECHNICAL.md](docs/TECHNICAL.md) — ports, routers, tests
 - [docs/METHODOLOGY.md](docs/METHODOLOGY.md) — DOC1 steps 1–7
 - [docs/WALKTHROUGH.md](docs/WALKTHROUGH.md) — recording script
+- [docs/audit/](docs/audit/) — 2026-11-07 audit and phased improvement plan
 
 ## Quick start
 
@@ -55,6 +58,6 @@ Host ports: `FRONTEND_HOST_PORT` (3001), `API_HOST_PORT` (8000), `DB_HOST_PORT` 
 | Backend | FastAPI |
 | Auth / governance | PostgreSQL (`users`, audit, scenarios, AHP, expert validations) |
 | Dashboards | Ethiopia parquets under `data/ethiopia/` |
-| Models | OLS-on-lags + seasonal-naive (M1/M2); alignment scores (M3); AHP separate |
+| Models | Four-candidate rolling-origin backtest per target, best per horizon (M1/M2); cohort-lagged supply and coverage-based gaps (M3); AHP separate |
 | Frontend | React + Vite + Recharts |
-| Tests | pytest + Vitest |
+| Tests | pytest (unit / `live` markers) + Vitest; GitHub Actions CI |

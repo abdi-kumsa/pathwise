@@ -1,4 +1,4 @@
-import client from './client'
+import client, { setToken } from './client'
 
 // ── Admin: user management ────────────────────────────────────────────────────
 
@@ -27,6 +27,7 @@ export const updateUser = async (username, changes) => {
   if (changes.displayName !== undefined) body.display_name = changes.displayName
   if (changes.institution !== undefined) body.institution_name = changes.institution || null
   if (changes.isActive !== undefined)    body.is_active = changes.isActive
+  if (changes.crossInstitution !== undefined) body.cross_institution = changes.crossInstitution
 
   const { data } = await client.patch(`/api/users/${encodeURIComponent(username)}`, body)
   return data
@@ -57,9 +58,16 @@ export const getInstitutionOptions = async () => {
 
 // ── Any role: own account ─────────────────────────────────────────────────────
 
+/**
+ * Self-service change. The server ends every existing session when a password
+ * changes and returns a fresh token for this one, which is stored here so the
+ * user stays signed in on this device.
+ */
 export const changeOwnPassword = async (currentPassword, newPassword) => {
-  await client.post('/api/auth/change-password', {
+  const { data } = await client.post('/api/auth/change-password', {
     current_password: currentPassword,
     new_password: newPassword,
   })
+  if (data?.access_token) setToken(data.access_token)
+  return data
 }

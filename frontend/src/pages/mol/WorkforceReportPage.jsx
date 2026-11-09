@@ -4,6 +4,7 @@ import SectionHeader from '../../components/SectionHeader'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
 import DataNote from '../../components/DataNote'
+import ForecastAccuracyNote from '../../components/ForecastAccuracyNote'
 import EmptyState from '../../components/EmptyState'
 import useFetch from '../../hooks/useFetch'
 import { getWorkforceReport, downloadWorkforceReport } from '../../api/roles'
@@ -45,6 +46,7 @@ export default function WorkforceReportPage() {
           <DataNote tone="simulated">
             {data.note} Each download writes a report_export audit row. official_forecast: {String(data.official_forecast)}.
           </DataNote>
+          <ForecastAccuracyNote />
           <div className="panel" style={{ marginTop: 16 }} data-testid="report-summary">
             <p className="panel-title">Workforce planning report</p>
             <p className="panel-sub">As of {data.as_of ?? '—'} · horizon {data.horizon ?? '—'} years</p>

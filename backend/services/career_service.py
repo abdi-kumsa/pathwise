@@ -96,6 +96,12 @@ def recommend(job_title: str, profile: dict = None, top_n: int = 5) -> dict:
     if family is None:
         raise ValueError(f"Unknown occupation '{job_title}'")
 
+    from .feature_flags import LEGACY_US_MODELS
+    # Personalised only if the profile actually reaches a model. With the US
+    # placement model switched off, every programme uses its historical rate,
+    # and claiming otherwise would mislabel the ranking.
+    personalised = profile is not None and LEGACY_US_MODELS
+
     demand = _demand_context(job_title, family)
     rows = _score_programs(family, profile)
 
@@ -142,12 +148,12 @@ def recommend(job_title: str, profile: dict = None, top_n: int = 5) -> dict:
         'recommendations': ranked[:top_n],
         'all_programs':    ranked,
         'weights':         WEIGHTS,
-        'personalised':    profile is not None,
+        'personalised':    personalised,
         'method': (
             "Each factor is min-max normalised across the twelve programmes, then "
             "combined with the published weights. Placement odds come from the "
             + ("XGBoost model run on your profile."
-               if profile else "programme's historical placement rate.")
+               if personalised else "programme's historical placement rate.")
         ),
         'dataset_label': ds.DATASET_LABEL,
     }
@@ -243,6 +249,12 @@ def _placement_odds(program: str, profile: dict, historical: dict) -> float:
     falls back to the historical rate rather than propagating.
     """
     if not profile:
+        return historical.get(program, 0.5)
+
+    # The placement model is a US artefact trained on US programme names
+    # (WV.US1); it is only consulted when the legacy models are switched on.
+    from .feature_flags import LEGACY_US_MODELS
+    if not LEGACY_US_MODELS:
         return historical.get(program, 0.5)
 
     try:

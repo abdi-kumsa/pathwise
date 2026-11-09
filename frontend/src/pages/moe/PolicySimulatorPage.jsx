@@ -7,7 +7,9 @@ import SectionHeader from '../../components/SectionHeader'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
 import DataNote from '../../components/DataNote'
+import ForecastAccuracyNote from '../../components/ForecastAccuracyNote'
 import useFetch from '../../hooks/useFetch'
+import useDebounced from '../../hooks/useDebounced'
 import { getPolicySimulator, persistPolicySimulator } from '../../api/roles'
 import { SERIES, axisProps, gridProps, tooltipProps, fmtNum } from '../../config/chartTheme'
 
@@ -27,6 +29,8 @@ export default function PolicySimulatorPage() {
   const [quota, setQuota] = useState(1)
   const [capacity, setCapacity] = useState(1)
   const [natural, setNatural] = useState(0.7)
+  const [passShift, setPassShift] = useState(0)
+  const [horizon, setHorizon] = useState(1)
   const [priority, setPriority] = useState('')
   const [saved, setSaved] = useState(null)
   const [saving, setSaving] = useState(false)
@@ -35,12 +39,16 @@ export default function PolicySimulatorPage() {
     quota_scale: quota,
     capacity_scale: capacity,
     natural_share: natural,
-    horizon: 1,
+    pass_rate_shift_pp: passShift,
+    horizon,
     ...(priority ? { priority_field: priority } : {}),
   }
+  // Sliders update the labels immediately but only run a scenario once the
+  // value has settled: each run is audited and rate limited on the server.
+  const settledKey = useDebounced(JSON.stringify(params), 400)
   const { data, loading, error, refetch } = useFetch(
-    () => getPolicySimulator(params),
-    [quota, capacity, natural, priority],
+    () => getPolicySimulator(JSON.parse(settledKey)),
+    [settledKey],
   )
 
   const chart = data ? [
@@ -56,9 +64,10 @@ export default function PolicySimulatorPage() {
         quota_scale: quota,
         capacity_scale: capacity,
         natural_share: natural,
+        pass_rate_shift_pp: passShift,
         priority_field: priority || null,
         name: 'policy-simulator',
-        horizon: 1,
+        horizon,
       })
       setSaved(body)
     } catch (err) {
@@ -78,14 +87,19 @@ export default function PolicySimulatorPage() {
       <DataNote tone="simulated">
         official_forecast is false. Every persisted run stores its assumptions so it cannot be quoted as a baseline.
       </DataNote>
+      <ForecastAccuracyNote />
       <div className="panel" style={{ marginTop: 16 }}>
         <p className="panel-title">Levers</p>
         <label className="sim-label">Quota scale {quota.toFixed(2)}</label>
         <input type="range" min="0.25" max="3" step="0.05" value={quota} onChange={e => setQuota(Number(e.target.value))} />
         <label className="sim-label">Capacity scale {capacity.toFixed(2)}</label>
         <input type="range" min="0.25" max="3" step="0.05" value={capacity} onChange={e => setCapacity(Number(e.target.value))} />
-        <label className="sim-label">Placement rule — natural-science share {Math.round(natural * 100)}%</label>
+        <label className="sim-label">Band allocation — natural-science share {Math.round(natural * 100)}%</label>
         <input type="range" min="0.5" max="0.9" step="0.01" value={natural} onChange={e => setNatural(Number(e.target.value))} />
+        <label className="sim-label">Placement rule — ESSLCE pass rate {passShift > 0 ? '+' : ''}{passShift} pp</label>
+        <input type="range" min="-15" max="15" step="1" value={passShift} onChange={e => setPassShift(Number(e.target.value))} />
+        <label className="sim-label">Horizon {horizon} year{horizon > 1 ? 's' : ''} — graduates respond only from about year 5</label>
+        <input type="range" min="1" max="5" step="1" value={horizon} onChange={e => setHorizon(Number(e.target.value))} />
         <label className="sim-label">Priority field</label>
         <select value={priority} onChange={e => setPriority(e.target.value)} style={{ width: '100%', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--border)' }}>
           {FIELDS.map(f => <option key={f || 'none'} value={f}>{f || 'None'}</option>)}

@@ -50,7 +50,6 @@ def train_xgboost_model():
     # Evaluate on test set
     print("\nEvaluating model...")
     y_pred = model.predict(X_test)
-    y_pred_proba = model.predict_proba(X_test)[:, 1]
 
     accuracy = accuracy_score(y_test, y_pred)
     precision = precision_score(y_test, y_pred)

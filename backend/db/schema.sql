@@ -47,6 +47,7 @@ CREATE TABLE users (
     program          VARCHAR(120),
     field            VARCHAR(120),
     enrollment_year  SMALLINT,
+    token_version    INTEGER         NOT NULL DEFAULT 0,
     created_at       TIMESTAMPTZ     NOT NULL DEFAULT NOW(),
 
     CHECK (role <> 'UNIVERSITY' OR institution_name IS NOT NULL)
@@ -187,6 +188,11 @@ CREATE TABLE expert_validations (
     verdict       VARCHAR(24)     NOT NULL
                   CHECK (verdict IN ('accepted', 'revision', 'rejected')),
     notes         TEXT,
+    expert_name   VARCHAR(120),
+    organisation  VARCHAR(160),
+    recorded_by   VARCHAR(64),
+    source        VARCHAR(16)     NOT NULL DEFAULT 'recorded'
+                  CHECK (source IN ('recorded', 'seeded')),
     created_at    TIMESTAMPTZ     NOT NULL DEFAULT NOW()
 );
 CREATE INDEX idx_expert_validations_spec ON expert_validations (spec_id);

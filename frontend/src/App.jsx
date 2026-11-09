@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 
 import { AuthProvider, useAuth } from './context/AuthContext'
@@ -16,11 +16,8 @@ import AccountPage from './pages/AccountPage'
 
 // Student
 import CareerExplorerPage from './pages/student/CareerExplorerPage'
-import StudentEvaluatorPage from './pages/StudentEvaluatorPage'
 import SkillRoadmapPage from './pages/SkillRoadmapPage'
 import EscapeRoutePage from './pages/EscapeRoutePage'
-import SalaryForecastPage from './pages/SalaryForecastPage'
-import MarketOverviewPage from './pages/MarketOverviewPage'
 import ProfilePage from './pages/student/ProfilePage'
 import LabourOutlookPage from './pages/student/LabourOutlookPage'
 import DemandComparisonPage from './pages/student/DemandComparisonPage'
@@ -61,7 +58,6 @@ import ProgramPortfolioPage from './pages/university/ProgramPortfolioPage'
 import ExpansionPage from './pages/university/ExpansionPage'
 import ResourceEfficiencyPage from './pages/university/ResourceEfficiencyPage'
 import PeerBenchmarkPage from './pages/university/PeerBenchmarkPage'
-import EnrollmentForecastPage from './pages/EnrollmentForecastPage'
 import DemandForecastPage from './pages/university/DemandForecastPage'
 import ConstrainedForecastPage from './pages/university/ConstrainedForecastPage'
 import ThreeWayComparisonPage from './pages/university/ThreeWayComparisonPage'
@@ -79,6 +75,23 @@ import AdminDataQualityPage from './pages/admin/AdminDataQualityPage'
 import AdminMethodologyPage from './pages/admin/AdminMethodologyPage'
 import AdminScenariosPage from './pages/admin/AdminScenariosPage'
 import AdminAuditLogPage from './pages/admin/AdminAuditLogPage'
+
+// Leftover US-model pages (waiver WV.US1): placement evaluator, salary,
+// Prophet market demand and LSTM enrolment. Their API routes are off unless the
+// backend runs with LEGACY_US_MODELS=1, so the pages are only routed when the
+// build sets VITE_LEGACY_US_MODELS=true. Lazy imports keep them out of the
+// default bundle entirely.
+const LEGACY_US_MODELS = import.meta.env.VITE_LEGACY_US_MODELS === 'true'
+// Behind the flag so the default build emits no chunk for them at all.
+const legacyPage = (load) => (LEGACY_US_MODELS ? lazy(load) : null)
+const StudentEvaluatorPage   = legacyPage(() => import('./pages/StudentEvaluatorPage'))
+const SalaryForecastPage     = legacyPage(() => import('./pages/SalaryForecastPage'))
+const MarketOverviewPage     = legacyPage(() => import('./pages/MarketOverviewPage'))
+const EnrollmentForecastPage = legacyPage(() => import('./pages/EnrollmentForecastPage'))
+
+function Legacy({ children }) {
+  return <Suspense fallback={<LoadingSpinner message="Loading…" height={320} />}>{children}</Suspense>
+}
 
 const STUDENT    = ['STUDENT']
 const MOL        = ['MOL', 'ADMIN']
@@ -150,11 +163,8 @@ function AppRoutes() {
 
       {/* ── Student ──────────────────────────────────────────────────────── */}
       <Route path="/student/careers"            element={<Protected allow={STUDENT}><CareerExplorerPage /></Protected>} />
-      <Route path="/student/evaluator"          element={<Protected allow={STUDENT}><StudentEvaluatorPage /></Protected>} />
       <Route path="/student/skill-roadmap"      element={<Protected allow={STUDENT}><SkillRoadmapPage /></Protected>} />
       <Route path="/student/alternatives"       element={<Protected allow={STUDENT}><EscapeRoutePage /></Protected>} />
-      <Route path="/student/salary"             element={<Protected allow={STUDENT}><SalaryForecastPage /></Protected>} />
-      <Route path="/student/market"             element={<Protected allow={STUDENT}><MarketOverviewPage /></Protected>} />
       <Route path="/student/profile"            element={<Protected allow={STUDENT}><ProfilePage /></Protected>} />
       <Route path="/student/outlook"            element={<Protected allow={STUDENT}><LabourOutlookPage /></Protected>} />
       <Route path="/student/demand-comparison"  element={<Protected allow={STUDENT}><DemandComparisonPage /></Protected>} />
@@ -197,7 +207,6 @@ function AppRoutes() {
       <Route path="/university/expansion"    element={<Protected allow={UNIVERSITY}><ExpansionPage /></Protected>} />
       <Route path="/university/resources"    element={<Protected allow={UNIVERSITY}><ResourceEfficiencyPage /></Protected>} />
       <Route path="/university/benchmark"    element={<Protected allow={UNIVERSITY}><PeerBenchmarkPage /></Protected>} />
-      <Route path="/university/enrollment"   element={<Protected allow={UNIVERSITY}><EnrollmentForecastPage /></Protected>} />
       <Route path="/university/demand"       element={<Protected allow={UNIVERSITY}><DemandForecastPage /></Protected>} />
       <Route path="/university/constrained"  element={<Protected allow={UNIVERSITY}><ConstrainedForecastPage /></Protected>} />
       <Route path="/university/three-way"    element={<Protected allow={UNIVERSITY}><ThreeWayComparisonPage /></Protected>} />
@@ -205,6 +214,16 @@ function AppRoutes() {
       <Route path="/university/cohort"       element={<Protected allow={UNIVERSITY}><CohortProgressionPage /></Protected>} />
       <Route path="/university/outcomes"     element={<Protected allow={UNIVERSITY}><GraduateOutcomesPage /></Protected>} />
       <Route path="/university/curriculum"   element={<Protected allow={UNIVERSITY}><CurriculumAlignmentPage /></Protected>} />
+
+      {/* ── Leftover US-model tools (VITE_LEGACY_US_MODELS=true only) ────── */}
+      {LEGACY_US_MODELS && (
+        <>
+          <Route path="/student/evaluator"      element={<Protected allow={STUDENT}><Legacy><StudentEvaluatorPage /></Legacy></Protected>} />
+          <Route path="/student/salary"         element={<Protected allow={STUDENT}><Legacy><SalaryForecastPage /></Legacy></Protected>} />
+          <Route path="/student/market"         element={<Protected allow={STUDENT}><Legacy><MarketOverviewPage /></Legacy></Protected>} />
+          <Route path="/university/enrollment"  element={<Protected allow={UNIVERSITY}><Legacy><EnrollmentForecastPage /></Legacy></Protected>} />
+        </>
+      )}
 
       {/* ── Admin ────────────────────────────────────────────────────────── */}
       <Route path="/admin/overview"     element={<Protected allow={ADMIN}><AdminOverviewPage /></Protected>} />

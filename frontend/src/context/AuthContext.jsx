@@ -51,6 +51,25 @@ export function AuthProvider({ children }) {
     setUser(null)
   }, [])
 
+  // Renew the session ten minutes before the token expires, so an active
+  // user is not signed out mid-task by the 8-hour lifetime. The refreshed
+  // token carries the account's current role; if access was revoked the
+  // refresh fails with 401 and the client interceptor signs the user out.
+  useEffect(() => {
+    if (!user) return undefined
+    const left = authApi.secondsUntilExpiry()
+    if (left == null) return undefined
+    const delayMs = Math.max((left - 600) * 1000, 30_000)
+    const timer = setTimeout(async () => {
+      try {
+        setUser(await authApi.refresh())
+      } catch {
+        // 401 is handled by the interceptor; anything else waits for the next attempt.
+      }
+    }, delayMs)
+    return () => clearTimeout(timer)
+  }, [user])
+
   const value = {
     user,
     booting,

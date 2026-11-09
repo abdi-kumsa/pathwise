@@ -18,6 +18,7 @@ def get_overview() -> dict:
     e = ds.enrollment()
 
     by_year = e.groupby('year')['enrollment_count'].sum()
+    apps_by_year = e.groupby('year')['applications_count'].sum()
     growth = ds.cagr(
         float(by_year.loc[ds.YEAR_MIN]),
         float(by_year.loc[ds.YEAR_MAX]),
@@ -50,7 +51,10 @@ def get_overview() -> dict:
         'total_enrollment':      int(e['enrollment_count'].sum()),
         'enrollment_latest_year': int(by_year.loc[ds.YEAR_MAX]),
         'enrollment_cagr_pct':   growth,
+        # All years combined; shown beside a single year of enrolment it
+        # overstated demand roughly tenfold. The page uses the latest year.
         'total_applications':    int(e['applications_count'].sum()),
+        'applications_latest_year': int(apps_by_year.loc[ds.YEAR_MAX]),
         'institutions':          int(e['institution_name'].nunique()),
         'programs':              int(e['program_name'].nunique()),
         'fields':                int(e['field_of_study'].nunique()),
@@ -341,6 +345,7 @@ def _records(df):
     return json.loads(df.to_json(orient="records"))
 
 
+@ttl_cache
 def demand_constrained_comparison(horizon: int = 3) -> dict:
     """National unconstrained vs constrained demand by field and year (W.MOE.02)."""
     from services import constraint_service as m1
@@ -371,6 +376,7 @@ def demand_constrained_comparison(horizon: int = 3) -> dict:
     }
 
 
+@ttl_cache
 def institution_comparison(horizon: int = 1) -> dict:
     """All registered HEIs: capacity, forecast accuracy, outcomes, alignment (W.MOE.07)."""
     from ml.features.model1 import c4_quota, c7_outcomes

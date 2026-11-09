@@ -8,7 +8,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 
 from services import alignment_service as m3
 from services import student_service as stu
-from services.auth_service import ROLE_STUDENT, student_scope
+from services.auth_service import student_scope
 
 router = APIRouter(
     prefix="/student",

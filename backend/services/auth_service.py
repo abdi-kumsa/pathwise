@@ -1,7 +1,7 @@
 """
 Authentication and role-based access control.
 
-Password hashing (bcrypt via passlib) + stateless JWTs (HS256 via python-jose).
+Password hashing (bcrypt) + stateless JWTs (HS256 via PyJWT).
 There is no server-side session store: the token carries the caller's role and
 institution, so any worker can authorise a request without a database round-trip
 after login.
@@ -21,16 +21,28 @@ from typing import Optional
 
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from jose import JWTError, jwt
-from passlib.context import CryptContext
+import jwt
+from jwt import PyJWTError as JWTError
+import bcrypt
 
 log = logging.getLogger(__name__)
 
 # ── Configuration ─────────────────────────────────────────────────────────────
-# JWT_SECRET must be overridden in any real deployment. The fallback exists so a
-# fresh clone boots without configuration; it is logged as a warning at startup.
-_DEFAULT_SECRET = "pathwise-dev-secret-change-me"
-JWT_SECRET     = os.getenv("JWT_SECRET", _DEFAULT_SECRET)
+# ENV selects how strict startup is. Anything other than "dev" (the default, so
+# a fresh clone and docker compose boot unchanged) is treated as a real
+# deployment: Render sets ENV=production.
+ENV    = (os.getenv("ENV") or "dev").strip().lower()
+IS_DEV = ENV in ("dev", "development", "local", "test")
+
+# JWT_SECRET must be set in any real deployment. An empty value counts as unset:
+# os.getenv returns "" for `JWT_SECRET=` and JWT libraries will happily sign and
+# verify with an empty key, which would let anyone mint an ADMIN token.
+# In dev the built-in key is used with a loud warning; elsewhere startup fails.
+# 32+ bytes so PyJWT does not warn on every signature in dev.
+_DEFAULT_SECRET     = "pathwise-dev-secret-change-me-before-deploying"
+_MIN_SECRET_BYTES   = 32
+_CONFIGURED_SECRET  = (os.getenv("JWT_SECRET") or "").strip()
+JWT_SECRET          = _CONFIGURED_SECRET or _DEFAULT_SECRET
 JWT_ALGORITHM  = "HS256"
 JWT_EXPIRE_MINUTES = int(os.getenv("JWT_EXPIRE_MINUTES", "480"))   # 8h — a working day
 
@@ -67,25 +79,30 @@ ROLE_HOME = {
 }
 
 # ── Password hashing ──────────────────────────────────────────────────────────
-_pwd = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# bcrypt directly. passlib 1.7.4 is unmaintained and only wrapped this. Hashes
+# keep the same $2b$ format, so every existing password still verifies.
+# bcrypt reads at most 72 bytes; new passwords are capped there by the schema
+# (schemas/users.check_password) so the limit is never silently applied.
+_BCRYPT_ROUNDS = 12
 
 
 def hash_password(plain: str) -> str:
-    return _pwd.hash(plain)
+    return bcrypt.hashpw(plain.encode("utf-8"), bcrypt.gensalt(_BCRYPT_ROUNDS)).decode("ascii")
 
 
 def verify_password(plain: str, hashed: str) -> bool:
     """Constant-time compare. Returns False rather than raising on a malformed
-    hash, so a corrupt row cannot 500 the login endpoint."""
+    hash or oversize input, so a corrupt row cannot 500 the login endpoint."""
     try:
-        return _pwd.verify(plain, hashed)
+        return bcrypt.checkpw(plain.encode("utf-8")[:72], hashed.encode("ascii"))
     except Exception:
         return False
 
 
 # ── Tokens ────────────────────────────────────────────────────────────────────
 
-def create_access_token(username: str, role: str, institution: Optional[str] = None) -> str:
+def create_access_token(username: str, role: str, institution: Optional[str] = None,
+                        version: Optional[int] = None) -> str:
     """Mint a signed JWT.
 
     `institution` is embedded in the token, not looked up per request, because
@@ -93,10 +110,16 @@ def create_access_token(username: str, role: str, institution: Optional[str] = N
     payload means it cannot be tampered with client-side.
     """
     now = datetime.now(timezone.utc)
+    if version is None:
+        try:
+            version = (account_state(username) or {}).get("token_version", 0)
+        except _StateUnavailable:
+            version = 0
     payload = {
         "sub":  username,
         "role": role,
         "institution": institution,
+        "ver":  int(version or 0),
         "iat":  now,
         "exp":  now + timedelta(minutes=JWT_EXPIRE_MINUTES),
     }
@@ -104,8 +127,14 @@ def create_access_token(username: str, role: str, institution: Optional[str] = N
 
 
 def decode_token(token: str) -> dict:
-    """Decode and validate. Raises JWTError on a bad signature or expiry."""
-    return jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+    """Decode and validate. Raises JWTError on a bad signature, expiry, or a
+    token without `sub` / `exp` (a token that never expires is rejected)."""
+    return jwt.decode(
+        token,
+        JWT_SECRET,
+        algorithms=[JWT_ALGORITHM],
+        options={"require": ["exp", "sub"]},
+    )
 
 
 # ── User lookup ───────────────────────────────────────────────────────────────
@@ -122,6 +151,7 @@ def _row_to_dict(row, include_hash: bool = False) -> dict:
         "program":          getattr(row, "program", None),
         "field":            getattr(row, "field", None),
         "enrollment_year":  getattr(row, "enrollment_year", None),
+        "token_version":    int(getattr(row, "token_version", 0) or 0),
         "created_at":       row.created_at.isoformat() if row.created_at else None,
     }
     if include_hash:
@@ -193,11 +223,21 @@ def authenticate(username: str, password: str) -> Optional[dict]:
 # user out of the platform.
 
 _ACTIVE_TTL = 30            # seconds
-_active_cache: dict = {}    # username -> (checked_at_monotonic, is_active)
+_active_cache: dict = {}    # username -> (checked_at_monotonic, state dict | None)
 
 
-def is_active(username: str) -> bool:
-    """Whether this account may currently be used. Cached for _ACTIVE_TTL."""
+def account_state(username: str) -> Optional[dict]:
+    """Authorisation-relevant fields of one account, cached for _ACTIVE_TTL.
+
+    {is_active, role, institution, token_version}, or None if the account no
+    longer exists. Re-read per request (behind the cache) so a deactivation,
+    demotion, institution move or password change takes effect within the TTL
+    — and immediately when made through the API, which evicts the entry.
+
+    On a lookup failure the last known state is served; with none, the
+    caller falls back to the token claims, so a database blip degrades to the
+    old behaviour rather than locking every user out.
+    """
     now = time.monotonic()
     entry = _active_cache.get(username)
     if entry and (now - entry[0]) < _ACTIVE_TTL:
@@ -210,23 +250,40 @@ def is_active(username: str) -> bool:
         session = SessionLocal()
         try:
             row = (
-                session.query(User.is_active)
+                session.query(User.is_active, User.role, User.institution_name,
+                              User.token_version)
                 .filter(User.username == username)
                 .first()
             )
-            # A missing row means the account was hard-deleted out from under
-            # a live token; treat that as inactive.
-            active = bool(row[0]) if row else False
         finally:
             session.close()
     except Exception as exc:
-        # Serve the last known value rather than failing closed on every
-        # endpoint at once.
-        log.warning("Active-status lookup failed for %s: %s", username, exc)
-        return entry[1] if entry else True
+        log.warning("Account-state lookup failed for %s: %s", username, exc)
+        if entry:
+            return entry[1]
+        raise _StateUnavailable from exc
 
-    _active_cache[username] = (now, active)
-    return active
+    state = None if row is None else {
+        "is_active": bool(row[0]),
+        "role": row[1],
+        "institution": row[2],
+        "token_version": int(row[3] or 0),
+    }
+    _active_cache[username] = (now, state)
+    return state
+
+
+class _StateUnavailable(Exception):
+    """The user store could not be read and nothing is cached."""
+
+
+def is_active(username: str) -> bool:
+    """Whether this account may currently be used."""
+    try:
+        state = account_state(username)
+    except _StateUnavailable:
+        return True
+    return bool(state and state["is_active"])
 
 
 def invalidate_active(username: str) -> None:
@@ -271,21 +328,35 @@ def get_current_user(token: Optional[str] = Depends(_oauth2)) -> dict:
     if not username or role not in ALL_ROLES:
         raise _UNAUTHORISED
 
-    # A token stays cryptographically valid until it expires, so a deactivated
-    # account would otherwise keep access for the rest of the token lifetime.
-    # 401 rather than 403: the session itself is no longer valid, and the
-    # frontend's 401 interceptor signs them out cleanly.
-    if not is_active(username):
+    # A token stays cryptographically valid until it expires, so without this
+    # check a deactivated, demoted or re-passworded account would keep its old
+    # access for the rest of the token lifetime. 401 rather than 403: the
+    # session itself is no longer valid, and the frontend's 401 interceptor
+    # signs the user out so they sign in again with current permissions.
+    try:
+        state = account_state(username)
+    except _StateUnavailable:
+        state = {"is_active": True, "role": role,
+                 "institution": claims.get("institution"),
+                 "token_version": int(claims.get("ver") or 0)}
+    if state is None or not state["is_active"]:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="This account has been deactivated.",
             headers={"WWW-Authenticate": "Bearer"},
         )
+    if int(claims.get("ver") or 0) != state["token_version"] or state["role"] != role \
+            or (state["institution"] or None) != (claims.get("institution") or None):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Your access has changed. Please sign in again.",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
 
     return {
         "username":    username,
-        "role":        role,
-        "institution": claims.get("institution"),
+        "role":        state["role"],
+        "institution": state["institution"],
     }
 
 
@@ -413,13 +484,77 @@ def assert_cross_institution(user: dict, requested: str) -> str:
     return requested
 
 
-def warn_if_insecure() -> None:
-    """Called once at startup so a default signing key is never silent."""
-    if JWT_SECRET == _DEFAULT_SECRET:
-        log.warning(
-            "JWT_SECRET is unset — using the built-in development key. "
-            "Set JWT_SECRET in .env before deploying anywhere real."
+def resolve_institution(user: dict, requested: Optional[str] = None) -> str:
+    """SCOPE.UNI.R1/R2 — which institution's rows this caller may read.
+
+    Own HEI comes from the signed JWT. A different `requested` value is 403
+    unless the CROSS_INSTITUTION grant is on the user record, in which case
+    the read is audited. ADMIN with no institution of its own defaults to the
+    first registered HEI so institution pages still render.
+    """
+    own = user.get("institution")
+    if not own and user.get("role") == ROLE_ADMIN:
+        from . import _datasets as ds
+        options = ds.institutions()
+        if options:
+            own = options[0]["name"]
+
+    if requested and requested != own:
+        return assert_cross_institution(user, requested)
+    if own:
+        return own
+    raise HTTPException(
+        status_code=status.HTTP_403_FORBIDDEN,
+        detail="This account is not linked to an institution.",
+    )
+
+
+class InsecureConfiguration(RuntimeError):
+    """Raised at startup when the signing key is unsafe outside dev."""
+
+
+def check_secret_configuration() -> None:
+    """Called once at startup. Fails closed outside dev.
+
+    Rejects: unset or empty JWT_SECRET, the built-in development key, and keys
+    shorter than _MIN_SECRET_BYTES. In dev each of these is a warning so a
+    fresh clone still boots.
+    """
+    problem = None
+    if not _CONFIGURED_SECRET:
+        problem = "JWT_SECRET is unset or empty"
+    elif _CONFIGURED_SECRET == _DEFAULT_SECRET:
+        problem = "JWT_SECRET is the built-in development key"
+    elif len(_CONFIGURED_SECRET.encode()) < _MIN_SECRET_BYTES:
+        problem = f"JWT_SECRET is shorter than {_MIN_SECRET_BYTES} bytes"
+
+    if problem is None:
+        return
+    hint = 'Generate one with: python -c "import secrets; print(secrets.token_urlsafe(48))"'
+    if IS_DEV:
+        log.warning("%s — acceptable only in development. %s", problem, hint)
+        return
+    raise InsecureConfiguration(f"{problem} (ENV={ENV}). Refusing to start. {hint}")
+
+
+_DEFAULT_DB_PASSWORDS = ("pathwise_pass",)
+
+
+def check_database_configuration() -> None:
+    """Outside dev, refuse the default database password from .env.example."""
+    if IS_DEV:
+        return
+    url = os.getenv("DATABASE_URL") or ""
+    password = os.getenv("DB_PASSWORD") or ""
+    if password in _DEFAULT_DB_PASSWORDS or any(f":{p}@" in url for p in _DEFAULT_DB_PASSWORDS):
+        raise InsecureConfiguration(
+            f"The database uses the published default password (ENV={ENV}). Refusing to start."
         )
+
+
+def warn_if_insecure() -> None:
+    """Backward-compatible name for check_secret_configuration()."""
+    check_secret_configuration()
 
 
 # ── User management ───────────────────────────────────────────────────────────
@@ -536,7 +671,8 @@ def update_user(username: str, *, actor: str,
                 role: Optional[str] = None,
                 display_name: Optional[str] = None,
                 institution: Optional[str] = None,
-                active: Optional[bool] = None) -> dict:
+                active: Optional[bool] = None,
+                cross_institution: Optional[bool] = None) -> dict:
     """Update a user. `actor` is the caller, for the self-lockout guards.
 
     Username is deliberately not updatable: it is the JWT `sub`, so changing it
@@ -578,15 +714,30 @@ def update_user(username: str, *, actor: str,
 
         # Re-validate whenever role or institution moves, so a role change
         # cannot leave a UNIVERSITY account without an institution.
+        old_role, old_institution = row.role, row.institution_name
         if role is not None or institution is not None:
             candidate = institution if institution is not None else row.institution_name
             row.institution_name = _validate_institution(new_role, candidate)
 
         row.role = new_role
+        if row.role != old_role or row.institution_name != old_institution:
+            # Permissions changed: end every session issued under the old ones.
+            row.token_version = int(row.token_version or 0) + 1
         if display_name is not None:
             row.display_name = display_name
         if active is not None:
             row.is_active = active
+
+        # SCOPE.UNI.R2 — the elevated grant only means something for a
+        # UNIVERSITY account, and must not survive a move to another role.
+        if cross_institution is not None:
+            if new_role != ROLE_UNIVERSITY and cross_institution:
+                raise UserError(
+                    "Only a University account can hold the cross-institution grant.", 422,
+                )
+            row.cross_institution = bool(cross_institution)
+        elif new_role != ROLE_UNIVERSITY and getattr(row, "cross_institution", False):
+            row.cross_institution = False
 
         session.commit()
         session.refresh(row)
@@ -594,6 +745,9 @@ def update_user(username: str, *, actor: str,
         # Role, institution and active status all affect authorisation, so the
         # cached status must not outlive the change.
         invalidate_active(username)
+        if active is True:
+            from services.rate_limit import forget_account
+            forget_account(username)
         log.info("User updated: %s by %s", username, actor)
         return _row_to_dict(row)
 
@@ -667,9 +821,13 @@ def set_password(username: str, new_password: str) -> dict:
             raise UserError(f"No such user '{username}'.", 404)
 
         row.password_hash = hash_password(new_password)
+        # A new password ends every existing session (stolen tokens included).
+        row.token_version = int(row.token_version or 0) + 1
         session.commit()
         session.refresh(row)
         invalidate_active(username)
+        from services.rate_limit import forget_account
+        forget_account(username)
         log.info("Password reset for %s", username)
         return _row_to_dict(row)
     except UserError:

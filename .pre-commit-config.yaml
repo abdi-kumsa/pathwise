@@ -1,0 +1,26 @@
+# Local pre-commit hooks — the same lint CI runs.
+#   pip install pre-commit && pre-commit install
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.6
+    hooks:
+      - id: ruff
+        args: [--config, ruff.toml]
+
+  - repo: local
+    hooks:
+      - id: oxlint
+        name: oxlint (frontend)
+        entry: npx --prefix frontend oxlint frontend/src
+        language: system
+        pass_filenames: false
+        files: ^frontend/src/.*\.(js|jsx)$
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: detect-private-key
+      - id: check-added-large-files
+        args: [--maxkb=5000]

@@ -10,7 +10,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 
-ROOT         = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT         = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 MODEL_PATH   = os.path.join(ROOT, 'ml', 'models', 'placement_xgboost.pkl')
 FEATURE_PATH = os.path.join(ROOT, 'ml', 'models', 'placement_feature_names.pkl')
 PARQUET      = os.path.join(ROOT, 'data', 'processed', 'features.parquet')

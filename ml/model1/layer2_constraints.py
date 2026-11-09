@@ -148,8 +148,8 @@ def _constrain_year(
         [c for c in (
             "institution", "campus", "region", "program", "field", "band",
             "academic_year", "horizon_step", "unconstrained_demand",
-            "seasonal_naive", "ols_lags", "selected_model",
-            "interval_low", "interval_high",
+            "seasonal_naive", "historical_mean", "drift", "pooled_ridge",
+            "selected_model", "interval_low", "interval_high", "interval_level",
         ) if c in df.columns]
     ].copy()
     out["constrained_enrollment"] = constrained.clip(lower=0).round(1)

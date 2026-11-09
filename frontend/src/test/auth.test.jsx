@@ -17,6 +17,8 @@ vi.mock('../api/auth', () => ({
   getMe:   vi.fn(),
   logout:  vi.fn(),
   getRoles: vi.fn(),
+  refresh: vi.fn(),
+  secondsUntilExpiry: vi.fn(() => null),
 }))
 
 vi.mock('../api/client', () => ({

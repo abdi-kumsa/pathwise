@@ -3,9 +3,12 @@ Inference script for XGBoost salary prediction.
 Used by backend API to estimate early-career salary from a student profile.
 """
 import pickle
-import numpy as np
 import pandas as pd
 from pathlib import Path
+try:
+    from artifacts import verified_open, verify  # noqa: F401  (ml/ on sys.path)
+except ImportError:  # imported as part of the ml package
+    from ml.artifacts import verified_open, verify  # noqa: F401
 
 
 PROGRAMS = [
@@ -40,9 +43,9 @@ def predict_salary(student_profile: dict) -> dict:
     model_path = script_dir / 'models' / 'salary_xgboost.pkl'
     meta_path  = script_dir / 'models' / 'salary_xgboost_meta.pkl'
 
-    with open(model_path, 'rb') as f:
+    with verified_open(model_path) as f:
         model = pickle.load(f)
-    with open(meta_path, 'rb') as f:
+    with verified_open(meta_path) as f:
         meta = pickle.load(f)
 
     feature_names = meta['feature_names']

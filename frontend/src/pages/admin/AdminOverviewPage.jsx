@@ -33,6 +33,9 @@ export default function AdminOverviewPage() {
   const modelsUp = data ? data.models_loaded : 0
   const modelsTotal = data ? data.models_total : 5
   const apiOk = data?.api_status === 'ok' || data?.status === 'ok'
+  // Ethiopia Models 1–3 are computed from parquet per request and have no
+  // artefact to load. Only the leftover US models do, and they are off by default.
+  const legacyOff = data?.legacy_us_models === false
 
   return (
     <div>
@@ -62,14 +65,14 @@ export default function AdminOverviewPage() {
             <KPICard
               label="API status"
               value={apiOk ? 'Healthy' : 'Degraded'}
-              delta={`${modelsUp}/${modelsTotal} models loaded`}
+              delta={legacyOff ? 'Ethiopia models computed on request' : `${modelsUp}/${modelsTotal} models loaded`}
               deltaDirection={apiOk ? 'up' : 'down'}
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>}
             />
             <KPICard
               label="Models loaded"
-              value={`${modelsUp}/${modelsTotal}`}
-              delta={apiOk ? 'All artefacts resident' : 'One or more missing'}
+              value={legacyOff ? 'n/a' : `${modelsUp}/${modelsTotal}`}
+              delta={legacyOff ? 'Leftover US artefacts switched off' : apiOk ? 'All artefacts resident' : 'One or more missing'}
               deltaDirection={apiOk ? 'up' : 'down'}
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></svg>}
             />
@@ -85,6 +88,12 @@ export default function AdminOverviewPage() {
           <div className="panel" style={{ margin: '20px 0' }}>
             <p className="panel-title">Model status</p>
             <p className="panel-sub">Loaded artefacts, read live from the API</p>
+            {legacyOff && (
+              <p className="panel-sub">
+                No artefacts to load: Ethiopia Models 1–3 are fitted from the parquet tables on
+                request, and the leftover US models are switched off (LEGACY_US_MODELS).
+              </p>
+            )}
             <div className="ao-models">
               {Object.entries(data.models || {}).map(([name, up]) => (
                 <div key={name} className="ao-model">

@@ -13,15 +13,18 @@ replace the parquets. See [docs/DATA_PROVENANCE.md](../docs/DATA_PROVENANCE.md).
 
 | Attribute | Value |
 |-----------|-------|
-| Task | Forecast programme enrolment (HEI × campus × programme × year) |
-| Request-path estimators | `ols_lags` (when history ≥ 4 years), else `seasonal_naive` |
-| Comparison candidates | `seasonal_naive`, `historical_mean`, `ols_lags` |
-| Validation | Grouped chronological holdout (last two observed years) |
+| Task | Layer 1: forecast applications (unconstrained demand) per HEI × campus × programme × year. Layer 2: turn demand into enrolment |
+| Request-path estimator | Lowest backtest RMSE per horizon among `seasonal_naive`, `historical_mean`, `drift`, `pooled_ridge` (`ml/forecasting.py`) |
+| Validation | Rolling-origin backtest, origins 2019–2024, horizons 1–5 |
+| Intervals | 90%, empirical residual quantiles; coverage measured leave-one-origin-out |
 | Constraint layer | Exam eligibility, placement rules, intake quotas, priority fields, capacity (`ml/model1/layer2_constraints.py`) |
 | Collection-priority yaml | `docs/spec/model1_attributes.yaml` (not used as weights) |
 
-`ols_lags` holdout RMSE on the simulated lag construction is near-zero. That is
-not ministry accuracy (WV.OLS1). Monitoring headlines use seasonal-naive.
+Layer 1 forecasts *applications* because observed enrolment has already
+passed every real constraint; forecasting it and then constraining again (as
+earlier waves did) applied the rules twice. Backtest errors and skill against
+the naive baselines are in [docs/MODEL_COMPARISON.md](../docs/MODEL_COMPARISON.md).
+They are measured on simulated data (WV.SIM1).
 
 **Artefacts**
 - `ml/model1/layer1_demand.py` — unconstrained forecast
@@ -37,10 +40,10 @@ AHP and DOC1 collection priorities do not enter training.
 
 | Attribute | Value |
 |-----------|-------|
-| Task | Forecast employment / vacancies (region × sector × year) |
-| Request-path estimators | `ols_lags` or `seasonal_naive` (same rule as M1) |
-| Comparison candidates | `seasonal_naive`, `historical_mean`, `ols_lags` |
-| Validation | Grouped chronological holdout |
+| Task | Forecast employment (region × sector), vacancies (region × occupation) and the skill-shortage index (field); growth and occupational demand are derived |
+| Request-path estimator | Same engine and selection rule as Model 1 |
+| Validation | Rolling-origin backtest |
+| Monitoring | Input PSI and error drift per target (`ml/drift.py`, `/api/monitoring/drift`) |
 | Collection-priority yaml | `docs/spec/model2_attributes.yaml` |
 
 **Artefacts**
@@ -104,8 +107,9 @@ or enter a loss.
 
 ## Appendix — US LSTM / Prophet (not compared)
 
-These artefacts stay on leftover tool routes. They are **not** scored as
-Ethiopia models and do not appear in `ml/models/ethiopia_comparison.json`
+These artefacts stay on disk, served only when the API runs with
+`LEGACY_US_MODELS=1` (and installed only from `backend/requirements-legacy.txt`).
+They are **not** scored as Ethiopia models and do not appear in `ml/models/ethiopia_comparison.json`
 except under `not_compared`.
 
 ### LSTM — enrolment (US programmes)

@@ -23,7 +23,6 @@ import sys
 from pathlib import Path
 
 import joblib
-import numpy as np
 import pandas as pd
 import psycopg2
 from dotenv import load_dotenv
@@ -195,11 +194,11 @@ def main() -> None:
     student_feat.to_parquet(FEATURES_OUT, index=False)
     joblib.dump(scaler, SCALER_OUT)
     print(f"  OK features.parquet saved            — {len(student_feat)} rows x {student_feat.shape[1]} columns")
-    print(f"  OK scaler.pkl saved")
+    print("  OK scaler.pkl saved")
 
     # ── Quick sanity ──
     placed_count = student_feat["placed"].sum()
-    print(f"\nSanity check:")
+    print("\nSanity check:")
     print(f"  placed=1 : {placed_count} ({placed_count/len(student_feat)*100:.1f}%)")
     print(f"  placed=0 : {len(student_feat)-placed_count}")
     print(f"  prog columns: {[c for c in student_feat.columns if c.startswith('prog_')]}")

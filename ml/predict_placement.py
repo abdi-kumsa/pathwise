@@ -3,8 +3,11 @@ Inference script for XGBoost placement prediction.
 Used by backend API to predict student placement probability.
 """
 import pickle
-import numpy as np
 import pandas as pd
+try:
+    from artifacts import verified_open, verify  # noqa: F401  (ml/ on sys.path)
+except ImportError:  # imported as part of the ml package
+    from ml.artifacts import verified_open, verify  # noqa: F401
 
 
 def predict_placement(student_profile):
@@ -28,20 +31,18 @@ def predict_placement(student_profile):
             'confidence': float
         }
     """
-    import os
     from pathlib import Path
 
     # Get paths relative to script location
     script_dir = Path(__file__).parent
     model_path = script_dir / 'models' / 'placement_xgboost.pkl'
     feature_names_path = script_dir / 'models' / 'placement_feature_names.pkl'
-    scaler_path = script_dir / '..' / 'data' / 'processed' / 'scaler.pkl'
 
     # Load model and feature names
-    with open(model_path, 'rb') as f:
+    with verified_open(model_path) as f:
         model = pickle.load(f)
 
-    with open(feature_names_path, 'rb') as f:
+    with verified_open(feature_names_path) as f:
         feature_names = pickle.load(f)
 
     # Manual scaling (MinMaxScaler equivalent)

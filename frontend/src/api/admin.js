@@ -33,6 +33,20 @@ export const getExpertValidations = () =>
 export const postExpertValidation = (body) =>
   client.post('/api/methodology/expert-validations', body).then(r => r.data)
 
+export const clearSeededExpertValidations = () =>
+  client.post('/api/methodology/expert-validations/clear-seeded').then(r => r.data)
+
+/** CSV of every DOC1 category with its latest recorded verdict; downloads in the browser. */
+export const downloadExpertValidations = async () => {
+  const { data } = await client.get('/api/methodology/expert-validations/export', { responseType: 'blob' })
+  const url = URL.createObjectURL(data)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'expert-validations.csv'
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
 export const getAhpWeights = () =>
   client.get('/api/ahp/weights').then(r => r.data)
 

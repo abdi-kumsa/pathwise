@@ -318,6 +318,11 @@ export default function AdminUsersPage() {
                         <td style={{ textAlign: 'left' }}><RoleBadge role={u.role} /></td>
                         <td style={{ textAlign: 'left', color: 'var(--text-secondary)' }}>
                           {u.institution_name ?? '—'}
+                          {u.cross_institution && (
+                            <span className="u-you" title="May read other institutions' data; every read is audited">
+                              cross-institution
+                            </span>
+                          )}
                         </td>
                         <td style={{ textAlign: 'left' }}>
                           {/* Colour plus the word — status never reads by colour alone */}
@@ -338,6 +343,25 @@ export default function AdminUsersPage() {
                           <button className="u-act" onClick={() => setDialog({ kind: 'reset', user: u })}>
                             Reset password
                           </button>
+                          {u.role === 'UNIVERSITY' && (
+                            <button
+                              className="u-act"
+                              title="SCOPE.UNI.R2: allow this account to read other institutions. Audited."
+                              onClick={() => {
+                                const grant = !u.cross_institution
+                                if (grant && !window.confirm(
+                                  `Allow ${u.username} to read every other institution's data? Each read is audited.`
+                                )) return
+                                run(
+                                  () => updateUser(u.username, { crossInstitution: grant }),
+                                  grant ? `Cross-institution access granted to ${u.username}.`
+                                        : `Cross-institution access revoked for ${u.username}.`,
+                                )
+                              }}
+                            >
+                              {u.cross_institution ? 'Revoke cross-access' : 'Grant cross-access'}
+                            </button>
+                          )}
                           {u.is_active ? (
                             <button
                               className="u-act u-act-danger"

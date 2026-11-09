@@ -6,6 +6,7 @@ import SectionHeader from '../../components/SectionHeader'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
 import DataNote from '../../components/DataNote'
+import ForecastAccuracyNote from '../../components/ForecastAccuracyNote'
 import useFetch from '../../hooks/useFetch'
 import { getEducationGap } from '../../api/roles'
 import { STATUS, axisProps, gridProps, tooltipProps, fmtNum } from '../../config/chartTheme'
@@ -34,8 +35,9 @@ export default function NationalGapPage() {
       {data && (
         <>
           <DataNote tone="simulated">
-            Shortage, balanced and oversupply are labelled in text as well as colour. Q1 of |gap| is treated as balanced. This is the Model 3 national gap, not the US-compat labour gap.
+            Shortage, balanced and oversupply are labelled in text as well as colour. Status follows coverage (graduates ÷ demand): below 0.85 is a shortage, above 1.15 an oversupply, in between balanced. Severity Q1–Q4 ranks the size of the gap against the other fields. This is the Model 3 national gap, not the US-compat labour gap.
           </DataNote>
+          <ForecastAccuracyNote />
           <div className="panel" style={{ marginTop: 16 }}>
             <ResponsiveContainer width="100%" height={340}>
               <BarChart data={rows} margin={{ top: 8, right: 12, left: 0, bottom: 48 }}>

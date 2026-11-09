@@ -6,13 +6,16 @@ a student never receives institution records in the first place. Each hit
 carries the route the frontend should navigate to, keeping the role -> page
 mapping in one place.
 """
-from fastapi import APIRouter, Depends, Query
 from typing import List
+from urllib.parse import quote
+
+from fastapi import APIRouter, Depends, Query
 
 from services import _datasets as ds
+from services import rate_limit
 from services.auth_service import (
-    get_current_user,
     ROLE_ADMIN, ROLE_STUDENT, ROLE_MOE, ROLE_MOL, ROLE_UNIVERSITY,
+    log_audit,
 )
 
 router = APIRouter(prefix="/search", tags=["Search"])
@@ -35,9 +38,15 @@ _ROUTES = {
     ROLE_UNIVERSITY: {'program': '/university/portfolio?program=', 'field': '/university/expansion?field='},
     ROLE_ADMIN:      {
         'occupation': '/mol/occupations?job=', 'field': '/moe/fields?field=',
-        'program': '/university/portfolio?program=', 'institution': '/admin/institutions?name=',
+        'program': '/university/portfolio?program=', 'institution': '/moe/institutions?name=',
     },
 }
+
+
+def _route(routes: dict, kind: str, label: str) -> str:
+    """Target route with the label URL-encoded, so names containing '&', '/',
+    '#' or spaces arrive intact as a single query value."""
+    return routes.get(kind, '') + quote(label, safe='')
 
 
 def _match(text: str, q: str) -> int:
@@ -54,9 +63,14 @@ def _match(text: str, q: str) -> int:
 def search(
     q: str = Query(..., min_length=1, max_length=100),
     limit: int = Query(15, ge=1, le=50),
-    user: dict = Depends(get_current_user),
+    user: dict = Depends(rate_limit.per_user("search", 120, 60)),
 ):
-    """Search occupations, fields, programmes and institutions at once."""
+    """Search occupations, fields, programmes and institutions at once.
+
+    Each query is written to the audit log as a `query` action (W.ADM.08). The
+    command bar debounces keystrokes, and the per-user limit stops the log
+    being flooded by a script.
+    """
     query = q.strip().lower()
     role = user["role"]
     visible = _VISIBLE.get(role, set())
@@ -71,7 +85,7 @@ def search(
                 hits.append((r, {
                     'kind': 'occupation', 'label': entry['job_title'],
                     'sublabel': entry['job_family'],
-                    'route': routes.get('occupation', '') + entry['job_title'],
+                    'route': _route(routes, 'occupation', entry['job_title']),
                 }))
 
     if 'field' in visible:
@@ -81,7 +95,7 @@ def search(
                 hits.append((r, {
                     'kind': 'field', 'label': field,
                     'sublabel': f"{len(ds.family_to_programs().get(field, []))} programme(s)",
-                    'route': routes.get('field', '') + field,
+                    'route': _route(routes, 'field', field),
                 }))
 
     if 'program' in visible:
@@ -92,7 +106,7 @@ def search(
                 hits.append((r, {
                     'kind': 'program', 'label': program,
                     'sublabel': prog_field.get(program, ''),
-                    'route': routes.get('program', '') + program,
+                    'route': _route(routes, 'program', program),
                 }))
 
     if 'institution' in visible:
@@ -102,10 +116,11 @@ def search(
                 hits.append((r, {
                     'kind': 'institution', 'label': inst['name'],
                     'sublabel': f"{inst['type']} · {inst['state']}",
-                    'route': routes.get('institution', '') + inst['name'],
+                    'route': _route(routes, 'institution', inst['name']),
                 }))
 
     hits.sort(key=lambda h: (h[0], h[1]['label']))
+    log_audit(user, "query", "search", {"q": q[:100], "results": len(hits)})
     return {
         'query':   q,
         'role':    role,

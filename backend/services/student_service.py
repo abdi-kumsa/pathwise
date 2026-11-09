@@ -75,13 +75,20 @@ def labour_outlook(field: str | None, horizons: tuple[int, ...] = (3, 5)) -> dic
                 {"occupation": r.occupation, "vacancies": round(float(r.vacancies), 1)}
                 for r in occ.sort_values("vacancies", ascending=False).itertuples(index=False)
             ]
-    n_occ = len(occupations)
+    # SCOPE.STU.R2 minimum cell size applies to the count inside each row, not
+    # to how many rows there are. The old check compared the number of
+    # occupation *categories* with MIN_CELL_SIZE; every field maps to a single
+    # occupation, so the panel (W.STU.02) was always withheld. A row is now
+    # released when its own vacancy count reaches the threshold.
+    released = [o for o in occupations if cell_released(o["vacancies"])]
+    withheld = len(occupations) - len(released)
     return {
         "field": field,
         "horizons": list(horizons),
         "series": series,
-        "occupations": occupations if cell_released(n_occ) else [],
-        "cell_withheld": not cell_released(n_occ) and n_occ > 0,
+        "occupations": released,
+        "cell_withheld": withheld > 0,
+        "cells_withheld": withheld,
         "min_cell_size": MIN_CELL_SIZE,
         "note": "Projected occupational vacancies for the student's field. Simulated Ethiopian structure.",
     }

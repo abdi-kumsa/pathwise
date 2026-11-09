@@ -6,6 +6,7 @@ import SectionHeader from '../../components/SectionHeader'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
 import DataNote from '../../components/DataNote'
+import ForecastAccuracyNote from '../../components/ForecastAccuracyNote'
 import EmptyState from '../../components/EmptyState'
 import useFetch from '../../hooks/useFetch'
 import { getLabourOutlook } from '../../api/student'
@@ -32,6 +33,7 @@ export default function LabourOutlookPage() {
       {data && (
         <>
           <DataNote tone="simulated">{data.note}</DataNote>
+          <ForecastAccuracyNote />
           {data.cell_withheld && (
             <DataNote tone="caution">
               Occupation cells smaller than {data.min_cell_size ?? 5} are withheld
