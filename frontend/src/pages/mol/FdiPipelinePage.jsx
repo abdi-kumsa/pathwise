@@ -39,7 +39,7 @@ export default function FdiPipelinePage() {
   return (
     <div>
       <SectionHeader
-        title="FDI and industrial development pipeline"
+        title="Investment and industrial parks"
         subtitle="Parks, expected employment and opening years"
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}
@@ -75,7 +75,7 @@ export default function FdiPipelinePage() {
           <div className="panel" style={{ marginTop: 16 }}>
             <p className="panel-title">Park opening years</p>
             <div className="table-scroll">
-              <table>
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={{ textAlign: 'left' }}>Park</th>

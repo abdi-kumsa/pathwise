@@ -17,7 +17,7 @@ export default function PolicyImpactPage() {
   return (
     <div>
       <SectionHeader
-        title="Policy impact monitoring"
+        title="What past policy changed"
         subtitle="Simulated quota and capacity against subsequent enrolment and employment"
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}

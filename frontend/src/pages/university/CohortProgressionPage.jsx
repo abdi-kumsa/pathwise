@@ -29,7 +29,7 @@ export default function CohortProgressionPage() {
   return (
     <div>
       <SectionHeader
-        title="Cohort progression"
+        title="Who progresses, who repeats"
         subtitle="Retention, dropout, transfer and completion by programme (M1.C6)"
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}

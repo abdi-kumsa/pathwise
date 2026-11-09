@@ -33,7 +33,7 @@ export default function SkillsMismatchPage() {
   return (
     <div>
       <SectionHeader
-        title="Skills demand and shortage heatmap"
+        title="Where skills fall short"
         subtitle="Employer-demanded skills versus the graduate pipeline — skills, not credential fit"
       />
       <DataNote tone="simulated">
@@ -52,7 +52,7 @@ export default function SkillsMismatchPage() {
           <p className="panel-title">Skills heatmap by field</p>
           <p className="panel-sub">Technical, digital, soft and emerging demand. Intensity is ordinal blue; the class name is in the header.</p>
           <div className="table-scroll">
-            <table>
+            <table className="data-table">
               <thead>
                 <tr>
                   <th style={{ textAlign: 'left' }}>Field</th>

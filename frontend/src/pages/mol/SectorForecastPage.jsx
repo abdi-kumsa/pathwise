@@ -71,7 +71,7 @@ export default function SectorForecastPage() {
   return (
     <div>
       <SectionHeader
-        title="Sector and occupational demand forecast"
+        title="Where demand is heading"
         subtitle={lastObserved
           ? `Observed ${firstObserved}–${lastObserved}, forecast to ${lastForecast}`
           : 'Employment by sector and region, vacancies by occupation'}

@@ -56,7 +56,7 @@ export default function PublicHiringPage() {
           <div className="panel" style={{ marginTop: 16 }}>
             <p className="panel-title">Freeze flag by year</p>
             <div className="table-scroll">
-              <table>
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={{ textAlign: 'left' }}>Year</th>

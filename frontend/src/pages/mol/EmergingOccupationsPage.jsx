@@ -129,7 +129,7 @@ export default function EmergingOccupationsPage() {
             <p className="panel-sub">Click a row to add or remove it from the chart above</p>
 
             <div className="table-scroll">
-              <table>
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={{ textAlign: 'left' }}>{level === 'family' ? 'Field' : 'Occupation'}</th>

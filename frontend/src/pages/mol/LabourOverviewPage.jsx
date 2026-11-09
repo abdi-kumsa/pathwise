@@ -21,7 +21,7 @@ export default function LabourOverviewPage() {
   return (
     <div>
       <SectionHeader
-        title="Labour pulse"
+        title="Labour market today"
         subtitle="Employment, unemployment, underemployment, vacancies and participation"
       />
 

@@ -585,3 +585,97 @@ body {
 }
 
 .app-footer a { color: inherit; }
+
+/* ── Tables ──────────────────────────────────────────────────────────────── */
+/* One row per field, programme, region or institution: dense, sortable,
+   numbers right-aligned on tabular digits, status in words. */
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+.data-table caption {
+  text-align: left;
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 0 0 8px;
+}
+
+.data-table th,
+.data-table td {
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.data-table th {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  border-bottom-color: #CBD5E1;
+}
+
+.data-table th.num,
+.data-table td.num { text-align: right; }
+
+.data-table tbody tr:hover { background: #FAFBFD; }
+.data-table tbody tr.selectable { cursor: pointer; }
+.data-table tbody tr[aria-selected="true"] { background: var(--blue-light); }
+.data-table tbody tr.own td { font-weight: 600; }
+
+.data-table td.empty {
+  color: var(--text-muted);
+  text-align: center;
+  padding: 18px;
+}
+
+.data-table th .sort {
+  all: unset;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 4px;
+  align-items: baseline;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+}
+
+.data-table th .sort:hover,
+.data-table th .sort.active { color: var(--navy); }
+.data-table th .sort-mark { font-size: 10px; min-width: 8px; }
+
+.status-word {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: capitalize;
+}
+
+.status-word i {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.spark { display: inline-block; vertical-align: middle; }
+.spark-empty { color: var(--text-muted); }
+
+/* Map beside a table: the map keeps a fixed column, the table takes the rest. */
+.map-table-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .map-table-grid { grid-template-columns: 1fr; }
+}

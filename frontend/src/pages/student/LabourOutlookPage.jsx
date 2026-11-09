@@ -25,7 +25,7 @@ export default function LabourOutlookPage() {
   return (
     <div>
       <SectionHeader
-        title="Labour-market outlook"
+        title="Jobs outlook for your field"
         subtitle={data?.field ? `3- and 5-year vacancy outlook for ${data.field}` : 'Projected occupational demand'}
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}

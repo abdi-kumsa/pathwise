@@ -48,7 +48,7 @@ export default function ConstrainedForecastPage() {
   return (
     <div>
       <SectionHeader
-        title="Constrained enrolment forecast"
+        title="How many you can enrol"
         subtitle="Intake after exam, placement, quota and capacity rules, shown against the applications behind it"
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}

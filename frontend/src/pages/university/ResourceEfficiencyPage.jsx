@@ -31,7 +31,7 @@ export default function ResourceEfficiencyPage() {
   return (
     <div>
       <SectionHeader
-        title="Resource efficiency"
+        title="Where to put resources"
         subtitle={data ? `What recruitment costs ${data.institution}, and where it converts` : 'Loading…'}
       />
 
@@ -149,7 +149,7 @@ export default function ResourceEfficiencyPage() {
             <p className="panel-sub">Where each programme loses candidates</p>
 
             <div className="table-scroll">
-              <table>
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={{ textAlign: 'left' }}>Programme</th>
@@ -208,7 +208,7 @@ export default function ResourceEfficiencyPage() {
             {planning.loading && <LoadingSpinner message="Re-running scenario…" height={80} />}
             {plan && (
               <div className="table-scroll">
-                <table>
+                <table className="data-table">
                   <thead>
                     <tr>
                       <th style={{ textAlign: 'left' }}>Lever</th>

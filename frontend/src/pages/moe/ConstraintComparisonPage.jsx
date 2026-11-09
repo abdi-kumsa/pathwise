@@ -33,7 +33,7 @@ export default function ConstraintComparisonPage() {
   return (
     <div>
       <SectionHeader
-        title="Unconstrained vs constrained demand"
+        title="Where capacity caps demand"
         subtitle="National student demand compared with policy- and capacity-constrained enrolment"
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}
@@ -80,7 +80,7 @@ export default function ConstraintComparisonPage() {
                   </BarChart>
                 </ResponsiveContainer>
                 <div className="table-scroll" style={{ marginTop: 12 }}>
-                  <table>
+                  <table className="data-table">
                     <thead>
                       <tr>
                         <th style={{ textAlign: 'left' }}>Field</th>

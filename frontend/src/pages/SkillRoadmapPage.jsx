@@ -21,7 +21,7 @@ export default function SkillRoadmapPage() {
   return (
     <div>
       <SectionHeader
-        title="Skill-gap recommendations"
+        title="Skills to add"
         subtitle="Technical, digital and soft skills mapped onto the MoE programme list"
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}

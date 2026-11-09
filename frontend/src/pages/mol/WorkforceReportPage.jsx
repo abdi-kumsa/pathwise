@@ -79,7 +79,7 @@ export default function WorkforceReportPage() {
               <p className="panel-title">{kind}</p>
               <p className="panel-sub">{(rows || []).length} rows · preview</p>
               <div className="table-scroll">
-                <table>
+                <table className="data-table">
                   <thead>
                     <tr>
                       <th style={{ textAlign: 'left' }}>Key</th>

@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 
 from services import alignment_service as m3
+from services import trend_service as trends
 from services import constraint_service as m1
 from services import institution_service
 from services.auth_service import (
@@ -147,7 +148,8 @@ def funnel(scope: tuple = Depends(_scope)):
                 .agg(lambda s: s.value_counts().index[0] if len(s) else "none")
                 .to_dict()
             )
-        rows = _records(raw)
+        rows = trends.attach(_records(raw), trends.applications_trend(("institution", "program")),
+                             ("institution", "program"))
         for row in rows:
             row["binding_constraint"] = bind.get(row.get("program"), "none")
         stages = {

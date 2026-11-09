@@ -18,7 +18,7 @@ export default function DemandComparisonPage() {
   return (
     <div>
       <SectionHeader
-        title="Student demand vs market demand"
+        title="Students vs jobs, by field"
         subtitle="Where popularity and employment opportunity diverge"
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}

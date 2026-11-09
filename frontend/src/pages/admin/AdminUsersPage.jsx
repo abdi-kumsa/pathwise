@@ -292,7 +292,7 @@ export default function AdminUsersPage() {
             </div>
 
             <div className="table-scroll">
-              <table>
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={{ textAlign: 'left' }}>Username</th>
@@ -402,7 +402,7 @@ export default function AdminUsersPage() {
             </p>
 
             <div className="table-scroll">
-              <table>
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={{ textAlign: 'left' }}>Area</th>

@@ -80,7 +80,7 @@ export default function PolicySimulatorPage() {
   return (
     <div>
       <SectionHeader
-        title="Quota and placement policy simulator"
+        title="Test a quota or placement change"
         subtitle="Quota, priority field, placement rule and capacity — a draft, not an official forecast"
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}

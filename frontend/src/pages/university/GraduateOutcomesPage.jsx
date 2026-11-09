@@ -38,7 +38,7 @@ export default function GraduateOutcomesPage() {
   return (
     <div>
       <SectionHeader
-        title="Graduate outcomes"
+        title="Where graduates end up"
         subtitle="Employment, earnings and time-to-graduation for prior cohorts — not fit classification"
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}

@@ -12,19 +12,19 @@ import { STATUS } from '../../config/chartTheme'
 const ROLE_CARDS = [
   {
     role: 'Student', to: '/student/profile',
-    blurb: 'Career explorer — pick a target job, get ranked departments with the reasoning.',
+    blurb: 'Eligibility, the jobs outlook for a field, and where it has room.',
   },
   {
     role: 'Ministry of Labour', to: '/mol/overview',
-    blurb: 'Emerging occupations, workforce shortfalls, and credential mismatch.',
+    blurb: 'The labour market today, where demand is heading, where skills fall short.',
   },
   {
-    role: 'Ministry of Education', to: '/moe/quadrant',
-    blurb: 'Investment matrix — where demand growth outruns graduate supply.',
+    role: 'Ministry of Education', to: '/moe/gap',
+    blurb: 'Where demand outruns graduates, which fields to grow first, which regions are misaligned.',
   },
   {
     role: 'University', to: '/university/overview',
-    blurb: 'Portfolio, expansion verdicts, recruitment efficiency, peer standing.',
+    blurb: 'Which programmes are healthy, how many will apply, where applicants drop out.',
   },
 ]
 

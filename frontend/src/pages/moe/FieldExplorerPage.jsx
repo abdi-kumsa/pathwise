@@ -152,7 +152,7 @@ export default function FieldExplorerPage() {
             </p>
 
             <div className="table-scroll">
-              <table>
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={{ textAlign: 'left' }}>Programme</th>

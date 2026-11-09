@@ -96,7 +96,7 @@ export default function SupplyDemandPage() {
             <p className="panel-sub">Ranked by unfilled openings</p>
 
             <div className="table-scroll">
-              <table>
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={{ textAlign: 'left' }}>Field</th>

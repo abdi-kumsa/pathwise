@@ -26,7 +26,7 @@ export default function FieldAlignmentPage() {
   return (
     <div>
       <SectionHeader
-        title="Field opportunity"
+        title="Where your field has room"
         subtitle="Labour demand, graduate supply and employment outcomes — with the reasons behind the score"
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}

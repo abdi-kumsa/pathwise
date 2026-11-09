@@ -35,7 +35,7 @@ export default function DemandForecastPage() {
   return (
     <div>
       <SectionHeader
-        title="Unconstrained student demand"
+        title="How many will apply"
         subtitle="Applications this institution would receive before quota, exam and capacity caps"
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}
