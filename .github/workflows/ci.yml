@@ -20,7 +20,10 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  PYTHON_VERSION: "3.11.9"
+  # Minor version only: runners carry the current 3.11.x patch, and an exact
+  # patch pin (3.11.9) was not available on Ubuntu 26.04. Render pins the
+  # patch separately in .python-version.
+  PYTHON_VERSION: "3.11"
   NODE_VERSION: "22"
 
 jobs:
