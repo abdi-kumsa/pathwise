@@ -1,4 +1,4 @@
-import client, { setToken, clearToken } from './client'
+import client, { getToken, setToken, clearToken } from './client'
 
 /**
  * Exchange credentials for a JWT.
@@ -28,3 +28,27 @@ export const getRoles = async () => {
 }
 
 export const logout = () => clearToken()
+
+/** Exchange the current, still-valid token for a fresh one. */
+export const refresh = async () => {
+  const { data } = await client.post('/api/auth/refresh')
+  setToken(data.access_token)
+  return data.user
+}
+
+/**
+ * Seconds until the stored token expires, read from its own `exp` claim.
+ * Null when there is no token or it cannot be decoded. Reading the claim is
+ * not a security check — the server verifies every request — it only tells
+ * the client when to refresh.
+ */
+export const secondsUntilExpiry = () => {
+  const token = getToken()
+  if (!token) return null
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')))
+    return typeof payload.exp === 'number' ? payload.exp - Date.now() / 1000 : null
+  } catch {
+    return null
+  }
+}

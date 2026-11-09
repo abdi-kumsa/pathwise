@@ -110,9 +110,26 @@ def seed_users_if_empty() -> None:
     Idempotent: exits silently once any user exists, so a password changed
     through the app is never overwritten on restart.
     """
-    from services.auth_service import hash_password
+    from services.auth_service import IS_DEV, hash_password
 
-    password = os.getenv("DEMO_PASSWORD", "pathwise123")
+    # The well-known fallback is for local development only. A real deployment
+    # with no DEMO_PASSWORD gets no demo accounts rather than five accounts
+    # (one of them ADMIN) behind a password published in the README.
+    password = (os.getenv("DEMO_PASSWORD") or "").strip()
+    if not password:
+        if not IS_DEV:
+            log.error(
+                "User seed skipped — DEMO_PASSWORD is not set and ENV is not dev. "
+                "Set DEMO_PASSWORD to create the first administrator."
+            )
+            return
+        password = "pathwise123"
+    elif not IS_DEV and password == "pathwise123":
+        log.error(
+            "User seed skipped — DEMO_PASSWORD is the published demo value. "
+            "Choose a private password for a non-dev deployment."
+        )
+        return
 
     try:
         from db.database import SessionLocal
@@ -174,6 +191,21 @@ def apply_wave5_user_columns() -> None:
         "ALTER TABLE users ADD COLUMN IF NOT EXISTS program VARCHAR(120)",
         "ALTER TABLE users ADD COLUMN IF NOT EXISTS field VARCHAR(120)",
         "ALTER TABLE users ADD COLUMN IF NOT EXISTS enrollment_year SMALLINT",
+        # Phase 3.6 — session revocation.
+        "ALTER TABLE users ADD COLUMN IF NOT EXISTS token_version INTEGER NOT NULL DEFAULT 0",
+        # Phase 4.1 — expert validation provenance.
+        "ALTER TABLE expert_validations ADD COLUMN IF NOT EXISTS expert_name VARCHAR(120)",
+        "ALTER TABLE expert_validations ADD COLUMN IF NOT EXISTS organisation VARCHAR(160)",
+        "ALTER TABLE expert_validations ADD COLUMN IF NOT EXISTS recorded_by VARCHAR(64)",
+        "ALTER TABLE expert_validations ADD COLUMN IF NOT EXISTS source VARCHAR(16) NOT NULL DEFAULT 'recorded'",
+        # Rows created by the earlier seeder carry one of its fixed notes.
+        "UPDATE expert_validations SET source = 'seeded' WHERE notes IN ("
+        "'Enrolment history is the right demand spine.', "
+        "'Quota tables match placement practice.', "
+        "'Formal/informal split needs a ministry refresh.', "
+        "'Labour history grain is usable for a simulated series.', "
+        "'Macro-regional context is a collection priority, not a weight.', "
+        "'FDI parks are leading indicators, displayed separately.')",
     )
     try:
         with engine.begin() as conn:

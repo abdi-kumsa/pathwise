@@ -8,6 +8,17 @@ Wave 1.2 — simulated Ethiopian fact tables for every DOC1 attribute.
 Seeded, deterministic, 2016–2025. Structure is Ethiopian (regions, HEIs, MoE
 bands, ETB, ESSLCE, industrial parks). Magnitudes are simulated and must never
 be presented as official MoE / MoLS / ESS statistics.
+
+Time-series design (Phase 2 of the 2026-11-07 improvement plan):
+
+* Every forecast target is a persistent process: a series-specific level and
+  trend times exp(AR(1) deviation), so this year carries information about
+  next year. The previous generator drew each year independently, which left
+  nothing for a lag model to learn.
+* Every lag column is a true lag of the published series (`shift`). Rolling
+  means cover the *previous* years only. The previous generator computed
+  `enrollment_rolling_3y_avg` including the current year and set
+  `employment_lag_1y = employment / 1.02`, both of which leaked the target.
 """
 from __future__ import annotations
 
@@ -44,16 +55,36 @@ def _write(name: str, df: pd.DataFrame) -> None:
     print(f"  {name:28s} {len(df):5d} rows  {len(df.columns):3d} cols")
 
 
+def _ar1(n: int, phi: float, sigma: float) -> np.ndarray:
+    """Stationary AR(1) deviations: u_t = phi * u_(t-1) + e_t."""
+    u = np.empty(n)
+    u[0] = RNG.normal(0, sigma / np.sqrt(1 - phi ** 2))
+    for t in range(1, n):
+        u[t] = phi * u[t - 1] + RNG.normal(0, sigma)
+    return u
+
+
+# Persistence of each simulated series. Chosen so year-on-year variation is of
+# the same size as before (enrolment CV ~ 0.16) but autocorrelated.
+# Stationary spread is sigma / sqrt(1 - phi^2): ~0.16 for enrolment, ~0.10 for
+# employment, ~0.20 for vacancies.
+ENROL_PHI, ENROL_SIGMA = 0.85, 0.084
+EMP_PHI, EMP_SIGMA = 0.85, 0.05
+VAC_PHI, VAC_SIGMA = 0.75, 0.13
+SKILL_PHI, SKILL_SIGMA = 0.75, 0.065
+
+
 def _base_panel() -> list[dict]:
     rows = []
     for hei in HEIS:
         for field in FIELDS:
-            for year in YEARS:
+            base = max(80.0, RNG.normal(220, 35))
+            slope = 0.025 + RNG.normal(0, 0.01) + (0.01 if field["band"] == "Natural science" else 0)
+            dev = _ar1(len(YEARS), ENROL_PHI, ENROL_SIGMA)
+            for i, year in enumerate(YEARS):
                 shock = shock_factor(hei["region"], year)
-                trend = 1.0 + 0.025 * (year - 2016)
-                if field["band"] == "Natural science":
-                    trend += 0.01
-                enrol = int(max(40, RNG.normal(220, 35) * trend * shock))
+                trend = 1.0 + slope * (year - 2016)
+                enrol = int(max(40, base * trend * shock * np.exp(dev[i])))
                 rows.append({
                     "institution": hei["name"],
                     "institution_type": hei["type"],
@@ -79,8 +110,10 @@ def build_enrollment_history(panel: pd.DataFrame) -> pd.DataFrame:
     df["program_enrollment_count"] = df["enrollment"]
     df["enrollment_lag_1y"] = g.shift(1)
     df["enrollment_lag_2y"] = g.shift(2)
-    df["enrollment_rolling_3y_avg"] = g.transform(lambda s: s.rolling(3, min_periods=1).mean())
-    df["enrollment_rolling_5y_avg"] = g.transform(lambda s: s.rolling(5, min_periods=1).mean())
+    # Rolling means of the *previous* years: knowable before year t is observed.
+    df["enrollment_rolling_3y_avg"] = g.transform(lambda s: s.shift(1).rolling(3, min_periods=1).mean())
+    df["enrollment_rolling_5y_avg"] = g.transform(lambda s: s.shift(1).rolling(5, min_periods=1).mean())
+    # Observed growth *into* year t. Describes the year; never a learner input.
     df["enrollment_growth_rate_pct"] = g.pct_change() * 100
     campus = df.groupby(["institution", "campus", "year"])["enrollment"].transform("sum")
     region = df.groupby(["region", "year"])["enrollment"].transform("sum")
@@ -93,7 +126,13 @@ def build_admissions_funnel(hist: pd.DataFrame) -> pd.DataFrame:
     df = hist[["institution", "campus", "region", "program", "field", "year",
                "program_enrollment_count"]].copy()
     seats = (df["program_enrollment_count"] * RNG.uniform(0.95, 1.15, len(df))).astype(int)
-    apps = (seats * RNG.uniform(1.6, 3.4, len(df))).astype(int)
+    # Applicants per place is a property of the programme, so it is drawn once
+    # per series. Applications then inherit the persistence of enrolment.
+    ratio = df.groupby(["institution", "program"])["year"].transform(
+        lambda s: RNG.uniform(1.8, 3.0)
+    )
+    apps = (df["program_enrollment_count"] * ratio
+            * np.exp(RNG.normal(0, 0.06, len(df)))).astype(int)
     offers = np.minimum(apps, (seats * RNG.uniform(0.9, 1.05, len(df))).astype(int))
     accepted = np.minimum(offers, df["program_enrollment_count"].astype(int))
     df["applications_count"] = apps
@@ -164,10 +203,16 @@ def build_demographics() -> pd.DataFrame:
 def build_cohort(hist: pd.DataFrame) -> pd.DataFrame:
     df = hist[["institution", "program", "field", "region", "year"]].copy()
     retain = np.clip(RNG.normal(82, 4, len(df)), 60, 96)
-    drop = np.clip(100 - retain - RNG.uniform(2, 6, len(df)), 2, 25)
+    # Dropout and transfer split what retention leaves, so the three rates
+    # never sum past 100% (the remainder is students who stop out). Drawing
+    # them independently, as before, broke that in ~60% of rows — caught by
+    # rule C.COHORT.SUM in ml/consistency.py.
+    remainder = 100 - retain
+    drop = remainder * RNG.uniform(0.45, 0.65, len(df))      # shares sum to at most 0.95
+    transfer = remainder * RNG.uniform(0.15, 0.30, len(df))
     df["retention_rate_pct"] = retain
     df["dropout_rate_pct"] = drop
-    df["transfer_rate_pct"] = np.clip(RNG.normal(4.5, 1.2, len(df)), 0.5, 12)
+    df["transfer_rate_pct"] = transfer
     df["completion_rate_pct"] = np.clip(retain - 8, 50, 90)
     df["time_to_graduation_years"] = np.clip(RNG.normal(4.3, 0.35, len(df)), 3.5, 6.5)
     return df
@@ -225,26 +270,32 @@ def build_labour_history() -> pd.DataFrame:
     rows = []
     for region in REGIONS:
         for sector in SECTORS:
-            for year in YEARS:
+            base = 40_000 * RNG.uniform(0.7, 1.3)
+            dev = _ar1(len(YEARS), EMP_PHI, EMP_SIGMA)
+            for i, year in enumerate(YEARS):
                 shock = shock_factor(region["name"], year)
                 park_boost = 1.0
                 for park in INDUSTRIAL_PARKS:
                     if park["region"] == region["name"] and year >= park["opened"] and sector == "Manufacturing":
                         park_boost += 0.18
-                emp = int(40_000 * shock * park_boost * (1 + 0.02 * (year - 2016)) * RNG.uniform(0.7, 1.3))
+                emp = int(base * shock * park_boost * (1 + 0.02 * (year - 2016)) * np.exp(dev[i]))
                 rows.append({
                     "region": region["name"], "sector": sector, "year": year,
                     "employment_level": emp,
                     "unemployment_rate_pct": float(np.clip(17 + RNG.normal(0, 2), 6, 35)),
                     "youth_unemployment_rate_pct": float(np.clip(24 + RNG.normal(0, 3), 10, 50)),
                     "sector_employment": emp,
-                    "employment_growth_pct": float(RNG.normal(2.4, 1.8) + (8 if park_boost > 1 else 0)),
                     "job_creation_count": int(emp * 0.04),
                     "labour_force_participation_pct": float(np.clip(78 + RNG.normal(0, 2), 60, 90)),
-                    "employment_lag_1y": int(emp / 1.02),
-                    "employment_lag_2y": int(emp / 1.05),
                 })
-    return pd.DataFrame(rows)
+    df = pd.DataFrame(rows).sort_values(["region", "sector", "year"])
+    g = df.groupby(["region", "sector"], sort=False)["employment_level"]
+    # True lags and observed growth — previously employment / 1.02 and / 1.05,
+    # which made the "lag" a same-year function of the target.
+    df["employment_lag_1y"] = g.shift(1)
+    df["employment_lag_2y"] = g.shift(2)
+    df["employment_growth_pct"] = g.pct_change() * 100
+    return df.reset_index(drop=True)
 
 
 def build_sector_output(labour: pd.DataFrame) -> pd.DataFrame:
@@ -275,8 +326,11 @@ def build_vacancies(hist: pd.DataFrame) -> pd.DataFrame:
     rows = []
     for field in FIELDS:
         for region in REGIONS:
-            for year in YEARS:
-                vac = int(max(10, RNG.normal(180, 40) * shock_factor(region["name"], year)))
+            base = max(60.0, RNG.normal(180, 40))
+            dev = _ar1(len(YEARS), VAC_PHI, VAC_SIGMA)
+            for i, year in enumerate(YEARS):
+                trend = 1 + 0.03 * (year - 2016)
+                vac = int(max(10, base * trend * shock_factor(region["name"], year) * np.exp(dev[i])))
                 rows.append({
                     "region": region["name"], "year": year,
                     "occupation": field["occupation"],
@@ -295,14 +349,17 @@ def build_vacancies(hist: pd.DataFrame) -> pd.DataFrame:
 def build_skills() -> pd.DataFrame:
     rows = []
     for field in FIELDS:
+        mu = float(np.clip(RNG.normal(0.35, 0.08), 0.1, 0.7))
+        shortage = mu
         for year in YEARS:
+            shortage = float(np.clip(mu + SKILL_PHI * (shortage - mu) + RNG.normal(0, SKILL_SIGMA), 0, 1))
             rows.append({
                 "field": field["field"], "year": year,
                 "technical_skill_demand": float(np.clip(RNG.normal(0.7 if field["stem"] else 0.45, 0.1), 0.1, 1)),
                 "digital_skill_demand": float(np.clip(RNG.normal(0.65, 0.12), 0.1, 1)),
                 "soft_skill_demand": float(np.clip(RNG.normal(0.6, 0.08), 0.2, 1)),
                 "emerging_skill_demand": float(np.clip(RNG.normal(0.4 + 0.03 * (year - 2016), 0.1), 0.05, 1)),
-                "skill_shortage_index": float(np.clip(RNG.normal(0.35, 0.15), 0, 1)),
+                "skill_shortage_index": shortage,
                 "skill_oversupply_index": float(np.clip(RNG.normal(0.2, 0.1), 0, 1)),
             })
     return pd.DataFrame(rows)

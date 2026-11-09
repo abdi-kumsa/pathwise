@@ -30,4 +30,7 @@ class User(Base):
     program          = Column(String(120), nullable=True)
     field            = Column(String(120), nullable=True)
     enrollment_year  = Column(Integer, nullable=True)
+    # Incremented on any change that must end existing sessions: password,
+    # role or institution. Tokens carry the version they were issued under.
+    token_version    = Column(Integer, nullable=False, server_default=text("0"))
     created_at       = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text("NOW()"))

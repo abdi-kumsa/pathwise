@@ -6,11 +6,14 @@ Usage:
     python ml/predict_demand.py --months 12
 """
 import os
-import sys
 import pickle
 import argparse
 import warnings
 import pandas as pd
+try:
+    from artifacts import verified_open, verify  # noqa: F401  (ml/ on sys.path)
+except ImportError:  # imported as part of the ml package
+    from ml.artifacts import verified_open, verify  # noqa: F401
 
 warnings.filterwarnings('ignore')
 
@@ -27,7 +30,7 @@ MODEL_PATH = os.path.join(MODEL_DIR, 'demand_prophet.pkl')
 
 
 def load_model():
-    with open(MODEL_PATH, 'rb') as f:
+    with verified_open(MODEL_PATH) as f:
         return pickle.load(f)
 
 

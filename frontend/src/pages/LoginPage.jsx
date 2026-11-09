@@ -3,6 +3,14 @@ import { useNavigate, useLocation, Navigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { User, Lock, Eye, EyeOff, ArrowRight, Loader2, Info, X, ShieldAlert, Sparkles } from 'lucide-react'
 
+// Demo quick-fill is a development convenience only. `import.meta.env.DEV` is
+// statically false in `vite build`, so the minifier drops the password literal
+// and the whole picker from production bundles. Never ship a shared password to
+// the browser: anyone who can load the login page could read it.
+const DEMO_PASSWORD = import.meta.env.DEV
+  ? (import.meta.env.VITE_DEMO_PASSWORD || 'pathwise123')
+  : null
+
 const DEMO_ACCOUNTS = [
   { role: 'Student', username: 'student', label: 'Student' },
   { role: 'Administrator', username: 'admin', label: 'Admin' },
@@ -76,13 +84,17 @@ export default function LoginPage() {
 
   const handleQuickFill = (acc) => {
     setUsername(acc.username)
-    setPassword('pathwise123')
+    setPassword(DEMO_PASSWORD ?? '')
     setError(null)
     setInfoNotice(null)
   }
 
   const handleGoogleSignIn = () => {
-    setInfoNotice('Google Single Sign-On (SSO) is coming in a future update. Please sign in using your account credentials or pick a demo profile above.')
+    setInfoNotice(
+      DEMO_PASSWORD
+        ? 'Google Single Sign-On (SSO) is coming in a future update. Please sign in using your account credentials or pick a demo profile above.'
+        : 'Google Single Sign-On (SSO) is coming in a future update. Please sign in using your account credentials.'
+    )
   }
 
   return (
@@ -124,7 +136,8 @@ export default function LoginPage() {
           <h1 className="login-title">Welcome back 👋</h1>
           <p className="login-sub">Sign in to access your intelligence dashboard</p>
 
-          {/* Quick-fill demo account pills */}
+          {/* Quick-fill demo account pills (development builds only) */}
+          {DEMO_PASSWORD && (
           <div className="demo-picker">
             <div className="demo-picker-header">
               <Sparkles size={13} className="demo-sparkle" />
@@ -144,6 +157,7 @@ export default function LoginPage() {
               ))}
             </div>
           </div>
+          )}
 
           {expired && (
             <div className="login-note" role="status">
@@ -320,10 +334,12 @@ export default function LoginPage() {
                 For institutional security and role access integrity, password changes are managed directly by your <strong>Platform Administrator</strong> or inside your account profile once logged in.
               </p>
               <div className="login-modal-tips">
-                <div className="tip-row">
-                  <span className="tip-dot" />
-                  <span><strong>Demo Accounts:</strong> If you are testing the application, use the password <code>pathwise123</code>.</span>
-                </div>
+                {DEMO_PASSWORD && (
+                  <div className="tip-row">
+                    <span className="tip-dot" />
+                    <span><strong>Demo Accounts:</strong> In a development build, use the password <code>{DEMO_PASSWORD}</code>.</span>
+                  </div>
+                )}
                 <div className="tip-row">
                   <span className="tip-dot" />
                   <span><strong>Organizational Users:</strong> Contact your system admin or ministry supervisor for credential resets.</span>

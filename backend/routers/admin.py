@@ -2,7 +2,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 
 from services import admin_service
-from services.auth_service import ROLE_ADMIN, require_roles
+from services.auth_service import ROLE_ADMIN, get_current_user, require_roles
 
 router = APIRouter(
     prefix="/admin",
@@ -44,14 +44,33 @@ def audit_log(
     resource: str | None = Query(None),
     since: str | None = Query(None),
     until: str | None = Query(None),
+    limit: int = Query(500, ge=1, le=1000),
 ):
-    """Searchable audit rows, newest first. This GET is not itself logged."""
+    """Searchable audit rows, newest first. This GET is not itself logged.
+
+    `n` is the number of rows returned (at most `limit`); `total` is how many
+    match the filters.
+    """
     try:
         return admin_service.list_audit_log(
             actor=actor, action=action, resource=resource, since=since, until=until,
+            limit=limit,
         )
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=str(exc)) from exc
+
+
+@router.post("/audit-log/purge")  # /admin/audit-log/purge
+def purge_audit_log(
+    retention_days: int = Query(None, ge=30, le=3650,
+                                description="Delete rows older than this; default AUDIT_RETENTION_DAYS"),
+    actor: dict = Depends(get_current_user),
+):
+    """Apply the retention policy now. The purge is itself audited."""
+    try:
+        return admin_service.purge_audit_log(retention_days, actor=actor)
     except Exception as exc:
         raise HTTPException(status_code=500, detail=str(exc)) from exc
 

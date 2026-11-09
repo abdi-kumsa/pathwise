@@ -77,6 +77,7 @@ def update_user(username: str, body: UserUpdate, actor: dict = Depends(_admin)):
             display_name = body.display_name,
             institution  = body.institution_name,
             active       = body.is_active,
+            cross_institution = body.cross_institution,
         )
         action = "user_role_change" if body.role is not None else (
             "user_deactivate" if body.is_active is False else "user_update"
@@ -84,6 +85,15 @@ def update_user(username: str, body: UserUpdate, actor: dict = Depends(_admin)):
         log_audit(actor, action, username, {
             "role": body.role, "is_active": body.is_active,
         })
+        if body.cross_institution is not None:
+            # A separate, searchable action: granting one HEI read access to
+            # every other HEI is the most sensitive change an admin can make.
+            log_audit(
+                actor,
+                "cross_institution_grant" if body.cross_institution else "cross_institution_revoke",
+                username,
+                {"institution": row.get("institution_name")},
+            )
         return row
     except UserError as e:
         _raise(e)

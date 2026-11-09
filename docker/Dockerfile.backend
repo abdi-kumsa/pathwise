@@ -18,10 +18,18 @@ RUN apt-get update && apt-get install -y \
 
 # ── Python dependencies ────────────────────────────────────────────────────────
 # Copy requirements first so Docker caches this layer.
-# The heavy ML packages (tensorflow-cpu, prophet) only re-install when
-# requirements.txt changes, not on every source code change.
-COPY requirements.txt .
+# Packages only re-install when a requirements file changes, not on every
+# source code change.
+COPY requirements.txt requirements-legacy.txt ./
+# Generous timeout and retries: a slow mirror should slow the build, not fail it.
+ENV PIP_DEFAULT_TIMEOUT=120 PIP_RETRIES=10
 RUN pip install --no-cache-dir -r requirements.txt
+
+# Leftover US models (TensorFlow, Prophet, XGBoost, SHAP) only on request:
+#   docker compose build --build-arg LEGACY_US_MODELS=1 backend
+# and run with LEGACY_US_MODELS=1 so their routes are registered.
+ARG LEGACY_US_MODELS=0
+RUN if [ "$LEGACY_US_MODELS" = "1" ]; then         pip install --no-cache-dir -r requirements-legacy.txt;     fi
 
 # ── TensorFlow / environment tunables ─────────────────────────────────────────
 # Suppress TF startup banner and oneDNN info messages in container logs
@@ -30,6 +38,11 @@ ENV TF_ENABLE_ONEDNN_OPTS=0
 
 # ── Application source ────────────────────────────────────────────────────────
 COPY . .
+
+# Run as an unprivileged user (plan item 3.4). The app writes only to the
+# model-output and monitoring folders, which in docker-compose are bind mounts.
+RUN useradd --uid 10001 --create-home --shell /usr/sbin/nologin app     && chown -R app:app /app
+USER app
 
 EXPOSE 8000
 

@@ -4,10 +4,9 @@ from services import alignment_service as m3
 from services import constraint_service as m1
 from services import institution_service
 from services.auth_service import (
-    ROLE_ADMIN,
     ROLE_UNIVERSITY,
-    assert_cross_institution,
     require_roles,
+    resolve_institution,
 )
 
 router = APIRouter(
@@ -19,29 +18,8 @@ _guard = require_roles(ROLE_UNIVERSITY)
 
 
 def _institution_of(user: dict, requested: str | None = None) -> str:
-    """Resolve which institution the caller may read.
-
-    Own HEI comes from the signed JWT. A different `?institution=` is 403
-    unless the CROSS_INSTITUTION grant is on the user record (SCOPE.UNI.R2).
-    """
-    own = user.get("institution")
-    if not own and user.get("role") == ROLE_ADMIN:
-        from services import _datasets as ds
-        options = ds.institutions()
-        if options:
-            own = options[0]["name"]
-
-    if requested and own and requested != own:
-        return assert_cross_institution(user, requested)
-    if requested and not own:
-        return assert_cross_institution(user, requested)
-
-    if own:
-        return own
-    raise HTTPException(
-        status_code=403,
-        detail="This account is not linked to an institution.",
-    )
+    """Own HEI from the JWT; a different `?institution=` needs the grant."""
+    return resolve_institution(user, requested)
 
 
 def _scope(user: dict = Depends(_guard), institution: str | None = Query(None)):

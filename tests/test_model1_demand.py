@@ -23,11 +23,12 @@ def test_constrained_is_at_or_below_unconstrained_on_generated_data():
     assert {"unconstrained_demand", "constrained_enrollment", "binding_constraint"} <= set(out.columns)
 
 
-def test_layer1_estimators_are_scored_on_a_chronological_holdout():
+def test_layer1_estimators_are_scored_on_a_rolling_origin_backtest():
     from ml.model1.compare import compare_estimators
-    result = compare_estimators()
+    result = compare_estimators(persist=False)
     assert result["n_holdout_rows"] > 0
-    naive = result["estimators"]["seasonal_naive"]["rmse"]
-    ols = result["estimators"]["ols_lags"]["rmse"]
-    assert naive is not None and ols is not None
-    assert naive >= 0 and ols >= 0
+    assert set(result["candidates"]) >= {"seasonal_naive", "historical_mean", "pooled_ridge"}
+    for name in result["candidates"]:
+        rmse = result["estimators"][name]["rmse"]
+        assert rmse is not None and rmse > 0, name   # > 0: no leakage
+    assert result["selected_by_horizon"]["1"] in result["candidates"]

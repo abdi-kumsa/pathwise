@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import AhpMatrixEditor from '../../components/AhpMatrixEditor'
 
 import SectionHeader from '../../components/SectionHeader'
 import LoadingSpinner from '../../components/LoadingSpinner'
@@ -14,6 +15,8 @@ import {
   getPriorityTiers,
   postAhpWeights,
   postExpertValidation,
+  clearSeededExpertValidations,
+  downloadExpertValidations,
 } from '../../api/admin'
 import { SERIES } from '../../config/chartTheme'
 
@@ -46,8 +49,11 @@ export default function AdminMethodologyPage() {
     spec_id: 'M1.C1',
     expert_role: 'higher_education',
     verdict: 'accepted',
+    expert_name: '',
+    organisation: '',
     notes: '',
   })
+  const [expertError, setExpertError] = useState(null)
 
   const learned = data?.importance?.learned_importance
   const collection = data?.importance?.collection_priority || []
@@ -78,15 +84,30 @@ export default function AdminMethodologyPage() {
   const submitExpert = async (e) => {
     e.preventDefault()
     setBusy(true)
+    setExpertError(null)
     try {
-      await postExpertValidation(expertForm)
+      await postExpertValidation({ ...expertForm, notes: expertForm.notes || null })
+      setExpertForm({ ...expertForm, notes: '' })
       await refetch()
     } catch (err) {
-      setAhpError(err?.message || 'Could not record validation')
+      setExpertError(err?.message || 'Could not record validation')
     } finally {
       setBusy(false)
     }
   }
+
+  const clearSeeded = async () => {
+    if (!window.confirm('Delete the demonstration rows? Recorded reviews are kept.')) return
+    setBusy(true)
+    try {
+      await clearSeededExpertValidations()
+      await refetch()
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  const coverage = data?.experts?.coverage
 
   return (
     <div>
@@ -154,9 +175,17 @@ export default function AdminMethodologyPage() {
               <label style={lab}>Labels (comma separated)
                 <input value={labelsText} onChange={e => setLabelsText(e.target.value)} />
               </label>
-              <label style={lab}>Pairwise matrix (JSON)
-                <textarea rows={4} value={matrixText} onChange={e => setMatrixText(e.target.value)} />
-              </label>
+              <AhpMatrixEditor
+                labels={labelsText.split(',').map(x => x.trim()).filter(Boolean)}
+                matrix={(() => { try { return JSON.parse(matrixText) } catch { return null } })()}
+                onChange={m => setMatrixText(JSON.stringify(m))}
+              />
+              <details>
+                <summary style={{ fontSize: 12, cursor: 'pointer' }}>Edit as JSON</summary>
+                <label style={lab}>Pairwise matrix (JSON)
+                  <textarea rows={4} value={matrixText} onChange={e => setMatrixText(e.target.value)} />
+                </label>
+              </details>
               <button type="submit" disabled={busy}>Compute weights</button>
             </form>
             {ahpError && (
@@ -207,7 +236,27 @@ export default function AdminMethodologyPage() {
 
           <div className="panel" style={{ marginTop: 16, padding: 14 }}>
             <p className="panel-title">Expert validations</p>
-            <p className="panel-sub">Six DOC1 domains. Seeded rows stay simulated. Recording stores a verdict — it is not an invented official sign-off.</p>
+            <p className="panel-sub">
+              PROC.S2: record each expert&apos;s judgement on a DOC1 category or variable, with their name
+              and organisation. Only recorded reviews count; demonstration rows never do.
+            </p>
+            {coverage && (
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, fontSize: 12.5, margin: '8px 0' }}>
+                <span><strong>{coverage.recorded_reviews}</strong> recorded review(s)</span>
+                <span><strong>{coverage.domains_with_a_review}</strong> / {coverage.domains_total} expert domains reviewed</span>
+                <span><strong>{coverage.categories_accepted}</strong> / {coverage.categories_total} categories accepted</span>
+                <span style={{ color: coverage.complete ? 'var(--green)' : '#B45309' }}>
+                  {coverage.complete ? 'Validation complete' : 'Validation incomplete'}
+                </span>
+                <button type="button" onClick={downloadExpertValidations}>Export CSV</button>
+                {coverage.seeded_rows > 0 && (
+                  <button type="button" onClick={clearSeeded} disabled={busy}>
+                    Clear {coverage.seeded_rows} demonstration row(s)
+                  </button>
+                )}
+              </div>
+            )}
+            {expertError && <p style={{ color: 'var(--red)', fontSize: 12.5 }}>{expertError}</p>}
             <form onSubmit={submitExpert} style={{ display: 'grid', gap: 8, gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', margin: '10px 0' }}>
               <label style={lab}>Spec id
                 <input value={expertForm.spec_id} onChange={e => setExpertForm({ ...expertForm, spec_id: e.target.value })} />
@@ -216,6 +265,14 @@ export default function AdminMethodologyPage() {
                 <select value={expertForm.expert_role} onChange={e => setExpertForm({ ...expertForm, expert_role: e.target.value })}>
                   {(data.experts?.expert_domains || []).map(d => <option key={d} value={d}>{d}</option>)}
                 </select>
+              </label>
+              <label style={lab}>Expert name
+                <input value={expertForm.expert_name} required minLength={2}
+                       onChange={e => setExpertForm({ ...expertForm, expert_name: e.target.value })} />
+              </label>
+              <label style={lab}>Organisation
+                <input value={expertForm.organisation} required minLength={2}
+                       onChange={e => setExpertForm({ ...expertForm, organisation: e.target.value })} />
               </label>
               <label style={lab}>Verdict
                 <select value={expertForm.verdict} onChange={e => setExpertForm({ ...expertForm, verdict: e.target.value })}>
@@ -238,7 +295,10 @@ export default function AdminMethodologyPage() {
             <ul style={{ listStyle: 'none', display: 'grid', gap: 6 }}>
               {(data.experts?.rows || []).map(row => (
                 <li key={row.id} style={{ fontSize: 12.5 }}>
-                  <strong>{row.spec_id}</strong> · {row.expert_role} · {row.verdict} · {row.tier || 'simulated'}
+                  <strong>{row.spec_id}</strong> · {row.expert_role} · {row.verdict}
+                  {row.source === 'seeded'
+                    ? ' · demonstration row (not a validation)'
+                    : ` · ${row.expert_name}, ${row.organisation}`}
                   {row.notes ? ` — ${row.notes}` : ''}
                 </li>
               ))}

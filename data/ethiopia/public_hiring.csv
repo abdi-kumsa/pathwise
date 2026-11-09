@@ -1,141 +1,141 @@
 region,year,civil_service_hiring_plan,hiring_policy_state,public_project_count,megaproject_staffing_demand,provenance
-Addis Ababa,2016,3103,expansion,11,2208,simulated
-Addis Ababa,2017,2170,expansion,6,795,simulated
-Addis Ababa,2018,2177,expansion,17,513,simulated
-Addis Ababa,2019,732,expansion,6,2437,simulated
-Addis Ababa,2020,1012,freeze,14,1437,simulated
-Addis Ababa,2021,986,freeze,12,362,simulated
-Addis Ababa,2022,2592,expansion,11,2069,simulated
-Addis Ababa,2023,534,expansion,10,2333,simulated
-Addis Ababa,2024,3303,expansion,6,1835,simulated
-Addis Ababa,2025,1718,expansion,14,1610,simulated
-Dire Dawa,2016,2031,expansion,2,1914,simulated
-Dire Dawa,2017,2259,expansion,10,1801,simulated
-Dire Dawa,2018,3665,expansion,5,2257,simulated
-Dire Dawa,2019,785,expansion,12,1244,simulated
-Dire Dawa,2020,1230,freeze,10,1477,simulated
-Dire Dawa,2021,747,freeze,12,774,simulated
-Dire Dawa,2022,1304,expansion,8,544,simulated
-Dire Dawa,2023,1386,expansion,3,661,simulated
-Dire Dawa,2024,1759,expansion,9,1597,simulated
-Dire Dawa,2025,1703,expansion,11,1116,simulated
-Amhara,2016,1866,expansion,2,1964,simulated
-Amhara,2017,2832,expansion,2,164,simulated
-Amhara,2018,3001,expansion,5,2246,simulated
-Amhara,2019,3253,expansion,8,2461,simulated
-Amhara,2020,886,freeze,17,177,simulated
-Amhara,2021,980,freeze,15,685,simulated
-Amhara,2022,3359,expansion,15,1968,simulated
-Amhara,2023,2671,expansion,3,2466,simulated
-Amhara,2024,3554,expansion,10,1026,simulated
-Amhara,2025,2199,expansion,17,157,simulated
-Oromia,2016,2024,expansion,5,2047,simulated
-Oromia,2017,2734,expansion,16,2484,simulated
-Oromia,2018,642,expansion,9,2331,simulated
-Oromia,2019,310,expansion,15,1028,simulated
-Oromia,2020,893,freeze,4,885,simulated
-Oromia,2021,1538,freeze,16,396,simulated
-Oromia,2022,2337,expansion,3,2473,simulated
-Oromia,2023,1939,expansion,6,1377,simulated
-Oromia,2024,964,expansion,13,899,simulated
-Oromia,2025,1598,expansion,14,2247,simulated
-Tigray,2016,974,expansion,11,802,simulated
-Tigray,2017,379,expansion,6,133,simulated
-Tigray,2018,3172,expansion,9,1383,simulated
-Tigray,2019,1869,expansion,6,1158,simulated
-Tigray,2020,312,freeze,2,434,simulated
-Tigray,2021,160,freeze,10,198,simulated
-Tigray,2022,1678,expansion,13,1461,simulated
-Tigray,2023,2485,expansion,6,384,simulated
-Tigray,2024,788,expansion,8,2233,simulated
-Tigray,2025,3783,expansion,4,219,simulated
-Sidama,2016,1966,expansion,5,386,simulated
-Sidama,2017,1680,expansion,17,627,simulated
-Sidama,2018,523,expansion,4,1571,simulated
-Sidama,2019,3898,expansion,17,1927,simulated
-Sidama,2020,884,freeze,13,201,simulated
-Sidama,2021,1496,freeze,14,508,simulated
-Sidama,2022,1324,expansion,16,1377,simulated
-Sidama,2023,3934,expansion,8,1486,simulated
-Sidama,2024,216,expansion,16,2092,simulated
-Sidama,2025,3301,expansion,14,828,simulated
-South Ethiopia,2016,331,expansion,7,1700,simulated
-South Ethiopia,2017,2768,expansion,15,1402,simulated
-South Ethiopia,2018,1497,expansion,8,2452,simulated
-South Ethiopia,2019,378,expansion,12,106,simulated
-South Ethiopia,2020,784,freeze,3,600,simulated
-South Ethiopia,2021,694,freeze,7,117,simulated
-South Ethiopia,2022,3184,expansion,4,1794,simulated
-South Ethiopia,2023,3878,expansion,5,1153,simulated
-South Ethiopia,2024,2654,expansion,16,980,simulated
-South Ethiopia,2025,921,expansion,3,928,simulated
-South West Ethiopia,2016,3359,expansion,12,609,simulated
-South West Ethiopia,2017,3961,expansion,12,1764,simulated
-South West Ethiopia,2018,209,expansion,16,223,simulated
-South West Ethiopia,2019,386,expansion,13,794,simulated
-South West Ethiopia,2020,1498,freeze,16,1387,simulated
-South West Ethiopia,2021,875,freeze,4,466,simulated
-South West Ethiopia,2022,245,expansion,4,1133,simulated
-South West Ethiopia,2023,3082,expansion,3,436,simulated
-South West Ethiopia,2024,1631,expansion,9,1090,simulated
-South West Ethiopia,2025,888,expansion,14,560,simulated
-Central Ethiopia,2016,646,expansion,8,2474,simulated
-Central Ethiopia,2017,648,expansion,4,1665,simulated
-Central Ethiopia,2018,2561,expansion,4,1642,simulated
-Central Ethiopia,2019,3057,expansion,12,1327,simulated
-Central Ethiopia,2020,778,freeze,7,217,simulated
-Central Ethiopia,2021,1013,freeze,14,1048,simulated
-Central Ethiopia,2022,2991,expansion,3,294,simulated
-Central Ethiopia,2023,1374,expansion,7,1335,simulated
-Central Ethiopia,2024,319,expansion,3,1830,simulated
-Central Ethiopia,2025,2982,expansion,14,923,simulated
-Somali,2016,2755,expansion,5,2178,simulated
-Somali,2017,230,expansion,11,258,simulated
-Somali,2018,3337,expansion,5,101,simulated
-Somali,2019,1594,expansion,16,425,simulated
-Somali,2020,493,freeze,10,2184,simulated
-Somali,2021,375,freeze,7,2388,simulated
-Somali,2022,2850,expansion,11,936,simulated
-Somali,2023,3227,expansion,17,1083,simulated
-Somali,2024,3824,expansion,5,2117,simulated
-Somali,2025,1908,expansion,5,1060,simulated
-Afar,2016,1743,expansion,11,2002,simulated
-Afar,2017,3660,expansion,4,631,simulated
-Afar,2018,3367,expansion,3,782,simulated
-Afar,2019,2918,expansion,10,50,simulated
-Afar,2020,304,freeze,14,883,simulated
-Afar,2021,1186,freeze,12,2073,simulated
-Afar,2022,2401,expansion,3,359,simulated
-Afar,2023,974,expansion,4,1401,simulated
-Afar,2024,1952,expansion,7,1443,simulated
-Afar,2025,3414,expansion,7,1172,simulated
-Benishangul-Gumuz,2016,3557,expansion,8,252,simulated
-Benishangul-Gumuz,2017,902,expansion,6,1426,simulated
-Benishangul-Gumuz,2018,1731,expansion,7,2086,simulated
-Benishangul-Gumuz,2019,1912,expansion,9,714,simulated
-Benishangul-Gumuz,2020,784,freeze,11,2301,simulated
-Benishangul-Gumuz,2021,1353,freeze,2,100,simulated
-Benishangul-Gumuz,2022,3375,expansion,5,111,simulated
-Benishangul-Gumuz,2023,2773,expansion,17,1781,simulated
-Benishangul-Gumuz,2024,713,expansion,6,758,simulated
-Benishangul-Gumuz,2025,1287,expansion,12,1879,simulated
-Gambela,2016,1313,expansion,10,1241,simulated
-Gambela,2017,1678,expansion,4,185,simulated
-Gambela,2018,3781,expansion,12,2110,simulated
-Gambela,2019,1313,expansion,5,1463,simulated
-Gambela,2020,1138,freeze,13,1388,simulated
-Gambela,2021,784,freeze,11,670,simulated
-Gambela,2022,815,expansion,5,871,simulated
-Gambela,2023,2878,expansion,15,2234,simulated
-Gambela,2024,1700,expansion,17,2463,simulated
-Gambela,2025,3252,expansion,3,1526,simulated
-Harari,2016,1279,expansion,15,599,simulated
-Harari,2017,1680,expansion,6,2211,simulated
-Harari,2018,2372,expansion,8,2046,simulated
-Harari,2019,2462,expansion,11,466,simulated
-Harari,2020,652,freeze,9,1078,simulated
-Harari,2021,598,freeze,17,947,simulated
-Harari,2022,2469,expansion,11,565,simulated
-Harari,2023,3551,expansion,4,2073,simulated
-Harari,2024,2460,expansion,7,710,simulated
-Harari,2025,2988,expansion,9,1391,simulated
+Addis Ababa,2016,3129,expansion,15,968,simulated
+Addis Ababa,2017,2108,expansion,3,727,simulated
+Addis Ababa,2018,1384,expansion,16,2132,simulated
+Addis Ababa,2019,1603,expansion,4,449,simulated
+Addis Ababa,2020,858,freeze,17,1516,simulated
+Addis Ababa,2021,682,freeze,15,1231,simulated
+Addis Ababa,2022,1027,expansion,15,2284,simulated
+Addis Ababa,2023,1293,expansion,17,1345,simulated
+Addis Ababa,2024,1116,expansion,15,395,simulated
+Addis Ababa,2025,1173,expansion,7,2241,simulated
+Dire Dawa,2016,3807,expansion,5,89,simulated
+Dire Dawa,2017,3446,expansion,10,1014,simulated
+Dire Dawa,2018,230,expansion,10,378,simulated
+Dire Dawa,2019,2295,expansion,4,552,simulated
+Dire Dawa,2020,271,freeze,4,1765,simulated
+Dire Dawa,2021,1161,freeze,9,2072,simulated
+Dire Dawa,2022,3852,expansion,4,613,simulated
+Dire Dawa,2023,3055,expansion,11,850,simulated
+Dire Dawa,2024,2406,expansion,11,1501,simulated
+Dire Dawa,2025,2231,expansion,2,1871,simulated
+Amhara,2016,913,expansion,10,1358,simulated
+Amhara,2017,554,expansion,6,734,simulated
+Amhara,2018,964,expansion,8,767,simulated
+Amhara,2019,2373,expansion,2,465,simulated
+Amhara,2020,863,freeze,7,1067,simulated
+Amhara,2021,176,freeze,6,840,simulated
+Amhara,2022,284,expansion,10,173,simulated
+Amhara,2023,3758,expansion,2,485,simulated
+Amhara,2024,2180,expansion,2,1578,simulated
+Amhara,2025,1633,expansion,2,1538,simulated
+Oromia,2016,484,expansion,11,1679,simulated
+Oromia,2017,1513,expansion,11,142,simulated
+Oromia,2018,3507,expansion,16,465,simulated
+Oromia,2019,2106,expansion,8,1952,simulated
+Oromia,2020,406,freeze,8,964,simulated
+Oromia,2021,1343,freeze,10,1972,simulated
+Oromia,2022,485,expansion,3,2365,simulated
+Oromia,2023,394,expansion,12,416,simulated
+Oromia,2024,2165,expansion,15,1213,simulated
+Oromia,2025,1224,expansion,4,1019,simulated
+Tigray,2016,3788,expansion,11,1188,simulated
+Tigray,2017,2677,expansion,10,1094,simulated
+Tigray,2018,830,expansion,9,714,simulated
+Tigray,2019,1446,expansion,6,280,simulated
+Tigray,2020,871,freeze,4,1050,simulated
+Tigray,2021,1432,freeze,15,2438,simulated
+Tigray,2022,766,expansion,15,2045,simulated
+Tigray,2023,1362,expansion,7,486,simulated
+Tigray,2024,3872,expansion,10,757,simulated
+Tigray,2025,559,expansion,10,2291,simulated
+Sidama,2016,1651,expansion,14,877,simulated
+Sidama,2017,3899,expansion,12,2146,simulated
+Sidama,2018,2481,expansion,8,165,simulated
+Sidama,2019,1394,expansion,5,2093,simulated
+Sidama,2020,942,freeze,11,2439,simulated
+Sidama,2021,1415,freeze,12,846,simulated
+Sidama,2022,613,expansion,10,2472,simulated
+Sidama,2023,1956,expansion,17,498,simulated
+Sidama,2024,434,expansion,10,965,simulated
+Sidama,2025,516,expansion,17,968,simulated
+South Ethiopia,2016,1166,expansion,10,2121,simulated
+South Ethiopia,2017,751,expansion,7,1896,simulated
+South Ethiopia,2018,2733,expansion,5,117,simulated
+South Ethiopia,2019,2968,expansion,5,108,simulated
+South Ethiopia,2020,1416,freeze,13,1162,simulated
+South Ethiopia,2021,688,freeze,15,1985,simulated
+South Ethiopia,2022,2205,expansion,10,1364,simulated
+South Ethiopia,2023,1644,expansion,10,1676,simulated
+South Ethiopia,2024,2657,expansion,8,2076,simulated
+South Ethiopia,2025,1553,expansion,13,1092,simulated
+South West Ethiopia,2016,3783,expansion,13,1806,simulated
+South West Ethiopia,2017,2536,expansion,4,2295,simulated
+South West Ethiopia,2018,2875,expansion,2,783,simulated
+South West Ethiopia,2019,811,expansion,4,1260,simulated
+South West Ethiopia,2020,1287,freeze,12,2337,simulated
+South West Ethiopia,2021,216,freeze,12,770,simulated
+South West Ethiopia,2022,255,expansion,17,361,simulated
+South West Ethiopia,2023,1445,expansion,10,981,simulated
+South West Ethiopia,2024,785,expansion,5,1721,simulated
+South West Ethiopia,2025,266,expansion,2,749,simulated
+Central Ethiopia,2016,3908,expansion,4,1649,simulated
+Central Ethiopia,2017,1647,expansion,10,619,simulated
+Central Ethiopia,2018,3698,expansion,8,157,simulated
+Central Ethiopia,2019,1223,expansion,7,2293,simulated
+Central Ethiopia,2020,122,freeze,6,490,simulated
+Central Ethiopia,2021,366,freeze,17,1916,simulated
+Central Ethiopia,2022,3796,expansion,14,2156,simulated
+Central Ethiopia,2023,2339,expansion,10,894,simulated
+Central Ethiopia,2024,470,expansion,15,981,simulated
+Central Ethiopia,2025,2745,expansion,17,983,simulated
+Somali,2016,727,expansion,8,2385,simulated
+Somali,2017,209,expansion,6,191,simulated
+Somali,2018,3122,expansion,4,705,simulated
+Somali,2019,1139,expansion,2,2318,simulated
+Somali,2020,663,freeze,15,1327,simulated
+Somali,2021,141,freeze,4,86,simulated
+Somali,2022,1135,expansion,11,355,simulated
+Somali,2023,1630,expansion,2,2014,simulated
+Somali,2024,1538,expansion,17,850,simulated
+Somali,2025,2078,expansion,9,484,simulated
+Afar,2016,3009,expansion,16,2152,simulated
+Afar,2017,1804,expansion,14,1071,simulated
+Afar,2018,752,expansion,13,1048,simulated
+Afar,2019,1605,expansion,3,625,simulated
+Afar,2020,711,freeze,13,1019,simulated
+Afar,2021,362,freeze,8,146,simulated
+Afar,2022,1950,expansion,9,1772,simulated
+Afar,2023,328,expansion,12,1987,simulated
+Afar,2024,3275,expansion,17,1710,simulated
+Afar,2025,3804,expansion,7,414,simulated
+Benishangul-Gumuz,2016,201,expansion,16,341,simulated
+Benishangul-Gumuz,2017,624,expansion,13,918,simulated
+Benishangul-Gumuz,2018,2152,expansion,3,1089,simulated
+Benishangul-Gumuz,2019,3326,expansion,11,598,simulated
+Benishangul-Gumuz,2020,310,freeze,12,1768,simulated
+Benishangul-Gumuz,2021,1239,freeze,3,982,simulated
+Benishangul-Gumuz,2022,437,expansion,14,668,simulated
+Benishangul-Gumuz,2023,1437,expansion,11,413,simulated
+Benishangul-Gumuz,2024,3133,expansion,9,1420,simulated
+Benishangul-Gumuz,2025,2899,expansion,12,147,simulated
+Gambela,2016,574,expansion,14,2204,simulated
+Gambela,2017,1171,expansion,2,1718,simulated
+Gambela,2018,3940,expansion,3,272,simulated
+Gambela,2019,1679,expansion,11,1189,simulated
+Gambela,2020,792,freeze,9,2473,simulated
+Gambela,2021,495,freeze,3,1346,simulated
+Gambela,2022,2013,expansion,6,2418,simulated
+Gambela,2023,832,expansion,4,376,simulated
+Gambela,2024,3775,expansion,16,2392,simulated
+Gambela,2025,696,expansion,2,1018,simulated
+Harari,2016,2009,expansion,6,1558,simulated
+Harari,2017,2540,expansion,12,897,simulated
+Harari,2018,319,expansion,6,468,simulated
+Harari,2019,3882,expansion,15,2492,simulated
+Harari,2020,1225,freeze,4,1161,simulated
+Harari,2021,1132,freeze,3,2230,simulated
+Harari,2022,3421,expansion,17,783,simulated
+Harari,2023,1332,expansion,12,1971,simulated
+Harari,2024,1228,expansion,7,901,simulated
+Harari,2025,2562,expansion,3,1306,simulated

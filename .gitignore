@@ -73,6 +73,10 @@ secrets/
 !data/processed/*.parquet
 !data/ethiopia/**/*.parquet
 
+# ── Runtime logs ─────────────────────────────────────
+# Written by the running API (leftover placement evaluator). Never committed.
+data/monitoring/*.jsonl
+
 # ── OS ───────────────────────────────────────────────
 .DS_Store
 Thumbs.db

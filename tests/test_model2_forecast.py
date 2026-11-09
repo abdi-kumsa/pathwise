@@ -45,21 +45,21 @@ def test_skills_map_onto_the_moe_programme_list():
 
 def test_estimators_are_scored_on_a_chronological_holdout():
     from ml.model2.compare import compare_estimators
-    result = compare_estimators()
+    result = compare_estimators(persist=False)
     assert result["n_holdout_rows"] > 0
-    naive = result["estimators"]["seasonal_naive"]["rmse"]
-    ols = result["estimators"]["ols_lags"]["rmse"]
-    assert naive is not None and ols is not None
-    assert naive >= 0 and ols >= 0
-    assert len(result["targets"]) == 5
     ids = [t["id"] for t in result["targets"]]
-    assert ids == [
-        "M2.employment_demand",
-        "M2.employment_growth",
-        "M2.vacancies",
-        "M2.occupational_demand",
-        "M2.skill_shortages",
-    ]
+    assert ids == ["M2.employment_demand", "M2.vacancies", "M2.skill_shortages"]
+    for target in result["targets"]:
+        assert len(target["candidates"]) >= 3
+        assert "seasonal_naive" in target["candidates"]
+        for name in target["candidates"]:
+            assert target["estimators"][name]["rmse"] > 0, (target["id"], name)
+    # The two remaining DOC1 targets are derived, and say from what.
+    derived = {d["id"]: d["derived_from"] for d in result["derived_targets"]}
+    assert derived == {
+        "M2.employment_growth": "M2.employment_demand",
+        "M2.occupational_demand": "M2.vacancies",
+    }
     assert "occupational_demand_method" in result
 
 

@@ -1,5 +1,8 @@
 # API
-fastapi==0.111.0
+# 0.111 shipped Starlette 0.37, which carries several multipart/range DoS
+# advisories reachable unauthenticated via the login form (audit S7).
+fastapi==0.162.0
+starlette==1.10.0
 uvicorn[standard]==0.29.0
 
 # Database
@@ -8,48 +11,40 @@ psycopg2-binary==2.9.9
 alembic==1.13.1
 
 # Environment
-python-dotenv==1.0.1
+python-dotenv==1.2.4
 
 # Data / ML — core
 pandas==3.0.1
 numpy==1.26.4
-scikit-learn==1.4.2
-pyarrow==16.1.0
+scikit-learn==1.5.2
+pyarrow==23.0.1
 joblib==1.4.2
 
-# ML inference — placement (XGBoost + SHAP)
-# Pin matches the training environment; update if you retrain with a different version
-xgboost==2.1.4
-shap==0.45.1
-
-# ML inference — enrollment forecasting (LSTM)
-# tensorflow-cpu: no GPU required on the server; ~400MB vs ~2GB for full tensorflow
-# Requires .keras model saved with Keras 3.x (TF >= 2.16)
-tensorflow-cpu==2.16.2
-
-# ML inference — demand forecasting (Prophet)
-# prophet only needs to load a pre-trained pickle for inference; CmdStan not required
-prophet==1.1.6
+# Leftover US models (TensorFlow, Prophet, XGBoost, SHAP) are NOT installed by
+# default: nothing on the Ethiopia request path imports them, and they add over
+# a gigabyte to every image, deploy and CI run. They live in
+# requirements-legacy.txt and are installed only for LEGACY_US_MODELS=1 builds
+# (docker compose build --build-arg LEGACY_US_MODELS=1 backend).
 
 # Auth — JWT + password hashing for role-based access control
-# python-jose: HS256 encode/decode. passlib[bcrypt]: password hashing.
+# PyJWT: HS256 encode/decode (replaces python-jose, unmaintained with open
+# advisories). bcrypt: password hashing, used directly (passlib is unmaintained).
 # python-multipart: required by FastAPI to parse the OAuth2 password form body.
-python-jose[cryptography]==3.3.0
-passlib[bcrypt]==1.7.4
+PyJWT==2.15.1
 bcrypt==4.0.1
-python-multipart==0.0.9
+python-multipart==0.0.33
 
 # Validation
-pydantic==2.7.1
-pydantic-settings==2.2.1
+pydantic==2.14.3
+pydantic-settings==2.16.2
 PyYAML==6.0.2
 
 # HTTP client (for inter-service calls, and the pytest suite)
 httpx==0.27.0
 
 # Testing
-pytest==8.2.2
+pytest==9.0.3
 
 # Report export (W.MOL.09)
 openpyxl==3.1.5
-fpdf2==2.8.2
+fpdf2==2.8.8

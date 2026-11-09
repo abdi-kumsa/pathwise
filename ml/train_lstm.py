@@ -166,7 +166,6 @@ def evaluate(model, X_test, y_test, enrollment, scalers, programs):
     per_program = {}
 
     for i, prog in enumerate(programs):
-        prog_data = enrollment[enrollment['program'] == prog].sort_values('enrollment_year')
         target_years = np.array(years[SEQ_LEN:])
         test_mask = target_years == test_year
 

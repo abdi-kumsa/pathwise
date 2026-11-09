@@ -126,21 +126,24 @@ def feature_importance() -> dict:
             block = ethiopia.get(key) or {}
             learned[key] = {
                 "method": "model_based_importance",
-                "also": ["permutation_importance"],
+                "also": ["shap_linear_exact", "permutation_importance"],
+                "model": block.get("model"),
+                "target": block.get("target"),
                 "model_based": block.get("model_based") or [],
+                "shap": block.get("shap") or [],
                 "permutation": block.get("permutation") or [],
                 "rows": block.get("model_based") or [],
+                "coefficients": block.get("coefficients"),
                 "holdout_rmse": block.get("holdout_rmse"),
+                "holdout_rmse_no_change": block.get("holdout_rmse_no_change"),
                 "split": block.get("split"),
+                "features_from": block.get("features_from"),
             }
+    # The pooled learners use only the target's own history. Every other DOC1
+    # column is collected but not a learner input, and is listed as such.
     used = {
-        "model1": [
-            "enrollment_lag_1y",
-            "enrollment_lag_2y",
-            "enrollment_rolling_3y_avg",
-            "applications_count",
-        ],
-        "model2": ["employment_lag_1y", "employment_lag_2y"],
+        "model1": ["applications_count"],
+        "model2": ["employment_level", "employment_lag_1y", "employment_lag_2y"],
     }
     unused = []
     for model_key, mid in (("model1", "M1"), ("model2", "M2")):
@@ -162,9 +165,10 @@ def feature_importance() -> dict:
         "collection_priority": collection_priority_panel(),
         "unused_by_learner": unused,
         "note": (
-            "Ethiopia OLS uses only the lag columns listed under learned_importance. "
-            "Other DOC1 columns are collected and unused — they are not SHAP features. "
-            "Placement SHAP is a leftover US tool."
+            "Ethiopia M1/M2 importance comes from the pooled ridge the forecasts use, "
+            "trained on earlier years and explained on later ones. Its two inputs are "
+            "derived from the target's own history; other DOC1 columns are collected "
+            "and unused by the learner. Placement SHAP is a leftover US tool."
         ),
         "us_models_not_compared": (ethiopia or {}).get("not_compared") or [
             "US LSTM (ml/models/enrollment_lstm.keras)",
@@ -184,6 +188,17 @@ def _ethiopia_importance() -> dict | None:
 
 
 def _placement_shap() -> dict:
+    from services.feature_flags import LEGACY_US_MODELS
+    if not LEGACY_US_MODELS:
+        return {
+            "method": "shap",
+            "available": False,
+            "rows": [],
+            "note": (
+                "Placement SHAP belongs to the leftover US placement model, which is "
+                "switched off (LEGACY_US_MODELS=0). It is not an Ethiopia model."
+            ),
+        }
     try:
         from services import ml_service
         shap_values, base_val, feature_names, _X = ml_service.get_shap_cache()
@@ -214,23 +229,73 @@ def _placement_shap() -> dict:
         }
 
 
+def _valid_spec_ids() -> set[str]:
+    ids = set()
+    for model in S.models():
+        for cat in S.categories(model):
+            ids.add(cat["id"])
+        for var in S.variables(model):
+            ids.add(var["id"])
+    return ids
+
+
 def list_expert_validations() -> dict:
+    """PROC.S2 records plus validation coverage.
+
+    Coverage counts *recorded* reviews only. Seeded demonstration rows are
+    returned (flagged) so the page is not empty in a demo, but never count as
+    validation. They are created only in development.
+    """
     from db.database import SessionLocal
     from models.governance import ExpertValidation
+    from services.auth_service import IS_DEV
 
     session = SessionLocal()
     try:
         rows = session.query(ExpertValidation).order_by(ExpertValidation.created_at.desc()).all()
-        if not rows:
+        if not rows and IS_DEV:
             rows = _seed_expert_validations(session)
-        return {
-            "n": len(rows),
-            "expert_domains": EXPERT_DOMAINS,
-            "rows": [_expert_row(r) for r in rows],
-            "seed": "simulated",
-        }
+        out = [_expert_row(r) for r in rows]
     finally:
         session.close()
+    return {
+        "n": len(out),
+        "expert_domains": EXPERT_DOMAINS,
+        "verdicts": list(VERDICTS),
+        "coverage": _coverage(out),
+        "rows": out,
+    }
+
+
+def _coverage(rows: list[dict]) -> dict:
+    """Which domains and categories have a real (recorded) review, and the
+    latest recorded verdict per category."""
+    recorded = [r for r in rows if r["source"] == "recorded"]
+    by_domain = {d: 0 for d in EXPERT_DOMAINS}
+    for r in recorded:
+        by_domain[r["expert_role"]] = by_domain.get(r["expert_role"], 0) + 1
+    categories = [c["id"] for m in S.models() for c in S.categories(m)]
+    latest: dict[str, dict] = {}
+    for r in sorted(recorded, key=lambda r: r["created_at"] or ""):
+        cat = ".".join(r["spec_id"].split(".")[:2])
+        latest[cat] = {"verdict": r["verdict"], "expert_role": r["expert_role"],
+                       "expert_name": r["expert_name"], "at": r["created_at"]}
+    accepted = [c for c in categories if latest.get(c, {}).get("verdict") == "accepted"]
+    return {
+        "recorded_reviews": len(recorded),
+        "seeded_rows": len(rows) - len(recorded),
+        "domains_with_a_review": sum(1 for v in by_domain.values() if v),
+        "domains_total": len(EXPERT_DOMAINS),
+        "reviews_by_domain": by_domain,
+        "categories_total": len(categories),
+        "categories_accepted": len(accepted),
+        "latest_by_category": latest,
+        "complete": all(by_domain.values()) and len(accepted) == len(categories),
+        "note": (
+            "Only recorded reviews count. PROC.S2 is complete when every expert domain "
+            "has reviewed and every DOC1 category's latest recorded verdict is accepted."
+        ),
+    }
 
 
 def create_expert_validation(
@@ -238,27 +303,32 @@ def create_expert_validation(
     spec_id: str,
     expert_role: str,
     verdict: str,
+    expert_name: str,
+    organisation: str,
     notes: str | None = None,
+    recorded_by: str | None = None,
 ) -> dict:
     from fastapi import HTTPException
     from db.database import SessionLocal
     from models.governance import ExpertValidation
 
+    if spec_id not in _valid_spec_ids():
+        raise HTTPException(status_code=422,
+                            detail=f"spec_id {spec_id!r} is not a DOC1 category or variable id")
     if expert_role not in EXPERT_DOMAINS:
-        raise HTTPException(
-            status_code=422,
-            detail=f"expert_role must be one of {EXPERT_DOMAINS}",
-        )
+        raise HTTPException(status_code=422, detail=f"expert_role must be one of {EXPERT_DOMAINS}")
     if verdict not in VERDICTS:
         raise HTTPException(status_code=422, detail=f"verdict must be one of {VERDICTS}")
+    if not (expert_name or "").strip() or not (organisation or "").strip():
+        raise HTTPException(status_code=422,
+                            detail="A recorded review needs the expert's name and organisation")
 
     session = SessionLocal()
     try:
         row = ExpertValidation(
-            spec_id=spec_id,
-            expert_role=expert_role,
-            verdict=verdict,
-            notes=notes,
+            spec_id=spec_id, expert_role=expert_role, verdict=verdict, notes=notes,
+            expert_name=expert_name.strip(), organisation=organisation.strip(),
+            recorded_by=recorded_by, source="recorded",
         )
         session.add(row)
         session.commit()
@@ -269,6 +339,45 @@ def create_expert_validation(
         raise
     finally:
         session.close()
+
+
+def clear_seeded_expert_validations() -> int:
+    """Remove the demonstration rows (before real reviews are entered)."""
+    from db.database import SessionLocal
+    from models.governance import ExpertValidation
+
+    session = SessionLocal()
+    try:
+        n = session.query(ExpertValidation).filter(ExpertValidation.source == "seeded").delete()
+        session.commit()
+        return int(n)
+    except Exception:
+        session.rollback()
+        raise
+    finally:
+        session.close()
+
+
+def export_expert_validations_csv() -> str:
+    """The attribute list with its latest recorded verdict — what PROC.S2 asks
+    to be validated, in a form a ministry reviewer can sign off."""
+    import csv
+    import io
+
+    data = list_expert_validations()
+    latest = data["coverage"]["latest_by_category"]
+    buf = io.StringIO()
+    w = csv.writer(buf)
+    w.writerow(["category_id", "category", "model", "collection_priority_pct",
+                "latest_verdict", "expert_role", "expert_name", "reviewed_at"])
+    for model in S.models():
+        mid = S.load(model)["model"]["id"]
+        for cat in S.categories(model):
+            rec = latest.get(cat["id"], {})
+            w.writerow([cat["id"], cat["name"], mid, cat.get("collection_priority"),
+                        rec.get("verdict", "not reviewed"), rec.get("expert_role", ""),
+                        rec.get("expert_name", ""), rec.get("at", "")])
+    return buf.getvalue()
 
 
 def _seed_expert_validations(session) -> list:
@@ -284,12 +393,9 @@ def _seed_expert_validations(session) -> list:
     ]
     rows = []
     for spec_id, role, verdict, notes in seeds:
-        row = ExpertValidation(
-            spec_id=spec_id,
-            expert_role=role,
-            verdict=verdict,
-            notes=notes,
-        )
+        row = ExpertValidation(spec_id=spec_id, expert_role=role, verdict=verdict,
+                               notes=notes, source="seeded",
+                               expert_name="(demonstration row)", organisation="—")
         session.add(row)
         rows.append(row)
     try:
@@ -302,24 +408,20 @@ def _seed_expert_validations(session) -> list:
     return rows
 
 
-_SEED_NOTES = {
-    "Enrolment history is the right demand spine.",
-    "Quota tables match placement practice.",
-    "Formal/informal split needs a ministry refresh.",
-    "Labour history grain is usable for a simulated series.",
-    "Macro-regional context is a collection priority, not a weight.",
-    "FDI parks are leading indicators, displayed separately.",
-}
-
-
 def _expert_row(row) -> dict:
-    seeded = (row.notes or "") in _SEED_NOTES
+    source = getattr(row, "source", None) or "recorded"
     return {
         "id": row.id,
         "spec_id": row.spec_id,
         "expert_role": row.expert_role,
         "verdict": row.verdict,
         "notes": row.notes,
+        "expert_name": getattr(row, "expert_name", None),
+        "organisation": getattr(row, "organisation", None),
+        "recorded_by": getattr(row, "recorded_by", None),
+        "source": source,
         "created_at": row.created_at.isoformat() if row.created_at else None,
-        "tier": "simulated" if seeded else "recorded",
+        "tier": "simulated" if source == "seeded" else "recorded",
     }
+
+

@@ -48,4 +48,11 @@ class ExpertValidation(Base):
     expert_role = Column(String(64), nullable=False)
     verdict     = Column(String(24), nullable=False)
     notes       = Column(Text)
+    # Who gave the judgement and who entered it. `source` is 'recorded' for a
+    # real review and 'seeded' for the demonstration rows; only recorded
+    # reviews count towards validation coverage.
+    expert_name  = Column(String(120))
+    organisation = Column(String(160))
+    recorded_by  = Column(String(64))
+    source       = Column(String(16), nullable=False, server_default=text("'recorded'"))
     created_at  = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text("NOW()"))

@@ -6,12 +6,14 @@ scans Ethiopia parquets. Audit-log GET is searchable and is itself not logged.
 """
 from __future__ import annotations
 
+import os
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from sqlalchemy import desc
 
+from services._cache import ttl_cache
 from services._validate import ETHIOPIA, validate_ethiopia
 
 try:
@@ -72,7 +74,11 @@ def platform_health() -> dict:
     from services import ml_service
     from services.auth_service import ALL_ROLES
 
-    models = ml_service.loaded_status()
+    from services.feature_flags import LEGACY_US_MODELS
+
+    # With the leftover US artefacts switched off there is nothing to load;
+    # reporting "0/5 loaded" would read as an outage that is not happening.
+    models = ml_service.loaded_status() if LEGACY_US_MODELS else {}
     loaded = sum(1 for v in models.values() if v)
     session = SessionLocal()
     try:
@@ -92,6 +98,7 @@ def platform_health() -> dict:
         "models": models,
         "models_loaded": loaded,
         "models_total": len(models),
+        "legacy_us_models": LEGACY_US_MODELS,
         "users": {
             "total": len(rows),
             "active": active,
@@ -102,6 +109,7 @@ def platform_health() -> dict:
     }
 
 
+@ttl_cache
 def pipeline_status() -> dict:
     """W.ADM.02 — status list of all 20 source_tables."""
     validate_errors = validate_ethiopia()
@@ -136,6 +144,14 @@ def pipeline_status() -> dict:
                 import pandas as pd
                 df = pd.read_parquet(path) if path.suffix == ".parquet" else pd.read_csv(path)
                 feed["rows"] = int(len(df))
+                # Tier comes from the file itself, so an ingested official
+                # table shows as official (scripts/ingest_official.py).
+                if "provenance" in df.columns and len(df):
+                    tiers = set(df["provenance"].dropna().astype(str))
+                    feed["tier"] = tiers.pop() if len(tiers) == 1 else "mixed"
+                for col in ("source", "vintage"):
+                    if col in df.columns and len(df) and df[col].notna().any():
+                        feed[col] = str(df[col].dropna().iloc[0])
                 if "year" in df.columns and len(df):
                     feed["year_min"] = int(df["year"].min())
                     feed["year_max"] = int(df["year"].max())
@@ -151,14 +167,17 @@ def pipeline_status() -> dict:
         feeds.append(feed)
 
     families = sorted({f["family"] for f in feeds})
+    tiers = {f["tier"] for f in feeds}
     return {
         "n": len(feeds),
         "feeds": feeds,
         "families": families,
-        "tier": "simulated",
+        "tier": tiers.pop() if len(tiers) == 1 else "mixed",
+        "official_tables": sorted(f["source_table"] for f in feeds if f["tier"] == "official"),
     }
 
 
+@ttl_cache
 def data_quality() -> dict:
     """W.ADM.06 — alert list: missing, duplicates, outliers, inconsistent."""
     import pandas as pd
@@ -209,15 +228,29 @@ def data_quality() -> dict:
                 outlier_n,
             ))
 
+        # Contract errors include tier problems: an official row without a
+        # source, or a tier other than simulated / official / derived. A table
+        # that is correctly official is not an alert.
         for msg in contract.get(table) or []:
             alerts.append(_alert("high", table, "inconsistent_records", msg, 1))
-        if "provenance" in df.columns and not (df["provenance"] == "simulated").all():
-            n_bad = int((df["provenance"] != "simulated").sum())
-            alerts.append(_alert(
-                "high", table, "inconsistent_records",
-                f"{table}: {n_bad} rows with provenance other than simulated",
-                n_bad,
-            ))
+
+    # Cross-table consistency rules (ml/consistency.py): the checks an
+    # official file must also pass, e.g. funnel order and true lag columns.
+    try:
+        from ml.consistency import run_rules
+        for r in run_rules():
+            if r["status"] == "fail":
+                alerts.append(_alert(
+                    r["severity"], r["table"], "inconsistent_records",
+                    f"{r['table']}: {r['rule']} — {r['description']} ({r['violations']} row(s))",
+                    r["violations"],
+                ))
+            elif r["status"] == "missing table":
+                alerts.append(_alert("moderate", r["table"], "inconsistent_records",
+                                     f"{r['table']}: {r['rule']} could not run (table missing)", 1))
+    except Exception as exc:
+        alerts.append(_alert("moderate", "consistency", "inconsistent_records",
+                             f"consistency rules failed to run ({exc.__class__.__name__})", 1))
 
     severity_rank = {"critical": 0, "high": 1, "moderate": 2, "low": 3}
     alerts.sort(key=lambda a: (severity_rank.get(a["severity"], 9), a["table"]))
@@ -225,8 +258,17 @@ def data_quality() -> dict:
         "n": len(alerts),
         "alerts": alerts,
         "checks": ["missing_values", "duplicates", "outliers", "inconsistent_records"],
+        "consistency_rules": _consistency_summary(),
         "tier": "simulated",
     }
+
+
+def _consistency_summary() -> list[dict]:
+    try:
+        from ml.consistency import run_rules
+        return run_rules()
+    except Exception:
+        return []
 
 
 def _alert(severity: str, table: str, check: str, message: str, count: int) -> dict:
@@ -275,23 +317,100 @@ def list_audit_log(
     session = SessionLocal()
     try:
         q = session.query(AuditLog)
+        # Filters are substring matches. % and _ in the input are matched
+        # literally, so ?actor=% no longer returns every row (audit S16).
         if actor:
-            q = q.filter(AuditLog.actor.ilike(f"%{actor.strip()}%"))
+            q = q.filter(AuditLog.actor.ilike(_contains(actor), escape="\\"))
         if action:
-            q = q.filter(AuditLog.action.ilike(f"%{action.strip()}%"))
+            q = q.filter(AuditLog.action.ilike(_contains(action), escape="\\"))
         if resource:
-            q = q.filter(AuditLog.resource.ilike(f"%{resource.strip()}%"))
+            q = q.filter(AuditLog.resource.ilike(_contains(resource), escape="\\"))
         if since:
             q = q.filter(AuditLog.created_at >= _parse_dt(since))
         if until:
             q = q.filter(AuditLog.created_at <= _parse_dt(until))
-        rows = q.order_by(desc(AuditLog.created_at)).limit(min(int(limit), 1000)).all()
+        total = q.count()
+        rows = q.order_by(desc(AuditLog.created_at)).limit(max(1, min(int(limit), 1000))).all()
         return {
             "n": len(rows),
+            "total": total,
+            "retention_days": AUDIT_RETENTION_DAYS,
             "rows": [_audit_row(r) for r in rows],
         }
     finally:
         session.close()
+
+
+def _contains(value: str) -> str:
+    v = value.strip().replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
+    return f"%{v}%"
+
+
+# ── Retention (plan item 3.7) ─────────────────────────────────────────────────
+# Audit rows older than AUDIT_RETENTION_DAYS are deleted by a daily job and on
+# demand by an administrator. The purge is itself written to the log, so the
+# record of what was removed survives the removal. Minimum 30 days, so a
+# mistyped value cannot wipe recent accountability.
+AUDIT_RETENTION_DAYS = max(30, int(os.getenv("AUDIT_RETENTION_DAYS") or 365))
+
+
+# Draft and rejected scenarios are working notes; approved, submitted and
+# archived ones are part of the governance record and are never purged.
+SCENARIO_RETENTION_DAYS = max(30, int(os.getenv("SCENARIO_RETENTION_DAYS") or 180))
+_PURGEABLE_SCENARIO_STATUSES = ("draft", "rejected")
+
+
+def purge_scenarios(retention_days: int | None = None, actor: dict | None = None) -> dict:
+    from db.database import SessionLocal
+    from models.governance import Scenario
+    from services.auth_service import log_audit
+
+    days = max(30, int(retention_days or SCENARIO_RETENTION_DAYS))
+    cutoff = datetime.now(timezone.utc) - timedelta(days=days)
+    session = SessionLocal()
+    try:
+        deleted = (
+            session.query(Scenario)
+            .filter(Scenario.created_at < cutoff,
+                    Scenario.status.in_(_PURGEABLE_SCENARIO_STATUSES))
+            .delete(synchronize_session=False)
+        )
+        session.commit()
+    except Exception:
+        session.rollback()
+        raise
+    finally:
+        session.close()
+    log_audit(actor or {"username": "system", "role": "SYSTEM"}, "scenario_retention",
+              "scenarios", {"deleted": int(deleted), "cutoff": cutoff.isoformat(),
+                            "statuses": list(_PURGEABLE_SCENARIO_STATUSES), "retention_days": days})
+    return {"deleted": int(deleted), "cutoff": cutoff.isoformat(), "retention_days": days}
+
+
+def purge_audit_log(retention_days: int | None = None, actor: dict | None = None) -> dict:
+    from db.database import SessionLocal
+    from models.governance import AuditLog
+    from services.auth_service import log_audit
+
+    days = max(30, int(retention_days or AUDIT_RETENTION_DAYS))
+    cutoff = datetime.now(timezone.utc) - timedelta(days=days)
+    session = SessionLocal()
+    try:
+        deleted = (
+            session.query(AuditLog)
+            .filter(AuditLog.created_at < cutoff)
+            .delete(synchronize_session=False)
+        )
+        session.commit()
+    except Exception:
+        session.rollback()
+        raise
+    finally:
+        session.close()
+    log_audit(actor or {"username": "system", "role": "SYSTEM"}, "audit_retention",
+              "audit_log", {"deleted": int(deleted), "cutoff": cutoff.isoformat(),
+                            "retention_days": days})
+    return {"deleted": int(deleted), "cutoff": cutoff.isoformat(), "retention_days": days}
 
 
 def _parse_dt(value: str):

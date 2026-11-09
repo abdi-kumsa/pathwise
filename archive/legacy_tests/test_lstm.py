@@ -11,7 +11,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'   # silence TF startup noise
 
-ROOT        = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT        = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 MODEL_DIR   = os.path.join(ROOT, 'ml', 'models')
 MODEL_PATH  = os.path.join(MODEL_DIR, 'enrollment_lstm.keras')
 SCALER_PATH = os.path.join(MODEL_DIR, 'enrollment_scaler.pkl')

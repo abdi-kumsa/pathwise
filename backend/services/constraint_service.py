@@ -18,7 +18,7 @@ if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
 from ml.features.model1 import c2_funnel, c6_cohort
-from ml.model1.layer1_demand import DIMENSIONS, forecast_unconstrained, group_forecast
+from ml.model1.layer1_demand import DIMENSIONS, forecast_unconstrained, group_forecast  # noqa: F401  (DIMENSIONS re-exported for routers/model1.py)
 from ml.model1.layer2_constraints import apply_constraints, explain_rules
 
 
@@ -43,7 +43,8 @@ def constrained_demand(
     numeric = [
         c for c in (
             "unconstrained_demand", "constrained_enrollment", "constraint_loss",
-            "seasonal_naive", "ols_lags", "interval_low", "interval_high",
+            "seasonal_naive", "historical_mean", "drift", "pooled_ridge",
+            "interval_low", "interval_high",
         ) if c in raw.columns
     ]
     grouped = raw.groupby(dims, as_index=False)[numeric].sum()

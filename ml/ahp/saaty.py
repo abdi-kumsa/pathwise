@@ -45,6 +45,13 @@ def _as_matrix(raw: list[list[float]]) -> np.ndarray:
         raise ValueError("pairwise matrix must be at least 2×2")
     if np.any(arr <= 0):
         raise ValueError("pairwise entries must be positive")
+    # Saaty pairwise matrices are reciprocal: a_ii = 1 and a_ij × a_ji = 1.
+    # A non-reciprocal input is a data-entry error, refused up front rather
+    # than left to surface as an odd consistency ratio.
+    if not np.allclose(np.diag(arr), 1.0, rtol=0, atol=1e-6):
+        raise ValueError("pairwise matrix diagonal must be 1")
+    if not np.allclose(arr * arr.T, 1.0, rtol=1e-2, atol=0):
+        raise ValueError("pairwise matrix must be reciprocal (a_ij × a_ji = 1)")
     return arr
 
 

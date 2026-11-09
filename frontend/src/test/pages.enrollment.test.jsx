@@ -1,9 +1,10 @@
 /**
  * Page tests — Student Enrollment Intelligence Dashboard
- * Covers: EnrollmentForecastPage, AdmissionRiskPage, PlacementByStreamPage
+ * Covers: EnrollmentForecastPage (leftover US LSTM page, routed only with
+ *         VITE_LEGACY_US_MODELS=true)
  */
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, waitFor, fireEvent, act } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 vi.mock('recharts', () => {
@@ -30,13 +31,9 @@ vi.mock('../api/enrollment', () => ({
 import {
   getEnrollmentSummary,
   getEnrollmentForecast,
-  getAdmissionRisk,
-  getPlacementByStream,
 } from '../api/enrollment'
 
 import EnrollmentForecastPage from '../pages/EnrollmentForecastPage'
-import AdmissionRiskPage      from '../pages/AdmissionRiskPage'
-import PlacementByStreamPage  from '../pages/PlacementByStreamPage'
 
 // ── fixtures ──────────────────────────────────────────────────────────────────
 const SUMMARY = {
@@ -60,18 +57,6 @@ const FORECAST = {
     { year: 2027, predicted_count: 49 },
   ],
 }
-
-const RISKS = [
-  { program: 'MS Cybersecurity', risk_score: 24.5, trend: 'down', recommended_intake: 35 },
-  { program: 'MS HCI',           risk_score: 12.1, trend: 'down', recommended_intake: 28 },
-  { program: 'MS Cloud',         risk_score:  4.3, trend: 'stable', recommended_intake: 40 },
-]
-
-const STREAMS = [
-  { program: 'MS Data Science', placement_rate: 94.5, avg_salary: 125000, student_count: 250 },
-  { program: 'MS AI',           placement_rate: 92.1, avg_salary: 132000, student_count: 200 },
-  { program: 'BS CS',           placement_rate: 85.0, avg_salary: 98000,  student_count: 150 },
-]
 
 beforeEach(() => vi.clearAllMocks())
 
@@ -155,137 +140,3 @@ describe('EnrollmentForecastPage', () => {
 })
 
 // ─── AdmissionRiskPage ────────────────────────────────────────────────────────
-
-describe('AdmissionRiskPage', () => {
-
-  it('shows page title', () => {
-    getAdmissionRisk.mockResolvedValue(RISKS)
-    render(<AdmissionRiskPage />)
-    expect(screen.getByText('Admission risk')).toBeInTheDocument()
-  })
-
-  it('shows loading state initially', () => {
-    getAdmissionRisk.mockReturnValue(new Promise(() => {}))
-    render(<AdmissionRiskPage />)
-    expect(screen.getAllByText('—').length).toBeGreaterThan(0)
-  })
-
-  it('renders risk table rows after data loads', async () => {
-    getAdmissionRisk.mockResolvedValue(RISKS)
-    render(<AdmissionRiskPage />)
-    // "MS Cybersecurity" appears in KPI card (highest risk) AND in the table row
-    await waitFor(() => expect(screen.getAllByText('MS Cybersecurity').length).toBeGreaterThan(0))
-    expect(screen.getAllByText('MS HCI').length).toBeGreaterThan(0)
-  })
-
-  it('renders risk_score values', async () => {
-    getAdmissionRisk.mockResolvedValue(RISKS)
-    render(<AdmissionRiskPage />)
-    await waitFor(() => expect(screen.getByText('24.5')).toBeInTheDocument())
-    expect(screen.getByText('12.1')).toBeInTheDocument()
-  })
-
-  it('renders trend badges', async () => {
-    getAdmissionRisk.mockResolvedValue(RISKS)
-    render(<AdmissionRiskPage />)
-    await waitFor(() => expect(screen.getAllByText('Declining').length).toBe(2))
-    expect(screen.getByText('Stable')).toBeInTheDocument()
-  })
-
-  it('shows declining count in KPI', async () => {
-    getAdmissionRisk.mockResolvedValue(RISKS)
-    render(<AdmissionRiskPage />)
-    // 2 declining programmes in fixture
-    await waitFor(() => expect(screen.getByText('2')).toBeInTheDocument())
-  })
-
-  it('shows ErrorBanner on failure', async () => {
-    getAdmissionRisk.mockRejectedValue(new Error('risk data error'))
-    render(<AdmissionRiskPage />)
-    await waitFor(() => expect(screen.getByText('risk data error')).toBeInTheDocument())
-  })
-
-  it('initial API call uses default limit of 12', async () => {
-    getAdmissionRisk.mockResolvedValue(RISKS)
-    render(<AdmissionRiskPage />)
-    await waitFor(() => expect(getAdmissionRisk).toHaveBeenCalledWith(12))
-  })
-
-  it('debounces slider — only fires one API call 500ms after slider change', async () => {
-    vi.useFakeTimers()
-    getAdmissionRisk.mockResolvedValue(RISKS)
-    render(<AdmissionRiskPage />)
-
-    // Wait for the initial call to settle
-    await act(async () => { vi.advanceTimersByTime(600) })
-    const initialCalls = getAdmissionRisk.mock.calls.length
-
-    // Move slider — should NOT trigger immediately
-    const slider = screen.getByRole('slider')
-    fireEvent.change(slider, { target: { value: '5' } })
-
-    // 400ms later — still no new call
-    await act(async () => { vi.advanceTimersByTime(400) })
-    expect(getAdmissionRisk.mock.calls.length).toBe(initialCalls)
-
-    // 500ms total — now it fires
-    await act(async () => { vi.advanceTimersByTime(100) })
-    expect(getAdmissionRisk.mock.calls.length).toBe(initialCalls + 1)
-    expect(getAdmissionRisk).toHaveBeenLastCalledWith(5)
-
-    vi.useRealTimers()
-  })
-})
-
-// ─── PlacementByStreamPage ────────────────────────────────────────────────────
-
-describe('PlacementByStreamPage', () => {
-
-  it('shows page title', () => {
-    getPlacementByStream.mockResolvedValue(STREAMS)
-    render(<PlacementByStreamPage />)
-    expect(screen.getByText('Placement by stream')).toBeInTheDocument()
-  })
-
-  it('shows loading dashes initially', () => {
-    getPlacementByStream.mockReturnValue(new Promise(() => {}))
-    render(<PlacementByStreamPage />)
-    expect(screen.getAllByText('—').length).toBeGreaterThan(0)
-  })
-
-  it('renders top programme name after data loads', async () => {
-    getPlacementByStream.mockResolvedValue(STREAMS)
-    render(<PlacementByStreamPage />)
-    await waitFor(() => expect(screen.getAllByText('MS Data Science').length).toBeGreaterThan(0))
-  })
-
-  it('renders overall placement rate KPI', async () => {
-    getPlacementByStream.mockResolvedValue(STREAMS)
-    render(<PlacementByStreamPage />)
-    const avg = ((94.5 + 92.1 + 85.0) / 3).toFixed(1)
-    await waitFor(() => expect(screen.getByText(avg + '%')).toBeInTheDocument())
-  })
-
-  it('renders avg salary KPI', async () => {
-    getPlacementByStream.mockResolvedValue(STREAMS)
-    render(<PlacementByStreamPage />)
-    const avgSalary = '$' + Math.round((125000 + 132000 + 98000) / 3 / 1000) + 'K'
-    await waitFor(() => expect(screen.getByText(avgSalary)).toBeInTheDocument())
-  })
-
-  it('shows ErrorBanner when fetch fails', async () => {
-    getPlacementByStream.mockRejectedValue(new Error('stream error'))
-    render(<PlacementByStreamPage />)
-    await waitFor(() => expect(screen.getByText('stream error')).toBeInTheDocument())
-  })
-
-  it('shows Retry button and re-fetches on click', async () => {
-    getPlacementByStream
-      .mockRejectedValueOnce(new Error('fail'))
-      .mockResolvedValueOnce(STREAMS)
-    render(<PlacementByStreamPage />)
-    await waitFor(() => screen.getByRole('button', { name: /retry/i }))
-    fireEvent.click(screen.getByRole('button', { name: /retry/i }))
-    await waitFor(() => expect(screen.getAllByText('MS Data Science').length).toBeGreaterThan(0))
-  })
-})

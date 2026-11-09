@@ -6,6 +6,7 @@ import SectionHeader from '../../components/SectionHeader'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
 import DataNote from '../../components/DataNote'
+import ForecastAccuracyNote from '../../components/ForecastAccuracyNote'
 import EmptyState from '../../components/EmptyState'
 import useFetch from '../../hooks/useFetch'
 import { getUnconstrainedDemand } from '../../api/roles'
@@ -39,6 +40,7 @@ export default function DemandForecastPage() {
           <DataNote tone="simulated">
             Layer {data.layer || 'M1.L1'}. Horizon {data.horizon} years. JWT-scoped to this institution.
           </DataNote>
+          <ForecastAccuracyNote />
           {rows.length === 0 && (
             <EmptyState title="No forecast rows" description="Unconstrained demand is empty for this institution." />
           )}

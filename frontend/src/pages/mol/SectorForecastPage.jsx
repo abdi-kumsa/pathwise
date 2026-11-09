@@ -7,11 +7,12 @@ import SectionHeader from '../../components/SectionHeader'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
 import DataNote from '../../components/DataNote'
+import ForecastAccuracyNote from '../../components/ForecastAccuracyNote'
 import EmptyState from '../../components/EmptyState'
 import EthiopiaRegionMap from '../../components/EthiopiaRegionMap'
 import useFetch from '../../hooks/useFetch'
 import { getLabourForecast } from '../../api/roles'
-import { SERIES, axisProps, gridProps, tooltipProps, colorFor, fmtNum } from '../../config/chartTheme'
+import { axisProps, gridProps, tooltipProps, colorFor, fmtNum } from '../../config/chartTheme'
 
 const GRAINS = [
   { id: 'sector,period', label: 'Sector' },
@@ -63,6 +64,7 @@ export default function SectorForecastPage() {
           <DataNote tone="simulated">
             group_by={grain}. Employment demand (or vacancies when demand is empty) on one scale.
           </DataNote>
+          <ForecastAccuracyNote />
           {rows.length === 0 ? (
             <EmptyState title="No forecast rows" description="No employment-demand series for this grain." />
           ) : (

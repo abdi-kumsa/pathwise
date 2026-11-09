@@ -1,0 +1,11 @@
+{
+  "demand_prophet.pkl": "a234807138ae3299de30abeb507d4a832b209a9092ce1406060b234db3dc7dc6",
+  "demand_prophet_meta.pkl": "bcc268d000bbdc604207380edafb38e7a32f2decce422608ad5f7eb21892f156",
+  "enrollment_lstm.keras": "ed32d8c323b86ab09e9dab1fef73db0ef026ddcc13b2efbfdcd64361b6bec1bc",
+  "enrollment_lstm_meta.pkl": "e9d212ca3d7cbc34e87ddf020671699657534cf16b8cea32e817f14241bed386",
+  "enrollment_scaler.pkl": "4779063a16777cadf0e60a680f709972148ca76ae61af0de01b1e6ff3682c369",
+  "placement_feature_names.pkl": "ebfa3af4e215a7967332fcbc2e36a4610cfd8bb611446b913a4bd8f9f3eee04a",
+  "placement_xgboost.pkl": "03108899935a92838b392050965f60e1c6024ebb0f4a6cb66054ae2bdb2a0ab8",
+  "salary_xgboost.pkl": "e8c2ed518bca3c8df2c1138f1ecdc920c46145b1c88436e6409f6e51253a9672",
+  "salary_xgboost_meta.pkl": "e03a3c3cadc5d2e098905cd12bbd61d908ee0c4f8f5748c4fc612f1394f5c49b"
+}

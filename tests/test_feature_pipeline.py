@@ -5,7 +5,6 @@ Run from project root: python tests/test_feature_pipeline.py
 import os
 import sys
 import pandas as pd
-import numpy as np
 from sklearn.model_selection import train_test_split
 
 # ── Resolve project root ──────────────────────────────────────────────────────
@@ -111,7 +110,7 @@ print("\n--- Manual Inspection ---\n")
 
 placement_rate = df['placed'].mean()
 print(f"  {MANUAL}  F8  Placement rate: {placement_rate*100:.2f}%")
-print(f"           Expected range: 80–95%")
+print("           Expected range: 80–95%")
 print(f"           -> {'LOOKS OK' if 0.80 <= placement_rate <= 0.95 else 'OUT OF RANGE'}")
 
 print()

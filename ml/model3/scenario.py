@@ -1,20 +1,42 @@
 """
 M3.5 — policy / capacity scenario engine.
 
-What-ifs over quota, priority field, placement-band rule and capacity.
+What-ifs over quota, priority field, placement rule and capacity.
 Each run is labelled unofficial so it cannot be mistaken for a baseline
 forecast (the reason W.ADM.05 exists). Persistence lives in the service layer.
+
+Levers and what they change in the Layer 2 inputs:
+
+    quota            approved intake quota and available seats  (× quota_scale)
+    capacity         programme capacity                          (× capacity_scale)
+    priority_field   quota and seats of the named fields         (× priority_boost)
+    placement_rule   ESSLCE pass rate, in percentage points       (+ pass_rate_shift_pp)
+    band_allocation  natural : social science directive           (natural_share)
+
+Graduate supply follows cohorts (ml/model3/supply.py), so a lever reaches
+expected graduates only for intakes after the origin — about four years out.
 """
 from __future__ import annotations
 
 import pandas as pd
 
-from ml.features.model1 import c4_quota
+from ml.features.model1 import c3_exam, c4_quota
 from ml.model1.layer1_demand import forecast_unconstrained
 from ml.model1.layer2_constraints import NATURAL_SHARE, SOCIAL_SHARE, apply_constraints
 from ml.model3.supply import graduate_supply
 
-LEVERS = ("quota", "priority_field", "placement_rule", "capacity")
+LEVERS = ("quota", "priority_field", "placement_rule", "capacity", "band_allocation")
+PASS_RATE_SHIFT_LIMIT = 15.0
+
+
+def apply_placement_rule(exam: pd.DataFrame, pass_rate_shift_pp: float = 0.0) -> pd.DataFrame:
+    """Move the ESSLCE pass rate by a number of percentage points, clipped 0–100."""
+    e = exam.copy()
+    if pass_rate_shift_pp and "exam_pass_rate_pct" in e.columns:
+        e["exam_pass_rate_pct"] = (
+            e["exam_pass_rate_pct"].astype(float) + float(pass_rate_shift_pp)
+        ).clip(0, 100)
+    return e
 
 
 def apply_levers(
@@ -68,8 +90,11 @@ def run_scenario(
     priority_boost: float = 1.25,
     natural_share: float = NATURAL_SHARE,
     social_share: float = SOCIAL_SHARE,
+    pass_rate_shift_pp: float = 0.0,
     horizon: int = 1,
 ) -> dict:
+    if abs(float(pass_rate_shift_pp)) > PASS_RATE_SHIFT_LIMIT:
+        raise ValueError(f"pass_rate_shift_pp must be within ±{PASS_RATE_SHIFT_LIMIT}")
     unconstrained = forecast_unconstrained(horizon=horizon)
     quota = c4_quota.frame()
     baseline = apply_constraints(unconstrained)
@@ -83,6 +108,7 @@ def run_scenario(
     scenario = apply_constraints(
         unconstrained,
         quota=scenario_quota,
+        exam=apply_placement_rule(c3_exam.frame(), pass_rate_shift_pp),
         natural_share=natural_share,
         social_share=social_share,
     )
@@ -95,6 +121,7 @@ def run_scenario(
         "priority_boost": priority_boost,
         "natural_share": natural_share,
         "social_share": social_share,
+        "pass_rate_shift_pp": pass_rate_shift_pp,
         "horizon": horizon,
         "levers": list(LEVERS),
     }
@@ -112,6 +139,8 @@ def run_scenario(
         "note": (
             "This is a what-if against the simulated baseline, not an official "
             "MoE forecast. Assumptions are stored with the run so it cannot be "
-            "quoted without them."
+            "quoted without them. Expected graduates change only for cohorts that "
+            "enter after the last observed year, so at short horizons the graduate "
+            "delta is zero by design: those graduates are already enrolled."
         ),
     }
