@@ -44,14 +44,14 @@ export default function WorkforceReportPage() {
       {data && (
         <>
           <DataNote tone="simulated">
-            {data.note} Each download writes a report_export audit row. official_forecast: {String(data.official_forecast)}.
+            {data.note} Downloads are recorded in the audit log.{data.official_forecast ? '' : ' Not an official forecast.'}
           </DataNote>
           <ForecastAccuracyNote />
           <div className="panel" style={{ marginTop: 16 }} data-testid="report-summary">
             <p className="panel-title">Workforce planning report</p>
             <p className="panel-sub">As of {data.as_of ?? '—'} · horizon {data.horizon ?? '—'} years</p>
             <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 8 }}>
-              Caveat: simulated Ethiopian structure. official_forecast is false. Not a ministry circular.
+              Simulated Ethiopian structure. Not an official forecast or a ministry circular.
             </p>
             {recommendations.length > 0 && (
               <ol style={{ margin: '10px 0 0 18px', fontSize: 13 }}>

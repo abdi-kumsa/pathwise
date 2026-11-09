@@ -33,7 +33,7 @@ export default function ThreeWayComparisonPage() {
       {data && (
         <>
           <DataNote tone="simulated">
-            Planning on popularity alone misses graduate supply and labour demand. Colour plus the legend names each series.
+            Applications, graduate supply and labour demand side by side: planning on popularity alone misses the other two.
           </DataNote>
           <ForecastAccuracyNote />
           {rows.length === 0 && (

@@ -6,7 +6,6 @@ import RoleRoute from './components/RoleRoute'
 import Sidebar from './components/Sidebar'
 import CommandBar from './components/CommandBar'
 import LoadingSpinner from './components/LoadingSpinner'
-import ProvenanceBadge from './components/ProvenanceBadge'
 import { DEFAULT_PROVENANCE } from './hooks/useProvenance'
 import usePageView from './hooks/usePageView'
 
@@ -93,6 +92,9 @@ function Legacy({ children }) {
   return <Suspense fallback={<LoadingSpinner message="Loading…" height={320} />}>{children}</Suspense>
 }
 
+// Injected by vite.config.js from VITE_BUILD_SHA, the host's git commit, or 'dev'.
+const BUILD = typeof __BUILD_SHA__ === 'string' ? __BUILD_SHA__ : 'dev'
+
 const STUDENT    = ['STUDENT']
 const MOL        = ['MOL', 'ADMIN']
 const MOE        = ['MOE', 'ADMIN']
@@ -124,12 +126,17 @@ function Shell({ children }) {
           </button>
 
           <CommandBar />
-
-          <ProvenanceBadge provenance={DEFAULT_PROVENANCE} />
         </div>
 
         {/* key on pathname so a page never shows the previous page's state */}
         <div key={location.pathname}>{children}</div>
+
+        <footer className="app-footer">
+          <span>
+            {DEFAULT_PROVENANCE.source}, {DEFAULT_PROVENANCE.as_of}. Not official MoE, MoLS or ESS statistics.
+          </span>
+          <span>Build {BUILD}</span>
+        </footer>
       </main>
     </div>
   )

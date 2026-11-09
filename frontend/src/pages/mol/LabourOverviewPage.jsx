@@ -11,7 +11,7 @@ import useFetch from '../../hooks/useFetch'
 import { getLabourOverview } from '../../api/roles'
 import {
   SERIES, axisProps, gridProps, tooltipProps, RADIUS_H,
-  fmtCompact, fmtPct, fmtDelta, deltaDirection,
+  fmtCompact, fmtPct, fmtDelta, deltaDirection, fmtNum,
 } from '../../config/chartTheme'
 
 export default function LabourOverviewPage() {
@@ -38,7 +38,7 @@ export default function LabourOverviewPage() {
           <div className="kpi-grid">
             <KPICard
               label="Employment"
-              value={fmtCompact(o.employment_level)}
+              value={fmtNum(o.employment_level)}
               delta={o.labour_force_participation_pct != null ? `${fmtPct(o.labour_force_participation_pct)} participation` : 'Participation unavailable'}
               deltaDirection="neutral"
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8"/></svg>}
@@ -52,14 +52,14 @@ export default function LabourOverviewPage() {
             />
             <KPICard
               label="Underemployment"
-              value={fmtCompact(o.underemployment)}
+              value={fmtNum(o.underemployment)}
               delta="Labour-force structure, not job-board copy"
               deltaDirection="neutral"
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v18M7 7l-4 7h8ZM17 7l-4 7h8Z"/></svg>}
             />
             <KPICard
               label="Vacancies"
-              value={fmtCompact(o.vacancies ?? o.openings_latest_year)}
+              value={fmtNum(o.vacancies ?? o.openings_latest_year)}
               delta={fmtDelta(o.openings_cagr_pct) + ' openings / yr'}
               deltaDirection={deltaDirection(o.openings_cagr_pct)}
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 3v18h18"/><path d="M18.7 8 13 13.7l-3-3L4 16.5"/></svg>}
@@ -77,7 +77,7 @@ export default function LabourOverviewPage() {
                 <YAxis type="category" dataKey="field" {...axisProps} width={132}
                        tick={{ fontSize: 10.5, fill: '#64748B' }} />
                 <Tooltip {...tooltipProps}
-                         formatter={(v) => [fmtCompact(v), 'Openings']} />
+                         formatter={(v) => [fmtNum(v), 'Openings']} />
                 <Bar isAnimationActive={false} dataKey="openings" fill={SERIES[0]} radius={RADIUS_H} barSize={17} />
               </BarChart>
             </ResponsiveContainer>

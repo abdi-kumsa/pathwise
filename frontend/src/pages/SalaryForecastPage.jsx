@@ -133,7 +133,7 @@ export default function SalaryForecastPage() {
       {/* ── Charts ─────────────────────────────────────────────────────────── */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '24px' }}>
         <div style={{ background: 'var(--white)', border: '1px solid var(--border)', borderRadius: '14px', padding: '20px 22px 24px' }}>
-          <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '14px', fontWeight: '600', color: 'var(--navy)', marginBottom: '16px' }}>
+          <p style={{ fontSize: '14px', fontWeight: '600', color: 'var(--navy)', marginBottom: '16px' }}>
             Avg Salary by Programme ($K)
           </p>
           {loading ? <LoadingSpinner message="Loading salary data…" height={300} /> : (
@@ -150,7 +150,7 @@ export default function SalaryForecastPage() {
         </div>
 
         <div style={{ background: 'var(--white)', border: '1px solid var(--border)', borderRadius: '14px', padding: '20px 22px 24px' }}>
-          <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '14px', fontWeight: '600', color: 'var(--navy)', marginBottom: '16px' }}>
+          <p style={{ fontSize: '14px', fontWeight: '600', color: 'var(--navy)', marginBottom: '16px' }}>
             Median Salary by Programme ($K)
           </p>
           {loading ? <LoadingSpinner message="Loading salary data…" height={300} /> : (
@@ -169,7 +169,7 @@ export default function SalaryForecastPage() {
 
       {/* ── Individual predictor ───────────────────────────────────────────── */}
       <div style={{ background: 'var(--white)', border: '1px solid var(--border)', borderRadius: '14px', padding: '24px 28px' }}>
-        <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '15px', fontWeight: '700', color: 'var(--navy)', marginBottom: '4px' }}>
+        <p style={{ fontSize: '15px', fontWeight: '700', color: 'var(--navy)', marginBottom: '4px' }}>
           Individual salary predictor
         </p>
         <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '24px' }}>
@@ -209,7 +209,7 @@ export default function SalaryForecastPage() {
                 width: '100%', padding: '12px', borderRadius: '10px', border: 'none',
                 background: predLoading ? '#94a3b8' : '#2563eb', color: 'white',
                 fontSize: '14px', fontWeight: '600', cursor: predLoading ? 'not-allowed' : 'pointer',
-                fontFamily: "'Sora', sans-serif", transition: 'background 0.2s',
+                transition: 'background 0.2s',
               }}
             >
               {predLoading ? 'Predicting…' : 'Predict Salary'}
@@ -234,7 +234,7 @@ export default function SalaryForecastPage() {
                   <p style={{ fontSize: '12px', fontWeight: '600', color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px' }}>
                     Predicted Salary
                   </p>
-                  <p style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '48px', fontWeight: '700', color: '#1d4ed8', lineHeight: 1, marginBottom: '8px' }}>
+                  <p style={{ fontSize: '48px', fontWeight: '700', color: '#1d4ed8', lineHeight: 1, marginBottom: '8px' }}>
                     {fmt(prediction.predicted_salary)}
                   </p>
                   <p style={{ fontSize: '13px', color: '#6b7280' }}>
@@ -249,7 +249,7 @@ export default function SalaryForecastPage() {
                       <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '2px' }}>
                         {form.program} avg salary
                       </p>
-                      <p style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '20px', fontWeight: '600', color: 'var(--navy)' }}>
+                      <p style={{ fontSize: '20px', fontWeight: '600', color: 'var(--navy)' }}>
                         {fmt(prediction.program_avg_salary)}
                       </p>
                     </div>

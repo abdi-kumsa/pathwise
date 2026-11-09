@@ -13,7 +13,7 @@ import DataNote from '../../components/DataNote'
 import { searchJobs, recommendPrograms } from '../../api/roles'
 import {
   SERIES, axisProps, gridProps, tooltipProps, RADIUS_V, RADIUS_H,
-  fmtCompact, fmtMoney, fmtPct, fmtDelta, deltaDirection, shortMetro,
+  fmtCompact, fmtMoney, fmtPct, fmtDelta, deltaDirection, shortMetro, fmtNum,
 } from '../../config/chartTheme'
 
 /**
@@ -211,7 +211,7 @@ export default function CareerExplorerPage() {
           <div className="kpi-grid">
             <KPICard
               label="Openings (2016–2025)"
-              value={fmtCompact(demand.total_openings)}
+              value={fmtNum(demand.total_openings)}
               delta={fmtDelta(demand.openings_cagr_pct) + ' / yr'}
               deltaDirection={deltaDirection(demand.openings_cagr_pct)}
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 3v18h18"/><path d="M18.7 8 13 13.7l-3-3L4 16.5"/></svg>}
@@ -255,7 +255,7 @@ export default function CareerExplorerPage() {
                   <CartesianGrid {...gridProps} />
                   <XAxis dataKey="year" {...axisProps} />
                   <YAxis {...axisProps} tickFormatter={fmtCompact} width={46} />
-                  <Tooltip {...tooltipProps} formatter={v => [fmtCompact(v), 'Openings']} />
+                  <Tooltip {...tooltipProps} formatter={v => [fmtNum(v), 'Openings']} />
                   <Area isAnimationActive={false} type="monotone" dataKey="openings" stroke={SERIES[0]} strokeWidth={2}
                         fill="url(#ceDemand)" />
                 </AreaChart>
@@ -274,7 +274,7 @@ export default function CareerExplorerPage() {
                   <YAxis type="category" dataKey="metro" {...axisProps} width={104}
                          tickFormatter={shortMetro}
                          tick={{ fontSize: 10.5, fill: '#64748B' }} />
-                  <Tooltip {...tooltipProps} formatter={v => [fmtCompact(v), 'Openings']} />
+                  <Tooltip {...tooltipProps} formatter={v => [fmtNum(v), 'Openings']} />
                   <Bar isAnimationActive={false} dataKey="openings" fill={SERIES[0]} radius={RADIUS_H} barSize={16} />
                 </BarChart>
               </ResponsiveContainer>
@@ -388,7 +388,7 @@ export default function CareerExplorerPage() {
         .ce-submit {
           padding: 10px 20px; border-radius: 9px; border: none;
           background: var(--blue); color: #fff; font-size: 13.5px;
-          font-weight: 600; font-family: 'Sora', sans-serif; cursor: pointer;
+          font-weight: 600; cursor: pointer;
           height: 38px;
         }
         .ce-submit:disabled { background: #94A3B8; cursor: not-allowed; }
@@ -418,7 +418,7 @@ export default function CareerExplorerPage() {
         }
         .ce-card-head { display: flex; align-items: flex-start; gap: 10px; }
         .ce-rank {
-          font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600;
+          font-size: 12px; font-weight: 600;
           color: var(--text-muted); background: var(--white);
           border: 1px solid var(--border); border-radius: 6px; padding: 2px 7px;
           flex-shrink: 0;
@@ -434,7 +434,7 @@ export default function CareerExplorerPage() {
           text-transform: uppercase; letter-spacing: .03em;
         }
         .ce-score {
-          font-family: 'IBM Plex Mono', monospace; font-size: 22px;
+          font-size: 22px;
           font-weight: 700; line-height: 1; flex-shrink: 0;
         }
         .ce-score-unit { font-size: 11px; color: var(--text-muted); font-weight: 500; }

@@ -41,7 +41,7 @@ export default function ConstraintComparisonPage() {
       {data && (
         <>
           <DataNote tone="simulated">
-            Two series on one scale. Constrained enrolment is at most unconstrained demand. Binding constraint is named when the loss is on the constraint side.
+            Constrained enrolment can never exceed unconstrained demand. Where a field loses seats, the binding constraint is named.
           </DataNote>
           <ForecastAccuracyNote />
           {over && (

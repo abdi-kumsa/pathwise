@@ -102,6 +102,34 @@ def _series(p: pd.DataFrame, t: Target):
         yield key, s["year"].to_numpy(dtype=int), s["y"].to_numpy(dtype=float), s
 
 
+def observed(df: pd.DataFrame, ycol: str, keys, dimensions=(), where=()) -> pd.DataFrame:
+    """Sum an observed column to `dimensions` + year.
+
+    `where` is (column, value) pairs applied before summing, so an institution
+    scope holds even when the result is not grouped by institution. Dimensions
+    that are not series keys are ignored rather than inventing a grouping.
+    """
+    out = df.dropna(subset=[ycol])
+    for col, val in tuple(where or ()):
+        if col in out.columns:
+            out = out[out[col] == val]
+    dims = [d for d in (dimensions or ()) if d in keys and d in out.columns]
+    out = out.groupby([*dims, "year"], as_index=False)[ycol].sum()
+    return (out.rename(columns={ycol: "value"})
+               .sort_values([*dims, "year"]).reset_index(drop=True))
+
+
+@memo
+def history(target_id: str, dimensions=(), where=()) -> pd.DataFrame:
+    """The observed series a forecast continues, summed to `dimensions`.
+
+    Forecast charts draw this under the forecast so the reader sees what the
+    projection extends, not three floating points.
+    """
+    t = TARGETS[target_id]
+    return observed(panel(t), "y", t.keys, tuple(dimensions or ()), tuple(where or ()))
+
+
 # ── candidates ────────────────────────────────────────────────────────────────
 
 def _features(z: np.ndarray) -> np.ndarray:

@@ -22,6 +22,8 @@ from ml.model2.formal_informal import CAVEAT as ABSORPTION_CAVEAT
 from ml.model2.formal_informal import forecast_absorption
 from ml.model2.skills import skills_shortage
 from ml.model2.structural_breaks import park_openings
+from ml.forecasting import TARGETS as ENGINE_TARGETS
+from ml.forecasting import history
 
 DIMENSIONS = DIMENSIONS
 TARGETS = TARGETS
@@ -40,6 +42,29 @@ def labour_forecast(horizon: int = 3, dimensions: Iterable[str] | None = None) -
     if dimensions:
         return group_forecast(raw, dimensions)
     return raw
+
+
+_HISTORY_TARGETS = (("M2.employment_demand", "employment_demand"), ("M2.vacancies", "vacancies"))
+
+
+def forecast_history(dimensions: Iterable[str] | None = None) -> pd.DataFrame:
+    """Observed employment and vacancies the Model 2 forecast continues.
+
+    A target is included only when its own series keys cover every requested
+    dimension: an occupation grain carries vacancies, never a region-wide
+    employment total under an occupation's name.
+    """
+    dims = tuple(d for d in (dimensions or ()) if d != "period")
+    frames = []
+    for tid, col in _HISTORY_TARGETS:
+        if all(d in ENGINE_TARGETS[tid].keys for d in dims):
+            frames.append(history(tid, dims).rename(columns={"year": "period", "value": col}))
+    if not frames:
+        return pd.DataFrame(columns=[*dims, "period"])
+    out = frames[0]
+    for extra in frames[1:]:
+        out = out.merge(extra, on=[*dims, "period"], how="outer")
+    return out.sort_values([*dims, "period"]).reset_index(drop=True)
 
 
 def absorption(horizon: int = 3) -> tuple[pd.DataFrame, str]:

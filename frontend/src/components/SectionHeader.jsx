@@ -1,43 +1,16 @@
+/**
+ * Page title with an optional one-line subtitle.
+ *
+ * The subtitle should add information (scope, period, unit), not restate the
+ * title. `showLiveIndicator` is kept for the leftover US-model pages, which
+ * render a plain note instead of a live-status dot: nothing there is live.
+ */
 export default function SectionHeader({ title, subtitle, showLiveIndicator = false }) {
+  const sub = showLiveIndicator ? 'Leftover US dataset, not live' : subtitle
   return (
-    <div style={{ marginBottom: '28px' }}>
-      <h1 style={{
-        fontFamily: "'Sora', sans-serif",
-        fontWeight: '600',
-        fontSize: '26px',
-        letterSpacing: '-0.015em',
-        color: 'var(--navy)'
-      }}>
-        {title}
-      </h1>
-      {(subtitle || showLiveIndicator) && (
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          marginTop: '8px'
-        }}>
-          {showLiveIndicator && (
-            <>
-              <span style={{
-                width: '7px',
-                height: '7px',
-                borderRadius: '50%',
-                background: 'var(--green)',
-                boxShadow: '0 0 0 3px var(--green-bg)'
-              }}></span>
-              <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
-                Live data · synced 2 minutes ago
-              </span>
-            </>
-          )}
-          {subtitle && !showLiveIndicator && (
-            <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
-              {subtitle}
-            </span>
-          )}
-        </div>
-      )}
+    <div className="page-header">
+      <h1 className="page-title">{title}</h1>
+      {sub && <p className="page-subtitle">{sub}</p>}
     </div>
   )
 }

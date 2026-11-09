@@ -85,7 +85,7 @@ export default function PolicySimulatorPage() {
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}
       <DataNote tone="simulated">
-        official_forecast is false. Every persisted run stores its assumptions so it cannot be quoted as a baseline.
+        Scenario runs are not official forecasts. Each saved run keeps its assumptions attached, so it cannot be quoted as a baseline.
       </DataNote>
       <ForecastAccuracyNote />
       <div className="panel" style={{ marginTop: 16 }}>
@@ -109,7 +109,7 @@ export default function PolicySimulatorPage() {
         </button>
         {saved && !saved.error && (
           <p style={{ fontSize: 12, color: 'var(--text-secondary)', marginTop: 8 }}>
-            Saved as draft. official_forecast: {String(saved.official_forecast ?? false)}. status: {saved.status || 'draft'}.
+            Saved as a {saved.status || 'draft'} scenario, not an official forecast.
           </p>
         )}
         {saved?.error && <ErrorBanner message={saved.error} />}

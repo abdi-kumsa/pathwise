@@ -17,9 +17,10 @@ _ROOT = Path(__file__).resolve().parent.parent.parent
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
-from ml.features.model1 import c2_funnel, c6_cohort
+from ml.features.model1 import c1_enrollment, c2_funnel, c6_cohort
 from ml.model1.layer1_demand import DIMENSIONS, forecast_unconstrained, group_forecast  # noqa: F401  (DIMENSIONS re-exported for routers/model1.py)
 from ml.model1.layer2_constraints import apply_constraints, explain_rules
+from ml.forecasting import history, observed
 
 
 def unconstrained_demand(
@@ -30,6 +31,30 @@ def unconstrained_demand(
     if dimensions:
         return group_forecast(raw, dimensions)
     return raw
+
+
+_HISTORY_KEYS = ("institution", "campus", "region", "program")
+
+
+def demand_history(
+    dimensions: Iterable[str] | None = None,
+    institution: str | None = None,
+) -> pd.DataFrame:
+    """Observed applications and enrolment the Layer 1 / Layer 2 forecasts continue.
+
+    Summed to the same dimensions as the forecast and scoped to the same
+    institution before summing, so a UNIVERSITY caller never sees another
+    HEI's totals under its own chart.
+    """
+    dims = tuple(d for d in (dimensions or ()) if d in _HISTORY_KEYS)
+    where = (("institution", institution),) if institution else ()
+    apps = history("M1.applications", dims, where).rename(columns={"value": "applications"})
+    enrol = observed(
+        c1_enrollment.frame(), "program_enrollment_count", _HISTORY_KEYS, dims, where,
+    ).rename(columns={"value": "enrollment"})
+    out = apps.merge(enrol, on=[*dims, "year"], how="outer")
+    out = out.rename(columns={"year": "academic_year"})
+    return out.sort_values([*dims, "academic_year"]).reset_index(drop=True)
 
 
 def constrained_demand(

@@ -43,7 +43,7 @@ export default function LabourOutlookPage() {
           <div className="card-grid-2" style={{ marginTop: 16 }}>
             <div className="panel">
               <p className="panel-title">Vacancy forecast</p>
-              <p className="panel-sub">Two horizons, two lines — not a dual axis.</p>
+              <p className="panel-sub">The 3- and 5-year paths share one scale.</p>
               {merged.length === 0 ? (
                 <EmptyState title="No vacancy series" description="No 3- or 5-year outlook rows for this field." />
               ) : (

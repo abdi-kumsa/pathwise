@@ -544,7 +544,7 @@ export default function AdminUsersPage() {
         .u-act-danger:hover:not(:disabled) { background: var(--red-bg); }
         .u-act:disabled { color: var(--text-muted); cursor: not-allowed; }
         .u-code {
-          font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;
+          font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 11.5px;
           background: var(--page); border-radius: 5px; padding: 2px 6px;
           color: var(--text-secondary);
         }

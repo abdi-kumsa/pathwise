@@ -161,7 +161,7 @@ export default function AdminMethodologyPage() {
                 {collection.map(row => (
                   <li key={row.id} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12.5 }}>
                     <span>{row.id} {row.name}</span>
-                    <span style={{ fontFamily: 'IBM Plex Mono, monospace' }}>{row.collection_priority}%</span>
+                    <span style={{ fontVariantNumeric: 'tabular-nums' }}>{row.collection_priority}%</span>
                   </li>
                 ))}
               </ul>
@@ -318,7 +318,7 @@ function RankList({ rows, label }) {
         {rows.map((row, i) => (
           <li key={row.feature} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12.5, gap: 8 }}>
             <span>{i + 1}. {row.feature}</span>
-            <span style={{ color: SERIES[0], fontFamily: 'IBM Plex Mono, monospace' }}>
+            <span style={{ color: SERIES[0], fontVariantNumeric: 'tabular-nums' }}>
               {Number(row.importance).toFixed(4)}
             </span>
           </li>

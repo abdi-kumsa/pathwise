@@ -141,7 +141,7 @@ export default function ExpansionPage() {
           flex-shrink: 0; white-space: nowrap;
         }
         .ex-score {
-          font-family: 'IBM Plex Mono', monospace; font-size: 26px;
+          font-size: 26px;
           font-weight: 700; color: var(--navy); margin: 12px 0 8px; line-height: 1;
         }
         .ex-score span { font-size: 12px; color: var(--text-muted); font-weight: 500; }

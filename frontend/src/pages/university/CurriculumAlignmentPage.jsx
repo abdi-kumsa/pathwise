@@ -74,7 +74,7 @@ export default function CurriculumAlignmentPage() {
                             padding: '6px 10px', textAlign: 'center',
                             background: tone.bg,
                             color: tone.fg,
-                            fontFamily: 'IBM Plex Mono, monospace',
+                            fontVariantNumeric: 'tabular-nums',
                             fontSize: 12,
                           }}>
                             {v.toFixed(2)}

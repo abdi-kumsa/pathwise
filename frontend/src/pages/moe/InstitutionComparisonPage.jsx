@@ -36,7 +36,7 @@ export default function InstitutionComparisonPage() {
       {data && (
         <>
           <DataNote tone="simulated">
-            Reading this table writes an institution_drilldown audit row. Alignment status is labelled in words as well as colour.
+            Views of this table are recorded in the audit log.
           </DataNote>
           <div className="panel" style={{ marginTop: 16 }}>
             <p className="panel-title">{rows.length} HEIs · {data.year}</p>

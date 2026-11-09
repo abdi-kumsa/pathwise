@@ -154,4 +154,21 @@ def group_forecast(df: pd.DataFrame, dimensions: Iterable[str] | None) -> pd.Dat
     if not dims:
         dims = ["period"]
     numeric = [c for c in TARGETS if c in df.columns]
-    return df.groupby(dims, dropna=False, as_index=False)[numeric].sum(min_count=1)
+    out = df.groupby(dims, dropna=False, as_index=False)[numeric].sum(min_count=1)
+    # Per-target 90% bounds, summed within each target's own rows: employment
+    # and vacancy intervals live on different scales and must never be added
+    # together. Summed bounds are conservative for the aggregate.
+    if {"interval_low", "interval_high", "grain"} <= set(df.columns):
+        for grain, col in (("region_sector", "employment_demand"),
+                           ("region_occupation", "vacancies")):
+            # Only where the target has every grouping dimension: employment rows
+            # carry no occupation, so an occupation grain gets vacancy bounds only.
+            part = df[df["grain"] == grain].dropna(subset=dims)
+            if part.empty:
+                continue
+            bounds = (part.groupby(dims, dropna=False, as_index=False)
+                          [["interval_low", "interval_high"]].sum(min_count=1)
+                          .rename(columns={"interval_low": f"{col}_low",
+                                           "interval_high": f"{col}_high"}))
+            out = out.merge(bounds, on=dims, how="left")
+    return out

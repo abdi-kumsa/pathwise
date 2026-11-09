@@ -12,7 +12,7 @@ import useFetch from '../../hooks/useFetch'
 import { getEducationOverview, getFieldTrends } from '../../api/roles'
 import {
   SERIES, axisProps, gridProps, tooltipProps, RADIUS_H,
-  fmtCompact, fmtPct, fmtDelta, deltaDirection,
+  fmtCompact, fmtPct, fmtDelta, deltaDirection, fmtNum,
 } from '../../config/chartTheme'
 
 export default function EducationOverviewPage() {
@@ -54,21 +54,21 @@ export default function EducationOverviewPage() {
           <div className="kpi-grid">
             <KPICard
               label="HEIs"
-              value={fmtCompact(o.institutions)}
+              value={fmtNum(o.institutions)}
               delta={`${o.programs} programmes · ${o.fields} fields`}
               deltaDirection="neutral"
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg>}
             />
             <KPICard
               label="Enrolment"
-              value={fmtCompact(o.enrollment_latest_year ?? o.total_enrollment)}
+              value={fmtNum(o.enrollment_latest_year ?? o.total_enrollment)}
               delta={fmtDelta(o.enrollment_cagr_pct) + ' / yr'}
               deltaDirection={deltaDirection(o.enrollment_cagr_pct)}
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 10 12 5 2 10l10 5 10-5ZM6 12v5c0 1 3 3 6 3s6-2 6-3v-5"/></svg>}
             />
             <KPICard
               label="Student demand"
-              value={fmtCompact(o.applications_latest_year ?? o.total_applications)}
+              value={fmtNum(o.applications_latest_year ?? o.total_applications)}
               delta="Applications, latest year (simulated)"
               deltaDirection="neutral"
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8"/></svg>}
@@ -76,7 +76,7 @@ export default function EducationOverviewPage() {
             <KPICard
               label="Capacity utilisation"
               value={o.capacity_utilization_pct != null ? fmtPct(o.capacity_utilization_pct) : '—'}
-              delta={o.projected_intake != null ? `Projected intake ${fmtCompact(o.projected_intake)}` : 'Projected intake unavailable'}
+              delta={o.projected_intake != null ? `Projected intake ${fmtNum(o.projected_intake)}` : 'Projected intake unavailable'}
               deltaDirection="neutral"
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 3v18h18M18.7 8 13 13.7l-3-3L4 16.5"/></svg>}
             />
@@ -94,7 +94,7 @@ export default function EducationOverviewPage() {
                   <CartesianGrid {...gridProps} />
                   <XAxis dataKey="year" {...axisProps} />
                   <YAxis {...axisProps} tickFormatter={fmtCompact} width={50} />
-                  <Tooltip {...tooltipProps} formatter={v => fmtCompact(v)} />
+                  <Tooltip {...tooltipProps} formatter={v => fmtNum(v)} />
                   <Line isAnimationActive={false} name="Applications" type="monotone" dataKey="applications"
                         stroke={SERIES[1]} strokeWidth={2}
                         dot={{ r: 3, strokeWidth: 0, fill: SERIES[1] }} />

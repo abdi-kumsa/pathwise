@@ -54,7 +54,7 @@ export default function FunnelPage() {
                   <div key={s.key}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
                       <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--navy)' }}>{s.label}</span>
-                      <span style={{ fontFamily: 'IBM Plex Mono, monospace', fontWeight: 600 }}>{fmtNum(count)}</span>
+                      <span style={{ fontVariantNumeric: 'tabular-nums', fontWeight: 600 }}>{fmtNum(count)}</span>
                     </div>
                     <div style={{ height: 26, background: 'var(--page)', borderRadius: 6, overflow: 'hidden' }}>
                       <div style={{ width: `${Math.max(pct, 1.5)}%`, height: '100%', background: fill, borderRadius: 6 }} />

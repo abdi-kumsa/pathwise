@@ -153,12 +153,19 @@ export function colorFor(key, keys) {
 
 // ── Formatters ────────────────────────────────────────────────────────────────
 
+/**
+ * Axis-tick abbreviation. Headline figures use fmtNum at full precision; this
+ * is for the space-starved places. One decimal below 10 of a unit so adjacent
+ * ticks (2,000 and 2,500) never collapse to the same label.
+ */
 export const fmtCompact = (v) => {
   if (v == null || Number.isNaN(v)) return '—'
   const n = Number(v)
-  if (Math.abs(n) >= 1e9) return (n / 1e9).toFixed(1) + 'B'
-  if (Math.abs(n) >= 1e6) return (n / 1e6).toFixed(1) + 'M'
-  if (Math.abs(n) >= 1e3) return (n / 1e3).toFixed(0) + 'K'
+  const scaled = (x, suffix) =>
+    (Math.abs(x) < 10 ? x.toFixed(1).replace(/\.0$/, '') : x.toFixed(0)) + suffix
+  if (Math.abs(n) >= 1e9) return scaled(n / 1e9, 'B')
+  if (Math.abs(n) >= 1e6) return scaled(n / 1e6, 'M')
+  if (Math.abs(n) >= 1e3) return scaled(n / 1e3, 'K')
   return String(Math.round(n))
 }
 

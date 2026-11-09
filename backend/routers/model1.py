@@ -105,11 +105,13 @@ def unconstrained_demand(
     try:
         df = m1.unconstrained_demand(horizon=horizon, dimensions=dims)
         df = m1.scope_to_institution(df, scope)
+        hist = m1.demand_history(dims, scope)
     except Exception as exc:
         raise HTTPException(status_code=500, detail=str(exc)) from exc
     _audit_drilldown(user, "model1/demand/unconstrained", dims, int(len(df)), scope)
     return {"layer": "M1.L1", "horizon": horizon, "n": int(len(df)),
-            "accuracy": accuracy_summary("M1.applications"), "rows": _records(df)}
+            "accuracy": accuracy_summary("M1.applications"), "rows": _records(df),
+            "history": _records(hist)}
 
 
 @router.get("/demand/constrained")  # /model1/demand/constrained
@@ -124,11 +126,13 @@ def constrained_demand(
     try:
         df = m1.constrained_demand(horizon=horizon, dimensions=dims)
         df = m1.scope_to_institution(df, scope)
+        hist = m1.demand_history(dims, scope)
     except Exception as exc:
         raise HTTPException(status_code=500, detail=str(exc)) from exc
     _audit_drilldown(user, "model1/demand/constrained", dims, int(len(df)), scope)
     return {"layer": "M1.L2", "horizon": horizon, "n": int(len(df)),
-            "accuracy": accuracy_summary("M1.applications"), "rows": _records(df)}
+            "accuracy": accuracy_summary("M1.applications"), "rows": _records(df),
+            "history": _records(hist)}
 
 
 @router.get("/constraints/explain")  # /model1/constraints/explain

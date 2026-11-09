@@ -61,7 +61,7 @@ export default function MarketOverviewPage() {
       </div>
 
       <div style={{ background: 'var(--white)', border: '1px solid var(--border)', borderRadius: '14px', padding: '20px 22px 24px' }}>
-        <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '14px', fontWeight: '600', color: 'var(--navy)', marginBottom: '16px' }}>
+        <p style={{ fontSize: '14px', fontWeight: '600', color: 'var(--navy)', marginBottom: '16px' }}>
           Top 10 Hiring Companies
         </p>
         {loading ? (

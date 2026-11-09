@@ -49,7 +49,7 @@ export default function RegionalAlignmentPage() {
       {data && (
         <>
           <DataNote tone="simulated">
-            Schematic dashboard regions, not a CSA administrative map. 2023 SNNP splits will not match Natural Earth.
+            Schematic regions, not an official administrative map; the 2023 SNNP splits are approximate.
           </DataNote>
           <ForecastAccuracyNote />
           <div className="card-grid-2" style={{ marginTop: 16 }}>

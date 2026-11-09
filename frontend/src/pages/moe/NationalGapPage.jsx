@@ -35,7 +35,7 @@ export default function NationalGapPage() {
       {data && (
         <>
           <DataNote tone="simulated">
-            Shortage, balanced and oversupply are labelled in text as well as colour. Status follows coverage (graduates ÷ demand): below 0.85 is a shortage, above 1.15 an oversupply, in between balanced. Severity Q1–Q4 ranks the size of the gap against the other fields. This is the Model 3 national gap, not the US-compat labour gap.
+            Status follows coverage (graduates ÷ demand): below 0.85 is a shortage, above 1.15 an oversupply, in between balanced. Severity Q1–Q4 ranks the size of the gap against the other fields.
           </DataNote>
           <ForecastAccuracyNote />
           <div className="panel" style={{ marginTop: 16 }}>

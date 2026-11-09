@@ -130,7 +130,7 @@ export default function PeerBenchmarkPage() {
           font-size: 11px; font-weight: 400; color: var(--text-muted); margin-left: 8px;
         }
         .pb-value {
-          font-family: 'IBM Plex Mono', monospace; font-size: 13px;
+          font-size: 13px;
           font-weight: 600; color: var(--navy);
         }
         .pb-track {

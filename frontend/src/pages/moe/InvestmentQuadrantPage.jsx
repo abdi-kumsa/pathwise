@@ -11,7 +11,7 @@ import useFetch from '../../hooks/useFetch'
 import { getInvestmentQuadrant } from '../../api/roles'
 import {
   SERIES, VERDICT_COLOR, axisProps, gridProps,
-  fmtCompact, fmtPct, fmtDelta,
+  fmtPct, fmtDelta, fmtNum,
 } from '../../config/chartTheme'
 
 /**
@@ -59,7 +59,7 @@ function QuadrantTooltip({ active, payload }) {
         <dt style={{ color: '#94A3B8' }}>Supply growth</dt>
         <dd style={{ textAlign: 'right', fontWeight: 600 }}>{fmtDelta(p.supply_growth_pct)}/yr</dd>
         <dt style={{ color: '#94A3B8' }}>Openings</dt>
-        <dd style={{ textAlign: 'right', fontWeight: 600 }}>{fmtCompact(p.demand_openings)}</dd>
+        <dd style={{ textAlign: 'right', fontWeight: 600 }}>{fmtNum(p.demand_openings)}</dd>
         <dt style={{ color: '#94A3B8' }}>Employment 6mo</dt>
         <dd style={{ textAlign: 'right', fontWeight: 600 }}>{fmtPct(p.employment_rate_pct)}</dd>
       </dl>
@@ -250,7 +250,7 @@ export default function InvestmentQuadrantPage() {
         }
         .quad-col { padding: 16px 18px 18px; }
         .quad-col-title {
-          font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 700;
+          font-size: 13px; font-weight: 700;
           display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
         }
         .quad-count {

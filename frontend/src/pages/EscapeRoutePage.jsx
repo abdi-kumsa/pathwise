@@ -50,7 +50,7 @@ export default function EscapeRoutePage() {
         <div key={row.field} className="panel" style={{ marginBottom: 12 }} data-testid="alternative-row">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
             <p className="panel-title">{row.rank}. {row.field}</p>
-            <span style={{ fontFamily: 'IBM Plex Mono, monospace', color: SERIES[0] }}>{row.score}</span>
+            <span style={{ fontVariantNumeric: 'tabular-nums', color: SERIES[0] }}>{row.score}</span>
           </div>
           <p className="panel-sub">{row.status} · severity Q{row.severity}</p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 10 }}>
