@@ -10,7 +10,7 @@ import pandas as pd
 import xgboost as xgb
 from sklearn.model_selection import train_test_split
 
-ROOT         = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT         = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 MODEL_DIR    = os.path.join(ROOT, 'ml', 'models')
 MODEL_PATH   = os.path.join(MODEL_DIR, 'placement_xgboost.pkl')
 FEATURE_PATH = os.path.join(MODEL_DIR, 'placement_feature_names.pkl')

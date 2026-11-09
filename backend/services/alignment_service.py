@@ -28,6 +28,7 @@ from ml.model3.recommend import (
     student_alternatives,
 )
 from ml.model3.scenario import run_scenario
+from services._cache import ttl_cache
 from ml.model3.supply import graduate_supply
 
 
@@ -207,6 +208,7 @@ def persist_scenario(db, *, owner: str, name: str, payload: dict) -> dict:
         }
 
 
+@ttl_cache
 def resource_planning(institution: str, quota_scale: float = 1.0, capacity_scale: float = 1.0) -> dict:
     """Institution-grain resource table plus an unofficial intake what-if."""
     from ml.features.model1 import c4_quota, c8_institution, c9_finance

@@ -2,6 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from db.database import get_db
+from schemas.scenarios import ScenarioRequest
+from services import rate_limit
 from services import alignment_service as m3
 from services import education_service
 from services.auth_service import ROLE_MOE, get_current_user, log_audit, require_roles
@@ -70,45 +72,45 @@ def policy_simulator(
     capacity_scale: float = Query(1.0, ge=0.25, le=3.0),
     priority_field: str | None = Query(None),
     natural_share: float = Query(0.70, ge=0.5, le=0.9),
+    pass_rate_shift_pp: float = Query(0.0, ge=-15.0, le=15.0),
     horizon: int = Query(1, ge=1, le=5),
+    user: dict = Depends(rate_limit.per_user("scenario-whatif", 60, 60)),
 ):
+    """Unsaved what-if. Still a scenario run, so it is attributable (SCOPE.MOE.R3)."""
     try:
         fields = [priority_field] if priority_field else None
-        return m3.simulate(
+        payload = m3.simulate(
             quota_scale=quota_scale,
             capacity_scale=capacity_scale,
             priority_fields=fields,
             natural_share=natural_share,
             social_share=round(1.0 - natural_share, 4),
+            pass_rate_shift_pp=pass_rate_shift_pp,
             horizon=horizon,
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    log_audit(user, "scenario_run", "policy-simulator", {
+        "owner": user.get("username"),
+        "assumptions": payload.get("assumptions"),
+        "persisted": False,
+        "official_forecast": False,
+    })
+    return payload
 
 
 @router.post("/policy-simulator")  # /education/policy-simulator
 def persist_policy_simulator(
-    body: dict,
-    user: dict = Depends(get_current_user),
+    body: ScenarioRequest,
+    user: dict = Depends(rate_limit.per_user("scenario-run", 10, 60)),
     db: Session = Depends(get_db),
 ):
     try:
-        fields = body.get("priority_fields") or (
-            [body["priority_field"]] if body.get("priority_field") else None
-        )
-        natural = float(body.get("natural_share", 0.70))
-        payload = m3.simulate(
-            quota_scale=float(body.get("quota_scale", 1.0)),
-            capacity_scale=float(body.get("capacity_scale", 1.0)),
-            priority_fields=fields,
-            natural_share=natural,
-            social_share=float(body.get("social_share", round(1.0 - natural, 4))),
-            horizon=int(body.get("horizon", 1)),
-        )
+        payload = m3.simulate(**body.levers())
         saved = m3.persist_scenario(
             db,
             owner=user.get("username") or "unknown",
-            name=str(body.get("name") or "policy-simulator"),
+            name=body.name or "policy-simulator",
             payload=payload,
         )
         log_audit(user, "scenario_run", "policy-simulator", {

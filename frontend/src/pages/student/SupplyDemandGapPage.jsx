@@ -6,6 +6,7 @@ import SectionHeader from '../../components/SectionHeader'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
 import DataNote from '../../components/DataNote'
+import ForecastAccuracyNote from '../../components/ForecastAccuracyNote'
 import EmptyState from '../../components/EmptyState'
 import useFetch from '../../hooks/useFetch'
 import { getSupplyDemandGap } from '../../api/student'
@@ -35,9 +36,10 @@ export default function SupplyDemandGapPage() {
       {data && (
         <>
           <DataNote tone="simulated">
-            Shortage, balanced and oversupply are labelled in text as well as colour. Q1 of |gap| is treated as balanced.
+            Shortage, balanced and oversupply are labelled in text as well as colour. Status follows coverage (graduates ÷ demand): below 0.85 is a shortage, above 1.15 an oversupply, in between balanced. Severity Q1–Q4 ranks the size of the gap against the other fields.
             {data.field ? ` Your field (${data.field}) is highlighted.` : ''}
           </DataNote>
+          <ForecastAccuracyNote />
           {rows.length === 0 && (
             <EmptyState title="No gap rows" description="Expected graduates versus vacancies is empty for this slice." />
           )}

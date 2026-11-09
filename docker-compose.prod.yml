@@ -1,0 +1,72 @@
+# Production-shaped stack (plan item 3.4). Differs from docker-compose.yml:
+#   * the backend's own code is baked into its image; ml/, data/ and docs/spec
+#     (which it imports and reads) are mounted read-only, with ml/models kept
+#     writable so an admin can re-run the model comparison
+#   * the frontend is the static nginx build, not the Vite dev server
+#   * ENV=production, so the API refuses default or missing secrets
+#   * every secret is required; startup fails loudly when one is unset
+#
+#   docker compose -f docker-compose.prod.yml --env-file .env.production up -d --build
+#
+# Put TLS in front (a reverse proxy or the platform's load balancer); the
+# frontend sends HSTS and expects to be served over HTTPS.
+
+services:
+  db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:?set DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME:?set DB_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    # No published port: only the backend reaches the database.
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ../docker/Dockerfile.backend
+    restart: unless-stopped
+    environment:
+      ENV: production
+      DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
+      JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET (32+ bytes)}
+      JWT_EXPIRE_MINUTES: ${JWT_EXPIRE_MINUTES:-480}
+      DEMO_PASSWORD: ${DEMO_PASSWORD:?set DEMO_PASSWORD (not the published demo value)}
+      FRONTEND_URL: ${FRONTEND_URL:?set FRONTEND_URL to the public frontend origin}
+      TRUST_PROXY: ${TRUST_PROXY:-1}
+      LEGACY_US_MODELS: "0"
+    volumes:
+      - ./ml:/ml:ro
+      - ./ml/models:/ml/models
+      - ./data/ethiopia:/data/ethiopia:ro
+      - ./docs/spec:/docs/spec:ro
+    ports:
+      - "${BIND_ADDRESS:-127.0.0.1}:${API_HOST_PORT:-8000}:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.frontend.prod
+      args:
+        VITE_API_URL: ${PUBLIC_API_URL:?set PUBLIC_API_URL to the public API origin}
+    restart: unless-stopped
+    environment:
+      API_ORIGIN: ${PUBLIC_API_URL}
+    ports:
+      - "${BIND_ADDRESS:-127.0.0.1}:${FRONTEND_HOST_PORT:-3001}:8080"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

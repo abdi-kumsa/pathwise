@@ -4,6 +4,7 @@ import SectionHeader from '../../components/SectionHeader'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
 import DataNote from '../../components/DataNote'
+import ForecastAccuracyNote from '../../components/ForecastAccuracyNote'
 import EthiopiaRegionMap from '../../components/EthiopiaRegionMap'
 import useFetch from '../../hooks/useFetch'
 import { getRegionalAlignment } from '../../api/roles'
@@ -50,6 +51,7 @@ export default function RegionalAlignmentPage() {
           <DataNote tone="simulated">
             Schematic dashboard regions, not a CSA administrative map. 2023 SNNP splits will not match Natural Earth.
           </DataNote>
+          <ForecastAccuracyNote />
           <div className="card-grid-2" style={{ marginTop: 16 }}>
             <div className="panel">
               <p className="panel-title">Ethiopia regions</p>

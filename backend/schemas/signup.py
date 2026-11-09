@@ -11,8 +11,14 @@ from pydantic import BaseModel, Field, field_validator
 
 class SignUpRequest(BaseModel):
     username: str = Field(min_length=3, max_length=64)
-    password: str = Field(min_length=8)
+    password: str = Field(min_length=8, max_length=128)
     display_name: str = Field(min_length=1, max_length=200)
+
+    @field_validator('password')
+    @classmethod
+    def password_policy(cls, v: str) -> str:
+        from schemas.users import check_password
+        return check_password(v)
 
     @field_validator('username')
     @classmethod

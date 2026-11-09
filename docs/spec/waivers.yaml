@@ -10,10 +10,12 @@ waivers:
   - id: WV.US1
     caveat: >-
       Placement XGBoost, salary XGBoost, US LSTM enrolment and Prophet demand
-      artefacts remain on disk and on leftover tool routes (/student/evaluator,
-      /student/salary, /student/market, /university/enrollment). They are not
-      Ethiopia Model 1 or Model 2 scores. Wave 9 hid those links from role nav;
-      bookmarked URLs still work.
+      artefacts remain on disk. They are not Ethiopia Model 1 or Model 2 scores,
+      and the 2026-11-07 audit found each loses to a trivial baseline. Since
+      Phase 1 their routes (/api/market, /api/enrollment, /api/recommendations
+      and the /student/evaluator, /student/salary, /student/market,
+      /university/enrollment pages) are registered only when LEGACY_US_MODELS=1
+      and VITE_LEGACY_US_MODELS=true. The default deployment does not load them.
     retires_when: >-
       Those tool routes are removed or the artefacts are retrained on Ethiopia
       fact tables and labelled as such.
@@ -27,11 +29,8 @@ waivers:
       restamped tier official.
     does_not_excuse: widgets
 
-  - id: WV.OLS1
-    caveat: >-
-      M1/M2 ols_lags chronological holdout RMSE is near-zero on the simulated
-      lag construction. Comparison still includes seasonal-naive and
-      historical-mean. Figures are not ministry accuracy.
-    retires_when: Holdout RMSE is recomputed on official series that are not
-      generated from the same lags.
-    does_not_excuse: widgets
+# WV.OLS1 retired 2026-11-08 (Phase 2): the near-zero ols_lags RMSE came from
+# lag columns that leaked the target. The generator now publishes true lags,
+# ols_lags is replaced by a four-candidate rolling-origin backtest, and every
+# candidate's error is non-zero. "Simulated errors are not ministry accuracy"
+# remains, under WV.SIM1.

@@ -22,8 +22,8 @@ Confirm the provenance chip is in the shell (top bar).
    caveat (n < 5).
 4. Open **Alternative paths**. Show the ranking note: fit classification is
    not used; weights and method are visible.
-5. Do **not** open leftover US career / placement / salary pages from the
-   sidebar — they are hidden from nav. Skip them unless showing a bookmark.
+5. Do **not** look for placement or salary pages: the US-model tools are off
+   by default (`LEGACY_US_MODELS`) and do not appear anywhere.
 6. Sign out.
 
 ## 2. University (`university`)

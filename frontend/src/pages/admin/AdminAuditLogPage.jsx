@@ -37,7 +37,11 @@ export default function AdminAuditLogPage() {
         subtitle="Exports, model runs, scenario actions and user mutations"
       />
       <DataNote tone="info">
-        Dashboard page views are not logged. Search by actor, action, resource or date.
+        Page views on known dashboard routes, searches, exports, scenario runs, institution drill-downs,
+        grants and user changes are logged. Rows older than {data?.retention_days ?? 365} days are removed
+        daily, and each removal is itself logged (action <code>audit_retention</code>). Search by actor,
+        action, resource or date; filters match text literally.
+        {data?.total != null && ` ${data.total.toLocaleString()} matching row(s).`}
       </DataNote>
 
       <form onSubmit={submit} className="panel" style={{ marginTop: 16, padding: 14, display: 'grid', gap: 10, gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))' }}>

@@ -129,3 +129,14 @@ describe('W.ADM.02 pipeline status list', () => {
     await waitFor(() => expect(screen.getAllByTestId('pipeline-feed')).toHaveLength(20))
   })
 })
+
+describe('AHP consistency (client-side mirror of ml/ahp/saaty.py)', () => {
+  it('matches the textbook consistent matrix and flags an inconsistent one', async () => {
+    const { consistency, CR_MAX } = await import('../components/AhpMatrixEditor')
+    const good = consistency([[1, 3, 5], [1 / 3, 1, 3], [1 / 5, 1 / 3, 1]])
+    expect(good.weights[0]).toBeCloseTo(0.637, 2)
+    expect(good.cr).toBeLessThan(CR_MAX)
+    const bad = consistency([[1, 9, 1 / 9], [1 / 9, 1, 9], [9, 1 / 9, 1]])
+    expect(bad.cr).toBeGreaterThan(CR_MAX)
+  })
+})

@@ -1,8 +1,16 @@
 """
 Prediction monitoring service.
 
-Logs every call to predict-placement to data/monitoring/predictions.jsonl
-and computes drift relative to the training-time baseline probability.
+Two concerns, reported together for the admin Model performance monitor
+(W.ADM.03):
+
+* Ethiopia Models 1–2 — input drift (PSI) and error drift (latest backtest
+  error vs earlier origins) per forecast target, from ml/drift.py. This is the
+  monitoring that matters for the request path.
+* Leftover US placement model (only with LEGACY_US_MODELS=1) — logs every
+  predict-placement call to data/monitoring/predictions.jsonl and compares
+  recent mean probability with the earliest logged window. The baseline used
+  to be a hard-coded 0.88 copied from a stale metrics file.
 
 Two public functions used by the rest of the backend:
   log_prediction(inputs, result, latency_ms) -- append one record
@@ -23,13 +31,7 @@ _LOG_FILE    = _MONITOR_DIR / "predictions.jsonl"
 _M1_CMP      = _ROOT / "ml" / "models" / "model1_layer1_comparison.json"
 _M2_CMP      = _ROOT / "ml" / "models" / "model2_comparison.json"
 
-# ── Baseline ──────────────────────────────────────────────────────────────────
-# Training-time mean placement probability across 2,400 training rows.
-# XGBoost: accuracy 88.17 %, precision 88.17 %, recall 100 % → the model
-# rarely predicts Not Placed; mean probability ≈ 0.88.
-BASELINE_MEAN_PROB = 0.88
-
-# Raise alert when |mean - baseline| exceeds this fraction
+# Raise alert when |recent mean − reference mean| exceeds this
 DRIFT_THRESHOLD = 0.10
 
 
@@ -54,16 +56,14 @@ def _ethiopia_metrics() -> dict:
     m1 = _read_json(_M1_CMP) or {}
     m2 = _read_json(_M2_CMP) or {}
     ethiopia = {
-        "model1": _ethiopia_block(m1, "M1 enrollment"),
+        "model1": _ethiopia_block(m1, "M1 applications (unconstrained demand)"),
         "model2": _ethiopia_block(m2, "M2 employment"),
         "not_compared": sorted(set(
             list(m1.get("not_compared") or [])
             + list(m2.get("not_compared") or [])
         )),
     }
-    naive = ethiopia["model1"].get("estimators", {}).get("seasonal_naive") or {}
-    selected = ethiopia["model1"].get("selected") or ethiopia["model2"].get("selected") or {}
-    headline = naive or selected
+    headline = ethiopia["model1"].get("selected") or ethiopia["model2"].get("selected") or {}
     return {
         "mae": headline.get("mae"),
         "rmse": headline.get("rmse"),
@@ -74,8 +74,9 @@ def _ethiopia_metrics() -> dict:
 
 
 def _ethiopia_block(cmp: dict, label: str) -> dict:
+    """Headline is the candidate the backtest selected at horizon 1."""
     estimators = cmp.get("estimators") or {}
-    selected_name = "ols_lags" if "ols_lags" in estimators else next(iter(estimators), None)
+    selected_name = (cmp.get("selected_by_horizon") or {}).get("1") or next(iter(estimators), None)
     selected = estimators.get(selected_name) or {}
     return {
         "label": label,
@@ -116,83 +117,79 @@ def log_prediction(inputs: dict, result: dict, latency_ms: float) -> None:
         log.warning("Monitoring log write failed: %s", exc)
 
 
-def get_drift_report(window: int = 100) -> dict:
-    """Read the last *window* predictions and compare to the training baseline.
+def _ethiopia_drift() -> dict:
+    try:
+        from ml.drift import ethiopia_drift
+        return ethiopia_drift()
+    except Exception as exc:  # monitoring must not take the admin page down
+        log.warning("Ethiopia drift computation failed: %s", exc)
+        return {"targets": {}, "alert": False, "error": str(exc)}
 
-    Returns
-    -------
-    total_logged      -- total rows in the log file
-    window            -- how many rows were analysed (may be < requested if log is small)
-    mean_probability  -- mean placement_probability over the window
-    baseline          -- training-time mean (BASELINE_MEAN_PROB)
-    drift             -- abs(mean - baseline), rounded to 4 dp
-    alert             -- True when drift > DRIFT_THRESHOLD
-    recommendation    -- plain-language action string
-    """
-    if not _LOG_FILE.exists():
-        return {
-            "total_logged":     0,
-            "window":           0,
-            "mean_probability": None,
-            "baseline":         BASELINE_MEAN_PROB,
-            "drift":            None,
-            "alert":            False,
-            "recommendation":   "No predictions logged yet.",
-            **_ethiopia_metrics(),
-        }
 
-    lines  = _LOG_FILE.read_text(encoding="utf-8").splitlines()
-    total  = len(lines)
-    recent = lines[-window:]
-
-    probs = []
-    for line in recent:
+def _probabilities(lines: list[str]) -> list[float]:
+    out = []
+    for line in lines:
         try:
-            rec = json.loads(line)
-            p   = rec.get("probability")
-            if isinstance(p, (int, float)):
-                probs.append(float(p))
-        except Exception:
-            pass
+            p = json.loads(line).get("probability")
+        except ValueError:
+            continue
+        if isinstance(p, (int, float)):
+            out.append(float(p))
+    return out
 
-    if not probs:
-        return {
-            "total_logged":     total,
-            "window":           len(recent),
-            "mean_probability": None,
-            "baseline":         BASELINE_MEAN_PROB,
-            "drift":            None,
-            "alert":            False,
-            "recommendation":   "No valid probability values found in window.",
-            **_ethiopia_metrics(),
-        }
 
-    mean_prob = round(sum(probs) / len(probs), 4)
-    drift     = round(abs(mean_prob - BASELINE_MEAN_PROB), 4)
-    alert     = drift > DRIFT_THRESHOLD
+def _placement_drift(window: int) -> dict:
+    """Leftover US placement check: recent window vs the earliest window."""
+    from services.feature_flags import LEGACY_US_MODELS
 
-    extras = _ethiopia_metrics()
-
-    if alert:
-        recommendation = (
-            f"ALERT: mean probability has drifted {drift:.1%} from the training "
-            f"baseline ({mean_prob:.1%} vs {BASELINE_MEAN_PROB:.1%}). "
-            "Run scripts/retrain.sh to update the models."
-        )
-    else:
-        recommendation = (
-            f"OK: model is within {drift:.1%} of baseline. No action needed."
-        )
-
+    base = {"enabled": LEGACY_US_MODELS, "total_logged": 0, "window": 0,
+            "mean_probability": None, "baseline": None, "baseline_source": None,
+            "drift": None, "alert": False}
+    if not LEGACY_US_MODELS:
+        return {**base, "recommendation": "Leftover US placement model is switched off."}
+    if not _LOG_FILE.exists():
+        return {**base, "recommendation": "No predictions logged yet."}
+    lines = _LOG_FILE.read_text(encoding="utf-8").splitlines()
+    probs = _probabilities(lines)
+    if len(probs) < 2 * window:
+        return {**base, "total_logged": len(lines),
+                "recommendation": f"Need {2 * window} logged predictions to compare windows."}
+    reference = sum(probs[:window]) / window
+    recent = sum(probs[-window:]) / window
+    drift = round(abs(recent - reference), 4)
     return {
-        "total_logged":     total,
-        "window":           len(probs),
-        "mean_probability": mean_prob,
-        "baseline":         BASELINE_MEAN_PROB,
-        "drift":            drift,
-        "alert":            alert,
-        "recommendation":   recommendation,
-        **extras,
+        **base,
+        "total_logged": len(lines),
+        "window": window,
+        "mean_probability": round(recent, 4),
+        "baseline": round(reference, 4),
+        "baseline_source": f"first {window} logged predictions",
+        "drift": drift,
+        "alert": drift > DRIFT_THRESHOLD,
+        "recommendation": (
+            f"ALERT: recent mean probability moved {drift:.1%} from the reference window."
+            if drift > DRIFT_THRESHOLD else "Placement predictions are stable against the reference window."
+        ),
+    }
+
+
+def get_drift_report(window: int = 100) -> dict:
+    """Ethiopia drift first; the US placement block is secondary and optional.
+
+    Top-level `alert` / `recommendation` describe the Ethiopia models. The US
+    fields keep their old names (`mean_probability`, `baseline`, `drift`) so
+    existing clients still render.
+    """
+    ethiopia = _ethiopia_drift()
+    placement = _placement_drift(window)
+    return {
+        **{k: placement[k] for k in ("total_logged", "window", "mean_probability",
+                                     "baseline", "drift")},
+        "alert": bool(ethiopia.get("alert")),
+        "recommendation": ethiopia.get("recommendation") or placement["recommendation"],
+        "ethiopia_drift": ethiopia,
+        "placement": placement,
+        **_ethiopia_metrics(),
     }
 
 

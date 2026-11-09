@@ -36,11 +36,10 @@ import importlib.util
 import json
 import os
 import sys
-import types
 import unittest
 import unittest.mock as mock
 from pathlib import Path
-from unittest.mock import MagicMock, patch, mock_open, call
+from unittest.mock import MagicMock, patch, mock_open
 
 # ── Project root ──────────────────────────────────────────────────────────────
 
@@ -212,7 +211,7 @@ class TestLoadModel(unittest.TestCase):
 
     def test_load_model_uses_model_dir(self):
         """Both pickle paths must be inside MODEL_DIR."""
-        mod  = self._make_module()
+        self._make_module()          # must import cleanly
         src  = MONITOR_PY.read_text(encoding="utf-8")
         self.assertIn("placement_xgboost.pkl",      src)
         self.assertIn("placement_feature_names.pkl", src)
@@ -493,7 +492,6 @@ class TestRunMonitorMissingModel(unittest.TestCase):
 
     def test_returns_one_when_metrics_json_missing(self):
         mod = _load_source(MONITOR_PY, "monitor_missing_metrics")
-        import pandas as pd
         fake_model = MagicMock()
         features   = ["gpa_scaled"]
         with patch.object(mod, "_load_model",    return_value=(fake_model, features)), \
@@ -570,9 +568,15 @@ class TestRetrainSteps(unittest.TestCase):
     def _mod(self):
         return _load_source(RETRAIN_PY, "retrain_steps")
 
-    def test_steps_list_has_5_entries(self):
+    def test_steps_list_matches_pipeline(self):
+        # Six steps since the salary model joined the pipeline: features, four
+        # trainers, then the metrics refresh. Asserted against the script's own
+        # list so a seventh step fails with a readable diff, not a bare count.
         mod = self._mod()
-        self.assertEqual(len(mod.STEPS), 5)
+        self.assertEqual([s for s, _ in mod.STEPS], [
+            "feature_engineering.py", "train_xgboost.py", "train_salary_xgboost.py",
+            "train_lstm.py", "train_prophet.py", "generate_model_metrics.py",
+        ])
 
     def test_steps_are_tuples(self):
         mod = self._mod()
@@ -714,14 +718,14 @@ class TestRetrainMainSuccess(unittest.TestCase):
 
         self.assertEqual(rc, 0)
 
-    def test_main_runs_all_five_subprocesses(self):
-        mod = _load_source(RETRAIN_PY, "retrain_main_all5")
+    def test_main_runs_every_step_once(self):
+        mod = _load_source(RETRAIN_PY, "retrain_main_all")
         mock_result = MagicMock(returncode=0)
 
         with patch("subprocess.run", return_value=mock_result) as mock_sub:
             mod.main()
 
-        self.assertEqual(mock_sub.call_count, 5)
+        self.assertEqual(mock_sub.call_count, len(mod.STEPS))
 
     def test_main_prints_complete_message(self):
         import io
@@ -992,7 +996,6 @@ class TestExitCodeContract(unittest.TestCase):
 
     def test_monitor_exit_codes_are_0_and_1_only(self):
         """run_monitor must return only 0 or 1."""
-        src  = MONITOR_PY.read_text(encoding="utf-8")
         tree = _ast_source(MONITOR_PY)
         returns = [
             n.value.n if isinstance(n.value, ast.Constant) else None

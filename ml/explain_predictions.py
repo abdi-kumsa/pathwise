@@ -10,6 +10,10 @@ import os
 import pickle
 import numpy as np
 import pandas as pd
+try:
+    from artifacts import verified_open, verify  # noqa: F401  (ml/ on sys.path)
+except ImportError:  # imported as part of the ml package
+    from ml.artifacts import verified_open, verify  # noqa: F401
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
 
@@ -26,9 +30,9 @@ FEATURE_PATH = os.path.join(MODEL_DIR, 'placement_feature_names.pkl')
 
 
 def _load_model_and_features():
-    with open(MODEL_PATH, 'rb') as f:
+    with verified_open(MODEL_PATH) as f:
         model = pickle.load(f)
-    with open(FEATURE_PATH, 'rb') as f:
+    with verified_open(FEATURE_PATH) as f:
         feature_names = pickle.load(f)
     return model, feature_names
 
@@ -116,113 +120,87 @@ def explain_student(student: dict) -> dict:
     }
 
 
-# ── Ethiopia OLS importance (M1 / M2) — after training, never a prior ─────────
-# Model-based |coefficient| and permutation ΔRMSE on a chronological holdout.
+# ── Ethiopia importance (M1 / M2) — after training, never a prior ────────────
+# Computed on the pooled model the request path actually uses (ml/forecasting),
+# trained on target years up to HOLDOUT_FROM - 1 and explained on later years.
+# Three methods, all post-training (PROC.S5):
+#   model_based  |standardised coefficient|  (coefficient × feature std)
+#   shap         mean |coef × (x − mean x)|  — exact SHAP for a linear model
+#   permutation  RMSE increase on the holdout when one feature is shuffled
 # US LSTM / Prophet are not scored here.
 
 _ETHIOPIA_IMPORTANCE = os.path.join(MODEL_DIR, "ethiopia_feature_importance.json")
+HOLDOUT_FROM = 2023
 
 
-def _permutation_delta(model, X_test, y_test, baseline_rmse, rng):
-    """Increase in RMSE when each column is shuffled independently."""
-    out = []
-    y = np.asarray(y_test, dtype=float)
-    for name in list(X_test.columns):
-        shuffled = X_test.copy()
-        shuffled[name] = rng.permutation(shuffled[name].to_numpy())
-        pred = model.predict(shuffled)
-        rmse = float(np.sqrt(np.mean((y - pred) ** 2)))
-        out.append({
-            "feature": name,
-            "importance": round(max(rmse - baseline_rmse, 0.0), 6),
-            "method": "permutation_importance",
-        })
-    out.sort(key=lambda r: r["importance"], reverse=True)
-    return out
+def _pooled_importance(target_id: str) -> dict:
+    from sklearn.linear_model import Ridge
 
+    from ml.forecasting import FEATURE_NAMES, TARGETS, pooled_pairs
 
-def _ols_holdout_importance(frame, ycol, feature_cols, group_keys):
-    """Pooled OLS on a last-2-year chronological holdout of one Ethiopia panel."""
-    work = frame.dropna(subset=[ycol, *feature_cols]).copy()
-    if work.empty:
-        return {"model_based": [], "permutation": []}
-    hold_idx = []
-    train_idx = []
-    for _, series in work.groupby(group_keys, sort=False):
-        if len(series) < 6:
-            continue
-        train_idx.extend(series.index[:-2].tolist())
-        hold_idx.extend(series.index[-2:].tolist())
-    if len(hold_idx) < 4 or len(train_idx) < 8:
-        return {"model_based": [], "permutation": []}
-    train = work.loc[train_idx]
-    test = work.loc[hold_idx]
-    from sklearn.linear_model import LinearRegression
-    model = LinearRegression()
-    model.fit(train[feature_cols], train[ycol])
-    pred = model.predict(test[feature_cols])
-    y_test = test[ycol].to_numpy(dtype=float)
-    baseline_rmse = float(np.sqrt(np.mean((y_test - pred) ** 2)))
-    model_based = sorted(
-        [
-            {
-                "feature": name,
-                "importance": round(float(abs(coef)), 6),
-                "method": "model_based_importance",
-            }
-            for name, coef in zip(feature_cols, model.coef_)
-        ],
-        key=lambda r: r["importance"],
-        reverse=True,
-    )
+    pairs = pooled_pairs(target_id, horizon=1)
+    if pairs.empty:
+        return {"model_based": [], "shap": [], "permutation": []}
+    feats = list(FEATURE_NAMES)
+    train = pairs[pairs["target_year"] < HOLDOUT_FROM]
+    test = pairs[pairs["target_year"] >= HOLDOUT_FROM]
+    if len(train) < 20 or len(test) < 10:
+        return {"model_based": [], "shap": [], "permutation": []}
+    model = Ridge(alpha=1.0).fit(train[feats], train["change"])
+    pred = model.predict(test[feats])
+    y = test["change"].to_numpy(dtype=float)
+    rmse = float(np.sqrt(np.mean((y - pred) ** 2)))
+    naive_rmse = float(np.sqrt(np.mean(y ** 2)))       # "no change" baseline
+    std = train[feats].std().to_numpy()
+    mean = train[feats].mean().to_numpy()
+
+    def ranked(values, method):
+        return sorted(
+            [{"feature": f, "importance": round(float(v), 6), "method": method}
+             for f, v in zip(feats, values)],
+            key=lambda r: r["importance"], reverse=True,
+        )
+
+    shap_vals = np.abs((test[feats].to_numpy() - mean) * model.coef_).mean(axis=0)
     rng = np.random.default_rng(42)
-    permutation = _permutation_delta(
-        model, test[feature_cols], y_test, baseline_rmse, rng,
-    )
+    perm = []
+    for f in feats:
+        shuffled = test[feats].copy()
+        shuffled[f] = rng.permutation(shuffled[f].to_numpy())
+        r = float(np.sqrt(np.mean((y - model.predict(shuffled)) ** 2)))
+        perm.append(max(r - rmse, 0.0))
+    t = TARGETS[target_id]
     return {
-        "model_based": model_based,
-        "permutation": permutation,
-        "holdout_rmse": round(baseline_rmse, 4),
+        "target": t.ycol,
+        "target_id": target_id,
+        "model": "pooled_ridge (horizon 1)",
+        "scale": "log change" if t.log else "change",
+        "coefficients": {f: round(float(c), 6) for f, c in zip(feats, model.coef_)},
+        "intercept": round(float(model.intercept_), 6),
+        "model_based": ranked(np.abs(model.coef_) * std, "model_based_importance"),
+        "shap": ranked(shap_vals, "shap_linear_exact"),
+        "permutation": ranked(perm, "permutation_importance"),
+        "holdout_rmse": round(rmse, 6),
+        "holdout_rmse_no_change": round(naive_rmse, 6),
+        "n_train": int(len(train)),
         "n_holdout": int(len(test)),
-        "split": "chronological last-2-years per series",
+        "split": f"train on target years < {HOLDOUT_FROM}, explain on {HOLDOUT_FROM} onwards",
+        "features_from": (
+            "the target's own history: latest_change = last value − previous value; "
+            "distance_from_series_mean = last value − the series' mean so far"
+        ),
     }
 
 
 def ethiopia_feature_importance(persist: bool = True) -> dict:
-    """Empirical importance for Ethiopia M1/M2 OLS estimators.
+    """Empirical importance for the Ethiopia M1/M2 pooled estimators.
 
     Placement SHAP stays in compute_shap_values / explain_student. This function
     does not read collection-priority percentages.
     """
-    from ml.features.model1.assemble import assemble_panel
-    from ml.features.model2 import c1_labour
-
-    m1_lags = (
-        "enrollment_lag_1y",
-        "enrollment_lag_2y",
-        "enrollment_rolling_3y_avg",
-        "applications_count",
-    )
-    m2_lags = ("employment_lag_1y", "employment_lag_2y")
     result = {
-        "model1": {
-            "target": "program_enrollment_count",
-            **_ols_holdout_importance(
-                assemble_panel(),
-                "program_enrollment_count",
-                list(m1_lags),
-                ["institution", "campus", "program"],
-            ),
-        },
-        "model2": {
-            "target": "employment_level",
-            **_ols_holdout_importance(
-                c1_labour.frame(),
-                "employment_level",
-                list(m2_lags),
-                ["region", "sector"],
-            ),
-        },
+        "model1": _pooled_importance("M1.applications"),
+        "model2": _pooled_importance("M2.employment_demand"),
         "not_compared": [
             "US LSTM (ml/models/enrollment_lstm.keras)",
             "US Prophet (ml/models/demand_prophet.pkl)",

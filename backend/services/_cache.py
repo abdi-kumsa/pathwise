@@ -45,5 +45,11 @@ def ttl_cache(fn):
 
 
 def clear() -> None:
-    """Drop every cached entry. Used by tests and after a retrain."""
+    """Drop every cached entry, including the ML forecast memo. Used by tests
+    and after a retrain."""
     _cache.clear()
+    try:
+        from ml._memo import clear as clear_ml_memo
+        clear_ml_memo()
+    except ImportError:
+        pass

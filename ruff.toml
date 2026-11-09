@@ -1,0 +1,19 @@
+# Lint for bugs, not style. Picked up by backend/, ml/, tests/ and scripts/.
+target-version = "py311"
+extend-exclude = ["archive", "frontend", "data/ethiopia/generate.py"]
+
+[lint]
+# E9: syntax / IO errors   F: pyflakes (unused, undefined, shadowing)
+# B:  bugbear (mutable defaults, loop-variable capture, assert False, ...)
+select = ["E9", "F", "B"]
+ignore = [
+    "B008",  # Depends()/Query() in argument defaults is the FastAPI idiom
+    "B904",  # `raise ... from` in except: pre-existing across routers; tracked
+    "B905",  # zip(strict=) — turning silent length mismatches into runtime
+             # errors needs tests on each call site first (Phase 2 models)
+]
+
+[lint.per-file-ignores]
+# pytest fixtures and parametrised tests legitimately shadow / reuse names.
+"tests/**" = ["B018"]
+"backend/tests/**" = ["B018"]

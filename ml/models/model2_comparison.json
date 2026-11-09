@@ -1,132 +1,984 @@
 {
   "id": "M2.employment_demand",
+  "label": "Employment level by region \u00d7 sector",
   "target": "employment_level",
-  "n_holdout_rows": 224,
-  "split": "chronological last-2-years per series",
+  "scale": "log",
+  "candidates": [
+    "seasonal_naive",
+    "historical_mean",
+    "drift",
+    "pooled_ridge"
+  ],
+  "baselines": [
+    "seasonal_naive",
+    "historical_mean"
+  ],
+  "split": "rolling origin 2019\u20132024, horizons 1\u20135; a candidate never sees data after its origin",
+  "n_holdout_rows": 2240,
   "estimators": {
     "seasonal_naive": {
-      "rmse": 11837.14,
-      "mae": 9493.46
+      "rmse": 3893.3224,
+      "mae": 2485.247
     },
     "historical_mean": {
-      "rmse": 10406.35,
-      "mae": 8813.58
+      "rmse": 5933.0414,
+      "mae": 4540.7803
     },
-    "ols_lags": {
-      "rmse": 0.28,
-      "mae": 0.23
+    "drift": {
+      "rmse": 5269.49,
+      "mae": 3446.8492
+    },
+    "pooled_ridge": {
+      "rmse": 3741.669,
+      "mae": 2373.1549
     }
   },
-  "selected_for_request_path": "ols_lags if a series has 4+ history years, else seasonal-naive",
+  "by_horizon": {
+    "1": {
+      "drift": {
+        "rmse": 5269.49,
+        "mae": 3446.8492,
+        "mape": 7.9233,
+        "n": 672,
+        "origins": 6,
+        "coverage": 0.9,
+        "coverage_n": 672,
+        "skill_vs_naive": -0.353
+      },
+      "historical_mean": {
+        "rmse": 5933.0414,
+        "mae": 4540.7803,
+        "mape": 9.975,
+        "n": 672,
+        "origins": 6,
+        "coverage": 0.896,
+        "coverage_n": 672,
+        "skill_vs_naive": -0.524
+      },
+      "pooled_ridge": {
+        "rmse": 3741.669,
+        "mae": 2373.1549,
+        "mape": 5.6507,
+        "n": 672,
+        "origins": 6,
+        "coverage": 0.894,
+        "coverage_n": 672,
+        "skill_vs_naive": 0.039
+      },
+      "seasonal_naive": {
+        "rmse": 3893.3224,
+        "mae": 2485.247,
+        "mape": 5.7996,
+        "n": 672,
+        "origins": 6,
+        "coverage": 0.9,
+        "coverage_n": 672,
+        "skill_vs_naive": 0.0
+      }
+    },
+    "2": {
+      "drift": {
+        "rmse": 7562.9771,
+        "mae": 5048.4945,
+        "mape": 11.6948,
+        "n": 560,
+        "origins": 5,
+        "coverage": 0.896,
+        "coverage_n": 560,
+        "skill_vs_naive": -0.238
+      },
+      "historical_mean": {
+        "rmse": 6846.9005,
+        "mae": 5346.3873,
+        "mape": 11.7658,
+        "n": 560,
+        "origins": 5,
+        "coverage": 0.896,
+        "coverage_n": 560,
+        "skill_vs_naive": -0.12
+      },
+      "pooled_ridge": {
+        "rmse": 5849.1802,
+        "mae": 3671.8048,
+        "mape": 8.4516,
+        "n": 448,
+        "origins": 4,
+        "coverage": 0.886,
+        "coverage_n": 448,
+        "skill_vs_naive": 0.043
+      },
+      "seasonal_naive": {
+        "rmse": 6110.8964,
+        "mae": 4025.9554,
+        "mape": 9.4542,
+        "n": 560,
+        "origins": 5,
+        "coverage": 0.887,
+        "coverage_n": 560,
+        "skill_vs_naive": 0.0
+      }
+    },
+    "3": {
+      "drift": {
+        "rmse": 9011.0683,
+        "mae": 6377.2997,
+        "mape": 13.9963,
+        "n": 448,
+        "origins": 4,
+        "coverage": 0.897,
+        "coverage_n": 448,
+        "skill_vs_naive": -0.263
+      },
+      "historical_mean": {
+        "rmse": 7266.3697,
+        "mae": 5878.2201,
+        "mape": 12.4299,
+        "n": 448,
+        "origins": 4,
+        "coverage": 0.895,
+        "coverage_n": 448,
+        "skill_vs_naive": -0.019
+      },
+      "pooled_ridge": {
+        "rmse": 7197.7036,
+        "mae": 4481.2421,
+        "mape": 9.0909,
+        "n": 224,
+        "origins": 2,
+        "coverage": 0.888,
+        "coverage_n": 224,
+        "skill_vs_naive": -0.009
+      },
+      "seasonal_naive": {
+        "rmse": 7134.1001,
+        "mae": 4900.6786,
+        "mape": 10.7193,
+        "n": 448,
+        "origins": 4,
+        "coverage": 0.895,
+        "coverage_n": 448,
+        "skill_vs_naive": 0.0
+      }
+    },
+    "4": {
+      "drift": {
+        "rmse": 9687.3388,
+        "mae": 7012.7972,
+        "mape": 14.5008,
+        "n": 336,
+        "origins": 3,
+        "coverage": 0.893,
+        "coverage_n": 336,
+        "skill_vs_naive": -0.426
+      },
+      "historical_mean": {
+        "rmse": 7382.0403,
+        "mae": 6094.0846,
+        "mape": 12.2262,
+        "n": 336,
+        "origins": 3,
+        "coverage": 0.893,
+        "coverage_n": 336,
+        "skill_vs_naive": -0.087
+      },
+      "seasonal_naive": {
+        "rmse": 6792.5869,
+        "mae": 5056.3452,
+        "mape": 10.3677,
+        "n": 336,
+        "origins": 3,
+        "coverage": 0.878,
+        "coverage_n": 336,
+        "skill_vs_naive": 0.0
+      }
+    },
+    "5": {
+      "drift": {
+        "rmse": 10996.4526,
+        "mae": 7894.6396,
+        "mape": 15.9058,
+        "n": 224,
+        "origins": 2,
+        "coverage": 0.875,
+        "coverage_n": 224,
+        "skill_vs_naive": -0.733
+      },
+      "historical_mean": {
+        "rmse": 7892.4111,
+        "mae": 6590.8064,
+        "mape": 13.0115,
+        "n": 224,
+        "origins": 2,
+        "coverage": 0.897,
+        "coverage_n": 224,
+        "skill_vs_naive": -0.244
+      },
+      "seasonal_naive": {
+        "rmse": 6346.4986,
+        "mae": 5144.9598,
+        "mape": 10.297,
+        "n": 224,
+        "origins": 2,
+        "coverage": 0.902,
+        "coverage_n": 224,
+        "skill_vs_naive": 0.0
+      }
+    }
+  },
+  "selected_by_horizon": {
+    "1": "pooled_ridge",
+    "2": "pooled_ridge",
+    "3": "seasonal_naive",
+    "4": "seasonal_naive",
+    "5": "seasonal_naive"
+  },
+  "selected_for_request_path": "lowest backtest RMSE at each horizon: h1 pooled_ridge, h2 pooled_ridge, h3 seasonal_naive, h4 seasonal_naive, h5 seasonal_naive",
+  "interval": {
+    "level": 0.9,
+    "method": "empirical 5th/95th percentile of the selected candidate's backtest residuals",
+    "coverage_method": "leave-one-origin-out"
+  },
   "targets": [
     {
       "id": "M2.employment_demand",
+      "label": "Employment level by region \u00d7 sector",
       "target": "employment_level",
-      "n_holdout_rows": 224,
-      "split": "chronological last-2-years per series",
+      "scale": "log",
+      "candidates": [
+        "seasonal_naive",
+        "historical_mean",
+        "drift",
+        "pooled_ridge"
+      ],
+      "baselines": [
+        "seasonal_naive",
+        "historical_mean"
+      ],
+      "split": "rolling origin 2019\u20132024, horizons 1\u20135; a candidate never sees data after its origin",
+      "n_holdout_rows": 2240,
       "estimators": {
         "seasonal_naive": {
-          "rmse": 11837.14,
-          "mae": 9493.46
+          "rmse": 3893.3224,
+          "mae": 2485.247
         },
         "historical_mean": {
-          "rmse": 10406.35,
-          "mae": 8813.58
+          "rmse": 5933.0414,
+          "mae": 4540.7803
         },
-        "ols_lags": {
-          "rmse": 0.28,
-          "mae": 0.23
+        "drift": {
+          "rmse": 5269.49,
+          "mae": 3446.8492
+        },
+        "pooled_ridge": {
+          "rmse": 3741.669,
+          "mae": 2373.1549
         }
       },
-      "selected_for_request_path": "ols_lags if a series has 4+ history years, else seasonal-naive"
-    },
-    {
-      "id": "M2.employment_growth",
-      "target": "employment_growth_pct",
-      "n_holdout_rows": 224,
-      "split": "chronological last-2-years per series",
-      "estimators": {
-        "seasonal_naive": {
-          "rmse": 2.64,
-          "mae": 2.07
+      "by_horizon": {
+        "1": {
+          "drift": {
+            "rmse": 5269.49,
+            "mae": 3446.8492,
+            "mape": 7.9233,
+            "n": 672,
+            "origins": 6,
+            "coverage": 0.9,
+            "coverage_n": 672,
+            "skill_vs_naive": -0.353
+          },
+          "historical_mean": {
+            "rmse": 5933.0414,
+            "mae": 4540.7803,
+            "mape": 9.975,
+            "n": 672,
+            "origins": 6,
+            "coverage": 0.896,
+            "coverage_n": 672,
+            "skill_vs_naive": -0.524
+          },
+          "pooled_ridge": {
+            "rmse": 3741.669,
+            "mae": 2373.1549,
+            "mape": 5.6507,
+            "n": 672,
+            "origins": 6,
+            "coverage": 0.894,
+            "coverage_n": 672,
+            "skill_vs_naive": 0.039
+          },
+          "seasonal_naive": {
+            "rmse": 3893.3224,
+            "mae": 2485.247,
+            "mape": 5.7996,
+            "n": 672,
+            "origins": 6,
+            "coverage": 0.9,
+            "coverage_n": 672,
+            "skill_vs_naive": 0.0
+          }
         },
-        "historical_mean": {
-          "rmse": 1.96,
-          "mae": 1.53
+        "2": {
+          "drift": {
+            "rmse": 7562.9771,
+            "mae": 5048.4945,
+            "mape": 11.6948,
+            "n": 560,
+            "origins": 5,
+            "coverage": 0.896,
+            "coverage_n": 560,
+            "skill_vs_naive": -0.238
+          },
+          "historical_mean": {
+            "rmse": 6846.9005,
+            "mae": 5346.3873,
+            "mape": 11.7658,
+            "n": 560,
+            "origins": 5,
+            "coverage": 0.896,
+            "coverage_n": 560,
+            "skill_vs_naive": -0.12
+          },
+          "pooled_ridge": {
+            "rmse": 5849.1802,
+            "mae": 3671.8048,
+            "mape": 8.4516,
+            "n": 448,
+            "origins": 4,
+            "coverage": 0.886,
+            "coverage_n": 448,
+            "skill_vs_naive": 0.043
+          },
+          "seasonal_naive": {
+            "rmse": 6110.8964,
+            "mae": 4025.9554,
+            "mape": 9.4542,
+            "n": 560,
+            "origins": 5,
+            "coverage": 0.887,
+            "coverage_n": 560,
+            "skill_vs_naive": 0.0
+          }
         },
-        "ols_lags": {
-          "rmse": 2.31,
-          "mae": 1.8
+        "3": {
+          "drift": {
+            "rmse": 9011.0683,
+            "mae": 6377.2997,
+            "mape": 13.9963,
+            "n": 448,
+            "origins": 4,
+            "coverage": 0.897,
+            "coverage_n": 448,
+            "skill_vs_naive": -0.263
+          },
+          "historical_mean": {
+            "rmse": 7266.3697,
+            "mae": 5878.2201,
+            "mape": 12.4299,
+            "n": 448,
+            "origins": 4,
+            "coverage": 0.895,
+            "coverage_n": 448,
+            "skill_vs_naive": -0.019
+          },
+          "pooled_ridge": {
+            "rmse": 7197.7036,
+            "mae": 4481.2421,
+            "mape": 9.0909,
+            "n": 224,
+            "origins": 2,
+            "coverage": 0.888,
+            "coverage_n": 224,
+            "skill_vs_naive": -0.009
+          },
+          "seasonal_naive": {
+            "rmse": 7134.1001,
+            "mae": 4900.6786,
+            "mape": 10.7193,
+            "n": 448,
+            "origins": 4,
+            "coverage": 0.895,
+            "coverage_n": 448,
+            "skill_vs_naive": 0.0
+          }
+        },
+        "4": {
+          "drift": {
+            "rmse": 9687.3388,
+            "mae": 7012.7972,
+            "mape": 14.5008,
+            "n": 336,
+            "origins": 3,
+            "coverage": 0.893,
+            "coverage_n": 336,
+            "skill_vs_naive": -0.426
+          },
+          "historical_mean": {
+            "rmse": 7382.0403,
+            "mae": 6094.0846,
+            "mape": 12.2262,
+            "n": 336,
+            "origins": 3,
+            "coverage": 0.893,
+            "coverage_n": 336,
+            "skill_vs_naive": -0.087
+          },
+          "seasonal_naive": {
+            "rmse": 6792.5869,
+            "mae": 5056.3452,
+            "mape": 10.3677,
+            "n": 336,
+            "origins": 3,
+            "coverage": 0.878,
+            "coverage_n": 336,
+            "skill_vs_naive": 0.0
+          }
+        },
+        "5": {
+          "drift": {
+            "rmse": 10996.4526,
+            "mae": 7894.6396,
+            "mape": 15.9058,
+            "n": 224,
+            "origins": 2,
+            "coverage": 0.875,
+            "coverage_n": 224,
+            "skill_vs_naive": -0.733
+          },
+          "historical_mean": {
+            "rmse": 7892.4111,
+            "mae": 6590.8064,
+            "mape": 13.0115,
+            "n": 224,
+            "origins": 2,
+            "coverage": 0.897,
+            "coverage_n": 224,
+            "skill_vs_naive": -0.244
+          },
+          "seasonal_naive": {
+            "rmse": 6346.4986,
+            "mae": 5144.9598,
+            "mape": 10.297,
+            "n": 224,
+            "origins": 2,
+            "coverage": 0.902,
+            "coverage_n": 224,
+            "skill_vs_naive": 0.0
+          }
         }
       },
-      "selected_for_request_path": "ols_lags if a series has 4+ history years, else seasonal-naive"
+      "selected_by_horizon": {
+        "1": "pooled_ridge",
+        "2": "pooled_ridge",
+        "3": "seasonal_naive",
+        "4": "seasonal_naive",
+        "5": "seasonal_naive"
+      },
+      "selected_for_request_path": "lowest backtest RMSE at each horizon: h1 pooled_ridge, h2 pooled_ridge, h3 seasonal_naive, h4 seasonal_naive, h5 seasonal_naive",
+      "interval": {
+        "level": 0.9,
+        "method": "empirical 5th/95th percentile of the selected candidate's backtest residuals",
+        "coverage_method": "leave-one-origin-out"
+      }
     },
     {
       "id": "M2.vacancies",
+      "label": "Vacancies by region \u00d7 occupation",
       "target": "vacancy_count",
-      "n_holdout_rows": 224,
-      "split": "chronological last-2-years per series",
+      "scale": "log",
+      "candidates": [
+        "seasonal_naive",
+        "historical_mean",
+        "drift",
+        "pooled_ridge"
+      ],
+      "baselines": [
+        "seasonal_naive",
+        "historical_mean"
+      ],
+      "split": "rolling origin 2019\u20132024, horizons 1\u20135; a candidate never sees data after its origin",
+      "n_holdout_rows": 2240,
       "estimators": {
         "seasonal_naive": {
-          "rmse": 50.78,
-          "mae": 40.73
+          "rmse": 32.7192,
+          "mae": 24.2545
         },
         "historical_mean": {
-          "rmse": 43.03,
-          "mae": 33.75
+          "rmse": 47.0403,
+          "mae": 35.8541
         },
-        "ols_lags": {
-          "rmse": 56.47,
-          "mae": 43.43
+        "drift": {
+          "rmse": 39.9215,
+          "mae": 30.7336
+        },
+        "pooled_ridge": {
+          "rmse": 31.884,
+          "mae": 23.5055
         }
       },
-      "selected_for_request_path": "ols_lags if a series has 4+ history years, else seasonal-naive"
+      "by_horizon": {
+        "1": {
+          "drift": {
+            "rmse": 39.9215,
+            "mae": 30.7336,
+            "mape": 15.3356,
+            "n": 672,
+            "origins": 6,
+            "coverage": 0.899,
+            "coverage_n": 672,
+            "skill_vs_naive": -0.22
+          },
+          "historical_mean": {
+            "rmse": 47.0403,
+            "mae": 35.8541,
+            "mape": 16.828,
+            "n": 672,
+            "origins": 6,
+            "coverage": 0.888,
+            "coverage_n": 672,
+            "skill_vs_naive": -0.438
+          },
+          "pooled_ridge": {
+            "rmse": 31.884,
+            "mae": 23.5055,
+            "mape": 11.7108,
+            "n": 672,
+            "origins": 6,
+            "coverage": 0.894,
+            "coverage_n": 672,
+            "skill_vs_naive": 0.026
+          },
+          "seasonal_naive": {
+            "rmse": 32.7192,
+            "mae": 24.2545,
+            "mape": 11.9113,
+            "n": 672,
+            "origins": 6,
+            "coverage": 0.903,
+            "coverage_n": 672,
+            "skill_vs_naive": 0.0
+          }
+        },
+        "2": {
+          "drift": {
+            "rmse": 55.0338,
+            "mae": 43.0267,
+            "mape": 21.6171,
+            "n": 560,
+            "origins": 5,
+            "coverage": 0.9,
+            "coverage_n": 560,
+            "skill_vs_naive": -0.224
+          },
+          "historical_mean": {
+            "rmse": 52.8317,
+            "mae": 40.5494,
+            "mape": 18.924,
+            "n": 560,
+            "origins": 5,
+            "coverage": 0.882,
+            "coverage_n": 560,
+            "skill_vs_naive": -0.175
+          },
+          "pooled_ridge": {
+            "rmse": 43.2833,
+            "mae": 32.2415,
+            "mape": 15.5093,
+            "n": 448,
+            "origins": 4,
+            "coverage": 0.891,
+            "coverage_n": 448,
+            "skill_vs_naive": 0.037
+          },
+          "seasonal_naive": {
+            "rmse": 44.9564,
+            "mae": 33.5357,
+            "mape": 16.2447,
+            "n": 560,
+            "origins": 5,
+            "coverage": 0.893,
+            "coverage_n": 560,
+            "skill_vs_naive": 0.0
+          }
+        },
+        "3": {
+          "drift": {
+            "rmse": 67.9778,
+            "mae": 54.0642,
+            "mape": 26.5812,
+            "n": 448,
+            "origins": 4,
+            "coverage": 0.904,
+            "coverage_n": 448,
+            "skill_vs_naive": -0.308
+          },
+          "historical_mean": {
+            "rmse": 57.5369,
+            "mae": 44.2317,
+            "mape": 19.9902,
+            "n": 448,
+            "origins": 4,
+            "coverage": 0.886,
+            "coverage_n": 448,
+            "skill_vs_naive": -0.107
+          },
+          "pooled_ridge": {
+            "rmse": 52.5117,
+            "mae": 40.1974,
+            "mape": 17.436,
+            "n": 224,
+            "origins": 2,
+            "coverage": 0.893,
+            "coverage_n": 224,
+            "skill_vs_naive": -0.011
+          },
+          "seasonal_naive": {
+            "rmse": 51.9582,
+            "mae": 38.9799,
+            "mape": 18.1886,
+            "n": 448,
+            "origins": 4,
+            "coverage": 0.882,
+            "coverage_n": 448,
+            "skill_vs_naive": 0.0
+          }
+        },
+        "4": {
+          "drift": {
+            "rmse": 81.4722,
+            "mae": 64.0986,
+            "mape": 30.3316,
+            "n": 336,
+            "origins": 3,
+            "coverage": 0.893,
+            "coverage_n": 336,
+            "skill_vs_naive": -0.456
+          },
+          "historical_mean": {
+            "rmse": 62.5806,
+            "mae": 48.4318,
+            "mape": 20.8397,
+            "n": 336,
+            "origins": 3,
+            "coverage": 0.887,
+            "coverage_n": 336,
+            "skill_vs_naive": -0.119
+          },
+          "seasonal_naive": {
+            "rmse": 55.9433,
+            "mae": 42.6577,
+            "mape": 18.8397,
+            "n": 336,
+            "origins": 3,
+            "coverage": 0.899,
+            "coverage_n": 336,
+            "skill_vs_naive": 0.0
+          }
+        },
+        "5": {
+          "drift": {
+            "rmse": 98.9966,
+            "mae": 77.3236,
+            "mape": 35.6053,
+            "n": 224,
+            "origins": 2,
+            "coverage": 0.884,
+            "coverage_n": 224,
+            "skill_vs_naive": -0.655
+          },
+          "historical_mean": {
+            "rmse": 68.3646,
+            "mae": 52.9417,
+            "mape": 22.1831,
+            "n": 224,
+            "origins": 2,
+            "coverage": 0.897,
+            "coverage_n": 224,
+            "skill_vs_naive": -0.143
+          },
+          "seasonal_naive": {
+            "rmse": 59.8312,
+            "mae": 45.5179,
+            "mape": 19.4168,
+            "n": 224,
+            "origins": 2,
+            "coverage": 0.888,
+            "coverage_n": 224,
+            "skill_vs_naive": 0.0
+          }
+        }
+      },
+      "selected_by_horizon": {
+        "1": "pooled_ridge",
+        "2": "pooled_ridge",
+        "3": "seasonal_naive",
+        "4": "seasonal_naive",
+        "5": "seasonal_naive"
+      },
+      "selected_for_request_path": "lowest backtest RMSE at each horizon: h1 pooled_ridge, h2 pooled_ridge, h3 seasonal_naive, h4 seasonal_naive, h5 seasonal_naive",
+      "interval": {
+        "level": 0.9,
+        "method": "empirical 5th/95th percentile of the selected candidate's backtest residuals",
+        "coverage_method": "leave-one-origin-out"
+      }
+    },
+    {
+      "id": "M2.skill_shortages",
+      "label": "Skill-shortage index by field (0\u20131)",
+      "target": "skill_shortage_index",
+      "scale": "level",
+      "candidates": [
+        "seasonal_naive",
+        "historical_mean",
+        "drift",
+        "pooled_ridge"
+      ],
+      "baselines": [
+        "seasonal_naive",
+        "historical_mean"
+      ],
+      "split": "rolling origin 2019\u20132024, horizons 1\u20135; a candidate never sees data after its origin",
+      "n_holdout_rows": 160,
+      "estimators": {
+        "seasonal_naive": {
+          "rmse": 0.0723,
+          "mae": 0.0602
+        },
+        "historical_mean": {
+          "rmse": 0.0761,
+          "mae": 0.059
+        },
+        "drift": {
+          "rmse": 0.0783,
+          "mae": 0.0648
+        },
+        "pooled_ridge": {
+          "rmse": 0.0763,
+          "mae": 0.0643
+        }
+      },
+      "by_horizon": {
+        "1": {
+          "drift": {
+            "rmse": 0.0783,
+            "mae": 0.0648,
+            "mape": 19.1428,
+            "n": 48,
+            "origins": 6,
+            "coverage": 0.854,
+            "coverage_n": 48,
+            "skill_vs_naive": -0.083
+          },
+          "historical_mean": {
+            "rmse": 0.0761,
+            "mae": 0.059,
+            "mape": 17.4553,
+            "n": 48,
+            "origins": 6,
+            "coverage": 0.854,
+            "coverage_n": 48,
+            "skill_vs_naive": -0.053
+          },
+          "pooled_ridge": {
+            "rmse": 0.0763,
+            "mae": 0.0643,
+            "mape": 19.2279,
+            "n": 40,
+            "origins": 5,
+            "coverage": 0.875,
+            "coverage_n": 40,
+            "skill_vs_naive": -0.056
+          },
+          "seasonal_naive": {
+            "rmse": 0.0723,
+            "mae": 0.0602,
+            "mape": 17.9549,
+            "n": 48,
+            "origins": 6,
+            "coverage": 0.833,
+            "coverage_n": 48,
+            "skill_vs_naive": 0.0
+          }
+        },
+        "2": {
+          "drift": {
+            "rmse": 0.0978,
+            "mae": 0.078,
+            "mape": 22.4168,
+            "n": 40,
+            "origins": 5,
+            "coverage": 0.85,
+            "coverage_n": 40,
+            "skill_vs_naive": -0.158
+          },
+          "historical_mean": {
+            "rmse": 0.082,
+            "mae": 0.0612,
+            "mape": 17.7757,
+            "n": 40,
+            "origins": 5,
+            "coverage": 0.825,
+            "coverage_n": 40,
+            "skill_vs_naive": 0.029
+          },
+          "pooled_ridge": {
+            "rmse": 0.0921,
+            "mae": 0.0787,
+            "mape": 22.2577,
+            "n": 24,
+            "origins": 3,
+            "coverage": 0.792,
+            "coverage_n": 24,
+            "skill_vs_naive": -0.091
+          },
+          "seasonal_naive": {
+            "rmse": 0.0845,
+            "mae": 0.0709,
+            "mape": 20.8645,
+            "n": 40,
+            "origins": 5,
+            "coverage": 0.8,
+            "coverage_n": 40,
+            "skill_vs_naive": 0.0
+          }
+        },
+        "3": {
+          "drift": {
+            "rmse": 0.1264,
+            "mae": 0.0939,
+            "mape": 26.0139,
+            "n": 32,
+            "origins": 4,
+            "coverage": 0.875,
+            "coverage_n": 32,
+            "skill_vs_naive": -0.237
+          },
+          "historical_mean": {
+            "rmse": 0.093,
+            "mae": 0.0743,
+            "mape": 21.3689,
+            "n": 32,
+            "origins": 4,
+            "coverage": 0.875,
+            "coverage_n": 32,
+            "skill_vs_naive": 0.089
+          },
+          "pooled_ridge": {
+            "rmse": 0.1109,
+            "mae": 0.0923,
+            "mape": 26.4528,
+            "n": 8,
+            "origins": 1,
+            "coverage": null,
+            "coverage_n": 0,
+            "skill_vs_naive": -0.085
+          },
+          "seasonal_naive": {
+            "rmse": 0.1022,
+            "mae": 0.0827,
+            "mape": 23.7721,
+            "n": 32,
+            "origins": 4,
+            "coverage": 0.844,
+            "coverage_n": 32,
+            "skill_vs_naive": 0.0
+          }
+        },
+        "4": {
+          "drift": {
+            "rmse": 0.1513,
+            "mae": 0.1045,
+            "mape": 26.7917,
+            "n": 24,
+            "origins": 3,
+            "coverage": 0.792,
+            "coverage_n": 24,
+            "skill_vs_naive": -0.361
+          },
+          "historical_mean": {
+            "rmse": 0.0972,
+            "mae": 0.079,
+            "mape": 22.2049,
+            "n": 24,
+            "origins": 3,
+            "coverage": 0.792,
+            "coverage_n": 24,
+            "skill_vs_naive": 0.125
+          },
+          "seasonal_naive": {
+            "rmse": 0.1111,
+            "mae": 0.0871,
+            "mape": 23.8824,
+            "n": 24,
+            "origins": 3,
+            "coverage": 0.792,
+            "coverage_n": 24,
+            "skill_vs_naive": 0.0
+          }
+        },
+        "5": {
+          "drift": {
+            "rmse": 0.1854,
+            "mae": 0.1289,
+            "mape": 31.2455,
+            "n": 16,
+            "origins": 2,
+            "coverage": null,
+            "coverage_n": 0,
+            "skill_vs_naive": -0.541
+          },
+          "historical_mean": {
+            "rmse": 0.1136,
+            "mae": 0.0966,
+            "mape": 27.4346,
+            "n": 16,
+            "origins": 2,
+            "coverage": null,
+            "coverage_n": 0,
+            "skill_vs_naive": 0.056
+          },
+          "seasonal_naive": {
+            "rmse": 0.1203,
+            "mae": 0.0947,
+            "mape": 25.7043,
+            "n": 16,
+            "origins": 2,
+            "coverage": null,
+            "coverage_n": 0,
+            "skill_vs_naive": 0.0
+          }
+        }
+      },
+      "selected_by_horizon": {
+        "1": "seasonal_naive",
+        "2": "historical_mean",
+        "3": "historical_mean",
+        "4": "historical_mean",
+        "5": "historical_mean"
+      },
+      "selected_for_request_path": "lowest backtest RMSE at each horizon: h1 seasonal_naive, h2 historical_mean, h3 historical_mean, h4 historical_mean, h5 historical_mean",
+      "interval": {
+        "level": 0.9,
+        "method": "empirical 5th/95th percentile of the selected candidate's backtest residuals",
+        "coverage_method": "leave-one-origin-out"
+      }
+    }
+  ],
+  "derived_targets": [
+    {
+      "id": "M2.employment_growth",
+      "target": "employment_growth_pct",
+      "derived_from": "M2.employment_demand",
+      "method": "(forecast employment / last observed employment \u2212 1) \u00d7 100"
     },
     {
       "id": "M2.occupational_demand",
       "target": "occupational_demand",
-      "n_holdout_rows": 224,
-      "split": "chronological last-2-years per series",
-      "estimators": {
-        "seasonal_naive": {
-          "rmse": 12.6,
-          "mae": 9.95
-        },
-        "historical_mean": {
-          "rmse": 10.63,
-          "mae": 8.34
-        },
-        "ols_lags": {
-          "rmse": 13.9,
-          "mae": 10.76
-        }
-      },
-      "selected_for_request_path": "ols_lags if a series has 4+ history years, else seasonal-naive"
-    },
-    {
-      "id": "M2.skill_shortages",
-      "target": "skill_shortage_index",
-      "n_holdout_rows": 16,
-      "split": "chronological last-2-years per series",
-      "estimators": {
-        "seasonal_naive": {
-          "rmse": 0.28,
-          "mae": 0.24
-        },
-        "historical_mean": {
-          "rmse": 0.19,
-          "mae": 0.17
-        },
-        "ols_lags": {
-          "rmse": 0.31,
-          "mae": 0.2
-        }
-      },
-      "selected_for_request_path": "ols_lags if a series has 4+ history years, else seasonal-naive"
+      "derived_from": "M2.vacancies",
+      "method": "vacancy \u00d7 occupation share of the region's vacancy mix \u2014 not a copy of the vacancy point"
     }
   ],
+  "occupational_demand_method": "vacancy \u00d7 occupation share of the region's vacancy mix \u2014 not a copy of the vacancy point",
   "not_compared": [
     "US Prophet (ml/models/demand_prophet.pkl) \u2014 US labour-demand path"
-  ],
-  "occupational_demand_method": "vacancy \u00d7 occupation share of the region's vacancy mix \u2014 not a copy of the vacancy point"
+  ]
 }

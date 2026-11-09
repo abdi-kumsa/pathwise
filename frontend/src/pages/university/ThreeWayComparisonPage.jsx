@@ -6,6 +6,7 @@ import SectionHeader from '../../components/SectionHeader'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
 import DataNote from '../../components/DataNote'
+import ForecastAccuracyNote from '../../components/ForecastAccuracyNote'
 import EmptyState from '../../components/EmptyState'
 import useFetch from '../../hooks/useFetch'
 import { getDemandVsLabour } from '../../api/roles'
@@ -34,6 +35,7 @@ export default function ThreeWayComparisonPage() {
           <DataNote tone="simulated">
             Planning on popularity alone misses graduate supply and labour demand. Colour plus the legend names each series.
           </DataNote>
+          <ForecastAccuracyNote />
           {rows.length === 0 && (
             <EmptyState title="No field rows" description="Three-way comparison is empty for this institution." />
           )}

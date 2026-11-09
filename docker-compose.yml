@@ -14,7 +14,9 @@ services:
       # HOST:CONTAINER. Only the host side is configurable — the container always
       # listens on 5432, which is what the backend dials via DATABASE_URL.
       # Override DB_HOST_PORT in .env when another Postgres already owns 5432.
-      - "${DB_HOST_PORT:-5434}:5432"
+      # Bound to localhost: the database is reachable from this machine only,
+      # not from the network. Set BIND_ADDRESS=0.0.0.0 to change that.
+      - "${BIND_ADDRESS:-127.0.0.1}:${DB_HOST_PORT:-5434}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       # Mount schema so Postgres runs it automatically on first-ever container
@@ -31,6 +33,9 @@ services:
     build:
       context: ./backend
       dockerfile: ../docker/Dockerfile.backend
+      args:
+        # 1 also installs requirements-legacy.txt (TensorFlow, Prophet, ...).
+        LEGACY_US_MODELS: ${LEGACY_US_MODELS:-0}
     container_name: pathwise_backend
     restart: unless-stopped
     env_file: .env
@@ -43,7 +48,7 @@ services:
       JWT_EXPIRE_MINUTES: ${JWT_EXPIRE_MINUTES}
       DEMO_PASSWORD: ${DEMO_PASSWORD}
     ports:
-      - "${API_HOST_PORT:-8000}:8000"
+      - "${BIND_ADDRESS:-127.0.0.1}:${API_HOST_PORT:-8000}:8000"
     # Default (BACKEND_RELOAD unset) runs without uvicorn's file watcher.
     # The watcher is unreliable on Windows bind mounts — it crash-loops with
     # "WatchfilesRustInternalError: IO error for operation on /app" and leaves
@@ -88,7 +93,7 @@ services:
       # (which is the port uvicorn listens on inside the container).
       VITE_API_URL: http://localhost:${API_HOST_PORT:-8000}
     ports:
-      - "${FRONTEND_HOST_PORT:-3001}:3000"
+      - "${BIND_ADDRESS:-127.0.0.1}:${FRONTEND_HOST_PORT:-3001}:3000"
     volumes:
       - ./frontend:/app
       - /app/node_modules

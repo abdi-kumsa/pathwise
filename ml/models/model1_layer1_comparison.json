@@ -1,22 +1,243 @@
 {
-  "n_holdout_rows": 304,
-  "split": "chronological last-2-years per series",
-  "target": "program_enrollment_count",
+  "id": "M1.applications",
+  "label": "Unconstrained student demand (applications) by HEI \u00d7 programme",
+  "target": "applications_count",
+  "scale": "log",
+  "candidates": [
+    "seasonal_naive",
+    "historical_mean",
+    "drift",
+    "pooled_ridge"
+  ],
+  "baselines": [
+    "seasonal_naive",
+    "historical_mean"
+  ],
+  "split": "rolling origin 2019\u20132024, horizons 1\u20135; a candidate never sees data after its origin",
+  "n_holdout_rows": 3040,
   "estimators": {
     "seasonal_naive": {
-      "rmse": 62.52,
-      "mae": 49.54
+      "rmse": 94.1284,
+      "mae": 69.9452
     },
     "historical_mean": {
-      "rmse": 54.91,
-      "mae": 44.79
+      "rmse": 122.0293,
+      "mae": 91.799
     },
-    "ols_lags": {
-      "rmse": 0.0,
-      "mae": 0.0
+    "drift": {
+      "rmse": 114.2005,
+      "mae": 84.7606
+    },
+    "pooled_ridge": {
+      "rmse": 91.4251,
+      "mae": 67.652
     }
   },
-  "selected_for_request_path": "ols_lags if a series has 4+ history years, else seasonal_naive",
+  "by_horizon": {
+    "1": {
+      "drift": {
+        "rmse": 114.2005,
+        "mae": 84.7606,
+        "mape": 14.6285,
+        "n": 912,
+        "origins": 6,
+        "coverage": 0.893,
+        "coverage_n": 912,
+        "skill_vs_naive": -0.213
+      },
+      "historical_mean": {
+        "rmse": 122.0293,
+        "mae": 91.799,
+        "mape": 14.9129,
+        "n": 912,
+        "origins": 6,
+        "coverage": 0.895,
+        "coverage_n": 912,
+        "skill_vs_naive": -0.296
+      },
+      "pooled_ridge": {
+        "rmse": 91.4251,
+        "mae": 67.652,
+        "mape": 11.5027,
+        "n": 912,
+        "origins": 6,
+        "coverage": 0.895,
+        "coverage_n": 912,
+        "skill_vs_naive": 0.029
+      },
+      "seasonal_naive": {
+        "rmse": 94.1284,
+        "mae": 69.9452,
+        "mape": 11.7896,
+        "n": 912,
+        "origins": 6,
+        "coverage": 0.899,
+        "coverage_n": 912,
+        "skill_vs_naive": 0.0
+      }
+    },
+    "2": {
+      "drift": {
+        "rmse": 160.3945,
+        "mae": 120.209,
+        "mape": 21.1792,
+        "n": 760,
+        "origins": 5,
+        "coverage": 0.892,
+        "coverage_n": 760,
+        "skill_vs_naive": -0.208
+      },
+      "historical_mean": {
+        "rmse": 138.2093,
+        "mae": 105.213,
+        "mape": 17.1104,
+        "n": 760,
+        "origins": 5,
+        "coverage": 0.895,
+        "coverage_n": 760,
+        "skill_vs_naive": -0.041
+      },
+      "pooled_ridge": {
+        "rmse": 124.4344,
+        "mae": 90.3582,
+        "mape": 14.7127,
+        "n": 608,
+        "origins": 4,
+        "coverage": 0.872,
+        "coverage_n": 608,
+        "skill_vs_naive": 0.063
+      },
+      "seasonal_naive": {
+        "rmse": 132.7536,
+        "mae": 97.7803,
+        "mape": 16.7228,
+        "n": 760,
+        "origins": 5,
+        "coverage": 0.893,
+        "coverage_n": 760,
+        "skill_vs_naive": 0.0
+      }
+    },
+    "3": {
+      "drift": {
+        "rmse": 193.2258,
+        "mae": 146.3978,
+        "mape": 25.0636,
+        "n": 608,
+        "origins": 4,
+        "coverage": 0.888,
+        "coverage_n": 608,
+        "skill_vs_naive": -0.284
+      },
+      "historical_mean": {
+        "rmse": 147.6657,
+        "mae": 112.9123,
+        "mape": 17.5437,
+        "n": 608,
+        "origins": 4,
+        "coverage": 0.895,
+        "coverage_n": 608,
+        "skill_vs_naive": 0.019
+      },
+      "pooled_ridge": {
+        "rmse": 145.8783,
+        "mae": 109.7175,
+        "mape": 15.6293,
+        "n": 304,
+        "origins": 2,
+        "coverage": 0.885,
+        "coverage_n": 304,
+        "skill_vs_naive": 0.031
+      },
+      "seasonal_naive": {
+        "rmse": 150.5207,
+        "mae": 113.153,
+        "mape": 18.3306,
+        "n": 608,
+        "origins": 4,
+        "coverage": 0.888,
+        "coverage_n": 608,
+        "skill_vs_naive": 0.0
+      }
+    },
+    "4": {
+      "drift": {
+        "rmse": 221.1402,
+        "mae": 168.2362,
+        "mape": 27.1286,
+        "n": 456,
+        "origins": 3,
+        "coverage": 0.908,
+        "coverage_n": 456,
+        "skill_vs_naive": -0.465
+      },
+      "historical_mean": {
+        "rmse": 154.5907,
+        "mae": 117.4539,
+        "mape": 16.997,
+        "n": 456,
+        "origins": 3,
+        "coverage": 0.893,
+        "coverage_n": 456,
+        "skill_vs_naive": -0.024
+      },
+      "seasonal_naive": {
+        "rmse": 150.925,
+        "mae": 114.8136,
+        "mape": 17.1457,
+        "n": 456,
+        "origins": 3,
+        "coverage": 0.895,
+        "coverage_n": 456,
+        "skill_vs_naive": 0.0
+      }
+    },
+    "5": {
+      "drift": {
+        "rmse": 271.8051,
+        "mae": 203.2171,
+        "mape": 31.7862,
+        "n": 304,
+        "origins": 2,
+        "coverage": 0.885,
+        "coverage_n": 304,
+        "skill_vs_naive": -0.744
+      },
+      "historical_mean": {
+        "rmse": 168.3598,
+        "mae": 127.4929,
+        "mape": 17.737,
+        "n": 304,
+        "origins": 2,
+        "coverage": 0.914,
+        "coverage_n": 304,
+        "skill_vs_naive": -0.08
+      },
+      "seasonal_naive": {
+        "rmse": 155.8715,
+        "mae": 119.0296,
+        "mape": 16.9702,
+        "n": 304,
+        "origins": 2,
+        "coverage": 0.891,
+        "coverage_n": 304,
+        "skill_vs_naive": 0.0
+      }
+    }
+  },
+  "selected_by_horizon": {
+    "1": "pooled_ridge",
+    "2": "pooled_ridge",
+    "3": "pooled_ridge",
+    "4": "seasonal_naive",
+    "5": "seasonal_naive"
+  },
+  "selected_for_request_path": "lowest backtest RMSE at each horizon: h1 pooled_ridge, h2 pooled_ridge, h3 pooled_ridge, h4 seasonal_naive, h5 seasonal_naive",
+  "interval": {
+    "level": 0.9,
+    "method": "empirical 5th/95th percentile of the selected candidate's backtest residuals",
+    "coverage_method": "leave-one-origin-out"
+  },
   "not_compared": [
     "US LSTM (ml/models/enrollment_lstm.keras) \u2014 univariate US enrollment path",
     "US Prophet (ml/models/demand_prophet.pkl) \u2014 US labour-demand path"

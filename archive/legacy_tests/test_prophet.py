@@ -12,7 +12,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 warnings.filterwarnings('ignore')
 
-ROOT       = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT       = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 MODEL_DIR  = os.path.join(ROOT, 'ml', 'models')
 MODEL_PATH = os.path.join(MODEL_DIR, 'demand_prophet.pkl')
 

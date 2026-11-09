@@ -126,11 +126,19 @@ Composite scores min-max normalise across the current comparison set. A score of
 70 means “high among these rows”, not “70% good”. Payloads return `weights`,
 `method` and per-factor rows (RANK.R3).
 
-### 5.3 `ols_lags` holdout is not ministry accuracy
+### 5.3 Backtest error is not ministry accuracy
 
-On the simulated lag construction, chronological holdout RMSE for `ols_lags` is
-near-zero. Comparison still includes seasonal-naive and historical-mean. The
-monitoring headline uses seasonal-naive. Waiver **WV.OLS1**.
+Every forecast is chosen by a rolling-origin backtest against two naive
+baselines, and every interval has measured coverage
+([MODEL_COMPARISON.md](MODEL_COMPARISON.md)). On simulated data those errors
+say how well an estimator recovers the generator's process, not how well it
+predicts Ethiopia. They become ministry-relevant only when the same backtest
+runs on official series (WV.SIM1).
+
+Until Phase 2 the generator computed `enrollment_rolling_3y_avg` including the
+current year and set `employment_lag_1y = employment / 1.02`, so the old
+`ols_lags` estimator reproduced its target exactly (near-zero RMSE, waiver
+WV.OLS1, now retired). All lag columns are now true lags.
 
 ### 5.4 GET `/api/users` is a stamped object
 

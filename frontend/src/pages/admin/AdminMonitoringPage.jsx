@@ -18,6 +18,39 @@ import {
 const getPredictions = (n = 50) =>
   client.get('/api/monitoring/predictions', { params: { n } }).then(r => r.data)
 
+function DriftTable({ report }) {
+  const targets = Object.values(report?.targets || {})
+  if (!targets.length) return <EmptyState title="No drift report" description="The Ethiopia forecasts have not been evaluated yet." />
+  const tone = (s) => (s === 'shift' || s === 'degraded' ? 'var(--red)' : s === 'watch' ? '#B45309' : 'var(--green)')
+  return (
+    <table className="data-table" style={{ width: '100%' }}>
+      <thead>
+        <tr>
+          <th style={{ textAlign: 'left' }}>Target</th>
+          <th style={{ textAlign: 'right' }}>Input PSI</th>
+          <th style={{ textAlign: 'left' }}>Input</th>
+          <th style={{ textAlign: 'right' }}>Error ratio</th>
+          <th style={{ textAlign: 'left' }}>Error</th>
+        </tr>
+      </thead>
+      <tbody>
+        {targets.map((t) => {
+          const input = (t.inputs || [])[0] || {}
+          return (
+            <tr key={t.target}>
+              <td style={{ textAlign: 'left' }}>{t.label || t.target}</td>
+              <td style={{ textAlign: 'right' }}>{input.psi != null ? input.psi.toFixed(3) : '—'}</td>
+              <td style={{ textAlign: 'left', color: tone(input.status) }}>{input.status || '—'}</td>
+              <td style={{ textAlign: 'right' }}>{t.error?.ratio != null ? t.error.ratio.toFixed(2) : '—'}</td>
+              <td style={{ textAlign: 'left', color: tone(t.error?.status) }}>{t.error?.status || '—'}</td>
+            </tr>
+          )
+        })}
+      </tbody>
+    </table>
+  )
+}
+
 export default function AdminMonitoringPage() {
   const { data, loading, error, refetch } = useFetch(() =>
     Promise.all([getDrift(), getPredictions(50)])
@@ -37,11 +70,12 @@ export default function AdminMonitoringPage() {
     <div>
       <SectionHeader
         title="Model monitoring"
-        subtitle="Ethiopia M1/M2 RMSE against seasonal-naive; leftover US placement drift is secondary"
+        subtitle="Ethiopia M1/M2: backtest error of the selected model, input drift and error drift"
       />
       <DataNote tone="simulated">
-        Headline error is Ethiopia seasonal-naive RMSE. US LSTM, Prophet and
-        placement XGBoost (baseline 0.88) are leftover tools, not Ethiopia accuracy.
+        Headline error is the horizon-1 backtest RMSE of the model each forecast actually uses,
+        on simulated data. Drift compares the latest year with 2016–2022. The leftover US
+        placement model is reported separately and only when it is switched on.
       </DataNote>
 
       {error && <ErrorBanner message={error} onRetry={refetch} />}
@@ -51,9 +85,9 @@ export default function AdminMonitoringPage() {
         <>
           <div className="kpi-grid">
             <KPICard
-              label="Ethiopia RMSE"
+              label="M1 backtest RMSE"
               value={drift.rmse != null ? fmtNum(drift.rmse) : '—'}
-              delta={drift.mae != null ? `MAE ${fmtNum(drift.mae)} · vs naive` : 'vs seasonal-naive'}
+              delta={drift.ethiopia?.model1?.selected_name ? `selected: ${drift.ethiopia.model1.selected_name}` : 'horizon 1'}
               deltaDirection="neutral"
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 3v18h18"/><path d="M18.7 8 13 13.7l-3-3L4 16.5"/></svg>}
             />
@@ -65,30 +99,11 @@ export default function AdminMonitoringPage() {
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>}
             />
             <KPICard
-              label="Predictions logged"
-              value={fmtNum(drift.total_logged)}
-              delta={`leftover US window of ${drift.window}`}
-              deltaDirection="neutral"
-              icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 3v18h18"/><path d="M18.7 8 13 13.7l-3-3L4 16.5"/></svg>}
-            />
-            <KPICard
-              label="Mean probability"
-              value={drift.mean_probability != null ? drift.mean_probability.toFixed(3) : '—'}
-              delta={`leftover US baseline ${drift.baseline}`}
-              deltaDirection="neutral"
-              icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>}
-            />
-            <KPICard
-              label="Drift"
-              value={drift.drift != null ? drift.drift.toFixed(4) : '—'}
-              delta={drift.alert ? 'Above threshold' : 'Within tolerance'}
-              deltaDirection={drift.alert ? 'down' : 'up'}
-              icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>}
-            />
-            <KPICard
-              label="Status"
-              value={drift.alert ? 'Retrain' : 'Stable'}
-              delta={drift.alert ? 'Action needed' : 'No action needed'}
+              label="Ethiopia drift"
+              value={drift.alert ? 'Review' : 'Stable'}
+              delta={drift.alert
+                ? `${(drift.ethiopia_drift?.alerting_targets || []).length} target(s) flagged`
+                : 'Inputs and errors within tolerance'}
               deltaDirection={drift.alert ? 'down' : 'up'}
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6 9 17l-5-5"/></svg>}
             />
@@ -102,8 +117,17 @@ export default function AdminMonitoringPage() {
           </div>
 
           <div className="panel" style={{ marginBottom: 20 }}>
+            <p className="panel-title">Drift by forecast target</p>
+            <p className="panel-sub">
+              Input PSI of the year-on-year change (&lt; 0.10 stable, 0.10–0.25 watch, &gt; 0.25 shift) and
+              the latest backtest error against earlier origins (&gt; 1.5× flagged).
+            </p>
+            <DriftTable report={drift.ethiopia_drift} />
+          </div>
+
+          <div className="panel" style={{ marginBottom: 20 }}>
             <p className="panel-title">Ethiopia estimators vs naive</p>
-            <p className="panel-sub">Chronological holdout RMSE / MAE. US models are not compared.</p>
+            <p className="panel-sub">Rolling-origin backtest RMSE / MAE at horizon 1. US models are not compared.</p>
             <EthiopiaTable ethiopia={drift.ethiopia} />
             {(drift.us_models_not_compared || []).length > 0 && (
               <p style={{ fontSize: 12, color: 'var(--text-secondary)', marginTop: 8 }}>
@@ -112,11 +136,12 @@ export default function AdminMonitoringPage() {
             )}
           </div>
 
+          {drift.placement?.enabled && (
           <div className="panel">
             <p className="panel-title">Recent prediction probabilities</p>
             <p className="panel-sub">
               Leftover US placement probabilities (most recent {series.length}),
-              against training baseline {drift.baseline}. Not Ethiopia accuracy.
+              against {drift.placement?.baseline_source || 'the reference window'}. Not Ethiopia accuracy.
             </p>
 
             {series.length === 0 ? (
@@ -142,6 +167,7 @@ export default function AdminMonitoringPage() {
               </ResponsiveContainer>
             )}
           </div>
+          )}
         </>
       )}
     </div>

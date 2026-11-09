@@ -13,6 +13,10 @@ import pandas as pd
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 from tensorflow.keras.models import load_model
+try:
+    from artifacts import verified_open, verify  # noqa: F401  (ml/ on sys.path)
+except ImportError:  # imported as part of the ml package
+    from ml.artifacts import verified_open, verify  # noqa: F401
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
 
@@ -32,10 +36,10 @@ META_PATH   = os.path.join(MODEL_DIR, 'enrollment_lstm_meta.pkl')
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 def load_artifacts():
-    model   = load_model(MODEL_PATH)
-    with open(SCALER_PATH, 'rb') as f:
+    model   = load_model(str(verify(MODEL_PATH)))
+    with verified_open(SCALER_PATH) as f:
         scalers = pickle.load(f)
-    with open(META_PATH, 'rb') as f:
+    with verified_open(META_PATH) as f:
         meta = pickle.load(f)
     return model, scalers, meta
 

@@ -11,6 +11,10 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import (accuracy_score, precision_score, recall_score,
                              f1_score, mean_squared_error, mean_absolute_error)
+try:
+    from artifacts import verified_open, verify  # noqa: F401  (ml/ on sys.path)
+except ImportError:  # imported as part of the ml package
+    from ml.artifacts import verified_open, verify  # noqa: F401
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
@@ -40,9 +44,9 @@ def xgboost_metrics():
 
     # Fallback: load and evaluate (only safe when training and inference
     # environments use the exact same XGBoost version)
-    with open(os.path.join(MODEL_DIR, 'placement_xgboost.pkl'), 'rb') as f:
+    with verified_open(os.path.join(MODEL_DIR, 'placement_xgboost.pkl')) as f:
         model = pickle.load(f)
-    with open(os.path.join(MODEL_DIR, 'placement_feature_names.pkl'), 'rb') as f:
+    with verified_open(os.path.join(MODEL_DIR, 'placement_feature_names.pkl')) as f:
         feature_names = pickle.load(f)
 
     df = pd.read_parquet(PARQUET)
@@ -72,9 +76,9 @@ def lstm_metrics():
     if not os.path.exists(model_path):
         return {'model': 'LSTM', 'status': 'not_trained'}
 
-    with open(os.path.join(MODEL_DIR, 'enrollment_scaler.pkl'), 'rb') as f:
+    with verified_open(os.path.join(MODEL_DIR, 'enrollment_scaler.pkl')) as f:
         scalers = pickle.load(f)
-    with open(os.path.join(MODEL_DIR, 'enrollment_lstm_meta.pkl'), 'rb') as f:
+    with verified_open(os.path.join(MODEL_DIR, 'enrollment_lstm_meta.pkl')) as f:
         meta = pickle.load(f)
 
     keras_model = keras_load(model_path)
@@ -133,7 +137,7 @@ def salary_metrics():
             return {'model': 'XGBoostRegressor', 'status': 'not_trained'}
         return {'model': 'XGBoostRegressor', 'status': 'meta_missing'}
 
-    with open(meta_path, 'rb') as f:
+    with verified_open(meta_path) as f:
         meta = pickle.load(f)
 
     fi = dict(sorted(meta.get('top_features', {}).items(),

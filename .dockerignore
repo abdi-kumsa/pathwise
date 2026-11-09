@@ -1,0 +1,12 @@
+# Build context hygiene for images built from the repository root.
+**/node_modules
+**/dist
+**/__pycache__
+**/.pytest_cache
+.git
+.env
+.env.*
+!.env.example
+archive
+docs/audit
+data/monitoring

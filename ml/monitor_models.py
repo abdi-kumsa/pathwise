@@ -24,6 +24,10 @@ import sys
 import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score
+try:
+    from artifacts import verified_open, verify  # noqa: F401  (ml/ on sys.path)
+except ImportError:  # imported as part of the ml package
+    from ml.artifacts import verified_open, verify  # noqa: F401
 
 # ── Paths ──────────────────────────────────────────────────────────────────────
 
@@ -42,9 +46,9 @@ SAMPLE_SIZE     = 50     # evaluate against the N most recent student records
 # ── Helpers ────────────────────────────────────────────────────────────────────
 
 def _load_model():
-    with open(os.path.join(MODEL_DIR, "placement_xgboost.pkl"), "rb") as f:
+    with verified_open(os.path.join(MODEL_DIR, "placement_xgboost.pkl")) as f:
         model = pickle.load(f)
-    with open(os.path.join(MODEL_DIR, "placement_feature_names.pkl"), "rb") as f:
+    with verified_open(os.path.join(MODEL_DIR, "placement_feature_names.pkl")) as f:
         feature_names = pickle.load(f)
     return model, feature_names
 
@@ -116,7 +120,7 @@ def run_monitor() -> int:
     drop_f1       = baseline_f1       - current_f1
 
     # Report
-    print(f"\n  Baseline  (model_metrics.json)")
+    print("\n  Baseline  (model_metrics.json)")
     print(f"    Accuracy : {baseline_accuracy:.4f}")
     print(f"    F1-Score : {baseline_f1:.4f}")
 

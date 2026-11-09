@@ -1,83 +1,109 @@
 {
   "model1": {
-    "target": "program_enrollment_count",
+    "target": "applications_count",
+    "target_id": "M1.applications",
+    "model": "pooled_ridge (horizon 1)",
+    "scale": "log change",
+    "coefficients": {
+      "latest_change": 0.071359,
+      "distance_from_series_mean": -0.233216
+    },
+    "intercept": 0.015317,
     "model_based": [
       {
-        "feature": "enrollment_rolling_3y_avg",
-        "importance": 3.0,
+        "feature": "distance_from_series_mean",
+        "importance": 0.029542,
         "method": "model_based_importance"
       },
       {
-        "feature": "enrollment_lag_1y",
-        "importance": 1.0,
+        "feature": "latest_change",
+        "importance": 0.011043,
         "method": "model_based_importance"
+      }
+    ],
+    "shap": [
+      {
+        "feature": "distance_from_series_mean",
+        "importance": 0.028904,
+        "method": "shap_linear_exact"
       },
       {
-        "feature": "enrollment_lag_2y",
-        "importance": 1.0,
-        "method": "model_based_importance"
-      },
-      {
-        "feature": "applications_count",
-        "importance": 0.0,
-        "method": "model_based_importance"
+        "feature": "latest_change",
+        "importance": 0.008268,
+        "method": "shap_linear_exact"
       }
     ],
     "permutation": [
       {
-        "feature": "enrollment_rolling_3y_avg",
-        "importance": 127.101389,
+        "feature": "distance_from_series_mean",
+        "importance": 0.017878,
         "method": "permutation_importance"
       },
       {
-        "feature": "enrollment_lag_2y",
-        "importance": 66.933932,
-        "method": "permutation_importance"
-      },
-      {
-        "feature": "enrollment_lag_1y",
-        "importance": 61.173717,
-        "method": "permutation_importance"
-      },
-      {
-        "feature": "applications_count",
-        "importance": 0.0,
+        "feature": "latest_change",
+        "importance": 0.001074,
         "method": "permutation_importance"
       }
     ],
-    "holdout_rmse": 0.0,
-    "n_holdout": 304,
-    "split": "chronological last-2-years per series"
+    "holdout_rmse": 0.137869,
+    "holdout_rmse_no_change": 0.151084,
+    "n_train": 608,
+    "n_holdout": 456,
+    "split": "train on target years < 2023, explain on 2023 onwards",
+    "features_from": "the target's own history: latest_change = last value \u2212 previous value; distance_from_series_mean = last value \u2212 the series' mean so far"
   },
   "model2": {
     "target": "employment_level",
+    "target_id": "M2.employment_demand",
+    "model": "pooled_ridge (horizon 1)",
+    "scale": "log change",
+    "coefficients": {
+      "latest_change": 0.022317,
+      "distance_from_series_mean": -0.082518
+    },
+    "intercept": 0.015374,
     "model_based": [
       {
-        "feature": "employment_lag_1y",
-        "importance": 0.517962,
+        "feature": "distance_from_series_mean",
+        "importance": 0.006851,
         "method": "model_based_importance"
       },
       {
-        "feature": "employment_lag_2y",
-        "importance": 0.516804,
+        "feature": "latest_change",
+        "importance": 0.002185,
         "method": "model_based_importance"
+      }
+    ],
+    "shap": [
+      {
+        "feature": "distance_from_series_mean",
+        "importance": 0.006199,
+        "method": "shap_linear_exact"
+      },
+      {
+        "feature": "latest_change",
+        "importance": 0.00123,
+        "method": "shap_linear_exact"
       }
     ],
     "permutation": [
       {
-        "feature": "employment_lag_2y",
-        "importance": 6608.129692,
+        "feature": "distance_from_series_mean",
+        "importance": 0.004808,
         "method": "permutation_importance"
       },
       {
-        "feature": "employment_lag_1y",
-        "importance": 6465.156103,
+        "feature": "latest_change",
+        "importance": 0.000325,
         "method": "permutation_importance"
       }
     ],
-    "holdout_rmse": 0.2131,
-    "n_holdout": 224,
-    "split": "chronological last-2-years per series"
+    "holdout_rmse": 0.08045,
+    "holdout_rmse_no_change": 0.088318,
+    "n_train": 448,
+    "n_holdout": 336,
+    "split": "train on target years < 2023, explain on 2023 onwards",
+    "features_from": "the target's own history: latest_change = last value \u2212 previous value; distance_from_series_mean = last value \u2212 the series' mean so far"
   },
   "not_compared": [
     "US LSTM (ml/models/enrollment_lstm.keras)",

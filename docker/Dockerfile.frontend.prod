@@ -1,0 +1,27 @@
+# Production frontend: static build served by nginx (plan item 3.4).
+# The dev image (Dockerfile.frontend) runs the Vite dev server, which must not
+# be exposed: it serves source files and carries dev-only advisories.
+#
+# Build from the repository root:
+#   docker build -f docker/Dockerfile.frontend.prod \
+#     --build-arg VITE_API_URL=https://api.example.org -t pathwise-frontend-prod .
+
+FROM node:22-alpine AS build
+WORKDIR /app
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm ci --no-audit --no-fund
+COPY frontend/ .
+ARG VITE_API_URL=http://localhost:8000
+ARG VITE_LEGACY_US_MODELS=false
+ENV VITE_API_URL=$VITE_API_URL VITE_LEGACY_US_MODELS=$VITE_LEGACY_US_MODELS
+RUN npx vite build
+
+# Runs as the unprivileged nginx user and listens on 8080.
+FROM nginxinc/nginx-unprivileged:1.27-alpine
+# API_ORIGIN feeds the CSP connect-src. Both files under templates/ are
+# rendered with envsubst into /etc/nginx/conf.d/ when the container starts;
+# only defined variables are substituted, so nginx's own $uri is untouched.
+ENV API_ORIGIN=http://localhost:8000
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY docker/nginx/default.conf.template docker/nginx/security-headers.inc.template /etc/nginx/templates/
+EXPOSE 8080

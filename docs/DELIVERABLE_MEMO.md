@@ -205,9 +205,8 @@ every DOC2 widget, mapped to the artefact that discharges it.
 
 | Id | Caveat | Retires when |
 |---|---|---|
-| `WV.US1` | Placement XGBoost, salary XGBoost, US LSTM enrolment and Prophet demand artefacts remain on disk and on leftover tool routes (/student/evaluator, /student/salary, /student/market, /university/enrollment). They are not Ethiopia Model 1 or Model 2 scores. Wave 9 hid those links from role nav; bookmarked URLs still work. | Those tool routes are removed or the artefacts are retrained on Ethiopia fact tables and labelled as such. |
+| `WV.US1` | Placement XGBoost, salary XGBoost, US LSTM enrolment and Prophet demand artefacts remain on disk. They are not Ethiopia Model 1 or Model 2 scores, and the 2026-11-07 audit found each loses to a trivial baseline. Since Phase 1 their routes (/api/market, /api/enrollment, /api/recommendations and the /student/evaluator, /student/salary, /student/market, /university/enrollment pages) are registered only when LEGACY_US_MODELS=1 and VITE_LEGACY_US_MODELS=true. The default deployment does not load them. | Those tool routes are removed or the artefacts are retrained on Ethiopia fact tables and labelled as such. |
 | `WV.SIM1` | Every Ethiopia figure is provenance.tier simulated until official CSA, MoE or ESS files replace the parquets under docs/spec/ingestion/. | An official file is ingested for a table and that series is restamped tier official. |
-| `WV.OLS1` | M1/M2 ols_lags chronological holdout RMSE is near-zero on the simulated lag construction. Comparison still includes seasonal-naive and historical-mean. Figures are not ministry accuracy. | Holdout RMSE is recomputed on official series that are not generated from the same lags. |
 
 ## What we did not do
 

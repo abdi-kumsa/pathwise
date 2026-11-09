@@ -3,8 +3,8 @@ from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.responses import Response
 
-from services import labour_market_service, mismatch_service
-from services.auth_service import ROLE_MOE, ROLE_MOL, get_current_user, log_audit, require_roles
+from services import labour_market_service, mismatch_service, rate_limit
+from services.auth_service import ROLE_MOE, ROLE_MOL, log_audit, require_roles
 
 # MoE also reads labour demand — it is the input to their investment decisions —
 # so both ministries are admitted here. Education supply data is MoE-only.
@@ -90,7 +90,7 @@ def graduate_absorption():
 def workforce_report(
     format: Optional[str] = Query(None, alias="format"),
     horizon: int = Query(3, ge=1, le=5),
-    user: dict = Depends(get_current_user),
+    user: dict = Depends(rate_limit.per_user("workforce-report", 10, 60)),
 ):
     try:
         payload = labour_market_service.workforce_report(horizon=horizon)

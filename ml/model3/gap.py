@@ -1,9 +1,15 @@
 """
 M3.2 — supply–demand gap and alignment scoring.
 
-Expected graduates vs projected occupational demand. Status is shortage /
-balanced / oversupply; severity is a quartile of |gap| (RANK.R4), not a fixed
-coverage threshold. Composite scores return weights, method and per-factor
+Expected graduates vs projected occupational demand, both annual flows (people
+finishing a programme in a year vs vacancies opening in a year).
+
+Status comes from coverage = graduates / demand: below COVERAGE_SHORTAGE is a
+shortage, above COVERAGE_OVERSUPPLY an oversupply, between them balanced.
+Severity is separate: the quartile of |gap| across the comparison set (RANK.R4),
+so it ranks how large a gap is relative to the others. Earlier waves derived
+the status from severity, which labelled the smallest quartile "balanced" even
+at an 11% shortfall. Composite scores return weights, method and per-factor
 decomposition (RANK.R3). Graduate fit classification does not enter.
 """
 from __future__ import annotations
@@ -22,8 +28,9 @@ ALIGNMENT_WEIGHTS = {
 
 ALIGNMENT_METHOD = (
     "Each factor is min-max normalised across the comparison set, then combined "
-    "with the published weights. Scores are relative, not absolute. Severity is "
-    "the quartile of |demand − supply|, not a fixed coverage cut."
+    "with the published weights. Scores are relative, not absolute. Status is "
+    "coverage (graduates ÷ demand) below 0.85 shortage, above 1.15 oversupply; "
+    "severity is the quartile of |demand − supply|."
 )
 
 
@@ -41,10 +48,19 @@ def _quartile(abs_gap: pd.Series) -> pd.Series:
     return pd.cut(pct, bins=[-0.01, 0.25, 0.50, 0.75, 1.01], labels=[1, 2, 3, 4]).astype(int)
 
 
-def _status(signed: float, severity: int) -> str:
-    if severity <= 1:
-        return "balanced"
-    return "shortage" if signed > 0 else "oversupply"
+COVERAGE_SHORTAGE = 0.85
+COVERAGE_OVERSUPPLY = 1.15
+
+
+def _status(supply: float, demand: float) -> str:
+    if demand <= 0:
+        return "oversupply" if supply > 0 else "balanced"
+    coverage = supply / demand
+    if coverage < COVERAGE_SHORTAGE:
+        return "shortage"
+    if coverage > COVERAGE_OVERSUPPLY:
+        return "oversupply"
+    return "balanced"
 
 
 def _demand(horizon: int) -> pd.DataFrame:
@@ -99,7 +115,8 @@ def supply_demand_gap(
     merged["abs_gap"] = merged["signed_gap"].abs()
     merged["severity"] = _quartile(merged["abs_gap"])
     merged["status"] = [
-        _status(float(s), int(q)) for s, q in zip(merged["signed_gap"], merged["severity"])
+        _status(float(s), float(d))
+        for s, d in zip(merged["expected_graduates"], merged["labour_demand"])
     ]
     coverage = merged["labour_demand"].replace(0, pd.NA)
     merged["coverage_pct"] = (

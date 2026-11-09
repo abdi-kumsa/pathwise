@@ -41,18 +41,19 @@ These numbers never enter a loss function.
 **Report:** [MODEL_COMPARISON.md](MODEL_COMPARISON.md)  
 **Endpoint:** `GET /api/methodology/model-comparison`
 
-Grouped chronological holdout (last two observed years per series). No random
-split. At least three named candidates per target, including a naive baseline:
+Rolling-origin backtest: from every origin year from 2019, each candidate
+forecasts 1–5 years ahead using only data up to the origin. No random split.
+Four candidates per target, two of them naive baselines:
 
 | Target | Candidates |
 |---|---|
-| M1 programme enrolment | `seasonal_naive`, `historical_mean`, `ols_lags` |
-| M2 employment level | `seasonal_naive`, `historical_mean`, `ols_lags` |
+| M1 applications (unconstrained demand) | `seasonal_naive`, `historical_mean`, `drift`, `pooled_ridge` |
+| M2 employment, vacancies, skill-shortage index | same four |
 
-The request path still prefers `ols_lags` when a series has four or more history
-years, otherwise `seasonal_naive`. Holdout RMSE on the simulated lags is
-near-zero for `ols_lags` (waiver WV.OLS1). US LSTM and Prophet are
-**not-compared**.
+The request path uses the lowest-RMSE candidate at each horizon and records it
+on every row. Intervals come from that candidate's backtest residuals, with
+coverage measured leave-one-origin-out. Engine: `ml/forecasting.py`. US LSTM
+and Prophet are **not-compared**.
 
 ## Step 5 — Empirical importance after training
 

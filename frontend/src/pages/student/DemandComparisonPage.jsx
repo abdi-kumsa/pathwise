@@ -6,6 +6,7 @@ import SectionHeader from '../../components/SectionHeader'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
 import DataNote from '../../components/DataNote'
+import ForecastAccuracyNote from '../../components/ForecastAccuracyNote'
 import useFetch from '../../hooks/useFetch'
 import { getDemandComparison } from '../../api/student'
 import { SERIES, SERIES_ALL_PAIRS, axisProps, gridProps, tooltipProps, fmtNum } from '../../config/chartTheme'
@@ -25,6 +26,7 @@ export default function DemandComparisonPage() {
       {data && (
         <>
           <DataNote tone="simulated">{data.note}</DataNote>
+          <ForecastAccuracyNote />
           <div className="panel" style={{ marginTop: 16 }}>
             <p className="panel-title">Two measures, two charts would be used if the scales fought. Here they share a count scale.</p>
             <ResponsiveContainer width="100%" height={360}>

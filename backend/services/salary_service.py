@@ -4,7 +4,6 @@ Reads data/processed/features.parquet and calls the salary ML inference
 wrapper for all /api/recommendations/salary-* endpoints.
 """
 from pathlib import Path
-import numpy as np
 import pandas as pd
 
 _ROOT    = Path(__file__).resolve().parent.parent.parent

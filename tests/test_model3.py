@@ -10,11 +10,14 @@ from ml.model3.scenario import run_scenario
 from ml.model3.supply import graduate_supply
 
 
-def test_graduate_supply_is_constrained_enrollment_times_completion():
-    df = graduate_supply(horizon=1)
+def test_graduate_supply_follows_the_cohort_that_entered_years_earlier():
+    """Graduates in P = intake in P − time-to-graduation × completion rate."""
+    df = graduate_supply(horizon=3)
     assert not df.empty
-    assert "expected_graduates" in df.columns
-    assert (df["expected_graduates"] <= df["constrained_enrollment"] + 1e-6).all()
+    assert (df["cohort_intake_year"] == df["period"] - df["time_to_graduation_years"]).all()
+    known = df.dropna(subset=["cohort_intake"])
+    expected = known["cohort_intake"] * known["completion_rate_pct"] / 100
+    assert ((known["expected_graduates"] - expected).abs() <= 0.11).all()
     assert (df["expected_graduates"] >= 0).all()
 
 

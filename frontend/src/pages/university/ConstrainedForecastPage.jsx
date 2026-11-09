@@ -6,6 +6,7 @@ import SectionHeader from '../../components/SectionHeader'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
 import DataNote from '../../components/DataNote'
+import ForecastAccuracyNote from '../../components/ForecastAccuracyNote'
 import EmptyState from '../../components/EmptyState'
 import useFetch from '../../hooks/useFetch'
 import { getConstrainedDemand } from '../../api/roles'
@@ -43,6 +44,7 @@ export default function ConstrainedForecastPage() {
             Layer {data.layer || 'M1.L2'}. Constrained enrolment is at most unconstrained demand.
             Each programme names the binding constraint that cut the last seat.
           </DataNote>
+          <ForecastAccuracyNote />
           {over && (
             <DataNote tone="caution">Constrained total exceeded unconstrained — inspect the constraint layer.</DataNote>
           )}

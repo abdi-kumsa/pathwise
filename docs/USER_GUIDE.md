@@ -55,11 +55,15 @@ If a page shows a red error banner, the API is down. Click **Retry**.
 - **Scores are relative.** A 70 means high among the rows on screen, not
   “70% good”. Open the factor breakdown.
 
-Leftover US tools (career explorer, placement odds, salary, job market,
-expansion, peer benchmark, enrolment LSTM, field explorer, investment matrix,
-emerging occupations, leftover supply–demand, regional demand) still exist as
-bookmarked URLs. They are hidden from role nav. They are labelled on the page
-and are not Ethiopia Model 1 or Model 2.
+Leftover pages come in two kinds, and neither is Ethiopia Model 1 or Model 2:
+
+- **US-model tools** (placement odds, salary, job market, enrolment LSTM) are
+  switched off. Their pages and routes exist only when the platform runs with
+  `LEGACY_US_MODELS=1`.
+- **Older dashboard pages** (career explorer, expansion, peer benchmark, field
+  explorer, investment matrix, emerging occupations, supply–demand, regional
+  demand) read the Ethiopia tables. They are hidden from role nav but open from
+  search results and bookmarks.
 
 ---
 
@@ -142,7 +146,7 @@ HEI without a `CROSS_INSTITUTION` grant.
 
 1. **Labour pulse**
 2. **Formal vs informal**
-3. **Sector forecast** — Model 2 (OLS-on-lags or seasonal-naive).
+3. **Sector forecast** — Model 2, using whichever of four estimators had the lowest error on past years, with a 90% range.
 4. **Skills heatmap** — fit classification is listed alphabetically with a
    caveat; it is not a league table.
 
@@ -165,7 +169,7 @@ HEI without a `CROSS_INSTITUTION` grant.
 2. **Data pipeline** — all **20** Ethiopia feeds (education, labor, policy,
    investment).
 3. **Data quality** — validation failures from `_validate.py`.
-4. **Model monitoring** — Ethiopia M1/M2 RMSE against seasonal-naive.
+4. **Model monitoring** — backtest error of each forecast's chosen model, input drift and error drift.
    Leftover US placement drift (baseline 0.88) is secondary.
 5. **Accounts** — create, role, reset password, deactivate. Never deletes
    from the UI. Last-admin and self-lockout guards are server-side.
@@ -195,9 +199,10 @@ to read.
 until an official parquet replaces the generator file. See
 [DATA_PROVENANCE.md](DATA_PROVENANCE.md).
 
-**Why do leftover US pages still exist?** Wave 9 hid them from role nav. It
-does not delete them. Bookmarked URLs still work. Ethiopia scores live on
-the Model 1–3 widget pages.
+**Why do leftover US pages still exist?** The four US-model tools are kept for
+side-by-side demonstration only and are off by default (`LEGACY_US_MODELS`).
+The older dashboard pages still open from search and bookmarks. Ethiopia
+scores live on the Model 1–3 widget pages.
 
 **Why did AHP return 422?** The pairwise matrix is inconsistent (CR > 0.1).
 Fix the judgements; do not paste those weights into a learner.
