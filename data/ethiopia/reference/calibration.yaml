@@ -1,0 +1,201 @@
+# ==============================================================================
+# Calibration anchors for the simulated Ethiopia fact tables.
+#
+# The fact tables are still SIMULATED. This file is what the generator is
+# calibrated to: published figures where they exist, and clearly labelled
+# estimates where they do not. Every figure carries its source and a
+# confidence tier, so a reviewer can trace any magnitude on the dashboards.
+#
+#   confidence:
+#     official    ministry / statistics service / central bank / IMF / World Bank,
+#                 directly or quoted verbatim by a reputable outlet
+#     reputable   University World News, Addis Standard, Addis Fortune, ILO, IOM,
+#                 peer-reviewed studies, think-tank reports
+#     news        local news or aggregators
+#     estimate    our own estimate or interpolation; reasoning given in `note`
+#
+#   year convention: Gregorian. For the exam, the year the exam was sat by the
+#   cohort that enters university that September. For universities, the
+#   Gregorian year in which most of the academic year falls.
+#
+# Researched November 2026. Gaps are listed at the end rather than filled in
+# silently.
+# ==============================================================================
+
+# ── National grade 12 exam (ESSLCE / university entrance) ─────────────────────
+exam:
+  # candidates who sat, by cohort year
+  candidates:
+    2016: {value: 254000, confidence: news, source: "allAfrica, 31 May 2016 (exam leak, retake 11-13 Jul)", url: "https://allafrica.com/stories/201605311273.html"}
+    2017: {value: 270000, confidence: estimate, note: "interpolated between 2016 and 2018; no 2017 figure found"}
+    2018: {value: 281974, confidence: news, source: "Addis Insight, 1 Aug 2018", url: "https://addisinsight.net/2018/08/01/ministry-of-education-released-2018-grade-12-result/"}
+    2019: {value: 310000, confidence: news, source: "Borkena: '>300,000', results of two days voided", url: "https://borkena.com/ethiopia-massive-university-entrance-exam-scandal-compels-ministry-to-reject-results-for-several-subject-matters/"}
+    2020: {value: 340000, confidence: reputable, source: "COVID-delayed sitting Mar 2021: 319,776 (agency) vs 358,000 (ministry); midpoint", url: "https://ethiopianmonitor.com/2021/03/29/half-of-examinees-in-grade-12-natl-exams-score-over-350/"}
+    2021: {value: 600000, confidence: news, source: "two rounds Nov 2021 + Jan/Feb 2022: 545,381 + ~55k", url: "https://ethiopianmonitor.com/2022/02/24/agency-reveals-grade-12-national-exam-results/"}
+    2022: {value: 896520, confidence: official, source: "MoE via allAfrica / University World News; NS 339,642, SS 556,878", url: "https://www.universityworldnews.com/post.php?story=20230201195745831"}
+    2023: {value: 845099, confidence: official, source: "MoE via Ethiopian Monitor; NS 356,878, SS 488,221", url: "https://ethiopianmonitor.com/2023/10/09/eslce-report-card-only-27000-grade-12-students-hit-50-mark/"}
+    2024: {value: 674823, confidence: official, source: "MoE via University World News (NS 321,536 + SS 353,287)", url: "https://www.universityworldnews.com/post.php?story=20240924153252830"}
+    2025: {value: 585882, confidence: official, source: "MoE via Ethiopian Monitor, 14 Sep 2025", url: "https://ethiopianmonitor.com/2025/09/14/grade-12-exam-results-8-4-of-the-students-hit-the-passing-mark/"}
+  # share of candidates in the natural-science stream
+  natural_share:
+    pre_reform: {value: 0.42, confidence: estimate, note: "2022-2024 stream counts give 0.38-0.48; used for 2016-2021"}
+    2022: {value: 0.379, confidence: official, source: "339,642 / 896,520"}
+    2023: {value: 0.422, confidence: official, source: "356,878 / 845,099"}
+    2024: {value: 0.476, confidence: official, source: "321,536 / 674,823"}
+    2025: {value: 0.52, confidence: estimate, note: "2026 reported ~306k NS of 550k; trend continued"}
+  # pass rate (percent) by stream. Pre-2022: share at or above the admission cut-off.
+  # From 2022: share at or above the single 50% pass mark.
+  pass_rate_pct:
+    2016: {natural: 78, social: 60, confidence: estimate, note: "old regime; 2018 'qualified' ~76% overall, 2010/11 81% NS / 48% SS (The Reporter)"}
+    2017: {natural: 78, social: 60, confidence: estimate, note: "as 2016"}
+    2018: {natural: 82, social: 68, confidence: news, source: "213,621 of 281,974 qualified (~76%); stream split estimated", url: "https://addisfortune.news/public-campus-chaos-unlocks-business-opportunity-for-private-colleges"}
+    2019: {natural: 74, social: 58, confidence: estimate, note: "grading scandal year; between 2018 and 2020"}
+    2020: {natural: 62, social: 51, confidence: reputable, source: "55.7% scored >= 350/700; stream split estimated", url: "https://ethiopianmonitor.com/2021/03/29/half-of-examinees-in-grade-12-natl-exams-score-over-350/"}
+    2021: {natural: 55, social: 43, confidence: news, source: "~48% overall; stream split estimated", url: "https://ethiopianmonitor.com/2022/03/14/ministry-of-education-announces-university-entrance-points/"}
+    2022: {natural: 6.8, social: 1.3, confidence: official, source: "22,936 NS + 6,973 SS = 29,909 passed (3.3%)", url: "https://allafrica.com/stories/202301300041.html"}
+    2023: {natural: 6.4, social: 1.7, confidence: official, source: "27,267 passed (3.2%)", url: "https://addisinsight.net/2023/10/09/only-3-2-of-ethiopian-grade-12-students-pass-the-national-leaving-exam/"}
+    2024: {natural: 9.0, social: 2.0, confidence: official, source: "36,409 passed (5.4%)", url: "https://borkena.com/2024/09/09/ethiopia-grade-12-exam-disastrous-result-announced/"}
+    2025: {natural: 11.4, social: 5.2, confidence: official, source: "8.9% after cut-off lowered to 295/600", url: "https://ethiopianmonitor.com/2025/09/14/grade-12-exam-results-8-4-of-the-students-hit-the-passing-mark/"}
+  # students placed into public universities (first-year intake), incl. remedial passers from 2022
+  public_placement:
+    2016: {value: 130000, confidence: estimate, note: "extrapolated back from 147,640 (2020) and 152,014 (2021)"}
+    2017: {value: 135000, confidence: estimate, note: "as 2016"}
+    2018: {value: 140000, confidence: estimate, note: "as 2016"}
+    2019: {value: 145000, confidence: estimate, note: "as 2016"}
+    2020: {value: 147640, confidence: official, source: "placed into 47 public universities, Apr 2021", url: "https://capitalethiopia.com/2021/05/31/the-state-of-12th-grade-examinations/"}
+    2021: {value: 152014, confidence: official, source: "63,833 female", url: "https://ethiopianmonitor.com/2022/03/14/ministry-of-education-announces-university-entrance-points/"}
+    2022: {value: 93000, confidence: estimate, note: "29,909 direct + >63,300 remedial passers (University World News / Ethiopian Monitor)"}
+    2023: {value: 95000, confidence: estimate, note: "27,267 direct + remedial (>145k admitted to remedial at 30% threshold; ~45% pass assumed)"}
+    2024: {value: 80000, confidence: estimate, note: "36,409 direct + remedial 'at reduced scale'"}
+    2025: {value: 82000, confidence: estimate, note: "52,279 direct incl. lowered cut-off + reduced remedial"}
+  reform_year: {value: 2022, confidence: official, note: "exam moved into universities, single 50% pass mark, remedial programme from Feb 2023"}
+
+# ── University operations by region: 1.0 normal, 0.0 closed ───────────────────
+# Our ESTIMATES, derived from the dated events below. The events are sourced;
+# the factors are not reported figures.
+disruption:
+  confidence: estimate
+  note: "Derived from dated events (closures, occupation, relocation, reopening). COVID 2020 applies to all regions."
+  covid_2020: 0.45
+  regions:
+    Tigray:            {2020: 0.35, 2021: 0.15, 2022: 0.0, 2023: 0.25, 2024: 0.55, 2025: 0.6}
+    Amhara:            {2020: 0.45, 2021: 0.75, 2022: 0.8, 2023: 0.8, 2024: 0.65, 2025: 0.7}
+    Afar:              {2020: 0.45, 2021: 0.85, 2022: 0.85}
+    Oromia:            {2020: 0.45, 2021: 0.9, 2022: 0.85, 2023: 0.9, 2024: 0.9, 2025: 0.9}
+    Benishangul-Gumuz: {2020: 0.4, 2021: 0.85, 2022: 0.95}
+  # institution-level overrides where the event is specific to one campus
+  institutions:
+    Mekelle University: {2020: 0.35, 2021: 0.2, 2022: 0.0, 2023: 0.3, 2024: 0.6, 2025: 0.65}
+    Aksum University:   {2020: 0.35, 2021: 0.1, 2022: 0.0, 2023: 0.2, 2024: 0.5, 2025: 0.55}
+    Wollo University:   {2021: 0.45, 2022: 0.7, 2023: 0.85, 2024: 0.7, 2025: 0.75}
+    Bahir Dar University: {2024: 0.6, 2025: 0.7}
+    University of Gondar: {2023: 0.75, 2024: 0.65, 2025: 0.7}
+  events:
+    - {region: All, start: 2020-03, end: 2020-11, event: "COVID-19 closure; public universities reopened 2-9 Nov 2020, graduating classes first", confidence: reputable, url: "https://www.universityworldnews.com/post.php?story=20201021203025367"}
+    - {region: Tigray, start: 2020-11, end: 2022-11, event: "War. Mekelle University damaged; federal funding stopped Jun 2021; students of Mekelle, Aksum, Adigrat, Raya, Woldia transferred Oct 2021; Tigray excluded from 2022/23; >90,000 students before the war; ~25,000 staff unpaid", confidence: reputable, url: "https://www.universityworldnews.com/post.php?story=20220928145021530"}
+    - {region: Tigray, start: 2023-08, end: null, event: "Universities reopen (Adigrat 5-7 Aug, Aksum 8 Aug 2023); Mekelle graduation 18 Nov 2023 (>2,000 graduates); exam takers still ~50% below pre-war in 2025", confidence: reputable, url: "https://www.universityworldnews.com/post.php?story=20230804125642838"}
+    - {region: Amhara, start: 2021-07, end: 2021-12, event: "Spillover: Woldia, Wollo (Dessie, Kombolcha) occupied; Wollo evacuated ~30 Oct 2021; rebuilding estimated >= 20bn birr for 3 universities", confidence: reputable, url: "https://www.universityworldnews.com/post.php?story=20230109160236445"}
+    - {region: Amhara, start: 2023-08, end: null, event: "Fano insurgency; state of emergency 4 Aug 2023; Bahir Dar classes halted 29 Feb 2024; >4m children out of school; only ~half of eligible students sat the 2024 exam", confidence: reputable, url: "https://www.universityworldnews.com/post.php?story=20230904174022480"}
+    - {region: Afar, start: 2021-07, end: 2022-04, event: "Incursions; 455 schools destroyed, ~300,000 displaced from Jan 2022", confidence: news, url: "https://www.thenewhumanitarian.org/news-feature/2022/03/31/inside-the-conflict-in-Ethiopias-Afar-region"}
+    - {region: Oromia, start: 2019, end: null, event: "OLA insurgency in western Oromia; Wollega University interrupted, reopened Jun 2022; 730 schools closed (2023)", confidence: reputable, url: "https://addisstandard.com/from-excellence-to-emergency-a-generation-of-students-held-hostage-by-conflict-in-western-oromia/"}
+    - {region: Benishangul-Gumuz, start: 2020-04, end: 2021-12, event: "Metekel violence; state of emergency from 21 Jan 2021; ~315,000 displaced", confidence: official, url: "https://reliefweb.int/report/ethiopia/ethiopia-metekel-zone-benishangul-gumuz-region-flash-update-no-2-29-january-2021"}
+    - {region: "Somali, Oromia, Afar", start: 2020-10, end: 2023-06, event: "Drought, five failed rainy seasons; 6.8m livestock lost; affects household income, not campuses", confidence: official, url: "https://reliefweb.int/report/ethiopia/horn-africa-drought-regional-humanitarian-overview-call-action-revised-26-may-2023"}
+  # internally displaced people, Jun 2023 (IOM DTM Report 16)
+  idps_2023:
+    confidence: official
+    url: "https://dtm.iom.int/report-product-series/national-displacement-report"
+    values: {Somali: 1321684, Oromia: 1064500, Tigray: 1021798, Amhara: 436805, Afar: 96576}
+  admin_changes:
+    - {region: Sidama, from: 2020, note: "region from 18 Jun 2020; before that part of SNNPR"}
+    - {region: South West Ethiopia, from: 2021, note: "region from 23 Nov 2021"}
+    - {region: "South Ethiopia, Central Ethiopia", from: 2023, note: "SNNPR dissolved 19 Aug 2023"}
+
+# ── Macro (calendar year unless noted) ────────────────────────────────────────
+macro:
+  gdp_growth_pct:
+    source: "World Bank WDI (calendar year); 2025 is FY24/25 (IMF)"
+    url: "https://thedocs.worldbank.org/en/doc/b3502c65235d8c72aef5f34d87ed6298-0500062021/related/data-eth.pdf"
+    confidence: official
+    values: {2016: 9.4, 2017: 9.6, 2018: 6.8, 2019: 8.4, 2020: 6.1, 2021: 5.6, 2022: 5.3, 2023: 6.6, 2024: 7.6, 2025: 9.2}
+  inflation_pct:
+    source: "IMF WEO / NBE, annual average CPI"
+    url: "https://www.anansidata.com/wed/eth/inflation"
+    confidence: official
+    values: {2016: 6.6, 2017: 10.7, 2018: 13.8, 2019: 15.8, 2020: 20.4, 2021: 26.8, 2022: 33.9, 2023: 30.2, 2024: 21.7, 2025: 13.2}
+  etb_per_usd:
+    source: "World Bank (annual average); 2025 estimated after the 29 Jul 2024 float (57.5 -> ~128 at end-2024 -> ~139 Aug 2025)"
+    url: "https://addisinsight.net/2026/08/01/two-years-of-the-float-2-65b-in-imf-funding-24-nbe-auctions-and-a-birr-that-keeps-sliding/"
+    confidence: official
+    values: {2016: 21.73, 2017: 23.87, 2018: 27.43, 2019: 29.07, 2020: 34.93, 2021: 43.73, 2022: 51.76, 2023: 54.60, 2024: 82.60, 2025: 132.0}
+  fx_reserve_months:
+    source: "IMF Article IV reports / NBE; 2021 interpolated"
+    url: "https://www.imf.org/-/media/files/publications/cr/2026/english/1ethea2026001-source-pdf.pdf"
+    confidence: official
+    values: {2016: 2.2, 2017: 2.1, 2018: 1.6, 2019: 1.8, 2020: 2.0, 2021: 1.4, 2022: 0.8, 2023: 0.5, 2024: 0.65, 2025: 1.8}
+
+# ── Labour market ─────────────────────────────────────────────────────────────
+labour:
+  urban_unemployment_pct:
+    source: "ESS Urban Employment-Unemployment Surveys and 2021 LFMS; 2017, 2023-25 interpolated"
+    url: "https://documents1.worldbank.org/curated/en/717091632198808079/pdf/Employment-in-Urban-and-Rural-Ethiopia.pdf"
+    confidence: official
+    values: {2016: 16.9, 2017: 18.0, 2018: 19.1, 2019: 18.5, 2020: 18.7, 2021: 17.9, 2022: 19.6, 2023: 20.0, 2024: 20.4, 2025: 20.6}
+  national_unemployment_pct: {2013: 4.5, 2019: 9.2, 2021: 8.0, confidence: official, url: "https://ethiopia.unfpa.org/sites/default/files/pub-pdf/2024-09/3.%20Print%20Ready%20-%20Policy%20Brief%20-%20Unemployment%20and%20Development%20in%20Ethiopia.pdf"}
+  urban_youth_unemployment_pct: {2018: 25.3, 2021: 23.1, confidence: official}
+  # urban unemployment by region (2019 / 2021)
+  regional_urban_unemployment_pct:
+    confidence: official
+    url: "https://includeplatform.net/wp-content/uploads/2022/04/The-Challenge-of-Unemployment-and-Youth-Unemployment-amidst-Fast-Economic-Growth-in-Ethiopia.pdf"
+    values: {Addis Ababa: 22.1, Dire Dawa: 16.0, Somali: 12.0, Tigray: 27.0, Benishangul-Gumuz: 4.3}
+    note: "Tigray is the 2019 figure (excluded from the 2021 survey)"
+  tigray_unemployment_pct:
+    confidence: reputable
+    source: "Tigray Statistics Agency: 17% (2019) -> 74.1% (2022); youth 81% (~2023-24)"
+    url: "https://www.equaltimes.org/serious-obstacles-are-preventing"
+    values: {2019: 17.0, 2022: 74.1}
+  sector_shares_2021:
+    confidence: official
+    source: "ILO tabulation of the 2021 LFMS"
+    url: "https://www.ilo.org/media/362676/download"
+    values: {agriculture: 0.635, industry: 0.063, services: 0.302}
+  informal_share_2021: {value: 0.852, confidence: official, url: "https://www.ilo.org/media/362676/download"}
+  participation_2021: {value: 65.6, confidence: official}
+  graduates:
+    employed_share: {value: 0.58, confidence: official, source: "MoE to Parliament, Dec 2022: 58% of public-university graduates employed, ~160,000 graduates a year", url: "https://www.universityworldnews.com/post.php?story=20221217131114976"}
+    median_months_to_first_job: {value: 16, confidence: reputable, source: "tracer studies: Wolkite 17 months (2019 cohort), Debre Markos 15 months (2018 cohort)", url: "https://www.tandfonline.com/doi/full/10.1080/2331186X.2022.2143032"}
+    civil_service_entry_bachelor_etb_month:
+      confidence: official
+      url: "https://addisstandard.com/ethiopia-raises-civil-servants-salaries-degree-holder-entry-pay-set-at-11500-birr-from-september/"
+      values: {2016: 3137, 2017: 3137, 2018: 3137, 2019: 4609, 2020: 4609, 2021: 4609, 2022: 4609, 2023: 4609, 2024: 6940, 2025: 11500}
+      note: "6,940 until Sep 2025 and 11,500 from Sep 2025 are sourced; 2016-2023 values are estimates (3,137 / 4,609 scales, unverified)"
+  industrial_parks:
+    confidence: official
+    source: "World Bank industrial-park review; CSIS; NBE via Business & Human Rights"
+    url: "https://documents1.worldbank.org/curated/en/099350011132228872/pdf/P1741950a12ef10560af5008750d1393b7c.pdf"
+    employment:
+      Hawassa Industrial Park:  {2018: 24000, 2021: 29975, 2023: 22000}
+      Bole Lemi:                {2014: 9100, 2018: 15000, 2021: 17100}
+      Eastern Industrial Zone:  {2018: 14906, 2021: 18000}
+      Adama Industrial Park:    {2018: 1500, 2021: 6300}
+      Kombolcha Industrial Park: {2018: 3800}
+      Mekelle Industrial Park:  {2018: 3800, 2020: 2000, 2021: 700}
+    total: {2018: 69659, 2021: 90000}
+    agoa_suspension_2022:
+      confidence: news
+      url: "https://www.business-humanrights.org/en/latest-news/ethiopia-nbe-report-reveals-11500-jobs-lost-18-foreign-companies-exiting-industrial-parks-following-agoa-suspension/"
+      jobs_lost: {total: 11500, Hawassa Industrial Park: 4321, Mekelle Industrial Park: 2885, Bole Lemi: 1097}
+  civil_service:
+    total: {2018: 1500000, 2021: 2217372, 2025: 2498504}
+    confidence: official
+    url: "https://fcsc.ecsc.gov.et/"
+    tigray_unpaid: {value: 141000, note: "federal transfers to Tigray frozen during the war", confidence: news}
+  migration:
+    legal_deployments: {2022: 40000, 2024: 345000, 2025: 503000, confidence: official, url: "https://www.ena.et/web/eng/w/eng_7928923"}
+    returns_from_saudi: {2023: 42948, 2024: 93498, 2025: 111400, confidence: official, url: "https://dtm.iom.int/sites/g/files/tmzbdl1461/files/reports/2024_Yearly_Eastern_Route_Report.pdf", note: "2025 doubles the Jan-Jun figure of 55,700"}
+
+gaps:
+  - "Exam: no 2017 figures; no placement figures for 2016-2019; remedial counts for 2024-2025."
+  - "Tigray: number of students who returned to universities in 2023."
+  - "Reopening dates for Wollo, Samara and Assosa universities; Gambela, Harari and Dire Dawa events."
+  - "Labour: manufacturing vs construction split; Tigray and Amhara regional unemployment after 2021."
+  - "Civil-service entry pay before Nov 2024."
