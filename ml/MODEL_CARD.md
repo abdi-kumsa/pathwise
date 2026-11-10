@@ -5,7 +5,7 @@ the leftover student tools. AHP is a **separate** methodology and does not
 train anything. US LSTM and Prophet are appendix-only: **not compared**.
 
 Figures are simulated Ethiopian structure (2016–2025) until official files
-replace the parquets. See [docs/DATA_PROVENANCE.md](../docs/DATA_PROVENANCE.md).
+replace the parquets.
 
 ---
 
@@ -138,5 +138,4 @@ Do not mix these RMSE figures with Ethiopia M1/M2 comparison tables.
 
 SHAP and permutation importance are **learned**, after training.
 DOC1 collection priorities are **expert / data-collection**. Two panels. Never one
-blended number. See [docs/METHODOLOGY.md](../docs/METHODOLOGY.md) and
-[docs/FEATURE_IMPORTANCE.md](../docs/FEATURE_IMPORTANCE.md).
+blended number. See [docs/FEATURE_IMPORTANCE.md](../docs/FEATURE_IMPORTANCE.md).

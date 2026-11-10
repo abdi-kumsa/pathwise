@@ -138,7 +138,7 @@ procedure:
 # ── The honesty constraints carried forward ──────────────────────────────────
 # Not from DOC1, but decisions taken with the client that bind how DOC2's
 # "ranked" widgets may be built. Recorded here so they are testable rather than
-# remembered. See docs/DATA_PROVENANCE.md.
+# remembered.
 ranking_constraints:
   - id: RANK.R1
     rule: >-

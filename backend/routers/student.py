@@ -7,6 +7,7 @@ Identity is JWT `sub` via student_scope; query username/student_id are ignored.
 from fastapi import APIRouter, Depends, HTTPException, Query
 
 from services import alignment_service as m3
+from services import trend_service as trends
 from services import student_service as stu
 from services.auth_service import student_scope
 
@@ -58,7 +59,8 @@ def supply_demand_gap(horizon: int = Query(1, ge=1, le=5), user: dict = Depends(
     try:
         df = m3.gap(horizon=horizon, group=("field", "period"))
         field = user.get("field")
-        rows = m3.as_records(df)
+        trend = trends.enrolment_trend(("field",))
+        rows = trends.attach(m3.as_records(df), trend, ("field",))
         for row in rows:
             row["is_own_field"] = bool(field) and str(row.get("field")) == str(field)
         return {"n": int(len(rows)), "field": field, "rows": rows}

@@ -2,7 +2,7 @@
 # account and this one is shared with another project. DATABASE_URL is set
 # manually on the backend service and points at that existing instance, with
 # ?options=-csearch_path%3Dpathwise so every table PathWise creates lands in
-# its own `pathwise` schema rather than `public`. See docs/RENDER_DEPLOYMENT.md.
+# its own `pathwise` schema rather than `public`.
 
 services:
 
@@ -69,7 +69,7 @@ services:
     headers:
       - path: /*
         name: Content-Security-Policy
-        value: "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://*.onrender.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+        value: "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://*.onrender.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
       - path: /*
         name: Strict-Transport-Security
         value: max-age=31536000; includeSubDomains

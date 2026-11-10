@@ -18,7 +18,7 @@ export default function DemandComparisonPage() {
   return (
     <div>
       <SectionHeader
-        title="Student demand vs market demand"
+        title="Students vs jobs, by field"
         subtitle="Where popularity and employment opportunity diverge"
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}
@@ -28,7 +28,8 @@ export default function DemandComparisonPage() {
           <DataNote tone="simulated">{data.note}</DataNote>
           <ForecastAccuracyNote />
           <div className="panel" style={{ marginTop: 16 }}>
-            <p className="panel-title">Two measures, two charts would be used if the scales fought. Here they share a count scale.</p>
+            <p className="panel-title">Student demand and labour demand by field</p>
+            <p className="panel-sub">Both are headcounts, so they share one scale</p>
             <ResponsiveContainer width="100%" height={360}>
               <BarChart data={rows} margin={{ top: 8, right: 12, left: 0, bottom: 48 }}>
                 <CartesianGrid {...gridProps} />

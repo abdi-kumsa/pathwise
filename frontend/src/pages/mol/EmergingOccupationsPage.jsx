@@ -11,7 +11,7 @@ import useFetch from '../../hooks/useFetch'
 import { getEmerging } from '../../api/roles'
 import {
   SERIES, axisProps, gridProps, tooltipProps,
-  fmtCompact, fmtMoney, fmtDelta,
+  fmtCompact, fmtMoney, fmtDelta, fmtNum,
 } from '../../config/chartTheme'
 
 /**
@@ -104,7 +104,7 @@ export default function EmergingOccupationsPage() {
                 <CartesianGrid {...gridProps} />
                 <XAxis dataKey="year" {...axisProps} />
                 <YAxis {...axisProps} tickFormatter={fmtCompact} width={48} />
-                <Tooltip {...tooltipProps} formatter={v => fmtCompact(v)} />
+                <Tooltip {...tooltipProps} formatter={v => fmtNum(v)} />
                 <Legend wrapperStyle={{ fontSize: 12, paddingTop: 10 }} iconType="plainline" />
                 {active.map((name, i) => (
                   <Line isAnimationActive={false}
@@ -129,7 +129,7 @@ export default function EmergingOccupationsPage() {
             <p className="panel-sub">Click a row to add or remove it from the chart above</p>
 
             <div className="table-scroll">
-              <table>
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={{ textAlign: 'left' }}>{level === 'family' ? 'Field' : 'Occupation'}</th>
@@ -164,7 +164,7 @@ export default function EmergingOccupationsPage() {
                         }}>
                           {fmtDelta(r.openings_cagr_pct)}
                         </td>
-                        <td className="num">{fmtCompact(r.total_openings)}</td>
+                        <td className="num">{fmtNum(r.total_openings)}</td>
                         <td className="num">{fmtMoney(r.avg_salary)}</td>
                         <td className="num">{r.supply_demand_ratio.toFixed(2)}</td>
                         <td className="num">{r.time_to_fill_days}d</td>

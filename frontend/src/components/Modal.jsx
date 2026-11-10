@@ -110,7 +110,7 @@ export default function Modal({ open, title, subtitle, onClose, children, width 
           padding: 18px 20px 14px; border-bottom: 1px solid var(--border);
         }
         .modal-title {
-          font-family: 'Sora', sans-serif; font-size: 15px;
+          font-size: 15px;
           font-weight: 600; color: var(--navy);
         }
         .modal-sub { font-size: 12.5px; color: var(--text-muted); margin-top: 3px; line-height: 1.5; }
@@ -153,7 +153,7 @@ export default function Modal({ open, title, subtitle, onClose, children, width 
         }
         .mf-btn {
           padding: 9px 16px; border-radius: 9px; font-size: 13.5px;
-          font-weight: 600; font-family: 'Sora', sans-serif; cursor: pointer;
+          font-weight: 600; cursor: pointer;
           border: 1px solid var(--border); background: var(--white); color: var(--navy);
         }
         .mf-btn:hover:not(:disabled) { background: var(--page); }

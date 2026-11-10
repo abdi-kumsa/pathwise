@@ -11,20 +11,20 @@ import { STATUS } from '../../config/chartTheme'
 
 const ROLE_CARDS = [
   {
-    role: 'Student', to: '/student/profile', tone: '#2563EB',
-    blurb: 'Career explorer — pick a target job, get ranked departments with the reasoning.',
+    role: 'Student', to: '/student/profile',
+    blurb: 'Eligibility, the jobs outlook for a field, and where it has room.',
   },
   {
-    role: 'Ministry of Labour', to: '/mol/overview', tone: '#EA580C',
-    blurb: 'Emerging occupations, workforce shortfalls, and credential mismatch.',
+    role: 'Ministry of Labour', to: '/mol/overview',
+    blurb: 'The labour market today, where demand is heading, where skills fall short.',
   },
   {
-    role: 'Ministry of Education', to: '/moe/quadrant', tone: '#0E9F6E',
-    blurb: 'Investment matrix — where demand growth outruns graduate supply.',
+    role: 'Ministry of Education', to: '/moe/gap',
+    blurb: 'Where demand outruns graduates, which fields to grow first, which regions are misaligned.',
   },
   {
-    role: 'University', to: '/university/overview', tone: '#D97706',
-    blurb: 'Portfolio, expansion verdicts, recruitment efficiency, peer standing.',
+    role: 'University', to: '/university/overview',
+    blurb: 'Which programmes are healthy, how many will apply, where applicants drop out.',
   },
 ]
 
@@ -45,8 +45,8 @@ export default function AdminOverviewPage() {
       />
 
       <DataNote tone="simulated">
-        Operational counts from this process. Ethiopia figures elsewhere on the
-        admin console remain simulated until official files replace them.
+        Counts from this API process. Figures elsewhere on the console remain
+        simulated until official files replace them.
       </DataNote>
 
       {error && <ErrorBanner message={error} onRetry={refetch} />}
@@ -114,8 +114,7 @@ export default function AdminOverviewPage() {
             </p>
             <div className="ao-roles">
               {ROLE_CARDS.map(r => (
-                <Link key={r.role} to={r.to} className="ao-role"
-                      style={{ borderLeftColor: r.tone }}>
+                <Link key={r.role} to={r.to} className="ao-role">
                   <p className="ao-role-name">{r.role}</p>
                   <p className="ao-role-blurb">{r.blurb}</p>
                 </Link>

@@ -5,7 +5,7 @@ It forecasts student demand (Model 1), labour demand (Model 2) and the gap
 between them (Model 3), then shows each audience only the pages it may see.
 
 Figures are **simulated Ethiopian structure, 2016–2025**, not official MoE,
-MoLS or ESS statistics. See [docs/DATA_PROVENANCE.md](docs/DATA_PROVENANCE.md).
+MoLS or ESS statistics.
 
 | Sign in as | Role | Lands on |
 |---|---|---|
@@ -32,15 +32,13 @@ pathwise/
 ├── frontend/     React + Vite — five role dashboards
 ├── ml/           Ethiopia M1/M2/M3, AHP, leftover US artefacts
 ├── data/ethiopia 20 fact tables + reference dimensions
-├── docs/         Spec, provenance, user guide, methodology
+├── docs/         Machine-read spec and generated model/route reports
 └── docker-compose.yml
 ```
 
-- [docs/USER_GUIDE.md](docs/USER_GUIDE.md) — five role walkthroughs
 - [docs/TECHNICAL.md](docs/TECHNICAL.md) — ports, routers, tests
-- [docs/METHODOLOGY.md](docs/METHODOLOGY.md) — DOC1 steps 1–7
-- [docs/WALKTHROUGH.md](docs/WALKTHROUGH.md) — recording script
-- [docs/audit/](docs/audit/) — 2026-11-07 audit and phased improvement plan
+- [docs/MODEL_COMPARISON.md](docs/MODEL_COMPARISON.md) — backtest results per target
+- [docs/FEATURE_IMPORTANCE.md](docs/FEATURE_IMPORTANCE.md) — learned importance
 
 ## Quick start
 

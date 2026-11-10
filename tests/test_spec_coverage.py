@@ -1,8 +1,8 @@
 """
 Coverage gate for the two feedback documents.
 
-The governing rule for this piece of work is that nothing in
-docs/feedback/*.docx may be missing. A checklist cannot enforce that, so both
+The governing rule for this piece of work is that nothing in the client's
+two feedback documents may be missing. A checklist cannot enforce that, so both
 documents are transcribed into docs/spec/ and this suite walks every id in the
 registry and asserts a real artefact claims it.
 

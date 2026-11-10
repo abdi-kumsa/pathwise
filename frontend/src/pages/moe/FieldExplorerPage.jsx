@@ -74,8 +74,8 @@ export default function FieldExplorerPage() {
           <div className="kpi-grid">
             <KPICard
               label="Total enrolment"
-              value={fmtCompact(data.total_enrollment)}
-              delta={`${fmtCompact(data.total_applications)} applications`}
+              value={fmtNum(data.total_enrollment)}
+              delta={`${fmtNum(data.total_applications)} applications`}
               deltaDirection="neutral"
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 10 12 5 2 10l10 5 10-5ZM6 12v5c0 1 3 3 6 3s6-2 6-3v-5"/></svg>}
             />
@@ -95,7 +95,7 @@ export default function FieldExplorerPage() {
             />
             <KPICard
               label="Labour demand"
-              value={fmtCompact(data.demand_openings)}
+              value={fmtNum(data.demand_openings)}
               delta={fmtDelta(data.demand_growth_pct) + ' growth'}
               deltaDirection={deltaDirection(data.demand_growth_pct)}
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 3v18h18"/><path d="M18.7 8 13 13.7l-3-3L4 16.5"/></svg>}
@@ -152,7 +152,7 @@ export default function FieldExplorerPage() {
             </p>
 
             <div className="table-scroll">
-              <table>
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={{ textAlign: 'left' }}>Programme</th>

@@ -169,7 +169,7 @@ export default function CommandBar() {
         .cmd-trigger svg { width: 15px; height: 15px; flex-shrink: 0; }
         .cmd-trigger-text { flex: 1; text-align: left; }
         .cmd-kbd {
-          font-family: 'IBM Plex Mono', monospace; font-size: 10.5px;
+          font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 10.5px;
           color: var(--text-muted); background: var(--page);
           border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px;
         }

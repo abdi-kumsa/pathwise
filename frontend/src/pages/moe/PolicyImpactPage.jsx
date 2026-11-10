@@ -17,7 +17,7 @@ export default function PolicyImpactPage() {
   return (
     <div>
       <SectionHeader
-        title="Policy impact monitoring"
+        title="What past policy changed"
         subtitle="Simulated quota and capacity against subsequent enrolment and employment"
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}
@@ -25,12 +25,12 @@ export default function PolicyImpactPage() {
       {data && (
         <>
           <DataNote tone="simulated">
-            {data.note} official_forecast: {String(data.official_forecast)}. Not a real MoE circular.
+            {data.note}{data.official_forecast ? '' : ' Not an official forecast or an MoE circular.'}
           </DataNote>
           <div className="card-grid-2" style={{ marginTop: 16 }}>
             <div className="panel">
               <p className="panel-title">Quota, capacity and enrolment</p>
-              <p className="panel-sub">Counts on one scale — not a dual axis</p>
+              <p className="panel-sub">Headcounts on one scale</p>
               <ResponsiveContainer width="100%" height={260}>
                 <LineChart data={series} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
                   <CartesianGrid {...gridProps} />

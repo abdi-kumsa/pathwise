@@ -95,7 +95,7 @@ export default function EnrollmentForecastPage() {
       <div style={{ background: 'var(--white)', border: '1px solid var(--border)', borderRadius: '14px', padding: '20px 22px 24px' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
           <div>
-            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '14px', fontWeight: '600', color: 'var(--navy)', marginBottom: '2px' }}>
+            <p style={{ fontSize: '14px', fontWeight: '600', color: 'var(--navy)', marginBottom: '2px' }}>
               LSTM Enrollment Forecast
             </p>
             <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>

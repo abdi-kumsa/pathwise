@@ -36,8 +36,8 @@ export default function AdminScenariosPage() {
         subtitle="Saved what-if runs, assumptions and approval status"
       />
       <DataNote tone="simulated">
-        Approval is internal governance. It does not turn a run into an official
-        ministry circular — official_forecast stays false.
+        Approval is internal governance. It does not make a run an official
+        ministry forecast or circular.
       </DataNote>
 
       {error && <ErrorBanner message={error} onRetry={refetch} />}
@@ -69,7 +69,7 @@ export default function AdminScenariosPage() {
                   <td style={td}>{row.name}</td>
                   <td style={td}>{row.owner}</td>
                   <td style={td}>{summarise(row.assumptions)}</td>
-                  <td style={td}>{row.official_forecast ? 'true' : 'false'}</td>
+                  <td style={td}>{row.official_forecast ? 'Yes' : 'No'}</td>
                   <td style={td}>
                     <select
                       value={row.status}

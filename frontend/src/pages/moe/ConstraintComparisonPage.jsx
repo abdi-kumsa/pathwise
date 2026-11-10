@@ -33,7 +33,7 @@ export default function ConstraintComparisonPage() {
   return (
     <div>
       <SectionHeader
-        title="Unconstrained vs constrained demand"
+        title="Where capacity caps demand"
         subtitle="National student demand compared with policy- and capacity-constrained enrolment"
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}
@@ -41,7 +41,7 @@ export default function ConstraintComparisonPage() {
       {data && (
         <>
           <DataNote tone="simulated">
-            Two series on one scale. Constrained enrolment is at most unconstrained demand. Binding constraint is named when the loss is on the constraint side.
+            Constrained enrolment can never exceed unconstrained demand. Where a field loses seats, the binding constraint is named.
           </DataNote>
           <ForecastAccuracyNote />
           {over && (
@@ -80,7 +80,7 @@ export default function ConstraintComparisonPage() {
                   </BarChart>
                 </ResponsiveContainer>
                 <div className="table-scroll" style={{ marginTop: 12 }}>
-                  <table>
+                  <table className="data-table">
                     <thead>
                       <tr>
                         <th style={{ textAlign: 'left' }}>Field</th>

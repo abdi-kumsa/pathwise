@@ -170,7 +170,9 @@ describe('chartTheme formatters', () => {
 
   it('compacts large numbers', () => {
     expect(fmtCompact(999)).toBe('999')
-    expect(fmtCompact(1500)).toBe('2K')
+    expect(fmtCompact(1500)).toBe('1.5K')
+    expect(fmtCompact(2000)).toBe('2K')
+    expect(fmtCompact(25_000)).toBe('25K')
     expect(fmtCompact(2_300_000)).toBe('2.3M')
     expect(fmtCompact(4_100_000_000)).toBe('4.1B')
   })

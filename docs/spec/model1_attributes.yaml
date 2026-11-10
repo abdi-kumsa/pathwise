@@ -1,8 +1,8 @@
 # ==============================================================================
 # DOC1 — Model 1: Higher Education Demand Forecasting
 #
-# Executable transcription of:
-#   docs/feedback/Comments on Recommended Attributes and Relative Importance.docx
+# Executable transcription of the client's feedback on recommended attributes
+# and their relative importance.
 #
 # This file is the CONTRACT, not documentation. tests/test_spec_coverage.py walks
 # every `id` below and fails while any is unclaimed. Do not edit an id — other

@@ -12,7 +12,7 @@ import useFetch from '../../hooks/useFetch'
 import { getResourceEfficiency, getResourcePlanning } from '../../api/roles'
 import {
   SERIES, ORDINAL_BLUE, axisProps, gridProps, tooltipProps, RADIUS_H,
-  fmtCompact, fmtMoney, fmtPct, fmtNum,
+  fmtMoney, fmtPct, fmtNum,
 } from '../../config/chartTheme'
 
 export default function ResourceEfficiencyPage() {
@@ -31,7 +31,7 @@ export default function ResourceEfficiencyPage() {
   return (
     <div>
       <SectionHeader
-        title="Resource efficiency"
+        title="Where to put resources"
         subtitle={data ? `What recruitment costs ${data.institution}, and where it converts` : 'Loading…'}
       />
 
@@ -149,7 +149,7 @@ export default function ResourceEfficiencyPage() {
             <p className="panel-sub">Where each programme loses candidates</p>
 
             <div className="table-scroll">
-              <table>
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={{ textAlign: 'left' }}>Programme</th>
@@ -167,7 +167,7 @@ export default function ResourceEfficiencyPage() {
                   {programs.map(p => (
                     <tr key={p.program}>
                       <td style={{ textAlign: 'left', fontWeight: 500 }}>{p.program}</td>
-                      <td className="num">{fmtCompact(p.marketing_spend)}</td>
+                      <td className="num">{fmtNum(p.marketing_spend)}</td>
                       <td className="num">{fmtNum(p.inquiries)}</td>
                       <td className="num">{fmtNum(p.applications)}</td>
                       <td className="num">{fmtNum(p.enrollment)}</td>
@@ -187,7 +187,7 @@ export default function ResourceEfficiencyPage() {
             <p className="panel-sub">Faculty, facilities, budget and intake — unofficial what-if at this institution</p>
             <DataNote tone="simulated">
               {plan?.note || 'This run is not an official MoE forecast.'}
-              {plan?.official_forecast === false ? ' official_forecast: false.' : ''}
+              {plan?.official_forecast === false ? ' Not an official forecast.' : ''}
             </DataNote>
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', margin: '12px 0' }}>
               <label style={{ fontSize: 13 }}>
@@ -208,7 +208,7 @@ export default function ResourceEfficiencyPage() {
             {planning.loading && <LoadingSpinner message="Re-running scenario…" height={80} />}
             {plan && (
               <div className="table-scroll">
-                <table>
+                <table className="data-table">
                   <thead>
                     <tr>
                       <th style={{ textAlign: 'left' }}>Lever</th>
@@ -258,7 +258,7 @@ export default function ResourceEfficiencyPage() {
         }
         .funnel-stage { font-size: 13px; font-weight: 600; color: var(--navy); }
         .funnel-count {
-          font-family: 'IBM Plex Mono', monospace; font-size: 13px;
+          font-size: 13px;
           font-weight: 600; color: var(--navy);
         }
         .funnel-track {

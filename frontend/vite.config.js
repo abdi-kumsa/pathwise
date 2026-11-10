@@ -1,8 +1,24 @@
+import { execSync } from 'node:child_process'
+
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+// Short commit shown in the app footer. CI and Render expose the commit as an
+// environment variable; a local checkout asks git; a Docker build without
+// .git falls back to 'dev' unless VITE_BUILD_SHA is passed as a build arg.
+function buildSha() {
+  const fromEnv = process.env.VITE_BUILD_SHA || process.env.RENDER_GIT_COMMIT || process.env.GITHUB_SHA
+  if (fromEnv) return fromEnv.slice(0, 7)
+  try {
+    return execSync('git rev-parse --short HEAD', { stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim()
+  } catch {
+    return 'dev'
+  }
+}
+
 export default defineConfig({
   plugins: [react()],
+  define: { __BUILD_SHA__: JSON.stringify(buildSha()) },
   server: {
     host: '0.0.0.0',
     port: 3000,

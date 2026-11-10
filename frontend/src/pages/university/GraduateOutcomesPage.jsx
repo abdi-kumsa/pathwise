@@ -38,7 +38,7 @@ export default function GraduateOutcomesPage() {
   return (
     <div>
       <SectionHeader
-        title="Graduate outcomes"
+        title="Where graduates end up"
         subtitle="Employment, earnings and time-to-graduation for prior cohorts — not fit classification"
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}
@@ -68,7 +68,7 @@ export default function GraduateOutcomesPage() {
               </div>
               <div className="panel">
                 <p className="panel-title">Median earnings (ETB)</p>
-                <p className="panel-sub">Separate chart — not a dual axis on employment</p>
+                <p className="panel-sub">Median graduate earnings by year</p>
                 <ResponsiveContainer width="100%" height={260}>
                   <LineChart data={employment} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
                     <CartesianGrid {...gridProps} />

@@ -43,7 +43,7 @@ export default function ProgramPortfolioPage() {
   return (
     <div>
       <SectionHeader
-        title="Programme portfolio"
+        title="Which programmes are healthy"
         subtitle={data?.portfolio ? `All ${data.portfolio.programs.length} programmes at ${data.portfolio.institution}` : 'Loading…'}
       />
 
@@ -118,7 +118,7 @@ export default function ProgramPortfolioPage() {
             <p className="panel-sub">Enrolment funnel, price position and outcomes</p>
 
             <div className="table-scroll">
-              <table>
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={{ textAlign: 'left' }}>Programme</th>

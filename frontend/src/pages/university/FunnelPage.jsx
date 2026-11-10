@@ -3,15 +3,36 @@ import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
 import DataNote from '../../components/DataNote'
 import EmptyState from '../../components/EmptyState'
+import DataTable, { StatusWord } from '../../components/DataTable'
+import Sparkline from '../../components/Sparkline'
 import useFetch from '../../hooks/useFetch'
 import { getInstitutionFunnel } from '../../api/roles'
-import { ORDINAL_BLUE, STATUS, fmtNum } from '../../config/chartTheme'
+import { ORDINAL_BLUE, STATUS, fmtNum, fmtPct } from '../../config/chartTheme'
 
 const STAGES = [
   { key: 'applications', label: 'Applications' },
   { key: 'offers_placement', label: 'Offers / placement' },
   { key: 'acceptance', label: 'Acceptance' },
   { key: 'enrollment', label: 'Enrolment' },
+]
+
+const bound = r => r.binding_constraint && r.binding_constraint !== 'none'
+
+const COLUMNS = [
+  { key: 'program', label: 'Programme' },
+  { key: 'trend', label: 'Applications, by year', sortable: false, render: r => <Sparkline values={r.trend ?? []} /> },
+  { key: 'applications_count', label: 'Applications', align: 'right', render: r => fmtNum(r.applications_count) },
+  { key: 'offers_count', label: 'Offers', align: 'right', render: r => fmtNum(r.offers_count) },
+  { key: 'accepted_offers_count', label: 'Accepted', align: 'right', render: r => fmtNum(r.accepted_offers_count) },
+  { key: 'yield_rate_pct', label: 'Yield', align: 'right', render: r => (r.yield_rate_pct == null ? '—' : fmtPct(r.yield_rate_pct, 0)) },
+  {
+    key: 'binding_constraint', label: 'Binding constraint',
+    render: r => (
+      <StatusWord status={r.binding_constraint || 'none'} color={bound(r) ? STATUS.serious : STATUS.good}>
+        {(r.binding_constraint || 'none').replace(/_/g, ' ')}
+      </StatusWord>
+    ),
+  },
 ]
 
 export default function FunnelPage() {
@@ -24,20 +45,20 @@ export default function FunnelPage() {
     : allRows.slice(0, 24)
   const counts = STAGES.map(s => Number(stages[s.key] || 0))
   const max = Math.max(...counts, 1)
-  const constrainedLoss = rows.filter(r => r.binding_constraint && r.binding_constraint !== 'none')
+  const constrainedLoss = rows.filter(bound)
 
   return (
     <div>
       <SectionHeader
-        title="Application and placement funnel"
-        subtitle={data ? `${data.institution} — applications → offers → acceptance → enrolment` : 'Loading…'}
+        title="Where applicants drop out"
+        subtitle={data ? `${data.institution}: applications, offers, acceptance and enrolment` : 'Loading…'}
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}
       {loading && <LoadingSpinner message="Loading funnel…" height={280} />}
       {data && (
         <>
           <DataNote tone="simulated">
-            When a drop is constraint-side, the binding rule is listed. Demand-side loss is yield between offers and acceptance.
+            Where a drop is on the constraint side, the binding rule is named. Loss between offers and acceptance is yield, on the demand side.
           </DataNote>
           {counts.every(c => c === 0) && (
             <EmptyState title="Empty funnel" description="No applications or constrained enrolment for this institution." />
@@ -54,7 +75,7 @@ export default function FunnelPage() {
                   <div key={s.key}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
                       <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--navy)' }}>{s.label}</span>
-                      <span style={{ fontFamily: 'IBM Plex Mono, monospace', fontWeight: 600 }}>{fmtNum(count)}</span>
+                      <span style={{ fontWeight: 600 }}>{fmtNum(count)}</span>
                     </div>
                     <div style={{ height: 26, background: 'var(--page)', borderRadius: 6, overflow: 'hidden' }}>
                       <div style={{ width: `${Math.max(pct, 1.5)}%`, height: '100%', background: fill, borderRadius: 6 }} />
@@ -70,20 +91,19 @@ export default function FunnelPage() {
             </div>
           </div>
           <div className="panel" style={{ marginTop: 16 }}>
-            <p className="panel-title">Binding constraint</p>
+            <p className="panel-title">By programme{latestYear ? ` · ${latestYear}` : ''}</p>
             <p className="panel-sub">
               {constrainedLoss.length
-                ? 'Loss on these programmes is constraint-side, not a demand collapse.'
-                : 'No binding constraint on the latest constrained run.'}
+                ? `${constrainedLoss.length} of ${rows.length} programmes lose seats to a constraint rather than to demand.`
+                : 'No programme is bound by a constraint on the latest run.'}
             </p>
-            {rows.slice(0, 24).map(r => (
-              <div key={`${r.program}-${r.academic_year || ''}`} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid var(--border)' }}>
-                <span>{r.program}</span>
-                <span style={{ color: r.binding_constraint && r.binding_constraint !== 'none' ? STATUS.serious : STATUS.good }}>
-                  {r.binding_constraint || 'none'}
-                </span>
-              </div>
-            ))}
+            <DataTable
+              columns={COLUMNS}
+              rows={rows}
+              rowKey={r => `${r.program}-${r.academic_year || r.year || ''}`}
+              defaultSort={{ key: 'applications_count', dir: 'desc' }}
+              emptyText="No programmes in the latest year"
+            />
           </div>
         </>
       )}

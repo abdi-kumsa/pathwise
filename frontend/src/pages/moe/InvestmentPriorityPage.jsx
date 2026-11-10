@@ -44,7 +44,7 @@ export default function InvestmentPriorityPage() {
   return (
     <div>
       <SectionHeader
-        title="Strategic field priority"
+        title="Which fields to grow first"
         subtitle="Labour shortage, national priority, student demand and feasibility"
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}
@@ -104,7 +104,7 @@ export default function InvestmentPriorityPage() {
               </span>
             ))}
             <div className="table-scroll">
-              <table>
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={{ textAlign: 'left', width: 40 }}>#</th>

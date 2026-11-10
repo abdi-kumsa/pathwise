@@ -60,6 +60,7 @@ services:
       dockerfile: docker/Dockerfile.frontend.prod
       args:
         VITE_API_URL: ${PUBLIC_API_URL:?set PUBLIC_API_URL to the public API origin}
+        VITE_BUILD_SHA: ${BUILD_SHA:-dev}
     restart: unless-stopped
     environment:
       API_ORIGIN: ${PUBLIC_API_URL}

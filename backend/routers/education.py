@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from db.database import get_db
 from schemas.scenarios import ScenarioRequest
 from services import rate_limit
+from services import trend_service as trends
 from services import alignment_service as m3
 from services import education_service
 from services.auth_service import ROLE_MOE, get_current_user, log_audit, require_roles
@@ -61,7 +62,9 @@ def get_investment_priority():
 def supply_demand_gap(horizon: int = Query(1, ge=1, le=5)):
     try:
         df = m3.gap(horizon=horizon, group=("field", "period"))
-        return {"n": int(len(df)), "rows": m3.as_records(df)}
+        trend = trends.enrolment_trend(("field",))
+        rows = trends.attach(m3.as_records(df), trend, ("field",))
+        return {"n": int(len(rows)), "trend_years": trend["years"], "rows": rows}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -159,7 +162,9 @@ def policy_impact():
 def regional_alignment(horizon: int = Query(1, ge=1, le=5)):
     try:
         df = m3.regional_alignment(horizon=horizon)
-        return {"n": int(len(df)), "rows": m3.as_records(df)}
+        trend = trends.enrolment_trend(("region", "field"))
+        rows = trends.attach(m3.as_records(df), trend, ("region", "field"))
+        return {"n": int(len(rows)), "trend_years": trend["years"], "rows": rows}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

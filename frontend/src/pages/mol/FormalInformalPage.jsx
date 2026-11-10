@@ -30,7 +30,7 @@ export default function FormalInformalPage() {
   return (
     <div>
       <SectionHeader
-        title="Formal vs informal absorption"
+        title="Formal vs informal work"
         subtitle="Formal wage, informal, self-employment and underemployment — shares sum to 1"
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}

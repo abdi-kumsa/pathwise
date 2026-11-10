@@ -1,4 +1,4 @@
-"""Phase 0 regression tests (audit 2026-11-07, docs/audit/).
+"""Phase 0 regression tests (audit 2026-11-07).
 
 Two groups:
 

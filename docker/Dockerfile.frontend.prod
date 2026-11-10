@@ -13,7 +13,8 @@ RUN npm ci --no-audit --no-fund
 COPY frontend/ .
 ARG VITE_API_URL=http://localhost:8000
 ARG VITE_LEGACY_US_MODELS=false
-ENV VITE_API_URL=$VITE_API_URL VITE_LEGACY_US_MODELS=$VITE_LEGACY_US_MODELS
+ARG VITE_BUILD_SHA=dev
+ENV VITE_API_URL=$VITE_API_URL VITE_LEGACY_US_MODELS=$VITE_LEGACY_US_MODELS VITE_BUILD_SHA=$VITE_BUILD_SHA
 RUN npx vite build
 
 # Runs as the unprivileged nginx user and listens on 8080.

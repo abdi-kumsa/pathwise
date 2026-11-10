@@ -1,8 +1,8 @@
 # ==============================================================================
 # DOC1 — Model 2: Labor Market Trend Prediction Module
 #
-# Executable transcription of:
-#   docs/feedback/Comments on Recommended Attributes and Relative Importance.docx
+# Executable transcription of the client's feedback on recommended attributes
+# and their relative importance.
 #
 # Same rules as model1_attributes.yaml: ids are the contract, `collection_priority`
 # is never a model weight, add but never renumber.

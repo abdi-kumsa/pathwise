@@ -382,6 +382,7 @@ def institution_comparison(horizon: int = 1) -> dict:
     from ml.features.model1 import c4_quota, c7_outcomes
     from services import alignment_service as m3
     from services import constraint_service as m1
+    from services import trend_service as trends
 
     e = ds.enrollment()
     latest_year = int(e["year"].max())
@@ -457,6 +458,7 @@ def institution_comparison(horizon: int = 1) -> dict:
             "employment_rate_pct": round(float(emp_map.get(name, r["employment_rate_pct"] or 0)), 1),
             "alignment_status": alignment,
         })
+    trends.attach(rows, trends.enrolment_trend(("institution",)), ("institution",))
     rows.sort(key=lambda x: x["enrollment"], reverse=True)
     return {"n": len(rows), "year": latest_year, "rows": rows}
 

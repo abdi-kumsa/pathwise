@@ -1,8 +1,8 @@
 # ==============================================================================
 # DOC2 — Role-Based Dashboard Specification: all 44 widgets
 #
-# Executable transcription of:
-#   docs/feedback/comments Role-Based Dashboard Specification.docx
+# Executable transcription of the client's comments on the role-based
+# dashboard specification.
 #
 # Every widget keeps all five columns DOC2 specified — content, visualization,
 # primary source/model, purpose — because the visualization type and the stated

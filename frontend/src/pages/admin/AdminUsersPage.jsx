@@ -292,7 +292,7 @@ export default function AdminUsersPage() {
             </div>
 
             <div className="table-scroll">
-              <table>
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={{ textAlign: 'left' }}>Username</th>
@@ -402,7 +402,7 @@ export default function AdminUsersPage() {
             </p>
 
             <div className="table-scroll">
-              <table>
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={{ textAlign: 'left' }}>Area</th>
@@ -544,7 +544,7 @@ export default function AdminUsersPage() {
         .u-act-danger:hover:not(:disabled) { background: var(--red-bg); }
         .u-act:disabled { color: var(--text-muted); cursor: not-allowed; }
         .u-code {
-          font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;
+          font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 11.5px;
           background: var(--page); border-radius: 5px; padding: 2px 6px;
           color: var(--text-secondary);
         }

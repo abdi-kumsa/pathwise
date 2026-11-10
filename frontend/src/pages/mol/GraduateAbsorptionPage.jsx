@@ -18,7 +18,7 @@ export default function GraduateAbsorptionPage() {
   return (
     <div>
       <SectionHeader
-        title="Graduate absorption and transition"
+        title="How fast graduates find work"
         subtitle="Time-to-employment and employment type after graduation — aggregate only"
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}

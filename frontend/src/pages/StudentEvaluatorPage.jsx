@@ -101,7 +101,7 @@ export default function StudentEvaluatorPage() {
 
         {/* ── Input form ─────────────────────────────────────────────────────── */}
         <div style={{ background: 'var(--white)', border: '1px solid var(--border)', borderRadius: '14px', padding: '24px 28px' }}>
-          <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '14px', fontWeight: '700', color: 'var(--navy)', marginBottom: '24px' }}>
+          <p style={{ fontSize: '14px', fontWeight: '700', color: 'var(--navy)', marginBottom: '24px' }}>
             Student Profile
           </p>
 
@@ -146,7 +146,7 @@ export default function StudentEvaluatorPage() {
               width: '100%', padding: '12px', borderRadius: '10px', border: 'none',
               background: submitting ? '#94a3b8' : '#2563eb', color: 'white',
               fontSize: '14px', fontWeight: '600', cursor: submitting ? 'not-allowed' : 'pointer',
-              fontFamily: "'Sora', sans-serif", transition: 'background 0.2s',
+              transition: 'background 0.2s',
             }}
           >
             {submitting ? 'Predicting…' : 'Predict Placement'}
@@ -173,7 +173,7 @@ export default function StudentEvaluatorPage() {
                 <p style={{ fontSize: '12px', fontWeight: '600', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px' }}>
                   Placement Probability
                 </p>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '56px', fontWeight: '800', color, lineHeight: 1, marginBottom: '10px' }}>
+                <p style={{ fontSize: '56px', fontWeight: '800', color, lineHeight: 1, marginBottom: '10px' }}>
                   {probPct}%
                 </p>
                 <span style={{
@@ -190,7 +190,7 @@ export default function StudentEvaluatorPage() {
 
               {/* SHAP waterfall */}
               <div style={{ background: 'var(--white)', border: '1px solid var(--border)', borderRadius: '14px', padding: '20px 22px 24px', marginBottom: '16px' }}>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '14px', fontWeight: '600', color: 'var(--navy)', marginBottom: '4px' }}>
+                <p style={{ fontSize: '14px', fontWeight: '600', color: 'var(--navy)', marginBottom: '4px' }}>
                   SHAP Feature Contributions
                 </p>
                 <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '16px' }}>
@@ -215,7 +215,7 @@ export default function StudentEvaluatorPage() {
               {/* Skill recommendations */}
               {recs && (
                 <div style={{ background: 'var(--white)', border: '1px solid var(--border)', borderRadius: '14px', padding: '20px 22px 24px', marginBottom: '16px' }}>
-                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '14px', fontWeight: '600', color: 'var(--navy)', marginBottom: '4px' }}>
+                  <p style={{ fontSize: '14px', fontWeight: '600', color: 'var(--navy)', marginBottom: '4px' }}>
                     Skill Recommendations
                   </p>
                   <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '16px' }}>

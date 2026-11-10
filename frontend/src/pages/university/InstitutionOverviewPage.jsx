@@ -37,14 +37,14 @@ export default function InstitutionOverviewPage() {
           <div className="kpi-grid" style={{ marginTop: 16 }}>
             <KPICard
               label="Latest enrolment"
-              value={fmtCompact(p.latest_enrollment ?? p.total_enrollment)}
+              value={fmtNum(p.latest_enrollment ?? p.total_enrollment)}
               delta={fmtDelta(p.yoy_change_pct) + ' YoY'}
               deltaDirection={deltaDirection(p.yoy_change_pct)}
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 10 12 5 2 10l10 5 10-5ZM6 12v5c0 1 3 3 6 3s6-2 6-3v-5"/></svg>}
             />
             <KPICard
               label="Applications"
-              value={fmtCompact(p.total_applications)}
+              value={fmtNum(p.total_applications)}
               delta={`CAGR ${fmtDelta(p.enrollment_cagr_pct)}`}
               deltaDirection={deltaDirection(p.enrollment_cagr_pct)}
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 4h18l-7 8v7l-4 2v-9L3 4Z"/></svg>}

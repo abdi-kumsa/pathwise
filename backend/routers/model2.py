@@ -41,7 +41,9 @@ def forecast(
     ),
 ):
     try:
-        df = m2.labour_forecast(horizon=horizon, dimensions=_dimensions(group_by))
+        dims = _dimensions(group_by)
+        df = m2.labour_forecast(horizon=horizon, dimensions=dims)
+        hist = m2.forecast_history(dims)
         from ml.forecasting import accuracy_summary
         return {
             "targets": list(m2.TARGETS),
@@ -53,6 +55,7 @@ def forecast(
                 for tid in ("M2.employment_demand", "M2.vacancies", "M2.skill_shortages")
             },
             "rows": _records(df),
+            "history": _records(hist),
         }
     except HTTPException:
         raise

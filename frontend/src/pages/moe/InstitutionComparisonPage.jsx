@@ -2,6 +2,7 @@ import SectionHeader from '../../components/SectionHeader'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorBanner from '../../components/ErrorBanner'
 import DataNote from '../../components/DataNote'
+import Sparkline from '../../components/Sparkline'
 import useFetch from '../../hooks/useFetch'
 import { getInstitutionComparison } from '../../api/roles'
 import { STATUS, ORDINAL_BLUE, fmtNum, fmtPct } from '../../config/chartTheme'
@@ -28,7 +29,7 @@ export default function InstitutionComparisonPage() {
   return (
     <div>
       <SectionHeader
-        title="Institution comparison"
+        title="How institutions compare"
         subtitle="Capacity, forecast accuracy, graduate outcomes and alignment across registered HEIs"
       />
       {error && <ErrorBanner message={error} onRetry={refetch} />}
@@ -36,16 +37,17 @@ export default function InstitutionComparisonPage() {
       {data && (
         <>
           <DataNote tone="simulated">
-            Reading this table writes an institution_drilldown audit row. Alignment status is labelled in words as well as colour.
+            Views of this table are recorded in the audit log.
           </DataNote>
           <div className="panel" style={{ marginTop: 16 }}>
             <p className="panel-title">{rows.length} HEIs · {data.year}</p>
             <div className="table-scroll">
-              <table>
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={{ textAlign: 'left' }}>Institution</th>
                     <th>Region</th>
+                    <th>Enrolment trend</th>
                     <th>Enrolment</th>
                     <th>Capacity</th>
                     <th>Utilisation</th>
@@ -59,6 +61,7 @@ export default function InstitutionComparisonPage() {
                     <tr key={r.institution}>
                       <td style={{ textAlign: 'left', fontWeight: 600 }}>{r.institution}</td>
                       <td>{r.region}</td>
+                      <td><Sparkline values={r.trend} /></td>
                       <td className="num">{fmtNum(r.enrollment)}</td>
                       <td className="num" style={{ background: heat(r.capacity, maxCap) + '33' }}>{fmtNum(r.capacity)}</td>
                       <td className="num">{r.capacity_utilization_pct != null ? fmtPct(r.capacity_utilization_pct) : '—'}</td>

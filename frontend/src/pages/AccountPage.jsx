@@ -152,7 +152,7 @@ export default function AccountPage() {
         .mf-actions { display: flex; gap: 9px; justify-content: flex-end; padding-top: 4px; }
         .mf-btn {
           padding: 9px 16px; border-radius: 9px; font-size: 13.5px;
-          font-weight: 600; font-family: 'Sora', sans-serif; cursor: pointer;
+          font-weight: 600; cursor: pointer;
           border: 1px solid var(--border); background: var(--white); color: var(--navy);
         }
         .mf-btn-primary { background: var(--blue); border-color: var(--blue); color: #fff; }

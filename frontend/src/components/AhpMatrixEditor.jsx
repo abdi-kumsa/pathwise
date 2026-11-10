@@ -82,7 +82,7 @@ export default function AhpMatrixEditor({ labels, matrix, onChange }) {
                   )}
                 </td>
               ))}
-              <td style={{ textAlign: 'right', fontFamily: 'IBM Plex Mono, monospace' }}>
+              <td style={{ textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>
                 {(weights[i] * 100).toFixed(1)}%
               </td>
             </tr>
