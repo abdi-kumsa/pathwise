@@ -60,9 +60,9 @@ export default function EducationOverviewPage() {
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg>}
             />
             <KPICard
-              label="Enrolment"
-              value={fmtNum(o.enrollment_latest_year ?? o.total_enrollment)}
-              delta={fmtDelta(o.enrollment_cagr_pct) + ' / yr'}
+              label="Students on roll"
+              value={fmtNum(o.students_on_roll_latest_year ?? o.enrollment_latest_year)}
+              delta={`First-year intake ${fmtNum(o.enrollment_latest_year)} · ${fmtDelta(o.enrollment_cagr_pct)} / yr`}
               deltaDirection={deltaDirection(o.enrollment_cagr_pct)}
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 10 12 5 2 10l10 5 10-5ZM6 12v5c0 1 3 3 6 3s6-2 6-3v-5"/></svg>}
             />
@@ -84,7 +84,7 @@ export default function EducationOverviewPage() {
 
           <div className="card-grid-2" style={{ marginBottom: 20 }}>
             <div className="panel">
-              <p className="panel-title">National enrolment and applications</p>
+              <p className="panel-title">Applications and first-year intake</p>
               <p className="panel-sub">
                 Two series on one axis — both are counts of people, so they are
                 directly comparable.
@@ -98,14 +98,14 @@ export default function EducationOverviewPage() {
                   <Line isAnimationActive={false} name="Applications" type="monotone" dataKey="applications"
                         stroke={SERIES[1]} strokeWidth={2}
                         dot={{ r: 3, strokeWidth: 0, fill: SERIES[1] }} />
-                  <Line isAnimationActive={false} name="Enrolment" type="monotone" dataKey="enrollment"
+                  <Line isAnimationActive={false} name="First-year intake" type="monotone" dataKey="enrollment"
                         stroke={SERIES[0]} strokeWidth={2}
                         dot={{ r: 3, strokeWidth: 0, fill: SERIES[0] }} />
                 </LineChart>
               </ResponsiveContainer>
               <div className="ov-legend">
                 <span><i style={{ background: SERIES[1] }} /> Applications</span>
-                <span><i style={{ background: SERIES[0] }} /> Enrolment</span>
+                <span><i style={{ background: SERIES[0] }} /> First-year intake</span>
               </div>
             </div>
 

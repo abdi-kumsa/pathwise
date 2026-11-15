@@ -25,9 +25,35 @@ export default function AdminDataQualityPage() {
         subtitle="Missing values, duplicates, outliers and inconsistent records"
       />
       <DataNote tone="simulated">
-        Scans of the Ethiopia parquet tables, not the old Postgres warehouse
-        script. Figures stay simulated until official files land.
+        Scans of the Ethiopia tables. Figures are simulated, calibrated to published
+        sources, until official files land.
       </DataNote>
+
+      {data?.calibration?.available && (
+        <div className="panel" style={{ marginTop: 16 }} data-testid="calibration-summary">
+          <p className="panel-title">What the simulation is calibrated to</p>
+          <p className="panel-sub">
+            Figures in <code>{data.calibration.file}</code> across {data.calibration.sections.length} sections,
+            each with its source and a confidence tier
+          </p>
+          <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', margin: '4px 0 12px' }}>
+            {data.calibration.tiers.map(t => (
+              <div key={t.tier}>
+                <div style={{ fontSize: 22, fontWeight: 600, color: 'var(--navy)' }}>{t.count}</div>
+                <div style={{ fontSize: 12, color: 'var(--text-secondary)', textTransform: 'capitalize' }}>{t.tier}</div>
+              </div>
+            ))}
+          </div>
+          {data.calibration.gaps.length > 0 && (
+            <>
+              <p style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--navy)', marginBottom: 4 }}>Known gaps</p>
+              <ul style={{ fontSize: 12.5, color: 'var(--text-secondary)', paddingLeft: 18, lineHeight: 1.6 }}>
+                {data.calibration.gaps.map(g => <li key={g}>{g}</li>)}
+              </ul>
+            </>
+          )}
+        </div>
+      )}
 
       {error && <ErrorBanner message={error} onRetry={refetch} />}
       {loading && <LoadingSpinner message="Scanning tables…" height={280} />}

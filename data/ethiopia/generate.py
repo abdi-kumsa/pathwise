@@ -814,16 +814,32 @@ def build_formal_informal(labour: pd.DataFrame) -> pd.DataFrame:
     return df.drop(columns=["employment_level"])
 
 
-# National vacancies per occupation in 2025, from MoLS LMI 2025 online positions.
-VACANCY_2025 = {"Accountant": 30000, "Civil Engineer": 14000, "General Practitioner": 7000,
-                "Software Developer": 7000, "Social Worker": 6000, "Legal Officer": 3000,
-                "Secondary Teacher": 15000, "Agronomist": 4000}
+# National vacancies open to new graduates in 2025, per occupation (calibration.yaml).
+VACANCY_2025 = {k: float(v) for k, v in C.get("employment.graduate_entry_vacancies_2025.values").items()}
 PUBLIC_OCCUPATIONS = {"Secondary Teacher", "Social Worker", "Legal Officer"}
 FILL_DAYS = {"Accountant": 30, "Civil Engineer": 50, "General Practitioner": 70, "Software Developer": 55,
              "Social Worker": 35, "Legal Officer": 40, "Secondary Teacher": 45, "Agronomist": 40}
 
 
-def build_vacancies() -> pd.DataFrame:
+def _modelled_share_by_field(hist: pd.DataFrame) -> dict[str, float]:
+    """Share of each field's national students that the 19 modelled
+    institutions hold (2025): modelled students on roll / (all-HE enrolment x
+    field mix, HESAA 2024/25). Vacancies are national; graduates come only
+    from the modelled institutions, so demand is scaled to the same scope
+    before the two are compared. Without this every field reads as a
+    shortage, and business (41.5% of all students, mostly private) as the
+    worst one, the opposite of the evidence."""
+    total = float(C.get("higher_education.all_he_2025.value"))
+    mix = C.get("higher_education.field_mix_all_he_2025.values")
+    roll = hist[hist["year"] == YEARS[-1]].groupby("field")["students_on_roll_count"].sum()
+    return {f: float(np.clip(roll.get(f, 0) / (total * float(mix[f])), 0.03, 0.95)) for f in FIELD}
+
+
+def build_vacancies(hist: pd.DataFrame) -> pd.DataFrame:
+    """Vacancies for graduates of the modelled institutions: national postings
+    (MoLS LMI 2025) x the share of the field's graduates these institutions
+    produce (see _modelled_share_by_field)."""
+    scope = _modelled_share_by_field(hist)
     rows = []
     real = {}
     level = 1.0
@@ -840,7 +856,7 @@ def build_vacancies() -> pd.DataFrame:
             dev = _ar1(len(YEARS), VAC_PHI, VAC_SIGMA)
             prev = None
             for i, year in enumerate(YEARS):
-                v = VACANCY_2025[occ] * real[year] * urban_weight[region] / tot_w
+                v = VACANCY_2025[occ] * scope[f["field"]] * real[year] * urban_weight[region] / tot_w
                 if year == 2020:
                     v *= 0.8
                 if occ in PUBLIC_OCCUPATIONS and year in freeze:
@@ -1137,7 +1153,7 @@ def generate() -> dict[str, pd.DataFrame]:
     exam = build_exam_placement()
     demo = build_demographics()
     cohort = build_cohort(hist)
-    vac = build_vacancies()
+    vac = build_vacancies(hist)
     skills = build_skills()
     outcomes = build_outcomes(hist, vac, skills)
     icap = build_institution_capacity(hist)

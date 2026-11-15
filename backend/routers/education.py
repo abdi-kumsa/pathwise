@@ -158,13 +158,29 @@ def policy_impact():
         raise HTTPException(status_code=500, detail=str(e))
 
 
+def _regional_disruptions() -> dict:
+    """Conflict and drought years per region (COVID applies everywhere, so it
+    is left out). Lets the page say why a region's figures look the way they do."""
+    from ml.features.model2 import c10_shocks
+    s = c10_shocks.frame()
+    if s.empty or "shock_type" not in s.columns:
+        return {}
+    out: dict[str, dict[str, list[int]]] = {}
+    for r in s.itertuples(index=False):
+        for kind in str(r.shock_type or "").split(","):
+            if kind and kind != "covid":
+                out.setdefault(r.region, {}).setdefault(kind, []).append(int(r.year))
+    return {reg: {k: sorted(v) for k, v in kinds.items()} for reg, kinds in out.items()}
+
+
 @router.get("/regional-alignment")  # /education/regional-alignment
 def regional_alignment(horizon: int = Query(1, ge=1, le=5)):
     try:
         df = m3.regional_alignment(horizon=horizon)
         trend = trends.enrolment_trend(("region", "field"))
         rows = trends.attach(m3.as_records(df), trend, ("region", "field"))
-        return {"n": int(len(rows)), "trend_years": trend["years"], "rows": rows}
+        return {"n": int(len(rows)), "trend_years": trend["years"], "rows": rows,
+                "disruptions": _regional_disruptions()}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

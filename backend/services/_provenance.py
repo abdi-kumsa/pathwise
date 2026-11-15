@@ -19,7 +19,7 @@ from typing import Any, Optional
 
 # Mirrors backend/services/_datasets.py::DATASET_LABEL. Duplicated on purpose
 # so this module stays importable without pandas.
-DATASET_LABEL = "Simulated Ethiopian structure · 2016–2025"
+DATASET_LABEL = "Simulated Ethiopian structure, calibrated · 2016–2025"
 
 TIERS = ("simulated", "official", "derived")
 
@@ -46,13 +46,13 @@ class Provenance:
 def default_provenance() -> Provenance:
     """The stamp that applies until Wave 1 retires the US benchmark data."""
     return Provenance(
-        source="Simulated Ethiopian structure",
+        source="Simulated Ethiopian structure, calibrated to published figures",
         tier="simulated",
         as_of="2016–2025",
-        method="seeded generator in data/ethiopia/generate.py",
+        method="seeded generator calibrated to data/ethiopia/reference/calibration.yaml (source and confidence per figure)",
         caveat=(
-            "Simulated Ethiopian structure (real regions, HEIs, MoE bands). "
-            "Not official MoE, MoLS or ESS statistics."
+            "Simulated Ethiopian structure (real regions, HEIs, MoE bands), calibrated to "
+            "published MoE, ESS, IMF and World Bank figures. Not official MoE, MoLS or ESS statistics."
         ),
     )
 

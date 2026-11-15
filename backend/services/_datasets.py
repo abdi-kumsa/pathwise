@@ -25,7 +25,7 @@ _ETH = _ROOT / "data" / "ethiopia"
 YEAR_MIN = 2016
 YEAR_MAX = 2025
 
-DATASET_LABEL = "Simulated Ethiopian structure · 2016–2025"
+DATASET_LABEL = "Simulated Ethiopian structure, calibrated · 2016–2025"
 
 FIELDS = [
     "Engineering & Technology",

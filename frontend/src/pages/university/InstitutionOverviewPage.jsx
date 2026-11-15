@@ -36,17 +36,17 @@ export default function InstitutionOverviewPage() {
           </DataNote>
           <div className="kpi-grid" style={{ marginTop: 16 }}>
             <KPICard
-              label="Latest enrolment"
-              value={fmtNum(p.latest_enrollment ?? p.total_enrollment)}
-              delta={fmtDelta(p.yoy_change_pct) + ' YoY'}
+              label="Students on roll"
+              value={fmtNum(p.students_on_roll ?? p.latest_enrollment)}
+              delta={`First-year intake ${fmtNum(p.intake_latest ?? p.latest_enrollment)} · ${fmtDelta(p.yoy_change_pct)} YoY`}
               deltaDirection={deltaDirection(p.yoy_change_pct)}
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 10 12 5 2 10l10 5 10-5ZM6 12v5c0 1 3 3 6 3s6-2 6-3v-5"/></svg>}
             />
             <KPICard
               label="Applications"
-              value={fmtNum(p.total_applications)}
-              delta={`CAGR ${fmtDelta(p.enrollment_cagr_pct)}`}
-              deltaDirection={deltaDirection(p.enrollment_cagr_pct)}
+              value={fmtNum(p.applications_latest_year ?? p.total_applications)}
+              delta={p.applicants_per_place != null ? `${p.applicants_per_place} per first-year place` : 'latest year'}
+              deltaDirection="neutral"
               icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 4h18l-7 8v7l-4 2v-9L3 4Z"/></svg>}
             />
             <KPICard
@@ -66,8 +66,8 @@ export default function InstitutionOverviewPage() {
           </div>
 
           <div className="panel" style={{ marginBottom: 20 }}>
-            <p className="panel-title">Enrolment trend</p>
-            <p className="panel-sub">Total students by year, 2016–2025</p>
+            <p className="panel-title">Students on roll</p>
+            <p className="panel-sub">All years of study, 2016–2025</p>
             <ResponsiveContainer width="100%" height={260}>
               <AreaChart data={p.series} margin={{ top: 4, right: 16, left: 0, bottom: 0 }}>
                 <defs>
@@ -79,8 +79,8 @@ export default function InstitutionOverviewPage() {
                 <CartesianGrid {...gridProps} />
                 <XAxis dataKey="year" {...axisProps} />
                 <YAxis {...axisProps} tickFormatter={fmtCompact} width={50} />
-                <Tooltip {...tooltipProps} formatter={v => [fmtNum(v), 'Enrolment']} />
-                <Area isAnimationActive={false} type="monotone" dataKey="enrollment" stroke={SERIES[0]}
+                <Tooltip {...tooltipProps} formatter={v => [fmtNum(v), 'Students on roll']} />
+                <Area isAnimationActive={false} type="monotone" dataKey="students_on_roll" stroke={SERIES[0]}
                       strokeWidth={2} fill="url(#instEnrol)" />
               </AreaChart>
             </ResponsiveContainer>

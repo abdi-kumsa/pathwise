@@ -171,8 +171,9 @@ def eligibility_by_field() -> pd.DataFrame:
         return pd.DataFrame(columns=["field", "eligibility_pct"])
     latest = int(exam["year"].max())
     now = exam[exam["year"] == latest]
+    col = "admission_eligible_pct" if "admission_eligible_pct" in now.columns else "exam_pass_rate_pct"
     return (
-        now.groupby("field", as_index=False)["exam_pass_rate_pct"]
+        now.groupby("field", as_index=False)[col]
         .mean()
-        .rename(columns={"exam_pass_rate_pct": "eligibility_pct"})
+        .rename(columns={col: "eligibility_pct"})
     )

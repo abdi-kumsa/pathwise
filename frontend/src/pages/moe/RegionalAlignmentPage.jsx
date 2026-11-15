@@ -14,10 +14,38 @@ import { STATUS, fmtNum, fmtPct } from '../../config/chartTheme'
 
 // Same rule as the field table: coverage below 0.85 is a shortage, above 1.15
 // an oversupply, so a region and its fields are judged the same way.
-const statusOf = (graduates, demand) => {
+const statusOf = (graduates, demand, enrollment) => {
+  // No modelled university in the region: there is no supply figure to judge,
+  // so say so instead of calling it a shortage.
+  if (!graduates && !enrollment) return 'no modelled institution'
   if (!demand) return 'balanced'
   const c = graduates / demand
   return c < 0.85 ? 'shortage' : c > 1.15 ? 'oversupply' : 'balanced'
+}
+
+// "conflict 2021–2023 · drought 2022" from {conflict: [2021, 2022, 2023], drought: [2022]}
+function spans(years) {
+  const out = []
+  let start = null
+  let prev = null
+  years.forEach(y => {
+    if (start == null) { start = y; prev = y; return }
+    if (y === prev + 1) { prev = y; return }
+    out.push(start === prev ? `${start}` : `${start}–${prev}`)
+    start = y; prev = y
+  })
+  if (start != null) out.push(start === prev ? `${start}` : `${start}–${prev}`)
+  return out.join(', ')
+}
+
+const SHOCK_LABEL = { conflict: 'Conflict', drought: 'Drought', trade_shock: 'AGOA trade shock' }
+
+function describeDisruption(kinds) {
+  if (!kinds) return ''
+  return Object.entries(kinds)
+    .filter(([k]) => SHOCK_LABEL[k])
+    .map(([k, years]) => `${SHOCK_LABEL[k]} ${spans(years)}`)
+    .join(' · ')
 }
 
 export default function RegionalAlignmentPage() {
@@ -46,7 +74,8 @@ export default function RegionalAlignmentPage() {
       gap,
       value: Math.abs(gap),
       coverage_pct: r.labour_demand ? (r.expected_graduates / r.labour_demand) * 100 : null,
-      status: statusOf(r.expected_graduates, r.labour_demand),
+      status: statusOf(r.expected_graduates, r.labour_demand, r.enrollment),
+      disruption: describeDisruption(data?.disruptions?.[r.name]),
     }
   })
   const fields = now.filter(r => r.region === selected)
@@ -57,8 +86,14 @@ export default function RegionalAlignmentPage() {
     { key: 'expected_graduates', label: 'Graduates', align: 'right', render: r => fmtNum(Math.round(r.expected_graduates)) },
     { key: 'labour_demand', label: 'Labour demand', align: 'right', render: r => fmtNum(Math.round(r.labour_demand)) },
     { key: 'gap', label: 'Demand − graduates', align: 'right', render: r => fmtNum(Math.round(r.gap)) },
-    { key: 'coverage_pct', label: 'Coverage', align: 'right', render: r => (r.coverage_pct == null ? '—' : fmtPct(r.coverage_pct, 0)) },
+    { key: 'coverage_pct', label: 'Coverage', align: 'right', render: r => (r.coverage_pct == null || r.status === 'no modelled institution' ? '—' : fmtPct(r.coverage_pct, 0)) },
     { key: 'status', label: 'Status', render: r => <StatusWord status={r.status} color={GAP_STATUS_COLOR[r.status] ?? STATUS.warning} /> },
+    {
+      key: 'disruption', label: 'Disruption', sortValue: r => (r.disruption ? 1 : 0),
+      render: r => (r.disruption
+        ? <span style={{ color: STATUS.serious, fontSize: 12 }}>{r.disruption}</span>
+        : <span style={{ color: 'var(--text-muted)' }}>—</span>),
+    },
   ]
 
   return (

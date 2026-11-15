@@ -32,6 +32,11 @@ def get_profile(institution: str) -> dict:
     sub = _scoped(institution)
 
     by_year = sub.groupby('year')['enrollment_count'].sum()
+    # enrollment_count is first-year intake; students on roll is the stock
+    # across all years of study. Older files may lack it.
+    roll_col = 'students_on_roll_count' if 'students_on_roll_count' in sub.columns else 'enrollment_count'
+    roll_by_year = sub.groupby('year')[roll_col].sum()
+    apps_by_year = sub.groupby('year')['applications_count'].sum()
     growth = ds.cagr(
         float(by_year.get(ds.YEAR_MIN, 0)),
         float(by_year.get(ds.YEAR_MAX, 0)),
@@ -70,12 +75,18 @@ def get_profile(institution: str) -> dict:
         'yoy_change_pct':    yoy,
         'capacity_utilization_pct': capacity_util,
         'total_applications': int(sub['applications_count'].sum()),
+        'students_on_roll':  int(roll_by_year.loc[years[-1]]) if years else 0,
+        'intake_latest':     latest_enrollment,
+        'applications_latest_year': int(apps_by_year.loc[years[-1]]) if years else 0,
+        'applicants_per_place': (round(float(apps_by_year.loc[years[-1]]) / latest_enrollment, 1)
+                                 if years and latest_enrollment else None),
         'programs':          int(sub['program_name'].nunique()),
         'avg_acceptance_rate_pct': round(float(sub['acceptance_rate_pct'].mean()), 1),
         'avg_yield_rate_pct': round(float(sub['yield_rate_pct'].mean()), 1),
         'avg_employment_rate_pct': round(float(sub['employment_rate_6mo_pct'].mean()), 1),
         'series': [
-            {'year': int(y), 'enrollment': int(v)} for y, v in by_year.items()
+            {'year': int(y), 'enrollment': int(v), 'students_on_roll': int(roll_by_year.loc[y])}
+            for y, v in by_year.items()
         ],
         'dataset_label': ds.DATASET_LABEL,
     }

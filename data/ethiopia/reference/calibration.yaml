@@ -305,6 +305,25 @@ employment:
     source: "MoLS 5th Labour Market Intelligence report 2025 (positions advertised online)"
     url: "https://www.mols.gov.et/wp-content/uploads/2025/10/Final-LMI-2025.pdf"
     values: {Business: 46541, Finance: 26477, Engineering: 22781, Health: 10929, ICT: 7067, Transport: 15918}
+  # annual vacancies open to new graduates, national, 2025, by the occupation each field feeds
+  graduate_entry_vacancies_2025:
+    confidence: estimate
+    note: >-
+      MoLS LMI 2025 online positions x ~0.35 open to 0-2 years' experience (LMI: 0 yrs 10.1%, 1 yr 8.8%,
+      2-5 yrs ~59%): business+finance 73,018 -> ~25,600; engineering 22,781 -> ~8,000; ICT 7,067 -> ~6,000
+      with ICT growth. Health adds public hiring (workforce 219,542 in 2016 -> 490,016 in 2024, ~34k a year,
+      about half degree-level). Teachers: ~374k secondary teachers needed, recruitment held back by budget
+      and the 2023-24 freeze, ~20k a year. Social work, law and agronomy have no posting data (estimates).
+    url: "https://www.mols.gov.et/wp-content/uploads/2025/10/Final-LMI-2025.pdf"
+    values:
+      Accountant: 25600
+      Civil Engineer: 8000
+      General Practitioner: 19000
+      Software Developer: 6000
+      Secondary Teacher: 20000
+      Social Worker: 6000
+      Legal Officer: 3000
+      Agronomist: 4000
   shortage_evidence:
     confidence: official
     url: "https://p4h.world/app/uploads/2025/05/Fact-Sheets-MINISTRY-OF-HEALTH-Ethiopia.x73677.pdf"
@@ -383,9 +402,9 @@ higher_education:
       Education: 0.06
   field_mix_all_he_2025:
     confidence: official
-    source: "MoE HESAA 2024/25 Table 4 (private growth drives the business share)"
+    source: "MoE HESAA 2024/25 Table 4 (private growth drives the business share); agriculture, education and law (16.3% together) are not reported and split by estimate"
     url: "https://blog.atenu.org/ethiopia-education-report-2024-25/"
-    values: {Business & Economics: 0.415, Social Sciences & Humanities: 0.129, Medicine & Health Sciences: 0.121, Engineering & Technology: 0.086, Natural & Computational Sciences: 0.086}
+    values: {Business & Economics: 0.415, Social Sciences & Humanities: 0.129, Medicine & Health Sciences: 0.121, Engineering & Technology: 0.086, Natural & Computational Sciences: 0.086, Agriculture & Life Sciences: 0.07, Education: 0.06, Law: 0.033}
   # student population per institution (all levels and modes unless noted)
   institution_students:
     confidence: reputable
