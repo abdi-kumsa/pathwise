@@ -141,7 +141,7 @@ labour:
     confidence: official
     values: {2016: 16.9, 2017: 18.0, 2018: 19.1, 2019: 18.5, 2020: 18.7, 2021: 17.9, 2022: 19.6, 2023: 20.0, 2024: 20.4, 2025: 20.6}
   national_unemployment_pct: {2013: 4.5, 2019: 9.2, 2021: 8.0, confidence: official, url: "https://ethiopia.unfpa.org/sites/default/files/pub-pdf/2024-09/3.%20Print%20Ready%20-%20Policy%20Brief%20-%20Unemployment%20and%20Development%20in%20Ethiopia.pdf"}
-  urban_youth_unemployment_pct: {2018: 25.3, 2021: 23.1, confidence: official}
+  urban_youth_unemployment_pct: {2018: 25.3, 2021: 23.1, confidence: official, url: "https://www.scribd.com/document/579853796/Final-2021-Labour-Force-and-Migration-Survey-Key-Finding-Report-17aug2021"}
   # urban unemployment by region (2019 / 2021)
   regional_urban_unemployment_pct:
     confidence: official
@@ -159,7 +159,7 @@ labour:
     url: "https://www.ilo.org/media/362676/download"
     values: {agriculture: 0.635, industry: 0.063, services: 0.302}
   informal_share_2021: {value: 0.852, confidence: official, url: "https://www.ilo.org/media/362676/download"}
-  participation_2021: {value: 65.6, confidence: official}
+  participation_2021: {value: 65.6, confidence: official, url: "https://www.ilo.org/media/362676/download"}
   graduates:
     employed_share: {value: 0.58, confidence: official, source: "MoE to Parliament, Dec 2022: 58% of public-university graduates employed, ~160,000 graduates a year", url: "https://www.universityworldnews.com/post.php?story=20221217131114976"}
     median_months_to_first_job: {value: 16, confidence: reputable, source: "tracer studies: Wolkite 17 months (2019 cohort), Debre Markos 15 months (2018 cohort)", url: "https://www.tandfonline.com/doi/full/10.1080/2331186X.2022.2143032"}
@@ -193,9 +193,370 @@ labour:
     legal_deployments: {2022: 40000, 2024: 345000, 2025: 503000, confidence: official, url: "https://www.ena.et/web/eng/w/eng_7928923"}
     returns_from_saudi: {2023: 42948, 2024: 93498, 2025: 111400, confidence: official, url: "https://dtm.iom.int/sites/g/files/tmzbdl1461/files/reports/2024_Yearly_Eastern_Route_Report.pdf", note: "2025 doubles the Jan-Jun figure of 55,700"}
 
+# ── Population and exam takers by region ──────────────────────────────────────
+population:
+  basis: "ESS/CSA projections (official). UN/World Bank totals are ~17% higher; not mixed in."
+  # ESS July 2022 by region (SNNPR remainder split South 54.2% / Central 45.8% from 2007 back-cast zones)
+  regions_2022:
+    confidence: official
+    source: "ESS 2022 regional projections via citypopulation.de; South/Central split estimated from 2007 zone totals"
+    url: "https://www.citypopulation.de/en/ethiopia/admin/"
+    values:
+      Addis Ababa: 3860000
+      Dire Dawa: 535000
+      Amhara: 22877000
+      Oromia: 40061000
+      Tigray: 5739000
+      Sidama: 4623000
+      South Ethiopia: 7353000
+      South West Ethiopia: 3303000
+      Central Ethiopia: 6214000
+      Somali: 6506000
+      Afar: 2091000
+      Benishangul-Gumuz: 1218000
+      Gambela: 508000
+      Harari: 276000
+  growth_pct:
+    confidence: estimate
+    note: "implied by CSA 2017 -> ESS 2022 (Oromia 2.5, SNNPR 2.3, Amhara ~1.6, Somali 2.5) and ESS 2022 -> 2024 (~2.0 national)"
+    default: 2.3
+    values: {Oromia: 2.5, Amhara: 1.6, Somali: 2.5, Addis Ababa: 2.2, Tigray: 1.7}
+  youth_15_24_share: {value: 0.20, confidence: reputable, note: "UNFPA 22% (2007 basis); UN WPP ~20.9% (2026); strategy doc 18.2%", url: "https://www.prb.org"}
+  urban_share_2007:
+    confidence: reputable
+    source: "CSA 2007 census via Wikipedia; Tigray/Amhara/SNNPR recalled, unverified"
+    url: "https://en.wikipedia.org/wiki/Urbanization_in_Ethiopia"
+    values: {Addis Ababa: 1.0, Dire Dawa: 0.68, Harari: 0.54, Gambela: 0.25, Tigray: 0.195, Somali: 0.14, Benishangul-Gumuz: 0.135, Afar: 0.133, Amhara: 0.123, Oromia: 0.113, Sidama: 0.12, South Ethiopia: 0.09, South West Ethiopia: 0.09, Central Ethiopia: 0.10}
+  urban_share_national: {values: {2016: 0.196, 2020: 0.216, 2025: 0.241}, confidence: reputable, url: "https://data.worldbank.org/indicator/SP.URB.TOTL.IN.ZS?locations=ET"}
+  # share of national grade-12 exam takers by region, implied by 2026 regional passers / pass rates
+  exam_taker_share:
+    confidence: estimate
+    note: "derived from 2026 regional passers / pass rates (sums to 549,850 vs 550,210 national); Amhara and Tigray still depressed in 2026, so pre-war shares are raised for them"
+    url: "https://addisinsight.net/2026/08/23/"
+    values: {Oromia: 0.345, Amhara: 0.205, Addis Ababa: 0.095, South Ethiopia: 0.09, Central Ethiopia: 0.053, Tigray: 0.065, Sidama: 0.046, Somali: 0.031, South West Ethiopia: 0.03, Benishangul-Gumuz: 0.013, Gambela: 0.013, Afar: 0.008, Dire Dawa: 0.0063, Harari: 0.0047}
+  # participation of a region's normal cohort in the exam (1.0 = normal)
+  exam_participation:
+    confidence: estimate
+    note: "Tigray did not sit in 2021-2022 and sat separately in Oct 2023 (9,514, ~1/4 of a normal cohort); 2025 attendance ~50% below pre-war. Only ~half of eligible Amhara students sat in 2024; hundreds of schools missed 2025."
+    url: "https://www.universityworldnews.com/post.php?story=20240924153252830"
+    values:
+      Tigray: {2021: 0.0, 2022: 0.0, 2023: 0.25, 2024: 0.4, 2025: 0.5}
+      Amhara: {2024: 0.5, 2025: 0.7}
+  # regional pass rate relative to the national rate after the 2022 reform
+  pass_rate_relative:
+    confidence: news
+    note: "2024-2026 regional results: Addis Ababa 21-32% vs national 5-13%; Harari ~2x; Gambela ~0.4x; Tigray 2023 reported 66.96% (contested)"
+    url: "https://borkena.com/2025/09/14/"
+    values: {Addis Ababa: 3.0, Harari: 2.3, Afar: 1.2, Amhara: 1.1, Oromia: 0.9, Dire Dawa: 1.0, Tigray: 1.0, Central Ethiopia: 0.8, Somali: 0.8, Sidama: 0.6, Benishangul-Gumuz: 0.55, South Ethiopia: 0.5, South West Ethiopia: 0.45, Gambela: 0.35}
+
+# ── Employment detail, wages, graduate outcomes, demand ───────────────────────
+employment:
+  by_sector_thousands:
+    confidence: official
+    source: "ILOSTAT processing of LFS 2013 and LFS 2021 microdata"
+    url: "https://sdmx.ilo.org/rest/data/ILO,DF_EMP_TEMP_SEX_ECO_NB/ETH.A..SEX_T.?format=csv"
+    values:
+      Agriculture: {2013: 25216, 2021: 23511}
+      Manufacturing: {2013: 1817, 2021: 1175}
+      Construction: {2013: 811, 2021: 738}
+      Education: {2013: 682, 2021: 937}
+      Health: {2013: 239, 2021: 318}
+      Finance: {2013: 134, 2021: 267}
+      ICT: {2013: 60, 2021: 92}
+      Public administration: {2013: 287, 2021: 366}
+    total: {2013: 35498, 2021: 37044}
+  urban_rural_sector_mix_2021:
+    confidence: official
+    url: "https://sdmx.ilo.org/rest/data/ILO,DF_EMP_TEMP_SEX_ECO_GEO_NB/"
+    urban: {employed: 7880000, agriculture: 0.129, industry: 0.168, services: 0.703}
+    rural: {employed: 29160000, agriculture: 0.771, industry: 0.035, services: 0.194}
+  mean_monthly_wage_etb:
+    confidence: official
+    source: "ILOSTAT, mean monthly earnings of paid employees (LFS); 2022 UEUS mean 5,091; 2024/25 ESS mean 6,704"
+    url: "https://sdmx.ilo.org/rest/data/ILO,DF_EAR_EMTA_SEX_ECO_NB/ETH.A..SEX_T.?format=csv"
+    all: {2013: 1346, 2021: 4196, 2022: 5091, 2025: 6704}
+    by_sector_2021: {Agriculture: 1863, Manufacturing: 3867, Construction: 3796, ICT: 6123, Finance: 7335, Public administration: 4513, Education: 5233, Health: 5696}
+    professionals_2021: 7889
+  graduate_employment_by_field:
+    confidence: estimate
+    note: "no national study by field; levels anchored on MoE 58% (2022) and spread from tracer studies (engineering 80% 2009-13 national; health/radiology ~97%; accounting 80%; Bahir Dar social sciences 86% 2015/16; graduates in 5 regions 31.5% fully employed)"
+    url: "https://www.researchgate.net/publication/314302285"
+    relative_to_national:
+      Medicine & Health Sciences: 1.30
+      Engineering & Technology: 1.12
+      Natural & Computational Sciences: 1.00
+      Business & Economics: 1.02
+      Agriculture & Life Sciences: 0.95
+      Law: 1.00
+      Education: 0.90
+      Social Sciences & Humanities: 0.82
+  graduate_employment_national:
+    confidence: estimate
+    note: "MoE 58% for 2022 (official); earlier cohorts higher in tracer studies (Bahir Dar 77-79% 2015/16); later years lower as unemployment rose; 2020 COVID dip"
+    url: "https://www.universityworldnews.com/post.php?story=20221217131114976"
+    values: {2016: 70, 2017: 68, 2018: 66, 2019: 64, 2020: 57, 2021: 59, 2022: 58, 2023: 56, 2024: 54, 2025: 53}
+  job_creation_claims:
+    confidence: official
+    note: "Jobs Creation Commission / MoLS claims; credibility questioned by Ethiopian Business Review"
+    url: "https://www.ena.et/web/eng/w/eng_5007549"
+    values: {2020: 3300000, 2022: 2380000, 2023: 3100000, 2024: 3700000}
+  online_positions_2025:
+    confidence: official
+    source: "MoLS 5th Labour Market Intelligence report 2025 (positions advertised online)"
+    url: "https://www.mols.gov.et/wp-content/uploads/2025/10/Final-LMI-2025.pdf"
+    values: {Business: 46541, Finance: 26477, Engineering: 22781, Health: 10929, ICT: 7067, Transport: 15918}
+  shortage_evidence:
+    confidence: official
+    url: "https://p4h.world/app/uploads/2025/05/Fact-Sheets-MINISTRY-OF-HEALTH-Ethiopia.x73677.pdf"
+    note: "physicians 1 per 5,843-7,576 people (WHO safeguard list 2023); ~374k secondary teachers needed (Teacher Task Force); 26% of firms report skills-gap vacancies; 75% of Addis job seekers have university education vs 39% of postings requiring it (IGC)"
+  # persistent skill-shortage level per field (0-1), from the evidence above
+  skill_shortage_level:
+    confidence: estimate
+    note: "health and computing highest (doctor density, ICT skills scarcity); engineering medium-high; teacher shortage in schools vs low pay; business and social sciences oversupplied (IGC mismatch, MoLS)"
+    values:
+      Medicine & Health Sciences: 0.68
+      Natural & Computational Sciences: 0.55
+      Engineering & Technology: 0.50
+      Education: 0.45
+      Agriculture & Life Sciences: 0.38
+      Law: 0.25
+      Business & Economics: 0.20
+      Social Sciences & Humanities: 0.15
+
+# ── Higher education ──────────────────────────────────────────────────────────
+higher_education:
+  # undergraduate enrolment, public + private, all modes (regular/extension/summer/distance)
+  undergraduate_all_modes:
+    confidence: official
+    source: "MoE Education Statistics Annual Abstract via Tareke et al. 2024 (mode columns sum to the ESAA totals)"
+    url: "https://publicatio.bibl.u-szeged.hu/34784/1/education-14-01065.pdf"
+    values: {2016: 778766, 2017: 788033, 2018: 825003}
+  undergraduate_regular:
+    confidence: official
+    url: "https://publicatio.bibl.u-szeged.hu/34784/1/education-14-01065.pdf"
+    values: {2016: 424946, 2017: 435980, 2018: 451240}
+  all_he_2025: {value: 828002, confidence: official, source: "MoE HESAA 2024/25 (158 HEIs, GER 7.7%, 39.2% female)", url: "https://blog.atenu.org/ethiopia-education-report-2024-25/"}
+  public_all_levels_2023: {value: 460304, confidence: official, note: "excludes Tigray universities and remedial students", url: "https://www.moe.gov.et/fact-sheets"}
+  private_share:
+    values: {2018: 0.168, 2023: 0.49}
+    confidence: official
+    note: "private share rose sharply after the 2022 exam reform (2023 fact sheet: 436,920 private vs 460,304 public)"
+  public_universities: {values: {2016: 36, 2018: 45, 2021: 47, 2025: 47}, confidence: reputable, url: "https://ethiopianmonitor.com/2020/01/04/ministry-seeks-excellence-with-plan-to-classify-public-universities/"}
+  graduates_per_year:
+    values: {2018: 141700, 2022: 160000}
+    confidence: reputable
+    note: "MoE 2018 via Yimer et al.; 2022 'at least 160,000 a year' (MoE to Parliament)"
+    url: "https://www.universityworldnews.com/post.php?story=20221217131114976"
+  exit_exam_2023:
+    confidence: official
+    source: "first national exit exam, Jul 2023: 150,184 sat; 40.65% passed; public 62.5% of 77,981, private 17.2% of 72,203"
+    url: "https://borkena.com/2023/07/17/"
+  female_share: {values: {2015: 0.33, 2018: 0.368, 2023: 0.309, 2025: 0.392}, confidence: official, note: "2018 regular UG all institutions; 2023 public all levels"}
+  attrition_over_programme:
+    confidence: reputable
+    source: "Tamrat 2022: ~30% over a decade in 15 public universities; female attrition can exceed 60%"
+    url: "https://www.researchgate.net/publication/360725086"
+    overall: 0.30
+    by_institution: {Arba Minch University: 0.50, Mekelle University: 0.37, Bahir Dar University: 0.29, Jimma University: 0.24, Adama Science and Technology University: 0.18, Hawassa University: 0.12}
+  programme_length_years:
+    confidence: reputable
+    source: "Nuffic / WENR; freshman common year reintroduced Oct 2019 turned 3-year degrees into 4-year ones"
+    url: "https://www.universityworldnews.com/post.php?story=20190930054657294"
+    default: 4
+    Engineering & Technology: 5
+    Medicine & Health Sciences: 6
+    Law: 5
+  # broad-field mix of public undergraduate enrolment, 2014/15 (ESAA via World Bank 2017, Fig. 22).
+  # Law and Education are folded into the social bands in the source; split here by estimate.
+  field_mix_public_2015:
+    confidence: reputable
+    url: "https://documents1.worldbank.org/curated/en/687231505250026457/pdf/119694-REVISED-PUBLIC-Ethiopia-ST-HE-Policy-Note-Ethiopia-Higher-Education-Science-and-Techn.pdf"
+    note: "assignment of the 12/9/7% S&T bands and the 17/20% social bands to named fields is inferred; law/education split is an estimate"
+    values:
+      Engineering & Technology: 0.34
+      Natural & Computational Sciences: 0.12
+      Medicine & Health Sciences: 0.09
+      Agriculture & Life Sciences: 0.07
+      Business & Economics: 0.17
+      Social Sciences & Humanities: 0.11
+      Law: 0.04
+      Education: 0.06
+  field_mix_all_he_2025:
+    confidence: official
+    source: "MoE HESAA 2024/25 Table 4 (private growth drives the business share)"
+    url: "https://blog.atenu.org/ethiopia-education-report-2024-25/"
+    values: {Business & Economics: 0.415, Social Sciences & Humanities: 0.129, Medicine & Health Sciences: 0.121, Engineering & Technology: 0.086, Natural & Computational Sciences: 0.086}
+  # student population per institution (all levels and modes unless noted)
+  institution_students:
+    confidence: reputable
+    note: "university websites, THE rankings, news; most are all-mode totals; lower confidence than ministry tables"
+    values:
+      Addis Ababa University: {students: 47000, undergraduate: 29872, source: "THE WUR 2023 / PAPSS mobility profile"}
+      Addis Ababa Science and Technology University: {students: 8000, source: "IIE profile ~2023"}
+      Bahir Dar University: {students: 36000, earlier: {2016: 52830}, source: "IIE profile; Wikipedia (2016)"}
+      University of Gondar: {students: 45000, source: "uog.edu.et ~2024"}
+      Jimma University: {students: 33390, source: "THE WUR 2025"}
+      Haramaya University: {students: 22189, earlier: {2018: 30355}, source: "haramaya.edu.et 2025/26 (19,503 UG)"}
+      Adama Science and Technology University: {students: 22000, source: "uniRank band 20-25k"}
+      Hawassa University: {students: 32000, source: "hu.edu.et"}
+      Mekelle University: {students: 30000, after_war: 15650, source: "pre-war ~30,000 (war-status report); THE 2027 15,650"}
+      Aksum University: {students: 13128, source: "PMC11930727 ~2022 (10,086 regular in 2019)"}
+      Arba Minch University: {students: 24000, earlier: {2018: 39000}, source: "amu.edu.et"}
+      Dilla University: {students: 31000, source: "du.edu.et"}
+      Wolaita Sodo University: {students: 38565, source: "wsu.edu.et 2024"}
+      Jigjiga University: {students: 22181, source: "edmap.et (21,554 UG)"}
+      Ambo University: {students: 18250, source: "ambou.edu.et"}
+      Wollo University: {students: 28000, source: "Addis Fortune ~2019"}
+      Debre Berhan University: {students: 19383, regular: 6759, source: "medRxiv 2025 (2023)"}
+      Unity University: {students: 16000, source: "Addis Fortune ~2025"}
+      St. Mary's University: {students: 30000, on_campus_undergraduate: 6000, source: "IAU / Wikipedia; ~20-22k distance"}
+  differentiation:
+    confidence: reputable
+    url: "https://ethiopianmonitor.com/2020/01/04/ministry-seeks-excellence-with-plan-to-classify-public-universities/"
+    research: [Addis Ababa University, Arba Minch University, Bahir Dar University, University of Gondar, Haramaya University, Hawassa University, Jimma University, Mekelle University]
+    applied: [Aksum University, Dilla University, Debre Berhan University, Jigjiga University, Wolaita Sodo University, Ambo University, Wollo University]
+    science_technology: [Addis Ababa Science and Technology University, Adama Science and Technology University]
+  aau_autonomy: {year: 2023, note: "Proclamation 1294/2023, Regulation 537/2023; upfront fees from 2024/25", confidence: official, url: "https://www.universityworldnews.com/post.php?story=20230811144739871"}
+
+# ── Programme offering and specialisation per institution ─────────────────────
+programmes:
+  confidence: reputable
+  source: "university websites (colleges/faculties pages), Wikipedia; MoE ban on private law and teacher education since 2010"
+  url: "https://www.universityworldnews.com/post.php?story=20221011090808989"
+  note: "Y/N per broad field at undergraduate level. Unknowns are treated as offered. Computing is counted under Natural & Computational Sciences everywhere."
+  not_offered:
+    Addis Ababa Science and Technology University: [Medicine & Health Sciences, Agriculture & Life Sciences, Business & Economics, Social Sciences & Humanities, Law, Education]
+    Adama Science and Technology University: [Agriculture & Life Sciences, Business & Economics, Social Sciences & Humanities, Law, Education]
+    Unity University: [Natural & Computational Sciences, Medicine & Health Sciences, Agriculture & Life Sciences, Social Sciences & Humanities, Law, Education]
+    St. Mary's University: [Engineering & Technology, Medicine & Health Sciences, Agriculture & Life Sciences, Social Sciences & Humanities, Law, Education]
+  # relative weight of a field within the institution versus the national public mix (1.0 = national mix)
+  specialisation:
+    confidence: estimate
+    note: "from each institution's history and largest colleges (e.g. Gondar/Jimma health, Haramaya/Ambo agriculture, AASTU/ASTU/Arba Minch engineering); ASTU health is pharmacy only"
+    values:
+      Addis Ababa University: {Social Sciences & Humanities: 1.4, Law: 1.5, Business & Economics: 1.3, Medicine & Health Sciences: 1.3}
+      Addis Ababa Science and Technology University: {Engineering & Technology: 3.0, Natural & Computational Sciences: 1.0}
+      Bahir Dar University: {Engineering & Technology: 1.4, Education: 1.7}
+      University of Gondar: {Medicine & Health Sciences: 2.6}
+      Jimma University: {Medicine & Health Sciences: 2.2, Agriculture & Life Sciences: 1.8}
+      Haramaya University: {Agriculture & Life Sciences: 3.0, Medicine & Health Sciences: 1.2}
+      Adama Science and Technology University: {Engineering & Technology: 3.0, Natural & Computational Sciences: 0.8, Medicine & Health Sciences: 0.25}
+      Hawassa University: {Agriculture & Life Sciences: 2.0, Medicine & Health Sciences: 1.4}
+      Mekelle University: {Agriculture & Life Sciences: 1.5, Engineering & Technology: 1.3, Medicine & Health Sciences: 1.3}
+      Aksum University: {Engineering & Technology: 1.4, Agriculture & Life Sciences: 1.5}
+      Arba Minch University: {Engineering & Technology: 1.7}
+      Dilla University: {Education: 2.0, Medicine & Health Sciences: 1.4}
+      Wolaita Sodo University: {Agriculture & Life Sciences: 2.4, Medicine & Health Sciences: 1.6}
+      Jigjiga University: {Agriculture & Life Sciences: 1.6, Law: 1.3}
+      Ambo University: {Agriculture & Life Sciences: 2.4}
+      Wollo University: {Medicine & Health Sciences: 1.4, Business & Economics: 1.2}
+      Debre Berhan University: {}
+      Unity University: {Business & Economics: 3.0, Engineering & Technology: 1.0}
+      St. Mary's University: {Business & Economics: 3.0, Natural & Computational Sciences: 1.0}
+  # intake weight of each public institution (regular undergraduate scale), used to
+  # share the national placement among them. Derived from institution_students.
+  intake_weight:
+    confidence: estimate
+    note: "regular-undergraduate scale per public institution (all-mode totals x ~0.6-0.7 regular share; UG figures where published)"
+    values:
+      Addis Ababa University: 30000
+      Addis Ababa Science and Technology University: 7000
+      Bahir Dar University: 30000
+      University of Gondar: 30000
+      Jimma University: 28000
+      Haramaya University: 24000
+      Adama Science and Technology University: 18000
+      Hawassa University: 25000
+      Mekelle University: 25000
+      Aksum University: 11000
+      Arba Minch University: 28000
+      Dilla University: 22000
+      Wolaita Sodo University: 25000
+      Jigjiga University: 20000
+      Ambo University: 18000
+      Wollo University: 22000
+      Debre Berhan University: 12000
+  # share of the national public placement absorbed by the 17 public institutions modelled
+  modelled_public_share: {value: 0.5, confidence: estimate, note: "17 of ~45-47 public universities, mostly first-generation and large; their all-mode totals (~470k) are about half of public enrolment"}
+  # annual regular undergraduate intake of the two private institutions
+  private_intake:
+    confidence: estimate
+    note: "from on-campus regular undergraduates (Unity ~4.3k UG 2012, ~16k all modes 2025; St Mary's ~6k regular UG) / programme length; private enrolment grew after the 2022 exam reform"
+    Unity University: {2016: 1100, 2021: 1300, 2025: 2100}
+    St. Mary's University: {2016: 1300, 2021: 1450, 2025: 2200}
+  # institution-level intake factor (academic-year convention: 2022 = 2021/22).
+  # Tigray: students transferred Oct 2021, no placement into Tigray 2022/23, reopened Aug 2023.
+  intake_disruption:
+    confidence: estimate
+    note: "derived from the dated events in disruption.events; 0 means no new intake"
+    values:
+      Mekelle University: {2021: 0.35, 2022: 0.0, 2023: 0.0, 2024: 0.45, 2025: 0.6}
+      Aksum University: {2021: 0.3, 2022: 0.0, 2023: 0.0, 2024: 0.4, 2025: 0.5}
+      Wollo University: {2022: 0.7, 2023: 0.9}
+      Bahir Dar University: {2024: 0.85, 2025: 0.9}
+      University of Gondar: {2024: 0.85, 2025: 0.9}
+      Debre Berhan University: {2024: 0.9}
+
+# ── Higher-education finance ──────────────────────────────────────────────────
+finance:
+  cost_sharing:
+    confidence: official
+    source: "Council of Ministers Regulation 91/2003: full food and boarding + at least 15% of tuition, repaid as a graduate tax of >= 10% of salary within 15 years"
+    url: "https://chilot.wordpress.com/2011/11/16/higher-education-cost-sharing-council-of-ministers-regulation-number-91of-2003/"
+    tuition_share: 0.15
+  spending_per_student_etb: {value: 66381, year: 2020, confidence: official, url: "https://documents1.worldbank.org/curated/en/099615206172211408/pdf/P175041082679e070b36f0ab1b2746fa0e.pdf"}
+  meal_allowance_etb_per_day: {values: {2016: 22, 2024: 22, 2025: 100}, confidence: news, note: "raised from 22 to 100 ETB/day, announced 9 Dec 2024", url: "https://addisstandard.com/ministry-of-education-raises-daily-university-meal-budget-to-100-birr-per-student-amid-rising-costs/"}
+  cost_sharing_repayments_etb: {values: {2017: 238000000, 2018: 314000000, 2019: 488000000, 2023: 400000000}, confidence: news, url: "https://capitalethiopia.com/2019/08/26/cost-sharing-rate-increases-repayments-decline/"}
+  aau_upfront_fees_etb_programme: {social_science_4yr: 144000, medicine: 1000000, year: 2025, confidence: news, url: "https://addisfortune.news/addis-abeba-universitys-autonomy-shuts-the-door-on-brightest-minds"}
+  private_tuition_etb_semester: {Unity University: {2025: 39000, 2024: 19500}, confidence: news, note: "28,000-50,000+ per semester in 2025, roughly double the earlier rate", url: "https://addisfortune.news/unity-university-hikes-tuition-fee-students-push-back"}
+  education_budget_etb_bn: {values: {2018: 95.7, 2019: 98.6, 2020: 110.1, 2021: 137.2, 2022: 162.2, 2023: 180.2, 2024: 200.4}, confidence: official, url: "https://www.unicef.org/ethiopia/media/10601/file/National%20Education%20Budget%20Brief%202024.pdf.pdf"}
+  he_budget_etb_bn: {values: {2019: 23.0}, confidence: news, note: "~80% of the federal education budget"}
+
+# ── Investment, industrial parks, public sector ───────────────────────────────
+investment:
+  fdi_inflow_usd_bn:
+    confidence: official
+    source: "UNCTAD World Investment Report annex tables (calendar years; 2016-2018 revised values)"
+    url: "https://unctad.org/system/files/official-document/wir2025_annex-tables_en.pdf"
+    values: {2016: 4.14, 2017: 4.02, 2018: 3.36, 2019: 2.549, 2020: 2.381, 2021: 4.26, 2022: 3.67, 2023: 3.269, 2024: 3.984, 2025: 3.796}
+  fdi_regional_share: {Addis Ababa: 0.55, Oromia: 0.28, other: 0.17, confidence: reputable, note: "AA + Oromia host 83% of licensed FDI projects (PSI); split from Chinese-project shares", url: "https://psi.org.et/index.php/blog/525-policy-and-strategic-directions-of-foreign-direct-investment-in-ethiopia-challenges-and-prospects"}
+  investment_licences: {values: {2024: 329, 2025: 515}, confidence: news, note: "2024/25 total reported as 544 but parts sum to 515"}
+  park_openings:
+    confidence: official
+    url: "https://documents1.worldbank.org/curated/en/099350011132228872/pdf/P1741950a12ef10560af5008750d1393b7c.pdf"
+    values: {Eastern Industrial Zone: 2010, Bole Lemi: 2014, Hawassa Industrial Park: 2016, Kombolcha Industrial Park: 2017, Mekelle Industrial Park: 2017, Adama Industrial Park: 2018, Dire Dawa Industrial Park: 2018, Debre Berhan Industrial Park: 2019, Jimma Industrial Park: 2019, Bahir Dar Industrial Park: 2020}
+  park_exports_usd_m: {values: {2018: 72, 2019: 141, 2020: 165, 2024: 115, 2025: 180}, confidence: reputable, note: "2025 interpolated toward 266.9M (IPDC, 2025/26); exports fell 24% in 2023 (AfDB)"}
+  park_events:
+    - {park: Mekelle Industrial Park, year: 2020, event: "closed by the war in Nov 2020; Almeda (5,000+ workers) looted", confidence: reputable, url: "https://www.industriall-union.org/workers-fear-returning-to-work-in-ethiopias-war-torn-tigray-region"}
+    - {park: all, year: 2022, event: "AGOA suspension Jan 2022: ~11,500 jobs lost, 18 firms exited, USD 45M lost", confidence: official, url: "https://www.business-humanrights.org/en/latest-news/ethiopia-nbe-report-reveals-11500-jobs-lost-18-foreign-companies-exiting-industrial-parks-following-agoa-suspension/"}
+public_sector:
+  capital_budget_etb_bn: {values: {2019: 113.6, 2020: 130.7, 2021: 160.0, 2022: 184.0, 2023: 218.0, 2024: 203.4, 2025: 340.5}, confidence: official, url: "https://www.unicef.org/ethiopia/media/11731/file/Highlights%20of%20Federal%20budget%20proclamation%202024-25.pdf.pdf"}
+  hiring_freeze: {years: [2023, 2024], confidence: news, note: "no new civil-service hires for about two fiscal years (2022/23-2023/24) for budget reasons", url: "https://thereportermagazines.com/3565/"}
+  teacher_shortfall: {value: 100000, year: 2025, confidence: news, url: "https://ethionegari.com/2025/04/03/ethiopia-to-implement-national-service-for-university-students/"}
+  health_workforce: {value: 219542, year: 2016, health_extension_workers: 42336, confidence: official, url: "https://www.hcwpolicylab.org/wp-content/uploads/2024/03/2016-National-Human-Resources-for-Health-Strategic-Plan-2016-2025-English-Version.pdf"}
+  megaprojects:
+    - {name: GERD, region: Benishangul-Gumuz, start: 2011, end: 2025, workforce: 8500, confidence: reputable, url: "https://www.webuildvalue.com/en/reportage/gerd-and-koysha-the-dams-of-the-future.html"}
+    - {name: Koysha dam, region: South West Ethiopia, start: 2016, end: null, workforce: 5000, confidence: news, url: "https://www.ena.et/web/eng/w/eng_3393663"}
+    - {name: Addis corridor development, region: Addis Ababa, start: 2024, end: null, workforce: 55000, confidence: news, note: "50,000-62,000 by phase; EBC claims 170,000+"}
+
+# ── Agriculture and climate shocks ────────────────────────────────────────────
+agriculture:
+  seasons: {belg: "Feb-Jun rains, harvest Jun-Jul", meher: "Jun-Sep rains, harvest Oct-Jan, 85-90% of crop output", confidence: official, url: "https://www.fao.org/fileadmin/user_upload/emergencies/docs/FAO%20Ethiopia_El%20Nino%20Situation%20Report_February%202016.pdf"}
+  shocks:
+    - {year: 2016, regions: [Afar, Somali, Amhara, Oromia, Tigray], event: "El Nino drought; 10.2M people in need", confidence: official, url: "https://fews.net/east-africa/ethiopia/alert/december-2015"}
+    - {year: 2017, regions: [Somali], event: "south-east drought; 8.5M in need", confidence: official, url: "https://reliefweb.int/report/ethiopia/ethiopia-crisis-worsens-drought-prevails"}
+    - {year: 2020, regions: [Somali, Afar, Oromia, Amhara, Tigray], event: "desert locusts; 356,286 t cereal lost", confidence: official, url: "https://reliefweb.int/report/ethiopia/impact-desert-locust-infestation-household-livelihoods-and-food-security-ethiopia"}
+    - {year: 2021, regions: [Somali, Oromia, Afar], event: "drought begins (five failed seasons to 2023)", confidence: reputable, url: "https://www.acaps.org/fileadmin/Data_Product/Main_media/20230418_acaps_thematic_report_ethiopia_key_drought_developments_to_watch_in_afar_snnp_somalisouthern_and_eastern_oromia_regions.pdf"}
+    - {year: 2022, regions: [Somali, Oromia, Afar], event: "drought peak; ~24M affected, 6.8M livestock dead", confidence: reputable, url: "https://reliefweb.int/report/ethiopia/horn-africa-drought-regional-humanitarian-overview-call-action-revised-26-may-2023"}
+    - {year: 2023, regions: [Tigray, Somali, Oromia, Afar], event: "meher 20-30% below average; Tigray 37% of average", confidence: official, url: "https://fscluster.org/sites/default/files/2024-04/Ethiopia%20Food%20Security%20Outlook%20(February%20%E2%80%93%20September%202024)%20FEWS%20NET.pdf"}
+
+
 gaps:
   - "Exam: no 2017 figures; no placement figures for 2016-2019; remedial counts for 2024-2025."
   - "Tigray: number of students who returned to universities in 2023."
   - "Reopening dates for Wollo, Samara and Assosa universities; Gambela, Harari and Dire Dawa events."
   - "Labour: manufacturing vs construction split; Tigray and Amhara regional unemployment after 2021."
   - "Civil-service entry pay before Nov 2024."
+  - "Regional employment by sector (ESS 2021 LFS tables unreachable): regions blend the urban/rural sector mix by urban share."
+  - "Secondary enrolment by region; full regional exam tables for 2022-2025."
+  - "Graduate employment by field: no national tracer study; relative levels are estimates."
