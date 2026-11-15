@@ -1,141 +1,141 @@
-region,year,agricultural_season,hiring_season_index,commodity_price_index,external_shock_flag,provenance
-Addis Ababa,2016,meher,0.4430263348894005,105.82154877991596,False,simulated
-Addis Ababa,2017,belg,0.619472382863547,103.88951312771161,False,simulated
-Addis Ababa,2018,meher,0.7780156118344428,122.18365869714266,False,simulated
-Addis Ababa,2019,belg,0.7728921082458073,120.09112576970041,False,simulated
-Addis Ababa,2020,meher,0.6088123976687846,125.92382584524121,True,simulated
-Addis Ababa,2021,belg,0.4366306093155353,133.8639713639995,False,simulated
-Addis Ababa,2022,meher,0.41464988534103686,149.77760223170378,False,simulated
-Addis Ababa,2023,belg,0.563079201998141,164.42323706957578,False,simulated
-Addis Ababa,2024,meher,0.7454533300691706,165.4432458911785,False,simulated
-Addis Ababa,2025,belg,0.794098337267004,163.58514355614784,False,simulated
-Dire Dawa,2016,meher,0.4430263348894005,100.33604214410047,False,simulated
-Dire Dawa,2017,belg,0.619472382863547,101.9127127869914,False,simulated
-Dire Dawa,2018,meher,0.7780156118344428,115.81342412630474,False,simulated
-Dire Dawa,2019,belg,0.7728921082458073,130.99316159323214,False,simulated
-Dire Dawa,2020,meher,0.6088123976687846,135.46220486150253,True,simulated
-Dire Dawa,2021,belg,0.4366306093155353,133.09310376074114,False,simulated
-Dire Dawa,2022,meher,0.41464988534103686,137.3746254431002,False,simulated
-Dire Dawa,2023,belg,0.563079201998141,148.94164711431054,False,simulated
-Dire Dawa,2024,meher,0.7454533300691706,153.52708605168013,False,simulated
-Dire Dawa,2025,belg,0.794098337267004,185.56007337416284,False,simulated
-Amhara,2016,meher,0.4430263348894005,94.03817378599032,False,simulated
-Amhara,2017,belg,0.619472382863547,112.56692303729223,False,simulated
-Amhara,2018,meher,0.7780156118344428,110.43518766094618,False,simulated
-Amhara,2019,belg,0.7728921082458073,122.71467839530993,False,simulated
-Amhara,2020,meher,0.6088123976687846,136.9239331594186,True,simulated
-Amhara,2021,belg,0.4366306093155353,136.28722066842596,False,simulated
-Amhara,2022,meher,0.41464988534103686,145.1664246601728,False,simulated
-Amhara,2023,belg,0.563079201998141,136.40958132246314,False,simulated
-Amhara,2024,meher,0.7454533300691706,147.55290906226975,False,simulated
-Amhara,2025,belg,0.794098337267004,170.31691025603476,False,simulated
-Oromia,2016,meher,0.4430263348894005,97.41286849250311,False,simulated
-Oromia,2017,belg,0.619472382863547,108.31372714196341,False,simulated
-Oromia,2018,meher,0.7780156118344428,109.75876798232625,False,simulated
-Oromia,2019,belg,0.7728921082458073,111.35907700634627,False,simulated
-Oromia,2020,meher,0.6088123976687846,133.74067657950266,True,simulated
-Oromia,2021,belg,0.4366306093155353,143.06010432820915,False,simulated
-Oromia,2022,meher,0.41464988534103686,155.13016363330564,False,simulated
-Oromia,2023,belg,0.563079201998141,141.36302555268327,False,simulated
-Oromia,2024,meher,0.7454533300691706,153.37494789481028,False,simulated
-Oromia,2025,belg,0.794098337267004,161.54106113431857,False,simulated
-Tigray,2016,meher,0.4430263348894005,108.60221310454945,False,simulated
-Tigray,2017,belg,0.619472382863547,108.06502721794455,False,simulated
-Tigray,2018,meher,0.7780156118344428,121.85290009443894,False,simulated
-Tigray,2019,belg,0.7728921082458073,128.3994581809936,False,simulated
-Tigray,2020,meher,0.6088123976687846,119.81621975748129,True,simulated
-Tigray,2021,belg,0.4366306093155353,131.89082595324967,True,simulated
-Tigray,2022,meher,0.41464988534103686,139.40135958065113,True,simulated
-Tigray,2023,belg,0.563079201998141,149.96913276868978,False,simulated
-Tigray,2024,meher,0.7454533300691706,175.2499691662424,False,simulated
-Tigray,2025,belg,0.794098337267004,157.92484202511997,False,simulated
-Sidama,2016,meher,0.4430263348894005,105.44873421012156,False,simulated
-Sidama,2017,belg,0.619472382863547,100.22562432584567,False,simulated
-Sidama,2018,meher,0.7780156118344428,117.73955064379521,False,simulated
-Sidama,2019,belg,0.7728921082458073,112.02010843898637,False,simulated
-Sidama,2020,meher,0.6088123976687846,126.93154204090975,True,simulated
-Sidama,2021,belg,0.4366306093155353,138.3129631401708,False,simulated
-Sidama,2022,meher,0.41464988534103686,139.91929072554916,False,simulated
-Sidama,2023,belg,0.563079201998141,164.38176303846785,False,simulated
-Sidama,2024,meher,0.7454533300691706,165.937114707301,False,simulated
-Sidama,2025,belg,0.794098337267004,157.3691746509632,False,simulated
-South Ethiopia,2016,meher,0.4430263348894005,97.44282946716962,False,simulated
-South Ethiopia,2017,belg,0.619472382863547,102.05647848918662,False,simulated
-South Ethiopia,2018,meher,0.7780156118344428,107.76451494740436,False,simulated
-South Ethiopia,2019,belg,0.7728921082458073,112.23544852698708,False,simulated
-South Ethiopia,2020,meher,0.6088123976687846,118.31223508239168,True,simulated
-South Ethiopia,2021,belg,0.4366306093155353,143.7297215709092,False,simulated
-South Ethiopia,2022,meher,0.41464988534103686,155.73451114064363,False,simulated
-South Ethiopia,2023,belg,0.563079201998141,140.1392216291767,False,simulated
-South Ethiopia,2024,meher,0.7454533300691706,168.66919739885472,False,simulated
-South Ethiopia,2025,belg,0.794098337267004,159.74185790180576,False,simulated
-South West Ethiopia,2016,meher,0.4430263348894005,100.43339602980268,False,simulated
-South West Ethiopia,2017,belg,0.619472382863547,99.57929602557657,False,simulated
-South West Ethiopia,2018,meher,0.7780156118344428,107.21639145304204,False,simulated
-South West Ethiopia,2019,belg,0.7728921082458073,116.97430384910999,False,simulated
-South West Ethiopia,2020,meher,0.6088123976687846,131.42497008698135,True,simulated
-South West Ethiopia,2021,belg,0.4366306093155353,133.1275310277059,False,simulated
-South West Ethiopia,2022,meher,0.41464988534103686,150.64827695489475,False,simulated
-South West Ethiopia,2023,belg,0.563079201998141,138.23150952604948,False,simulated
-South West Ethiopia,2024,meher,0.7454533300691706,161.6751509862741,False,simulated
-South West Ethiopia,2025,belg,0.794098337267004,155.65865935296094,False,simulated
-Central Ethiopia,2016,meher,0.4430263348894005,92.35604320801387,False,simulated
-Central Ethiopia,2017,belg,0.619472382863547,101.94875564686065,False,simulated
-Central Ethiopia,2018,meher,0.7780156118344428,103.48303799427286,False,simulated
-Central Ethiopia,2019,belg,0.7728921082458073,125.6631137358329,False,simulated
-Central Ethiopia,2020,meher,0.6088123976687846,126.43433825217522,True,simulated
-Central Ethiopia,2021,belg,0.4366306093155353,137.69152282765492,False,simulated
-Central Ethiopia,2022,meher,0.41464988534103686,129.26291263469247,False,simulated
-Central Ethiopia,2023,belg,0.563079201998141,142.08722799561556,False,simulated
-Central Ethiopia,2024,meher,0.7454533300691706,160.1272724730772,False,simulated
-Central Ethiopia,2025,belg,0.794098337267004,154.8242192568723,False,simulated
-Somali,2016,meher,0.4430263348894005,93.21170131987172,False,simulated
-Somali,2017,belg,0.619472382863547,95.86388792065263,False,simulated
-Somali,2018,meher,0.7780156118344428,121.60697020292176,False,simulated
-Somali,2019,belg,0.7728921082458073,117.46368925124382,False,simulated
-Somali,2020,meher,0.6088123976687846,114.75967177014554,True,simulated
-Somali,2021,belg,0.4366306093155353,132.76514067781534,False,simulated
-Somali,2022,meher,0.41464988534103686,152.84677121738622,False,simulated
-Somali,2023,belg,0.563079201998141,141.03898811744995,False,simulated
-Somali,2024,meher,0.7454533300691706,151.0287421865029,False,simulated
-Somali,2025,belg,0.794098337267004,185.24235450693968,False,simulated
-Afar,2016,meher,0.4430263348894005,107.07819285506967,False,simulated
-Afar,2017,belg,0.619472382863547,107.02878509517744,False,simulated
-Afar,2018,meher,0.7780156118344428,105.30407424730124,False,simulated
-Afar,2019,belg,0.7728921082458073,112.4205914951762,False,simulated
-Afar,2020,meher,0.6088123976687846,135.37434968037655,True,simulated
-Afar,2021,belg,0.4366306093155353,138.52066475547656,False,simulated
-Afar,2022,meher,0.41464988534103686,137.6231362803128,False,simulated
-Afar,2023,belg,0.563079201998141,136.10764462565808,False,simulated
-Afar,2024,meher,0.7454533300691706,147.7822789936264,False,simulated
-Afar,2025,belg,0.794098337267004,176.69345888350682,False,simulated
-Benishangul-Gumuz,2016,meher,0.4430263348894005,102.97496694428222,False,simulated
-Benishangul-Gumuz,2017,belg,0.619472382863547,103.00617951862374,False,simulated
-Benishangul-Gumuz,2018,meher,0.7780156118344428,114.42649458604379,False,simulated
-Benishangul-Gumuz,2019,belg,0.7728921082458073,125.1785956897961,False,simulated
-Benishangul-Gumuz,2020,meher,0.6088123976687846,129.8792536321871,True,simulated
-Benishangul-Gumuz,2021,belg,0.4366306093155353,126.85068709309165,False,simulated
-Benishangul-Gumuz,2022,meher,0.41464988534103686,154.6612632363411,False,simulated
-Benishangul-Gumuz,2023,belg,0.563079201998141,136.03729089195082,False,simulated
-Benishangul-Gumuz,2024,meher,0.7454533300691706,161.1787032004307,False,simulated
-Benishangul-Gumuz,2025,belg,0.794098337267004,159.59865232789693,False,simulated
-Gambela,2016,meher,0.4430263348894005,104.15041158686489,False,simulated
-Gambela,2017,belg,0.619472382863547,107.31027506324253,False,simulated
-Gambela,2018,meher,0.7780156118344428,105.52184264366342,False,simulated
-Gambela,2019,belg,0.7728921082458073,119.2418537452841,False,simulated
-Gambela,2020,meher,0.6088123976687846,126.74610568674782,True,simulated
-Gambela,2021,belg,0.4366306093155353,131.68946884623028,False,simulated
-Gambela,2022,meher,0.41464988534103686,128.86316280342734,False,simulated
-Gambela,2023,belg,0.563079201998141,141.545053860948,False,simulated
-Gambela,2024,meher,0.7454533300691706,174.32925235372346,False,simulated
-Gambela,2025,belg,0.794098337267004,158.422112122785,False,simulated
-Harari,2016,meher,0.4430263348894005,99.1752619741343,False,simulated
-Harari,2017,belg,0.619472382863547,101.63365534990429,False,simulated
-Harari,2018,meher,0.7780156118344428,118.13187932782249,False,simulated
-Harari,2019,belg,0.7728921082458073,120.96168990828147,False,simulated
-Harari,2020,meher,0.6088123976687846,131.68665586942717,True,simulated
-Harari,2021,belg,0.4366306093155353,137.4886742681577,False,simulated
-Harari,2022,meher,0.41464988534103686,141.95685664864112,False,simulated
-Harari,2023,belg,0.563079201998141,164.21515203204726,False,simulated
-Harari,2024,meher,0.7454533300691706,165.86167235256545,False,simulated
-Harari,2025,belg,0.794098337267004,175.32823789902722,False,simulated
+region,year,agricultural_season,hiring_season_index,commodity_price_index,external_shock_flag,shock_type,provenance
+Addis Ababa,2016,meher,0.662,100.0,False,,simulated
+Addis Ababa,2017,meher,0.693,110.7,False,,simulated
+Addis Ababa,2018,meher,0.724,125.98,False,,simulated
+Addis Ababa,2019,meher,0.707,145.88,False,,simulated
+Addis Ababa,2020,meher,0.701,175.64,True,covid,simulated
+Addis Ababa,2021,meher,0.668,222.71,False,,simulated
+Addis Ababa,2022,meher,0.777,298.21,True,trade_shock,simulated
+Addis Ababa,2023,meher,0.675,388.27,False,,simulated
+Addis Ababa,2024,meher,0.704,472.53,False,,simulated
+Addis Ababa,2025,meher,0.73,534.9,False,,simulated
+Dire Dawa,2016,meher,0.701,100.0,False,,simulated
+Dire Dawa,2017,meher,0.676,110.7,False,,simulated
+Dire Dawa,2018,meher,0.724,125.98,False,,simulated
+Dire Dawa,2019,meher,0.66,145.88,False,,simulated
+Dire Dawa,2020,meher,0.752,175.64,True,covid,simulated
+Dire Dawa,2021,meher,0.708,222.71,False,,simulated
+Dire Dawa,2022,meher,0.692,298.21,False,,simulated
+Dire Dawa,2023,meher,0.658,388.27,False,,simulated
+Dire Dawa,2024,meher,0.665,472.53,False,,simulated
+Dire Dawa,2025,meher,0.698,534.9,False,,simulated
+Amhara,2016,meher,0.757,112.0,True,drought,simulated
+Amhara,2017,meher,0.707,110.7,False,,simulated
+Amhara,2018,meher,0.71,125.98,False,,simulated
+Amhara,2019,meher,0.712,145.88,False,,simulated
+Amhara,2020,meher,0.771,175.64,True,covid,simulated
+Amhara,2021,meher,0.537,222.71,True,conflict,simulated
+Amhara,2022,meher,0.747,298.21,False,,simulated
+Amhara,2023,meher,0.538,388.27,True,conflict,simulated
+Amhara,2024,meher,0.529,472.53,True,conflict,simulated
+Amhara,2025,meher,0.548,534.9,True,conflict,simulated
+Oromia,2016,meher,0.697,112.0,True,drought,simulated
+Oromia,2017,meher,0.717,110.7,False,,simulated
+Oromia,2018,meher,0.63,125.98,False,,simulated
+Oromia,2019,meher,0.704,145.88,False,,simulated
+Oromia,2020,meher,0.682,175.64,True,covid,simulated
+Oromia,2021,meher,0.678,249.44,True,drought,simulated
+Oromia,2022,meher,0.661,334.0,True,drought,simulated
+Oromia,2023,meher,0.689,388.27,False,,simulated
+Oromia,2024,meher,0.685,472.53,False,,simulated
+Oromia,2025,meher,0.687,534.9,False,,simulated
+Tigray,2016,meher,0.651,112.0,True,drought,simulated
+Tigray,2017,meher,0.703,110.7,False,,simulated
+Tigray,2018,meher,0.676,125.98,False,,simulated
+Tigray,2019,meher,0.651,145.88,False,,simulated
+Tigray,2020,meher,0.684,175.64,True,covid,simulated
+Tigray,2021,meher,0.527,222.71,True,conflict,simulated
+Tigray,2022,meher,0.551,298.21,True,"conflict,trade_shock",simulated
+Tigray,2023,meher,0.533,388.27,True,conflict,simulated
+Tigray,2024,meher,0.657,472.53,False,,simulated
+Tigray,2025,meher,0.673,534.9,False,,simulated
+Sidama,2016,meher,0.648,100.0,False,,simulated
+Sidama,2017,meher,0.734,110.7,False,,simulated
+Sidama,2018,meher,0.739,125.98,False,,simulated
+Sidama,2019,meher,0.743,145.88,False,,simulated
+Sidama,2020,meher,0.682,175.64,True,covid,simulated
+Sidama,2021,meher,0.739,222.71,False,,simulated
+Sidama,2022,meher,0.712,298.21,True,trade_shock,simulated
+Sidama,2023,meher,0.675,388.27,False,,simulated
+Sidama,2024,meher,0.681,472.53,False,,simulated
+Sidama,2025,meher,0.695,534.9,False,,simulated
+South Ethiopia,2016,meher,0.703,100.0,False,,simulated
+South Ethiopia,2017,meher,0.711,110.7,False,,simulated
+South Ethiopia,2018,meher,0.7,125.98,False,,simulated
+South Ethiopia,2019,meher,0.69,145.88,False,,simulated
+South Ethiopia,2020,meher,0.741,175.64,True,covid,simulated
+South Ethiopia,2021,meher,0.697,222.71,False,,simulated
+South Ethiopia,2022,meher,0.695,298.21,False,,simulated
+South Ethiopia,2023,meher,0.693,388.27,False,,simulated
+South Ethiopia,2024,meher,0.697,472.53,False,,simulated
+South Ethiopia,2025,meher,0.659,534.9,False,,simulated
+South West Ethiopia,2016,meher,0.67,100.0,False,,simulated
+South West Ethiopia,2017,meher,0.773,110.7,False,,simulated
+South West Ethiopia,2018,meher,0.65,125.98,False,,simulated
+South West Ethiopia,2019,meher,0.708,145.88,False,,simulated
+South West Ethiopia,2020,meher,0.71,175.64,True,covid,simulated
+South West Ethiopia,2021,meher,0.73,222.71,False,,simulated
+South West Ethiopia,2022,meher,0.711,298.21,False,,simulated
+South West Ethiopia,2023,meher,0.757,388.27,False,,simulated
+South West Ethiopia,2024,meher,0.707,472.53,False,,simulated
+South West Ethiopia,2025,meher,0.74,534.9,False,,simulated
+Central Ethiopia,2016,meher,0.731,100.0,False,,simulated
+Central Ethiopia,2017,meher,0.746,110.7,False,,simulated
+Central Ethiopia,2018,meher,0.701,125.98,False,,simulated
+Central Ethiopia,2019,meher,0.712,145.88,False,,simulated
+Central Ethiopia,2020,meher,0.689,175.64,True,covid,simulated
+Central Ethiopia,2021,meher,0.705,222.71,False,,simulated
+Central Ethiopia,2022,meher,0.706,298.21,False,,simulated
+Central Ethiopia,2023,meher,0.638,388.27,False,,simulated
+Central Ethiopia,2024,meher,0.696,472.53,False,,simulated
+Central Ethiopia,2025,meher,0.727,534.9,False,,simulated
+Somali,2016,meher,0.659,112.0,True,drought,simulated
+Somali,2017,meher,0.67,123.98,True,drought,simulated
+Somali,2018,meher,0.735,125.98,False,,simulated
+Somali,2019,meher,0.74,145.88,False,,simulated
+Somali,2020,meher,0.681,175.64,True,covid,simulated
+Somali,2021,meher,0.705,249.44,True,drought,simulated
+Somali,2022,meher,0.698,334.0,True,drought,simulated
+Somali,2023,meher,0.735,388.27,False,,simulated
+Somali,2024,meher,0.684,472.53,False,,simulated
+Somali,2025,meher,0.689,534.9,False,,simulated
+Afar,2016,meher,0.74,112.0,True,drought,simulated
+Afar,2017,meher,0.67,110.7,False,,simulated
+Afar,2018,meher,0.685,125.98,False,,simulated
+Afar,2019,meher,0.704,145.88,False,,simulated
+Afar,2020,meher,0.746,175.64,True,covid,simulated
+Afar,2021,meher,0.514,249.44,True,"conflict,drought",simulated
+Afar,2022,meher,0.529,334.0,True,"conflict,drought",simulated
+Afar,2023,meher,0.718,388.27,False,,simulated
+Afar,2024,meher,0.722,472.53,False,,simulated
+Afar,2025,meher,0.706,534.9,False,,simulated
+Benishangul-Gumuz,2016,meher,0.696,100.0,False,,simulated
+Benishangul-Gumuz,2017,meher,0.704,110.7,False,,simulated
+Benishangul-Gumuz,2018,meher,0.655,125.98,False,,simulated
+Benishangul-Gumuz,2019,meher,0.703,145.88,False,,simulated
+Benishangul-Gumuz,2020,meher,0.594,175.64,True,"conflict,covid",simulated
+Benishangul-Gumuz,2021,meher,0.51,222.71,True,conflict,simulated
+Benishangul-Gumuz,2022,meher,0.676,298.21,False,,simulated
+Benishangul-Gumuz,2023,meher,0.688,388.27,False,,simulated
+Benishangul-Gumuz,2024,meher,0.69,472.53,False,,simulated
+Benishangul-Gumuz,2025,meher,0.755,534.9,False,,simulated
+Gambela,2016,meher,0.672,100.0,False,,simulated
+Gambela,2017,meher,0.666,110.7,False,,simulated
+Gambela,2018,meher,0.723,125.98,False,,simulated
+Gambela,2019,meher,0.681,145.88,False,,simulated
+Gambela,2020,meher,0.724,175.64,True,covid,simulated
+Gambela,2021,meher,0.694,222.71,False,,simulated
+Gambela,2022,meher,0.714,298.21,False,,simulated
+Gambela,2023,meher,0.653,388.27,False,,simulated
+Gambela,2024,meher,0.714,472.53,False,,simulated
+Gambela,2025,meher,0.707,534.9,False,,simulated
+Harari,2016,meher,0.692,100.0,False,,simulated
+Harari,2017,meher,0.663,110.7,False,,simulated
+Harari,2018,meher,0.707,125.98,False,,simulated
+Harari,2019,meher,0.722,145.88,False,,simulated
+Harari,2020,meher,0.684,175.64,True,covid,simulated
+Harari,2021,meher,0.685,222.71,False,,simulated
+Harari,2022,meher,0.724,298.21,False,,simulated
+Harari,2023,meher,0.751,388.27,False,,simulated
+Harari,2024,meher,0.728,472.53,False,,simulated
+Harari,2025,meher,0.707,534.9,False,,simulated
