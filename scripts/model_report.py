@@ -12,8 +12,17 @@ the docs and in ml/models/*.json come from the same run.
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 from pathlib import Path
+
+# Single-threaded linear algebra, set before numpy loads. Multi-threaded BLAS
+# can sum in a different order from run to run, and the extrapolating
+# candidates (pooled ridge two years past a national shock) amplify that last
+# bit into a different rounded figure, so `--check` failed intermittently in CI
+# on an unchanged commit.
+for _var in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS"):
+    os.environ.setdefault(_var, "1")
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
