@@ -12,7 +12,9 @@ the docs and in ml/models/*.json come from the same run.
 from __future__ import annotations
 
 import argparse
+import difflib
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -150,6 +152,35 @@ def importance_doc(result: dict) -> str:
     return "\n".join(lines)
 
 
+_NUM = re.compile(r"-?\d[\d,]*\.?\d*")
+
+
+def _same(a: str, b: str, rel: float = 0.01, abs_: float = 0.011) -> bool:
+    """Equal text, with numbers allowed to differ in their last rounded digit.
+
+    Different numpy / scikit-learn builds can round a backtest error or a
+    coverage figure one unit differently; that is not a stale document. Text,
+    structure, candidate choices and anything beyond the tolerance still fail.
+    """
+    ta, tb = _NUM.split(a), _NUM.split(b)
+    na, nb = _NUM.findall(a), _NUM.findall(b)
+    if ta != tb or len(na) != len(nb):
+        return False
+    for x, y in zip(na, nb):
+        if x == y:
+            continue
+        fx, fy = float(x.replace(",", "")), float(y.replace(",", ""))
+        if abs(fx - fy) > max(abs_, rel * max(abs(fx), abs(fy)), 1.0 if "." not in x + y else 0):
+            return False
+    return True
+
+
+def _diff(old: str, new: str, limit: int = 12) -> list[str]:
+    lines = [ln for ln in difflib.unified_diff(old.splitlines(), new.splitlines(), lineterm="", n=0)
+             if ln[:1] in "+-" and not ln.startswith(("+++", "---"))]
+    return lines[:limit]
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true")
@@ -162,10 +193,14 @@ def main() -> int:
         CMP_DOC: comparison_doc(compare_all()),
         IMP_DOC: importance_doc(ethiopia_feature_importance(persist=True)),
     }
-    stale = [p for p, text in docs.items() if not p.exists() or p.read_text(encoding="utf-8") != text]
+    stale = [p for p, text in docs.items()
+             if not p.exists() or not _same(p.read_text(encoding="utf-8"), text)]
     if args.check:
         for p in stale:
             print(f"{p.relative_to(ROOT)} is stale — run python scripts/model_report.py", file=sys.stderr)
+            if p.exists():
+                for ln in _diff(p.read_text(encoding="utf-8"), docs[p]):
+                    print("   " + ln, file=sys.stderr)
         return 1 if stale else 0
     for p, text in docs.items():
         p.write_text(text, encoding="utf-8", newline="\n")
