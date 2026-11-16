@@ -7,7 +7,11 @@ export const GAP_STATUS_COLOR = {
   shortage: STATUS.serious,
   balanced: STATUS.good,
   oversupply: STATUS.warning,
+  'no modelled institution': '#CBD5E1',
 }
+
+// A region with no modelled university has no supply to judge.
+const unmodelled = r => !Number(r.expected_graduates) && !Number(r.enrollment) && r.enrollment !== undefined
 
 /**
  * One row per field from the Model 3 gap: enrolment trend, expected graduates,
@@ -26,11 +30,14 @@ export default function GapTable({ rows, trendYears, renderField, rowProps, capt
     { key: 'labour_demand', label: 'Labour demand', align: 'right', render: r => fmtNum(Math.round(r.labour_demand ?? 0)) },
     {
       key: 'coverage_pct', label: 'Coverage', align: 'right', title: 'Expected graduates as a share of labour demand',
-      render: r => (r.coverage_pct == null ? '—' : fmtPct(r.coverage_pct, 0)),
+      render: r => (r.coverage_pct == null || unmodelled(r) ? '—' : fmtPct(r.coverage_pct, 0)),
     },
     {
       key: 'status', label: 'Status',
-      render: r => <StatusWord status={r.status} color={GAP_STATUS_COLOR[r.status] ?? STATUS.warning} />,
+      render: r => {
+        const st = unmodelled(r) ? 'no modelled institution' : r.status
+        return <StatusWord status={st} color={GAP_STATUS_COLOR[st] ?? STATUS.warning} />
+      },
     },
     {
       key: 'severity', label: 'Severity', align: 'right', title: 'Quartile of the absolute gap across fields; Q4 is the largest',

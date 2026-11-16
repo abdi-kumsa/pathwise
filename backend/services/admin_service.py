@@ -259,7 +259,41 @@ def data_quality() -> dict:
         "alerts": alerts,
         "checks": ["missing_values", "duplicates", "outliers", "inconsistent_records"],
         "consistency_rules": _consistency_summary(),
+        "calibration": _calibration_summary(),
         "tier": "simulated",
+    }
+
+
+def _calibration_summary() -> dict:
+    """How the simulated tables are anchored: figures in calibration.yaml by
+    confidence tier, and the gaps the research could not fill."""
+    import yaml
+    path = ETHIOPIA / "reference" / "calibration.yaml"
+    try:
+        doc = yaml.safe_load(path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        return {"available": False, "reason": exc.__class__.__name__}
+    tiers: dict[str, int] = {}
+
+    def walk(node):
+        if isinstance(node, dict):
+            conf = node.get("confidence")
+            if isinstance(conf, str):
+                tiers[conf] = tiers.get(conf, 0) + 1
+            for v in node.values():
+                walk(v)
+        elif isinstance(node, list):
+            for v in node:
+                walk(v)
+
+    walk({k: v for k, v in doc.items() if k != "gaps"})
+    order = ["official", "reputable", "news", "estimate"]
+    return {
+        "available": True,
+        "file": "data/ethiopia/reference/calibration.yaml",
+        "sections": [k for k in doc if k != "gaps"],
+        "tiers": [{"tier": t, "count": tiers.get(t, 0)} for t in order],
+        "gaps": list(doc.get("gaps") or []),
     }
 
 

@@ -19,15 +19,15 @@ Prediction intervals are the 5th–95th percentiles of the selected candidate's 
 
 ## M1.applications — Unconstrained student demand (applications) by HEI × programme
 
-Target `applications_count` on a log scale. rolling origin 2019–2024, horizons 1–5; a candidate never sees data after its origin. 3,040 backtest forecasts per candidate.
+Target `applications_count` on a log scale. rolling origin 2019–2024, horizons 1–5; a candidate never sees data after its origin. 2,468 backtest forecasts per candidate.
 
 | Horizon | `seasonal_naive` RMSE | `historical_mean` RMSE | `drift` RMSE | `pooled_ridge` RMSE | Selected | Skill vs naive | 90% interval coverage |
 |---|---|---|---|---|---|---|---|
-| 1 | 94.1 | 122 | 114 | 91.4 | `pooled_ridge` | 0.029 | 0.895 |
-| 2 | 133 | 138 | 160 | 124 | `pooled_ridge` | 0.063 | 0.872 |
-| 3 | 151 | 148 | 193 | 146 | `pooled_ridge` | 0.031 | 0.885 |
-| 4 | 151 | 155 | 221 | — | `seasonal_naive` | 0 | 0.895 |
-| 5 | 156 | 168 | 272 | — | `seasonal_naive` | 0 | 0.891 |
+| 1 | 1,089 | 1,858 | 1,684 | 2,060 | `seasonal_naive` | 0 | 0.788 |
+| 2 | 1,956 | 2,204 | 2,517 | 15,736 | `seasonal_naive` | 0 | 0.772 |
+| 3 | 2,383 | 2,459 | 2,781 | 12,496 | `seasonal_naive` | 0 | 0.669 |
+| 4 | 1,904 | 2,148 | 1,826 | — | `drift` | 0.041 | 0.642 |
+| 5 | 1,507 | 1,690 | 1,052 | — | `drift` | 0.301 | 0.849 |
 
 ## M2.employment_demand — Employment level by region × sector
 
@@ -35,11 +35,11 @@ Target `employment_level` on a log scale. rolling origin 2019–2024, horizons 1
 
 | Horizon | `seasonal_naive` RMSE | `historical_mean` RMSE | `drift` RMSE | `pooled_ridge` RMSE | Selected | Skill vs naive | 90% interval coverage |
 |---|---|---|---|---|---|---|---|
-| 1 | 3,893 | 5,933 | 5,269 | 3,742 | `pooled_ridge` | 0.039 | 0.894 |
-| 2 | 6,111 | 6,847 | 7,563 | 5,849 | `pooled_ridge` | 0.043 | 0.886 |
-| 3 | 7,134 | 7,266 | 9,011 | 7,198 | `seasonal_naive` | 0 | 0.895 |
-| 4 | 6,793 | 7,382 | 9,687 | — | `seasonal_naive` | 0 | 0.878 |
-| 5 | 6,346 | 7,892 | 10,996 | — | `seasonal_naive` | 0 | 0.902 |
+| 1 | 60,853 | 76,579 | 55,555 | 73,875 | `drift` | 0.087 | 0.9 |
+| 2 | 71,445 | 91,213 | 65,899 | 87,332 | `drift` | 0.078 | 0.9 |
+| 3 | 75,601 | 95,493 | 73,190 | 86,082 | `drift` | 0.032 | 0.897 |
+| 4 | 87,239 | 107,302 | 82,415 | — | `drift` | 0.055 | 0.89 |
+| 5 | 92,525 | 115,104 | 71,352 | — | `drift` | 0.229 | 0.862 |
 
 ## M2.vacancies — Vacancies by region × occupation
 
@@ -47,11 +47,11 @@ Target `vacancy_count` on a log scale. rolling origin 2019–2024, horizons 1–
 
 | Horizon | `seasonal_naive` RMSE | `historical_mean` RMSE | `drift` RMSE | `pooled_ridge` RMSE | Selected | Skill vs naive | 90% interval coverage |
 |---|---|---|---|---|---|---|---|
-| 1 | 32.7 | 47 | 39.9 | 31.9 | `pooled_ridge` | 0.026 | 0.894 |
-| 2 | 45 | 52.8 | 55 | 43.3 | `pooled_ridge` | 0.037 | 0.891 |
-| 3 | 52 | 57.5 | 68 | 52.5 | `seasonal_naive` | 0 | 0.882 |
-| 4 | 55.9 | 62.6 | 81.5 | — | `seasonal_naive` | 0 | 0.899 |
-| 5 | 59.8 | 68.4 | 99 | — | `seasonal_naive` | 0 | 0.888 |
+| 1 | 77.1 | 100 | 84.4 | 88.9 | `seasonal_naive` | 0 | 0.869 |
+| 2 | 97.7 | 116 | 96.7 | 110 | `drift` | 0.01 | 0.873 |
+| 3 | 104 | 128 | 118 | 97.7 | `pooled_ridge` | 0.065 | 0.71 |
+| 4 | 116 | 141 | 157 | — | `seasonal_naive` | 0 | 0.801 |
+| 5 | 152 | 154 | 250 | — | `seasonal_naive` | 0 | 0.402 |
 
 ## M2.skill_shortages — Skill-shortage index by field (0–1)
 
@@ -59,11 +59,11 @@ Target `skill_shortage_index` on a level scale. rolling origin 2019–2024, hori
 
 | Horizon | `seasonal_naive` RMSE | `historical_mean` RMSE | `drift` RMSE | `pooled_ridge` RMSE | Selected | Skill vs naive | 90% interval coverage |
 |---|---|---|---|---|---|---|---|
-| 1 | 0.0723 | 0.0761 | 0.0783 | 0.0763 | `seasonal_naive` | 0 | 0.833 |
-| 2 | 0.0845 | 0.082 | 0.0978 | 0.0921 | `historical_mean` | 0.029 | 0.825 |
-| 3 | 0.102 | 0.093 | 0.126 | 0.111 | `historical_mean` | 0.089 | 0.875 |
-| 4 | 0.111 | 0.0972 | 0.151 | — | `historical_mean` | 0.125 | 0.792 |
-| 5 | 0.12 | 0.114 | 0.185 | — | `historical_mean` | 0.056 | — |
+| 1 | 0.0405 | 0.0585 | 0.0497 | 0.0394 | `pooled_ridge` | 0.028 | 0.825 |
+| 2 | 0.055 | 0.0683 | 0.0665 | 0.0525 | `pooled_ridge` | 0.046 | 0.75 |
+| 3 | 0.0633 | 0.0742 | 0.0826 | 0.0673 | `seasonal_naive` | 0 | 0.875 |
+| 4 | 0.0721 | 0.0797 | 0.0993 | — | `seasonal_naive` | 0 | 0.792 |
+| 5 | 0.076 | 0.0821 | 0.122 | — | `seasonal_naive` | 0 | — |
 
 ## Derived targets
 

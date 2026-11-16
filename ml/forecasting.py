@@ -92,6 +92,12 @@ def panel(t: Target) -> pd.DataFrame:
     cols = [c for c in (*t.keys, *t.carry) if c in df.columns]
     out = df[[*cols, "year", t.ycol]].rename(columns={t.ycol: "y"})
     out = out.dropna(subset=["y"])
+    if t.log:
+        # A zero is a closure (Tigray universities admitted nobody in 2022-2023),
+        # not a level the series moved to: log(0) is undefined and one such year
+        # would dominate every residual. Treat it as a gap; the year-difference
+        # checks below already skip pairs that span a gap.
+        out = out[out["y"] > 0]
     out = out.drop_duplicates(subset=[*t.keys, "year"])
     return out.sort_values([*t.keys, "year"]).reset_index(drop=True)
 

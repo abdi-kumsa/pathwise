@@ -14,225 +14,225 @@
     "historical_mean"
   ],
   "split": "rolling origin 2019\u20132024, horizons 1\u20135; a candidate never sees data after its origin",
-  "n_holdout_rows": 3040,
+  "n_holdout_rows": 2468,
   "estimators": {
     "seasonal_naive": {
-      "rmse": 94.1284,
-      "mae": 69.9452
+      "rmse": 1088.7424,
+      "mae": 592.345
     },
     "historical_mean": {
-      "rmse": 122.0293,
-      "mae": 91.799
+      "rmse": 1857.6176,
+      "mae": 1091.4111
     },
     "drift": {
-      "rmse": 114.2005,
-      "mae": 84.7606
+      "rmse": 1684.0188,
+      "mae": 910.2647
     },
     "pooled_ridge": {
-      "rmse": 91.4251,
-      "mae": 67.652
+      "rmse": 2060.2934,
+      "mae": 798.5522
     }
   },
   "by_horizon": {
     "1": {
       "drift": {
-        "rmse": 114.2005,
-        "mae": 84.7606,
-        "mape": 14.6285,
-        "n": 912,
+        "rmse": 1684.0188,
+        "mae": 910.2647,
+        "mape": 35.0884,
+        "n": 742,
         "origins": 6,
-        "coverage": 0.893,
-        "coverage_n": 912,
-        "skill_vs_naive": -0.213
+        "coverage": 0.836,
+        "coverage_n": 742,
+        "skill_vs_naive": -0.547
       },
       "historical_mean": {
-        "rmse": 122.0293,
-        "mae": 91.799,
-        "mape": 14.9129,
-        "n": 912,
+        "rmse": 1857.6176,
+        "mae": 1091.4111,
+        "mape": 38.2736,
+        "n": 742,
         "origins": 6,
-        "coverage": 0.895,
-        "coverage_n": 912,
-        "skill_vs_naive": -0.296
+        "coverage": 0.836,
+        "coverage_n": 742,
+        "skill_vs_naive": -0.706
       },
       "pooled_ridge": {
-        "rmse": 91.4251,
-        "mae": 67.652,
-        "mape": 11.5027,
-        "n": 912,
+        "rmse": 2060.2934,
+        "mae": 798.5522,
+        "mape": 28.3764,
+        "n": 742,
         "origins": 6,
-        "coverage": 0.895,
-        "coverage_n": 912,
-        "skill_vs_naive": 0.029
+        "coverage": 0.713,
+        "coverage_n": 742,
+        "skill_vs_naive": -0.892
       },
       "seasonal_naive": {
-        "rmse": 94.1284,
-        "mae": 69.9452,
-        "mape": 11.7896,
-        "n": 912,
+        "rmse": 1088.7424,
+        "mae": 592.345,
+        "mape": 22.8828,
+        "n": 742,
         "origins": 6,
-        "coverage": 0.899,
-        "coverage_n": 912,
+        "coverage": 0.788,
+        "coverage_n": 742,
         "skill_vs_naive": 0.0
       }
     },
     "2": {
       "drift": {
-        "rmse": 160.3945,
-        "mae": 120.209,
-        "mape": 21.1792,
-        "n": 760,
+        "rmse": 2517.1464,
+        "mae": 1470.0133,
+        "mape": 54.3137,
+        "n": 613,
         "origins": 5,
-        "coverage": 0.892,
-        "coverage_n": 760,
-        "skill_vs_naive": -0.208
+        "coverage": 0.744,
+        "coverage_n": 613,
+        "skill_vs_naive": -0.287
       },
       "historical_mean": {
-        "rmse": 138.2093,
-        "mae": 105.213,
-        "mape": 17.1104,
-        "n": 760,
+        "rmse": 2203.7367,
+        "mae": 1389.5595,
+        "mape": 46.6457,
+        "n": 613,
         "origins": 5,
-        "coverage": 0.895,
-        "coverage_n": 760,
-        "skill_vs_naive": -0.041
+        "coverage": 0.821,
+        "coverage_n": 613,
+        "skill_vs_naive": -0.126
       },
       "pooled_ridge": {
-        "rmse": 124.4344,
-        "mae": 90.3582,
-        "mape": 14.7127,
-        "n": 608,
+        "rmse": 15736.4169,
+        "mae": 7035.8587,
+        "mape": 257.6557,
+        "n": 484,
         "origins": 4,
-        "coverage": 0.872,
-        "coverage_n": 608,
-        "skill_vs_naive": 0.063
+        "coverage": 0.643,
+        "coverage_n": 484,
+        "skill_vs_naive": -7.044
       },
       "seasonal_naive": {
-        "rmse": 132.7536,
-        "mae": 97.7803,
-        "mape": 16.7228,
-        "n": 760,
+        "rmse": 1956.3467,
+        "mae": 1187.3067,
+        "mape": 42.7751,
+        "n": 613,
         "origins": 5,
-        "coverage": 0.893,
-        "coverage_n": 760,
+        "coverage": 0.772,
+        "coverage_n": 613,
         "skill_vs_naive": 0.0
       }
     },
     "3": {
       "drift": {
-        "rmse": 193.2258,
-        "mae": 146.3978,
-        "mape": 25.0636,
-        "n": 608,
+        "rmse": 2780.9325,
+        "mae": 1599.4961,
+        "mape": 54.4133,
+        "n": 484,
         "origins": 4,
-        "coverage": 0.888,
-        "coverage_n": 608,
-        "skill_vs_naive": -0.284
+        "coverage": 0.7,
+        "coverage_n": 484,
+        "skill_vs_naive": -0.167
       },
       "historical_mean": {
-        "rmse": 147.6657,
-        "mae": 112.9123,
-        "mape": 17.5437,
-        "n": 608,
+        "rmse": 2458.947,
+        "mae": 1584.9009,
+        "mape": 50.1207,
+        "n": 484,
         "origins": 4,
-        "coverage": 0.895,
-        "coverage_n": 608,
-        "skill_vs_naive": 0.019
+        "coverage": 0.779,
+        "coverage_n": 484,
+        "skill_vs_naive": -0.032
       },
       "pooled_ridge": {
-        "rmse": 145.8783,
-        "mae": 109.7175,
-        "mape": 15.6293,
-        "n": 304,
+        "rmse": 12495.941,
+        "mae": 5985.628,
+        "mape": 251.7034,
+        "n": 258,
         "origins": 2,
-        "coverage": 0.885,
-        "coverage_n": 304,
-        "skill_vs_naive": 0.031
+        "coverage": 0.508,
+        "coverage_n": 258,
+        "skill_vs_naive": -4.244
       },
       "seasonal_naive": {
-        "rmse": 150.5207,
-        "mae": 113.153,
-        "mape": 18.3306,
-        "n": 608,
+        "rmse": 2383.0785,
+        "mae": 1414.093,
+        "mape": 46.2133,
+        "n": 484,
         "origins": 4,
-        "coverage": 0.888,
-        "coverage_n": 608,
+        "coverage": 0.669,
+        "coverage_n": 484,
         "skill_vs_naive": 0.0
       }
     },
     "4": {
       "drift": {
-        "rmse": 221.1402,
-        "mae": 168.2362,
-        "mape": 27.1286,
-        "n": 456,
+        "rmse": 1826.3167,
+        "mae": 1145.0543,
+        "mape": 42.4456,
+        "n": 371,
         "origins": 3,
-        "coverage": 0.908,
-        "coverage_n": 456,
-        "skill_vs_naive": -0.465
+        "coverage": 0.642,
+        "coverage_n": 371,
+        "skill_vs_naive": 0.041
       },
       "historical_mean": {
-        "rmse": 154.5907,
-        "mae": 117.4539,
-        "mape": 16.997,
-        "n": 456,
+        "rmse": 2147.5265,
+        "mae": 1446.57,
+        "mape": 50.3361,
+        "n": 371,
         "origins": 3,
-        "coverage": 0.893,
-        "coverage_n": 456,
-        "skill_vs_naive": -0.024
+        "coverage": 0.73,
+        "coverage_n": 371,
+        "skill_vs_naive": -0.128
       },
       "seasonal_naive": {
-        "rmse": 150.925,
-        "mae": 114.8136,
-        "mape": 17.1457,
-        "n": 456,
+        "rmse": 1904.4087,
+        "mae": 1196.6577,
+        "mape": 41.9246,
+        "n": 371,
         "origins": 3,
-        "coverage": 0.895,
-        "coverage_n": 456,
+        "coverage": 0.625,
+        "coverage_n": 371,
         "skill_vs_naive": 0.0
       }
     },
     "5": {
       "drift": {
-        "rmse": 271.8051,
-        "mae": 203.2171,
-        "mape": 31.7862,
-        "n": 304,
+        "rmse": 1052.4515,
+        "mae": 719.4979,
+        "mape": 34.2465,
+        "n": 258,
         "origins": 2,
-        "coverage": 0.885,
-        "coverage_n": 304,
-        "skill_vs_naive": -0.744
+        "coverage": 0.849,
+        "coverage_n": 258,
+        "skill_vs_naive": 0.301
       },
       "historical_mean": {
-        "rmse": 168.3598,
-        "mae": 127.4929,
-        "mape": 17.737,
-        "n": 304,
+        "rmse": 1690.4469,
+        "mae": 1186.1741,
+        "mape": 47.5596,
+        "n": 258,
         "origins": 2,
-        "coverage": 0.914,
-        "coverage_n": 304,
-        "skill_vs_naive": -0.08
+        "coverage": 0.845,
+        "coverage_n": 258,
+        "skill_vs_naive": -0.122
       },
       "seasonal_naive": {
-        "rmse": 155.8715,
-        "mae": 119.0296,
-        "mape": 16.9702,
-        "n": 304,
+        "rmse": 1506.6651,
+        "mae": 1045.9845,
+        "mape": 42.588,
+        "n": 258,
         "origins": 2,
-        "coverage": 0.891,
-        "coverage_n": 304,
+        "coverage": 0.81,
+        "coverage_n": 258,
         "skill_vs_naive": 0.0
       }
     }
   },
   "selected_by_horizon": {
-    "1": "pooled_ridge",
-    "2": "pooled_ridge",
-    "3": "pooled_ridge",
-    "4": "seasonal_naive",
-    "5": "seasonal_naive"
+    "1": "seasonal_naive",
+    "2": "seasonal_naive",
+    "3": "seasonal_naive",
+    "4": "drift",
+    "5": "drift"
   },
-  "selected_for_request_path": "lowest backtest RMSE at each horizon: h1 pooled_ridge, h2 pooled_ridge, h3 pooled_ridge, h4 seasonal_naive, h5 seasonal_naive",
+  "selected_for_request_path": "lowest backtest RMSE at each horizon: h1 seasonal_naive, h2 seasonal_naive, h3 seasonal_naive, h4 drift, h5 drift",
   "interval": {
     "level": 0.9,
     "method": "empirical 5th/95th percentile of the selected candidate's backtest residuals",

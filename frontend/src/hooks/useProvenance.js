@@ -5,11 +5,11 @@
  * structure, 2016–2025, not official MoE / MoLS / ESS statistics.
  */
 export const DEFAULT_PROVENANCE = {
-  source: 'Simulated Ethiopian structure',
+  source: 'Simulated Ethiopian structure, calibrated to published figures',
   tier: 'simulated',
   as_of: '2016–2025',
-  method: 'seeded generator in data/ethiopia/generate.py',
-  caveat: 'Simulated Ethiopian structure. Not official MoE, MoLS or ESS statistics.',
+  method: 'seeded generator calibrated to data/ethiopia/reference/calibration.yaml',
+  caveat: 'Simulated Ethiopian structure, calibrated to published MoE, ESS, IMF and World Bank figures. Not official MoE, MoLS or ESS statistics.',
 }
 
 export default function useProvenance(payload, fallback = DEFAULT_PROVENANCE) {

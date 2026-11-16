@@ -43,6 +43,7 @@ def _caps_for_year(
     cap_cols = [
         "program_suspension_flag", "approved_intake_quota", "available_seats",
         "program_capacity", "strategic_priority_flag", "exam_pass_rate_pct",
+        "admission_eligible_pct",
         "band_allocation_ratio", "exam_score_mean", "program_cutoff_score",
     ]
     q = quota[quota["year"] == quota_year].copy()
@@ -50,7 +51,7 @@ def _caps_for_year(
     if "field" in q.columns and "field" in e.columns:
         q = q.merge(
             e[[c for c in (
-                "field", "exam_pass_rate_pct", "band_allocation_ratio",
+                "field", "exam_pass_rate_pct", "admission_eligible_pct", "band_allocation_ratio",
                 "exam_score_mean", "program_cutoff_score",
             ) if c in e.columns]].drop_duplicates("field"),
             on="field",
@@ -111,7 +112,13 @@ def _constrain_year(
         constrained = constrained.where(~mask, 0.0)
         binding = binding.where(~mask, "program_suspension")
 
+    # Share of applicants eligible for a seat. Since the 2022 exam reform the
+    # 50% pass mark is reached by 3-9% of candidates, but remedial-programme
+    # passers are placed as well, so the admission route is wider than the
+    # pass rate. Fall back to the pass rate for tables without the column.
     pass_rate = df.get("exam_pass_rate_pct", pd.Series(100.0, index=df.index)).fillna(100.0)
+    if "admission_eligible_pct" in df.columns:
+        pass_rate = df["admission_eligible_pct"].astype(float).fillna(pass_rate)
     eligible = demand * (pass_rate.clip(0, 100) / 100.0)
     tighter = (constrained > eligible) & (binding != "program_suspension")
     constrained = constrained.where(~tighter, eligible)

@@ -12,14 +12,14 @@ Three methods:
 
 ## Model 1 — demand (applications)
 
-Model `pooled_ridge (horizon 1)`, target `applications_count` (log change). train on target years < 2023, explain on 2023 onwards. 608 training and 456 holdout pairs.
+Model `pooled_ridge (horizon 1)`, target `applications_count` (log change). train on target years < 2023, explain on 2023 onwards. 500 training and 355 holdout pairs.
 
-Holdout RMSE 0.1379 against 0.1511 for predicting no change.
+Holdout RMSE 0.6837 against 0.1933 for predicting no change.
 
 | Feature | Coefficient | Model-based | SHAP | Permutation |
 |---|---|---|---|---|
-| `distance_from_series_mean` | -0.2332 | 0.02954 | 0.0289 | 0.01788 |
-| `latest_change` | 0.07136 | 0.01104 | 0.008268 | 0.001074 |
+| `distance_from_series_mean` | 0.6661 | 0.1403 | 0.2772 | 0.001882 |
+| `latest_change` | -0.2598 | 0.05448 | 0.07101 | 0.001573 |
 
 Inputs: the target's own history: latest_change = last value − previous value; distance_from_series_mean = last value − the series' mean so far.
 
@@ -27,12 +27,12 @@ Inputs: the target's own history: latest_change = last value − previous value;
 
 Model `pooled_ridge (horizon 1)`, target `employment_level` (log change). train on target years < 2023, explain on 2023 onwards. 448 training and 336 holdout pairs.
 
-Holdout RMSE 0.08045 against 0.08832 for predicting no change.
+Holdout RMSE 0.1106 against 0.101 for predicting no change.
 
 | Feature | Coefficient | Model-based | SHAP | Permutation |
 |---|---|---|---|---|
-| `distance_from_series_mean` | -0.08252 | 0.006851 | 0.006199 | 0.004808 |
-| `latest_change` | 0.02232 | 0.002185 | 0.00123 | 0.000325 |
+| `latest_change` | 0.2357 | 0.02102 | 0.01185 | 0 |
+| `distance_from_series_mean` | 0.2044 | 0.02047 | 0.02692 | 0 |
 
 Inputs: the target's own history: latest_change = last value − previous value; distance_from_series_mean = last value − the series' mean so far.
 

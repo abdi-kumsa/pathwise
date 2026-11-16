@@ -19,6 +19,8 @@ def get_overview() -> dict:
 
     by_year = e.groupby('year')['enrollment_count'].sum()
     apps_by_year = e.groupby('year')['applications_count'].sum()
+    roll_col = 'students_on_roll_count' if 'students_on_roll_count' in e.columns else 'enrollment_count'
+    roll_by_year = e.groupby('year')[roll_col].sum()
     growth = ds.cagr(
         float(by_year.loc[ds.YEAR_MIN]),
         float(by_year.loc[ds.YEAR_MAX]),
@@ -50,6 +52,7 @@ def get_overview() -> dict:
     return {
         'total_enrollment':      int(e['enrollment_count'].sum()),
         'enrollment_latest_year': int(by_year.loc[ds.YEAR_MAX]),
+        'students_on_roll_latest_year': int(roll_by_year.loc[ds.YEAR_MAX]),
         'enrollment_cagr_pct':   growth,
         # All years combined; shown beside a single year of enrolment it
         # overstated demand roughly tenfold. The page uses the latest year.

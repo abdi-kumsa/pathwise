@@ -66,30 +66,42 @@ HEIS = [
     {"name": "St. Mary's University", "type": "private", "generation": 0, "region": "Addis Ababa", "campus": "Mexico"},
 ]
 
+# Opening years from the World Bank industrial-park review (see calibration.yaml
+# investment.park_openings). Debre Berhan added; Kombolcha and Hawassa corrected.
 INDUSTRIAL_PARKS = [
-    {"name": "Hawassa Industrial Park", "region": "Sidama", "opened": 2017},
+    {"name": "Eastern Industrial Zone", "region": "Oromia", "opened": 2010},
     {"name": "Bole Lemi", "region": "Addis Ababa", "opened": 2014},
-    {"name": "Eastern Industrial Zone", "region": "Oromia", "opened": 2013},
-    {"name": "Adama Industrial Park", "region": "Oromia", "opened": 2018},
-    {"name": "Kombolcha Industrial Park", "region": "Amhara", "opened": 2019},
+    {"name": "Hawassa Industrial Park", "region": "Sidama", "opened": 2016},
+    {"name": "Kombolcha Industrial Park", "region": "Amhara", "opened": 2017},
     {"name": "Mekelle Industrial Park", "region": "Tigray", "opened": 2017},
+    {"name": "Adama Industrial Park", "region": "Oromia", "opened": 2018},
     {"name": "Dire Dawa Industrial Park", "region": "Dire Dawa", "opened": 2018},
-    {"name": "Jimma Industrial Park", "region": "Oromia", "opened": 2020},
-    {"name": "Bahir Dar Industrial Park", "region": "Amhara", "opened": 2019},
+    {"name": "Debre Berhan Industrial Park", "region": "Amhara", "opened": 2019},
+    {"name": "Jimma Industrial Park", "region": "Oromia", "opened": 2019},
+    {"name": "Bahir Dar Industrial Park", "region": "Amhara", "opened": 2020},
 ]
 
 SECTORS = sorted({f["sector"] for f in FIELDS} | {"Manufacturing", "Construction", "ICT", "Health", "Agriculture", "Finance", "Public administration", "Education"})
 
 
-def shock_factor(region_name: str, year: int) -> float:
-    """Tigray 2021–2022 discontinuity — a structural break, not noise."""
-    if region_name == "Tigray" and year in (2021, 2022):
-        return 0.55
-    if region_name == "Tigray" and year == 2023:
-        return 0.78
-    return 1.0
+def shock_factor(region_name: str, year: int, institution: str | None = None) -> float:
+    """University-operations factor (1.0 normal, 0.0 closed) from calibration.yaml.
+
+    Institution overrides win over the region; COVID 2020 applies everywhere.
+    These factors are estimates derived from dated, sourced events.
+    """
+    import calibration as C
+    d = C.get("disruption")
+    if institution and institution in d.get("institutions", {}):
+        vals = d["institutions"][institution]
+        if year in vals:
+            return float(vals[year])
+    vals = d.get("regions", {}).get(region_name, {})
+    if year in vals:
+        return float(vals[year])
+    return float(d["covid_2020"]) if year == 2020 else 1.0
 
 
 def esslce_pass_uplift(year: int) -> float:
-    """2023 assessment reform as a step change in pass rates."""
-    return 8.0 if year >= 2023 else 0.0
+    """Kept for compatibility; pass rates now come from calibration.yaml exam.pass_rate_pct."""
+    return 0.0

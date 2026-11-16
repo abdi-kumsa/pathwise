@@ -55,6 +55,10 @@ jobs:
       - name: API route table in docs/TECHNICAL.md is current
         run: python scripts/gen_route_table.py --check
       - name: Model comparison and importance docs match the models
+        env:
+          OMP_NUM_THREADS: "1"
+          OPENBLAS_NUM_THREADS: "1"
+          MKL_NUM_THREADS: "1"
         run: python scripts/model_report.py --check
       - name: Model artefacts match their SHA-256 manifest
         run: python scripts/artifact_manifest.py --check

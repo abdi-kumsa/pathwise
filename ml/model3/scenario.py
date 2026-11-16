@@ -32,10 +32,12 @@ PASS_RATE_SHIFT_LIMIT = 15.0
 def apply_placement_rule(exam: pd.DataFrame, pass_rate_shift_pp: float = 0.0) -> pd.DataFrame:
     """Move the ESSLCE pass rate by a number of percentage points, clipped 0–100."""
     e = exam.copy()
-    if pass_rate_shift_pp and "exam_pass_rate_pct" in e.columns:
-        e["exam_pass_rate_pct"] = (
-            e["exam_pass_rate_pct"].astype(float) + float(pass_rate_shift_pp)
-        ).clip(0, 100)
+    if pass_rate_shift_pp:
+        # Shift the pass rate and, where present, the admission-eligible share
+        # that Layer 2 now applies; a move in one is a move in the other.
+        for col in ("exam_pass_rate_pct", "admission_eligible_pct"):
+            if col in e.columns:
+                e[col] = (e[col].astype(float) + float(pass_rate_shift_pp)).clip(0, 100)
     return e
 
 

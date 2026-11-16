@@ -15,6 +15,11 @@ COLUMNS = (
     "placement_rate_pct",
     "field_allocation_count",
     "band_allocation_ratio",
+    # Added with the calibrated generator (Nov 2026). Since the 2022 reform the
+    # pass rate (3-9%) is not the admission route: remedial passers are placed
+    # too, so eligibility for a seat is a separate figure.
+    "admission_eligible_pct",
+    "remedial_placed_count",
 )
 TABLE = "exam_placement"
 
